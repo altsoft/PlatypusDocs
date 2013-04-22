@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Ui_Reference.ent">
+%BOOK_ENTITIES;
+]>
+<bookinfo id="book-Ui_Reference-Ui_Reference">
+	<title>Справочник по разрабоке пользовательского интерфейса</title>
+	<subtitle>Справочник по разрабоке пользовательского интерфейса платформы Platypus</subtitle>
+	<productname>Platypus</productname>
+	<productnumber>2.2</productnumber>
+	<edition>0</edition>
+	<pubsnumber>0</pubsnumber>
+	<abstract>
+		<para>
+			Данный справочник предоставляет информацию по разработке пользовательского интерфейса платформы Platypus c использовании приложения Platypus Client.
+		</para>
+	</abstract>
+</bookinfo>
+

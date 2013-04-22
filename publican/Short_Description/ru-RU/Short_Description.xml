@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Test_Article.ent">
+%BOOK_ENTITIES;
+]>
+<article>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Article_Info.xml"/>
+  <section>
+    <title>Что такое Платформа Platypus?</title>
+    <para>Platypus Platform - разработанная в компании &quot;Альтернатива-Софт&quot;
+  инструментальная платформа, предназначенная для построения приложений любого
+  уровня сложности.</para>
+    <para>Platypus Platform реализована на базе технологии Java SE, Java EE, GWT
+  и включает следующие элементы:</para>
+    <itemizedlist>
+      <listitem>
+        <para>клиентское приложение Platypus Client;</para>
+      </listitem>
+      <listitem>
+        <para>сервер приложений Platypus Application Server;</para>
+      </listitem>
+      <listitem>
+        <para>сервлет J2EE сервера со встроенным браузерным клиентом приложений
+      Platypus Platform;</para>
+      </listitem>
+      <listitem>
+        <para>дизайнер приложений Platypus Application Designer.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Platypus Application Designer 
+  позволяет разрабатывать структуру базы данных приложения, повторно
+  используемые SQL запросы, клиентскую и серверную части приложения.</para>
+    <para>Преимущества инструментальной платформы Platypus:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Платформа работает на всех операционных системах для которых
+      реализована виртуальная Java-машина.</para>
+      </listitem>
+      <listitem>
+        <para>Модули, написанные на внутреннем языке (JavaScript) могут
+      выступать в качестве внутренних библиотек, модулей форм и отчетов. А
+      также эти модули возможно разворачивать на сервере приложений в качестве
+      внутренних серверных задач.</para>
+      </listitem>
+      <listitem>
+        <para>Многозвенная архитектура с сервером приложений.</para>
+      </listitem>
+      <listitem>
+        <para>Прозрачная для приложений поддержка разных баз данных.</para>
+      </listitem>
+      <listitem>
+        <para>Автоматический прозрачный для приложений перенос метаданных из
+      одной базы данных в другую.</para>
+      </listitem>
+      <listitem>
+        <para>Web клиент для приложений Platypus.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Поддерживаемые базы данных:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Oracle;</para>
+      </listitem>
+      <listitem>
+        <para>Db2;</para>
+      </listitem>
+      <listitem>
+        <para>MsSql;</para>
+      </listitem>
+      <listitem>
+        <para>MySql (InnoDb).</para>
+      </listitem>
+      <listitem>
+        <para>PostgreSql;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Почему выбирают Platypus Platform:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Инструментальная платформа Platypus Platform подходит для
+      корпоративной автоматизации.</para>
+      </listitem>
+      <listitem>
+        <para>Platypus Platform покрывает все задачи обработки и представления
+      данных в корпоративном информационном пространстве.</para>
+      </listitem>
+      <listitem>
+        <para>Применённые технические решения ставят платформу на уровень таких
+      платформ как Sap R/3, Microsoft Dynamics, 1С:Предприятие 8.x.</para>
+      </listitem>
+      <listitem>
+        <para>Клиент получает более доступное решение по сравнению с западными
+      аналогами (значительная экономия средств учреждений и
+      предприятий).</para>
+      </listitem>
+      <listitem>
+        <para>Платформа Platypus Platform отличается максимальной
+      эксплуатационной простотой, гарантированной скоростью внедрения и
+      надежностью работы.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Revision_History.xml"/>
+</article>

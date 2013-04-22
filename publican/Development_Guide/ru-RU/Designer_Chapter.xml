@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Designer_Chapter">
+  <title>Работа с проектом приложения в Platypus Application Designer</title>
+  <para>В процессе разработки и далее в течении жизненного цикла     приложения, оно представлено проектом Platypus. Проект Platypus представляет собой каталог на жестком диске, содержащий файлы настроек и элементов приложения.</para>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
+    <title>Создание нового проекта</title>
+    <para>В этом разделе содержится информация по созданию и основным действиям при работе с проектом Platypus.</para>
+    <para>Для создания нового  проекта Platypus выполните следующие действия:
+   <itemizedlist>
+        <listitem>
+          <para>запустите дизайнер  (если он еще не запущен). Для этого воспользуйтесь ярлыком <guiicon>Platypus Application Designer</guiicon> на рабочем столе или пунктом меню установленных приложений;</para>
+        </listitem>
+        <listitem>
+          <para>выберите пункт меню <menuchoice>
+              <guimenu>File New</guimenu>
+              <guimenuitem> Project</guimenuitem>
+            </menuchoice> или нажмите на кнопку <guibutton>New Project</guibutton> на панели инструментов; </para>
+        </listitem>
+        <listitem>
+          <para>выберите тип проекта <classname>Platypus Application Project</classname> и нажмите кнопку <guibutton>Next</guibutton>; </para>
+        </listitem>
+        <listitem>
+          <para>введите название и место расположения проекта:</para>
+          <itemizedlist>
+            <listitem>
+              <para>введите имя каталога проекта  в поле <guilabel>Project Folder Name</guilabel>;</para>
+            </listitem>
+            <listitem>
+              <para>выберите родительский каталог, в котором будет создан проект приложения Platypus в поле <guilabel>Project Location</guilabel>;</para>
+            </listitem>
+            <listitem>
+              <para>введите наименование проекта в поле <guilabel>Project Title</guilabel>;</para>
+            </listitem>
+            <listitem>
+              <para>нажмите кнопку <guibutton>Next</guibutton> для перехода к следующему шагу;</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>введите параметры соединения с БД:</para>
+          <itemizedlist>
+            <listitem>
+              <para>введите URL соединения с БД в формате JDBC в поле <guilabel>JDBC Url<!--Может пример : jdbc:mysql://localhost:3306/db_name ?--></guilabel>; </para>
+            </listitem>
+            <listitem>
+              <para>введите наименование схемы в БД в поле <guilabel>Database Schema</guilabel>; </para>
+            </listitem>
+            <listitem>
+              <para>введите имя пользователя в поле <guilabel>Database User Name</guilabel>;</para>
+            </listitem>
+            <listitem>
+              <para>введите пароль в поле <guilabel>Database User Password</guilabel>;</para>
+            </listitem>
+            <listitem>
+              <para>для проверки соединения с БД нажмите кнопку <guibutton>Test connection</guibutton>;</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>нажмите кнопку <guibutton>Finish</guibutton> для завершения создания проекта Platypus.</para>
+        </listitem>
+      </itemizedlist>
+  Новый проект будет добавлен на панель <guilabel>Projects</guilabel>. </para>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
+    <title>Открытие проекта</title>
+    <para>Для того чтобы открыть существующий проект Platypus выполните следующие действия:
+   <itemizedlist>
+        <listitem>
+          <para>запустите дизайнер   (если он еще не запущен). Для этого воспользуйтесь ярлыком <guiicon>Platypus Application Designer</guiicon> на рабочем столе или пунктом меню установленных приложений;</para>
+        </listitem>
+        <listitem>
+          <para>выберите пункт меню <menuchoice>
+              <guimenu>File Open</guimenu>
+              <guimenuitem> Project</guimenuitem>
+            </menuchoice>  или нажмите на кнопку <guibutton>Open Project</guibutton> на панели инструментов; </para>
+        </listitem>
+        <listitem>
+          <para>выберите родительский  каталог проекта  при помощи диалога выбора, выберите папку проекта, нажмите кнопку<guibutton> Open Project</guibutton>.</para>
+        </listitem>
+      </itemizedlist>
+  Открытый проект будет добавлен на панель <guilabel>Projects</guilabel>. </para>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
+    <title>Структура проекта и действия с элементами приложения</title>
+    <para>Проект Platypus имеет следующую  структуру:
+   <itemizedlist>
+        <listitem>
+          <para>элементы приложения <guilabel>Application Elements</guilabel> - корневой каталог, содержащий дерево элементов приложения;</para>
+        </listitem>
+        <listitem>
+          <para>миграции БД <guilabel>Database Migrations</guilabel> - каталог, содержащий файлы миграций БД.</para>
+        </listitem>
+      </itemizedlist></para>
+    <para>Над элементами  и каталогами приложения можно  выполнить следующие  операции:</para>
+    <itemizedlist>
+      <listitem>
+        <para>создать новый элемент - команда <command>New</command>;</para>
+      </listitem>
+      <listitem>
+        <para>переименовать - для этого кликните на названии выделенного элемента или нажмите клавишу <keycap>F2</keycap>;</para>
+      </listitem>
+      <listitem>
+        <para>вставить в указанное место проекта элемента приложения скопированного в буфер - команда <command>Paste</command> ;</para>
+      </listitem>
+      <listitem>
+        <para>копировать и перенести каталог или элементы приложения в указанное место проекта путем перетаскивания, для копирования удерживайте кнопку <keycap>Ctrl</keycap> во время перетаскивания   - команда <command>Drag-and-Drop</command>; </para>
+      </listitem>
+      <listitem>
+        <para>удаление  элемента приложения - команда <command>Delete</command>;</para>
+      </listitem>
+      <listitem>
+        <para>поиск элемента в проекте- команда <command>Find</command> .</para>
+      </listitem>
+    </itemizedlist>
+    <para>Выполните данные операции используя контекстное меню элемента, пункты меню <menuchoice>
+        <guimenu>Edit</guimenu>
+      </menuchoice> в главном меню или  &quot;горячие&quot; клавиши. Над специфическими элементами приложения могут выполняться  операции,  специфические<!--может , применимые для элеметнов данного типа?--> для элементов приложения данного типа. Подробно специфические операции рассмотрены в разделах посвященных конкретным типам элементов приложения.<!--3 раза специфические --></para>
+    <para>Для того чтобы создать новый каталог:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите пункт меню <menuchoice>
+            <guimenuitem>New</guimenuitem>
+          </menuchoice> контекстного меню родительского каталога или выделите родительский каталог и выберите пункт <menuchoice>
+            <guimenuitem>New Filе</guimenuitem>
+          </menuchoice>  главного меню или нажмите кнопку <guibutton>New File</guibutton> на панели инструментов или воспользуйтесь &quot;горячей&quot; клавишей;</para>
+      </listitem>
+      <listitem>
+        <para>выберите тип <guimenuitem>Folder</guimenuitem> из контекстного меню или на на первом шаге мастера <menuchoice>
+            <guimenu>Choose file type</guimenu>
+            <guisubmenu> Platypus application elements </guisubmenu>
+            <guimenuitem> Folder</guimenuitem>
+          </menuchoice> и нажмите <guibutton>Next</guibutton>;</para>
+      </listitem>
+      <listitem>
+        <para>введите название каталога в поле <guilabel>Name</guilabel> и  нажмите <guibutton>Finish</guibutton> для создания нового каталога или <guibutton>Cancel</guibutton> для отмены.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Для того чтобы перейти к элементу приложения зная его имя-идентификатор:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите пункт меню <menuchoice>
+            <guimenu>File</guimenu>
+            <guimenuitem>Go to application element</guimenuitem>
+          </menuchoice>  или активируйте сочетание клавиш <keycombo>
+            <keycap>Ctl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>G</keycap>
+          </keycombo>;</para>
+      </listitem>
+      <listitem>
+        <para>в диалоге введите имя-идентификатор элемента приложения в поле <guilabel>Provide appication element id</guilabel> диалога;</para>
+      </listitem>
+      <listitem>
+        <para>нажмите <guibutton>OK</guibutton> для перехода к элементу приложения  или <guibutton>Cancel</guibutton> для отмены;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Для того, чтобы открыть элемент приложения выберите пункт <guimenuitem>Open</guimenuitem> в контекстном меню элемента приложения или дважды кликните на этом элементе. Редактор элемента приложения откроется в виде окна в зоне редакторов <application>Platypus Application Designer</application>. </para>
+    <para>Для того, чтобы узнать имя-идентификатор элемента приложения:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите элемент приложения в дереве элементов приложения проектов;</para>
+      </listitem>
+      <listitem>
+        <para>выберите пункт меню<menuchoice>
+            <guimenu> File</guimenu>
+            <guimenuitem>Application element info</guimenuitem>
+          </menuchoice> или активируйте сочетание клавиш<keycombo>
+            <keycap> Ctl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>I</keycap>
+          </keycombo>;</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Управление соединением с БД</title>
+    <para>Для полноценной работы с <application>Platypus Appication Designer</application> необходимо в процессе разработки приложения установить соединение с базой данных. Параметры соединения задаются при создании нового проекта и могут быть изменены на форме свойств проекта, которую можно открыть  выбрав в контекстном меню проекта пункт Properties. При открытии проекта Platypus Appication Designer предпринимает попытку соединиться с <acronym>БД</acronym>, и если это не удается, переходит в режим ограниченной функциональности - при этом работа с  дизайнером модели данных становится недоступной, также отключаются некоторые другие возможности дизайнера. </para>
+    <para>В процессе разработки, каждому разработчику в команде, работающей над одним проектом рекомендуется создать и использовать собственный экземпляр <acronym>БД</acronym> для отладки и тестирования. Также создается общая образцовая <acronym>БД</acronym> команды куда применяются все изменения прошедшие отладку на индивидуальных базах разработчиков.  </para>
+    <para>Локальную базу данных  разработчика удобно запускать на &quot;легком&quot; сервере баз данных H2, поставляемой в комплекте с Platypus Platform. </para>
+    <para>Для того, чтобы запустить сервер БД H2 в Platypus Application Designer:</para>
+    <itemizedlist>
+      <listitem>
+        <para>откройте панель служб <guilabel>Services</guilabel>;</para>
+      </listitem>
+      <listitem>
+        <para>выберите узел  <menuchoice>
+            <guimenu>Databases</guimenu>
+            <guimenuitem>H2</guimenuitem>
+          </menuchoice>  и активируйте пункт меню <guimenuitem>Start</guimenuitem>.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>В приложениях Platypus Platform рекомендуется по-возможности не использовать особенности конкретных баз данных, используя стандартный SQL для того чтобы приложение могло быть  легко перенесено на другие сервера БД, поддерживаемые платформой. </para>
+    </note>
+    <para>После того, как сервер <acronym>БД</acronym> будет запущен и станет доступен по сети или локально, соединитесь с ним выбрав из контекстного меню проекта пункт <!--Соедениться с базой данных проекта--><guimenuitem> Connect to project database</guimenuitem> или нажав кнопку <guibutton>Establish</guibutton> connection на форме <guilabel>Application Database</guilabel> свойств проекта или нажав ссылку Connect to project database на форме-заглушке редактора модели данных.</para>
+    <para>Для того, чтобы разорвать соединение выберите из контекстного меню проекта пункт <guimenuitem><!--Отсоедениться от базы даннх проекта-->Disconnect from project database</guimenuitem> или или нажмите кнопку <guibutton>Drop</guibutton> connection на форме <guilabel>Application Database</guilabel> свойств проекта.</para>
+  </section>
+  <section>
+    <title>Развертывание элементов приложения в БД</title>
+    <para>Для тестирования или промышленной эксплуатации элементы приложения могут быть развернуты в базу данных. После развертывания приложение может исполняться непосредственно из базы данных.</para>
+    <para>Для того, чтобы развернуть приложение в <acronym>БД</acronym>: выберите пункт <guimenuitem><!--Развернуть-->Deploy</guimenuitem> из контекстного меню узла проекта. При развертывании элементы приложения  из папки Application Elements копируются в  таблицу <literal>MTD_ENTITIES</literal><acronym> БД</acronym>. Элементы приложения ранее находившиеся в этой таблицы удаляются. При копировании сохраняется древовидная структура каталогов приложения.</para>
+    <para>Импорт приложения из БД - процесс обратный развертыванию. Для того, чтобы импортировать приложение из БД: выберите пункт Import из контекстного меню проекта. При импорте элементы приложения из таблицы <literal>MTD_ENTITIES</literal> копируются в папку <guilabel>Application Elements</guilabel>. <!--ВАЖНО!!!!-->Перед началом копирования папка <guilabel> Application Elements</guilabel> очищается.</para>
+    <note>
+      <para>При промышленной эксплуатации рекомендуется развертывать приложение в БД, поскольку это облегчает процесс обслуживания приложения. </para>
+    </note>
+  </section>
+  <section>
+    <title>Миграции БД</title>
+    <para>Platypus Platform имеет встроенный механизм контроля над изменением структуры и данных в БД, являющихся частью приложения. </para>
+    <para>Данные приложения -  это информация, которая необходима для начала работы приложения - базовые справочники, начальные данные и т.п.</para>
+    <para>Структура <acronym>БД</acronym> и данные приложения представлены в виде файлов миграций. Каждая миграция имеет свой номер, представленный положительным целым числом, которое используется в качестве  имени файла. В базе данных приложения поддерживается информация о текущей версии <acronym>БД</acronym> (таблица <literal>MTD_VERSION)</literal>. В процессе разработки и далее в ходе жизненного цикла приложения при изменении структуры <acronym>БД</acronym> или изменении данных создается миграция, которая затем может быть применена на других экземплярах <acronym>БД</acronym>. </para>
+    <para>В процессе синхронизации состояния  миграции  с номером большим чем текущая версия БД  последовательно применяются к БД. После успешного применения миграции номер версии <acronym>БД</acronym> устанавливается равным номеру этой миграции.</para>
+    <para>Типы миграций:</para>
+    <itemizedlist>
+      <listitem>
+        <para>мгновенный снимок структуры <acronym>БД</acronym> - файл с расширением <filename>.xdm</filename>, содержащий представление метаданных БД в формате XML;</para>
+      </listitem>
+      <listitem>
+        <para>пакет  команд SQL- файл с расширением <filename>.batch</filename> , содержащий SQL команды разделенные тэгом <code>#GO</code>. </para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>В пакетном  SQL-файле рекомендуется использовать <acronym>DML</acronym> (<literal>INSERT</literal>, <literal>UPDATE</literal> и <literal>DELETE</literal>) команды, хотя технически допустимо помещать туда и <acronym>DDL</acronym> команды. Однако, использование команд изменяющих структуру <acronym>БД</acronym> в пакетном  SQL-файле не рекомендовано, поскольку это может снизить переносимость приложения.</para>
+    </note>
+    <para>Команды создания и применения миграций доступны при наличии соединения с <acronym>БД</acronym>.</para>
+    <para>Для  создания нового моментального снимка структуры <acronym>БД</acronym> выберите пункт меню<guimenuitem> Add Metadata Migration</guimenuitem> контекстного меню на узле <guilabel>Database Migrations</guilabel>. При этом будет создан мгновенный снимок метаданных базы и текущая версия <acronym>БД</acronym> будет увеличена на единицу. Новому файлу будет присвоено имя соответствующее новой версии <acronym>БД</acronym>.</para>
+    <para>Для создания нового файла команд SQL  выберите пункт меню <guimenuitem>Add SQL Migration</guimenuitem> контекстного меню на узле <guilabel>Database Migrations</guilabel> проекта. При этом текущая версия <acronym>БД</acronym> будет увеличена на единицу. Новому файлу будет присвоено имя соответствующее новой текущей версии <acronym>БД</acronym>.</para>
+    <para>В процессе применения миграций имеют значения и применяются лишь те мгновенные снимки метаданных, которые по номеру версии находятся  непосредственно перед пакетным SQL-файлом  и та миграция которая имеет максимальный номер.</para>
+    <para>Для удаления неиспользуемых миграций (очистки каталога миграций) выберите пункт меню <guimenuitem>Cleanup</guimenuitem> контекстного меню каталога миграций <guilabel>Database Migrations</guilabel> проекта. Нажмите кнопку <guibutton>Yes</guibutton> для подтверждения или <guibutton>No</guibutton> для отмены команды в диалоге подтверждения.</para>
+    <important>
+      <para><!--Это замечание в начало раздела по миграции - а то не дочитают :(-->Перед применением миграций сделайте резервную копию <acronym>БД</acronym>.</para>
+    </important>
+    <para>Для применения миграций из каталога миграций проекта выберите пункт меню <guimenuitem>Apply Migrations</guimenuitem> контекстного меню <guimenu>Database Migrations</guimenu> проекта.</para>
+    <para>В процессе разработки может возникнуть потребность узнать текущий номер версии БД или изменить его. Для того чтобы узнать текущий номер версии <acronym>БД</acronym> проекта к которой подключен <application>Platypus Application Designer</application> выберите пункт меню <guimenuitem>Db migration version</guimenuitem> из контекстного меню <guimenu> Database Migrations</guimenu> проекта. Текущая версия <acronym>БД</acronym> будет показана в диалоге <guilabel>Current Db Migration version</guilabel> в поле <guilabel>Migration version</guilabel>. Для изменения текущей версии задайте новый номер текущей версии БД в текстовом поле <guilabel>Migration version</guilabel> и нажмите кнопку <guibutton>OK</guibutton>. Если вы не хотите менять текущую версию <acronym> БД</acronym> нажмите кнопку <guibutton>Cancel</guibutton> или закройте диалог.</para>
+  </section>
+  <section>
+    <title>Работа с системами контроля версий</title>
+    <para>В процессе разработки и далее в течении жизненного цикла приложения рекомендуется помещать исходные файлы проекта под управление системы контроля версий.</para>
+    <para><application>Platypus Application Designer</application> имеет встроенную поддержку следующих  систем контроля версий: </para>
+    <itemizedlist>
+      <listitem>
+        <para><application>Subversion</application>;</para>
+      </listitem>
+      <listitem>
+        <para><application>Git</application>;</para>
+      </listitem>
+      <listitem>
+        <para><application>Mercurial</application>;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Для доступа к возможностям данных систем контроля версий используйте пункт <guimenuitem><!--Группа-->Team</guimenuitem> глобального меню и/или подменю <guisubmenu>Versioning</guisubmenu> контекстного меню  проекта.</para>
+    <note>
+      <para>Обратитесь к документации на соответствующую систему контроля версий для получения подробной информации по её использованию.</para>
+    </note>
+  </section>
+</chapter>

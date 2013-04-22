@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Extdb_Chapter">
+  <title>Подключение к внешней базе данных</title>
+  <para>Каждое приложение платформы Platypus имеет соединение с базой данных по умолчанию, которое задается при создании приложения. Кроме того, приложение может использовать соединения с произвольным количеством внешних баз данных. </para>
+  <para>Для определения соединения с внешними базами данных используются элементы приложения типа <emphasis>Подключение к внешней базе данных</emphasis>.</para>
+  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_5">
+    <title>Создание нового подключения к внешней БД</title>
+    <para>Для создания нового подключения к внешней <acronym>БД</acronym> выполните следующие действия:
+   
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите пункт меню <guimenuitem>New</guimenuitem> контекстного меню родительского каталога или выделите родительский каталог и выберите пункт <guimenuitem>New Filе</guimenuitem> главного меню или нажмите кнопку <guibutton>New File</guibutton> на панели инструментов или воспользуйтесь &quot;горячей&quot; клавишей;</para>
+      </listitem>
+      <listitem>
+        <para>выберите тип <guilabel>External database</guilabel> connection из контекстного меню или на первом шаге мастера <menuchoice>
+            <guimenu>Choose file type</guimenu>
+            <guisubmenu>Platypus application elements</guisubmenu>
+            <guimenuitem>External database connection</guimenuitem>
+          </menuchoice> -   и нажмите <guibutton>Next</guibutton>;</para>
+      </listitem>
+      <listitem>
+        <para>введите название нового элемента приложения в поле <guilabel>Name</guilabel> и  нажмите <guibutton>Finish</guibutton> для его создания или <guibutton>Cancel</guibutton> для отмены.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_6">
+    <title>Редактирование подключения к внешней БД</title>
+    <para>Редактирование элемента приложения типа <emphasis>Подключения к внешней БД</emphasis>  осуществляется при помощи специализированного редактора. Для открытия редактора элемента приложения дважды кликните  по элементу приложения в дереве проекта. </para>
+    <para>Для изменения настроек подключения к внешней БД:</para>
+    <itemizedlist>
+      <listitem>
+        <para>заполните полe <guilabel>Name</guilabel> - имя-идентификатор элемента приложения соединения с внешней <acronym>БД</acronym>; имя-идентификатор подчиняется требованиям к именам элементов приложения Platypus;</para>
+      </listitem>
+      <listitem>
+        <para>заполните полe <guilabel>JDBC Url</guilabel> - <acronym>URL</acronym> соединения с внешней <acronym>БД</acronym> в формате <acronym>JDBC</acronym>;</para>
+      </listitem>
+      <listitem>
+        <para>заполните полe <guilabel>Database User</guilabel> - имя пользователя в <acronym>БД</acronym>; </para>
+      </listitem>
+      <listitem>
+        <para>заполните полe <guilabel>Password</guilabel> - пароль пользователя в БД; </para>
+      </listitem>
+      <listitem>
+        <para>Выберите схему по умолчанию для этого подключения из выпадающего списка в поле  <guilabel>Default schema</guilabel>; </para>
+      </listitem>
+      <listitem>
+        <para>проверьте соединение с <acronym>БД</acronym> нажав кнопку <guibutton>Test connection</guibutton>; </para>
+      </listitem>
+      <listitem>
+        <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов <application>Platypus Application Designer</application> или нажав сочетание клавиш <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo>.</para>
+      </listitem>
+    </itemizedlist>
+    <para>При работе приложения в  среде <acronym>J2EE</acronym> сервера или сервлет-контейнера соединение с базой данных предоставляется окружением в котором работает приложение Platypus. Настройте соединение с базой данных как <acronym>JNDI</acronym>-ресурс и укажите имя этого ресурса в поле <acronym>JDBC</acronym><acronym> URL</acronym>. Поля <guilabel>Database User</guilabel>, <guilabel>Password</guilabel> и <guilabel>Default schema</guilabel> в этом случае не заполняются и тестирование соединения не производится.</para>
+  </section>
+</chapter>

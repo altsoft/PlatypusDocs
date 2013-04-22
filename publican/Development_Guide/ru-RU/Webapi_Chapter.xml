@@ -1,0 +1,626 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Webapi_Chapter">
+  <title>Platypus Web</title>
+  <section>
+    <title>Внешний HTTP интерфейс</title>
+    <para>Метод  модуля может быть  вызван  при помощи GET или POST HTTP-запроса.</para>
+    <para>Для того, чтобы сделать модуль доступным для внешних вызовов, пометьте его аннотацией <code>@public</code>. </para>
+    <para>Для вызова серверного метода  выполните запрос по URL, сформированной из базовой URL сервлета Platypus и суффикса доступа к Web API <filename>/api</filename>. Укажите тип запроса, имя модуля, имя метода  и параметры вызова метода в параметрах URL  или в теле POST-запроса в формате <classname>application/x-www-form-urlencoded</classname>.  Тело ответа будет содержать значение, которое было возвращено в исполняемом методе, в случае если будет возвращен объект JavaScript он будет будут сериализованы в виде JSON, в случае если будет возвращен объект типа String или XML он будет помещен в ответ в виде строки.</para>
+    <para>Параметры запроса выполнения метода модуля:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Параметр</entry>
+            <entry align="center">Описание</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>__type</parameter>
+            </entry>
+            <entry>Тип запроса. Для выполнения метода серверного модуля должно быть равно 14.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>__moduleName</parameter>
+            </entry>
+            <entry>
+              <para>Имя-идентификатор модуля.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>__methodName</parameter>
+            </entry>
+            <entry>Имя вызываемого метода модуля.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>__param</parameter>
+            </entry>
+            <entry>Параметр вызова метда - одиночное значение, строка, число или сериализованный объект JavaScript формате JSON.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>__param[]</parameter>
+            </entry>
+            <entry>Параметр вызова метда - несклоько параметров, строка, число или сериализованный объект JavaScript формате JSON.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>Пример URL для вызова метода серверого модуля в метод передаются два параметра: строка <parameter>Hello Platypus</parameter> и число <parameter>2</parameter> (URL приведена в незакодированном виде):</para>
+    <para><uri>http://server/platypus/application/api?type=14&amp;module=ModuleName&amp;method=methodName&amp;param[]=Hello Platypus&amp;param[]=2</uri></para>
+  </section>
+  <section>
+    <title>JavaScript API</title>
+    <para>JavaScript API предназначен для реализации пользовательского интерфейса (например для удаленного вызова функций и чтения/записи свойств) модуля исполняемого на сервере приложений Platypus,  из клиентского кода браузерного Web-приложения. HTML страницы  данного приложения могут  быть сгенерированы с использованием любой серверной технологии, например, Java Server Pages. С помощью вызова серверных функций обычно запрашиваются данные, которые могут быть отображены на клиенте, осуществляется сохранение изменений и т.д..</para>
+    <para>JavaScript API содержит набор относительно низкоуровневых функций и инфраструктуры для организации удаленного вызова процедур (RPC - Remote Procedure Call).</para>
+    <para>Методы  JavaScript API принадлежат объекту <code>Platypus.API</code>.</para>
+    <para>Список функций JavaScript API:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Метод</entry>
+            <entry align="center">Описание</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>setServerUrl(url)</parameter>
+            </entry>
+            <entry>Задает серверный URL по которому досупен сервлет Platypus в параметре <parameter>url</parameter>.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>login(callback)</parameter>
+            </entry>
+            <entry>
+              <para>Не используется.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>logout(callback)</parameter>
+            </entry>
+            <entry>
+              <para>Завершает сеанс авторизации, <parameter>callback</parameter> - функция которая будет вызвана при успешном завершении сеанса.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>hello(callback)</parameter>
+            </entry>
+            <entry>
+              <para>Не используется.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>disposeServerModule(moduleName, callback)</parameter>
+            </entry>
+            <entry>
+              <para>Удаляет модуль из сессии пользователя, <parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>createServerModule(moduleName, callback)</parameter>
+            </entry>
+            <entry>
+              <para>Создает модуль в сессии пользователя,<parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>executeServerModuleMethod(moduleName, methodName, params, callback(result))</parameter>
+            </entry>
+            <entry>
+              <para>Исполняет метод серверного модуля. При необходимости модуль будет создан в сессии пользователя автоматически<parameter>moduleName</parameter> - имя модуля, <parameter>methodName</parameter> - имя метода в этом модуле, <parameter>callback(result)</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>keepAlive(callback)</parameter>
+            </entry>
+            <entry>
+              <para>Обнуляет тайм-аут текущей сессии,<parameter>callback</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>executeServerReport(moduleName)</parameter>
+            </entry>
+            <entry>
+              <para>Исполняет серверный отчет, <parameter>moduleName</parameter> - имя модуля.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>getServerModuleProperty(moduleName, propName)</parameter>
+            </entry>
+            <entry>
+              <para>Получает свойство серверного модуля, <parameter>moduleName</parameter> - имя модуля, <parameter>propName</parameter> - имя свойства в этом модуле. Выполняется синхронно.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>setServerModuleProperty(moduleName, propName, propValue)</parameter>
+            </entry>
+            <entry>
+              <para>Устанавливает свойство серверного модуля. , <parameter>moduleName</parameter> - имя модуля, <parameter>propName</parameter> - имя свойства в этом модуле, <parameter>propValue</parameter> - значение свойства. Выполняется синхронно.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>Модуль может быть загружен в пользовательскую сессию явно, при помощи метода <parameter>createServerModule(moduleName, callback)</parameter> или автоматически при вызове функций выполнения серверного метода или чтения/установки свойств модуля.</para>
+    <para>Для того, чтобы использовать Platypus Web API подключите JavaScript библиотекy, поставляемую вместе с Platypus Platform: <filename>api.js</filename>. Platypus Web API использует  библиотеку jQuery.</para>
+    <programlisting language="JavaScript">&lt;html&gt;
+ &lt;head&gt;
+     &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.min.js&quot;&gt;
+     &lt;/script&gt;
+     &lt;script type=&quot;text/javascript&quot; src=&quot;js/api.js&quot;&gt;
+     &lt;/script&gt;
+  &lt;/head&gt;
+  ...
+&lt;/html&gt; </programlisting>
+    <para>Задайте базовый <acronym>URL</acronym>, на котором работает сервер приложений  Platypus, при помощи функции <methodname>Platypus.API.setServerUrl(url)</methodname>:</para>
+    <programlisting language="JavaScript">$(function() {
+  Platypus.API.setServerUrl(&apos;/platypus/application/&apos;);
+  ...
+});</programlisting>
+    <para>В приведенном ниже примере приведен пример кода в котором вызывается серверный метод, <methodname>testModule.testMethod</methodname> с параметрами-строками <parameter>Hello</parameter> и <parameter>Platypus</parameter> и возвращаемым объектом, свойство <property>prop1</property> которого будет выведено в консоль:</para>
+    <programlisting language="JavaScript">$(function() {
+  Platypus.API.setServerUrl(&apos;/platypus/application/&apos;);
+  Platypus.API.executeServerModuleMethod(
+     &apos;TestModule&apos;,
+     &apos;testMethod&apos;,
+      [&apos;Hello&apos;, &apos;Platypus&apos;],
+       function(result) { 
+          console.log(result.prop1);
+      })
+});</programlisting>
+    <para>Пример кода соответствующего серверного модуля:</para>
+    <programlisting language="JavaScript">/**
+ * @name TestModule
+ */
+
+function testMethod(p1, p2) {
+  return { prop1 : p1 + &apos; &apos; +  p2};
+}</programlisting>
+    <para>Для доступа к ресурсам требующим аутентификации используйте стандартные механизмы предоставляемые сервером приложений или сервлет-контейнером. Так, сервер приложений Platypus может быть настроен на работу с BASIC или FORMS аутентификацией. Для того, чтобы прекратить авторизованный сеанс работы с сервером приложений Platypus используйте метод <methodname>Platypus.API.logout</methodname>:</para>
+    <programlisting language="JavaScript">Platypus.API.logout();</programlisting>
+    <para>Для более удобной организации вызова серверных методов используйте встроеную поддержку удаленного вызова процедур - RPC (Remote Procedure Call). Вызов методов серверных модулей происходит прозрачно для клиентского кода. В действительности вызываются методы прокси-объектов. При этом маршалинг (сериализация/десериализация аргументов  и возвращаемых результатов и сетевое взаимодействие) происходит автоматически &quot;под капотом&quot;. Для серверного кода вызов функции модуля также происходит &quot;как обычно&quot; - в аргументы функции передаются десериализованные объекты JavaScript, которые были переданы на стороне клиента. Серверный метод  возвращает JavaScript-объект, который будет сериализован,  передан по сети и десериализован на клиенте.</para>
+    <para>Для того, чтобы вызвать функцию серверного модуля или прочитать/установить свойство:</para>
+    <itemizedlist>
+      <listitem>
+        <para>запросите создание прокси-объекта для модуля вызвав <methodname> Platypus.Server.Module.get</methodname>, в качестве первого параметра передайте имя-идентификатор модуля, второй параметр - функция которая будет вызвана после создания объекта-заглушки;</para>
+      </listitem>
+      <listitem>
+        <para>вызовите метод объекта заглушки, передав параметры, последним параметром передайте функцию, которая будет вызвана асинхронно с аргументом который является результатом выполнения серверной функции;</para>
+      </listitem>
+      <listitem>
+        <para>прочитайте или установите свойство прокси-объекта - Ajax запрос будет при этом выполнен синхронно.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Пример клиентского кода, в котором после загрузки страницы вызывается серверный метод <methodname>testModule.testMethod</methodname> с параметрами-строками <parameter>Hello</parameter> и <parameter>Platypus</parameter> и возвращаемым объектом, свойство <property>prop1</property> которого будет выведено в консоль: </para>
+    <programlisting language="JavaScript">$(function() {
+ Platypus.API.setServerUrl(&apos;/platypus/application/&apos;);
+ Platypus.Server.Module.get(&quot;TestModule&quot;, testModuleReady);
+ function testModuleReady(module) {
+     module.testMethod(&quot;Hello&quot;, &quot;world&quot;, 
+         function(result) {
+         console.log(result.prop1);
+      });
+}});</programlisting>
+  </section>
+  <section>
+    <title>Программный доступ к запросу и ответу HTTP</title>
+    <para>Для программного доступа к HTTP запросу и ответу используйте свойство <code>http</code>, доступное в случае если метод был вызван внешним HTTP-запросом.</para>
+    <para>Свойство <code>http</code> содержит следующие объекты:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Свойство</entry>
+            <entry align="center">Описание</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>request</parameter>
+            </entry>
+            <entry>Объект содержащий данные запроса HTTP.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>response</parameter>
+            </entry>
+            <entry>
+              <para>Объект ответа HTTP.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>Объект запроса <code>request</code> содержит следующие свойства: </para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Свойство</entry>
+            <entry align="center">Описание</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>authType</parameter>
+            </entry>
+            <entry>Имя схемы аутентификации.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>characterEncoding</parameter>
+            </entry>
+            <entry>
+              <para>Имя кодировки символов.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>contentLength</parameter>
+            </entry>
+            <entry>
+              <para>Длина тела запроса в байтах или -1 если эта длина неизвестна.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>contentType</parameter>
+            </entry>
+            <entry>
+              <para>MIME тип тела запроса или null если тип неизвестен.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>contextPath</parameter>
+            </entry>
+            <entry>
+              <para>Часть URL,  контекст запроса.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>cookies</parameter>
+            </entry>
+            <entry>
+              <para> Куки которые были посланы клиентом в запросе, в виде ключ-значение. </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>headers</parameter>
+            </entry>
+            <entry>
+              <para>Заголовки запроса,  в виде ключ-значение.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>localAddr</parameter>
+            </entry>
+            <entry>
+              <para>IP адрес на который был получен запрос.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>localName</parameter>
+            </entry>
+            <entry>
+              <para>Имя хоста на который был получен запрос.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>localPort</parameter>
+            </entry>
+            <entry>
+              <para>Порт на который был получен запрос.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>method</parameter>
+            </entry>
+            <entry>
+              <para>Имя HTTP метода запроса, например <literal>GET</literal>, <literal>POST</literal>.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>params</parameter>
+            </entry>
+            <entry>
+              <para>Параметры запроса,  в виде ключ-значение. В случае если у нескольких параметров одно и то же имя их значения будут представлены в виде массива.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>pathInfo</parameter>
+            </entry>
+            <entry>
+              <para>Дополнительная информация о пути в URL запроса.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>pathTranslated</parameter>
+            </entry>
+            <entry>
+              <para>Дополнительная информация о пути в URL запроса, приведенная к реальному пути.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>protocol</parameter>
+            </entry>
+            <entry>
+              <para>Имя и версия протокола запроса в виде protocol/majorVersion.minorVersion, например, <literal>HTTP/1.1</literal>.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>queryString</parameter>
+            </entry>
+            <entry>
+              <para>Строка запроса URL.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>remoteAddr</parameter>
+            </entry>
+            <entry>
+              <para>IP адрес клиента или последнего прокси.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>remoteHost</parameter>
+            </entry>
+            <entry>
+              <para>Полное квалифицированное имя клиета или последнего прокси.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>remotePort</parameter>
+            </entry>
+            <entry>
+              <para>Порт клиета или последнего прокси.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>requestURI</parameter>
+            </entry>
+            <entry>
+              <para>Часть  URL запроса от имени протокола до строки запроса.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>requestURL</parameter>
+            </entry>
+            <entry>
+              <para> URL запроса.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>scheme</parameter>
+            </entry>
+            <entry>
+              <para>Схема запроса, например <literal>http</literal>, <literal>https</literal>, или <literal>ftp</literal>.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>serverName</parameter>
+            </entry>
+            <entry>
+              <para>Имя хоста на который был послан запрос.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>serverPort</parameter>
+            </entry>
+            <entry>
+              <para>Порт на который был послан запрос.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>secure</parameter>
+            </entry>
+            <entry>
+              <para>Флаг, показывающий, что запрос был послан через защищенный канал, например HTTPS.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>В приведенном ниже примере на  выводятся все заголовки запроса:</para>
+    <programlisting language="JavaScript">/**
+ * @name TestModule
+ */
+
+function printHeadres() {
+  for (var c in http.response.headers) {
+       Logger.info(c + &apos; - &apos; + http.response.headers[c]);
+  }
+}</programlisting>
+    <para>Объект ответа <code>response</code> содержит следующие свойства и методы: </para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Свойство/метод</entry>
+            <entry align="center">Описание</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>headers</parameter>
+            </entry>
+            <entry>Заголовки ответа, в виде ключ-значение.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>status</parameter>
+            </entry>
+            <entry>
+              <para>Текущий статус ответа.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>contentType</parameter>
+            </entry>
+            <entry>
+              <para>MIME тип тела ответа.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>addHeader(name, value)</parameter>
+            </entry>
+            <entry>
+              <para>Добавляет в ответ новый заголовок с заданным именем и значением.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>setHeader(name, value)</parameter>
+            </entry>
+            <entry>
+              <para>Устанавливает заголовку ответа новое значение.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>addCookie(cookie)</parameter>
+            </entry>
+            <entry>
+              <para>Добавляет в ответ новый куки.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>Объект куки содержит следующие свойства:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Свойство</entry>
+            <entry align="center">Описание</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>name</parameter>
+            </entry>
+            <entry>Имя куки - обязательное поле.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>value</parameter>
+            </entry>
+            <entry>
+              <para>Текущее значение куки - обязательное поле.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>comment</parameter>
+            </entry>
+            <entry>
+              <para>Комментарий, описывающий предназначение куки.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>domain</parameter>
+            </entry>
+            <entry>
+              <para>Доменное имя куки.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>maxAge</parameter>
+            </entry>
+            <entry>
+              <para>Срок жизни куки в секундах.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>path</parameter>
+            </entry>
+            <entry>
+              <para>Путь на сервере для которого браузер возвращает этот куки.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>secure</parameter>
+            </entry>
+            <entry>
+              <para>Флаг, уведомляющий браузер, что данный куки должен быть послан только по защищенному протоколу.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>version</parameter>
+            </entry>
+            <entry>
+              <para>Версия протокола куки.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>В приведено ниже примере в HTTP ответ будет добавлен новый куки:</para>
+    <programlisting language="JavaScript">/**
+ * @name TestModule
+ */
+
+function addCookie() {
+  http.response.addCookie(
+     { name : &apos;platypus&apos;,
+       value : &apos;test&apos;,
+       maxAge : 60*60
+     }
+   )
+}</programlisting>
+    <para>Для того, чтобы удалить куки из браузера, задайте его свойство <parameter>maxAge</parameter> равным 0.</para>
+  </section>
+</chapter>

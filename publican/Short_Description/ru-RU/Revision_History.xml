@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Test_Article.ent">
+%BOOK_ENTITIES;
+]>
+<appendix id="appe-Test_Article-Revision_History">
+	<title>Ревизии документа</title>
+	<simpara>
+		<revhistory>
+			<revision>
+				<revnumber>0-0</revnumber>
+				<date>15.05.2012</date>
+				<author>
+					<firstname>Марат</firstname>
+					<surname>Гайнуллин</surname>
+					<email>mg@altsoft.biz</email>
+				</author>
+			</revision>
+		</revhistory>
+	</simpara>
+</appendix>
+

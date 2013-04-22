@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Report_Chapter">
+  <title>Отчет</title>
+  <para>Элемент приложения типа <emphasis>Отчет</emphasis> предназначен для представления информации в виде отчета - файла в формате <application>Microsoft Excel</application>. Сгенерированный отчет может быть открыт в приложении электронных таблиц, отправлен на печать или сохранен на диск.</para>
+  <para>Элемент приложения <emphasis>Отчет</emphasis> включает в себя:</para>
+  <itemizedlist>
+    <listitem>
+      <para>шаблон отчета - файл в формате <application>Microsoft Excel</application>  с расширением <filename>.xls</filename>;</para>
+    </listitem>
+    <listitem>
+      <para>программный код JavaScript;</para>
+    </listitem>
+    <listitem>
+      <para>модель данных.</para>
+    </listitem>
+  </itemizedlist>
+  <para>Элемент приложения Отчет  является наследником элемента приложения Модуль, поэтому описание  программного кода, разграничений доступа и модели данных модуля справедливо и для отчета. Имя-идентификатор отчета задается в  JavaScript-файле при помощи аннотации <literal>@name</literal>.</para>
+  <para>Отчеты в Platypus построены на базе библиотеки jXLS, которая в свою очередь использует библиотеку Apache POI. Разметка и форматирование отчета задается в файле шаблона, при этом привязка к данным осуществляется при помощи тэгов, синтаксис которых соответствует синтаксису тэгов библиотеки jXLS.</para>
+  <para>В процессе формирования отчета тэги шаблона связываются с полями сущностей  модели, а также с JavaScript-объектами.</para>
+  <figure>
+    <title>Трансформации при формировании отчета</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata align="center" fileref="images/reportsFlow.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <note>
+    <para>Для получения подробной информации о тегах, используемых в шаблоне отчета смотрите документацию на библиотеку jXLS по адресу: <ulink url="http://jxls.sourceforge.net">http://jxls.sourceforge.net</ulink></para>
+  </note>
+  <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_8">
+    <title>Создание нового отчета</title>
+    <para>Для создания нового отчета выполните следующие действия:
+   
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>Выберите пункт меню <guimenuitem>New</guimenuitem> контекстного меню родительского каталога или выделите родительский каталог и выберите пункт <guimenuitem>New Filе</guimenuitem> главного меню или нажмите кнопку <guibutton>New File</guibutton> на панели инструментов или воспользуйтесь &quot;горячей&quot; клавишей;</para>
+      </listitem>
+      <listitem>
+        <para>Выберите тип <guilabel>Report</guilabel> из контекстного меню или на первом шаге мастера <menuchoice>
+            <guimenu>Choose file type</guimenu>
+            <guisubmenu>Platypus application elements</guisubmenu>
+            <guimenuitem>Report</guimenuitem>
+          </menuchoice> и нажмите кнопку <guibutton>Next</guibutton>;</para>
+      </listitem>
+      <listitem>
+        <para>Введите название нового элемента приложения в поле <guilabel>Name</guilabel> и  нажмите кнопку <guibutton>Finish</guibutton> для его создания или кнопку <guibutton>Cancel</guibutton> для отмены.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Редактирование отчета</title>
+    <para> Для открытия редактора элемента приложения кликните дважды по элементу приложения в дереве проекта. </para>
+    <para>Редактирование шаблона отчета  осуществляется при помощи приложения электронных таблиц. Для разных операционных систем  используются следующее приложениях по-умолчанию:</para>
+    <itemizedlist>
+      <listitem>
+        <para>для ОС Windows: <application>Microsoft Excel</application>;</para>
+      </listitem>
+      <listitem>
+        <para>для ОС Linux: <application>Open/Libre Office Calc</application>;</para>
+      </listitem>
+      <listitem>
+        <para>для Mac OS: <application>Microsoft Excel</application>;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Для редактирования отчета:</para>
+    <itemizedlist>
+      <listitem>
+        <para>откройте вкладку <guilabel>Layout</guilabel> редактора отчета, запустите редактор шаблона, для этого нажмите на ссылку <guilabel>Edit report template</guilabel>;</para>
+      </listitem>
+      <listitem>
+        <para>задайте форматирование отчета, добавьте в шаблон тэги привязки к данным, сохраните шаблон отчета в приложении редактора шаблона;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладках <guilabel>Datamodel</guilabel> и <guilabel>Source</guilabel> сконфигурируйте модель данных  и напишите программный код JavaScript; </para>
+      </listitem>
+      <listitem>
+        <para>задайте обработчики событий отчета, напишите код функций-обработчиков событий в редакторе JavaScript;</para>
+      </listitem>
+      <listitem>
+        <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов <application>Platypus Application Designer</application> или нажав сочетание клавиш<keycombo>
+            <keycap> Ctrl</keycap>
+            <keycap>S</keycap>
+          </keycombo>.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>В отчете рекомендуется размещать программный код, отвечающий непосредственно за формирование отчета.</para>
+    </note>
+  </section>
+  <section>
+    <title>Шаблон отчета</title>
+    <para>Отредактируйте шаблон отчета в приложении электронных таблиц.</para>
+    <section>
+      <title>Объекты и коллекции</title>
+      <para>Разместите в ячейках шаблона тэги связи с объектами JavaScript и сущностями модели. Для доступа к данным используйте следующий синтаксис: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, где <replaceable>objectName</replaceable> - имя JavaScript-объекта, JavaScript-массива объектов или сущности модели, <replaceable>propertyName</replaceable> - свойство  объекта. </para>
+      <para>Пример вывода в ячейки названия документа:</para>
+      <programlisting language="JavaScript">${document.name}</programlisting>
+      <para>Похожим образом можно получить доступ  и к сложному объекту:</para>
+      <programlisting language="JavaScript">${library.documents.name}</programlisting>
+      <para>Допускается использование нескольких тэгов в одной ячейке, например:</para>
+      <programlisting language="JavaScript">Employee: ${employee.name} - ${employee.age} years</programlisting>
+      <para>В программном коде отчета задайте объекты, которые будут доступны в тэгах шаблона:</para>
+      <programlisting language="JavaScript">/**
+ * @name documentReport
+ */
+var library = {};
+library.documens = [
+ {name:&apos;foo&apos;}, 
+ {name:&apos;bar&apos;},
+ {name:&apos;baz&apos;}
+];</programlisting>
+      <para>Добавьте сущности, которые будут связаны с шаблоном  в модель данных отчета.</para>
+      <para>При выводе коллекций для каждого элемента коллекции добавляется новая строка и при этом для ее ячеек устанавливается стиль ячейки, в которой находился тэг.</para>
+      <para>Если вы заранее знаете размер коллекции, вы можете  не добавлять для  каждого элемента новую строку, а использовать строки шаблона. Для этого установите для коллекции специальное свойство <property>fixed</property> в значение <literal>true</literal>.</para>
+      <para>При необходимости задайте динамические стили для ячеек. Такие стили будут изменяться в зависимости от содержимого ячейки. Для этого:</para>
+      <itemizedlist>
+        <listitem>
+          <para>задайте для специальной ячейки шаблона стиль которой должен динамически применяться к ячейке элемента коллекции, задайте для этой ячейки метку, например, <code> $[0]customRow</code>, данная ячейка может быть размещена на скрытой ячейке шаблона;</para>
+        </listitem>
+        <listitem>
+          <para>для элемента коллекции задайте специальное свойство <property>cellTemplateLabel</property> установив в него строку-ссылки на ячейку стиля, например, <code>cellTemplateLabel=&apos;customRow&apos;</code>.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+    <section>
+      <title>Тэги</title>
+      <para>Используйте специальные тэги в шаблоне для того, чтобы предопределить трансформацию данных при формировании отчета.</para>
+      <para>Для вывода коллекций используйте тэг <literal>jx:forEach</literal>:</para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${departments}&quot; var=&quot;department&quot;&gt;
+  ${department.name} | ${department.chief}
+&lt;/jx:forEach&gt;</programlisting>
+      <para>Тэги <literal>jx</literal> могут быть вложенными друг в друга. Если вы разместите открывающий и закрывающие тэги на одной строке, то  размножены будут колонки колонки на этой строке. Разместите тэги <literal>jx:forEach</literal> и <literal>jx:forEach</literal> на разных строках для того чтобы были размножены строки между этими тэгами. Другие ячейки на строках содержащих открывающие и закрывающие тэги будут проигнорированы.</para>
+      <para>Тэг <literal>jx:forEach</literal> позволяет осуществить группировку данных коллекции по одному из свойств. Для организации группировки используйте атрибуты <property>groupBy</property> и <property>groupOrder</property>, которые определяют какое свойство должно быть использовано для группировки данных и в каком порядке группы  должны быть выведены, например: </para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; groupBy=&quot;age&quot;&gt;
+  Age: ${group.item.age}
+  &lt;jx:forEach items=&quot;${group.items}&quot; var=&quot;employee&quot;&gt;
+    ${employee.name} |
+    ${employee.payment} |
+    ${employee.bonus}
+  &lt;/jx:forEach&gt;
+&lt;/jx:forEach&gt;</programlisting>
+      <para>В данном примере мы группируем работников по возрасту. При группировке в контексте цикла создается новый объект <property>group</property>, содержащий два свойства: <property>item</property> - текущая группа и <property>items</property> - коллекция всех объектов в группе. </para>
+      <para>По умолчанию при группировке, если атрибут <property>groupOrder</property> отсутствует  будет сохранен первоначальный порядок следования элементов в коллекции. Используйте атрибут <property>groupOrder</property>, присвоив ему значения <literal>asc</literal> или <literal>desc</literal> для прямой и обратной сортировки.</para>
+      <para>Если в тэге<literal> jx:forEach</literal>  используется атрибут <property>groupBy</property> - атрибут var игнорируется.</para>
+      <para>Используйте атрибут <property>select</property> для того, чтобы определить, какие элементы коллекции должны быть включены в отчет. В приведенном ниже примере мы включаем только сотрудников с зарплатой болше 2000:</para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; select=&quot;${employee.payment &gt; 2000}&quot;&gt;
+ ${employee.name} | ${employee.payment} | ${employee.bonus}
+&lt;/jx:forEach&gt;</programlisting>
+      <para>Для того, чтобы получить доступ к индексу текущего элемента коллекции используйте атрибут <property>varStatus</property>, задав ему имя объекта, которому будет присвоен объект статуса. У объекта статуса есть единственное свойство <property>index</property>, например: </para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; varStatus=&quot;status&quot;&gt;
+ | ${status.index} 
+ | ${employee.name} 
+ | ${employee.payment} 
+ | ${employee.bonus}
+&lt;/jx:forEach&gt;</programlisting>
+      <para>Используйте тэг <literal>jx:if</literal>, для того, чтобы управлять выводом в зависимости от условия:</para>
+      <programlisting language="JavaScript">&lt;jx:if test=&quot;${department.chief.payment &gt; 2000.0}&quot;&gt;
+Chief Name: ${department.chief.name}
+&lt;/jx:if&gt;</programlisting>
+      <para>Тэг <literal>jx:if</literal> может быть использован для того, чтобы отображать или скрывать колонки, для этого поместите открывающий и закрывающие тэги на одном ряду - при экспорте данных колонки содержащиеся в теле тэга будут отображаться или скрываться.</para>
+      <para>Используйте тэг <literal>jx:outline</literal> для того, чтобы сгруппировать ряды:</para>
+      <programlisting language="JavaScript">&lt;jx:outline&gt;
+   //any rows can go here
+&lt;/jx:outline&gt;</programlisting>
+      <para>У тэга <literal>jx:outline</literal> есть необязательный атрибут <property>detail</property>, определяющий состояние группы рядов. По умолчанию он установлен в <literal>false</literal>, что означает что группа рядов будет скрыта.</para>
+    </section>
+    <section>
+      <title>Графики и диаграммы</title>
+      <para>Используйте стандартные средства электронных таблиц по выводу графиков и диаграмм. </para>
+      <para>При использовании коллекций с фиксированным количеством элементов просто настройте диаграмму <application>Excel</application> на диапазон ячеек в которые будут выведены данные.</para>
+      <para>Если количество элементов в коллекции не известно используйте подход  с использованием функций <literal>OFFSET</literal> и <literal>COUNTA</literal> и созданием именованного диапазона.</para>
+      <note>
+        <para>Прочитайте  статьи по следующим ссылкам для того, чтобы ознакомится с подходом для создания диаграмм с динамическим диапазоном данных: <itemizedlist>
+            <listitem>
+              <para><ulink url="http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518">http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518</ulink></para>
+            </listitem>
+            <listitem>
+              <para><ulink url="http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html">http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html</ulink></para>
+            </listitem>
+          </itemizedlist></para>
+      </note>
+    </section>
+  </section>
+  <section>
+    <title>Программный код формирования отчета</title>
+    <para>Для того чтобы сгенерировать отчет - создайте объект отчета, передав в конструктор имя-идентификатор требуемого отчета.</para>
+    <para>Используйте объект отчета:</para>
+    <itemizedlist>
+      <listitem>
+        <para>отобразите отчет, вызвав метод <methodname>show</methodname>, при этом отчет будет загружен и дана команда операционной системе его открытие в  приложении электронных таблиц;</para>
+      </listitem>
+      <listitem>
+        <para> отправьте отчет на печать, вызвав метод <methodname>print</methodname>;</para>
+      </listitem>
+      <listitem>
+        <para> сохраните файл отчета на диск, вызвав метод <methodname>save</methodname>, в качестве параметра передайте путь файлу, в который отчет должен быть сохранен;</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>При исполнении отчета в HTML5 браузерном клиенте вызов методов <methodname>show()</methodname>, <methodname>print()</methodname> и <methodname>save(reportPath)</methodname> приведет к одному и тому же результату - загрузке файла отчета в браузер.</para>
+    </note>
+    <para>В приведенном ниже примере отчет формируется при нажатии на кнопку формы:</para>
+    <programlisting language="JavaScript">/**
+ * Form generates report
+ * @name reportForm
+ */
+
+function reportButtonActionPerformed(evt) {                    var r = new Report(&apos;documentReport&apos;);
+  r.params.documentCategory = &apos;business&apos;; // update model
+  r.show(); // show report
+}</programlisting>
+    <para>Напишите логику обработки данных для отчета в скрипте отчета. </para>
+    <para>Программа обработки данных может специальным образом подготавливать данные для отображения, вычислять новые данные и т.д. Программный код может быть выполнен:</para>
+    <itemizedlist>
+      <listitem>
+        <para>при вызове конструктора отчета - поместите код на верхний уровень скрипта отчета;</para>
+      </listitem>
+      <listitem>
+        <para>в  событии <literal>beforeRender</literal>, которое будет вызвано перед запуском  формирования отчета -  при вызове методов <methodname>show</methodname>,  <methodname>print</methodname> или <methodname>save</methodname> - поместите код в обработчик события <varname>beforeRender</varname>;</para>
+      </listitem>
+      <listitem>
+        <para>в стандартных событиях обновления наборов данных модели - см. главу &quot;Модель данных&quot; в разделе &quot;Модуль&quot;;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Список событий отчета приведен в таблице:</para>
+    <informaltable>
+      <tgroup cols="4">
+        <thead>
+          <row>
+            <entry align="center">Событие</entry>
+            <entry>Отменяемое</entry>
+            <entry>Параметры обработчика</entry>
+            <entry align="center">Описание </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>onBeforeRender</parameter>
+            </entry>
+            <entry>нет</entry>
+            <entry><parameter>evt</parameter> - объект события</entry>
+            <entry>Вызывается перед запуском формирования отчета</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

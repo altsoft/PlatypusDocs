@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Administration_Guide-Deployment_Chapter">
+  <title>Развертывание приложений и миграции БД</title>
+  <para>Развертывание — это процесс распространения готового приложения  для установки или обновления на  рабочем сервере. На рабочем сервере приложение Platypus  целиком располагается в базе данных, либо в виде каталога на жестком  диске. </para>
+  <para>Механизм миграций обеспечивает сохранение и восстановление конфигурации и начальных данных в  базе данных.  </para>
+  <para>Приложения Platypus поставляются в следующих вариантах:</para>
+  <itemizedlist>
+    <listitem>
+      <para>на компакт или DVD диске;</para>
+    </listitem>
+    <listitem>
+      <para>через  Интернет - в виде архивного файла в формате zip.</para>
+    </listitem>
+  </itemizedlist>
+  <para>В случае поставки приложения Platypus в виде архивного файла распакуйте его содержимое в удобное для вас место на жестком диске.</para>
+  <para>После распаковки, каталог будет иметь следующую структуру:</para>
+  <itemizedlist>
+    <listitem>
+      <para><filename>appDirectory/</filename></para>
+      <itemizedlist>
+        <listitem>
+          <para><filename>src/</filename></para>
+        </listitem>
+        <listitem>
+          <para><filename>db/</filename></para>
+        </listitem>
+        <listitem>
+          <para><filename>platypus.xml</filename></para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </itemizedlist>
+  <para>Каталог приложения Platypus соответствует проекту приложения готового как для развертывания и исполнения, так и для модификации в <application>Platypus Application Designer</application>. </para>
+  <para>Каталог приложения содежит конфигурационный файл <filename>platypus.xml</filename>, каталог <filename>src</filename>, содержащий элементы приложения и каталог <filename>db</filename>  в котором содержатся миграции баз данных.</para>
+  <para>База данных в которую развертывается приложение включает в себя  системные таблицы и произвольное количество рабочих таблиц. При развертывании системные таблицы создаются  автоматически.</para>
+  <para>К системным таблицам относятся:</para>
+  <itemizedlist>
+    <listitem>
+      <para><literal>MTD_ENTITIES</literal> - в данной таблице хранится исполняемое приложение в виде древовидной структуры; </para>
+    </listitem>
+    <listitem>
+      <para><literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> - таблицы пользователей и их групп при работе со встроенным пространством пользователей, для информации  смотри раздел Безопасность.</para>
+    </listitem>
+    <listitem>
+      <para><literal>MTD_VERSION</literal> - в данной таблице хранится информация о текущей версии хранилища данных приложения.</para>
+    </listitem>
+  </itemizedlist>
+  <para>После развертывания в БД каждый элемент приложения представляет собой одну запись в таблице <literal>MTD_ENTITIES</literal>.</para>
+  <para>Команда запуска утилиты развертывания и миграций БД имеет следующий вид:</para>
+  <programlisting>java -jar PlatypusDeploy.jar <replaceable>OPTIONS</replaceable></programlisting>
+  <para>где <replaceable>OPTIONS</replaceable> - команда развертывания или миграции и набор её параметров.</para>
+  <para>Описание команд относящиеся к операции развертывания импорта и миграций смотрите в  подразделах относящихся к развертыванию и миграциям БД.</para>
+  <table>
+    <title> Параметры команд развертывания и миграций</title>
+    <tgroup cols="2">
+      <tbody>
+        <row>
+          <entry>Параметр</entry>
+          <entry>Описание</entry>
+        </row>
+        <row>
+          <entry>
+            <parameter>-ap APP_PATH</parameter>
+          </entry>
+          <entry>Путь к папке, содержащей готовое приложение Platypus. Если этот параметр не задан, то будет использована текущая папка.</entry>
+        </row>
+        <row>
+          <entry>
+            <parameter>-dbuser DB_USER</parameter>
+          </entry>
+          <entry>Имя пользователя для авторизации в БД.</entry>
+        </row>
+        <row>
+          <entry>
+            <parameter>-dbpassword DB_PASSWORD</parameter>
+          </entry>
+          <entry>Пароль пользователя для авторизации в БД.</entry>
+        </row>
+        <row>
+          <entry>
+            <parameter>-dbschema DB_SCHEMA</parameter>
+          </entry>
+          <entry>Схема БД.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+  <note>
+    <para>Действия по развертыванию и обновлению приложения также могут быть выполнены при помощи <application>Platypus Application Designer</application>.</para>
+  </note>
+  <section id="sect-Administration_Guide-Deployment_Chapter-Test_Section_2">
+    <title> Развертывание и импорт приложения</title>
+    <important>
+      <para>Перед выполнением обновления приложения  произведите резервное копирование рабочей БД.</para>
+    </important>
+    <para>Во время процесса разработки приложение находится в каталоге на диске, при этом оно может запускаться для отладки и тестирования непосредственно с диска. Для промышленной эксплуатации приложение рекомендуется развертывать в базу данных.</para>
+    <table>
+      <title>Команды развертывания и импорта приложения</title>
+      <tgroup cols="2">
+        <tbody>
+          <row>
+            <entry>Параметр</entry>
+            <entry>Описание</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-deploy</parameter>
+            </entry>
+            <entry>Развертывает приложение с диска в БД.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-undeploy</parameter>
+            </entry>
+            <entry>Удаляет приложение из БД.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-import</parameter>
+            </entry>
+            <entry>Импортирует приложение из БД на диск.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <para>В случае если параметры настройки соеденения с БД или имени пользвателя и пароля Platypus не заданы в опциях, информация о соденении с БД будет прочитана из файла настроек <filename>platypus.xml</filename> папки приложения.</para>
+    <para>Пример команды импорта приложения из БД:</para>
+    <programlisting>java -jar PlatypusDeploy.jar -import -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema</programlisting>
+    <para><application>Platypus Application Server</application> и <application>Platypus Client</application> не требуют перезапуска после обновления рабочего приложения.</para>
+  </section>
+  <section>
+    <title>Миграции БД</title>
+    <para>Конфигурация базы данных приложения Platypus хранится в виде последовательных миграций, которые применяются последовательно для обеспечения корректной работы обновлений схемы и данных в БД. Каждое изменение структуры или служебных данных представляет собой файл миграции, название которого соответствует версии изменений, начиная с 1. Для каждой новой миграции имя файла получается путем прибавления единицы к максимальному номеру версии для данного приложения. Файлы миграций могут быть двух типов:</para>
+    <itemizedlist>
+      <listitem>
+        <para>мгновенный снимок метаданных БД, с расширением <filename>.xdm</filename>;</para>
+      </listitem>
+      <listitem>
+        <para>пакет SQL команд для   добавления и/или изменения служебных данных,  с расширением <filename>.batch</filename>;</para>
+      </listitem>
+    </itemizedlist>
+    <table>
+      <title>Команды создания и применения миграций БД</title>
+      <tgroup cols="2">
+        <tbody>
+          <row>
+            <entry>Параметр</entry>
+            <entry>Описание</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-apply</parameter>
+            </entry>
+            <entry>Применяет набор миграций к БД. Применяются те миграции, номер которых больше текущей версии БД.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-undeploy</parameter>
+            </entry>
+            <entry>Удаляет приложение из БД.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-snapshot</parameter>
+            </entry>
+            <entry>Создает новую миграцию - снимок метаданных БД, при этом версия БД устанавливается соответсвующей этой миграции.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-batch</parameter>
+            </entry>
+            <entry>Создает новую пустую пакетную миграцию, при этом версия БД устанавливается соответсвующей этой миграции.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-clean</parameter>
+            </entry>
+            <entry>Производит очистку каталога миграций, удаляя те миграции, которые не применяются.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-getver</parameter>
+            </entry>
+            <entry>Возвращает текущую версию БД.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-setver</parameter>
+            </entry>
+            <entry>устанавливает текущую версию БД в <replaceable>VERSION</replaceable> - целое, неотрицательное число.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <para>В случае если настройка соеденения с БД или имя пользвателя и пароля Platypus не заданы в переметрах, информация о соеденении с БД будет прочитана из файла настроек <filename>platypus.xml</filename> папки приложения.</para>
+    <para>При применении миграций к БД используется только последний моментальный снимок структуры БД, а также все моментальные снимки которые идут непосредственно перед пакетами SQL команд, остальные файлы миграций игнорируются и могут быть удалены командой <parameter>-clean</parameter>.</para>
+    <para>Пример применения миграций к БД:</para>
+    <programlisting>java -jar PlatypusDeploy.jar -apply -ap ~/apps/testApp</programlisting>
+  </section>
+</chapter>

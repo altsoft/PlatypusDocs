@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Install_Chapter">
+  <title>Установка и настройка Platypus Application Designer</title>
+  <para>В данном разделе содержится  информация по установке основного средства разработки приложений на платформе Platypus  - <application> Platypus Application Designer</application>.</para>
+  <para>Программное обеспечение дизайнера приложений входит в комплект разработчика  и поставляется совместно с платформой Platypus.</para>
+  <para>Комплект разработчика Platypus поставляется в следующих вариантах:</para>
+  <itemizedlist>
+    <listitem>
+      <para>на компакт или DVD диске;</para>
+    </listitem>
+    <listitem>
+      <para>через  Интернет - в виде архивного файла в формате zip.</para>
+    </listitem>
+  </itemizedlist>
+  <para>В случае поставки комплекта разработчика в виде архивного файла распакуйте его содержимое в удобное для вас место на жестком диске.</para>
+  <note>
+    <para>Инструкции по установке платформы Platypus  смотрите в документе &quot;Руководство администратора&quot;.</para>
+  </note>
+  <section id="sect-Administration_Guide-Install_Chapter-Test_Section_1">
+    <title>Системные требования для установки дизайнера приложений</title>
+    <para>Системные требования для установки комплекта разработчика на компьютере включают минимальные системные требования к компьютеру для установки исполняемой части платформы Platypus со следующими  уточнениями<!--минимальными требованиями?-->:
+   <itemizedlist>
+        <listitem>
+          <para>32-разрядный (x86) или 64-разрядный (x64) процессор с тактовой частотой 1 гигагерц (ГГц) или выше; </para>
+        </listitem>
+        <listitem>
+          <para>2 гигабайта (ГБ) (для 32-разрядной системы) или 3 ГБ (для 64-разрядной системы) оперативной памяти (ОЗУ); </para>
+        </listitem>
+        <listitem>
+          <para>10 гигабайт (ГБ) свободного пространства на жестком диске; </para>
+        </listitem>
+        <listitem>
+          <para>операционная система   с графическим интерфейсом пользователя;</para>
+        </listitem>
+        <listitem>
+          <para>Oracle JDK 7;</para>
+        </listitem>
+        <listitem>
+          <para>доступ к Интернет для получения обновлений.</para>
+        </listitem>
+      </itemizedlist>
+  </para>
+  </section>
+  <section>
+    <title>Установка дизайнера приложений</title>
+    <para>
+   Для того, чтобы установить комплект разработчика выполните следующие действия:<orderedlist>
+        <listitem>
+          <para>
+установите платформу Platypus;</para>
+        </listitem>
+        <listitem>
+          <para>
+перейдите в подкаталог <filename>designer</filename> дистрибутива комплекта разработчика Platypus;</para>
+        </listitem>
+        <listitem>
+          <para>
+запустите файлы <filename>platypusdesigner-windows.exe</filename> для операционной системы Windows или <filename>platypusdesigner-linux.sh</filename> для Linux;</para>
+          <note>
+            <para>Для ОС Linux пользователь должен иметь права доступа, позволяющие запустить исполняемый файл. </para>
+          </note>
+        </listitem>
+        <listitem>
+          <para>
+нажмите кнопку <guibutton>Next</guibutton> для перехода к следующему шагу процесса установки;</para>
+        </listitem>
+        <listitem>
+          <para>
+прочитайте условия лицензирования программного обеспечения и для  их принятия установите флажок <guilabel>I accept the terms of the license agreement</guilabel>. Нажмите кнопку <guibutton>Next</guibutton> для перехода к следующему шагу процесса установки;</para>
+        </listitem>
+        <listitem>
+          <para>
+выберите каталог установки приложений и опции по созданию ярлыков на Рабочем столе и пунктов в меню установленных программ; Нажмите кнопку <guibutton>Next</guibutton> для  перехода к следующему шагу процесса установки;</para>
+        </listitem>
+        <listitem>
+          <para>
+нажмите кнопку <guibutton>Install</guibutton> для начала установки <application>Platypus Application Designer</application>; </para>
+        </listitem>
+        <listitem>
+          <para>
+после окончания установки нажмите кнопку <guibutton>Finish</guibutton>.  Установите флажок <guilabel>Launch Platypus application designer after the installer closes</guilabel> для немедленного запуска дизайнера.</para>
+        </listitem>
+      </orderedlist>
+  </para>
+    <note>
+      <para>Укажите путь к JDK в параметре <parameter>jdkhome</parameter> в файле конфигурации <application>Platypus Application Designer</application>, находящегося в <filename> platypusdesigner/etc/platypusdesigner.conf</filename> в случае, если  JDK установлен в  место на жестком диске отличное от места по умолчанию. Неправильное значение параметра jdkhome может приводить к ошибкам при запуске приложения.</para>
+    </note>
+  </section>
+  <section>
+    <title>Настройка дизайнера приложений</title>
+    <para><application>Platypus Application Designer</application> поддерживает локализацию текстов меню, сообщений и т.д. В настоящее время реализована <!--Поддержку?-->локализация для следующих языков:</para>
+    <itemizedlist>
+      <listitem>
+        <para>английский язык;</para>
+      </listitem>
+      <listitem>
+        <para>русский язык.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Язык локализации выбирается автоматически при запуске приложения дизайнера в соответствии с региональными настройками пользователя в операционной системе.</para>
+    <para>Для того чтобы принудительно изменить язык локализации: </para>
+    <itemizedlist>
+      <listitem>
+        <para>отредактируйте файл конфигурации <application>Platypus Application Designe</application>r - добавьте в параметр <parameter>default_options</parameter> опцию <option>--locale ru:RU</option> или <option>--locale en:US</option>;</para>
+      </listitem>
+      <listitem>
+        <para>перезапустите дизайнер приложений.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Вы также можете изменить язык локализации дизайнера добавив опцию -<option>-locale ru:RU</option> или <option>--locale en:US</option> в строку команды на запуск <application>Platypus Application Designer</application>.</para>
+    <para>Дизайнер Platypus поддерживает подключение различных стилей оформления пользовательского интерфейса (LaF - Look and Feel). Существуют стили оформления для конкретной операционной системы, универсальные стили (<literal>Metal</literal> и <literal>Nimbus</literal>) и  стили оформления которые могут поставляться сторонними разработчиками.</para>
+    <warning>
+      <para>Подключение внешних стилей оформления является достаточно сложной процедурой и не рекомендовано для начинающих.</para>
+    </warning>
+    <para>Для того чтобы изменить стиль оформления <application>Platypus Application Designer</application>:</para>
+    <itemizedlist>
+      <listitem>
+        <para>отредактируйте файл  конфигурации дизайнера  - добавьте в параметр <parameter>default_options</parameter> опцию <option>--laf <replaceable>LaF</replaceable></option>, где <replaceable>LaF</replaceable> соответствует названию стиля или полному имени класса LaF, в случае использования стороннего LaF также необходимо включить библиотеку стилей в путь доступный загрузчику классов <application>Platypus Application Designer</application>;</para>
+      </listitem>
+      <listitem>
+        <para>перезапустите  дизайнер приложений.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="sect-Administration_Guide-Install_Chapter-Test_Section_4">
+    <title>Удаление дизайнера приложений</title>
+    <para>
+   Для того, чтобы удалить дизайнер приложений Platypus с компьютера выполните следующие действия:
+   <orderedlist>
+        <listitem>
+          <para>запустите приложение <application>Uninstall Platypus Application Designer</application> из меню установленных программ. Для ОС Windows используйте штатный механизм удаления программ, в качестве альтернативного варианта для удаления  воспользуйтесь программой <filename>uninstall.exe</filename> для OC Windows или <filename>uninstall.sh</filename> для ОС Linux из каталога в который был установлен <application> Platypus Application Designer</application>;</para>
+        </listitem>
+        <listitem>
+          <para>подтвердите удаление приложений и  компонентов Platypus нажав кнопу <guibutton>Finish</guibutton>, при необходимости  активируйте опцию удаления конфигурационных данных из  каталога пользователя.</para>
+        </listitem>
+      </orderedlist>
+  </para>
+  </section>
+</chapter>

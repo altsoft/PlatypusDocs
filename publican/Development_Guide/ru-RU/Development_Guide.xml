@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<book>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Book_Info.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Preface.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Intro_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Install_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Designer_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Diagram_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Extdb_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Query_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Module_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Form_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Report_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Webapi_Chapter.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Revision_History.xml"/>
+  <index/>
+</book>

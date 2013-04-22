@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Quick_Start.ent">
+%BOOK_ENTITIES;
+]>
+<bookinfo id="book-Quick_Start-Quick_Start">
+	<title>Руководство по быстрому старту</title>
+	<subtitle>Руководство по быстрому старту с платформой Platypus</subtitle>
+	<productname>Platypus</productname>
+	<productnumber>2.2</productnumber>
+	<edition>0</edition>
+	<pubsnumber>0</pubsnumber>
+	<abstract>
+		<para>
+			Данное руководство предоставляет пошаговые инструкции для того, чтобы начать разрабатывать приложения на платформе Platypus.
+		</para>
+	</abstract>
+</bookinfo>
+
