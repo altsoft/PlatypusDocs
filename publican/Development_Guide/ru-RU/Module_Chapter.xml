@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. -->
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -1089,9 +1088,9 @@ try {
         </varname> - сущность, <varname>
           <replaceable>paramName</replaceable>
         </varname> - свойство соответствующего параметра.</para>
-      <para>Для того чтобы установить значения параметра используйте свойство <varname>value</varname> объекта параметра сущности:</para>
-      <programlisting language="JavaScript">entityParam.value = newValue;</programlisting>
-      <para>где <varname>entityParam</varname> - объект  параметра сущности, <literal>newValue</literal> - новое значение параметра.</para>
+      <para>Для того чтобы установить значения параметра присвойте ему новое значение:</para>
+      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
+      <para>где, <literal>newValue</literal> - новое значение параметра.</para>
       <note>
         <para>Установка нового значения параметра сущности не приводит к автоматическому обновлению её данных.</para>
       </note>
