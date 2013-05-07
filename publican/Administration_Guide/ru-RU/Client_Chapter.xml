@@ -94,7 +94,7 @@
       <listitem>
         <para><guilabel>URL подключения</guilabel> - строка соединения с сервером, для работы по 2х звенной схеме должна быть в формате JDBC URL, например: <literal>jdbc:oracle:thin:@dbhost:1521:adb</literal>,</para>
         <para>для работы по 3-х звенной схеме по  протоколу Platypus Protocol используйте URL формата <literal> platypus://<replaceable>host</replaceable><replaceable>:port</replaceable></literal>, например, <literal>platypus://serverhost:8500</literal>, порт 8500 является портом по умолчанию для протокола  Platypus, и его можно в данном случае не указывать,</para>
-        <para>для работы по 3-х звенной схеме по протоколу HTTP используйте URL формата <literal>http://<replaceable>host</replaceable><replaceable>:port</replaceable></literal>, например, <literal>http://serverhost:8080</literal>.</para>
+        <para>для работы по 3-х звенной схеме по протоколу HTTP используйте URL формата <literal>http://<replaceable>host</replaceable><replaceable>:port/platypus_servlet/application</replaceable></literal>, например, <literal>http://localhost/myapp/application</literal>.</para>
       </listitem>
       <listitem>
         <para><guilabel>Схема</guilabel> - схема БД по умолчанию, например, <literal>myschema</literal>; В случае 3-х звенного подключения не используется.</para>
