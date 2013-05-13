@@ -54,7 +54,13 @@
     <para>Для корректной работы сервлета Platypus отредактируйте файл <filename>WEB-INF/web.xml</filename>:</para>
     <orderedlist>
       <listitem>
-        <para>задайте параметр инициализации с именем url и заполните его именем JNDI ресурса источника данных  JDBC, например, <literal>java:/jdbc/TestDB</literal>.</para>
+        <para>задайте параметр инициализации с именем <parameter>url</parameter> и значением имени JNDI ресурса источника данных  JDBC, например, <literal>java:/jdbc/TestDB</literal>.</para>
+      </listitem>
+      <listitem>
+        <para>задайте параметр инициализации с именем <parameter>dialect</parameter> и значением имени драйвера базы данных, например,  <literal>Oracle</literal>.</para>
+      </listitem>
+      <listitem>
+        <para>задайте параметр инициализации с именем <parameter>schema</parameter> и значением схемы БД по умолчанию, например,   <literal>test</literal>.</para>
       </listitem>
       <listitem>
         <para>укажите тип аутентификации,  например <literal>BASIC</literal> и имя области безопасности (Realm), например <literal>JDBCRealm</literal>. При работе со встроенным пространством пользователей, информацию по настройке области безопасности смотрите в разделе &quot;Безопасность&quot;.</para>
@@ -69,6 +75,49 @@
     <important>
       <para>Настройте ограничения безопасности для URL по которым работает Platypus Servlet.</para>
     </important>
+    <table>
+      <title>Диалекты - имена драйверов БД</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">База данных</entry>
+            <entry align="center">Диалект</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>Oracle DB</entry>
+            <entry>
+              <literal>Oracle</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>MySQL</entry>
+            <entry>
+              <literal>MySql</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>SQL Server</entry>
+            <entry>
+              <literal>MsSql</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>PostgreSQL</entry>
+            <entry>
+              <literal>Postgre</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>H2 DB</entry>
+            <entry>
+              <literal>H2</literal>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
     <para>Platypus Client поддерживает <literal>BASIC</literal> аутентификацию, поэтому для его корректной работы должен быть настроен именно этот тип аутентификаци. </para>
     <para>После завершения конфигруированя разверните Web-приложение в виде папки или WAR-архива в сервлет-контейнер или J2EE сервер и укажите базовый URL для web-приложения.</para>
   </section>

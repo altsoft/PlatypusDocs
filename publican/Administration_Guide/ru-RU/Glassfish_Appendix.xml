@@ -20,7 +20,7 @@
     <listitem>
       <para>Создайте пул подключений JDBC: <guimenuitem>Resources -&gt; JDBC -&gt; JDBC Connection Pools -&gt; New</guimenuitem>, Тип ресурса
         <type>javax.sql.ConnectionPoolDataSource</type>, а так же укажите
-        параметры подключения к БД: url, schema, username, password;</para>
+        параметры подключения к БД: <parameter>url</parameter>, <parameter>schema</parameter>, <parameter>username</parameter>, <parameter>password</parameter>;</para>
     </listitem>
     <listitem>
       <para>Проверьте правильность настройки пула, нажав кнопку Ping;</para>
@@ -29,6 +29,7 @@
       <para>Создайте  JNDI ресурс для пула подключений: <guimenuitem>Resources -&gt; JDBC Resources-&gt; New</guimenuitem>;  Задайте имя ресурса и укажите пул подключений JDBC.</para>
     </listitem>
   </orderedlist>
+  <para>Задайте параметры инициализации web-приложения  <parameter>url</parameter>, <parameter>dialect</parameter> и <parameter>schema</parameter> в файле web.xml. </para>
   <para>Для того, чтобы настроить Platypus для работы с внутренним хранилищем данных о пользователях или  внешним сервисом аутентификации:</para>
   <itemizedlist>
     <listitem>

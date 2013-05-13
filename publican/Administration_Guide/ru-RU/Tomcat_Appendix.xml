@@ -54,6 +54,14 @@
         &lt;param-name&gt;url&lt;/param-name&gt;
         &lt;param-value&gt;jdbc/TestDB&lt;/param-value&gt;
 &lt;/context-param&gt;
+&lt;context-param&gt;
+        &lt;param-name&gt;dialect&lt;/param-name&gt;
+        &lt;param-value&gt;Oracle&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;context-param&gt;
+        &lt;param-name&gt;schema&lt;/param-name&gt;
+        &lt;param-value&gt;test&lt;/param-value&gt;
+&lt;/context-param&gt;
 ...
 &lt;resource-ref&gt;
         &lt;res-ref-name&gt;jdbc/TestDB&lt;/res-ref-name&gt;
