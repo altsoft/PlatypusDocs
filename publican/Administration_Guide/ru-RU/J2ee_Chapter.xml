@@ -115,6 +115,12 @@
               <literal>H2</literal>
             </entry>
           </row>
+          <row>
+            <entry>IBM DB2</entry>
+            <entry>
+              <literal>DB2</literal>
+            </entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
