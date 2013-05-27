@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <appendix id="appe-Administration_Guide-Glassfish_Appendix">
-  <title>Настройка J2EE сервера Glassfish 3.1.2</title>
+  <title>Настройка J2EE сервера Glassfish 3</title>
   <note>
     <para>Для получения подробной информации по настройке <application>Glassfish</application> обратитесь к документации данного сервера приложений.</para>
   </note>
@@ -23,13 +23,12 @@
         параметры подключения к БД: <parameter>url</parameter>, <parameter>schema</parameter>, <parameter>username</parameter>, <parameter>password</parameter>;</para>
     </listitem>
     <listitem>
-      <para>Проверьте правильность настройки пула, нажав кнопку Ping;</para>
+      <para>Проверьте правильность настройки пула, нажав кнопку <guibutton>Ping</guibutton>;</para>
     </listitem>
     <listitem>
       <para>Создайте  JNDI ресурс для пула подключений: <guimenuitem>Resources -&gt; JDBC Resources-&gt; New</guimenuitem>;  Задайте имя ресурса и укажите пул подключений JDBC.</para>
     </listitem>
   </orderedlist>
-  <para>Задайте параметры инициализации web-приложения  <parameter>url</parameter>, <parameter>dialect</parameter> и <parameter>schema</parameter> в файле web.xml. </para>
   <para>Для того, чтобы настроить Platypus для работы с внутренним хранилищем данных о пользователях или  внешним сервисом аутентификации:</para>
   <itemizedlist>
     <listitem>
@@ -42,7 +41,7 @@
   <para>Для того, чтобы настроить сервер Glassfish:</para>
   <itemizedlist>
     <listitem>
-      <para>Добавьте область безопасности для Glassfish - для этого измените конфигурацию сервера Configurations -&gt; server-config -&gt; Security -&gt; Realms -&gt;New;</para>
+      <para>Добавьте область безопасности для Glassfish - для этого измените конфигурацию сервера Configurations -&gt; Server-config -&gt; Security -&gt; Realms -&gt;New;</para>
       <para>Задайте имя области безопасности, выберите имя класса из списка или укажите свой класс:  </para>
       <itemizedlist>
         <listitem>
@@ -162,49 +161,7 @@
       </itemizedlist>
     </listitem>
     <listitem>
-      <para>Настройте режим аутентификации для web-приложения в котором будет развернут Platypus Servlet: в файле WEB-INF/web.xml для режима аутентификации укажите имя области безопасности (Realm Name), например, ldapRealm, которое было настроено на предыдущем шаге и создайте роли безопасности: добавьте следующий элемент после элемента &lt;security-constraint&gt; в файле web.xml, пример для BASIC аутентификации:</para>
-      <programlisting>&lt;web-app ... &gt; 
-   ... 
-   &lt;login-config&gt;
-        &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
-        &lt;realm-name&gt;ldapRealm&lt;/realm-name&gt;
-   &lt;/login-config&gt;
-   ...
-&lt;/web-app&gt;</programlisting>
-    </listitem>
-    <listitem>
-      <para>Добавьте роли безопасности:</para>
-      <programlisting>&lt;web-app ... &gt; 
-   ... 
-   &lt;security-role&gt;
-      &lt;role-name&gt;role1&lt;/role-name&gt;
-   &lt;/security-role&gt;
-   ...
-&lt;/web-app&gt;</programlisting>
-    </listitem>
-    <listitem>
-      <para>Добавьте ограничение безопасности:</para>
-      <programlisting>&lt;web-app ... &gt;
-...
-&lt;web-resource-collection&gt;
-            &lt;web-resource-name&gt;platypus&lt;/web-resource-name&gt;
-            &lt;description/&gt;
-            &lt;url-pattern&gt;/examples/Maps.jsp&lt;/url-pattern&gt;
-            &lt;url-pattern&gt;/application/*&lt;/url-pattern&gt;
-        &lt;/web-resource-collection&gt;
-        &lt;auth-constraint&gt;
-            &lt;description/&gt;
-            &lt;role-name&gt;platypus_default_role&lt;/role-name&gt;
-            &lt;role-name&gt;role1&lt;/role-name&gt;
-            &lt;role-name&gt;role2&lt;/role-name&gt;
-            &lt;role-name&gt;role3&lt;/role-name&gt;
-        &lt;/auth-constraint&gt;
-    &lt;/security-constraint&gt;
-...
-&lt;/web-app&gt;</programlisting>
-    </listitem>
-    <listitem>
-      <para>В файле <filename>WEB-INF/glassfish-web.xml</filename> свяжите роли  с группами LDAP:</para>
+      <para>В файле <filename>WEB-INF/glassfish-web.xml</filename> свяжите роли  с группами безопасности:</para>
       <programlisting>&lt;glassfish-web-app error-url=&quot;&quot;&gt;
 ...
   &lt;context-root&gt;/platypus&lt;/context-root&gt;
@@ -220,16 +177,8 @@
     &lt;role-name&gt;role2&lt;/role-name&gt;
     &lt;group-name&gt;role2&lt;/group-name&gt;
   &lt;/security-role-mapping&gt;
-  &lt;security-role-mapping&gt;
-    &lt;role-name&gt;role3&lt;/role-name&gt;
-    &lt;group-name&gt;role3&lt;/group-name&gt;
-  &lt;/security-role-mapping&gt;
 ..
 &lt;/glassfish-web-app&gt;</programlisting>
     </listitem>
   </itemizedlist>
-  <para>В LDAP сервиса создайте соответствующих пользователей, их группы и добавьте пользователей в эти группы.</para>
-  <note>
-    <para>Для получения подробной информации по настройке сервера и клиента LDAP  обратитесь к документации <application>OpenLDAP</application> и <application>Microsoft Active Directory</application>.</para>
-  </note>
 </appendix>

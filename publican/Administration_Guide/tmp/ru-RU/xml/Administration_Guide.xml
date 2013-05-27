@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<book lang="ru-RU">
+	<!--  This document was created with Syntext Serna Free.  --> <xi:include href="Book_Info.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Installation_Chapter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Client_Chapter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Server_Chapter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="J2ee_Chapter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Security_Chapter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Deployment_Chapter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Loglevel_Appendix.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Glassfish_Appendix.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Tomcat_Appendix.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <index />
+</book>
+

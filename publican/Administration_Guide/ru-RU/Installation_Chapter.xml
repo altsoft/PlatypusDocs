@@ -143,22 +143,19 @@
         <para><filename>platypus/</filename></para>
         <itemizedlist>
           <listitem>
-            <para><filename>run/</filename></para>
-          </listitem>
-          <listitem>
-            <para><filename>web/</filename></para>
-          </listitem>
-          <listitem>
-            <para><filename>examples/</filename></para>
-          </listitem>
-          <listitem>
-            <para><filename>docs/</filename></para>
-          </listitem>
-          <listitem>
             <para><filename>bin/</filename></para>
           </listitem>
           <listitem>
             <para><filename>lib/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>etc/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>run/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>logs/</filename></para>
           </listitem>
         </itemizedlist>
       </listitem>

@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Administration_Guide-Installation_Chapter">
+  <title>Установка сервера и клиента</title>
+  <para>Платформа Platypus поставляется в следующих вариантах:</para>
+  <itemizedlist>
+    <listitem>
+      <para>На компакт или DVD диске;</para>
+    </listitem>
+    <listitem>
+      <para>Через  Интернет - в виде архивного файла в формате zip.</para>
+    </listitem>
+  </itemizedlist>
+  <para>В случае поставки  в виде архивного файла распакуйте его содержимое в удобное для вас место на жестком диске.</para>
+  <note>
+    <para>Инструкции по установке инструмента  разработчика <application>Platypus Application Designer</application> смотри в документе &quot;Руководство разработчика&quot;.</para>
+  </note>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
+    <title>Системные требования платформы Platypus</title>
+    <para>
+   Ниже указаны необходимые условия для запуска компонентов платформы на компьютере:
+   <itemizedlist>
+        <listitem>
+          <para>32-разрядный (x86) или 64-разрядный (x64) процессор с тактовой частотой 1 гигагерц (ГГц) или выше; </para>
+        </listitem>
+        <listitem>
+          <para>1 гигабайт (ГБ) (для 32-разрядной системы) или 2 ГБ (для 64-разрядной системы) оперативной памяти (ОЗУ); </para>
+        </listitem>
+        <listitem>
+          <para>5 гигабайт (ГБ) свободного пространства на жестком диске; </para>
+        </listitem>
+        <listitem>
+          <para>операционная система Windows, Linux, Mac OS X или другая Unix подобная;</para>
+        </listitem>
+        <listitem>
+          <para>Oracle JRE 7   или   OpenJDK 7;</para>
+        </listitem>
+        <listitem>
+          <para>графический интерфейс пользователя для работы клиента;</para>
+        </listitem>
+        <listitem>
+          <para>доступ к Интернет для получения обновлений и работы  с внешним картографическим сервисом. В корпоративной сети такой доступ может быть организован через прокси-сервер;</para>
+        </listitem>
+        <listitem>
+          <para>Web-браузер Google Chrome 19, Mozilla Firefox 10, Internet Explorer 9  или их более новые версии для работы  HTML5 клиента Platypus.</para>
+        </listitem>
+      </itemizedlist>
+  </para>
+    <para>Для работы приложений Platypus обычно необходим сервер баз данных (БД), который может быть установлен как на том же компьютере что и клиент или сервер приложений, так и на другом компьютере, доступном по сети.   </para>
+    <para>Платформа Platypus поддерживает работу со следующими базами данных:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Oracle Database 10g и выше;</para>
+      </listitem>
+      <listitem>
+        <para>IBM DB2 9 и выше;</para>
+      </listitem>
+      <listitem>
+        <para>Microsoft SQL Server 2008 и выше;</para>
+      </listitem>
+      <listitem>
+        <para>MySQL (InnoDB) 5.5 и выше;</para>
+      </listitem>
+      <listitem>
+        <para>PostgreSQL 9 и выше;</para>
+      </listitem>
+      <listitem>
+        <para>H2 Database      1.3 и выше.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Для получения информации об установке и настройке сервера баз данных обратитесь к соответствующим руководствам по установке и администрированию, предоставляемым производителями серверов БД.</para>
+    <note>
+      <para>В комплект поставки Platypus Platform включена  база данных H2. Использование данной БД доступно &quot;из коробки&quot; после установки платформы и не требует  дополнительных действий по  установке и настройке.</para>
+    </note>
+    <para>Для работы серверной части приложений внутри сервлет-контейнера или J2EE сервера установите  или используйте уже установленный сервлет-контейнер или J2EE сервер. Работа Platypus тестировалась в следующем окружении:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Apache Tomcat 7;</para>
+      </listitem>
+      <listitem>
+        <para>Glassfish 3.1.2;</para>
+      </listitem>
+      <listitem>
+        <para>JBoss AS7;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Для получения информации об установке и настройке сервлет-контейнера или J2EE сервера обратитесь к соответствующим руководствам по установке и администрированию, предоставляемым их производителями.</para>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
+    <title>Установка платформы Platypus</title>
+    <para>  Для того, чтобы установить компоненты Платформы выполните следующие действия:<orderedlist>
+        <listitem>
+          <para>
+перейдите в подкаталог <filename>install</filename> дистрибутива Platypus;</para>
+        </listitem>
+        <listitem>
+          <para>
+запустите файлы <filename>install.bat</filename> для операционной системы Windows или выполните команду <command>sh install.sh</command> для Linux;</para>
+        </listitem>
+        <listitem>
+          <para>
+выберите язык интерфейса пользователя программы по установке;</para>
+        </listitem>
+        <listitem>
+          <para>
+выберите каталог установки;</para>
+        </listitem>
+        <listitem>
+          <para>
+выберите  компоненты которые будут установлены; </para>
+          <itemizedlist>
+            <listitem>
+              <para>Platypus Platform - ядро платформы Platypus;</para>
+            </listitem>
+            <listitem>
+              <para>Java SE клиент;</para>
+            </listitem>
+            <listitem>
+              <para>модули работы с картами;</para>
+            </listitem>
+            <listitem>
+              <para>сервер приложений - включает в себя модули необходимые для работы автономного сервера приложений и серверных компонентов  в сервлет/J2EE-контейнерах;</para>
+            </listitem>
+            <listitem>
+              <para>Platypus Communications - модули, необходимые для работы с COM/DCOM и OPC серверами;</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+выберите параметры настройкb ярлыков для запуска клиента Platypus в вашей системе. </para>
+        </listitem>
+      </orderedlist>
+  <note>
+        <para>Компоненты ядра платформы являются обязательными при установке любой конфигурации.</para>
+      </note></para>
+    <para>После установки, каталог будет иметь следующую структуру:</para>
+    <itemizedlist>
+      <listitem>
+        <para><filename>platypus/</filename></para>
+        <itemizedlist>
+          <listitem>
+            <para><filename>run/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>web/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>examples/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>docs/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>bin/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>lib/</filename></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
+    <title>Удаление платформы Platypus</title>
+    <para>
+   Для того, чтобы удалить платформу Platypus с компьютера выполните следующие действия:
+   <orderedlist>
+        <listitem>
+          <para>
+запустите программу <application>UninstallPlatypus</application> из меню установленных программ или с помощью ярлыка. Для ОС Windows используйте штатный механизм удаления программ;</para>
+        </listitem>
+        <listitem>
+          <para>
+подтвердите удаление компонентов Platypus, при необходимости  активируйте опцию удаления рабочего каталога.</para>
+        </listitem>
+      </orderedlist>
+  </para>
+  </section>
+</chapter>

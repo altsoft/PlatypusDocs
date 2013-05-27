@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Administration_Guide-J2ee_Chapter">
+  <title>Конфигурирование серверных компонентов Platypus для работы в сервлет-контейнере или J2EE сервере</title>
+  <para>Серверные компоненты <application>Platypus</application> могут работать в  сервлет-контейнере или J2EE сервере. Данная конфигурация имеет  следующие особенности:</para>
+  <itemizedlist>
+    <listitem>
+      <para>серверные компоненты Platypus развертываются в J2EE сервер как  web-приложение - в виде  WAR-архива или папки, взаимодействие с клиентом обеспечивает Platypus Servlet;</para>
+    </listitem>
+    <listitem>
+      <para>возможна работа <application>Java SE клиента (Platypus Client</application>), так и HTML5 браузерного клиента, а также Web-сайта с использованием Platypus Web API;</para>
+    </listitem>
+    <listitem>
+      <para>обмен данными с клиентом происходит по протоколу HTTP/HTTPS;</para>
+    </listitem>
+    <listitem>
+      <para>возможно использование внешнего сервиса аутентификации пользователей,   например, службы <application> Microsoft Active Directory</application>,  что позволяет интегрировать конечное приложение платформы Platypus в существующее на предприятии пространство пользователей; </para>
+    </listitem>
+    <listitem>
+      <para>связь сервера приложений Platypus с БД осуществляется через настроенный в виде ресурса JNDI источник данных; </para>
+    </listitem>
+  </itemizedlist>
+  <para>Использование Platypus Web API позволяет создавать Web-приложения, использующие в качестве источника данных сервер приложений Platypus. Web-приложение может строится с использованием технологий ASP, JSP, GWT и прочих. Platypus Web API приложение может осуществлять удаленный вызов функций серверных модулей, при этом вызов функций является прозрачным для клиентского JavaScript кода.</para>
+  <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_2">
+    <title>Настройка J2EE сервера для работы с Platypus</title>
+    <para>Для запуска Platypus в сервлет-контейнере или J2EE сервере выполните следующие действия:</para>
+    <itemizedlist>
+      <listitem>
+        <para>настройте источник данных JDBC в виде ресурса JNDI, задайте его имя, например, <literal>java:/jdbc/TestDB</literal>, настройте JDBC-драйвер, пул ресурсов  и ресурс JNDI, при необходимости скопируйте JAR соответствующего драйвера БД в каталог, доступный загрузчику классов сервера; </para>
+      </listitem>
+      <listitem>
+        <para>настройте область безопасности (Realm) для работы со встроенным хранилищем или внешним сервисом аутентификации. Для работы со встроенным хранилищем настройте область безопасности JDBC для рабты с таблицами <literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> - см. раздел Безопасность.</para>
+      </listitem>
+      <listitem>
+        <para>настройте параметры web-приложения в xml-дескрипторе <filename>WEB-INF/web.xml</filename> и, при необходимости, специфических для данного сервера файлах конфигурации;</para>
+      </listitem>
+      <listitem>
+        <para>разверните web-приложение в виде WAR-архива или папки.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>Руководство по  настройке J2EE сервера <application>Glassfish 3.1</application> смотрите в приложении B.</para>
+      <para>Руководство по  настройке <application>Apache Tomcat 7</application> смотрите в приложении C.</para>
+    </note>
+  </section>
+  <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_3">
+    <title>Kонфигурирование сервера приложений Platypus и развертывание в сервлет-контейнер или J2EE сервер</title>
+    <para>Для работы HTML5 браузерного клиента, использования Platypus Web API и Java SE клиента <application>Platypus</application> (по протоколам HTTP/HTTPS) серверные компоненты Platypus должны быть развернуты в сервлет-контейнере или J2EE сервере и соотвествующим образом сконфигрурированы.</para>
+    <para>В поставку Platypus входит папка web/ в которой находится  web-приложение Platypus, которое можно использовать для дальнейшей модификации. Сделайте копию данной папки, которая будет являться основой для вашего web-приложения. </para>
+    <para>Для конфигурирования web-приложения отредактируйте файл <filename>WEB-INF/web.xml</filename> и при необходимости добавьте или измените другие файлы - специфические для конкретного сервлет-контейнера или J2EE сервера. </para>
+    <para>Для корректной работы сервлета Platypus отредактируйте файл <filename>WEB-INF/web.xml</filename>:</para>
+    <orderedlist>
+      <listitem>
+        <para>задайте параметр инициализации с именем <parameter>url</parameter> и значением имени JNDI ресурса источника данных  JDBC, например, <literal>java:/jdbc/TestDB</literal>.</para>
+      </listitem>
+      <listitem>
+        <para>задайте параметр инициализации с именем <parameter>dialect</parameter> и значением имени драйвера базы данных, например,  <literal>Oracle</literal>.</para>
+      </listitem>
+      <listitem>
+        <para>задайте параметр инициализации с именем <parameter>schema</parameter> и значением схемы БД по умолчанию, например,   <literal>test</literal>.</para>
+      </listitem>
+      <listitem>
+        <para>укажите тип аутентификации,  например <literal>BASIC</literal> и имя области безопасности (Realm), например <literal>JDBCRealm</literal>. При работе со встроенным пространством пользователей, информацию по настройке области безопасности смотрите в разделе &quot;Безопасность&quot;.</para>
+      </listitem>
+      <listitem>
+        <para>добавьте роль безопасности - Security Role, например <literal>platypus_default_role</literal>;</para>
+      </listitem>
+      <listitem>
+        <para>добавьте ограничение безопасности - Security Constraint. Для данного ограничения задайте имя, шаблон URL и при необходимости методы HTTP. Данное ограничение необходимо задать если предполагается  осуществлять разграничение  доступа.</para>
+      </listitem>
+    </orderedlist>
+    <important>
+      <para>Настройте ограничения безопасности для URL по которым работает Platypus Servlet.</para>
+    </important>
+    <table>
+      <title>Диалекты - имена драйверов БД</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">База данных</entry>
+            <entry align="center">Диалект</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>Oracle DB</entry>
+            <entry>
+              <literal>Oracle</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>MySQL</entry>
+            <entry>
+              <literal>MySql</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>SQL Server</entry>
+            <entry>
+              <literal>MsSql</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>PostgreSQL</entry>
+            <entry>
+              <literal>PostgreSql</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>H2 DB</entry>
+            <entry>
+              <literal>H2</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>IBM DB2</entry>
+            <entry>
+              <literal>DB2</literal>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <para>Platypus Client поддерживает <literal>BASIC</literal> аутентификацию, поэтому для его корректной работы должен быть настроен именно этот тип аутентификаци. </para>
+    <para>После завершения конфигруированя разверните Web-приложение в виде папки или WAR-архива в сервлет-контейнер или J2EE сервер и укажите базовый URL для web-приложения.</para>
+  </section>
+</chapter>

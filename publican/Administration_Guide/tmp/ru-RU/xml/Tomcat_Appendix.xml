@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<appendix id="appe-Administration_Guide-Tomcat_Appendix" lang="ru-RU">
+	<title>Настройка Apache Tomcat 7</title>
+	 <note>
+		<para>
+			Для получения подробной информации по настройке <application>Apache Tomcat 7</application> обратитесь к его документации.
+		</para>
+
+	</note>
+	 <para>
+		Настройка источника данных:
+	</para>
+	 <orderedlist>
+		<listitem>
+			<para>
+				Скопируйте соответствующий JAR-файл JDBC драйвера в каталог доступный загрузчику классов: <filename><replaceable>CATALINA_HOME</replaceable>/lib</filename>, где <replaceable>CATALINA_HOME</replaceable> - каталог в который был установлен Apache Tomcat.
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				Создайте JNDI ресурс источника данных JDBC: в файле <filename><replaceable>CATALINA_HOME</replaceable>/conf/server.xml</filename> в секцию GlobalNamingResources добавьте элемент Resource. В случае, если данный ресурс будет использваться для доступа к области безопасности DataSourceRealm создайте глобальный ресурс:
+			</para>
+			 
+<programlisting>&lt;GlobalNamingResources&gt;
+...
+&lt;Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+       maxActive="100" maxIdle="30" maxWait="10000"
+       username="sa" password="te$tPwd" driverClassName="org.h2.Driver"     url="jdbc:h2:tcp://localhost/~/h2db/test;schema=test"/&gt;
+...
+&lt;/GlobalNamingResources&gt;</programlisting>
+			 <note>
+				<para>
+					В случае, если глобальный ресурс не требуется, определите JNDI ресурс на более низком уровне контекста.
+				</para>
+
+			</note>
+			 <para>
+				При необходимости настройте пул соединений, задав параметры удаления и очистки неиспользуемых соединений.
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				Настройте область безопасности. Для использования встроенного хранилища отредактируйте <filename><replaceable>CATALINA_HOME</replaceable>/conf/server.xml</filename>, добавив область безопасности и ссылку на глобальный JNDI ресурс:
+			</para>
+			 
+<programlisting>...
+&lt;Engine name="Catalina" defaultHost="localhost"&gt;
+...
+&lt;Realm  className="org.apache.catalina.realm.DataSourceRealm"
+   dataSourceName="jdbc/TestDB"
+   userTable="MTD_USERS" userNameCol="USR_NAME"   userCredCol="USR_PASSWD"
+   userRoleTable="MTD_GROUPS" roleNameCol="GROUP_NAME" digest="MD5"/&gt;
+&lt;Context antiJARLocking="true" path="/TomcatTest" reloadable="false"&gt;
+    &lt;ResourceLink
+            name="jdbc/TestDB"
+            global="jdbc/TestDB"
+            type="javax.sql.DataSource" /&gt;
+&lt;/Context&gt;
+...
+&lt;/Engine&gt;</programlisting>
+			 <para>
+				Для области безопасности DataSourceRealm задайте названия таблиц, столбцов и алгоритма хэширования для работы с таблицами <literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal>.
+			</para>
+			 <para>
+				Для использвания другого хранилища данных аутентификации, например, внешнего LDAP-сервера настройте соответствующий тип области безопасности.
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				Настройте web-приложение Playpus - в файле <filename>WEB-INF/web.xml</filename> установите параметру <parameter>url</parameter> значение имени JNDI ресурса источника данных. Добавьте ссылку на глобальный ресурс для контекста web-приложения:
+			</para>
+			 
+<programlisting>...
+&lt;context-param&gt;
+        &lt;param-name&gt;url&lt;/param-name&gt;
+        &lt;param-value&gt;jdbc/TestDB&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;context-param&gt;
+        &lt;param-name&gt;dialect&lt;/param-name&gt;
+        &lt;param-value&gt;Oracle&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;context-param&gt;
+        &lt;param-name&gt;schema&lt;/param-name&gt;
+        &lt;param-value&gt;test&lt;/param-value&gt;
+&lt;/context-param&gt;
+...
+&lt;resource-ref&gt;
+        &lt;res-ref-name&gt;jdbc/TestDB&lt;/res-ref-name&gt;
+        &lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;
+        &lt;res-auth&gt;Container&lt;/res-auth&gt;
+        &lt;res-sharing-scope&gt;Shareable&lt;/res-sharing-scope&gt;
+&lt;/resource-ref&gt;
+...
+</programlisting>
+
+		</listitem>
+		 <listitem>
+			<para>
+				Настройте ограничения безопасности для URL Platypus Servlet:
+			</para>
+			 
+<programlisting>...
+&lt;security-constraint&gt;
+        &lt;display-name&gt;Constraint1&lt;/display-name&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;res0&lt;/web-resource-name&gt;
+            &lt;description/&gt;
+            &lt;url-pattern&gt;/application/*&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;auth-constraint&gt;
+            &lt;role-name&gt;role1&lt;/role-name&gt;
+        &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;
+...
+</programlisting>
+
+		</listitem>
+
+	</orderedlist>
+</appendix>
+
