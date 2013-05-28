@@ -28,7 +28,7 @@
     </listitem>
   </itemizedlist>
   <note>
-    <para>С помощью аннотаций <abbrev>JsDoc</abbrev> также задаются права доступа на весь модуль или на его функции.</para>
+    <para>С помощью аннотаций <abbrev>JsDoc</abbrev> также задаются права доступа на весь модуль или на его отдельные функции.</para>
   </note>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_5">
     <title>Создание нового модуля</title>
@@ -179,16 +179,42 @@
           <para>процесс продолжается для загруженных модулей.</para>
         </listitem>
       </itemizedlist>
-      <para>В случае, если зависимость не нужно или невозможно разрешать автоматически, например, если необходимо  динамически определить вызваемый модуль - примените ручное разрешение зависимостей. Для этого вызовите функцию <code>require</code> :</para>
+      <para>В случае, если зависимость не нужно или невозможно разрешать автоматически, например, если необходимо  динамически определить вызваемый модуль - примените ручное разрешение зависимостей. Для этого вызовите функцию <code>require</code>:</para>
       <programlisting language="JavaScript">var moduleName1 = &quot;m1&quot;,
     moduleName2 = &quot;m2&quot;;
+//Client and server usage
 require([moduleName1, moduleName2], function() {
   var m1 = new Module(moduleName1);
   m1.bar();
   var m2 = new Module(moduleName2);
   m2.foo();
 });</programlisting>
-      <para>Глобальная функция <code>require</code> принимает массив имен-идентификаторов в качестве первого параметра, а в качестве второго функцию, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
+      <para>Глобальная функция <code>require</code> принимает массив имен-идентификаторов и/или путей или URL к файлам JavaScript в качестве первого параметра, а в качестве  второго параметра  функцию, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова. На приведенном ниже примере показано использование функции <code>require</code> для загрузки моделя по имени-идентификатору модуля, а также кода JavaScript из указанного файла и по URL:</para>
+      <programlisting language="JavaScript">require([&quot;m1&quot;,
+ &quot;lib/localLib.js&quot;,
+ &quot;http://localhost/extLib.js&quot;], function() {
+  
+  //Platypus module
+  var m1 = new Module(moduleName1);
+  m1.bar();
+  
+  // Constructor LibObject is defined in lib/localLib.js
+  var o1 = new LibObject();
+  
+  // Constructor ExtObject is defined 
+  // in the external resource
+  var testObject = new ExtObject();
+});</programlisting>
+      <para>Функция <code>require</code> имеет также синхронный вариант, который испоьльзуется в серверном коде. В этом случае, если не нужна совместимость с клиентским кодом, второй параметр можно не указывать:</para>
+      <programlisting language="JavaScript">var moduleName1 = &quot;m1&quot;,
+    moduleName2 = &quot;m2&quot;;
+//Server only
+require([moduleName1, moduleName2]);
+var m1 = new Module(moduleName1);
+m1.bar();
+var m2 = new Module(moduleName2);
+m2.foo();
+</programlisting>
       <para>Следует внимательно относится к комбинации автоматического и ручного разрешения зависимостей. Например, в следующем фрагменте кода, вызов функции <code>require</code> является бессмысленным:</para>
       <programlisting>var moduleName1 = &quot;SampleModule1&quot;,
     moduleName2 = &quot;SampleModule2&quot;;
@@ -258,6 +284,10 @@ Logger.info(&apos;Current user: &apos; + principal.name);
 if (principal.hasRole(&apos;Manager&apos;)) {
   // Some operations allowed only to managers ...
 }</programlisting>
+    </section>
+    <section>
+      <title>Загрузка ресурсов</title>
+      <para/>
     </section>
     <section>
       <title>Вызов Java кода из JavaScript кода</title>
