@@ -56,13 +56,13 @@
       </tgroup>
     </informaltable>
     <para>Пример URL для вызова метода серверого модуля в метод передаются два параметра: строка <parameter>Hello Platypus</parameter> и число <parameter>2</parameter> (URL приведена в незакодированном виде):</para>
-    <para><uri>http://server/platypus/application/api?type=14&amp;module=ModuleName&amp;method=methodName&amp;param[]=Hello Platypus&amp;param[]=2</uri></para>
+    <para><uri>http://server/platypus/application/api?t__ype=14&amp;__moduleName=Test&amp;__methodName=test&amp;__param[]=Hello Platypus&amp;__param[]=2</uri></para>
   </section>
   <section>
     <title>JavaScript API</title>
     <para>JavaScript API предназначен для реализации пользовательского интерфейса (например для удаленного вызова функций и чтения/записи свойств) модуля исполняемого на сервере приложений Platypus,  из клиентского кода браузерного Web-приложения. HTML страницы  данного приложения могут  быть сгенерированы с использованием любой серверной технологии, например, Java Server Pages. С помощью вызова серверных функций обычно запрашиваются данные, которые могут быть отображены на клиенте, осуществляется сохранение изменений и т.д..</para>
     <para>JavaScript API содержит набор относительно низкоуровневых функций и инфраструктуры для организации удаленного вызова процедур (RPC - Remote Procedure Call).</para>
-    <para>Методы  JavaScript API принадлежат объекту <code>Platypus.API</code>.</para>
+    <para>Методы  JavaScript API принадлежат объекту <code>platypus.api</code>.</para>
     <para>Список функций JavaScript API:</para>
     <informaltable>
       <tgroup cols="2">
@@ -163,25 +163,25 @@
       </tgroup>
     </informaltable>
     <para>Модуль может быть загружен в пользовательскую сессию явно, при помощи метода <parameter>createServerModule(moduleName, callback)</parameter> или автоматически при вызове функций выполнения серверного метода или чтения/установки свойств модуля.</para>
-    <para>Для того, чтобы использовать Platypus Web API подключите JavaScript библиотекy, поставляемую вместе с Platypus Platform: <filename>api.js</filename>. Platypus Web API использует  библиотеку jQuery.</para>
+    <para>Для того, чтобы использовать Platypus Web API подключите JavaScript библиотекy, поставляемую вместе с Platypus Platform: <filename>pwa.js</filename>. Platypus Web API использует  библиотеку jQuery.</para>
     <programlisting language="JavaScript">&lt;html&gt;
  &lt;head&gt;
      &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.min.js&quot;&gt;
      &lt;/script&gt;
-     &lt;script type=&quot;text/javascript&quot; src=&quot;js/api.js&quot;&gt;
+     &lt;script type=&quot;text/javascript&quot; src=&quot;js/pwa.js&quot;&gt;
      &lt;/script&gt;
   &lt;/head&gt;
   ...
 &lt;/html&gt; </programlisting>
-    <para>Задайте базовый <acronym>URL</acronym>, на котором работает сервер приложений  Platypus, при помощи функции <methodname>Platypus.API.setServerUrl(url)</methodname>:</para>
+    <para>Задайте базовый <acronym>URL</acronym>, на котором работает сервер приложений  Platypus, при помощи функции <methodname>platypus.api.setServerUrl(url)</methodname>:</para>
     <programlisting language="JavaScript">$(function() {
-  Platypus.API.setServerUrl(&apos;/platypus/application/&apos;);
+  platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
   ...
 });</programlisting>
     <para>В приведенном ниже примере приведен пример кода в котором вызывается серверный метод, <methodname>testModule.testMethod</methodname> с параметрами-строками <parameter>Hello</parameter> и <parameter>Platypus</parameter> и возвращаемым объектом, свойство <property>prop1</property> которого будет выведено в консоль:</para>
     <programlisting language="JavaScript">$(function() {
-  Platypus.API.setServerUrl(&apos;/platypus/application/&apos;);
-  Platypus.API.executeServerModuleMethod(
+  platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
+  platypus.api.executeServerModuleMethod(
      &apos;TestModule&apos;,
      &apos;testMethod&apos;,
       [&apos;Hello&apos;, &apos;Platypus&apos;],
@@ -197,13 +197,13 @@
 function testMethod(p1, p2) {
   return { prop1 : p1 + &apos; &apos; +  p2};
 }</programlisting>
-    <para>Для доступа к ресурсам требующим аутентификации используйте стандартные механизмы предоставляемые сервером приложений или сервлет-контейнером. Так, сервер приложений Platypus может быть настроен на работу с BASIC или FORMS аутентификацией. Для того, чтобы прекратить авторизованный сеанс работы с сервером приложений Platypus используйте метод <methodname>Platypus.API.logout</methodname>:</para>
-    <programlisting language="JavaScript">Platypus.API.logout();</programlisting>
+    <para>Для доступа к ресурсам требующим аутентификации используйте стандартные механизмы предоставляемые сервером приложений или сервлет-контейнером. Так, сервер приложений Platypus может быть настроен на работу с BASIC или FORMS аутентификацией. Для того, чтобы прекратить авторизованный сеанс работы с сервером приложений Platypus используйте метод <methodname>platypus.api.logout</methodname>:</para>
+    <programlisting language="JavaScript">platypus.api.logout();</programlisting>
     <para>Для более удобной организации вызова серверных методов используйте встроеную поддержку удаленного вызова процедур - RPC (Remote Procedure Call). Вызов методов серверных модулей происходит прозрачно для клиентского кода. В действительности вызываются методы прокси-объектов. При этом маршалинг (сериализация/десериализация аргументов  и возвращаемых результатов и сетевое взаимодействие) происходит автоматически &quot;под капотом&quot;. Для серверного кода вызов функции модуля также происходит &quot;как обычно&quot; - в аргументы функции передаются десериализованные объекты JavaScript, которые были переданы на стороне клиента. Серверный метод  возвращает JavaScript-объект, который будет сериализован,  передан по сети и десериализован на клиенте.</para>
     <para>Для того, чтобы вызвать функцию серверного модуля или прочитать/установить свойство:</para>
     <itemizedlist>
       <listitem>
-        <para>запросите создание прокси-объекта для модуля вызвав <methodname> Platypus.Server.Module.get</methodname>, в качестве первого параметра передайте имя-идентификатор модуля, второй параметр - функция которая будет вызвана после создания объекта-заглушки;</para>
+        <para>запросите создание прокси-объекта для модуля вызвав <methodname> platypus.server.module.get</methodname>, в качестве первого параметра передайте имя-идентификатор модуля, второй параметр - функция которая будет вызвана после создания объекта-заглушки;</para>
       </listitem>
       <listitem>
         <para>вызовите метод объекта заглушки, передав параметры, последним параметром передайте функцию, которая будет вызвана асинхронно с аргументом который является результатом выполнения серверной функции;</para>
@@ -214,8 +214,8 @@ function testMethod(p1, p2) {
     </itemizedlist>
     <para>Пример клиентского кода, в котором после загрузки страницы вызывается серверный метод <methodname>testModule.testMethod</methodname> с параметрами-строками <parameter>Hello</parameter> и <parameter>Platypus</parameter> и возвращаемым объектом, свойство <property>prop1</property> которого будет выведено в консоль: </para>
     <programlisting language="JavaScript">$(function() {
- Platypus.API.setServerUrl(&apos;/platypus/application/&apos;);
- Platypus.Server.Module.get(&quot;TestModule&quot;, testModuleReady);
+ platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
+ platypus.server.Module.get(&quot;TestModule&quot;, testModuleReady);
  function testModuleReady(module) {
      module.testMethod(&quot;Hello&quot;, &quot;world&quot;, 
          function(result) {
@@ -225,7 +225,7 @@ function testMethod(p1, p2) {
   </section>
   <section>
     <title>Программный доступ к запросу и ответу HTTP</title>
-    <para>Для программного доступа к HTTP запросу и ответу используйте свойство <code>http</code>, доступное в случае если метод был вызван внешним HTTP-запросом.</para>
+    <para>Для программного доступа к HTTP запросу и ответу в серверном коде JavaScript используйте свойство <code>http</code>, доступное в случае если метод был вызван внешним HTTP-запросом.</para>
     <para>Свойство <code>http</code> содержит следующие объекты:</para>
     <informaltable>
       <tgroup cols="2">

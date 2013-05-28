@@ -91,8 +91,8 @@
     </note>
   </section>
   <section>
-    <title>Настройка дизайнера приложений</title>
-    <para><application>Platypus Application Designer</application> поддерживает локализацию текстов меню, сообщений и т.д. В настоящее время реализована <!--Поддержку?-->локализация для следующих языков:</para>
+    <title>Настройка запуска дизайнера приложений</title>
+    <para><application>Platypus Application Designer</application> поддерживает локализацию текстов меню, сообщений и т.д. В настоящее время реализована <!--Поддержку?-->поддержка  для следующих языков:</para>
     <itemizedlist>
       <listitem>
         <para>английский язык;</para>

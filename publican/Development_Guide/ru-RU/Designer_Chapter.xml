@@ -6,6 +6,30 @@
 <chapter id="chap-Development_Guide-Designer_Chapter">
   <title>Работа с проектом приложения в Platypus Application Designer</title>
   <para>В процессе разработки и далее в течении жизненного цикла     приложения, оно представлено проектом Platypus. Проект Platypus представляет собой каталог на жестком диске, содержащий файлы настроек и элементов приложения.</para>
+  <section>
+    <title>Настройка среды разработки</title>
+    <para>Укажите место в файловой системе компьютера где находится каталог Platypus Platform:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите пункт главного меню  <menuchoice>
+            <guimenu>Tools</guimenu>
+            <guimenuitem>Platypus Platform</guimenuitem>
+          </menuchoice>;</para>
+      </listitem>
+      <listitem>
+        <para>в диалоге выбора задайте путь к каталогу размещения Platypus Platform;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Добавьте экземпляр J2EE сервера, который может быть использован для запуска приложения Platypus:</para>
+    <itemizedlist>
+      <listitem>
+        <para>в окне <guilabel>Services</guilabel> в контекстном меню узла <guilabel>Servers</guilabel> выберите пункт <guimenuitem>Add server...</guimenuitem>;</para>
+      </listitem>
+      <listitem>
+        <para>в мастере добавления J2EE сервера выберите тип сервера, его имя и задайте его настройки: путь к каталогу сервера, логин и пароль администратора;</para>
+      </listitem>
+    </itemizedlist>
+  </section>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
     <title>Создание нового проекта</title>
     <para>В этом разделе содержится информация по созданию и основным действиям при работе с проектом Platypus.</para>
@@ -44,7 +68,7 @@
           <para>введите параметры соединения с БД:</para>
           <itemizedlist>
             <listitem>
-              <para>введите URL соединения с БД в формате JDBC в поле <guilabel>JDBC Url<!--Может пример : jdbc:mysql://localhost:3306/db_name ?--></guilabel>; </para>
+              <para>введите URL соединения с БД в формате JDBC в поле <guilabel>JDBC Url<!--Может пример : jdbc:mysql://localhost:3306/db_name ?--></guilabel>; используйте кнопку <guibutton>Build JDBC Url</guibutton> для вызова мастера формирования URL; в окне мастера выберите тип базы данных, имя хоста, порт и имя базы данных;  </para>
             </listitem>
             <listitem>
               <para>введите наименование схемы в БД в поле <guilabel>Database Schema</guilabel>; </para>
@@ -84,6 +108,82 @@
         </listitem>
       </itemizedlist>
   Открытый проект будет добавлен на панель <guilabel>Projects</guilabel>. </para>
+  </section>
+  <section>
+    <title>Настройка свойств проекта</title>
+    <para>Для того чтобы изменить свойства проекта выберите пункт <guimenuitem>Properties</guimenuitem> контекстного меню корневого узла проекта.</para>
+    <para>Настройте параметры главного соеденения с базой данных:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите категрию <guilabel>Applictation Database</guilabel>;</para>
+      </listitem>
+      <listitem>
+        <para>задайте JDBC URL, при необходимости воспользовавшись для этого мастером <guibutton>Build JDBC Url</guibutton>;</para>
+      </listitem>
+      <listitem>
+        <para>задайте схему БД;</para>
+      </listitem>
+      <listitem>
+        <para>задайте имя пользователя и пароль.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Настройте параметры запуска приложения:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите категрию <guilabel>Run</guilabel>;</para>
+      </listitem>
+      <listitem>
+        <para>задайте стартовый элемент приложения по-умолчанию; при необходимости воспользуйтесь диалогом выбора элемента приложения;</para>
+      </listitem>
+      <listitem>
+        <para>задайте тип запускаемого клиентского приложения: <guilabel>Platypus Client</guilabel> или <guilabel>HTML5 браузер</guilabel>;</para>
+      </listitem>
+      <listitem>
+        <para>задайте тип запускаемого сервера: <guilabel>Нет</guilabel>, <guilabel>Platypus Application Server</guilabel>, <guilabel>J2EE Server</guilabel>;</para>
+      </listitem>
+      <listitem>
+        <para>установите флажок <guilabel>Database application</guilabel> для того, чтобы при запуске использовалось приложение, развернутое в базе данных;</para>
+      </listitem>
+      <listitem>
+        <para>установите флажок <guilabel>Don&apos;t start application server</guilabel> для того, чтобы запускать только клиент;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>Client</guilabel> в поле <guilabel>Url</guilabel> задайте URL сервера приложений, который будет использваться приложением Platypus Client при запуске, если установлен флаг <guilabel>Don&apos;t start application server</guilabel>; в случае, если этот флаг не установлен, перед запуском клиента на компьютере разработчика будет запущен сервер приложений и клиент будет использвать URL доступа к этому серверу;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>Client</guilabel> в полях <guilabel>Login</guilabel> и <guilabel>Password</guilabel> задайте имя пользователя и пароль для приложения Platypus Client;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>Client</guilabel> в поле <guilabel>Options</guilabel> задайте дополнительные параметры запуска приложения Platypus Client, например, LaF (Look and Feel);</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>Platypus Application Server</guilabel> в поле <guilabel>Port</guilabel> задайте порт на котором будет работать сервер приложения разработки;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>Platypus Application Server</guilabel> в поле <guilabel>Options</guilabel> задайте дополнительные параметры запуска сервера приложений Platypus;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>J2EE Server</guilabel> в поле <guilabel>Server</guilabel> выберите из списка установленых J2EE серверов экземпляр сервера который будет использован для запуска приложения;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>J2EE Server</guilabel> в поле <guilabel>Context</guilabel> введите имя web-приложения в J2EE сервере;</para>
+      </listitem>
+      <listitem>
+        <para>на вкладке <guilabel>J2EE Server</guilabel> установите флажок <guilabel>Enable security</guilabel> для активизации  безопасности, при этом для web-приложения будет использован механизм аутентификация при поможи форм;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Настройте параметры отладки:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите категрию <guilabel>Applictation Database</guilabel>;</para>
+      </listitem>
+      <listitem>
+        <para>задайте порт отладки Platypus Client;</para>
+      </listitem>
+      <listitem>
+        <para>задайте порт отладки сервера приложений.</para>
+      </listitem>
+    </itemizedlist>
   </section>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
     <title>Структура проекта и действия с элементами приложения</title>
@@ -174,6 +274,34 @@
             <keycap>Shift</keycap>
             <keycap>I</keycap>
           </keycombo>;</para>
+      </listitem>
+    </itemizedlist>
+    <para>Для того, чтобы запустить приложение:</para>
+    <itemizedlist>
+      <listitem>
+        <para>выберите элемент приложения в дереве элементов приложения проектов;</para>
+      </listitem>
+      <listitem>
+        <para>нажмите кнопку <guibutton>Run project</guibutton> на главной панели инструментов или  выберите пункт контекстного меню  элемента <guimenuitem>Run</guimenuitem> элемента приложения;</para>
+      </listitem>
+    </itemizedlist>
+    <para>В случае если элемент для запуска приложения не выбран явно в качестве стартового элемента будет задан стартовый элемент приложения по умолчанию из настроек проекта.</para>
+    <para>Для того, чтобы произвести отладку приложения:</para>
+    <itemizedlist>
+      <listitem>
+        <para>установите точки останова в программе JavaScript;</para>
+      </listitem>
+      <listitem>
+        <para>выберите элемент приложения в дереве элементов приложения проектов;</para>
+      </listitem>
+      <listitem>
+        <para>нажмите кнопку <guibutton>Debug project</guibutton> на главной панели инструментов или  выберите пункт контекстного меню  элемента <guimenuitem>Debug</guimenuitem> элемента приложения;</para>
+      </listitem>
+      <listitem>
+        <para>после остановки отладчика на точке останова смотрите содержимое переменных и стека вызовов; для продолжения работы программы нажмите кнопку <guibutton>Continue</guibutton> главной панели инструментов; используйте кнопки Step over или клавишу <keycap>F8</keycap>, Step into или клавишу <keycap>F7</keycap>, Step out или сочетание клавиш <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>F7</keycap>
+          </keycombo> для пошагового исполнения программы.</para>
       </listitem>
     </itemizedlist>
   </section>
