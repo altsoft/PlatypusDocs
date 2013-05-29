@@ -149,6 +149,9 @@
         <para>в мастере добавления J2EE сервера выберите тип сервера, его имя и задайте его настройки: путь к каталогу сервера, логин и пароль администратора;</para>
       </listitem>
     </itemizedlist>
+    <note>
+      <para>В текущей версии PlatypusApplication Designer поддерживается запуск приложений в  Apache Tomcat 7. Скачайте Apache Tomcat 7 с сайта разработчика и установите (распакуйте) его в удобное для вас место на жеском диске.</para>
+    </note>
   </section>
   <section id="sect-Administration_Guide-Install_Chapter-Test_Section_4">
     <title>Удаление дизайнера приложений</title>
