@@ -156,7 +156,7 @@
             </code> - строка имени-идентификатора модуля, серверный модуль должен быть помечен аннотацией <code>@public</code>;</para>
         </listitem>
       </itemizedlist>
-      <para>Параметрм, который передается в конструктор или методом для получения экземпляра модуля является его  имя-идентификатор.</para>
+      <para>Параметром, который передается в конструктор или методом для получения экземпляра модуля является его  имя-идентификатор.</para>
       <para>Для того, чтобы обратится к функции экземпляра модуля, используйте следующую конструкцию, например:</para>
       <programlisting language="JavaScript">var result = moduleInstance.getResult(10);</programlisting>
       <para>Здесь вызывается функция <code>getResult</code>, которой передается в качестве  параметра число <literal>10</literal>, и возвращается результат выполнения функции, который присваивается  локальной переменной <code>result</code>.</para>
@@ -189,9 +189,9 @@ require([moduleName1, moduleName2], function() {
   var m2 = new Module(moduleName2);
   m2.foo();
 });</programlisting>
-      <para>Глобальная функция <code>require</code> принимает массив имен-идентификаторов и/или путей или URL к файлам JavaScript в качестве первого параметра, а в качестве  второго параметра  функцию, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова. На приведенном ниже примере показано использование функции <code>require</code> для загрузки моделя по имени-идентификатору модуля, а также кода JavaScript из указанного файла и по URL:</para>
+      <para>Глобальная функция <code>require</code> принимает массив имен-идентификаторов и/или путей приложения или URL к файлам JavaScript в качестве первого параметра, а в качестве  второго параметра  функцию, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова. На приведенном ниже примере показано использование функции <code>require</code> для загрузки модуля по имени-идентификатору модуля, а также кода JavaScript из указанного файла и по URL:</para>
       <programlisting language="JavaScript">require([&quot;m1&quot;,
- &quot;src/localLib.js&quot;,
+ &quot;localLib.js&quot;,
  &quot;http://localhost/extLib.js&quot;], function() {
   
   //Platypus module
@@ -205,7 +205,7 @@ require([moduleName1, moduleName2], function() {
   // in the external resource
   var testObject = new ExtObject();
 });</programlisting>
-      <para>Указанные пути загрузки могут быть абсолютными или относительными. Относительные пути отсчитываются от каталога приложения Platypus. В случае, если путь к файлу JavaScript совпадает с именем-идентификатором модуля Platypus будет загружен этот модуль.</para>
+      <para>Указанные пути загрузки могут относительными путями приложения или URL. Относительные пути отсчитываются от каталога <filename>src</filename> приложения Platypus. В случае, если путь к файлу JavaScript совпадает с именем-идентификатором модуля Platypus будет загружен модуль Platypus.</para>
       <para>Используйте путь начинающийся с  символа &quot;.&quot; для того чтобы указать текущий каталог исполняемого файла: </para>
       <programlisting language="JavaScript">/**
  * @name m1
@@ -217,7 +217,7 @@ require([&quot;./friend.js&quot;], function() {
   var obj = new FriendObject();
   obj.bar();
 });</programlisting>
-      <para>Функция <code>require</code> имеет также синхронный вариант, который испоьльзуется в серверном коде. В этом случае, если не нужна совместимость с клиентским кодом, второй параметр можно не указывать:</para>
+      <para>Функция <code>require</code> имеет также синхронный вариант, который может использоваться в серверном коде. В этом случае, если не нужна совместимость с клиентским кодом, второй параметр можно не указывать:</para>
       <programlisting language="JavaScript">var moduleName1 = &quot;m1&quot;,
     moduleName2 = &quot;m2&quot;;
 //Server only
@@ -298,8 +298,8 @@ if (principal.hasRole(&apos;Manager&apos;)) {
     </section>
     <section>
       <title>Загрузка ресурсов</title>
-      <para>Platypus Platform предоставляет возможность загрузки  ресурсов в виде двоичных данных и текста. Ресурсы могут быть загружены по относительным путям приложения, абсолютным путям или URL. Используйте в программном коде JavaScript методы объекта <classname>Resource</classname>.</para>
-      <para>Для того, чтобы загрузить двоичный ресурс используйте метод <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code>, где <parameter>path</parameter> - относительный или абсолютный путь или URL, <parameter>callback(obj)</parameter> -  функция, которая будет вызвана после того как ресурс будет загружен и <parameter>obj</parameter> - массив байтов загруженного ресурса:</para>
+      <para>Platypus Platform предоставляет возможность загрузки  ресурсов в виде двоичных данных и текста. Ресурсы могут быть загружены по относительным путям приложения или по URL. Используйте в программном коде JavaScript методы объекта <classname>Resource</classname>.</para>
+      <para>Для того, чтобы загрузить двоичный ресурс используйте метод <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code>, где <parameter>path</parameter> - относительный или абсолютный путь или URL, <parameter>callback(obj)</parameter> -  функция, которая будет вызвана после того как ресурс будет загружен.  <parameter>obj</parameter> - массив байтов загруженного ресурса:</para>
       <programlisting language="JavaScript">//Loads binary resource
 Resource.load(&quot;res/pict.bin&quot;, function(obj) {
   for (var i = 0; i &lt; obj.length; i++) {

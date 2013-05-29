@@ -3096,7 +3096,7 @@ var style2 = new Style(<replaceable>parent</replaceable>);</programlisting>
       <para>Объект иконки,  растровая картинка.</para>
       <para>Для того, чтобы создать объект иконки используйте фабричный метод <methodname>load</methodname> объекта <classname>Icon</classname>:</para>
       <programlisting language="JavaScript">var icon = Icon.load(<replaceable>path</replaceable>);</programlisting>
-      <para>где <replaceable>path</replaceable> - имя файла иконки, относительный или абсолютный путь или URL.</para>
+      <para>где <replaceable>path</replaceable> - имя файла иконки, относительный путь приложения или URL.</para>
       <para>Имя файла иконки будет использовано для обращения к встроенной коллекции иконок.</para>
       <para>Пример использования иконки при создании кнопки:</para>
       <programlisting language="JavaScript">var carIcon = Icon.load(&quot;car.png&quot;);
