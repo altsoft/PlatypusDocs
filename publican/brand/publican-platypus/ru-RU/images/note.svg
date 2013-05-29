@@ -1,21 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="48"
    height="48"
-   id="svgnote">
+   id="svgnote"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="note.svg">
+  <metadata
+     id="metadata3189">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview3187"
+     showgrid="false"
+     inkscape:object-paths="false"
+     inkscape:snap-grids="false"
+     inkscape:zoom="4.9166667"
+     inkscape:cx="-11.79661"
+     inkscape:cy="24"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svgnote" />
   <defs
-     id="defsnote" />
-  <text
-     x="24"
-     y="24"
-     transform="scale(0.89833804,1.1131667)"
-     id="textnote"
-     xml:space="preserve"
-     style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Liberation Serif;"><tspan
-       x="26"
-       y="26"
-       id="tspannote">note</tspan></text>
+     id="defsnote">
+    <linearGradient
+       id="linearGradient3976"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3978" />
+    </linearGradient>
+  </defs>
+  <path
+     id="path3203"
+     style="fill:#b3b3b3;fill-opacity:1"
+     d="m 10.372882,24.436616 0,-15.3308692 3.249203,-0.1596524 c 1.787061,-0.087812 6.323873,-0.1596542 10.081804,-0.1596542 l 6.832602,0 3.708471,4.0097688 3.708471,4.009768 0.141929,8.074564 c 0.07806,4.44101 0.141926,9.534894 0.141926,11.319737 l 0,3.245173 -6.823942,0 c -3.753166,0 -10.022658,0.07246 -13.932202,0.161018 l -7.108262,0.161016 0,-15.330869 z"
+     inkscape:connector-curvature="0" />
 </svg>
