@@ -121,7 +121,7 @@ books_tests  Desktop1  downloads      images  notes  scripts  svgs</screen>
 		 
 <programlisting language="JavaScript">
 $(function () {
-    platypus.api.setServerUrl(Platypus.Common.BASE_URL);
+    Platypus.API.setServerUrl(Platypus.Common.BASE_URL);
     var servmod = new ServerModule();
     servmod.get(Platypus.WebApp.SERVER_MODULE_NAME, 
         function (servModule) {
