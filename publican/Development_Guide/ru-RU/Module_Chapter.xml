@@ -179,7 +179,10 @@
           <para>процесс продолжается для загруженных модулей.</para>
         </listitem>
       </itemizedlist>
-      <para>В случае, если зависимость не нужно или невозможно разрешать автоматически, например, если необходимо  динамически определить вызваемый модуль - примените ручное разрешение зависимостей. Для этого вызовите функцию <code>require</code>:</para>
+      <para>В случае, если зависимость не нужно или невозможно разрешать автоматически, например, если необходимо  динамически определить вызваемый модуль - примените ручное разрешение зависимостей. Для этого вызовите глобальную функцию <code>require</code>. Также используйте функцию  <code>require</code> для загрузки ресурсов JavaScript.</para>
+      <programlisting language="JavaScript">require(<replaceable>param</replaceable>, <replaceable>callback</replaceable>())</programlisting>
+      <para>где <replaceable>param</replaceable> - имя-идентификатор модуля, относительный путь в приложении к файлу JavaScript или URL JavaScript ресурса или массив этих элементов; <replaceable>callback</replaceable> -  функция, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
+      <para>Пример использования ручного разрешения зависимостей для модулей:</para>
       <programlisting language="JavaScript">var moduleName1 = &quot;m1&quot;,
     moduleName2 = &quot;m2&quot;;
 //Client and server usage
@@ -189,7 +192,7 @@ require([moduleName1, moduleName2], function() {
   var m2 = new Module(moduleName2);
   m2.foo();
 });</programlisting>
-      <para>Глобальная функция <code>require</code> принимает массив имен-идентификаторов и/или путей приложения или URL к файлам JavaScript в качестве первого параметра, а в качестве  второго параметра  функцию, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова. На приведенном ниже примере показано использование функции <code>require</code> для загрузки модуля по имени-идентификатору модуля, а также кода JavaScript из указанного файла и по URL:</para>
+      <para>На приведенном ниже примере показано использование функции <code>require</code> для загрузки модуля по имени-идентификатору модуля, а также кода JavaScript из указанного файла и по URL:</para>
       <programlisting language="JavaScript">require([&quot;m1&quot;,
  &quot;localLib.js&quot;,
  &quot;http://localhost/extLib.js&quot;], function() {
@@ -202,21 +205,10 @@ require([moduleName1, moduleName2], function() {
   var o1 = new LibObject();
   
   // Constructor ExtObject is defined 
-  // in the external resource
+  // in the external resource by provided URL
   var testObject = new ExtObject();
 });</programlisting>
-      <para>Указанные пути загрузки могут относительными путями приложения или URL. Относительные пути отсчитываются от каталога <filename>src</filename> приложения Platypus. В случае, если путь к файлу JavaScript совпадает с именем-идентификатором модуля Platypus будет загружен модуль Platypus.</para>
-      <para>Используйте путь начинающийся с  символа &quot;.&quot; для того чтобы указать текущий каталог исполняемого файла: </para>
-      <programlisting language="JavaScript">/**
- * @name m1
- */
-
-require([&quot;./friend.js&quot;], function() {
-  // Constructor FriendObject is defined 
-  // in the file in the same directory with the module m1
-  var obj = new FriendObject();
-  obj.bar();
-});</programlisting>
+      <para>Относительные пути отсчитываются от каталога <filename>src</filename> приложения Platypus. В случае, если путь к файлу JavaScript совпадает с именем-идентификатором модуля Platypus будет загружен модуль Platypus.</para>
       <para>Функция <code>require</code> имеет также синхронный вариант, который может использоваться в серверном коде. В этом случае, если не нужна совместимость с клиентским кодом, второй параметр можно не указывать:</para>
       <programlisting language="JavaScript">var moduleName1 = &quot;m1&quot;,
     moduleName2 = &quot;m2&quot;;
