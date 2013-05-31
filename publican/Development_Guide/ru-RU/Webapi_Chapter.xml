@@ -56,7 +56,7 @@
       </tgroup>
     </informaltable>
     <para>Пример URL для вызова метода серверого модуля в метод передаются два параметра: строка <parameter>Hello Platypus</parameter> и число <parameter>2</parameter> (URL приведена в незакодированном виде):</para>
-    <para><uri>http://server/platypus/application/api?t__ype=14&amp;__moduleName=Test&amp;__methodName=test&amp;__param[]=Hello Platypus&amp;__param[]=2</uri></para>
+    <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=Test&amp;__methodName=test&amp;__param[]=Hello Platypus&amp;__param[]=2</uri></para>
   </section>
   <section>
     <title>JavaScript API</title>

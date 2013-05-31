@@ -181,11 +181,10 @@
       </itemizedlist>
       <para>В случае, если зависимость не нужно или невозможно разрешать автоматически, например, если необходимо  динамически определить вызваемый модуль - примените ручное разрешение зависимостей. Для этого вызовите глобальную функцию <code>require</code>. Также используйте функцию  <code>require</code> для загрузки ресурсов JavaScript.</para>
       <programlisting language="JavaScript">require(<replaceable>param</replaceable>, <replaceable>callback</replaceable>())</programlisting>
-      <para>где <replaceable>param</replaceable> - имя-идентификатор модуля, относительный путь в приложении к файлу JavaScript или URL JavaScript ресурса или массив этих элементов; <replaceable>callback</replaceable> -  функция, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
+      <para>где <replaceable>param</replaceable> - имя-идентификатор модуля, относительный путь в приложении к файлу JavaScript  или массив этих элементов; <replaceable>callback</replaceable> -  функция, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
       <para>Пример использования ручного разрешения зависимостей для модулей:</para>
-      <programlisting language="JavaScript">var moduleName1 = &quot;m1&quot;,
-    moduleName2 = &quot;m2&quot;;
-//Client and server usage
+      <programlisting language="JavaScript">var moduleName1 = &quot;Module1&quot;,
+    moduleName2 = &quot;Module2&quot;;
 require([moduleName1, moduleName2], function() {
   var m1 = new Module(moduleName1);
   m1.bar();
@@ -193,31 +192,21 @@ require([moduleName1, moduleName2], function() {
   m2.foo();
 });</programlisting>
       <para>На приведенном ниже примере показано использование функции <code>require</code> для загрузки модуля по имени-идентификатору модуля, а также кода JavaScript из указанного файла и по URL:</para>
-      <programlisting language="JavaScript">require([&quot;m1&quot;,
- &quot;localLib.js&quot;,
- &quot;http://localhost/extLib.js&quot;], function() {
+      <programlisting language="JavaScript">require([&quot;Module1&quot;,
+ &quot;localLib.js&quot;], function() {
   
   //Platypus module
-  var m1 = new Module(moduleName1);
+  var m1 = new Module(&quot;Module1&quot;);
   m1.bar();
   
-  // Constructor LibObject is defined in src/localLib.js
+  // Constructor LibObject is defined in localLib.js
   var o1 = new LibObject();
-  
-  // Constructor ExtObject is defined 
-  // in the external resource by provided URL
-  var testObject = new ExtObject();
 });</programlisting>
       <para>Относительные пути отсчитываются от каталога <filename>src</filename> приложения Platypus. В случае, если путь к файлу JavaScript совпадает с именем-идентификатором модуля Platypus будет загружен модуль Platypus.</para>
       <para>Функция <code>require</code> имеет также синхронный вариант, который может использоваться в серверном коде. В этом случае, если не нужна совместимость с клиентским кодом, второй параметр можно не указывать:</para>
-      <programlisting language="JavaScript">var moduleName1 = &quot;m1&quot;,
-    moduleName2 = &quot;m2&quot;;
-//Server only
-require([moduleName1, moduleName2]);
-var m1 = new Module(moduleName1);
-m1.bar();
-var m2 = new Module(moduleName2);
-m2.foo();</programlisting>
+      <programlisting language="JavaScript">require(&quot;localLib.js&quot;);
+// Constructor LibObject is defined in localLib.js
+var obj = new LibObject();</programlisting>
       <para>Следует внимательно относится к комбинации автоматического и ручного разрешения зависимостей. Например, в следующем фрагменте кода, вызов функции <code>require</code> является бессмысленным:</para>
       <programlisting>var moduleName1 = &quot;SampleModule1&quot;,
     moduleName2 = &quot;SampleModule2&quot;;
@@ -228,7 +217,7 @@ require([moduleName1, moduleName2], function() {
   m2.foo();
 });</programlisting>
       <para>Такой код приведет к автоматическому разрешению зависимостей относительно модулей <classname>SampleModule1</classname> и <classname>SampleModule2</classname>, т.к. вызовы их конструкторов  встречаются в коде в явном виде. </para>
-      <para>С другой стороны, создание экземпляров модулей/форм/отчетов в виде <code>var m = new SampleModule1();</code> является предпочтительным. Для того, чтобы избежать автоматического разрешения зависимостей создаваемых таким образом модулей/форм/отчетов, можно воспользоваться приёмом, приведенном в следующем фрагменте кода:</para>
+      <para>С другой стороны, создание экземпляров модулей/форм/отчетов в виде <code>var m = new SampleModule1();</code> является предпочтительным. Для того, чтобы избежать автоматического разрешения зависимостей создаваемых таким образом модулей/форм/отчетов явно укажите  в параметре функции <function>require</function> имена-идентификаторы модулей в виде строковых литералов:</para>
       <programlisting>require([&quot;SampleModule1&quot;, &quot;SampleModule2&quot;], function() {
   var m1 = new SampleModule1();
   m1.bar();
@@ -254,7 +243,7 @@ var moduleState;</programlisting>
  */
 function publicFunction(param) {
 
-// Function implementation goes here
+// Function&apos;s implementation
 
 }</programlisting>
       <para>Реализуйте логику модуля в его функциях.</para>
@@ -290,21 +279,25 @@ if (principal.hasRole(&apos;Manager&apos;)) {
     </section>
     <section>
       <title>Загрузка ресурсов</title>
-      <para>Platypus Platform предоставляет возможность загрузки  ресурсов в виде двоичных данных и текста. Ресурсы могут быть загружены по относительным путям приложения или по URL. Используйте в программном коде JavaScript методы объекта <classname>Resource</classname>.</para>
-      <para>Для того, чтобы загрузить двоичный ресурс используйте метод <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code>, где <parameter>path</parameter> - относительный или абсолютный путь или URL, <parameter>callback(obj)</parameter> -  функция, которая будет вызвана после того как ресурс будет загружен.  <parameter>obj</parameter> - массив байтов загруженного ресурса:</para>
+      <para>Platypus Platform предоставляет возможность загрузки  ресурсов в виде двоичных данных и текста. Ресурсы могут быть загружены по относительным путям приложения или по URL. Относительные пути отсчитываются от каталога <filename>src</filename> приложения Platypus. Используйте в программном коде JavaScript методы объекта <classname>Resource</classname>.</para>
+      <para>Для того, чтобы загрузить двоичный ресурс используйте метод <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code>, где <parameter>path</parameter> - относительный или абсолютный путь или URL, <parameter>callback(obj)</parameter> -  функция, которая будет вызвана после того как ресурс будет загружен.  <parameter>obj</parameter> - массив байтов загруженного ресурса для серверного кода и Platypus Client и объект типа <classname>ArrayBuffer</classname> для HTML5 браузера:</para>
       <programlisting language="JavaScript">//Loads binary resource
 Resource.load(&quot;res/pict.bin&quot;, function(obj) {
-  for (var i = 0; i &lt; obj.length; i++) {
-    Logger.info(i);
- }
+  ...
 })</programlisting>
-      <para>В серверном коде может быть использована синхронная версия данного метода с одним параметром. В этом случае сам метод вернет массив байтов загруженного ресурса.</para>
+      <para>В серверном коде или коде исполняемом в Platypus Client может быть использована синхронная версия данного метода с одним параметром. В этом случае сам метод вернет массив байтов загруженного ресурса:</para>
+      <programlisting language="JavaScript">//Loads binary resource synchronously
+var obj = Resource.load(&quot;res/pict.bin&quot;);
+...</programlisting>
       <para>Для того, чтобы загрузить текст используйте метод <code>Resource.loadText(<parameter>path</parameter>, <parameter>encoding</parameter>, <parameter>callback</parameter><parameter>(txt</parameter>))</code>, где <parameter>path</parameter> - относительный или абсолютный путь или URL, <parameter>encoding</parameter> - имя кодировки текста, <parameter>callback(txt)</parameter> -  функция, которая будет вызвана после того как ресурс будет загружен и <parameter>txt</parameter> - текст:</para>
-      <programlisting language="JavaScript">//Loads text document
+      <programlisting language="JavaScript">//Loads text
 Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;, function(txt) {
   Logger.info(txt);
 })</programlisting>
-      <para>В серверном коде может быть использована синхронная версия данного метода с одним или двумя параметрами. В этом случае сам метод вернет объект строки загруженного ресурса.</para>
+      <para>В серверном коде или коде Platypus Client может быть использована синхронная версия данного метода с одним или двумя параметрами. В этом случае сам метод вернет объект строки загруженного ресурса:</para>
+      <programlisting language="JavaScript">//Loads text synchronously
+var txt = Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;);
+Logger.info(txt);</programlisting>
     </section>
     <section>
       <title>Вызов Java кода из JavaScript кода</title>
