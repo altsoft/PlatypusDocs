@@ -608,7 +608,7 @@ function printHeadres() {
         </tbody>
       </tgroup>
     </informaltable>
-    <para>В приведено ниже примере в HTTP ответ будет добавлен новый куки:</para>
+    <para>В приведенном ниже примере в HTTP ответ будет добавлен новый куки:</para>
     <programlisting language="JavaScript">/**
  * @name TestModule
  */
