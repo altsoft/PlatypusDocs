@@ -1441,8 +1441,8 @@ entity1.sort(sorter);</programlisting>
         </varname> - сущность, <methodname>sortingFunction</methodname> - <classname>Function</classname>, функция принимающая два объекта в качестве параметров и  сравнивающая их. Функция сравнения возвращает отрицательное целое число если первый объект меньше второго, 0 - если они равны и положительное целое число если первый объект  больше второго.</para>
       <para>В следующем примере производится  сортировка данных сущности с использованием анонимной функции сравнения. Сортировка осуществляется по длине имени документа:</para>
       <programlisting language="JavaScript">documents.sort(function(doc1, doc2) {
-  var length1 = doc1.NAME != null?doc1.NAME.length:0;
-  var length2 = doc2.NAME != null?doc2.NAME.length:0;
+  var length1 = doc1.NAME != null ? doc1.NAME.length : 0;
+  var length2 = doc2.NAME != null ? doc2.NAME.length : 0;
   return length1 - length2;
 });</programlisting>
     </section>
