@@ -270,12 +270,12 @@ function f2() {
 //...
 }</programlisting>
       <para>В исполняемом коде можно получить доступ к информации о текущем пользователе, для этого используйте свойство  <code>principal</code>. Данное свойство доступно только для чтения. Oбъект информации о пользователе  содержит свойство <code>name</code> - имя текущего пользователя и метод <code>hasRole(<replaceable>role</replaceable>)</code>, который позволяет проверить наличие  какой-либо роли у данного пользователя:</para>
-      <programlisting language="JavaScript">
-Logger.info(&apos;Current user: &apos; + principal.name);
+      <programlisting language="JavaScript">Logger.info(&apos;Current user: &apos; + principal.name);
 
 if (principal.hasRole(&apos;Manager&apos;)) {
   // Some operations allowed only to managers ...
 }</programlisting>
+      <para>Используйте глобальную функцию <function>logout(<replaceable>callback</replaceable>())</function>, где <function><replaceable>callback</replaceable>()</function> -  функция, которая будет вызвана после того как сеанс  будет завершен, в  клиентском коде для того, чтобы завершить сеанс пользователя. Открытые формы будут закрыты и пользвателю будет показана форма логинации. </para>
     </section>
     <section>
       <title>Загрузка ресурсов</title>
