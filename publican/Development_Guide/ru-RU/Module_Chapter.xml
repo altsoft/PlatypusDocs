@@ -449,33 +449,21 @@ var element = new XML(&apos;&lt;foo/&gt;&lt;bar/&gt;&lt;/foo&gt;&apos;);  </prog
       <programlisting language="JavaScript">var element1 = &lt;foo/&gt;;  
 var element2 = &lt;bar/&gt;;  
 element1.appendChild(element2);   </programlisting>
-      <para>В результате выполнения данной функции получится следующий <abbrev>XML</abbrev>:</para>
-      <programlisting language="JavaScript">&lt;foo&gt;
-  &lt;bar/&gt;
-&lt;/foo&gt;  </programlisting>
       <para>Для интеграции кода JavaScript и <abbrev>XML</abbrev> используйте синтаксис с использованием фигурных скобок: <code>{}</code>:</para>
       <programlisting language="JavaScript">var a = 2;  
 var bar = &apos;bar&apos;;  
 var foo = &lt;foo {bar}={a}&gt;hi&lt;/foo&gt;;   </programlisting>
-      <para>Содержащийся в переменной <varname>foo</varname>  документ <abbrev>XML</abbrev> будет следующего вида: </para>
-      <programlisting language="JavaScript">&lt;foo bar=&quot;2&quot;&gt;hi&lt;/foo&gt;  </programlisting>
       <note>
         <para>Обратите внимание, что содержанием <abbrev>XML</abbrev> элементов могут быть только текстовые данные, так как для встраивания в <abbrev>XML</abbrev> используется метод <methodname>toString</methodname>.</para>
       </note>
       <para>Несмотря на то, что встраиваемые объекты ограничены одним выражением используйте анонимную функцию для встраивания более сложной логики:</para>
       <programlisting language="JavaScript">var a = &apos;foo&apos;;  
 var b = &lt;bar&gt;{function () {var c = a.toUpperCase(); var d = 5 * 5; return c + d;}()}&lt;/bar&gt;;  </programlisting>
-      <para>В результате выполнения этого кода получится такой <abbrev>XML</abbrev> документ:</para>
-      <programlisting language="JavaScript">&lt;bar&gt;FOO25&lt;/bar&gt;  </programlisting>
       <para>Для сериализации <abbrev> XML</abbrev> в строку используйте функцию <methodname>toXMLString</methodname>:</para>
       <programlisting language="JavaScript">var element1 = &lt;foo/&gt;;  
 var element2 = &lt;bar/&gt;;  
 element1.appendChild(element2);  
 Logger.info(element1.toXMLString());  </programlisting>
-      <para>В консоль выведется следующее: </para>
-      <programlisting language="JavaScript">&lt;foo&gt;
-  &lt;bar/&gt;
-&lt;/foo&gt;  </programlisting>
       <para>Вызов функции <methodname>toString</methodname> в данном случае выведет то же самое, однако вызов функции <methodname>toString</methodname> на одном элементе вернет текст внутри элемента:</para>
       <programlisting language="JavaScript">&lt;foo&gt;abc&lt;/foo&gt;.toString();
 //abc</programlisting>
@@ -486,20 +474,9 @@ Logger.info(element1.toXMLString());  </programlisting>
 var element2 = &lt;baz/&gt;;
 element1.bar.appendChild(element2);
 element1[&quot;bar&quot;].appendChild(&lt;quux/&gt;);</programlisting>
-      <para>Приведенный выше код добавляет дочерний элемент элементу <literal>bar</literal>. В результате чего  получается следующий <abbrev>XML</abbrev> документ:</para>
-      <programlisting language="JavaScript">&lt;foo&gt;
-  &lt;bar&gt;
-    &lt;baz/&gt;
-    &lt;quux/&gt;
-  &lt;/bar&gt;
-&lt;/foo&gt;</programlisting>
       <para>Обратите внимание, что присвоение свойства несуществующего дочернего элемента создаст этот элемент:</para>
       <programlisting language="JavaScript">var element1 = &lt;foo/&gt;
 element1.bar = 1;</programlisting>
-      <para>Результат:</para>
-      <programlisting language="JavaScript">&lt;foo&gt;
-  &lt;bar&gt;1&lt;/bar&gt;
-&lt;/foo&gt;</programlisting>
       <para>Присвоение свойства для существующего дочернего элемента установит его значение:</para>
       <programlisting language="JavaScript">var elem = &lt;foo&gt;
              &lt;bar&gt;1&lt;/bar&gt;
@@ -512,10 +489,6 @@ elem.bar = 2;</programlisting>
              &lt;baz/&gt;
            &lt;/foo&gt;
 delete elem.bar;</programlisting>
-      <para>В результате элемент bar будет удален из документа:</para>
-      <programlisting language="JavaScript">&lt;foo&gt;
-  &lt;baz/&gt;
-&lt;/foo&gt;</programlisting>
       <para>Для замены элемента также используйте синтаксис присваивания:</para>
       <programlisting language="JavaScript">var elem1 = &lt;foo&gt;
                &lt;bar/&gt;
@@ -524,12 +497,6 @@ var elem2 = &lt;red&gt;
                &lt;blue/&gt;
              &lt;/red&gt;;
 elem1.bar = elem2;</programlisting>
-      <para>Результат:</para>
-      <programlisting language="JavaScript">&lt;foo&gt;
-  &lt;red&gt;
-    &lt;blue/&gt;
-  &lt;/red&gt;
-&lt;foo&gt;</programlisting>
       <para>Если элемент содержит несколько дочерних элементов одного типа обращение к соответствующему свойству вернет список этих элементов в виде массива:</para>
       <programlisting language="JavaScript">var element = &lt;foo&gt;
                 &lt;bar baz=&quot;1&quot;&gt;red&lt;/bar&gt;
@@ -541,11 +508,6 @@ list[0]; // the first bar element
 list[1]; // the second bar element</programlisting>
       <para>Присвоение значения элементу массива в данном случае изменит значение элемента:</para>
       <programlisting language="JavaScript">list[1] = &quot;green&quot;;</programlisting>
-      <para>Выполнение этого кода приведет к изменению <abbrev>XML</abbrev> документа:</para>
-      <programlisting language="JavaScript">&lt;foo&gt;
-  &lt;bar baz=&quot;1&quot;&gt;red&lt;/bar&gt;
-  &lt;bar baz=&quot;2&quot;&gt;green&lt;/bar&gt;
-&lt;/foo&gt;</programlisting>
       <para>Для доступа к некоторым специальным типам узлов используйте функции <methodname>text</methodname>  и comments, а также  селектор <literal>*</literal>.</para>
       <para>Для доступа к текстовым узлам используйте функцию <methodname>text</methodname>:</para>
       <programlisting language="JavaScript">var a = &lt;foo&gt; Some text &lt;bar&gt;not text&lt;/bar&gt; More text &lt;/foo&gt;;
@@ -597,11 +559,6 @@ var a = &lt;p&gt;Some text&lt;/p&gt;;
 default xml namespace = &quot;http://www.mozilla.org/keymaster/gat...re.is.only.xul&quot;;
 var b = &lt;label&gt;More text&lt;/label&gt;;
 a.appendChild(b);</programlisting>
-      <para>В результате выполнения этого фрагмента кода <abbrev>XML</abbrev> документ будет имеет следующий вид:</para>
-      <programlisting language="JavaScript">&lt;p xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-  Some text
-  &lt;label xmlns=&quot;http://www.mozilla.org/keymaster/gat...re.is.only.xul&quot;&gt;More text&lt;/label&gt;
-&lt;/p&gt;</programlisting>
       <para>Используйте функцию name объекта <abbrev>XML</abbrev> для того, чтобы получить объект <literal>QName</literal> - квалифицированное имя. Полученный объект содержит два свойства: <literal>localName</literal> - содержит имя элемента, свойство uri содержит пространство имен к которому относится данный элемент:</para>
       <programlisting language="JavaScript">var info = a.name();
 info.localName; // returns &apos;p&apos;.
