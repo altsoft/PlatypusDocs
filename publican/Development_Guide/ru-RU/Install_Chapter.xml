@@ -128,7 +128,7 @@
   </section>
   <section>
     <title>Настройка среды разработки дизайнера приложений</title>
-    <para>Укажите место в файловой системе компьютера где находится каталог Platypus Platform:</para>
+    <para>Укажите место в файловой системе компьютера, где находится каталог Platypus Platform:</para>
     <itemizedlist>
       <listitem>
         <para>выберите пункт главного меню  <menuchoice>
@@ -150,7 +150,7 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>В текущей версии PlatypusApplication Designer поддерживается запуск приложений в  Apache Tomcat 7. Скачайте Apache Tomcat 7 с сайта разработчика и установите (распакуйте) его в удобное для вас место на жеском диске.</para>
+      <para>В текущей версии PlatypusApplication Designer поддерживается запуск приложений в  Apache Tomcat 7. Скачайте Apache Tomcat 7 с сайта разработчика и установите (распакуйте) его в удобное для вас место на жестком диске.</para>
     </note>
   </section>
   <section id="sect-Administration_Guide-Install_Chapter-Test_Section_4">
