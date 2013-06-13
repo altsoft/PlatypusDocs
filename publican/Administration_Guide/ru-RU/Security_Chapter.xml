@@ -169,6 +169,10 @@
         </tbody>
       </tgroup>
     </informaltable>
+    <para>Для разработки и тестирования приложений используйте технический логин <literal>admin</literal> c паролем <literal>masterkey</literal>, которому назначена группа <literal>admin</literal>. </para>
+    <important>
+      <para>Измените технический пароль перед началом промышленной эксплуатации приложения!</para>
+    </important>
   </section>
   <section>
     <title>Использование внешнего хранилища информации о пользователях</title>
