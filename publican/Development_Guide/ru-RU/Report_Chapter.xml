@@ -135,7 +135,7 @@ library.documens = [
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${departments}&quot; var=&quot;department&quot;&gt;
   ${department.name} | ${department.chief}
 &lt;/jx:forEach&gt;</programlisting>
-      <para>Тэги <literal>jx</literal> могут быть вложенными друг в друга. Если вы разместите открывающий и закрывающие тэги на одной строке, то  размножены будут колонки колонки на этой строке. Разместите тэги <literal>jx:forEach</literal> и <literal>jx:forEach</literal> на разных строках для того чтобы были размножены строки между этими тэгами. Другие ячейки на строках содержащих открывающие и закрывающие тэги будут проигнорированы.</para>
+      <para>Тэги <literal>jx</literal> могут быть вложенными друг в друга. Если вы разместите открывающий и закрывающие тэги на одной строке, то  размножены будут колонки колонки на этой строке. Разместите тэги <literal>jx:forEach</literal> и <literal>jx:forEach</literal> на разных строках для того, чтобы были размножены строки между этими тэгами. Другие ячейки на строках содержащих открывающие и закрывающие тэги будут проигнорированы.</para>
       <para>Тэг <literal>jx:forEach</literal> позволяет осуществить группировку данных коллекции по одному из свойств. Для организации группировки используйте атрибуты <property>groupBy</property> и <property>groupOrder</property>, которые определяют какое свойство должно быть использовано для группировки данных и в каком порядке группы  должны быть выведены, например: </para>
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; groupBy=&quot;age&quot;&gt;
   Age: ${group.item.age}
@@ -189,7 +189,7 @@ Chief Name: ${department.chief.name}
   </section>
   <section>
     <title>Программный код формирования отчета</title>
-    <para>Для того чтобы сгенерировать отчет - создайте объект отчета, передав в конструктор имя-идентификатор требуемого отчета.</para>
+    <para>Для того, чтобы сгенерировать отчет - создайте объект отчета, передав в конструктор имя-идентификатор требуемого отчета.</para>
     <para>Используйте объект отчета:</para>
     <itemizedlist>
       <listitem>

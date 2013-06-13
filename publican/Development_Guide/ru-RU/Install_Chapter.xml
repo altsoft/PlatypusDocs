@@ -102,7 +102,7 @@
       </listitem>
     </itemizedlist>
     <para>Язык локализации выбирается автоматически при запуске приложения дизайнера в соответствии с региональными настройками пользователя в операционной системе.</para>
-    <para>Для того чтобы принудительно изменить язык локализации: </para>
+    <para>Для того, чтобы принудительно изменить язык локализации: </para>
     <itemizedlist>
       <listitem>
         <para>отредактируйте файл конфигурации <application>Platypus Application Designe</application>r - добавьте в параметр <parameter>default_options</parameter> опцию <option>--locale ru:RU</option> или <option>--locale en:US</option>;</para>
@@ -116,7 +116,7 @@
     <warning>
       <para>Подключение внешних стилей оформления является достаточно сложной процедурой и не рекомендовано для начинающих.</para>
     </warning>
-    <para>Для того чтобы изменить стиль оформления <application>Platypus Application Designer</application>:</para>
+    <para>Для того, чтобы изменить стиль оформления <application>Platypus Application Designer</application>:</para>
     <itemizedlist>
       <listitem>
         <para>отредактируйте файл  конфигурации дизайнера  - добавьте в параметр <parameter>default_options</parameter> опцию <option>--laf <replaceable>LaF</replaceable></option>, где <replaceable>LaF</replaceable> соответствует названию стиля или полному имени класса LaF, в случае использования стороннего LaF также необходимо включить библиотеку стилей в путь доступный загрузчику классов <application>Platypus Application Designer</application>;</para>

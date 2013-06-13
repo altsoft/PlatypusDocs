@@ -23,7 +23,7 @@
         <para>выберите пункт меню <guimenuitem>New</guimenuitem> контекстного меню родительского каталога или выделите родительский каталог и выберите пункт <guimenuitem>New Filе</guimenuitem> главного меню или нажмите кнопку <guibutton>New File</guibutton> на панели инструментов или воспользуйтесь &quot;горячей&quot; клавишей;</para>
       </listitem>
       <listitem>
-        <para>выберите тип <guimenuitem>Database structure diagram</guimenuitem> из контекстного меню или на на первом шаге мастера <menuchoice>
+        <para>выберите тип <guimenuitem>Database structure diagram</guimenuitem> из контекстного меню или на первом шаге мастера <menuchoice>
             <guimenu>Choose file type</guimenu>
             <guisubmenu>Platypus application elements</guisubmenu>
             <guimenuitem>Database structure diagram</guimenuitem>
@@ -36,7 +36,7 @@
             <para>выберите базу данных по-умолчанию - нажмите кнопку <guibutton>Default</guibutton> или подключение к внешней базе данных - нажмите кнопку <guibutton>Specific</guibutton>;</para>
           </listitem>
           <listitem>
-            <para>выберите схему в базе данных из выпадающего списка поля <guilabel>Schema</guilabel>; Для выбора схемы по-умолчанию нажмите кнопку <guibutton>Default</guibutton>;</para>
+            <para>выберите схему в базе данных из выпадающего списка поля <guilabel>Schema</guilabel>; для выбора схемы по-умолчанию нажмите кнопку <guibutton>Default</guibutton>;</para>
           </listitem>
           <listitem>
             <para>нажмите кнопку <guibutton>Next</guibutton>;</para>
@@ -124,7 +124,7 @@
         <para>выберите таблицу на диаграмме;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Delete</guibutton>        на панели инструментов редактора; на диалоге подтверждения удаления нажимите кнопку <guibutton>Delete from diagram</guibutton> для того чтобы удалить таблицу из диаграммы (только из диаграммы, а не из <acronym>БД</acronym>) кнопку <guibutton>Drop table</guibutton>   для того чтобы удалить таблицу из базы данных (при этом таблица будет уничтожена физически); нажимите кноку <guibutton>Cancel</guibutton> для отмены удаления;</para>
+        <para>нажмите кнопку <guibutton>Delete</guibutton>        на панели инструментов редактора; на диалоге подтверждения удаления нажимите кнопку <guibutton>Delete from diagram</guibutton> для того, чтобы удалить таблицу из диаграммы (только из диаграммы, а не из <acronym>БД</acronym>) кнопку <guibutton>Drop table</guibutton>   для того, чтобы удалить таблицу из базы данных (при этом таблица будет уничтожена физически); нажимите кноку <guibutton>Cancel</guibutton> для отмены удаления;</para>
       </listitem>
       <listitem>
         <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов <application>Platypus Application Designer</application> или нажав сочетание клавиш <keycombo>
@@ -350,7 +350,7 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>При работе в команде разработчиков после изменения структуры <acronym>БД</acronym> рекомендуется создать миграцию - мгновенный снимок  метаданных и сделать его доступным другим участникам процесса разработки, для того чтобы применить сделанные изменения на других экземплярах баз, участвующих в разработке.</para>
+      <para>При работе в команде разработчиков после изменения структуры <acronym>БД</acronym> рекомендуется создать миграцию - мгновенный снимок  метаданных и сделать его доступным другим участникам процесса разработки, для того, чтобы применить сделанные изменения на других экземплярах баз, участвующих в разработке.</para>
     </note>
     <para>Для того, чтобы выполнить запрос данных из таблицы:</para>
     <itemizedlist>
@@ -370,7 +370,7 @@
         <para>перейдите на вкладку <guilabel>Database schema</guilabel>;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton> Zoom In</guibutton> для того чтобы увеличить, и кнопку <guibutton>Zoom out</guibutton> для того чтобы уменьшить представление структуры БД в редакторе.</para>
+        <para>нажмите кнопку <guibutton> Zoom In</guibutton> для того, чтобы увеличить, и кнопку <guibutton>Zoom out</guibutton> для того, чтобы уменьшить представление структуры БД в редакторе.</para>
       </listitem>
     </itemizedlist>
     <para>Для того, чтобы воспользоваться поиском по диаграмме:</para>

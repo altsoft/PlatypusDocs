@@ -69,7 +69,7 @@
         <para>используйте автоматический переход к объявлениям переменных, функций и к функциям  других модулей, для этого кликните на идентификаторе или функции модуля удерживая клавишу <keycap>Ctrl</keycap>;</para>
       </listitem>
       <listitem>
-        <para>используйте контекстное меню и &quot;горячие&quot; клавиши для того чтобы использовать встроенные функции редактора;</para>
+        <para>используйте контекстное меню и &quot;горячие&quot; клавиши для того, чтобы использовать встроенные функции редактора;</para>
       </listitem>
       <listitem>
         <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов <application>Platypus Application Designer</application> или нажав сочетание клавиш <keycombo>
@@ -100,7 +100,7 @@
     <note>
       <para>Особенности работы с данными и  использования модели данных в программе смотрите раздел &quot;Программный интерфейс работы с данными&quot;.</para>
     </note>
-    <para>Использование модулей позволяет управлять сложностью программного обеспечения в соответствии с принципами объектно ориентированного программирования. Конструктор модуля используется для того чтобы создавать экземпляры модуля - объекты. </para>
+    <para>Использование модулей позволяет управлять сложностью программного обеспечения в соответствии с принципами объектно ориентированного программирования. Конструктор модуля используется для того, чтобы создавать экземпляры модуля - объекты. </para>
     <para>В состав программного кода модуля входят функции и поля, определяющие поведение и состояние объектов  экземпляров модуля. </para>
     <para>Для кода, использующего   экземпляр модуля доступны для вызова его функции относящиеся к верхней области видимости модуля.</para>
     <para>Модуль в Platypus можно назвать аналогом класса в других языках программирования, например Java или С++.</para>
@@ -254,7 +254,7 @@ function publicFunction(param) {
     <section>
       <title>Безопасность</title>
       <para>Исполняемый код модуля является ресурсом доступ к которому может разграничиваться на базе ролей текущего пользователя. При попытке вызова кода, для исполнения которого  у пользователя нет прав возникает исключение безопасности.</para>
-      <para>Для того чтобы ограничить доступ ко всему коду модуля добавьте аннотацию <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code>... к заголовку модуля. В аннотации <code>@rolesAllowed</code> перечислите через пробел роли пользователей имеющих доступ к исполнению кода модуля. В случае отсутствия данной аннотации доступ к модулю предоставляется всем пользователям.</para>
+      <para>Для того, чтобы ограничить доступ ко всему коду модуля добавьте аннотацию <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code>... к заголовку модуля. В аннотации <code>@rolesAllowed</code> перечислите через пробел роли пользователей имеющих доступ к исполнению кода модуля. В случае отсутствия данной аннотации доступ к модулю предоставляется всем пользователям.</para>
       <para>Доступ к исполнению кода модуля можно разграничить на уровне отдельной функции. Для этого добавьте аннотацию <code>@rolesAllowed</code> в <abbrev> JsDoc</abbrev> функции. При этом ограничения уровня функции имеют более высокий приоритет, чем ограничения уровня модуля. Например к функции <code>f2</code> из примера приведенного ниже имеет доступ только пользователь с ролью <literal>role2</literal>: </para>
       <programlisting language="JavaScript">/**
  * @name WebSupport
@@ -569,9 +569,9 @@ info.uri; // returns &quot;http://www.w3.org/1999/xhtml&quot;</programlisting>
       </note>
       <para>Используйте свойство <varname>ignoreComments</varname> (по умолчанию true) глобального объекта XML для того, чтобы управлять режимом обработки комментариев при сериализации и фильтрации.</para>
       <para>Используйте свойство <varname>ignoreProcessingInstructions</varname> (по умолчанию <literal>true</literal>) глобального объекта <abbrev>XML</abbrev> для того, чтобы управлять режимом обработки инструкций обработки при сериализации и фильтрации.</para>
-      <para>Используйте свойство <varname>ignoreWhitespace</varname> (по умолчанию true) глобального объекта <abbrev>XML</abbrev>, для того чтобы включить или выключить обработку пробелов как текстовых узлов.</para>
-      <para>Используйте свойство <varname>prettyPrinting</varname> (по умолчанию true) глобального объекта <abbrev>XML</abbrev>, для того чтобы включить или выключить добавление новых строк и отступов при выполнении функции <methodname>toXMLString</methodname>.</para>
-      <para>Используйте свойство <varname>prettyIndent</varname> (по умолчанию 2) глобального объекта <abbrev>XML</abbrev>, для того чтобы управлять величиной отступа при выполнении функции <methodname>toXMLString</methodname>.</para>
+      <para>Используйте свойство <varname>ignoreWhitespace</varname> (по умолчанию true) глобального объекта <abbrev>XML</abbrev>, для того, чтобы включить или выключить обработку пробелов как текстовых узлов.</para>
+      <para>Используйте свойство <varname>prettyPrinting</varname> (по умолчанию true) глобального объекта <abbrev>XML</abbrev>, для того, чтобы включить или выключить добавление новых строк и отступов при выполнении функции <methodname>toXMLString</methodname>.</para>
+      <para>Используйте свойство <varname>prettyIndent</varname> (по умолчанию 2) глобального объекта <abbrev>XML</abbrev>, для того, чтобы управлять величиной отступа при выполнении функции <methodname>toXMLString</methodname>.</para>
       <programlisting language="JavaScript">XML.ignoreComments = false;
 XML.ignoreProcessingInstructions = false;</programlisting>
       <note>
@@ -775,9 +775,9 @@ session.destroy();</programlisting>
       </listitem>
     </itemizedlist>
     <note>
-      <para>Перетащите существующий запрос из дерева элементов приложения панели проектов на диаграмму визуального редактора модели данных для того чтобы включить его в редактируемую модель данных.</para>
+      <para>Перетащите существующий запрос из дерева элементов приложения панели проектов на диаграмму визуального редактора модели данных для того, чтобы включить его в редактируемую модель данных.</para>
     </note>
-    <para>Для того, чтобы сущность была доступна из программного кода скрипта,  необходимо дать ей имя. Для того чтобы указать имя сущности выполните следующие действия:</para>
+    <para>Для того, чтобы сущность была доступна из программного кода скрипта,  необходимо дать ей имя. Для того, чтобы указать имя сущности выполните следующие действия:</para>
     <itemizedlist>
       <listitem>
         <para>перейдите на вкладку <guilabel>Datamodel</guilabel>;</para>
@@ -796,7 +796,7 @@ session.destroy();</programlisting>
           </keycombo>.</para>
       </listitem>
     </itemizedlist>
-    <para>Для того чтобы связать события сущности с функциями-обработчиками выполните следующие действия:</para>
+    <para>Для того, чтобы связать события сущности с функциями-обработчиками выполните следующие действия:</para>
     <itemizedlist>
       <listitem>
         <para>перейдите на вкладку <guilabel>Datamodel - Datasets</guilabel>;</para>
@@ -980,7 +980,7 @@ session.destroy();</programlisting>
         <para>перейдите на вкладку <guilabel>Datasets</guilabel>;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Zoom In</guibutton> для того чтобы увеличить, и кнопку <guibutton>Zoom out</guibutton> для того чтобы уменьшить представление модели данных  в редакторе.</para>
+        <para>нажмите кнопку <guibutton>Zoom In</guibutton> для того, чтобы увеличить, и кнопку <guibutton>Zoom out</guibutton> для того, чтобы уменьшить представление модели данных  в редакторе.</para>
       </listitem>
     </itemizedlist>
     <para>Для того, чтобы воспользоваться поиском по диаграмме модели данных:</para>
@@ -989,7 +989,7 @@ session.destroy();</programlisting>
         <para>перейдите на вкладку <guilabel>Datasets</guilabel>;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Find</guibutton> для того чтобы открыть диалог поиска по модели данных в редакторе;</para>
+        <para>нажмите кнопку <guibutton>Find</guibutton> для того, чтобы открыть диалог поиска по модели данных в редакторе;</para>
       </listitem>
       <listitem>
         <para>введите строку поиска, выберите  поля по которым будет осуществляются поиск: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, а также установите флажки опций: <guilabel>Whole words</guilabel> - для поиска целых слов, <guilabel>Match case</guilabel> - для поиска с учетом регистра символов; </para>
@@ -1067,7 +1067,7 @@ try {
           <replaceable>entityName</replaceable>
         </varname> - скриптовое представление сущности.</para>
       <para>Сущности в модели данных  могут иметь параметры и могут обновляться независимо от модели в целом.</para>
-      <para>Для того чтобы обновить данные в сущности:</para>
+      <para>Для того, чтобы обновить данные в сущности:</para>
       <itemizedlist>
         <listitem>
           <para>установите значения параметров сущности;</para>
@@ -1088,7 +1088,7 @@ try {
         </varname> - сущность, <varname>
           <replaceable>paramName</replaceable>
         </varname> - свойство соответствующего параметра.</para>
-      <para>Для того чтобы установить значения параметра присвойте ему новое значение:</para>
+      <para>Для того, чтобы установить значения параметра присвойте ему новое значение:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
       <para>где, <literal>newValue</literal> - новое значение параметра.</para>
       <note>
@@ -1325,7 +1325,7 @@ for(var i=0; i&lt;foundDocuments.size(); i++) {
       <title>Фильтрация данных</title>
       <para>В этой главе рассмотрены операции  которые могут осуществляются после загрузки данных сущности. Данные операции производятся внутри модели и не вызывают новых запросов к <acronym>БД</acronym>.</para>
       <para>Для каждой сущности можно задать правила фильтрации. Правила фильтрации будут применяться каждый раз при загрузке данных и при этом данные не прошедшие фильтрацию не теряются, однако становятся невидимыми для прикладного кода.</para>
-      <para>Для того чтобы создать фильтр используйте функцию <methodname>createFiter</methodname> сущности передав ей в качестве параметров свойства сущности по которым должна выполняться фильтрация:</para>
+      <para>Для того, чтобы создать фильтр используйте функцию <methodname>createFiter</methodname> сущности передав ей в качестве параметров свойства сущности по которым должна выполняться фильтрация:</para>
       <programlisting language="JavaScript">var filter = <replaceable>entityName</replaceable>.createFilter(
   <replaceable>entityName</replaceable>.md.<replaceable>prop1</replaceable>,
   <replaceable>entityName</replaceable>.md.<replaceable>prop2</replaceable>,
@@ -1337,7 +1337,7 @@ for(var i=0; i&lt;foundDocuments.size(); i++) {
       <note>
         <para>Подробнее о доступе к метаданным читайте в главе &quot;Доступ к метаданным&quot;.</para>
       </note>
-      <para>Для того чтобы применить фильтр к  данным используйте функцию apply фильтра передав в неё значения по которым должна происходить фильтрация в том же порядке в каком были заданны поля:</para>
+      <para>Для того, чтобы применить фильтр к  данным используйте функцию apply фильтра передав в неё значения по которым должна происходить фильтрация в том же порядке в каком были заданны поля:</para>
       <programlisting language="JavaScript">filter.apply(
   filterValue1,
   filterValue2,
@@ -1436,7 +1436,7 @@ entity1.sort(sorter);</programlisting>
         </listitem>
       </itemizedlist>
       <para>Информацию по загрузке данных, фильтрации и поиску смотрите в главах &quot;Данные сущностей&quot;, &quot;Фильтрация и Поиск в данных&quot;.</para>
-      <para>Для того чтобы изменить объект по умолчанию - объект на который указывает курсор - измените соответствующее свойство сущности:</para>
+      <para>Для того, чтобы изменить объект по умолчанию - объект на который указывает курсор - измените соответствующее свойство сущности:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable><replaceable>.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
@@ -1519,7 +1519,7 @@ model.save();</programlisting>
       <para>где <literal>
           <replaceable>rowIndex</replaceable>
         </literal> - может принимать значения <code>1..<replaceable>entityName</replaceable>.length</code>.</para>
-      <para>Используйте функцию <methodname>splice</methodname> для того чтобы удалить объект из данных сущности, передав в качестве аргументов индекс и количество элементов которые нужно удалить:</para>
+      <para>Используйте функцию <methodname>splice</methodname> для того, чтобы удалить объект из данных сущности, передав в качестве аргументов индекс и количество элементов которые нужно удалить:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.splice(<replaceable>index</replaceable>, <replaceable>howMany</replaceable>);</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
@@ -1540,7 +1540,7 @@ model.save();</programlisting>
       <para>Для управления режимом транзакций модели используйте свойство <varname>commitable</varname> объекта <varname>model</varname>:</para>
       <programlisting language="JavaScript">model.commitable = false;</programlisting>
       <para>В таком режиме при вызове функции <methodname>save</methodname> изменения сохраняются в <acronym>БД</acronym>, но подтверждения транзакции не происходит.</para>
-      <para>Установите для  этого свойства значение <literal>true</literal>, для того чтобы включить подтверждение транзакции, и вызовите функцию <methodname>save</methodname> для подтверждения транзакции:</para>
+      <para>Установите для  этого свойства значение <literal>true</literal>, для того, чтобы включить подтверждение транзакции, и вызовите функцию <methodname>save</methodname> для подтверждения транзакции:</para>
       <programlisting language="JavaScript">model.commitable = true;
 model.save();// Commit all changes</programlisting>
       <para>Вызов функции <methodname>save</methodname> может выбрасывать исключение, например при несоответствии сохраняемых данных схеме <acronym>БД</acronym>. При этом сохранения данных в <acronym>БД</acronym> не происходит. Для обработки этого исключения используйте конструкции <code>try-catch-finally</code>:</para>
