@@ -786,7 +786,7 @@ session.destroy();</programlisting>
         <para>выберите на диаграмме модели данных или в инспекторе модели данных соответвующую сущность;</para>
       </listitem>
       <listitem>
-        <para>в окне редактрирования свойств <guilabel>Properties</guilabel> и задайте значение имени в поле name;</para>
+        <para>в окне редактрирования свойств <guilabel>Properties</guilabel> и задайте значение имени в поле name; имя сущности является чувствительным регистру символов и должно удовлетворять требованиям к идентификаторам JavaScript;</para>
       </listitem>
       <listitem>
         <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов <application>Platypus Application Designer</application> или нажав сочетание клавиш <keycombo>
