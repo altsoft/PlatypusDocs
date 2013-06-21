@@ -59,6 +59,6 @@
           </keycombo>.</para>
       </listitem>
     </itemizedlist>
-    <para>При работе приложения в  среде <acronym>J2EE</acronym> сервера или сервлет-контейнера соединение с базой данных предоставляется окружением в котором работает приложение Platypus. Настройте соединение с базой данных как <acronym>JNDI</acronym>-ресурс и укажите имя этого ресурса в поле <acronym>JDBC</acronym><acronym> URL</acronym>. Поля <guilabel>Database User</guilabel>, <guilabel>Password</guilabel> и <guilabel>Default schema</guilabel> в этом случае не заполняются и тестирование соединения не производится.</para>
+    <para>При работе приложения в  среде <acronym>J2EE</acronym> сервера или сервлет-контейнера соединение с базой данных предоставляется окружением, в котором работает приложение Platypus. Настройте соединение с базой данных как <acronym>JNDI</acronym>-ресурс и укажите имя этого ресурса в поле <acronym>JDBC</acronym><acronym> URL</acronym>. Поля <guilabel>Database User</guilabel>, <guilabel>Password</guilabel> и <guilabel>Default schema</guilabel> в этом случае не заполняются и тестирование соединения не производится.</para>
   </section>
 </chapter>

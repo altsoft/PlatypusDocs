@@ -6,7 +6,7 @@
 <chapter id="chap-Development_Guide-Diagram_Chapter">
   <title>Диаграмма структуры базы данных</title>
   <para><emphasis>Диаграмма структуры базы данных</emphasis>  является  представлением структуры <acronym>БД в части</acronym>, определенной разработчком. Например, диаграмма может описывать часть предметной области. В проекте, как правило, существует несколько диаграмм структуры БД.</para>
-  <para>Диаграмма структуры БД является  визуальным  представлением структуры <acronym>БД</acronym>,   и на прямую не влияет на функциональность приложения.</para>
+  <para>Диаграмма структуры БД является  визуальным  представлением структуры <acronym>БД</acronym>   и на прямую не влияет на функциональность приложения.</para>
   <para>Структура реляционной базы данных определяется составом
       таблиц и их связями. Связи между двумя таблицами реализуются
       через внешние ключи.</para>
@@ -36,7 +36,7 @@
             <para>выберите базу данных по-умолчанию - нажмите кнопку <guibutton>Default</guibutton> или подключение к внешней базе данных - нажмите кнопку <guibutton>Specific</guibutton>;</para>
           </listitem>
           <listitem>
-            <para>выберите схему в базе данных из выпадающего списка поля <guilabel>Schema</guilabel>; для выбора схемы по-умолчанию нажмите кнопку <guibutton>Default</guibutton>;</para>
+            <para>выберите схему в базе данных из выпадающего списка поля <guilabel>Schema</guilabel>; для выбора схемы по умолчанию нажмите кнопку <guibutton>Default</guibutton>;</para>
           </listitem>
           <listitem>
             <para>нажмите кнопку <guibutton>Next</guibutton>;</para>
@@ -47,7 +47,7 @@
         <para>введите название новой диаграммы структуры <acronym>БД</acronym> в поле <guilabel>Name</guilabel> и  нажмите <guibutton>Finish</guibutton> для создания нового элемента приложения или <guibutton>Cancel</guibutton> для отмены.</para>
       </listitem>
     </itemizedlist>
-    <para>После создание  диаграммы структуры <acronym>БД</acronym> сформируйте структуры таблиц. Для этого определите состав полей и
+    <para>После создания  диаграммы структуры <acronym>БД</acronym> сформируйте структуры таблиц. Для этого определите состав полей и
       задайте их описание. После определения структуры таблиц определите связи между таблицами.</para>
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_2">
@@ -55,7 +55,7 @@
     <para>Редактирование диаграммы структуры базы данных осуществляется при помощи специализированного редактора.</para>
     <para>Диаграмма БД представляет из себя визуальное представление таблиц базы, а также связей между ними. Одна диаграмма обычно включает в себя часть общей структуры базы, например, относящиеся к определенному  сегменту предметной области.  При помощи визуального редактора  осуществляется изменение структуры базы данных - добавление и удаление таблиц, связей между таблицами и индексов. Одна и та же таблица может быть представлена на нескольких диаграммах.</para>
     <para>Для навигации по диаграмме удобно использовать инспектор диаграммы. В инспекторе диаграммы таблицы и их поля представлены в виде дерева. При выделении таблицы или поля в инспекторе, происходит такое же выделение на диаграмме. Кроме того, имеется возможность взаимного позиционирования инспектора и диаграммы. </para>
-    <para>Для того, чтобы взаимно спозиционировать узел в инспекторе и диаграммы выберите пункт меню <menuchoice>
+    <para>Для того, чтобы взаимно спозиционировать узел в инспекторе и объект на диаграмме выберите пункт меню <menuchoice>
         <guimenu>Show in diagram</guimenu>
       </menuchoice> в контектсном меню узла таблицы.</para>
     <para>Для добавления на диаграмму существующей таблицы выполните следующие действия:
@@ -75,17 +75,17 @@
         <para>выберите таблицу из списка в диалоге выбора таблицы, при необходимости воспользуйтесь поиском, нажав на кнопку <guibutton>Find</guibutton>;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>OK</guibutton> для добавления таблицы или <guibutton>Cancel</guibutton> для отмены.</para>
+        <para>нажмите кнопку <guibutton>OK</guibutton> для добавления таблицы или <guibutton>Cancel</guibutton> для отмены;</para>
       </listitem>
       <listitem>
-        <para>при необходимости передвиньте таблицу на диаграмме в нужное  место.</para>
+        <para>при необходимости передвиньте таблицу на диаграмме в нужное  место;</para>
       </listitem>
       <listitem>
         <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов <application>Platypus Application Designer</application> или нажав сочетание клавиш <keycombo>
             <keycap>Ctrl</keycap>
             <keycap>Shift</keycap>
             <keycap>S</keycap>
-          </keycombo>.</para>
+          </keycombo>;</para>
       </listitem>
     </itemizedlist>
     <para>Для создания новой таблицы и добавления её  на диаграмму  выполните следующие действия:
@@ -99,13 +99,13 @@
           </menuchoice>      на панели инструментов редактора;</para>
       </listitem>
       <listitem>
-        <para>введите имя новой таблицы в диалоге:</para>
+        <para>введите имя новой таблицы в диалоге;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>OK</guibutton> для добавления таблицы или <guibutton>Cancel</guibutton> для отмены.</para>
+        <para>нажмите кнопку <guibutton>OK</guibutton> для добавления таблицы или <guibutton>Cancel</guibutton> для отмены;</para>
       </listitem>
       <listitem>
-        <para>при необходимости передвиньте таблицу на диаграмме в нужное  место.</para>
+        <para>при необходимости передвиньте таблицу на диаграмме в нужное  место;</para>
       </listitem>
       <listitem>
         <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов Platypus Application Designer или нажав сочетание клавиш <keycombo>
@@ -116,7 +116,7 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>Для новой таблицы будет автоматически будет создано  числовое поле идентификатора и ограничение первичного ключа.</para>
+      <para>Для новой таблицы будет автоматически  создано  числовое поле идентификатора и ограничение первичного ключа.</para>
     </note>
     <para>Для удаления таблицы из  диаграммы выполните следующие действия:</para>
     <itemizedlist>
@@ -124,7 +124,10 @@
         <para>выберите таблицу на диаграмме;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Delete</guibutton>        на панели инструментов редактора; на диалоге подтверждения удаления нажимите кнопку <guibutton>Delete from diagram</guibutton> для того, чтобы удалить таблицу из диаграммы (только из диаграммы, а не из <acronym>БД</acronym>) кнопку <guibutton>Drop table</guibutton>   для того, чтобы удалить таблицу из базы данных (при этом таблица будет уничтожена физически); нажимите кноку <guibutton>Cancel</guibutton> для отмены удаления;</para>
+        <para>нажмите кнопку <guibutton>Delete</guibutton>        на панели инструментов редактора;</para>
+      </listitem>
+      <listitem>
+        <para>на диалоге подтверждения удаления нажимите кнопку <guibutton>Delete from diagram</guibutton> для того, чтобы удалить таблицу из диаграммы (только из диаграммы, а не из <acronym>БД</acronym>) кнопку <guibutton>Drop table</guibutton>   для того, чтобы удалить таблицу из базы данных (при этом таблица будет уничтожена физически) или кноку <guibutton>Cancel</guibutton> для отмены удаления;</para>
       </listitem>
       <listitem>
         <para>сохраните элемент приложения нажав кнопку <guibutton>Save All</guibutton> на  панели инструментов <application>Platypus Application Designer</application> или нажав сочетание клавиш <keycombo>
@@ -140,10 +143,10 @@
         <para>выберите таблицу на диаграмме;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Create new field/parameter</guibutton>    на панели инструментов вкладки редактора полей таблицы - будет создано поле с типом по-умолчанию и автоматически сгенерированным именем;</para>
+        <para>нажмите кнопку <guibutton>Create new field/parameter</guibutton>    на панели инструментов вкладки редактора полей таблицы - будет создано поле с типом по умолчанию и автоматически сгенерированным именем;</para>
       </listitem>
       <listitem>
-        <para>измените  следующие поля в, для этого выберети узел поля среди дочерних узлов таблицы в инспекторе модели данных и измените параметры поля в окне редактирования  свойств <guilabel>Properties</guilabel>:</para>
+        <para>измените свойства поля таблицы, для этого выберети узел поля среди дочерних узлов таблицы в инспекторе модели данных и измените свойства в окне редактирования  свойств <guilabel>Properties</guilabel>:</para>
       </listitem>
     </itemizedlist>
     <para>Свойства поля таблицы:</para>
@@ -155,10 +158,10 @@
         <para><guilabel>Description</guilabel> - описание поля;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type</guilabel> - выберите из выпадающего списка тип поля;</para>
+        <para><guilabel>Type</guilabel> - тип данных;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type Name</guilabel> - имя типа структуры данных, поле доступно для ввода если выбран тип поля Structure;</para>
+        <para><guilabel>Type Name</guilabel> - имя типа структуры данных, поле доступно для ввода если выбран тип данных <parameter>STRUCT</parameter>;</para>
       </listitem>
       <listitem>
         <para><guilabel>Size</guilabel> - длина поля;</para>
@@ -175,7 +178,7 @@
     </itemizedlist>
     <informaltable>
       <blockinfo>
-        <title>Типы полей в Platypus</title>
+        <title>Типы данный полей в Platypus</title>
       </blockinfo>
       <textobject>
         <para>Параметры режима развертывания</para>
@@ -258,26 +261,26 @@
         <para>выберите поле в таблице на диаграмме;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Delete</guibutton>        на панели инструментов редактира полей или нажмите сочетание клавиш <keycombo>
+        <para>нажмите кнопку <guibutton>Delete</guibutton>        на панели инструментов редактора полей или нажмите сочетание клавиш <keycombo>
             <keycap>Ctrl</keycap>
             <keycap>Delete</keycap>
           </keycombo>;</para>
       </listitem>
     </itemizedlist>
-    <para>Для того, чтобы  редактировать индексы таблицы используйте инспектор: раскройте узел соответсвующей таблицы, и используйте узел <guilabel>Indexes</guilabel>.</para>
+    <para>Для того, чтобы  редактировать индексы таблицы, используйте инспектор: раскройте узел соответсвующей таблицы, и используйте узел <guilabel>Indexes</guilabel>.</para>
     <para>Для того, чтобы добавить новый индекс:</para>
     <itemizedlist>
       <listitem>
         <para>выберите пункт меню <guimenuitem>Add index</guimenuitem> контекстного меню узла <guilabel>Indexes</guilabel> соответсвующей таблицы;</para>
       </listitem>
       <listitem>
-        <para>в диалоге выбора колонок таблицы выберите необходимые поля и нажмите кноку для добавления <guibutton>OK</guibutton> или <guibutton>Cancel</guibutton> для отмены;</para>
+        <para>в диалоге выбора колонок таблицы выберите необходимые поля и нажмите кнопку для добавления <guibutton>OK</guibutton> или <guibutton>Cancel</guibutton> для отмены;</para>
       </listitem>
       <listitem>
         <para>при необходимости удалите поле из индекса  используя пункт <guimenuitem>Delete</guimenuitem> контекстного меню колонки индекса;</para>
       </listitem>
       <listitem>
-        <para>при необходимости измените порядок  полей в индексе используя пункты <guimenuitem>Move up</guimenuitem> и <guimenuitem>Move down</guimenuitem> контектсного меню контекстного меню колонки индектса;</para>
+        <para>при необходимости измените порядок  полей в индексе используя пункты <guimenuitem>Move up</guimenuitem> и <guimenuitem>Move down</guimenuitem>  контекстного меню колонки индекса;</para>
       </listitem>
       <listitem>
         <para>при необходимости измените состояние флажка <guilabel>Ascending</guilabel> на панели свойств для колонки индекса, задав порядок сортировки по возрастанию или убыванию;</para>
@@ -319,7 +322,7 @@
         <para>перетащите мышкой поле одной таблицы на поле-первичный ключ другой таблицы; </para>
         <para>после этого в базе данных будет создан внешний ключ; визуально связь будет представлена линией со стрелкой  между полями таблиц;</para>
         <important>
-          <para>Типы полей, связанных внешним ключом должны быть одинаковыми. Для создания древовидной структуры (унарной связи) перетащите мышкой поле таблицы на поле - первичный ключ той же самой таблицы; </para>
+          <para>Типы полей, связанные внешним ключом, должны быть одинаковыми. Для создания древовидной структуры (унарной связи) перетащите мышкой поле таблицы на поле - первичный ключ той же самой таблицы; </para>
         </important>
       </listitem>
       <listitem>
@@ -379,10 +382,13 @@
         <para>перейдите на вкладку <guilabel>Database schema</guilabel>;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton> Find</guibutton> чтобы открыть диалог поиска по диаграмме;</para>
+        <para>нажмите кнопку <guibutton> Find</guibutton> для того, чтобы открыть диалог поиска по диаграмме;</para>
       </listitem>
       <listitem>
-        <para>введите строку поиска; выберите  поля по которым будет осуществляются поиск: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, а также установите флажки опций: <guilabel>Whole words</guilabel> - для поиска целых слов, <guilabel>Match case</guilabel> - для поиска с учетом регистра символов; </para>
+        <para>введите строку поиска; </para>
+      </listitem>
+      <listitem>
+        <para>выберите  поля по которым будет осуществляются поиск: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, а также установите флажки опций: <guilabel>Whole words</guilabel> - для поиска целых слов, <guilabel>Match case</guilabel> - для поиска с учетом регистра символов; </para>
       </listitem>
       <listitem>
         <para>нажмите кнопки <guibutton>Next</guibutton> и <guibutton>Previous</guibutton> для перехода к следующей найденной сущности; </para>
