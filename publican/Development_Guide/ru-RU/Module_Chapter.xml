@@ -1144,14 +1144,14 @@ for (var i = 0; i &lt; documents.length; i++) {
       <note>
         <para>В новых проектах не рекомендуется использовать устаревший API доступа к данным.</para>
       </note>
-      <para>Среди всех данных сущности, один объект может быть объектом по умолчанию. Свойства объекта по умолчанию доступны как одноименные свойства самой  сущности: </para>
+      <para>Среди всех данных сущности, один объект (экземпляр) может быть текущим объектом по умолчанию. Свойства объекта по умолчанию доступны как одноименные свойства самой  сущности: </para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable><replaceable>.propName</replaceable></programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
         </varname> - объект соответствующей сущности, <varname>
           <replaceable>propName</replaceable>
         </varname> - свойство, одноименное свойству объекта по умолчанию.</para>
-      <para>Объект по умолчанию определяется положением курсора в массиве данных сущности. Кроме указания на какой-либо объект, курсор может указывать на позицию <emphasis>перед первым</emphasis> и <emphasis>после последнего</emphasis>. При этом для сущности не будет определен объект по умолчанию.</para>
+      <para>Текущий объект по умолчанию определяется положением курсора в массиве данных сущности. Кроме указания на какой-либо объект, курсор может указывать на позицию <emphasis>перед первым</emphasis> и <emphasis>после последнего</emphasis>. При этом для сущности не будет определен объект по умолчанию.</para>
       <para>После загрузки данных и/или фильтрации курсор устанавливается на первый объект массива данных сущности. </para>
       <para>Для управления перемещением курсора по массиву объектов  используйте методы сущности <methodname>beforeFirst</methodname>, <methodname>afterLast</methodname>, <methodname>first</methodname>, <methodname>next</methodname>, <methodname>prev</methodname>, <methodname>last</methodname>  и <methodname>pos</methodname>. </para>
       <informaltable>
