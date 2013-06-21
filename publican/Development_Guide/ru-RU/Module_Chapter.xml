@@ -1250,13 +1250,13 @@ for (var i = 0; i &lt; documents.length; i++) {
         </tgroup>
       </informaltable>
       <para>Свойство <varname>rowIndex</varname> можно использовать и для установки курсора в заданную позицию.</para>
-      <para>В следующем примере использованы функции управления перемещением курсора и реализован перебор всех объектов  сущности documents  и вывод в лог имен документов:</para>
+      <para>В следующем примере использованы функции управления перемещением курсора и реализован перебор всех объектов  сущности <varname>documents</varname>  и вывод в лог имен документов:</para>
       <programlisting language="JavaScript">documents.requery();//Cursor is on the first object
 while (!documents.eof) { 
   Logger.info(documents.NAME);
   documents.next();
 }</programlisting>
-      <para>Для того, чтобы проверить наличие данных в массиве данных сущности используйте свойство empty сущности:</para>
+      <para>Для того, чтобы проверить наличие данных в массиве данных сущности используйте свойство <varname>empty</varname> сущности:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.empty</programlisting>
       <para>Свойство <varname>empty</varname> возвращает <literal>true</literal> в случае если массив данных сущности пуст и <literal>false</literal> если он содержит объекты, например, следующий фрагмент кода выводит сообщение в лог в случае если масив данных сущности <literal>documents</literal> пуст:</para>
       <programlisting language="JavaScript">documents.empty &amp;&amp; Logger.info(&apos;Documents is empty.&apos;);</programlisting>
