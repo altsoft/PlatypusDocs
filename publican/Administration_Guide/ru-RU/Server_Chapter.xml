@@ -148,8 +148,8 @@
       </tgroup>
     </table>
     <para>Пример команды запуска сервера приложений Platypus:</para>
-    <programlisting>java -cp Server.jar com.eas.server.ServerMain -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema -loglevel INFO -log serverlog.log -iface 0.0.0.0:8500 -protocols 8500:platypus</programlisting>
+    <programlisting>java -cp Server.jar com.eas.server.ServerMain -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -loglevel INFO -log serverlog.log -iface 0.0.0.0:8500 -protocols 8500:platypus</programlisting>
     <para>Пример команды запуска сервера приложений с использованием параметра <parameter>-jar</parameter>:    </para>
-    <programlisting>java -jar Server.jar -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema -loglevel INFO -log serverlog.log</programlisting>
+    <programlisting>java -jar Server.jar -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -loglevel INFO -log serverlog.log</programlisting>
   </section>
 </chapter>
