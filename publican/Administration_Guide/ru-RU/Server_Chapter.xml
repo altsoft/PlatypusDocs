@@ -139,16 +139,10 @@
           </row>
           <row>
             <entry>
-              <parameter>-acceptorTask</parameter>
-              <replaceable>MODULE_NAME</replaceable>
+              <parameter>-tasks </parameter>
+              <replaceable>MODULES_NAME</replaceable>
             </entry>
-            <entry>Серверный модуль для обработки входящих данных. У модуля должна быть определена функция <methodname>received(data)</methodname></entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-backgroundTask <replaceable>MODULE_NAME</replaceable>, <replaceable>MODULE_NAME</replaceable></parameter>
-            </entry>
-            <entry>Серверные модули, который будут запущены в фоновом потоке при старте сервера</entry>
+            <entry>Список серверных модулей (через запятую без пробелов) для обработки входящих данных и фоновых задач. У модуля обработки входящих данных должна быть определена функция <methodname>received(data)</methodname>. Модули обработки входящих данных могут быть как с аннотацией <property>@stateless</property>, так и без нее. У модулей фоновых задач не должно быть аннотации <property>@stateless. При старте сервера, модули с этой аннотацией будут пропущены.</property></entry>
           </row>
         </tbody>
       </tgroup>
