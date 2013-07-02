@@ -67,10 +67,7 @@
         <para>задайте параметр инициализации с именем <parameter>url</parameter> и значением имени JNDI ресурса источника данных  JDBC, например, <literal>java:/jdbc/main</literal>.</para>
       </listitem>
       <listitem>
-        <para>задайте параметр инициализации с именем <parameter>dialect</parameter> и значением имени драйвера базы данных, например,  <literal>Oracle</literal>.</para>
-      </listitem>
-      <listitem>
-        <para>задайте параметр инициализации с именем <parameter>schema</parameter> и значением схемы БД по умолчанию, например,   <literal>test</literal>.</para>
+        <para>задайте необязательный параметр инициализации с именем <parameter>dbschema</parameter> и значением схемы БД по умолчанию, например,   <literal>test</literal>.</para>
       </listitem>
       <listitem>
         <para>добавьте ссылку на  ресурс источика данных:</para>
