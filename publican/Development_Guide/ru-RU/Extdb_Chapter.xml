@@ -17,7 +17,7 @@
         <para>выберите пункт меню <guimenuitem>New</guimenuitem> контекстного меню родительского каталога или выделите родительский каталог и выберите пункт <guimenuitem>New Filе</guimenuitem> главного меню или нажмите кнопку <guibutton>New File</guibutton> на панели инструментов или воспользуйтесь &quot;горячей&quot; клавишей;</para>
       </listitem>
       <listitem>
-        <para>выберите тип <guilabel>External database</guilabel> connection из контекстного меню или на первом шаге мастера <menuchoice>
+        <para>выберите тип <guilabel>External database connection</guilabel> из контекстного меню или на первом шаге мастера <menuchoice>
             <guimenu>Choose file type</guimenu>
             <guisubmenu>Platypus application elements</guisubmenu>
             <guimenuitem>External database connection</guimenuitem>

@@ -355,7 +355,7 @@
         <para><application>Git</application>;</para>
       </listitem>
       <listitem>
-        <para><application>Mercurial</application>;</para>
+        <para><application>Mercurial</application>.</para>
       </listitem>
     </itemizedlist>
     <para>Для доступа к возможностям данных систем контроля версий используйте пункт <guimenuitem>Team</guimenuitem> глобального меню и/или подменю <guisubmenu>Versioning</guisubmenu> контекстного меню  проекта.</para>
