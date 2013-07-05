@@ -968,7 +968,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
     <para>При разработке приложения  выполните следующие типовые операции с данными базы данных: </para>
     <itemizedlist>
       <listitem>
-        <para>задайте параметры модели данных -  данные сущностей модели обновятся автоматически;</para>
+        <para>задайте параметры модели данных -  данные связанных сущностей модели обновятся автоматически;</para>
       </listitem>
       <listitem>
         <para>получите доступ к данным для дальнейшей обработки, анализа и т.д.;</para>
@@ -991,7 +991,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
     </itemizedlist>
     <section>
       <title>Параметры модели данных</title>
-      <para>Для того, чтобы загрузить данные из базы данных используйте параметры модели данных.</para>
+      <para>Для того, чтобы загрузить  из БД данные, выбранные по  специфическим критериям, используйте параметры модели данных.</para>
       <para>Параметры модели данных в программном коде представлены переменными модуля с именами, заданными при конфигурировании модели данных:</para>
       <programlisting language="JavaScript"><replaceable>paramName</replaceable> = newValue;</programlisting>
       <para>где <varname>
@@ -1004,12 +1004,12 @@ XML.ignoreProcessingInstructions = false;</programlisting>
       <programlisting language="JavaScript">params.<replaceable>paramName</replaceable> = newValue;</programlisting>
       <para>где <varname>
           <replaceable>paramName</replaceable>
-        </varname> - свойство соответствующее параметру, <literal>newValue</literal> - новое значение параметра (литерал, переменная или выражение). </para>
+        </varname> - свойство, соответствующее параметру, <literal>newValue</literal> - новое значение параметра (литерал, переменная или выражение). </para>
       <para>Ниже представлен фрагмент кода, исполнение которого приведет к загрузке новых данных сущностей модели, аналогично фрагменту приведенному выше:</para>
       <programlisting language="JavaScript">params.documentID = 1; // Changes data model parameter</programlisting>
-      <para>Каждое изменение любого параметра модели данных ведет к автоматическому обновлению данных сущностей модели.</para>
+      <para>Каждое изменение любого параметра модели данных ведет к автоматическому обновлению данных связанных с ним прямо или косвенно сущностей модели.</para>
       <important>
-        <para>Обновление данных в модели произойдет только если значение параметра модели изменилось. Для принудительного обновления данных сущности используйте функцию <methodname>requery</methodname> сущности - см. главу Модель.</para>
+        <para>Обновление данных в модели произойдет только если значение параметра модели изменилось. Для принудительного обновления данных сущности используйте функцию ее метод  <methodname>requery</methodname> - см. главу Модель.</para>
       </important>
       <para> Часто бывает необходимо изменить несколько параметров и только после этого обновить данные. Для этого используйте функции <methodname>beginUpdate</methodname> и <methodname>endUpdate</methodname> объекта <varname>params</varname>:</para>
       <programlisting language="JavaScript">params.beginUpdate();
@@ -1051,17 +1051,17 @@ try {
         </varname> - сущность, <varname>
           <replaceable>paramName</replaceable>
         </varname> - свойство соответствующего параметра.</para>
-      <para>Для того, чтобы установить значения параметра присвойте ему новое значение:</para>
+      <para>Для того, чтобы установить значения параметра, присвойте ему новое значение:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
-      <para>где, <literal>newValue</literal> - новое значение параметра.</para>
+      <para>где <literal>newValue</literal> - новое значение параметра.</para>
       <note>
         <para>Установка нового значения параметра сущности не приводит к автоматическому обновлению её данных.</para>
       </note>
-      <para>Для обновления данных сущности и связанных с ней сущностей, вызовите функцию <methodname>execute</methodname>, при этом новые данные будут загружены только если значения параметров сущности изменились: </para>
+      <para>Для обновления данных сущности и связанных с ней сущностей вызовите функцию <methodname>execute</methodname>, при этом новые данные будут загружены только если значения параметров сущности изменились: </para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.execute();</programlisting>
       <para>Для принудительного обновления данных сущности и связанных с ней сущностей используйте функцию <methodname>requery</methodname>:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.requery([aCallback]);</programlisting>
-      <para>Параметр <parameter>aCallback</parameter> используется при разработке клиентского кода, т.к. d клиентах модель работает в асинхронном режиме. Функция переданная через параметр <parameter>aCallback</parameter> будет вызвана когда запрос исполнится, а данные придут из сети.</para>
+      <para>Параметр <parameter>aCallback</parameter> используется при разработке клиентского кода, т.к. в клиентах модель работает в асинхронном режиме. Функция, переданная в этом параметре, будет вызвана когда запрос в БД исполнится, и его результаты придут по сети на клиент.</para>
       <important>
         <para>Обработчик события <code>onRequeried</code> сущности будет вызван  в любом случае, независимо от способа вызова <code>requery</code>.</para>
       </important>
@@ -1107,13 +1107,13 @@ for (var i = 0; i &lt; documents.length; i++) {
       <note>
         <para>В новых проектах не рекомендуется использовать устаревший API доступа к данным.</para>
       </note>
-      <para>В случае, если между двумя сущностями установлена связь внешнего ключа к экземплярам данных связанной сущности можно получить доступ используя свойство экземпляра данных, одноименное со связаной сущностью. Если сущность  содержит  внешний ключ, то соответсвующее свойство указывает на связаный экземпляр данных в связанной сущности:</para>
+      <para>В случае, если между двумя сущностями установлена связь внешнего ключа, к экземплярам данных связанной сущности можно получить доступ, используя свойство экземпляра данных, одноименное со связаной сущностью. Если сущность  содержит  внешний ключ, то соответсвующее свойство указывает на связаный экземпляр данных в связанной сущности:</para>
       <programlisting language="JavaScript">var propValue = <replaceable>entityName1</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName2</replaceable>.<replaceable>propName</replaceable></programlisting>
       <para>где  <varname>
           <replaceable>entityName1</replaceable>
         </varname> - сущность содержащая ссылку внешнего ключа, <literal>
           <replaceable>i</replaceable>
-        </literal> - индекс элемента массива с диапазоном <code>0..<replaceable>entityName</replaceable>.length - 1</code>, <replaceable>entityName2</replaceable> - сущность содержащая поле на которе ссылается внешний ключ, <varname>
+        </literal> - индекс элемента массива с диапазоном <code>0..<replaceable>entityName</replaceable>.length - 1</code>, <replaceable>entityName2</replaceable> - сущность содержащая поле, на которе ссылается внешний ключ, <varname>
           <replaceable>propName</replaceable>
         </varname> - свойство объекта сущности, одноименное с  полем результатов запроса.</para>
       <para>Eсли сущность содержит поле, на которое ссылается внешний ключ, то свойство содержит массив объектов связанной сущности:</para>
@@ -1122,12 +1122,12 @@ for (var i = 0; i &lt; documents.length; i++) {
           <replaceable>entityName1</replaceable>
         </varname> - сущность содержащая ссылку внешнего ключа, <literal>
           <replaceable>i</replaceable>
-        </literal> - индекс элемента массива с диапазоном <code>0..<replaceable>entityName</replaceable>.length - 1</code>,  <replaceable>entityName2</replaceable> - сущность содержащая поле на которе ссылается внешний ключ, <literal>
+        </literal> - индекс элемента массива с диапазоном <code>0..<replaceable>entityName</replaceable>.length - 1</code>,  <replaceable>entityName2</replaceable> - сущность содержащая поле на которое ссылается внешний ключ, <literal>
           <replaceable>j</replaceable>
         </literal> - индекс элемента массива связанных объектов, <varname>
           <replaceable>propName</replaceable>
         </varname> - свойство объекта сущности, одноименное с  полем результатов запроса.</para>
-      <para>Среди всех данных сущности, один объект (экземпляр) может быть текущим объектом по умолчанию. Свойства объекта по умолчанию доступны как одноименные свойства самой  сущности: </para>
+      <para>Среди всех данных сущности один объект (экземпляр) может быть текущим объектом по умолчанию. Свойства объекта по умолчанию доступны как одноименные свойства самой  сущности: </para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable><replaceable>.propName</replaceable></programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
@@ -1239,22 +1239,22 @@ while (!documents.eof) {
   Logger.info(documents.NAME);
   documents.next();
 }</programlisting>
-      <para>Для того, чтобы проверить наличие данных в массиве данных сущности используйте свойство <varname>empty</varname> сущности:</para>
+      <para>Для того, чтобы проверить наличие экземпляров данных в массиве данных сущности, используйте  ее свойство <varname>empty</varname>:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.empty</programlisting>
-      <para>Свойство <varname>empty</varname> возвращает <literal>true</literal> в случае если массив данных сущности пуст и <literal>false</literal> если он содержит объекты, например, следующий фрагмент кода выводит сообщение в лог в случае если масив данных сущности <literal>documents</literal> пуст:</para>
+      <para>Свойство <varname>empty</varname> возвращает <literal>true</literal> в случае если массив данных сущности пуст, и <literal>false</literal>, если он содержит объекты. Например, следующий фрагмент кода выводит сообщение в лог в случае, если масив данных сущности <literal>documents</literal> пуст:</para>
       <programlisting language="JavaScript">documents.empty &amp;&amp; Logger.info(&apos;Documents is empty.&apos;);</programlisting>
     </section>
     <section>
       <title>Поиск в данных</title>
-      <para>В этой главе рассмотрены операции  которые могут осуществляются после загрузки данных сущности. Данные операции производятся внутри модели и не вызывают новых запросов к <acronym>БД</acronym>.</para>
-      <para>Для того, чтобы найти объект по его идентификатору используйте функцию <methodname>findById</methodname> сущности, передав ей ключ поиска:</para>
+      <para>В этой главе рассмотрены операции  которые могут осуществляться после загрузки данных сущности. Данные операции производятся внутри модели и не вызывают новых запросов к <acronym>БД</acronym>.</para>
+      <para>Для того, чтобы найти объект по его идентификатору, используйте функцию <methodname>findById</methodname> сущности, передав ей ключ поиска:</para>
       <programlisting language="JavaScript">var item = <replaceable>entityName</replaceable>.findById(<replaceable>idValue</replaceable>);</programlisting>
       <para>где: <varname>
           <replaceable>entityName</replaceable>
         </varname> - сущность, <literal>
           <replaceable>idValue</replaceable>
         </literal> - выражение для ключа поиска.</para>
-      <para>Если   ничего не будет найдено  функция <methodname>findById</methodname> вернет значение <literal>null</literal>.</para>
+      <para>Если   ничего не будет найдено,  функция <methodname>findById</methodname> вернет значение <literal>null</literal>.</para>
       <para>Пример кода, в котором ищется документ по его идентификатору и его название выводится  в лог:</para>
       <programlisting language="JavaScript">var documentId = 101;
 var document = documents.findById(documentId);
@@ -1278,7 +1278,7 @@ if (document) {
       <note>
         <para>Функции <methodname>findById</methodname> и <methodname>find</methodname> ищут объекты пользуясь предварительно подготовленными хэшами массивов данных по соответствующим свойствам и не перебирают все объекты. Поэтому рекомендуется логически разделять код по поиску и изменению данных, т.к. при любом изменении данных, подготовленные хэши маркируются как устаревшие и при следующей попытке поиска перестраиваются. </para>
       </note>
-      <para>Для того, чтобы получить объект-свойство сущности используйте метаданные сущности:</para>
+      <para>Для того, чтобы получить объект-свойство сущности используйте, метаданные сущности:</para>
       <programlisting language="JavaScript">var field = <replaceable>entityName</replaceable>.md.<replaceable>propName</replaceable>;</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
@@ -1306,8 +1306,8 @@ for(var i=0; i&lt;foundDocuments.size(); i++) {
     </section>
     <section>
       <title>Фильтрация данных</title>
-      <para>В этой главе рассмотрены операции  которые могут осуществляются после загрузки данных сущности. Данные операции производятся внутри модели и не вызывают новых запросов к <acronym>БД</acronym>.</para>
-      <para>Для каждой сущности можно задать правила фильтрации. Правила фильтрации будут применяться каждый раз при загрузке данных и при этом данные не прошедшие фильтрацию не теряются, однако становятся невидимыми для прикладного кода.</para>
+      <para>В этой главе рассмотрены операции  которые могут осуществляться после загрузки данных сущности. Данные операции производятся внутри модели и не вызывают новых запросов к <acronym>БД</acronym>.</para>
+      <para>Для каждой сущности можно задать правила фильтрации. Правила фильтрации будут применяться каждый раз при загрузке данных. При этом данные не прошедшие фильтрацию не теряются, однако становятся невидимыми для прикладного кода.</para>
       <para>Для того, чтобы создать фильтр используйте функцию <methodname>createFiter</methodname> сущности передав ей в качестве параметров свойства сущности по которым должна выполняться фильтрация:</para>
       <programlisting language="JavaScript">var filter = <replaceable>entityName</replaceable>.createFilter(
   <replaceable>entityName</replaceable>.md.<replaceable>prop1</replaceable>,
@@ -1320,14 +1320,14 @@ for(var i=0; i&lt;foundDocuments.size(); i++) {
       <note>
         <para>Подробнее о доступе к метаданным читайте в главе &quot;Доступ к метаданным&quot;.</para>
       </note>
-      <para>Для того, чтобы применить фильтр к  данным используйте функцию apply фильтра передав в неё значения по которым должна происходить фильтрация в том же порядке в каком были заданны поля:</para>
+      <para>Для того, чтобы применить фильтр к  данным, используйте функцию <methodname>apply</methodname> фильтра передав в неё значения по которым должна происходить фильтрация в том же порядке в каком были заданны поля:</para>
       <programlisting language="JavaScript">filter.apply(
   filterValue1,
   filterValue2,
   //...
   filterValueN);</programlisting>
-      <para>где <literal>filterValueN</literal> - значение по которому будет происходить фильтрация соответствующего свойства.</para>
-      <para>Для того, чтобы отменить действие фильтра вызовите у него  функцию <methodname>cancel</methodname>:</para>
+      <para>где <literal>filterValueN</literal> - значение, по которому будет происходить фильтрация соответствующего свойства.</para>
+      <para>Для того, чтобы отменить действие фильтра, вызовите у него  функцию <methodname>cancel</methodname>:</para>
       <programlisting language="JavaScript">filter.cancel();</programlisting>
       <important>
         <para>Для каждой сущности в один момент времени можно задать только один фильтр. При применении фильтра к уже отфильтрованному набору данных старый фильтр замещается новым.</para>
@@ -1352,9 +1352,9 @@ filter.cancel();</programlisting>
     </section>
     <section>
       <title>Сортировка данных</title>
-      <para>В этой главе рассмотрены операции  которые могут осуществляются после загрузки данных сущности. Данные операции производятся внутри модели и не вызывают новых запросов к <acronym>БД</acronym>.</para>
-      <para>Данные сущности можно сортировать по нескольким полям используя правила сортировки.</para>
-      <para>Для задания правил сортировки создайте объекты сортировки. Для этого используйте функцию <methodname>createSorting</methodname> сущности. Передайте этой функции пары свойство-порядок сортировки:</para>
+      <para>В этой главе рассмотрены операции,  которые могут осуществляться после загрузки данных сущности. Данные операции производятся внутри модели и не вызывают новых запросов к <acronym>БД</acronym>.</para>
+      <para>Данные сущности можно сортировать по нескольким полям, используя правила сортировки.</para>
+      <para>Для задания правил сортировки создайте объекты сортировки. Для этого используйте функцию <methodname>createSorting</methodname> сущности. Передайте этой функции в качестве параметов пары, определяющие свойство по котрому должна выполняться сортировка и ее порядок:</para>
       <programlisting language="JavaScript">var sorting = <replaceable>entityName</replaceable>.createSorting(
   <replaceable>entityName</replaceable>.md.<replaceable>prop1</replaceable>, <replaceable>ascDesc1</replaceable>,
   <replaceable>entityName</replaceable>.md.<replaceable>prop2</replaceable>, <replaceable>ascDesc2</replaceable>,
@@ -1362,23 +1362,25 @@ filter.cancel();</programlisting>
   <replaceable>entityName</replaceable>.md.<replaceable>propN</replaceable>, <replaceable>ascDescN</replaceable>);</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
-        </varname> - сущность, <varname><replaceable>entityName</replaceable>.md.<replaceable>propN</replaceable></varname> - <classname>Object</classname>, свойство по которому будет выполнятся сортировка данных той же сущности у которой вызывается функция <methodname>createSorting</methodname>; <literal> ascDescN</literal> - <classname>Boolean</classname>, порядок сортировки по-возрастанию - <literal>true</literal> или по-убыванию - <literal>false</literal>.</para>
-      <para>Для того, чтобы выполнить сортировку данных используйте функцию sort сущности передав ей в качестве параметра объект сортировки:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.sort(sorting);</programlisting>
-      <para>где <varname>sorting</varname> - объект сортировки.</para>
+        </varname> - сущность, <varname><replaceable>entityName</replaceable>.md.<replaceable>propN</replaceable></varname> - <classname>Object</classname>, свойство по которому будет выполнятся сортировка данных той же сущности у которой вызывается функция <methodname>createSorting</methodname>; <literal> ascDescN</literal> - <classname>Boolean</classname>, порядок сортировки по возрастанию - <literal>true</literal> или по убыванию - <literal>false</literal>.</para>
+      <para>Для того, чтобы выполнить сортировку данных, используйте функцию <methodname>sort</methodname> сущности, передав ей в качестве параметра объект сортировки:</para>
+      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.sort(<replaceable>sorter</replaceable>);</programlisting>
+      <para>где <varname>
+          <replaceable>sorter</replaceable>
+        </varname> - объект сортировки.</para>
       <para>Пример сортировки данных сущности по имени и  обратной сортировки по флагу:</para>
-      <programlisting language="JavaScript">//Create sorting
+      <programlisting language="JavaScript">//Create sorter
 var sorter = documents.createSorting(
   documents.md.NAME, true,
   documents.md.CHECKED, false);
 
-//Do sort
+//Sort objects
 entity1.sort(sorter);</programlisting>
-      <para>Для задания специфической логики сравнения используйте альтернативный вариант функции <methodname>sort</methodname>. Для этого передайте в качестве параметра функцию реализующую сравнение двух элементов:</para>
+      <para>Для задания специфической логики сравнения используйте альтернативный вариант функции <methodname>sort</methodname>. Для этого передайте в качестве параметра функцию, реализующую сравнение двух элементов:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.sort(sortingFunction);</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
-        </varname> - сущность, <methodname>sortingFunction</methodname> - <classname>Function</classname>, функция принимающая два объекта в качестве параметров и  сравнивающая их. Функция сравнения возвращает отрицательное целое число если первый объект меньше второго, 0 - если они равны и положительное целое число если первый объект  больше второго.</para>
+        </varname> - сущность, <methodname>sortingFunction</methodname> - <classname>Function</classname>, функция принимающая два объекта в качестве параметров и  сравнивающая их. Функция сравнения возвращает отрицательное целое число, если первый объект меньше второго, 0 - если они равны и положительное целое число, если первый объект  больше второго.</para>
       <para>В следующем примере производится  сортировка данных сущности с использованием анонимной функции сравнения. Сортировка осуществляется по длине имени документа:</para>
       <programlisting language="JavaScript">documents.sort(function(doc1, doc2) {
   var length1 = doc1.NAME != null ? doc1.NAME.length : 0;
@@ -1396,30 +1398,18 @@ entity1.sort(sorter);</programlisting>
     </section>
     <section>
       <title>Сохранение данных в БД</title>
-      <para>Модель данных в Platypus обеспечивает автоматическое отслеживание изменений в данных. Данные могут сохранятся только в рамках всей модели.</para>
+      <para>Модель данных в Platypus обеспечивает автоматическое отслеживание изменений в данных. Данные могут сохраняться только в рамках всей модели.</para>
       <para>Для изменения, вставки или удаления данных выполните следующие действия: </para>
       <itemizedlist>
         <listitem>
-          <para>измените вставьте или удалите объект из данных сущности;</para>
+          <para>измените, вставьте или удалите объект из данных сущности;</para>
         </listitem>
         <listitem>
-          <para>вызовите метод save у модели.</para>
-        </listitem>
-      </itemizedlist>
-      <para>Для того, чтобы изменить объект сущности:</para>
-      <itemizedlist>
-        <listitem>
-          <para>вставьте новый объект в данные сущности;</para>
-        </listitem>
-        <listitem>
-          <para>измените значения свойств вставленного объекта при необходимости;</para>
-        </listitem>
-        <listitem>
-          <para>вызовите метод save у модели данных.</para>
+          <para>вызовите метод <methodname>save</methodname> у модели.</para>
         </listitem>
       </itemizedlist>
       <para>Информацию по загрузке данных, фильтрации и поиску смотрите в главах &quot;Данные сущностей&quot;, &quot;Фильтрация и Поиск в данных&quot;.</para>
-      <para>Для того, чтобы изменить объект по умолчанию - объект на который указывает курсор - измените соответствующее свойство сущности:</para>
+      <para>Измените соответствующее свойство сущности для того, чтобы изменить объект по умолчанию - объект на который указывает курсор:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable><replaceable>.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
@@ -1470,22 +1460,23 @@ if (category[0]) {
       <note>
         <para>Использование функции <methodname>insert</methodname> c парами  поле-значение является устаревшим и не рекомендовано для новых проектов.</para>
       </note>
-      <para>Вызовите функцию push для вставки нового объекта в данные сущности - эта функция является стандартной для вставки нового элемента в массив JavaScript. При необходимости передайте в функцию в качестве параметра объект JavaScript имена свойств которого соответствуют именам свойств в объектах сущности и их значения будут установлены в качестве значений свойств нового объекта:</para>
+      <para>Вызовите функцию push для вставки нового объекта в данные сущности - эта функция является стандартной для вставки нового элемента в массив JavaScript: </para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.push();</programlisting>
+      <para>При необходимости передайте в функцию в качестве параметра объект JavaScript, имена свойств которого соответствуют именам свойств в объектах сущности, и их значения будут установлены в качестве значений свойств нового объекта:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.push( {
   <replaceable>propName1</replaceable>: <replaceable>propValue1</replaceable>,
   <replaceable>propName2</replaceable>: <replaceable>propValue2 </replaceable>});</programlisting>
-      <para>Как при использовании функции insert так и при использовании <methodname>push</methodname> курсор будет установлен на новый объект. </para>
+      <para>Как при использовании функции <methodname>insert</methodname>, так и при использовании <methodname>push</methodname>, курсор будет установлен на новый объект. </para>
       <para> После вставки новый объект будет иметь следующие значения свойств:</para>
       <itemizedlist>
         <listitem>
           <para>свойству-идентификатору присваивается сгенерированное значение идентификатора, если для этого свойства значение не было задано явно при вставке; </para>
         </listitem>
         <listitem>
-          <para>свойствам входящим состав фильтра (при наличии такового) будут установлены значения соответствующих ключей фильтрации; при этом, фильтр может быть наложен фильтрующими связями модели или пользовательским кодом; </para>
+          <para>свойствам входящим в состав фильтра (при наличии такового) будут установлены значения соответствующих ключей фильтрации; при этом фильтр может быть наложен фильтрующими связями модели или пользовательским кодом; </para>
         </listitem>
         <listitem>
-          <para>свойствам входящим в пары ключ-значение будут присвоены переданные значения; </para>
+          <para>свойствам, входящим в пары ключ-значение будут присвоены переданные значения; </para>
         </listitem>
         <listitem>
           <para>остальные свойства будет иметь значение <literal>null</literal>.</para>
@@ -1509,24 +1500,24 @@ model.save();</programlisting>
         </varname> - сущность, <literal>index</literal> - индекс элемента массива данных сущности. <literal>index</literal> может принимать значение в диапазоне <code>0..<replaceable>entityName</replaceable>.length-1</code>, <literal>
           <replaceable>howMany</replaceable>
         </literal> - количество элементов которые нужно удалить.</para>
-      <para>Пример удаления удаления текущего объекта из сущности <literal>documents</literal> и из <acronym>БД</acronym>:</para>
+      <para>Пример удаления  текущего объекта из сущности <literal>documents</literal> и из <acronym>БД</acronym>:</para>
       <programlisting language="JavaScript">// Removes first element
 documents.splice(0, 1);
 model.save();</programlisting>
       <para>Для удаления всех объектов из  данных сущности используйте функцию <methodname>deleteAll</methodname> сущности:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.deleteAll();</programlisting>
-      <para>Пример удаления удаления  всех объектов из сущности <literal>documents</literal> и из <acronym>БД</acronym>:</para>
+      <para>Пример удаления   всех объектов из сущности <literal>documents</literal> и из <acronym>БД</acronym>:</para>
       <programlisting language="JavaScript">// Removes all elements
 documents.deleteAll();
 model.save();</programlisting>
-      <para>По умолчанию, вызов функции save приводит к сохранению изменений и подтверждению транзакции. Однако, в некоторых случаях требуется отложить подтверждение транзакции. Такое поведение может быть использовано при изменении данных несколькими модулями, например вызываемых друг из друга, при этом подтверждение транзакции должно быть произведено в конце операций по изменению данных.</para>
+      <para>По умолчанию вызов функции save приводит к сохранению изменений и подтверждению транзакции. Однако, в некоторых случаях требуется отложить подтверждение транзакции. Такое поведение может быть использовано при изменении данных несколькими модулями, например вызываемых друг из друга. При этом подтверждение транзакции должно быть произведено в конце операций по изменению данных.</para>
       <para>Для управления режимом транзакций модели используйте свойство <varname>commitable</varname> объекта <varname>model</varname>:</para>
       <programlisting language="JavaScript">model.commitable = false;</programlisting>
       <para>В таком режиме при вызове функции <methodname>save</methodname> изменения сохраняются в <acronym>БД</acronym>, но подтверждения транзакции не происходит.</para>
       <para>Установите для  этого свойства значение <literal>true</literal>, для того, чтобы включить подтверждение транзакции, и вызовите функцию <methodname>save</methodname> для подтверждения транзакции:</para>
       <programlisting language="JavaScript">model.commitable = true;
 model.save();// Commit all changes</programlisting>
-      <para>Вызов функции <methodname>save</methodname> может выбрасывать исключение, например при несоответствии сохраняемых данных схеме <acronym>БД</acronym>. При этом сохранения данных в <acronym>БД</acronym> не происходит. Для обработки этого исключения используйте конструкции <code>try-catch-finally</code>:</para>
+      <para>Вызов функции <methodname>save</methodname> может выбрасывать исключение, например, при несоответствии сохраняемых данных схеме <acronym>БД</acronym>. При этом сохранения данных в <acronym>БД</acronym> не происходит. Для обработки этого исключения используйте конструкции <code>try-catch-finally</code>:</para>
       <programlisting language="JavaScript">try {
   model.save();
 } catch (e) {
@@ -1536,9 +1527,9 @@ model.save();// Commit all changes</programlisting>
     </section>
     <section>
       <title>События данных сущностей</title>
-      <para>Для различных событий данных сущности,  можно задать функции-обработчики которым передаются параметры соответствующие данному событию. Для некоторых событий есть возможность отменить соответствующее действие вернув значение <literal>false</literal> из функции-обработчика.</para>
+      <para>Для различных событий данных сущности  можно задать функции-обработчики, которым передаются параметр, соответствующий информации о данном событии. Для некоторых событий есть возможность отменить соответствующее действие вернув значение <literal>false</literal> из функции-обработчика.</para>
       <note>
-        <para>Для того, чтобы задать обработчик события используйте дизайнер модели данных.</para>
+        <para>Для того, чтобы задать обработчик события, используйте дизайнер модели данных.</para>
       </note>
       <para>Список событий данных сущности приведен в таблице:</para>
       <informaltable>
@@ -1590,7 +1581,7 @@ model.save();// Commit all changes</programlisting>
               </entry>
               <entry>нет</entry>
               <entry/>
-              <entry>Вызывается после перезапроса данных сущности включая самый первый запрос данных при запуске модуля.</entry>
+              <entry>Вызывается после перезапроса данных сущности, включая самый первый запрос данных при запуске модуля.</entry>
             </row>
             <row>
               <entry>
@@ -1650,7 +1641,7 @@ function validateEmail(email) {
     <section>
       <title>Доступ к метаданным</title>
       <para>Программный код модуля имеет доступ к метаданным сущностей. Есть возможность прочитать типы, имена, описания свойств и параметров сущностей и другие метаданные.</para>
-      <para>Для того, чтобы прочитать метаданные свойств  сущности используйте её свойство md:</para>
+      <para>Для того, чтобы прочитать метаданные свойств  сущности, используйте её свойство <varname>md</varname>:</para>
       <programlisting language="JavaScript">var entityMetadata = <replaceable>entityName</replaceable>.md;</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
@@ -1778,7 +1769,7 @@ var entityMetadata = item.md;</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы получить количество свойств в сущности используйте свойство <code>length</code> объекта метаданных сущности:</para>
+      <para>Для того, чтобы получить количество свойств в сущности, используйте свойство <code>length</code> объекта метаданных сущности:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.md.length</programlisting>
       <para>К метаданным свойства можно обращаться по индексу  как к элементу массива:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.md[<varname>i</varname>]</programlisting>
@@ -1791,7 +1782,7 @@ var entityMetadata = item.md;</programlisting>
       <programlisting language="JavaScript">for (var i = 0; i &lt; documents.md.length; i++) {
   Logger.info(documents.md[i]);
 }</programlisting>
-      <para>Для того, чтобы прочитать метаданные  параметров сущности используйте свойство <varname>md</varname> объекта <varname>params</varname> модели данных или сущности:</para>
+      <para>Для того, чтобы прочитать метаданные  параметров сущности, используйте свойство <varname>md</varname> объекта <varname>params</varname> модели данных или сущности:</para>
       <programlisting language="JavaScript">var paramsMetadata = params.md;</programlisting>
       <programlisting language="JavaScript">var paramsMetadata = <replaceable>entityName</replaceable>.params.md;</programlisting>
       <para>Для того, чтобы получить доступ к метаданным конкретного параметра:</para>
@@ -1857,7 +1848,7 @@ var entityMetadata = item.md;</programlisting>
               <entry>
                 <classname>Boolean</classname>
               </entry>
-              <entry><literal>true</literal>, если поле является внешним ключем ссылающимся на другую сущьность</entry>
+              <entry><literal>true</literal>, если поле является внешним ключом, ссылающимся на другую сущьность</entry>
             </row>
             <row>
               <entry>
@@ -1934,7 +1925,7 @@ var entityMetadata = item.md;</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы получить количество параметров модели используйте свойство <code>length</code> объекта метаданных параметров модели:</para>
+      <para>Для того, чтобы получить количество параметров модели, используйте свойство <code>length</code> объекта метаданных параметров модели:</para>
       <programlisting language="JavaScript">params.md.length</programlisting>
       <para>или свойство <code>length</code> просто у параметров модели:</para>
       <programlisting language="JavaScript">params.length</programlisting>
@@ -1972,7 +1963,7 @@ var entityMetadata = item.md;</programlisting>
           <replaceable>sqlQuery</replaceable>
         </parameter> - текст запроса, <parameter>
           <replaceable>dataSourceName</replaceable>
-        </parameter> - имя источника данных   создания новой сущности модели (необязательный параметр, в случае если он не указан используется источник данных по-умолчанию). Сгенерированная сущность может быть использована для получения, добавления, изменения объектов:</para>
+        </parameter> - имя источника данных(необязательный параметр, в случае если он не указан, используется источник данных по умолчанию), для   создания новой сущности модели . Сгенерированная сущность может быть использована для получения, добавления, изменения объектов:</para>
       <programlisting language="JavaScript">var docEntity = model.createEntity(&quot;SELECT * FROM Document&quot;);
 docEntity.requery();
 
@@ -1984,14 +1975,14 @@ docEntity.foreach(function(doc) {
 //Change first document&apos;s name
 docEntity[0] &amp;&amp; docEntity[0].NAME = &quot;New document&quot;;
 model.save();</programlisting>
-      <para>Для исполнения SQL кода содержащего команды <code>INSERT</code>, <code>UPDATE</code>,  <code>DELETE</code> или <abbrev>DDL</abbrev> используйте метод сущности <methodname>executeUpdate</methodname>:</para>
+      <para>Для исполнения SQL кода содержащего команды <code>INSERT</code>, <code>UPDATE</code>,  <code>DELETE</code> или <abbrev>DDL</abbrev>, используйте метод сущности <methodname>executeUpdate</methodname>:</para>
       <programlisting language="JavaScript">var e = model.createEntity(&quot;DELETE * FROM Document d WHERE d.DOC_TYPE = 1&quot;);
 e.executeUpdate();</programlisting>
-      <para>Для исполнения SQL кода, cодержащего команды <code>INSERT</code>, <code>UPDATE</code>,  <code>DELETE</code> или <abbrev>DDL</abbrev> используйте также метод объекта модели <methodname>executeSql(sqlQuery, dataSourceName)</methodname>, где <parameter>
+      <para>Для исполнения SQL кода, cодержащего команды <code>INSERT</code>, <code>UPDATE</code>,  <code>DELETE</code> или <abbrev>DDL</abbrev>, используйте также метод объекта модели <methodname>executeSql(sqlQuery, dataSourceName)</methodname>, где <parameter>
           <replaceable>sqlQuery</replaceable>
         </parameter> - текст запроса, <parameter>
           <replaceable>dataSourceName</replaceable>
-        </parameter> - имя источника данных   создания новой сущности модели (необязательный параметр, в случае если он не указан используется источник данных по-умолчанию):</para>
+        </parameter> - имя источника данных   создания новой сущности модели (необязательный параметр, в случае если он не указан используется источник данных по умолчанию):</para>
       <programlisting language="JavaScript">model.executeSql(&quot;DROP TABLE Document&quot;);</programlisting>
     </section>
   </section>
