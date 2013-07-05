@@ -92,7 +92,7 @@
               <parameter>logout(callback)</parameter>
             </entry>
             <entry>
-              <para>Завершает сеанс авторизации, <parameter>callback</parameter> - функция которая будет вызвана при успешном завершении сеанса.</para>
+              <para>Завершает сеанс авторизации, <parameter>callback</parameter> — функция которая будет вызвана при успешном завершении сеанса.</para>
             </entry>
           </row>
           <row>
@@ -108,7 +108,7 @@
               <parameter>disposeServerModule(moduleName, callback)</parameter>
             </entry>
             <entry>
-              <para>Удаляет модуль из сессии пользователя, <parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+              <para>Удаляет модуль из сессии пользователя, <parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> — функция которая будет вызвана при успешном выполнении.</para>
             </entry>
           </row>
           <row>
@@ -116,7 +116,7 @@
               <parameter>createServerModule(moduleName, callback)</parameter>
             </entry>
             <entry>
-              <para>Создает модуль в сессии пользователя,<parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+              <para>Создает модуль в сессии пользователя,<parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> — функция которая будет вызвана при успешном выполнении.</para>
             </entry>
           </row>
           <row>
@@ -124,7 +124,7 @@
               <parameter>executeServerModuleMethod(moduleName, methodName, params, callback(result))</parameter>
             </entry>
             <entry>
-              <para>Исполняет метод серверного модуля. При необходимости модуль будет создан в сессии пользователя автоматически<parameter>moduleName</parameter> - имя модуля, <parameter>methodName</parameter> - имя метода в этом модуле, <parameter>callback(result)</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+              <para>Исполняет метод серверного модуля. При необходимости модуль будет создан в сессии пользователя автоматически<parameter>moduleName</parameter> - имя модуля, <parameter>methodName</parameter> — имя метода в этом модуле, <parameter>callback(result)</parameter> - функция которая будет вызвана при успешном выполнении.</para>
             </entry>
           </row>
           <row>
@@ -140,7 +140,7 @@
               <parameter>executeServerReport(moduleName)</parameter>
             </entry>
             <entry>
-              <para>Исполняет серверный отчет, <parameter>moduleName</parameter> - имя модуля.</para>
+              <para>Исполняет серверный отчет, <parameter>moduleName</parameter> — имя модуля.</para>
             </entry>
           </row>
           <row>
@@ -148,7 +148,7 @@
               <parameter>getServerModuleProperty(moduleName, propName)</parameter>
             </entry>
             <entry>
-              <para>Получает свойство серверного модуля, <parameter>moduleName</parameter> - имя модуля, <parameter>propName</parameter> - имя свойства в этом модуле. Выполняется синхронно.</para>
+              <para>Получает свойство серверного модуля, <parameter>moduleName</parameter> - имя модуля, <parameter>propName</parameter> — имя свойства в этом модуле. Выполняется синхронно.</para>
             </entry>
           </row>
           <row>
@@ -156,7 +156,7 @@
               <parameter>setServerModuleProperty(moduleName, propName, propValue)</parameter>
             </entry>
             <entry>
-              <para>Устанавливает свойство серверного модуля. , <parameter>moduleName</parameter> - имя модуля, <parameter>propName</parameter> - имя свойства в этом модуле, <parameter>propValue</parameter> - значение свойства. Выполняется синхронно.</para>
+              <para>Устанавливает свойство серверного модуля. , <parameter>moduleName</parameter> — имя модуля, <parameter>propName</parameter> — имя свойства в этом модуле, <parameter>propValue</parameter> — значение свойства. Выполняется синхронно.</para>
             </entry>
           </row>
         </tbody>
@@ -199,7 +199,7 @@ function testMethod(p1, p2) {
 }</programlisting>
     <para>Для доступа к ресурсам требующим аутентификации используйте стандартные механизмы предоставляемые сервером приложений или сервлет-контейнером. Так, сервер приложений Platypus может быть настроен на работу с BASIC или FORMS аутентификацией. Для того, чтобы прекратить авторизованный сеанс работы с сервером приложений Platypus используйте метод <methodname>platypus.api.logout</methodname>:</para>
     <programlisting language="JavaScript">platypus.api.logout();</programlisting>
-    <para>Для более удобной организации вызова серверных методов используйте встроеную поддержку удаленного вызова процедур - RPC (Remote Procedure Call). Вызов методов серверных модулей происходит прозрачно для клиентского кода. В действительности вызываются методы прокси-объектов. При этом маршалинг (сериализация/десериализация аргументов  и возвращаемых результатов и сетевое взаимодействие) происходит автоматически &quot;под капотом&quot;. Для серверного кода вызов функции модуля также происходит &quot;как обычно&quot; - в аргументы функции передаются десериализованные объекты JavaScript, которые были переданы на стороне клиента. Серверный метод  возвращает JavaScript-объект, который будет сериализован,  передан по сети и десериализован на клиенте.</para>
+    <para>Для более удобной организации вызова серверных методов используйте встроеную поддержку удаленного вызова процедур - RPC (Remote Procedure Call). Вызов методов серверных модулей происходит прозрачно для клиентского кода. В действительности вызываются методы прокси-объектов. При этом маршалинг (сериализация/десериализация аргументов  и возвращаемых результатов и сетевое взаимодействие) происходит автоматически &quot;под капотом&quot;. Для серверного кода вызов функции модуля также происходит &quot;как обычно&quot; — в аргументы функции передаются десериализованные объекты JavaScript, которые были переданы на стороне клиента. Серверный метод  возвращает JavaScript-объект, который будет сериализован,  передан по сети и десериализован на клиенте.</para>
     <para>Для того, чтобы вызвать функцию серверного модуля или прочитать/установить свойство:</para>
     <itemizedlist>
       <listitem>

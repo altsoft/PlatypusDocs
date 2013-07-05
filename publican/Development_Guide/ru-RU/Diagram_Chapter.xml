@@ -33,7 +33,7 @@
         <para>выберите соединение с <acronym>БД</acronym> и схему БД:</para>
         <itemizedlist>
           <listitem>
-            <para>выберите базу данных по-умолчанию - нажмите кнопку <guibutton>Default</guibutton> или подключение к внешней базе данных - нажмите кнопку <guibutton>Specific</guibutton>;</para>
+            <para>выберите базу данных по-умолчанию — нажмите кнопку <guibutton>Default</guibutton> или подключение к внешней базе данных — нажмите кнопку <guibutton>Specific</guibutton>;</para>
           </listitem>
           <listitem>
             <para>выберите схему в базе данных из выпадающего списка поля <guilabel>Schema</guilabel>; для выбора схемы по умолчанию нажмите кнопку <guibutton>Default</guibutton>;</para>
@@ -143,7 +143,7 @@
         <para>выберите таблицу на диаграмме;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Create new field/parameter</guibutton>    на панели инструментов вкладки редактора полей таблицы - будет создано поле с типом по умолчанию и автоматически сгенерированным именем;</para>
+        <para>нажмите кнопку <guibutton>Create new field/parameter</guibutton>    на панели инструментов вкладки редактора полей таблицы — будет создано поле с типом по умолчанию и автоматически сгенерированным именем;</para>
       </listitem>
       <listitem>
         <para>измените свойства поля таблицы, для этого выберети узел поля среди дочерних узлов таблицы в инспекторе модели данных и измените свойства в окне редактирования  свойств <guilabel>Properties</guilabel>:</para>
@@ -152,28 +152,28 @@
     <para>Свойства поля таблицы:</para>
     <itemizedlist>
       <listitem>
-        <para><guilabel>Name</guilabel> - наименование поля в таблице;</para>
+        <para><guilabel>Name</guilabel> — наименование поля в таблице;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Description</guilabel> - описание поля;</para>
+        <para><guilabel>Description</guilabel> — описание поля;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type</guilabel> - тип данных;</para>
+        <para><guilabel>Type</guilabel> — тип данных;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type Name</guilabel> - имя типа структуры данных, поле доступно для ввода если выбран тип данных <parameter>STRUCT</parameter>;</para>
+        <para><guilabel>Type Name</guilabel> — имя типа структуры данных, поле доступно для ввода если выбран тип данных <parameter>STRUCT</parameter>;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Size</guilabel> - длина поля;</para>
+        <para><guilabel>Size</guilabel> — длина поля;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Precision</guilabel> - точность;</para>
+        <para><guilabel>Precision</guilabel> — точность;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Required</guilabel> - обязательное поле (в поле недопустимы значения <literal>NULL)</literal>;</para>
+        <para><guilabel>Required</guilabel> — обязательное поле (в поле недопустимы значения <literal>NULL)</literal>;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Default value</guilabel> - значение по умолчанию;</para>
+        <para><guilabel>Default value</guilabel> — значение по умолчанию;</para>
       </listitem>
     </itemizedlist>
     <informaltable>
@@ -250,7 +250,7 @@
       <para>Эти имена являются зарезервированными и используются моделью данных  Platypus.</para>
     </important>
     <note>
-      <para>Если панель свойств <guilabel>Properties</guilabel> не отображается, включите эту панель  - для этого выберите пункт <menuchoice>
+      <para>Если панель свойств <guilabel>Properties</guilabel> не отображается, включите эту панель — для этого выберите пункт <menuchoice>
           <guimenu> Window</guimenu>
           <guimenuitem>Properties</guimenuitem>
         </menuchoice> главного меню<application> Platypus Application Designer</application>. </para>
@@ -364,7 +364,7 @@
         <para>выберите таблицу на диаграмме;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton> Query Table Data</guibutton> - будет выполнен запрос данных из таблицы, а результаты будут показаны в зоне вывода редактора.</para>
+        <para>нажмите кнопку <guibutton> Query Table Data</guibutton> — будет выполнен запрос данных из таблицы, а результаты будут показаны в зоне вывода редактора.</para>
       </listitem>
     </itemizedlist>
     <para>Для того, чтобы изменить размер визуального представления  диаграммы структуры БД:</para>
@@ -388,7 +388,7 @@
         <para>введите строку поиска; </para>
       </listitem>
       <listitem>
-        <para>выберите  поля по которым будет осуществляются поиск: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, а также установите флажки опций: <guilabel>Whole words</guilabel> - для поиска целых слов, <guilabel>Match case</guilabel> - для поиска с учетом регистра символов; </para>
+        <para>выберите  поля по которым будет осуществляются поиск: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, а также установите флажки опций: <guilabel>Whole words</guilabel> — для поиска целых слов, <guilabel>Match case</guilabel> — для поиска с учетом регистра символов; </para>
       </listitem>
       <listitem>
         <para>нажмите кнопки <guibutton>Next</guibutton> и <guibutton>Previous</guibutton> для перехода к следующей найденной сущности; </para>

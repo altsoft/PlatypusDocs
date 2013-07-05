@@ -9,7 +9,7 @@
   <para>Элемент приложения <emphasis>Отчет</emphasis> включает в себя:</para>
   <itemizedlist>
     <listitem>
-      <para>шаблон отчета - файл в формате <application>Microsoft Excel</application>  с расширением <filename>.xls</filename>;</para>
+      <para>шаблон отчета — файл в формате <application>Microsoft Excel</application>  с расширением <filename>.xls</filename>;</para>
     </listitem>
     <listitem>
       <para>программный код JavaScript;</para>
@@ -98,7 +98,7 @@
     <para>Отредактируйте шаблон отчета в приложении электронных таблиц.</para>
     <section>
       <title>Объекты и коллекции</title>
-      <para>Разместите в ячейках шаблона тэги связи с объектами JavaScript и сущностями модели. Для доступа к данным используйте следующий синтаксис: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, где <replaceable>objectName</replaceable> - имя JavaScript-объекта, JavaScript-массива объектов или сущности модели, <replaceable>propertyName</replaceable> - свойство  объекта. </para>
+      <para>Разместите в ячейках шаблона тэги связи с объектами JavaScript и сущностями модели. Для доступа к данным используйте следующий синтаксис: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, где <replaceable>objectName</replaceable> — имя JavaScript-объекта, JavaScript-массива объектов или сущности модели, <replaceable>propertyName</replaceable> — свойство  объекта. </para>
       <para>Пример вывода в ячейки названия документа:</para>
       <programlisting language="JavaScript">${document.name}</programlisting>
       <para>Похожим образом можно получить доступ  и к сложному объекту:</para>
@@ -121,7 +121,7 @@ library.documens = [
       <para>При необходимости задайте динамические стили для ячеек. Такие стили будут изменяться в зависимости от содержимого ячейки. Для этого:</para>
       <itemizedlist>
         <listitem>
-          <para>задайте для специальной ячейки шаблона стиль которой должен динамически применяться к ячейке элемента коллекции, задайте для этой ячейки метку, например, <code> $[0]customRow</code>, данная ячейка может быть размещена на скрытой ячейке шаблона;</para>
+          <para>задайте для специальной ячейки шаблона стиль которой должен динамически применяться к ячейке элемента коллекции, задайте для этой ячейки метку, например, <code>$[0]customRow</code>, данная ячейка может быть размещена на скрытой ячейке шаблона;</para>
         </listitem>
         <listitem>
           <para>для элемента коллекции задайте специальное свойство <property>cellTemplateLabel</property> установив в него строку-ссылки на ячейку стиля, например, <code>cellTemplateLabel=&apos;customRow&apos;</code>.</para>
@@ -148,7 +148,7 @@ library.documens = [
       <para>В данном примере мы группируем работников по возрасту. При группировке в контексте цикла создается новый объект <property>group</property>, содержащий два свойства: <property>item</property> - текущая группа и <property>items</property> - коллекция всех объектов в группе. </para>
       <para>По умолчанию при группировке, если атрибут <property>groupOrder</property> отсутствует  будет сохранен первоначальный порядок следования элементов в коллекции. Используйте атрибут <property>groupOrder</property>, присвоив ему значения <literal>asc</literal> или <literal>desc</literal> для прямой и обратной сортировки.</para>
       <para>Если в тэге<literal> jx:forEach</literal>  используется атрибут <property>groupBy</property> - атрибут var игнорируется.</para>
-      <para>Используйте атрибут <property>select</property> для того, чтобы определить, какие элементы коллекции должны быть включены в отчет. В приведенном ниже примере мы включаем только сотрудников с зарплатой болше 2000:</para>
+      <para>Используйте атрибут <property>select</property> для того, чтобы определить, какие элементы коллекции должны быть включены в отчет. В приведенном ниже примере мы включаем только сотрудников с зарплатой больше 2000:</para>
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; select=&quot;${employee.payment &gt; 2000}&quot;&gt;
  ${employee.name} | ${employee.payment} | ${employee.bonus}
 &lt;/jx:forEach&gt;</programlisting>
@@ -189,7 +189,7 @@ Chief Name: ${department.chief.name}
   </section>
   <section>
     <title>Программный код формирования отчета</title>
-    <para>Для того, чтобы сгенерировать отчет - создайте объект отчета, передав в конструктор имя-идентификатор требуемого отчета.</para>
+    <para>Для того, чтобы сгенерировать отчет — создайте объект отчета, передав в конструктор имя-идентификатор требуемого отчета.</para>
     <para>Используйте объект отчета:</para>
     <itemizedlist>
       <listitem>
@@ -203,7 +203,7 @@ Chief Name: ${department.chief.name}
       </listitem>
     </itemizedlist>
     <note>
-      <para>При исполнении отчета в HTML5 браузерном клиенте вызов методов <methodname>show()</methodname>, <methodname>print()</methodname> и <methodname>save(reportPath)</methodname> приведет к одному и тому же результату - загрузке файла отчета в браузер.</para>
+      <para>При исполнении отчета в HTML5 браузерном клиенте вызов методов <methodname>show()</methodname>, <methodname>print()</methodname> и <methodname>save(reportPath)</methodname> приведет к одному и тому же результату — загрузке файла отчета в браузер.</para>
     </note>
     <para>В приведенном ниже примере отчет формируется при нажатии на кнопку формы:</para>
     <programlisting language="JavaScript">/**
@@ -219,13 +219,13 @@ function reportButtonActionPerformed(evt) {                    var r = new Repor
     <para>Программа обработки данных может специальным образом подготавливать данные для отображения, вычислять новые данные и т.д. Программный код может быть выполнен:</para>
     <itemizedlist>
       <listitem>
-        <para>при вызове конструктора отчета - поместите код на верхний уровень скрипта отчета;</para>
+        <para>при вызове конструктора отчета — поместите код на верхний уровень скрипта отчета;</para>
       </listitem>
       <listitem>
-        <para>в  событии <literal>beforeRender</literal>, которое будет вызвано перед запуском  формирования отчета -  при вызове методов <methodname>show</methodname>,  <methodname>print</methodname> или <methodname>save</methodname> - поместите код в обработчик события <varname>beforeRender</varname>;</para>
+        <para>в  событии <literal>beforeRender</literal>, которое будет вызвано перед запуском  формирования отчета -  при вызове методов <methodname>show</methodname>,  <methodname>print</methodname> или <methodname>save</methodname> — поместите код в обработчик события <varname>beforeRender</varname>;</para>
       </listitem>
       <listitem>
-        <para>в стандартных событиях обновления наборов данных модели - см. главу &quot;Модель данных&quot; в разделе &quot;Модуль&quot;;</para>
+        <para>в стандартных событиях обновления наборов данных модели — см. главу &quot;Модель данных&quot; в разделе &quot;Модуль&quot;;</para>
       </listitem>
     </itemizedlist>
     <para>Список событий отчета приведен в таблице:</para>

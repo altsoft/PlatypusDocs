@@ -5,7 +5,7 @@
 ]>
 <chapter id="chap-Development_Guide-Install_Chapter">
   <title>Установка и настройка Platypus Application Designer</title>
-  <para>В данном разделе содержится  информация по установке основного средства разработки приложений на платформе Platypus  - <application> Platypus Application Designer</application>.</para>
+  <para>В данном разделе содержится  информация по установке основного средства разработки приложений на платформе Platypus — <application>Platypus Application Designer</application>.</para>
   <para>Программное обеспечение дизайнера приложений входит в комплект разработчика  и поставляется совместно с платформой Platypus.</para>
   <para>Комплект разработчика Platypus поставляется в следующих вариантах:</para>
   <itemizedlist>
@@ -13,7 +13,7 @@
       <para>на компакт или DVD диске;</para>
     </listitem>
     <listitem>
-      <para>через  Интернет - в виде архивного файла в формате zip.</para>
+      <para>через  Интернет — в виде архивного файла в формате zip.</para>
     </listitem>
   </itemizedlist>
   <para>В случае поставки комплекта разработчика в виде архивного файла распакуйте его содержимое в удобное для вас место на жестком диске.</para>
@@ -82,7 +82,7 @@
         </listitem>
         <listitem>
           <para>
-после окончания установки нажмите кнопку <guibutton>Finish</guibutton>.  Установите флажок <guilabel>Launch Platypus application designer after the installer closes</guilabel> для немедленного запуска дизайнера.</para>
+после окончания установки нажмите кнопку <guibutton>Finish</guibutton>; установите флажок <guilabel>Launch Platypus application designer after the installer closes</guilabel> для немедленного запуска дизайнера.</para>
         </listitem>
       </orderedlist>
   </para>
@@ -112,7 +112,7 @@
       </listitem>
     </itemizedlist>
     <para>Вы также можете изменить язык локализации дизайнера добавив опцию -<option>-locale ru:RU</option> или <option>--locale en:US</option> в строку команды на запуск <application>Platypus Application Designer</application>.</para>
-    <para>Дизайнер Platypus поддерживает подключение различных стилей оформления пользовательского интерфейса (LaF - Look and Feel). Существуют стили оформления для конкретной операционной системы, универсальные стили (<literal>Metal</literal> и <literal>Nimbus</literal>) и  стили оформления которые могут поставляться сторонними разработчиками.</para>
+    <para>Дизайнер Platypus поддерживает подключение различных стилей оформления пользовательского интерфейса (LaF — Look and Feel). Существуют стили оформления для конкретной операционной системы, универсальные стили (<literal>Metal</literal> и <literal>Nimbus</literal>) и  стили оформления которые могут поставляться сторонними разработчиками.</para>
     <warning>
       <para>Подключение внешних стилей оформления является достаточно сложной процедурой и не рекомендовано для начинающих.</para>
     </warning>

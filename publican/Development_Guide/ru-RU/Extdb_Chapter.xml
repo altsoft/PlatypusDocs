@@ -34,16 +34,16 @@
     <para>Для изменения настроек подключения к внешней БД:</para>
     <itemizedlist>
       <listitem>
-        <para>заполните полe <guilabel>Name</guilabel> - имя-идентификатор элемента приложения соединения с внешней <acronym>БД</acronym>; имя-идентификатор подчиняется требованиям к именам элементов приложения Platypus;</para>
+        <para>заполните полe <guilabel>Name</guilabel> — имя-идентификатор элемента приложения соединения с внешней <acronym>БД</acronym>; имя-идентификатор подчиняется требованиям к именам элементов приложения Platypus;</para>
       </listitem>
       <listitem>
-        <para>заполните полe <guilabel>JDBC Url</guilabel> - <acronym>URL</acronym> соединения с внешней <acronym>БД</acronym> в формате <acronym>JDBC</acronym>;</para>
+        <para>заполните полe <guilabel>JDBC Url</guilabel> — <acronym>URL</acronym> соединения с внешней <acronym>БД</acronym> в формате <acronym>JDBC</acronym>;</para>
       </listitem>
       <listitem>
-        <para>заполните полe <guilabel>Database User</guilabel> - имя пользователя в <acronym>БД</acronym>; </para>
+        <para>заполните полe <guilabel>Database User</guilabel> — имя пользователя в <acronym>БД</acronym>; </para>
       </listitem>
       <listitem>
-        <para>заполните полe <guilabel>Password</guilabel> - пароль пользователя в БД; </para>
+        <para>заполните полe <guilabel>Password</guilabel> — пароль пользователя в БД; </para>
       </listitem>
       <listitem>
         <para>Выберите схему по умолчанию для этого подключения из выпадающего списка в поле  <guilabel>Default schema</guilabel>; </para>

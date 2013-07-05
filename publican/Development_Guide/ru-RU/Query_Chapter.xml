@@ -5,7 +5,7 @@
 ]>
 <chapter id="chap-Development_Guide-Query_Chapter">
   <title>Запрос к базе данных</title>
-  <para><emphasis>Запрос</emphasis> в Platypus - это элемент приложения, определяющий SQL выражение для выполнения в базе данных. В платформе Platypus запрос подвергается предварительной обработке перед выполнением.</para>
+  <para><emphasis>Запрос</emphasis> в Platypus — это элемент приложения, определяющий SQL выражение для выполнения в базе данных. В платформе Platypus запрос подвергается предварительной обработке перед выполнением.</para>
   <para>Запросы решают несколько задач:<itemizedlist>
       <listitem>
         <para>формулируют задания на выборку данных из <acronym>БД</acronym> (запросы типа <literal>SELECT</literal>);</para>
@@ -27,7 +27,7 @@
         <para>запросы  поддерживают именованные параметры предопределенного типа;</para>
       </listitem>
       <listitem>
-        <para>реализовано повторное использование  - включение одних запросов в другие без копирования их тела;</para>
+        <para>реализовано повторное использование — включение одних запросов в другие без копирования их тела;</para>
       </listitem>
       <listitem>
         <para>редактирование запросов в визуальной форме и в виде текста одновременно;</para>
@@ -53,13 +53,13 @@
             <guimenu>Choose file type</guimenu>
             <guisubmenu>Platypus application elements</guisubmenu>
             <guimenuitem>Query</guimenuitem>
-          </menuchoice> -  и нажмите кнопку <guibutton>Next</guibutton>;</para>
+          </menuchoice> —  и нажмите кнопку <guibutton>Next</guibutton>;</para>
       </listitem>
       <listitem>
         <para>выберите соединения с <acronym>БД</acronym> и схему:</para>
         <itemizedlist>
           <listitem>
-            <para>выберите базу данных по умолчанию - нажмите кнопку <guibutton>Default</guibutton> или подключение к внешней базе данных - нажмите кнопку <guibutton>Specific</guibutton>; выберите элемент приложения типа <guilabel>Db Connection</guilabel> с помощью диалога выбора элемента приложения;</para>
+            <para>выберите базу данных по умолчанию — нажмите кнопку <guibutton>Default</guibutton> или подключение к внешней базе данных - нажмите кнопку <guibutton>Specific</guibutton>; выберите элемент приложения типа <guilabel>Db Connection</guilabel> с помощью диалога выбора элемента приложения;</para>
           </listitem>
           <listitem>
             <para>нажмите кнопку <guibutton>Next</guibutton>;</para>
@@ -90,13 +90,13 @@
           </menuchoice>);</para>
         <itemizedlist>
           <listitem>
-            <para>установите флажок <guilabel>public</guilabel>, если запрос должен быть доступен на сервере для вызова из Platypus Client или браузера - в заголовок запроса будет добавлена аннотация <code>@public</code>;</para>
+            <para>установите флажок <guilabel>public</guilabel>, если запрос должен быть доступен на сервере для вызова из Platypus Client или браузера — в заголовок запроса будет добавлена аннотация <code>@public</code>;</para>
           </listitem>
           <listitem>
-            <para>установите флажок <guilabel>procedure</guilabel>, если запрос будет использован для вызова хранимой процедуры - в заголовок запроса будет добавлена аннотация <code>@procedure</code>;</para>
+            <para>установите флажок <guilabel>procedure</guilabel>, если запрос будет использован для вызова хранимой процедуры — в заголовок запроса будет добавлена аннотация <code>@procedure</code>;</para>
           </listitem>
           <listitem>
-            <para>установите флажок <guilabel>manual</guilabel>, если вы хотите избежать автоматического исполнения этого запроса при его работе в составе модели данных модуля, отчета или формы при их инициализации, например, если запрос содержит вызов хранимой процедуры, выражения <literal>INSERT</literal> или <literal>UPDATE</literal> - в заголовок запроса будет добавлена аннотация <code>@manual</code>;</para>
+            <para>установите флажок <guilabel>manual</guilabel>, если вы хотите избежать автоматического исполнения этого запроса при его работе в составе модели данных модуля, отчета или формы при их инициализации, например, если запрос содержит вызов хранимой процедуры, выражения <literal>INSERT</literal> или <literal>UPDATE</literal> — в заголовок запроса будет добавлена аннотация <code>@manual</code>;</para>
           </listitem>
           <listitem>
             <para>установите флажок <guilabel>readonly</guilabel>, если вы не хотите, чтобы изменения в данных сущностей, полученных с помощью этого запроса, были сохранены в БД;</para>
@@ -234,22 +234,22 @@
     <para>Свойства поля параметра:</para>
     <itemizedlist>
       <listitem>
-        <para><guilabel>Name</guilabel> - наименование параметра;</para>
+        <para><guilabel>Name</guilabel> — наименование параметра;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Description</guilabel> - описание параметра;</para>
+        <para><guilabel>Description</guilabel> — описание параметра;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type</guilabel> - тип параметра, выберите из выпадающего списка тип параметра;</para>
+        <para><guilabel>Type</guilabel> — тип параметра, выберите из выпадающего списка тип параметра;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type Name</guilabel> - имя типа структуры данных, поле доступно для ввода если выбран тип поля <guilabel>Structure</guilabel>;</para>
+        <para><guilabel>Type Name</guilabel> — имя типа структуры данных, поле доступно для ввода если выбран тип поля <guilabel>Structure</guilabel>;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Size</guilabel> - длина или точность поля;</para>
+        <para><guilabel>Size</guilabel> — длина или точность поля;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Mode</guilabel> - установите данное поле если параметр будет использован в качестве параметра хранимой процедуры;</para>
+        <para><guilabel>Mode</guilabel> — установите данное поле если параметр будет использован в качестве параметра хранимой процедуры;</para>
       </listitem>
     </itemizedlist>
     <para>Режимы  использования параметра в вызовах хранимых процедур:</para>
@@ -325,8 +325,8 @@
       </listitem>
     </itemizedlist>
     <para>Параметр запроса может быть связан с полем таблицы или подзапроса  или быть связанным с параметром подзапроса.</para>
-    <para>При связи с полем параметр будет включен в текст SQL  - визуально связь будет отображаться как черная линия со стрелкой. </para>
-    <para>При связи параметра с  параметром подзапроса для данной связи будет создано сопоставление  параметров в модели запроса - визуально такая связь будет отображаться как пурпурная линия со стрелкой.</para>
+    <para>При связи с полем параметр будет включен в текст SQL — визуально связь будет отображаться как черная линия со стрелкой. </para>
+    <para>При связи параметра с  параметром подзапроса для данной связи будет создано сопоставление  параметров в модели запроса — визуально такая связь будет отображаться как пурпурная линия со стрелкой.</para>
     <para>Для того, чтобы добавить связь параметра и поля  или параметра подзапроса:</para>
     <itemizedlist>
       <listitem>
@@ -406,7 +406,7 @@
         <para>нажмите кнопку <guibutton>Find</guibutton> для того, чтобы открыть диалог поиска по диаграмме запроса;</para>
       </listitem>
       <listitem>
-        <para>введите строку поиска, выберите  поля по которым будет осуществляются поиск: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, а также установите флажки опций: <guilabel>Whole words</guilabel> - для поиска целых слов, <guilabel>Match case</guilabel> - для поиска с учетом регистра символов; </para>
+        <para>введите строку поиска, выберите  поля по которым будет осуществляются поиск: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, а также установите флажки опций: <guilabel>Whole words</guilabel> - для поиска целых слов, <guilabel>Match case</guilabel> — для поиска с учетом регистра символов; </para>
       </listitem>
       <listitem>
         <para>нажмите кнопки <guibutton>Next</guibutton> и <guibutton>Previous</guibutton> для перехода к следующему результату поиска; </para>
