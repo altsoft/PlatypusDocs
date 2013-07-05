@@ -147,7 +147,7 @@ library.documens = [
 &lt;/jx:forEach&gt;</programlisting>
       <para>В данном примере мы группируем работников по возрасту. При группировке в контексте цикла создается новый объект <property>group</property>, содержащий два свойства: <property>item</property> - текущая группа и <property>items</property> - коллекция всех объектов в группе. </para>
       <para>По умолчанию при группировке, если атрибут <property>groupOrder</property> отсутствует  будет сохранен первоначальный порядок следования элементов в коллекции. Используйте атрибут <property>groupOrder</property>, присвоив ему значения <literal>asc</literal> или <literal>desc</literal> для прямой и обратной сортировки.</para>
-      <para>Если в тэге<literal> jx:forEach</literal>  используется атрибут <property>groupBy</property> - атрибут var игнорируется.</para>
+      <para>Если в тэге<literal> jx:forEach</literal>  используется атрибут <property>groupBy</property> — атрибут var игнорируется.</para>
       <para>Используйте атрибут <property>select</property> для того, чтобы определить, какие элементы коллекции должны быть включены в отчет. В приведенном ниже примере мы включаем только сотрудников с зарплатой больше 2000:</para>
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; select=&quot;${employee.payment &gt; 2000}&quot;&gt;
  ${employee.name} | ${employee.payment} | ${employee.bonus}

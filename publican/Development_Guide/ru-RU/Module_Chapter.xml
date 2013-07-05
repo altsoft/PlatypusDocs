@@ -170,7 +170,7 @@
           <programlisting language="JavaScript">Modules.get(&quot;<replaceable>ModuleName</replaceable>&quot;)</programlisting>
           <programlisting language="JavaScript">new Form(&quot;<replaceable>FormName</replaceable>&quot;)</programlisting>
           <programlisting language="JavaScript">new <replaceable>FormName</replaceable>()</programlisting>
-          <para>где  аргументом конструктора или функции <code>get</code> является строковый литерал - имя-идентификатор элемента приложения;  </para>
+          <para>где  аргументом конструктора или функции <code>get</code> является строковый литерал — имя-идентификатор элемента приложения;  </para>
         </listitem>
         <listitem>
           <para>элементы приложения с указанными именами загружаются;</para>
@@ -181,7 +181,7 @@
       </itemizedlist>
       <para>В случае, если зависимость не нужно или невозможно разрешать автоматически, например, если необходимо  динамически определить вызваемый модуль — примените ручное разрешение зависимостей. Для этого вызовите глобальную функцию <code>require</code>. Также используйте функцию  <code>require</code> для загрузки ресурсов JavaScript.</para>
       <programlisting language="JavaScript">require(<replaceable>param</replaceable>, <replaceable>callback</replaceable>())</programlisting>
-      <para>где <replaceable>param</replaceable> - имя-идентификатор модуля, относительный путь в приложении к файлу JavaScript  или массив этих элементов; <replaceable>callback</replaceable> -  функция, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
+      <para>где <replaceable>param</replaceable> - имя-идентификатор модуля, относительный путь в приложении к файлу JavaScript  или массив этих элементов; <replaceable>callback</replaceable> —  функция, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
       <para>Пример использования ручного разрешения зависимостей для модулей:</para>
       <programlisting language="JavaScript">var moduleName1 = &quot;Module1&quot;,
     moduleName2 = &quot;Module2&quot;;
@@ -269,7 +269,7 @@ function publicFunction(param) {
 function f2() {
 //...
 }</programlisting>
-      <para>В исполняемом коде можно получить доступ к информации о текущем пользователе, для этого используйте свойство  <code>principal</code>. Данное свойство доступно только для чтения. Oбъект информации о пользователе  содержит свойство <code>name</code> - имя текущего пользователя и метод <code>hasRole(<replaceable>role</replaceable>)</code>, который позволяет проверить наличие  какой-либо роли у данного пользователя:</para>
+      <para>В исполняемом коде можно получить доступ к информации о текущем пользователе, для этого используйте свойство  <code>principal</code>. Данное свойство доступно только для чтения. Oбъект информации о пользователе  содержит свойство <code>name</code> — имя текущего пользователя и метод <code>hasRole(<replaceable>role</replaceable>)</code>, который позволяет проверить наличие  какой-либо роли у данного пользователя:</para>
       <programlisting language="JavaScript">Logger.info(&apos;Current user: &apos; + principal.name);
 
 if (principal.hasRole(&apos;Manager&apos;)) {
@@ -1009,7 +1009,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
       <programlisting language="JavaScript">params.documentID = 1; // Changes data model parameter</programlisting>
       <para>Каждое изменение любого параметра модели данных ведет к автоматическому обновлению данных связанных с ним прямо или косвенно сущностей модели.</para>
       <important>
-        <para>Обновление данных в модели произойдет только если значение параметра модели изменилось. Для принудительного обновления данных сущности используйте функцию ее метод  <methodname>requery</methodname> - см. главу Модель.</para>
+        <para>Обновление данных в модели произойдет только если значение параметра модели изменилось. Для принудительного обновления данных сущности используйте функцию ее метод  <methodname>requery</methodname> — см. главу Модель.</para>
       </important>
       <para> Часто бывает необходимо изменить несколько параметров и только после этого обновить данные. Для этого используйте функции <methodname>beginUpdate</methodname> и <methodname>endUpdate</methodname> объекта <varname>params</varname>:</para>
       <programlisting language="JavaScript">params.beginUpdate();
@@ -1043,7 +1043,7 @@ try {
       <programlisting language="JavaScript">var entityParams = <replaceable>entityName</replaceable>.params</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
-        </varname> - объект соответствующей сущности.</para>
+        </varname> — объект соответствующей сущности.</para>
       <para>Для доступа к конкретным параметрам используйте свойства объекта <code><replaceable>entityName</replaceable>.params</code> с именами, соответствующими именам параметров сущности: </para>
       <programlisting language="JavaScript">var entityParam = <replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable></programlisting>
       <para>где <varname>
@@ -1423,7 +1423,7 @@ entity1.sort(sorter);</programlisting>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
       <para>где <varname>
           <replaceable>entityName</replaceable>
-        </varname> — сущность, <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> - свойство объекта с указанным индексом в данных сущности, <literal>
+        </varname> — сущность, <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> — свойство объекта с указанным индексом в данных сущности, <literal>
           <replaceable>newValue</replaceable>
         </literal> — выражение для нового значения.</para>
       <para>Для сохранения  изменений в модели данных вызовите функцию <methodname>save</methodname> модели:</para>

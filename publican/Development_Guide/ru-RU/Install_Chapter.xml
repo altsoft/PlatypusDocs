@@ -119,7 +119,7 @@
     <para>Для того, чтобы изменить стиль оформления <application>Platypus Application Designer</application>:</para>
     <itemizedlist>
       <listitem>
-        <para>отредактируйте файл  конфигурации дизайнера  - добавьте в параметр <parameter>default_options</parameter> опцию <option>--laf <replaceable>LaF</replaceable></option>, где <replaceable>LaF</replaceable> соответствует названию стиля или полному имени класса LaF, в случае использования стороннего LaF также необходимо включить библиотеку стилей в путь доступный загрузчику классов <application>Platypus Application Designer</application>;</para>
+        <para>отредактируйте файл  конфигурации дизайнера — добавьте в параметр <parameter>default_options</parameter> опцию <option>--laf <replaceable>LaF</replaceable></option>, где <replaceable>LaF</replaceable> соответствует названию стиля или полному имени класса LaF, в случае использования стороннего LaF также необходимо включить библиотеку стилей в путь доступный загрузчику классов <application>Platypus Application Designer</application>;</para>
       </listitem>
       <listitem>
         <para>перезапустите  дизайнер приложений.</para>

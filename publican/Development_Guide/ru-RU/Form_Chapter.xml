@@ -447,7 +447,7 @@
               <parameter>onKeyPressed</parameter>
             </entry>
             <entry>нет</entry>
-            <entry><parameter>evt</parameter> - объект события</entry>
+            <entry><parameter>evt</parameter> — объект события</entry>
             <entry>Вызывается после нажатия кнопки клавиатуры</entry>
           </row>
           <row>
@@ -1354,7 +1354,7 @@ view.add(cb1);</programlisting>
                 <parameter>onActionPerformed</parameter>
               </entry>
               <entry>нет</entry>
-              <entry>evt - объект события</entry>
+              <entry>evt — объект события</entry>
               <entry>Событие переключения состояния кнопки переключателя</entry>
             </row>
           </tbody>
@@ -2999,7 +2999,7 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
     </section>
     <section>
       <title>Popup Menu — Всплывающее меню</title>
-      <para>Всплывающее меню - окно выбора опций, которое может быть назначено любому компоненту.</para>
+      <para>Всплывающее меню — окно выбора опций, которое может быть назначено любому компоненту.</para>
       <para>Добавьте компонент<emphasis> Всплывающее меню</emphasis> на форму, для этого перетащите его с палитры. После добавления данный компонент не будет иметь визуального представления в редакторе макета, в дереве компонентов инспектора оно будет добавлено в узел <emphasis>Другие компоненты</emphasis>.</para>
       <para>Добавьте элементы меню во всплывающее меню аналогично обычному меню.</para>
       <para>Для того, чтобы назначить всплывающее меню для компонента на форме задайте  свойство <property>componentPopupMenu</property>: выберете  нужное Всплывающее меню из списка.</para>
@@ -3093,7 +3093,7 @@ var style2 = new Style(<replaceable>parent</replaceable>);</programlisting>
       <para>Объект иконки,  растровая картинка.</para>
       <para>Для того, чтобы создать объект иконки используйте фабричный метод <methodname>load</methodname> объекта <classname>Icon</classname>:</para>
       <programlisting language="JavaScript">var icon = Icon.load(<replaceable>path</replaceable>);</programlisting>
-      <para>где <replaceable>path</replaceable> - имя файла иконки, относительный путь приложения или URL.</para>
+      <para>где <replaceable>path</replaceable> — имя файла иконки, относительный путь приложения или URL.</para>
       <para>Имя файла иконки будет использовано для обращения к встроенной коллекции иконок.</para>
       <para>Пример использования иконки при создании кнопки:</para>
       <programlisting language="JavaScript">var carIcon = Icon.load(&quot;car.png&quot;);
@@ -3270,7 +3270,7 @@ view.add(b);</programlisting>
       </informaltable>
       <para>Для того, чтобы создать объект произвольного цвета используйте конструктор Color, передав ему в качестве парамеров три целых числа RGB:</para>
       <programlisting language="JavaScript">var color = new Color(<replaceable>R</replaceable>, <replaceable>G</replaceable>, <replaceable>B</replaceable>);</programlisting>
-      <para>где <replaceable>R</replaceable>, <replaceable>G</replaceable>, <replaceable>B</replaceable> - красная, зеленая и синяя составляющие в виде целых чисел.</para>
+      <para>где <replaceable>R</replaceable>, <replaceable>G</replaceable>, <replaceable>B</replaceable> — красная, зеленая и синяя составляющие в виде целых чисел.</para>
       <para>Пример использования:</para>
       <programlisting language="JavaScript">button.foreground = Color.BLUE;
 
@@ -3283,8 +3283,8 @@ panel.background = IVORY_COLOR;</programlisting>
       <para>Для того, чтобы создать объект якорной компоновки используйте конструктор <classname>Anchors</classname>, передав в него в качестве параметров значения для соответствующего якоря. </para>
       <programlisting language="JavaScript">var anchors = new Anchors(<replaceable>left</replaceable>, <replaceable>width</replaceable>, <replaceable>right</replaceable>,
             <replaceable>top</replaceable>, <replaceable>height</replaceable>, <replaceable>bottom</replaceable>);</programlisting>
-      <para>где <replaceable>left</replaceable> - левый якорь, <replaceable>width</replaceable> - ширина, <replaceable>right</replaceable> - правый якорь ,
-<replaceable> top</replaceable> - верхний якорь, <replaceable>height</replaceable> - высота, <replaceable>bottom</replaceable> -  нижний якорь.</para>
+      <para>где <replaceable>left</replaceable> — левый якорь, <replaceable>width</replaceable> — ширина, <replaceable>right</replaceable> — правый якорь ,
+<replaceable> top</replaceable> — верхний якорь, <replaceable>height</replaceable> — высота, <replaceable>bottom</replaceable> —  нижний якорь.</para>
       <para>Каждый якорь может быть задан в пикселях, для этого задайте якорь числом или строкой с добавлением символов &quot;<literal>px</literal>&quot;, например: <literal>100</literal>, &quot;<literal>100px</literal>&quot; или в процентах, для этого задайте якорь строкой с добавлением символа &quot;<literal>%</literal>&quot;, например: &quot;<literal>30%</literal>&quot;.</para>
       <para>В соответствии с правилами якорной компоновки для трех якорей по и трех вертикали и горизонтали должны быть заданы два значения по каждой координате.</para>
       <para>Если якорь не задан, передайте  для в соответствующий параметр значение <literal>null</literal>, например:</para>
@@ -3410,8 +3410,8 @@ panel.background = IVORY_COLOR;</programlisting>
             <entry>
               <para>Выводит информационное
                   сообщение,</para>
-              <para>                  <parameter>message</parameter> - текст сообщения.</para>
-              <para><parameter>title</parameter> - заголовок окна сообщения.</para>
+              <para>                  <parameter>message</parameter> — текст сообщения.</para>
+              <para><parameter>title</parameter> — заголовок окна сообщения.</para>
             </entry>
           </row>
           <row>
