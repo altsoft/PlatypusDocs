@@ -306,13 +306,13 @@
             <entry>
               <parameter>focusable</parameter>
             </entry>
-            <entry>Флаг разрешающий форме получать фокус клавиатуры</entry>
+            <entry>Флаг, разрешающий форме получать фокус клавиатуры</entry>
           </row>
           <row>
             <entry>
               <parameter>font</parameter>
             </entry>
-            <entry>Шрифт используемый на форме по-умолчанию</entry>
+            <entry>Шрифт, используемый на форме по-умолчанию</entry>
           </row>
           <row>
             <entry>
@@ -330,25 +330,25 @@
             <entry>
               <parameter>locationByPlatform</parameter>
             </entry>
-            <entry>Флаг означающий что форма будет открыта на позиции по-умолчанию для данной платформы</entry>
+            <entry>Флаг, означающий, что форма будет открыта на позиции по-умолчанию для данной платформы</entry>
           </row>
           <row>
             <entry>
               <parameter>opacity</parameter>
             </entry>
-            <entry>Непрозрачность формы: 1 — полностью непрозрачна, 0 — полностью прозрачна</entry>
+            <entry>Непрозрачность формы, <classname>Number</classname>: 1 — полностью непрозрачна, 0 — полностью прозрачна</entry>
           </row>
           <row>
             <entry>
               <parameter>resizable</parameter>
             </entry>
-            <entry>Флаг разрешающий изменение размеров формы</entry>
+            <entry>Флаг, разрешающий изменение размеров формы</entry>
           </row>
           <row>
             <entry>
               <parameter>undecorated</parameter>
             </entry>
-            <entry>Флаг выключающий отображение системных границ и кнопок формы</entry>
+            <entry>Флаг, выключающий отображение системных границ и кнопок формы</entry>
           </row>
           <row>
             <entry>
@@ -512,7 +512,7 @@
             </entry>
             <entry>нет</entry>
             <entry><parameter>evt</parameter> — объект события</entry>
-            <entry>Вызывается после сворачивания(минимизации) формы </entry>
+            <entry>Вызывается после сворачивания (минимизации) формы </entry>
           </row>
           <row>
             <entry>
@@ -526,7 +526,7 @@
       </tgroup>
     </informaltable>
     <important>
-      <para>Событие взаимодействия с пользователем для контейнера генерируется лишь в том случае, если оно не было сгенерировано для дочернего компонента. Таким образом, например, форма получит событие мыши лишь в том случае если оно произошло над поверхностью свободной от  дочерних компонентов. </para>
+      <para>Событие взаимодействия с пользователем для контейнера генерируется лишь в том случае, если оно не было сгенерировано для дочернего компонента. Таким образом,  форма получит событие мыши лишь в том случае, если оно произошло над поверхностью, свободной от  дочерних компонентов. </para>
     </important>
     <para>Событие <varname>windowClosing</varname> удобно использовать для вызова диалога подтверждения закрытия окна: если функция-обработчик вернет <literal>false</literal>, то форма не будет закрыта: </para>
     <programlisting language="JavaScript">//Handles windowClosing event
@@ -574,7 +574,7 @@ view.background = Color.black;</programlisting>
             <entry>
               <parameter>showModal(callback)</parameter>
             </entry>
-            <entry>Отображает форму как диалог подтверждения. Если пользователь подтверждает выбор, то вызывается функция, переданная через параметр <literal>callback</literal>. Эта функция имеет вид: .</entry>
+            <entry>Отображает форму как диалог подтверждения. Если пользователь подтверждает выбор, то вызывается функция, переданная через параметр <literal>callback</literal>.</entry>
           </row>
           <row>
             <entry>
@@ -586,7 +586,7 @@ view.background = Color.black;</programlisting>
             <entry>
               <parameter>close(selected)</parameter>
             </entry>
-            <entry>Закрывает форму. Используется для возврата выбранного диалогом значения. Если он передан, то он будет передан <literal>callback</literal> функции переданнной, в свою очередь в качестве параметра методу <literal>showModal(callback)</literal> формы. Если он имеет значение <literal>null</literal>, то <literal>callback</literal> функция все же будет вызвана. Если он не передан вовсе, то <literal>callback</literal> функция вызвана не будет.</entry>
+            <entry>Закрывает форму. Может быть использована для возврата выбранного диалогом значения. Если параметр <parameter>selected</parameter> указан, то он будет передан в качестве аргумента <literal>callback</literal> функции переданнной, в свою очередь в качестве параметра методу <literal>showModal(<replaceable>callback</replaceable>)</literal> родительской формы. Если параметр <parameter>selected</parameter> имеет значение <literal>null</literal>, то <literal>callback</literal> функция все же будет вызвана. Если параметр <parameter>selected</parameter> не передан вовсе, то <literal>callback</literal> функция вызвана не будет.</entry>
           </row>
           <row>
             <entry>
@@ -615,7 +615,7 @@ view.background = Color.black;</programlisting>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>Пример модуля содержащего функцию, &quot;лениво&quot; создающую  и отображающую форму, а также функцию закрывающую форму:</para>
+    <para>Пример модуля, содержащего функцию, &quot;лениво&quot; создающую  и отображающую форму, а также функцию закрывающую форму:</para>
     <programlisting language="JavaScript">/**
  * @name formSupportModule 
  *
@@ -638,7 +638,7 @@ function closeSampleForm() {
   </section>
   <section>
     <title>Стандартные виджеты</title>
-    <para>Стандартные виджеты — компоненты  предназначенные для организации представления и взаимодействия с пользователем. </para>
+    <para>Стандартные виджеты — компоненты,  предназначенные для организации представления и взаимодействия с пользователем. </para>
     <para>Стандартные виджеты   в формах Platypus:</para>
     <itemizedlist>
       <listitem>
@@ -681,7 +681,7 @@ function closeSampleForm() {
         <para><guilabel>Editor Pane</guilabel> — Область редактора</para>
       </listitem>
     </itemizedlist>
-    <para>Для того, чтобы определить визуальное представление виджета задайте его свойства в дизайнере — на панели свойств или в программе. Для того, чтобы определить поведение компонента и его реакцию на действия пользователя задайте функции-обработчики его событий в дизайнере на панели свойств/событий. </para>
+    <para>Для того, чтобы определить визуальное представление виджета, задайте его свойства в дизайнере — на панели свойств или в программе. Для того, чтобы определить поведение компонента и его реакцию на действия пользователя, задайте функции-обработчики его событий в дизайнере на панели свойств/событий. </para>
     <para>Стандартные виджеты имеют набор свойств и событий общих для всех компонентов, а также собственные специфические свойства и события. </para>
     <para>Список свойств, одинаковых для всех компонентов представлен в таблице:</para>
     <informaltable>
@@ -709,7 +709,7 @@ function closeSampleForm() {
             <entry>
               <parameter>font</parameter>
             </entry>
-            <entry>Шрифт используемый на форме по-умолчанию</entry>
+            <entry>Шрифт, используемый на форме по-умолчанию</entry>
           </row>
           <row>
             <entry>
@@ -739,7 +739,7 @@ function closeSampleForm() {
             <entry>
               <parameter>autoscrolls</parameter>
             </entry>
-            <entry>Флаг, определяющий то что компонент автоматически прокручивает свое содержимое при перетаскивании</entry>
+            <entry>Флаг, определяющий то, что компонент автоматически прокручивает свое содержимое при перетаскивании</entry>
           </row>
           <row>
             <entry>
@@ -769,7 +769,7 @@ function closeSampleForm() {
             <entry>
               <parameter>focusable</parameter>
             </entry>
-            <entry>Флаг разрешающий форме получать фокус клавиатуры</entry>
+            <entry>Флаг, разрешающий форме получать фокус клавиатуры</entry>
           </row>
           <row>
             <entry>
@@ -786,7 +786,7 @@ function closeSampleForm() {
         </tbody>
       </tgroup>
     </informaltable>
-    <para>Список событий, которые  одинаковы для всех компонентов приведен в таблице:</para>
+    <para>Список событий, которые  одинаковы для всех компонентов, приведен в таблице:</para>
     <informaltable>
       <tgroup cols="4">
         <thead>
@@ -954,7 +954,7 @@ function closeSampleForm() {
       </tgroup>
     </informaltable>
     <note>
-      <para>На панели свойств, свойства объединены в группы, далее в тексте свойства приведены без объединения в группы. Свойства определяющие отображение компонента в менеджере компоновки (группа свойств <guilabel>Layout</guilabel> — Расположение) в тексте не приводятся и являются специфическими для каждого менеджера компоновки.</para>
+      <para>На панели свойств свойства объединены в группы. Далее в тексте свойства приведены без объединения в группы. Свойства определяющие отображение компонента в менеджере компоновки (группа свойств <guilabel>Layout</guilabel> — Расположение), в тексте не приводятся и являются специфическими для каждого менеджера компоновки.</para>
     </note>
     <section>
       <title>Label — Метка</title>
@@ -1044,7 +1044,7 @@ function closeSampleForm() {
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>Label</classname>, который может быть вызван с различным количеством параметров:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>Label</classname>, который может быть вызван с различным количеством параметров:</para>
       <programlisting language="JavaScript">var label1 = new Label();
 
 var label2 = new Label(<replaceable>text</replaceable>);
@@ -1053,7 +1053,7 @@ var label3 = new Label(<replaceable>text</replaceable>, <replaceable>icon</repla
 
 var label4 = new Label(<replaceable>text</replaceable>, <replaceable>icon</replaceable>, <replaceable>iconTextGap</replaceable>);</programlisting>
       <para>где <replaceable>text</replaceable> — текст, <replaceable>icon</replaceable> — иконка, <replaceable>iconTextGap</replaceable> — зазор между иконкой и текстом.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">label1.text = &quot;Message text&quot;;
 view.add(label1);</programlisting>
     </section>
@@ -1098,7 +1098,7 @@ view.add(label1);</programlisting>
               <entry>
                 <parameter>buttonGroup</parameter>
               </entry>
-              <entry>Группа кнопок / элементов меню к которым этот компонент принадлежит</entry>
+              <entry>Группа кнопок / элементов меню, к которым этот компонент принадлежит</entry>
             </row>
             <row>
               <entry>
@@ -1122,13 +1122,13 @@ view.add(label1);</programlisting>
               <entry>
                 <parameter>verticalAlignment</parameter>
               </entry>
-              <entry>Выравнивание текста относительно иконки по-вертикали </entry>
+              <entry>Выравнивание текста относительно иконки по вертикали </entry>
             </row>
             <row>
               <entry>
                 <parameter>verticalTextPosition</parameter>
               </entry>
-              <entry>Вертикальное положение текста, относительно иконки: <literal>BOTTOM</literal>, <literal>TOP</literal>, <literal>CENTER</literal></entry>
+              <entry>Вертикальное положение текста относительно иконки: <literal>BOTTOM</literal>, <literal>TOP</literal>, <literal>CENTER</literal></entry>
             </row>
           </tbody>
         </tgroup>
@@ -1167,7 +1167,7 @@ var btn4 = new Button(<replaceable>text</replaceable>, <replaceable>icon</replac
 
 var btn5 = new Button(<replaceable>text</replaceable>, <replaceable>icon</replaceable>, <replaceable>iconTextGap</replaceable>, <replaceable>actionPerformed</replaceable>);</programlisting>
       <para>где <replaceable>text</replaceable> — текст, <replaceable>icon</replaceable> — иконка, <replaceable>iconTextGap</replaceable> - зазор между иконкой и текстом, <replaceable>actionPerformed</replaceable> — обработчик события нажатия кнопки.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">btn1.text = &quot;Click me&quot;;
 btn1.onActionPerformed = function() {
   alert(&quot;Clicked!&quot;);
@@ -1231,7 +1231,7 @@ view.add(btn1);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>ToggleButton</classname>, который может быть вызван с различным количеством параметров:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>ToggleButton</classname>, который может быть вызван с различным количеством параметров:</para>
       <programlisting language="JavaScript">var btn1 = new ToggleButton();
 
 var btn2 = new ToggleButton(<replaceable>text</replaceable>);
@@ -1242,7 +1242,7 @@ var btn4 = new ToggleButton(<replaceable>text</replaceable>, <replaceable>icon</
 
 var btn5 = new ToggleButton(<replaceable>text</replaceable>, <replaceable>icon</replaceable>, <replaceable>iconTextGap</replaceable>, selected, <replaceable>actionPerformed</replaceable>);</programlisting>
       <para>где <replaceable>text</replaceable> — текст, <replaceable>icon</replaceable> — иконка, <replaceable>iconTextGap</replaceable> — зазор между иконкой и текстом, <replaceable>selected</replaceable> - <literal>true</literal>, если кнока выбрана, <replaceable>actionPerformed</replaceable> — обработчик события нажатия кнопки.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">btn1.text = &quot;Toggle me&quot;;
 btn.selected = true;
 btn1.onActionPerformed = function() {
@@ -1298,7 +1298,7 @@ view.add(btn1);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>CheckBox</classname>, который может быть вызван с различным количеством параметров:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>CheckBox</classname>, который может быть вызван с различным количеством параметров:</para>
       <programlisting language="JavaScript">var cb1 = new CheckBox();
 
 var cb2 = new CheckBox(<replaceable>text</replaceable>);
@@ -1307,7 +1307,7 @@ var cb3 = new CheckBox(<replaceable>text</replaceable>, <replaceable>selected</r
 
 var cb4 = new CheckBox(<replaceable>text</replaceable>, <replaceable>selected</replaceable>, <replaceable>actionPerformed</replaceable>);</programlisting>
       <para>где <replaceable>text</replaceable> — текст, <replaceable>icon</replaceable> — иконка, <replaceable>selected</replaceable> — флаг, указывающий выбран ли флажок, <replaceable>actionPerformed</replaceable> — обработчик события переключения флажка.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">cb1.text = &quot;Check box 1&quot;;
 cb1.selected = true;
 cb1.onActionPerformed = function() {
@@ -1360,7 +1360,7 @@ view.add(cb1);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>RadioButton</classname>, который может быть вызван с различным количеством параметров:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>RadioButton</classname>, который может быть вызван с различным количеством параметров:</para>
       <programlisting language="JavaScript">var rb1 = new RadioButton();
 
 var rb2 = new RadioButton(<replaceable>text</replaceable>);
@@ -1375,7 +1375,7 @@ var rb4 = new RadioButton(<replaceable>text</replaceable>, <replaceable>selected
         </code> — флаг, определяющий выбрана ли радио кнока; <code>
           <replaceable>action</replaceable>
         </code> — функция обработчика переключения кнопки.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">rb1.text = &quot;Radio button 1&quot;;
 rb1.selected = true;
 rb1.onActionPerformed = function(evt) {
@@ -1391,18 +1391,18 @@ view.add(rb1);</programlisting>
         вариант из множества. Непосредственное использование нескольких
         выключателей не даст желаемого эффекта — они будут менять свое
         состояние независимо друг от друга. </para>
-      <para>Группа кнопок предназначена для того, чтобы обеспечивать одновременный выбор только одного  из нескольких виджетов типа <emphasis>Кнопка выключатель</emphasis>, <emphasis>Кнопка переключатель</emphasis> и <emphasis>Переключаемый пункт меню</emphasis> для которых задана одна и та же группа кнопок. При выборе одного из виджетов в группе остальные будут сброшены.</para>
+      <para>Группа кнопок предназначена для того, чтобы обеспечивать одновременный выбор только одного  из нескольких виджетов типа <emphasis>Кнопка выключатель</emphasis>, <emphasis>Кнопка переключатель</emphasis> и <emphasis>Переключаемый пункт меню</emphasis>, для которых задана одна и та же группа кнопок. При выборе одного из виджетов в группе остальные будут сброшены.</para>
       <para>Установите свойство <literal>buttonGroup</literal> для компонентов типов <emphasis>Кнопка выключатель</emphasis>, <emphasis>Кнопка переключатель</emphasis> и <emphasis>Переключаемый пункт меню</emphasis>, для этого выберите  соответствующую  группу кнопок из списка поля свойства на панели свойств.</para>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>ButtonGroup</classname>:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>ButtonGroup</classname>:</para>
       <programlisting language="JavaScript">var bg1 = new ButtonGroup();</programlisting>
-      <para>После создания, добавьте виджеты кнопок в группу:</para>
+      <para>После создания добавьте виджеты кнопок в группу:</para>
       <programlisting language="JavaScript">bg1.add(rb1);// Add radio button 1
 bg1.add(rb2);// Add radio button 2
 view.add(bg1);</programlisting>
     </section>
     <section>
       <title>Text Field — Текстовое поле</title>
-      <para><emphasis>Текстовое поле</emphasis> — простой компонент позволяющий редактировать одну строку текста.</para>
+      <para><emphasis>Текстовое поле</emphasis> — простой компонент, позволяющий редактировать одну строку текста.</para>
       <para>Список свойств данного компонента представлен в таблице:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1487,14 +1487,14 @@ view.add(bg1);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>TextField</classname>, который может быть вызван с различным количеством параметров:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>TextField</classname>, который может быть вызван с различным количеством параметров:</para>
       <programlisting language="JavaScript">var tf1 = new TextField();
 
 var tf2 = new TextField(<replaceable>text</replaceable>);</programlisting>
       <para>где <code>
           <replaceable>text</replaceable>
         </code> — текст поля.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">tf.text = &quot;Default text&quot;;
 view.add(rb1);</programlisting>
     </section>
@@ -1545,19 +1545,19 @@ view.add(rb1);</programlisting>
               <entry>
                 <parameter>paintLabels</parameter>
               </entry>
-              <entry>Флаг, определяющий нужно ли показывать значения</entry>
+              <entry>Флаг, определяющий, нужно ли показывать значения</entry>
             </row>
             <row>
               <entry>
                 <parameter>paintTicks</parameter>
               </entry>
-              <entry>Флаг, определяющий нужно ли показывать отметки</entry>
+              <entry>Флаг, определяющий, нужно ли показывать отметки</entry>
             </row>
             <row>
               <entry>
                 <parameter>paintTrack</parameter>
               </entry>
-              <entry>Флаг, определяющий нужно ли показывать направляющую ползунка</entry>
+              <entry>Флаг, определяющий, нужно ли показывать направляющую ползунка</entry>
             </row>
             <row>
               <entry>
@@ -1581,7 +1581,7 @@ view.add(rb1);</programlisting>
               <entry>
                 <parameter>valueIsAjusting</parameter>
               </entry>
-              <entry>Флаг, показывающий что происходит движение ползунка</entry>
+              <entry>Флаг, показывающий, что происходит движение ползунка</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1617,14 +1617,14 @@ view.add(rb1);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>Slider</classname>, который может быть вызван с различным количеством параметров:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>Slider</classname>, который может быть вызван с различным количеством параметров:</para>
       <programlisting language="JavaScript">var sl1 = new Slider(<replaceable>orientation</replaceable>);
 
 var sl2 = new Slider(<replaceable>orientation</replaceable>, <replaceable>min</replaceable>, <replaceable>max</replaceable>, <replaceable>value</replaceable>);</programlisting>
       <para>где <code>
           <replaceable>orientation</replaceable>
         </code> — ориентация ползунка, объект типа <classname>Orientation</classname>, <replaceable>min</replaceable> — минимальное значение; <replaceable>max</replaceable> — максимальное значение, <replaceable>value</replaceable> — текущее значение.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">var sl1 = new Slider(Orientation.HORIZONTAL);
 sl1.minimum = 0;
 sl1.maximum = 100;
@@ -1636,9 +1636,9 @@ view.add(sl1);</programlisting>
     </section>
     <section>
       <title>Progress Bar — Индикатор прогресса</title>
-      <para><emphasis>Индикатор прогресса</emphasis> — компонент визуально отображающий прогресс какой-либо задачи. </para>
+      <para><emphasis>Индикатор прогресса</emphasis> — компонент, визуально отображающий прогресс какой-либо задачи. </para>
       <para>Например, во время исполнения  задачи для нее может быть известен процент готовности. В этом случае установите значение свойства <guilabel>minimum</guilabel> равное 0, <guilabel>maximum</guilabel> равное 100 и задавайте  свойство <guilabel>value</guilabel> при получении новых данных о прогрессе этой задачи.</para>
-      <para>В случае, если информации о текущем прогрессе задачи нет или ее невозможно получить - используйте режим  неопределенности, в котором индикатор будет показывать не величину прогресса, а лишь то, что задача началась, но еще не завершилась.</para>
+      <para>В случае, если информации о текущем прогрессе задачи нет или ее невозможно получить, —  используйте режим  неопределенности, в котором индикатор будет показывать не величину прогресса, а лишь то, что задача началась, но еще не завершилась.</para>
       <para>Список специфических свойств данного компонента представлен в таблице:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1717,7 +1717,7 @@ view.add(sl1);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы программно создать компонент данного типа используйте конструктор <classname>ProgressBar</classname>, который может быть вызван с различным числом параметров:</para>
+      <para>Для того, чтобы программно создать компонент данного типа, используйте конструктор <classname>ProgressBar</classname>, который может быть вызван с различным числом параметров:</para>
       <programlisting language="JavaScript">var pb1 = new ProgressBar();
 
 var pb2 = new ProgressBar(<replaceable>min</replaceable>, <replaceable>max</replaceable>);</programlisting>
@@ -1726,7 +1726,7 @@ var pb2 = new ProgressBar(<replaceable>min</replaceable>, <replaceable>max</repl
         </code> - минимальное значение; <code>
           <replaceable>max</replaceable>
         </code> - максимальное значение.</para>
-      <para>После создания, при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
+      <para>После создания при необходимости задайте свойства и обработчики событий компонента и добавьте его в контейнер:</para>
       <programlisting language="JavaScript">var pb1 = new ProgressBar();
 pb1.minimum = 0;
 pb1.maximum = 100;
@@ -1734,7 +1734,7 @@ view.add(pb1);</programlisting>
     </section>
     <section>
       <title>Formatted Field — Форматированное поле</title>
-      <para><emphasis>Форматированное поле</emphasis> —  компонент позволяющий редактировать значения в виде строки  текста. При этом можно задать набор символов, которые будут допустимыми для ввода в это поле. Для этого виджета можно задать формат и объект значения: формат преобразует значение в представление для отображения.</para>
+      <para><emphasis>Форматированное поле</emphasis> —  компонент, позволяющий редактировать значения в виде строки  текста. При этом можно задать набор символов, которые будут допустимыми для ввода в это поле. Для этого виджета можно задать формат и объект значения: формат преобразует значение в представление для отображения.</para>
       <para>Используя предопредённые способы форматирования можно настроить этот виджет для ввода даты, чисел в предопределённых форматах, а также задать произвольный формат для ввода строк.</para>
       <para>Список свойств   виджета <emphasis>Форматированное поле</emphasis> аналогичен свойствам  виджета <emphasis>Текстовое поле</emphasis>, с добавлением следующих специфических свойств:</para>
       <informaltable>
