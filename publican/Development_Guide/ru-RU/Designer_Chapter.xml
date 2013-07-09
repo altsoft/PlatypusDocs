@@ -71,7 +71,7 @@
     <para>Для того, чтобы открыть существующий проект Platypus выполните следующие действия:
    <itemizedlist>
         <listitem>
-          <para>запустите дизайнер   (если он еще не запущен). Для этого воспользуйтесь ярлыком <guiicon>Platypus Application Designer</guiicon> на рабочем столе или пунктом меню установленных приложений;</para>
+          <para>запустите дизайнер   (если он еще не запущен) — для этого воспользуйтесь ярлыком <guiicon>Platypus Application Designer</guiicon> на рабочем столе или пунктом меню установленных приложений;</para>
         </listitem>
         <listitem>
           <para>выберите пункт меню <menuchoice>
@@ -187,10 +187,10 @@
         <para>копировать и перенести каталог или элементы приложения в указанное место проекта путем перетаскивания, для копирования удерживайте кнопку <keycap>Ctrl</keycap> во время перетаскивания   - команда <command>Drag-and-Drop</command>; </para>
       </listitem>
       <listitem>
-        <para>удаление  элемента приложения - команда <command>Delete</command>;</para>
+        <para>удаление  элемента приложения — команда <command>Delete</command>;</para>
       </listitem>
       <listitem>
-        <para>поиск элемента в проекте- команда <command>Find</command> .</para>
+        <para>поиск элемента в проекте — команда <command>Find</command> .</para>
       </listitem>
     </itemizedlist>
     <para>Выполните данные операции используя контекстное меню элемента, пункты меню <menuchoice>
@@ -249,7 +249,7 @@
             <keycap> Ctl</keycap>
             <keycap>Shift</keycap>
             <keycap>I</keycap>
-          </keycombo>;</para>
+          </keycombo>.</para>
       </listitem>
     </itemizedlist>
     <para>Для того, чтобы запустить приложение:</para>
@@ -258,7 +258,7 @@
         <para>выберите элемент приложения в дереве элементов приложения проектов;</para>
       </listitem>
       <listitem>
-        <para>нажмите кнопку <guibutton>Run project</guibutton> на главной панели инструментов или  выберите пункт контекстного меню  элемента <guimenuitem>Run</guimenuitem> элемента приложения;</para>
+        <para>нажмите кнопку <guibutton>Run project</guibutton> на главной панели инструментов или  выберите пункт контекстного меню  элемента <guimenuitem>Run</guimenuitem> элемента приложения.</para>
       </listitem>
     </itemizedlist>
     <para>В случае если элемент для запуска приложения не выбран явно в качестве стартового элемента будет задан стартовый элемент приложения по умолчанию из настроек проекта.</para>
@@ -349,13 +349,13 @@
     <para><application>Platypus Application Designer</application> имеет встроенную поддержку следующих  систем контроля версий: </para>
     <itemizedlist>
       <listitem>
-        <para><application>Subversion</application>;</para>
+        <para><application>Subversion</application></para>
       </listitem>
       <listitem>
-        <para><application>Git</application>;</para>
+        <para><application>Git</application></para>
       </listitem>
       <listitem>
-        <para><application>Mercurial</application>.</para>
+        <para><application>Mercurial</application></para>
       </listitem>
     </itemizedlist>
     <para>Для доступа к возможностям данных систем контроля версий используйте пункт <guimenuitem>Team</guimenuitem> глобального меню и/или подменю <guisubmenu>Versioning</guisubmenu> контекстного меню  проекта.</para>

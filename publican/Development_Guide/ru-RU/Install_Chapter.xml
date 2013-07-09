@@ -70,11 +70,11 @@
         </listitem>
         <listitem>
           <para>
-прочитайте условия лицензирования программного обеспечения и для  их принятия установите флажок <guilabel>I accept the terms of the license agreement</guilabel>. Нажмите кнопку <guibutton>Next</guibutton> для перехода к следующему шагу процесса установки;</para>
+прочитайте условия лицензирования программного обеспечения и для  их принятия установите флажок <guilabel>I accept the terms of the license agreement</guilabel>; Нажмите кнопку <guibutton>Next</guibutton> для перехода к следующему шагу процесса установки;</para>
         </listitem>
         <listitem>
           <para>
-выберите каталог установки приложений и опции по созданию ярлыков на Рабочем столе и пунктов в меню установленных программ; Нажмите кнопку <guibutton>Next</guibutton> для  перехода к следующему шагу процесса установки;</para>
+выберите каталог установки приложений и опции по созданию ярлыков на Рабочем столе и пунктов в меню установленных программ; нажмите кнопку <guibutton>Next</guibutton> для  перехода к следующему шагу процесса установки;</para>
         </listitem>
         <listitem>
           <para>
@@ -105,7 +105,7 @@
     <para>Для того, чтобы принудительно изменить язык локализации: </para>
     <itemizedlist>
       <listitem>
-        <para>отредактируйте файл конфигурации <application>Platypus Application Designe</application>r - добавьте в параметр <parameter>default_options</parameter> опцию <option>--locale ru:RU</option> или <option>--locale en:US</option>;</para>
+        <para>отредактируйте файл конфигурации <application>Platypus Application Designe</application>r — добавьте в параметр <parameter>default_options</parameter> опцию <option>--locale ru:RU</option> или <option>--locale en:US</option>;</para>
       </listitem>
       <listitem>
         <para>перезапустите дизайнер приложений.</para>
@@ -137,7 +137,7 @@
           </menuchoice>;</para>
       </listitem>
       <listitem>
-        <para>в диалоге выбора задайте путь к каталогу размещения Platypus Platform;</para>
+        <para>в диалоге выбора задайте путь к каталогу размещения Platypus Platform.</para>
       </listitem>
     </itemizedlist>
     <para>Добавьте экземпляр J2EE сервера, который может быть использован для запуска приложения Platypus:</para>
@@ -146,7 +146,7 @@
         <para>в окне <guilabel>Services</guilabel> в контекстном меню узла <guilabel>Servers</guilabel> выберите пункт <guimenuitem>Add server...</guimenuitem>;</para>
       </listitem>
       <listitem>
-        <para>в мастере добавления J2EE сервера выберите тип сервера, его имя и задайте его настройки: путь к каталогу сервера, логин и пароль администратора;</para>
+        <para>в мастере добавления J2EE сервера выберите тип сервера, его имя и задайте его настройки: путь к каталогу сервера, логин и пароль администратора.</para>
       </listitem>
     </itemizedlist>
     <note>

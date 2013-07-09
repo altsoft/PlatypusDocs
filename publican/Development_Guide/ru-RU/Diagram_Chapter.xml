@@ -85,7 +85,7 @@
             <keycap>Ctrl</keycap>
             <keycap>Shift</keycap>
             <keycap>S</keycap>
-          </keycombo>;</para>
+          </keycombo>.</para>
       </listitem>
     </itemizedlist>
     <para>Для создания новой таблицы и добавления её  на диаграмму  выполните следующие действия:
@@ -173,7 +173,7 @@
         <para><guilabel>Required</guilabel> — обязательное поле (в поле недопустимы значения <literal>NULL)</literal>;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Default value</guilabel> — значение по умолчанию;</para>
+        <para><guilabel>Default value</guilabel> — значение по умолчанию.</para>
       </listitem>
     </itemizedlist>
     <informaltable>
@@ -295,7 +295,7 @@
         <para>при необходимости установите флажок <guilabel>Clustered</guilabel> на  панели свойств узла индекса, чтобы сделать индекс кластерным;</para>
       </listitem>
       <listitem>
-        <para>при необходимости установите флажок <guilabel>Hashed</guilabel> на  панели свойств узла индекса, чтобы включить или выключить хеширование для этого индекса;</para>
+        <para>при необходимости установите флажок <guilabel>Hashed</guilabel> на  панели свойств узла индекса, чтобы включить или выключить хеширование для этого индекса.</para>
       </listitem>
     </itemizedlist>
     <para>Для того, чтобы изменить индекс:</para>
@@ -313,7 +313,7 @@
         <para>выберите индекс среди дочерних узлов соответствующей таблицы в инспекторе;</para>
       </listitem>
       <listitem>
-        <para>выберите пункт меню <guimenuitem>Delete контекстного меню узла индекса</guimenuitem>;</para>
+        <para>выберите пункт меню <guimenuitem>Delete контекстного меню узла индекса</guimenuitem>.</para>
       </listitem>
     </itemizedlist>
     <para>Для того, чтобы добавить внешний ключ таблицы:</para>

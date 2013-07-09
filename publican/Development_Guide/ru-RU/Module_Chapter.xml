@@ -986,7 +986,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
         <para>изменяйте, удаляйте или добавляйте объекты в сущности и дайте модели данных сохранить изменения;</para>
       </listitem>
       <listitem>
-        <para>прочитайте метаданные сущностей для специальных нужд;</para>
+        <para>прочитайте метаданные сущностей для специальных нужд.</para>
       </listitem>
     </itemizedlist>
     <section>
@@ -1450,7 +1450,7 @@ if (category[0]) {
         </listitem>
       </itemizedlist>
       <para>Для вставки нового объекта в набор данных используйте функции <methodname>insert</methodname> или <methodname>push</methodname>  сущности. При необходимости присвойте значения свойств для вставленного объекта.</para>
-      <para>Вызовите функцию <methodname>insert</methodname> для вставки нового объекта в данные сущности. При необходимости передайте в функцию в качестве параметров пары ключ-значение, где ключ - имя свойства, а значение — значение этого свойства:</para>
+      <para>Вызовите функцию <methodname>insert</methodname> для вставки нового объекта в данные сущности. При необходимости передайте в функцию в качестве параметров пары ключ-значение, где ключ — имя свойства, а значение — значение этого свойства:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.insert();</programlisting>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.insert(
   <replaceable>entityName</replaceable>.md.<replaceable>propName1</replaceable>, <replaceable>propValue1</replaceable>,
