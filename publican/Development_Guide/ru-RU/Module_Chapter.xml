@@ -132,28 +132,28 @@
           <programlisting language="JavaScript">var moduleInstance = new <replaceable>ModuleName</replaceable>();</programlisting>
           <para>где <code>
               <replaceable>ModuleName</replaceable>
-            </code> - конструктор модуля, имя которого соответствует имени-идентификатору модуля;</para>
+            </code> — конструктор модуля, имя которого соответствует имени-идентификатору модуля;</para>
         </listitem>
         <listitem>
           <para>создайте экземпляр модуля при помощи ключевого слова <literal>new</literal>, например:</para>
           <programlisting language="JavaScript">var moduleInstance = new Module(<replaceable>ModuleName</replaceable>);</programlisting>
           <para>где <code>
               <replaceable>ModuleName</replaceable>
-            </code> - строка имени-идентификатора модуля, например, <literal>&quot;WebModule&quot;</literal>;</para>
+            </code> — строка имени-идентификатора модуля, например, <literal>&quot;WebModule&quot;</literal>;</para>
         </listitem>
         <listitem>
           <para>получите экземпляр модуля из пула модулей:</para>
           <programlisting language="JavaScript">var moduleInstance = Modules.get(<replaceable>ModuleName</replaceable>);</programlisting>
           <para>где <code>
               <replaceable>ModuleName</replaceable>
-            </code> - строка имени-идентификатора модуля;</para>
+            </code> — строка имени-идентификатора модуля;</para>
         </listitem>
         <listitem>
           <para>создайте прокси-заглушку серверного модуля, при этом код модуля будет выполнятся  на сервере приложений:</para>
           <programlisting language="JavaScript">var moduleInstance = new ServerModule(<replaceable>ModuleName</replaceable>);</programlisting>
           <para>где <code>
               <replaceable>ModuleName</replaceable>
-            </code> - строка имени-идентификатора модуля, серверный модуль должен быть помечен аннотацией <code>@public</code>;</para>
+            </code> — строка имени-идентификатора модуля, серверный модуль должен быть помечен аннотацией <code>@public</code> для доступа из клиентского кода.</para>
         </listitem>
       </itemizedlist>
       <para>Параметром, который передается в конструктор или методом для получения экземпляра модуля является его  имя-идентификатор.</para>
@@ -181,7 +181,7 @@
       </itemizedlist>
       <para>В случае, если зависимость не нужно или невозможно разрешать автоматически, например, если необходимо  динамически определить вызваемый модуль — примените ручное разрешение зависимостей. Для этого вызовите глобальную функцию <code>require</code>. Также используйте функцию  <code>require</code> для загрузки ресурсов JavaScript.</para>
       <programlisting language="JavaScript">require(<replaceable>param</replaceable>, <replaceable>callback</replaceable>())</programlisting>
-      <para>где <replaceable>param</replaceable> - имя-идентификатор модуля, относительный путь в приложении к файлу JavaScript  или массив этих элементов; <replaceable>callback</replaceable> —  функция, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
+      <para>где <replaceable>param</replaceable> — имя-идентификатор модуля, относительный путь в приложении к файлу JavaScript  или массив этих элементов; <replaceable>callback</replaceable> —  функция, которая будет вызвана после того как все упомянутые элементы приложения будут загружены и станут доступны для вызова.</para>
       <para>Пример использования ручного разрешения зависимостей для модулей:</para>
       <programlisting language="JavaScript">var moduleName1 = &quot;Module1&quot;,
     moduleName2 = &quot;Module2&quot;;
@@ -275,7 +275,7 @@ function f2() {
 if (principal.hasRole(&apos;Manager&apos;)) {
   // Some operations allowed only to managers ...
 }</programlisting>
-      <para>Используйте глобальную функцию <function>logout(<replaceable>callback</replaceable>())</function>, где <function><replaceable>callback</replaceable>()</function> -  функция, которая будет вызвана после того как сеанс  будет завершен. Открытые формы будут закрыты и пользователю будет показана форма ввода логина и пароля. </para>
+      <para>Используйте глобальную функцию <function>logout(<replaceable>callback</replaceable>())</function>, где <function><replaceable>callback</replaceable>()</function> —  функция, которая будет вызвана после того как сеанс  будет завершен. Открытые формы будут закрыты и пользователю будет показана форма ввода логина и пароля. </para>
     </section>
     <section>
       <title>Загрузка ресурсов</title>
@@ -397,7 +397,7 @@ Logger.severe(&quot;severe error&quot;);</programlisting>
     <section>
       <title>Ввод-вывод</title>
       <para>Для чтения и записи файлов используйте средства, предоставляемые Java. </para>
-      <para>Для чтения и записи строк используйте функции <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code> и <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code>, где <parameter>path</parameter> - путь к файлу, <parameter>text</parameter> — строка, <parameter>encoding</parameter> - имя кодировки. Параметр <parameter>encoding</parameter> в обоих функциях является необязательным и по умолчанию установленным для кодировки UTF-8. </para>
+      <para>Для чтения и записи строк используйте функции <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code> и <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code>, где <parameter>path</parameter> — путь к файлу, <parameter>text</parameter> — строка, <parameter>encoding</parameter> — имя кодировки. Параметр <parameter>encoding</parameter> в обоих функциях является необязательным и по умолчанию установленным для кодировки UTF-8. </para>
       <para>Пример использования функций чтения и записи строк в файл:</para>
       <programlisting language="JavaScript">//Read from one text file and write to another
 var str = readString(&apos;/home/user1/Documents/doc1.txt&apos;);
@@ -623,10 +623,10 @@ XML.ignoreProcessingInstructions = false;</programlisting>
     <para>Поля и/или параметры сущностей могут быть соединены связями. Связи в модели данных могут быть следующих типов:</para>
     <itemizedlist>
       <listitem>
-        <para>связь запроса - в случае, если конечной точкой связи является параметр;</para>
+        <para>связь запроса — в случае, если конечной точкой связи является параметр;</para>
       </listitem>
       <listitem>
-        <para>связь фильтра - в случае, если конечной точкой связи является поле;</para>
+        <para>связь фильтра — в случае, если конечной точкой связи является поле;</para>
       </listitem>
       <listitem>
         <para>связь, определяемая внешними ключами  для полей данных сущностей.</para>
@@ -1053,7 +1053,7 @@ try {
         </varname> — свойство соответствующего параметра.</para>
       <para>Для того, чтобы установить значения параметра, присвойте ему новое значение:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
-      <para>где <literal>newValue</literal> - новое значение параметра.</para>
+      <para>где <literal>newValue</literal> — новое значение параметра.</para>
       <note>
         <para>Установка нового значения параметра сущности не приводит к автоматическому обновлению её данных.</para>
       </note>
@@ -1556,7 +1556,7 @@ model.save();// Commit all changes</programlisting>
                 <parameter>changed</parameter>
               </entry>
               <entry>нет</entry>
-              <entry><parameter>aField</parameter> - Object, измененное свойство; <parameter>aOldValue</parameter> - Object, старое значение; <parameter>aNewValue</parameter> - Object, новое значение; <parameter>aObj</parameter> - измененный объект;</entry>
+              <entry><parameter>aField</parameter> — <classname>Object</classname>, измененное свойство; <parameter>aOldValue</parameter> — <classname>Object</classname>, старое значение; <parameter>aNewValue</parameter> — <classname>Object</classname>, новое значение; <parameter>aObj</parameter> - измененный объект;</entry>
               <entry>Вызывается после изменения свойств объекта сущности</entry>
             </row>
             <row>
@@ -1588,7 +1588,7 @@ model.save();// Commit all changes</programlisting>
                 <parameter>scrolled</parameter>
               </entry>
               <entry>нет</entry>
-              <entry><parameter>aOldIndex</parameter> - <classname>Numeric</classname>, старое положение курсора; <parameter>aNewIndex</parameter> - <classname>Number</classname>, новое положение курсора;</entry>
+              <entry><parameter>aOldIndex</parameter> — <classname>Numeric</classname>, старое положение курсора; <parameter>aNewIndex</parameter> - <classname>Number</classname>, новое положение курсора;</entry>
               <entry>Вызывается после изменения положения курсора в массиве данных сущности.</entry>
             </row>
             <row>
@@ -1596,7 +1596,7 @@ model.save();// Commit all changes</programlisting>
                 <parameter>willChange</parameter>
               </entry>
               <entry>да</entry>
-              <entry><parameter>aField</parameter> - Object, измененное свойство; <parameter>aOldValue</parameter> - Object, старое значение; <parameter>aNewValue</parameter> - Object, новое значение; <parameter>aObj</parameter> - измененный объект; </entry>
+              <entry><parameter>aField</parameter> — <classname>Object</classname>, измененное свойство; <parameter>aOldValue</parameter> — <classname>Object</classname>, старое значение; <parameter>aNewValue</parameter> — <classname>Object</classname>, новое значение; <parameter>aObj</parameter> — измененный объект; </entry>
               <entry>Вызывается перед изменением свойств объекта в данных сущности.</entry>
             </row>
             <row>
