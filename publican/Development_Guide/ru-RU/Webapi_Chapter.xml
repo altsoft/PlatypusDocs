@@ -55,8 +55,8 @@
         </tbody>
       </tgroup>
     </informaltable>
-    <para>Пример URL для вызова метода серверого модуля в метод передаются два параметра: строка <parameter>Hello Platypus</parameter> и число <parameter>2</parameter> (URL приведена в незакодированном виде):</para>
-    <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=Test&amp;__methodName=test&amp;__param[]=Hello Platypus&amp;__param[]=2</uri></para>
+    <para>Пример URL для вызова метода серверого модуля в метод передаются два параметра: строка <parameter>Hello Platypus</parameter> и число <parameter>1</parameter> (URL приведена в незакодированном виде):</para>
+    <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=TestModule&amp;__methodName=say&amp;__param[]=Hello Platypus&amp;__param[]=1</uri></para>
   </section>
   <section>
     <title>JavaScript API</title>
@@ -182,7 +182,7 @@
     <programlisting language="JavaScript">$(function() {
   platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
   platypus.api.executeServerModuleMethod(
-     &apos;TestModule&apos;,
+     &apos;WebModule&apos;,
      &apos;testMethod&apos;,
       [&apos;Hello&apos;, &apos;Platypus&apos;],
        function(result) { 
@@ -191,7 +191,8 @@
 });</programlisting>
     <para>Пример кода соответствующего серверного модуля:</para>
     <programlisting language="JavaScript">/**
- * @name TestModule
+ * @public
+ * @name WebModule
  */
 
 function testMethod(p1, p2) {
@@ -215,7 +216,7 @@ function testMethod(p1, p2) {
     <para>Пример клиентского кода, в котором после загрузки страницы вызывается серверный метод <methodname>testModule.testMethod</methodname> с параметрами-строками <parameter>Hello</parameter> и <parameter>Platypus</parameter> и возвращаемым объектом, свойство <property>prop1</property> которого будет выведено в консоль: </para>
     <programlisting language="JavaScript">$(function() {
  platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
- platypus.server.Module.get(&quot;TestModule&quot;, testModuleReady);
+ platypus.server.Module.get(&quot;WebModule&quot;, testModuleReady);
  function testModuleReady(module) {
      module.testMethod(&quot;Hello&quot;, &quot;world&quot;, 
          function(result) {
@@ -465,15 +466,10 @@ function testMethod(p1, p2) {
       </tgroup>
     </informaltable>
     <para>В приведенном ниже примере на  выводятся все заголовки запроса:</para>
-    <programlisting language="JavaScript">/**
- * @name TestModule
- */
-
-function printHeadres() {
-  for (var c in http.response.headers) {
-       Logger.info(c + &apos; - &apos; + http.response.headers[c]);
-  }
-}</programlisting>
+    <programlisting language="JavaScript">for (var c in http.response.headers) {
+    Logger.info(c + &apos; - &apos; + http.response.headers[c]);
+}
+</programlisting>
     <para>Объект ответа <code>response</code> содержит следующие свойства и методы: </para>
     <informaltable>
       <tgroup cols="2">
@@ -609,18 +605,11 @@ function printHeadres() {
       </tgroup>
     </informaltable>
     <para>В приведенном ниже примере в HTTP ответ будет добавлен новый куки:</para>
-    <programlisting language="JavaScript">/**
- * @name TestModule
- */
-
-function addCookie() {
-  http.response.addCookie(
-     { name : &apos;platypus&apos;,
-       value : &apos;test&apos;,
-       maxAge : 60*60
-     }
-   )
-}</programlisting>
+    <programlisting language="JavaScript">http.response.addCookie({ 
+    name : &apos;platypus&apos;,
+    value : &apos;test&apos;,
+    maxAge : 60*60
+});</programlisting>
     <para>Для того, чтобы удалить куки из браузера, задайте его свойство <parameter>maxAge</parameter> равным 0.</para>
   </section>
 </chapter>
