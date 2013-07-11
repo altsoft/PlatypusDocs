@@ -8,7 +8,7 @@
   <para>Серверные компоненты <application>Platypus</application> могут работать в  сервлет-контейнере или J2EE сервере. Данная конфигурация имеет  следующие особенности:</para>
   <itemizedlist>
     <listitem>
-      <para>серверные компоненты Platypus развертываются в J2EE сервер как  web-приложение - в виде  WAR-архива или папки, взаимодействие с клиентом обеспечивается при помощи серлета Platypus;</para>
+      <para>серверные компоненты Platypus развертываются в J2EE сервер как  web-приложение — в виде  WAR-архива или папки, взаимодействие с клиентом обеспечивается при помощи серлета Platypus;</para>
     </listitem>
     <listitem>
       <para>возможна работа <application>Java SE клиента (Platypus Client</application>), так и HTML5 браузерного клиента, а также Web-сайта с использованием Platypus Web API;</para>
@@ -17,7 +17,7 @@
       <para>обмен данными с клиентом происходит по протоколу HTTP/HTTPS;</para>
     </listitem>
     <listitem>
-      <para>возможно использование внешнего сервиса аутентификации пользователей,   например, службы <application> Microsoft Active Directory</application>,  что позволяет интегрировать конечное приложение платформы Platypus в существующее на предприятии пространство пользователей; </para>
+      <para>возможно использование внешнего сервиса аутентификации пользователей,   например, службы <application>Microsoft Active Directory</application>,  что позволяет интегрировать конечное приложение платформы Platypus в существующее на предприятии пространство пользователей; </para>
     </listitem>
     <listitem>
       <para>связь сервера приложений Platypus с БД осуществляется через настроенный в виде ресурса JNDI источник данных; </para>
@@ -55,27 +55,33 @@
     <para>Для корректной работы сервлета Platypus отредактируйте файл <filename>WEB-INF/web.xml</filename>:</para>
     <orderedlist>
       <listitem>
-        <para>задайте параметр инициализации с именем <parameter>ap</parameter> и значением имени пути к папке приложения Platypus, путь может быть абсолютным или относительным внутри web-приложения. В случае если web-приложение упаковывается в war-архив, относительный путь будет работать, если сервер распаковывает этот архив при разврертывании приложения. В случае, если этот параметр не задан, приложение будет загружено из базы данных. В приведенном ниже примере задан относительный путь <filename>app</filename>:</para>
+        <para>задайте параметр инициализации с именем <parameter>ap</parameter> и значением имени пути к папке приложения Platypus, путь может быть абсолютным или относительным внутри web-приложения; в случае если web-приложение упаковывается в war-архив, относительный путь будет работать, если сервер распаковывает этот архив при разврертывании приложения; в случае, если этот параметр не задан, приложение будет загружено из базы данных; в приведенном ниже примере задан абсолютный путь:</para>
         <programlisting>...
 &lt;context-param&gt;
     &lt;param-name&gt;ap&lt;/param-name&gt;
-    &lt;param-value&gt;app&lt;/param-value&gt;
+    &lt;param-value&gt;/home/Platypus/app&lt;/param-value&gt;
  &lt;/context-param&gt;
 ...</programlisting>
       </listitem>
       <listitem>
-        <para>задайте параметр инициализации с именем <parameter>url</parameter> и значением имени JNDI ресурса источника данных  JDBC, например, <literal>java:/jdbc/main</literal>.</para>
+        <para>задайте параметр инициализации с именем <parameter>url</parameter> и значением имени JNDI ресурса источника данных  JDBC, например:</para>
+        <programlisting>...
+&lt;context-param&gt;
+    &lt;param-name&gt;url&lt;/param-name&gt;
+    &lt;param-value&gt;jdbc/main&lt;/param-value&gt;
+ &lt;/context-param&gt;
+...</programlisting>
       </listitem>
       <listitem>
-        <para>задайте необязательный параметр инициализации с именем <parameter>dbschema</parameter> и значением схемы БД по умолчанию, например,   <literal>test</literal>.</para>
+        <para>задайте необязательный параметр инициализации с именем <parameter>dbschema</parameter> и значением схемы БД по умолчанию, например,   <literal>test</literal>;</para>
       </listitem>
       <listitem>
         <para>добавьте ссылку на  ресурс источика данных:</para>
         <programlisting>...
 &lt;resource-ref&gt;
-        &lt;res-ref-name&gt;jdbc/main&lt;/res-ref-name&gt;
-        &lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;
-        &lt;res-auth&gt;Container&lt;/res-auth&gt;
+    &lt;res-ref-name&gt;jdbc/main&lt;/res-ref-name&gt;
+    &lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;
+    &lt;res-auth&gt;Container&lt;/res-auth&gt;
 &lt;/resource-ref&gt;
 ...</programlisting>
       </listitem>

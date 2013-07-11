@@ -22,7 +22,7 @@
       <para>масштабируемость конечного приложения; </para>
     </listitem>
     <listitem>
-      <para>возможность использовать HTML5 браузерного клиента (работа с сервлет-контейнером/J2EE сервером);</para>
+      <para>возможность использовать HTML5 браузерного клиента (работа с сервлет-контейнером/J2EE сервером).</para>
     </listitem>
   </itemizedlist>
   <section id="sect-Administration_Guide-Server_Chapter-Test_Section_2">
@@ -34,12 +34,12 @@
     <filename>/run</filename> :</para>
     <itemizedlist>
       <listitem>
-        <para><filename>server.bat</filename> -  для запуска сервера в
+        <para><filename>server.bat</filename> —  для запуска сервера в
         ОС Windows; </para>
       </listitem>
       <listitem>
-        <para><filename>server.sh</filename> - для запуска сервера в
-        ОС Linux;</para>
+        <para><filename>server.sh</filename> — для запуска сервера в
+        ОС Linux.</para>
       </listitem>
     </itemizedlist>
     <para>Для промышленной эксплуатации сервера приложений Platypus рекомендуется настроить его запуск в качестве службы ОС.</para>

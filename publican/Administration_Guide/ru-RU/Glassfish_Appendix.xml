@@ -26,26 +26,26 @@
       <para>Проверьте правильность настройки пула, нажав кнопку <guibutton>Ping</guibutton>;</para>
     </listitem>
     <listitem>
-      <para>Создайте  JNDI ресурс для пула подключений: <guimenuitem>Resources -&gt; JDBC Resources-&gt; New</guimenuitem>;  Задайте имя ресурса и укажите пул подключений JDBC.</para>
+      <para>Создайте  JNDI ресурс для пула подключений: <guimenuitem>Resources -&gt; JDBC Resources-&gt; New</guimenuitem>;  Задайте имя ресурса, например,<literal> jdbc/main</literal>,  и укажите пул подключений JDBC.</para>
     </listitem>
   </orderedlist>
   <para>Для того, чтобы настроить Platypus для работы с внутренним хранилищем данных о пользователях или  внешним сервисом аутентификации:</para>
   <itemizedlist>
     <listitem>
-      <para>Настройте J2EE сервер Glassfish для работы с областью безопасности (Realm) во внешнем LDAP сервисе;</para>
+      <para>настройте J2EE сервер Glassfish для работы с областью безопасности (Realm) во внешнем LDAP сервисе;</para>
     </listitem>
     <listitem>
-      <para>Настройте учетные записи пользователей.</para>
+      <para>настройте учетные записи пользователей.</para>
     </listitem>
   </itemizedlist>
   <para>Для того, чтобы настроить сервер Glassfish:</para>
   <itemizedlist>
     <listitem>
-      <para>Добавьте область безопасности для Glassfish - для этого измените конфигурацию сервера Configurations -&gt; Server-config -&gt; Security -&gt; Realms -&gt;New;</para>
-      <para>Задайте имя области безопасности, выберите имя класса из списка или укажите свой класс:  </para>
+      <para>добавьте область безопасности для Glassfish - для этого измените конфигурацию сервера Configurations -&gt; Server-config -&gt; Security -&gt; Realms -&gt;New;</para>
+      <para>задайте имя области безопасности, выберите имя класса из списка или укажите свой класс:  </para>
       <itemizedlist>
         <listitem>
-          <para>Для использования встроенного хранилища Platypus укажите имя класса com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm; Настройте свойства, специфические для этого класса: </para>
+          <para>для использования встроенного хранилища Platypus укажите имя класса <classname>com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm</classname>; настройте свойства, специфические для этого класса: </para>
           <table>
             <title>Свойства области безопасности JDBCRealm</title>
             <tgroup cols="2">
@@ -97,7 +97,7 @@
           </table>
         </listitem>
         <listitem>
-          <para>Для использования внешнего сервиса LDAP (Active Directory, OpenLDAP и т.д.) укажите имя класса com.sun.enterprise.security.auth.realm.ldap.LDAPReam; Настройте свойства, специфические для этого класса: </para>
+          <para>Для использования внешнего сервиса LDAP (Active Directory, OpenLDAP и т.д.) укажите имя класса <classname>com.sun.enterprise.security.auth.realm.ldap.LDAPReam</classname>; Настройте свойства, специфические для этого класса: </para>
           <table>
             <title>Основные и дополнительные свойства области безопасности LDAPReam</title>
             <tgroup cols="2">

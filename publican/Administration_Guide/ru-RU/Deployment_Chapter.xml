@@ -35,18 +35,18 @@
     </listitem>
   </itemizedlist>
   <para>Каталог приложения Platypus соответствует проекту приложения готового как для развертывания и исполнения, так и для модификации в <application>Platypus Application Designer</application>.</para>
-  <para>Каталог приложения содежит конфигурационный файл <filename>platypus.xml</filename>, каталог <filename>src</filename>, содержащий элементы приложения и каталог <filename>db</filename>  в котором содержатся миграции баз данных, а также  включать файлы конфигруации дизайнера <filename>project.properties</filename> и <filename>private.properties</filename>. .</para>
+  <para>Каталог приложения содежит конфигурационный файл <filename>platypus.xml</filename>, каталог <filename>src</filename>, содержащий элементы приложения и каталог <filename>db</filename>  в котором содержатся миграции баз данных, а также  включать файлы конфигруации дизайнера <filename>project.properties</filename> и <filename>private.properties</filename>.</para>
   <para>База данных в которую развертывается приложение включает в себя  системные таблицы и произвольное количество рабочих таблиц. При развертывании системные таблицы создаются  автоматически.</para>
   <para>К системным таблицам относятся:</para>
   <itemizedlist>
     <listitem>
-      <para><literal>MTD_ENTITIES</literal> - в данной таблице хранится исполняемое приложение в виде древовидной структуры; </para>
+      <para><literal>MTD_ENTITIES</literal> — в данной таблице хранится исполняемое приложение в виде древовидной структуры; </para>
     </listitem>
     <listitem>
-      <para><literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> - таблицы пользователей и их групп при работе со встроенным пространством пользователей, для информации  смотри раздел Безопасность.</para>
+      <para><literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> — таблицы пользователей и их групп при работе со встроенным пространством пользователей, для информации  смотри раздел Безопасность.</para>
     </listitem>
     <listitem>
-      <para><literal>MTD_VERSION</literal> - в данной таблице хранится информация о текущей версии хранилища данных приложения.</para>
+      <para><literal>MTD_VERSION</literal> — в данной таблице хранится информация о текущей версии хранилища данных приложения.</para>
     </listitem>
   </itemizedlist>
   <para>После развертывания в БД каждый элемент приложения представляет собой одну запись в таблице <literal>MTD_ENTITIES</literal>.</para>
@@ -191,7 +191,7 @@
             <entry>
               <parameter>-setver</parameter>
             </entry>
-            <entry>устанавливает текущую версию БД в <replaceable>VERSION</replaceable> - целое, неотрицательное число.</entry>
+            <entry>устанавливает текущую версию БД в <replaceable>VERSION</replaceable> — целое, неотрицательное число.</entry>
           </row>
         </tbody>
       </tgroup>

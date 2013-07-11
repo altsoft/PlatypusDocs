@@ -11,19 +11,19 @@
   <para>Настройка источника данных:</para>
   <orderedlist>
     <listitem>
-      <para>Скопируйте соответствующий JAR-файл JDBC драйвера в каталог доступный загрузчику классов: <filename><replaceable>CATALINA_HOME</replaceable>/lib</filename>, где <replaceable>CATALINA_HOME</replaceable> - каталог в который был установлен Apache Tomcat.  </para>
+      <para>cкопируйте соответствующий JAR-файл JDBC драйвера в каталог доступный загрузчику классов: <filename><replaceable>CATALINA_HOME</replaceable>/lib</filename>, где <replaceable>CATALINA_HOME</replaceable> - каталог в который был установлен <application>Apache Tomcat</application>;  </para>
     </listitem>
     <listitem>
-      <para>Создайте  JNDI ресурс источника данных JDBC:</para>
+      <para>cоздайте  JNDI ресурс источника данных JDBC; отредактируйте файл <filename>META-INF/context.xml</filename> web-приложения, добавив ресурс источника данных:</para>
       <programlisting>...
-&lt;Resource name=&quot;jdbc/TestDB&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
+&lt;Resource name=&quot;jdbc/main&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
        maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
        username=&quot;sa&quot; password=&quot;te$tPwd&quot; driverClassName=&quot;org.h2.Driver&quot;     url=&quot;jdbc:h2:tcp://localhost/~/h2db/test;schema=test&quot;/&gt;
 ...</programlisting>
-      <para>При необходимости настройте пул соединений, задав параметры удаления и очистки неиспользуемых соединений.</para>
+      <para>при необходимости настройте пул соединений, задав параметры удаления и очистки неиспользуемых соединений.</para>
     </listitem>
     <listitem>
-      <para>Настройте область безопасности. Для использования встроенного хранилища отредактируйте <filename><replaceable>CATALINA_HOME</replaceable>/conf/server.xml</filename>, добавив область безопасности и ссылку на глобальный JNDI ресурс:</para>
+      <para>настройте область безопасности; отредактируйте файл <filename>META-INF/context.xml</filename> web-приложения, добавив область безопасности; пример, приведенный ниже настраивает область безопасности для работы со встроенным хранилищем информации о пользователях:</para>
       <programlisting>...
 &lt;Realm  className=&quot;org.apache.catalina.realm.DataSourceRealm&quot;
    dataSourceName=&quot;jdbc/TestDB&quot;
