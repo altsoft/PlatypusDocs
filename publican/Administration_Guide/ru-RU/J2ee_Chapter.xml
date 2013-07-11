@@ -55,7 +55,7 @@
     <para>Для корректной работы сервлета Platypus отредактируйте файл <filename>WEB-INF/web.xml</filename>:</para>
     <orderedlist>
       <listitem>
-        <para>задайте параметр инициализации с именем <parameter>ap</parameter> и значением имени пути к папке приложения Platypus, путь может быть абсолютным или относительным внутри web-приложения. В случае если web-приложение упаковывается в war-архив, относительный путь бутет работать если контейнер распаковывает этот архив при разврертывании приложения. В случае, если этот параметр не задан, приложение будет загружено из базы данных. В приведенном ниже примере задан относительный путь <filename>app</filename>:</para>
+        <para>задайте параметр инициализации с именем <parameter>ap</parameter> и значением имени пути к папке приложения Platypus, путь может быть абсолютным или относительным внутри web-приложения. В случае если web-приложение упаковывается в war-архив, относительный путь будет работать, если сервер распаковывает этот архив при разврертывании приложения. В случае, если этот параметр не задан, приложение будет загружено из базы данных. В приведенном ниже примере задан относительный путь <filename>app</filename>:</para>
         <programlisting>...
 &lt;context-param&gt;
     &lt;param-name&gt;ap&lt;/param-name&gt;
@@ -84,54 +84,5 @@
       </listitem>
     </orderedlist>
     <para>После завершения конфигруированя разверните Web-приложение в виде папки или WAR-архива в сервлет-контейнер или J2EE сервер.</para>
-    <table>
-      <title>Диалекты - имена драйверов БД</title>
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry align="center">База данных</entry>
-            <entry align="center">Диалект</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>Oracle DB</entry>
-            <entry>
-              <literal>Oracle</literal>
-            </entry>
-          </row>
-          <row>
-            <entry>MySQL</entry>
-            <entry>
-              <literal>MySql</literal>
-            </entry>
-          </row>
-          <row>
-            <entry>SQL Server</entry>
-            <entry>
-              <literal>MsSql</literal>
-            </entry>
-          </row>
-          <row>
-            <entry>PostgreSQL</entry>
-            <entry>
-              <literal>PostgreSql</literal>
-            </entry>
-          </row>
-          <row>
-            <entry>H2 DB</entry>
-            <entry>
-              <literal>H2</literal>
-            </entry>
-          </row>
-          <row>
-            <entry>IBM DB2</entry>
-            <entry>
-              <literal>DB2</literal>
-            </entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
   </section>
 </chapter>

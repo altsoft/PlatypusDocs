@@ -20,7 +20,7 @@
     <listitem>
       <para>Создайте пул подключений JDBC: <guimenuitem>Resources -&gt; JDBC -&gt; JDBC Connection Pools -&gt; New</guimenuitem>, Тип ресурса
         <type>javax.sql.ConnectionPoolDataSource</type>, а так же укажите
-        параметры подключения к БД: <parameter>url</parameter>, <parameter>schema</parameter>, <parameter>username</parameter>, <parameter>password</parameter>;</para>
+        параметры подключения к БД: <parameter>url</parameter>,  <parameter>username</parameter>, <parameter>password</parameter>;</para>
     </listitem>
     <listitem>
       <para>Проверьте правильность настройки пула, нажав кнопку <guibutton>Ping</guibutton>;</para>
