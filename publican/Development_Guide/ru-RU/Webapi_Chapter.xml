@@ -7,9 +7,9 @@
   <title>Platypus Web</title>
   <section>
     <title>Внешний HTTP интерфейс</title>
-    <para>Метод  модуля может быть  вызван  при помощи GET или POST HTTP-запроса.</para>
+    <para>Внешний HTTP интерфейс позволяет вызывать JavaScript-код на сервере по сети. Метод  модуля может быть  вызван  при помощи GET или POST HTTP-запроса.</para>
     <para>Для того, чтобы сделать модуль доступным для внешних вызовов, пометьте его аннотацией <code>@public</code>. </para>
-    <para>Для вызова серверного метода  выполните запрос по URL, сформированной из базовой URL сервлета Platypus и суффикса доступа к Web API <filename>/api</filename>. Укажите тип запроса, имя модуля, имя метода  и параметры вызова метода в параметрах URL  или в теле POST-запроса в формате <classname>application/x-www-form-urlencoded</classname>.  Тело ответа будет содержать значение, которое было возвращено в исполняемом методе, в случае если будет возвращен объект JavaScript он будет будут сериализованы в виде JSON, в случае если будет возвращен объект типа String или XML он будет помещен в ответ в виде строки.</para>
+    <para>Для вызова серверного метода  выполните запрос по URL, сформированной из базовой URL сервлета Platypus и суффикса доступа к Web API <filename>/api</filename>. Укажите тип запроса, имя модуля, имя метода  и параметры вызова метода в параметрах URL  или в теле POST-запроса в формате <classname>application/x-www-form-urlencoded</classname>.  Тело ответа будет содержать значение, которое было возвращено в исполняемом методе. В случае, если будет возвращен объект JavaScript он будет будут сериализованы в виде JSON; в случае, если будет возвращен объект типа <classname>String</classname> или XML, он будет возвращен в виде строки.</para>
     <para>Параметры запроса выполнения метода модуля:</para>
     <informaltable>
       <tgroup cols="2">
@@ -24,7 +24,7 @@
             <entry>
               <parameter>__type</parameter>
             </entry>
-            <entry>Тип запроса. Для выполнения метода серверного модуля должно быть равно 14.</entry>
+            <entry>Тип запроса. Для выполнения метода серверного модуля значение этого параметра должно быть равно <literal>14</literal>.</entry>
           </row>
           <row>
             <entry>
@@ -44,23 +44,23 @@
             <entry>
               <parameter>__param</parameter>
             </entry>
-            <entry>Параметр вызова метда - одиночное значение, строка, число или сериализованный объект JavaScript формате JSON.</entry>
+            <entry>Параметр вызова метода - одиночное значение, строка, число или сериализованный объект JavaScript в формате JSON.</entry>
           </row>
           <row>
             <entry>
               <parameter>__param[]</parameter>
             </entry>
-            <entry>Параметр вызова метда - несклоько параметров, строка, число или сериализованный объект JavaScript формате JSON.</entry>
+            <entry>Параметр вызова метда - несколько параметров, строка, число или сериализованный объект JavaScript формате JSON.</entry>
           </row>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>Пример URL для вызова метода серверого модуля в метод передаются два параметра: строка <parameter>Hello Platypus</parameter> и число <parameter>1</parameter> (URL приведена в незакодированном виде):</para>
+    <para>Пример URL для вызова метода серверого модуля, в метод передаются два параметра: строка <parameter>Hello Platypus</parameter> и число <parameter>1</parameter> (URL приведена в незакодированном виде):</para>
     <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=TestModule&amp;__methodName=say&amp;__param[]=Hello Platypus&amp;__param[]=1</uri></para>
   </section>
   <section>
     <title>JavaScript API</title>
-    <para>JavaScript API предназначен для реализации пользовательского интерфейса (например для удаленного вызова функций и чтения/записи свойств) модуля исполняемого на сервере приложений Platypus,  из клиентского кода браузерного Web-приложения. HTML страницы  данного приложения могут  быть сгенерированы с использованием любой серверной технологии, например, Java Server Pages. С помощью вызова серверных функций обычно запрашиваются данные, которые могут быть отображены на клиенте, осуществляется сохранение изменений и т.д..</para>
+    <para>JavaScript API предназначен для реализации программного интерфейса модуля исполняемого на сервере приложений Platypus,  из клиентского кода браузерного Web-приложения.  Данный API может применяться,  например, для удаленного вызова функций и чтения/записи свойств. HTML страницы  данного приложения могут  быть сгенерированы с использованием любой серверной технологии, например, JSP. С помощью вызова серверных функций обычно запрашиваются данные, которые могут быть отображены на клиенте, осуществляется сохранение изменений и т.д..</para>
     <para>JavaScript API содержит набор относительно низкоуровневых функций и инфраструктуры для организации удаленного вызова процедур (RPC - Remote Procedure Call).</para>
     <para>Методы  JavaScript API принадлежат объекту <code>platypus.api</code>.</para>
     <para>Список функций JavaScript API:</para>
@@ -77,7 +77,7 @@
             <entry>
               <parameter>setServerUrl(url)</parameter>
             </entry>
-            <entry>Задает серверный URL по которому досупен сервлет Platypus в параметре <parameter>url</parameter>.</entry>
+            <entry>Задает серверный URL, по которому досупен сервлет Platypus в параметре <parameter>url</parameter>.</entry>
           </row>
           <row>
             <entry>
@@ -92,7 +92,7 @@
               <parameter>logout(callback)</parameter>
             </entry>
             <entry>
-              <para>Завершает сеанс авторизации, <parameter>callback</parameter> — функция которая будет вызвана при успешном завершении сеанса.</para>
+              <para>Завершает сеанс авторизации, <parameter>callback</parameter> — функция, которая будет вызвана при успешном завершении сеанса.</para>
             </entry>
           </row>
           <row>
@@ -108,7 +108,7 @@
               <parameter>disposeServerModule(moduleName, callback)</parameter>
             </entry>
             <entry>
-              <para>Удаляет модуль из сессии пользователя, <parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> — функция которая будет вызвана при успешном выполнении.</para>
+              <para>Удаляет модуль из сессии пользователя, <parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> — функция, которая будет вызвана при успешном выполнении.</para>
             </entry>
           </row>
           <row>
@@ -116,7 +116,7 @@
               <parameter>createServerModule(moduleName, callback)</parameter>
             </entry>
             <entry>
-              <para>Создает модуль в сессии пользователя,<parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> — функция которая будет вызвана при успешном выполнении.</para>
+              <para>Создает модуль в сессии пользователя,<parameter>moduleName</parameter> - имя модуля, <parameter>callback</parameter> — функция, которая будет вызвана при успешном выполнении.</para>
             </entry>
           </row>
           <row>
@@ -124,7 +124,7 @@
               <parameter>executeServerModuleMethod(moduleName, methodName, params, callback(result))</parameter>
             </entry>
             <entry>
-              <para>Исполняет метод серверного модуля. При необходимости модуль будет создан в сессии пользователя автоматически<parameter>moduleName</parameter> - имя модуля, <parameter>methodName</parameter> — имя метода в этом модуле, <parameter>callback(result)</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+              <para>Исполняет метод серверного модуля. При необходимости модуль будет создан в сессии пользователя автоматически<parameter>moduleName</parameter> — имя модуля, <parameter>methodName</parameter> — имя метода в этом модуле, <parameter>callback(result)</parameter> — функция, которая будет вызвана при успешном выполнении.</para>
             </entry>
           </row>
           <row>
@@ -132,7 +132,7 @@
               <parameter>keepAlive(callback)</parameter>
             </entry>
             <entry>
-              <para>Обнуляет тайм-аут текущей сессии,<parameter>callback</parameter> - функция которая будет вызвана при успешном выполнении.</para>
+              <para>Обнуляет тайм-аут текущей сессии,<parameter>callback</parameter> - функция, которая будет вызвана при успешном выполнении.</para>
             </entry>
           </row>
           <row>
@@ -163,7 +163,7 @@
       </tgroup>
     </informaltable>
     <para>Модуль может быть загружен в пользовательскую сессию явно, при помощи метода <parameter>createServerModule(moduleName, callback)</parameter> или автоматически при вызове функций выполнения серверного метода или чтения/установки свойств модуля.</para>
-    <para>Для того, чтобы использовать Platypus Web API подключите JavaScript библиотекy, поставляемую вместе с Platypus Platform: <filename>pwa.js</filename>. Platypus Web API использует  библиотеку jQuery.</para>
+    <para>Для того, чтобы использовать Platypus Web API, подключите JavaScript библиотекy, поставляемую вместе с Platypus Platform: <filename>pwa.js</filename>. Для работы Platypus Web API  необходимо  подключить  библиотеку jQuery.</para>
     <programlisting language="JavaScript">&lt;html&gt;
  &lt;head&gt;
      &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.min.js&quot;&gt;
@@ -198,16 +198,16 @@
 function testMethod(p1, p2) {
   return { prop1 : p1 + &apos; &apos; +  p2};
 }</programlisting>
-    <para>Для доступа к ресурсам требующим аутентификации используйте стандартные механизмы предоставляемые сервером приложений или сервлет-контейнером. Так, сервер приложений Platypus может быть настроен на работу с BASIC или FORMS аутентификацией. Для того, чтобы прекратить авторизованный сеанс работы с сервером приложений Platypus используйте метод <methodname>platypus.api.logout</methodname>:</para>
+    <para>Для доступа к ресурсам, требующим аутентификации используйте стандартные механизмы предоставляемые сервером приложений или сервлет-контейнером. Сервер приложений Platypus может быть настроен на работу с BASIC или FORMS аутентификацией. Для того, чтобы прекратить авторизованный сеанс работы с сервером приложений Platypus, используйте метод <methodname>platypus.api.logout</methodname>:</para>
     <programlisting language="JavaScript">platypus.api.logout();</programlisting>
     <para>Для более удобной организации вызова серверных методов используйте встроеную поддержку удаленного вызова процедур - RPC (Remote Procedure Call). Вызов методов серверных модулей происходит прозрачно для клиентского кода. В действительности вызываются методы прокси-объектов. При этом маршалинг (сериализация/десериализация аргументов  и возвращаемых результатов и сетевое взаимодействие) происходит автоматически &quot;под капотом&quot;. Для серверного кода вызов функции модуля также происходит &quot;как обычно&quot; — в аргументы функции передаются десериализованные объекты JavaScript, которые были переданы на стороне клиента. Серверный метод  возвращает JavaScript-объект, который будет сериализован,  передан по сети и десериализован на клиенте.</para>
     <para>Для того, чтобы вызвать функцию серверного модуля или прочитать/установить свойство:</para>
     <itemizedlist>
       <listitem>
-        <para>запросите создание прокси-объекта для модуля вызвав <methodname> platypus.server.module.get</methodname>, в качестве первого параметра передайте имя-идентификатор модуля, второй параметр — функция которая будет вызвана после создания объекта-заглушки;</para>
+        <para>запросите создание прокси-объекта для модуля, вызвав <methodname> platypus.server.module.get</methodname>, в качестве первого параметра передайте имя-идентификатор модуля, второй параметр — функция, которая будет вызвана после создания объекта-заглушки;</para>
       </listitem>
       <listitem>
-        <para>вызовите метод объекта заглушки, передав параметры, последним параметром передайте функцию, которая будет вызвана асинхронно с аргументом который является результатом выполнения серверной функции;</para>
+        <para>вызовите метод объекта заглушки, передав параметры; последним параметром передайте функцию, которая будет вызвана асинхронно с аргументом который является результатом выполнения серверной функции;</para>
       </listitem>
       <listitem>
         <para>прочитайте или установите свойство прокси-объекта — Ajax запрос будет при этом выполнен синхронно.</para>
@@ -226,7 +226,7 @@ function testMethod(p1, p2) {
   </section>
   <section>
     <title>Программный доступ к запросу и ответу HTTP</title>
-    <para>Для программного доступа к HTTP запросу и ответу в серверном коде JavaScript используйте свойство <code>http</code>, доступное в случае если метод был вызван внешним HTTP-запросом.</para>
+    <para>Для программного доступа к HTTP запросу и ответу в серверном коде JavaScript используйте свойство <code>http</code>, доступное в случае, если метод был вызван внешним HTTP-запросом.</para>
     <para>Свойство <code>http</code> содержит следующие объекты:</para>
     <informaltable>
       <tgroup cols="2">
@@ -307,7 +307,7 @@ function testMethod(p1, p2) {
               <parameter>cookies</parameter>
             </entry>
             <entry>
-              <para> Куки которые были посланы клиентом в запросе, в виде ключ-значение. </para>
+              <para>Куки, которые были посланы клиентом в запросе, в виде ключ-значение. </para>
             </entry>
           </row>
           <row>
@@ -323,7 +323,7 @@ function testMethod(p1, p2) {
               <parameter>localAddr</parameter>
             </entry>
             <entry>
-              <para>IP адрес на который был получен запрос.</para>
+              <para>IP адрес, на который был получен запрос.</para>
             </entry>
           </row>
           <row>
@@ -331,7 +331,7 @@ function testMethod(p1, p2) {
               <parameter>localName</parameter>
             </entry>
             <entry>
-              <para>Имя хоста на который был получен запрос.</para>
+              <para>Имя хоста, на который был получен запрос.</para>
             </entry>
           </row>
           <row>
@@ -339,7 +339,7 @@ function testMethod(p1, p2) {
               <parameter>localPort</parameter>
             </entry>
             <entry>
-              <para>Порт на который был получен запрос.</para>
+              <para>Порт, на который был получен запрос.</para>
             </entry>
           </row>
           <row>
@@ -355,7 +355,7 @@ function testMethod(p1, p2) {
               <parameter>params</parameter>
             </entry>
             <entry>
-              <para>Параметры запроса,  в виде ключ-значение. В случае если у нескольких параметров одно и то же имя их значения будут представлены в виде массива.</para>
+              <para>Параметры запроса,  в виде ключ-значение. В случае, если у нескольких параметров одно и то же имя, их значения будут представлены в виде массива.</para>
             </entry>
           </row>
           <row>
@@ -443,7 +443,7 @@ function testMethod(p1, p2) {
               <parameter>serverName</parameter>
             </entry>
             <entry>
-              <para>Имя хоста на который был послан запрос.</para>
+              <para>Имя хоста, на который был послан запрос.</para>
             </entry>
           </row>
           <row>
@@ -451,7 +451,7 @@ function testMethod(p1, p2) {
               <parameter>serverPort</parameter>
             </entry>
             <entry>
-              <para>Порт на который был послан запрос.</para>
+              <para>Порт, на который был послан запрос.</para>
             </entry>
           </row>
           <row>
@@ -465,11 +465,10 @@ function testMethod(p1, p2) {
         </tbody>
       </tgroup>
     </informaltable>
-    <para>В приведенном ниже примере на  выводятся все заголовки запроса:</para>
+    <para>В приведенном ниже примере в журнал  выводятся все заголовки запроса:</para>
     <programlisting language="JavaScript">for (var c in http.response.headers) {
     Logger.info(c + &apos; - &apos; + http.response.headers[c]);
-}
-</programlisting>
+}</programlisting>
     <para>Объект ответа <code>response</code> содержит следующие свойства и методы: </para>
     <informaltable>
       <tgroup cols="2">
@@ -523,7 +522,7 @@ function testMethod(p1, p2) {
               <parameter>addCookie(cookie)</parameter>
             </entry>
             <entry>
-              <para>Добавляет в ответ новый куки.</para>
+              <para>Добавляет в ответ новые куки.</para>
             </entry>
           </row>
         </tbody>
@@ -604,12 +603,12 @@ function testMethod(p1, p2) {
         </tbody>
       </tgroup>
     </informaltable>
-    <para>В приведенном ниже примере в HTTP ответ будет добавлен новый куки:</para>
+    <para>В приведенном ниже примере в HTTP ответ будет добавлен новые куки:</para>
     <programlisting language="JavaScript">http.response.addCookie({ 
     name : &apos;platypus&apos;,
     value : &apos;test&apos;,
     maxAge : 60*60
 });</programlisting>
-    <para>Для того, чтобы удалить куки из браузера, задайте его свойство <parameter>maxAge</parameter> равным 0.</para>
+    <para>Для того, чтобы удалить куки из браузера, задайте его свойство <parameter>maxAge</parameter> равным <literal>0</literal>.</para>
   </section>
 </chapter>

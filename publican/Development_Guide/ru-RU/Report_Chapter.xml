@@ -30,7 +30,7 @@
     </mediaobject>
   </figure>
   <note>
-    <para>Для получения подробной информации о тегах, используемых в шаблоне отчета смотрите документацию на библиотеку jXLS по адресу: <ulink url="http://jxls.sourceforge.net">http://jxls.sourceforge.net</ulink></para>
+    <para>Для получения подробной информации о тегах, используемых в шаблоне отчета, смотрите документацию на библиотеку jXLS по адресу: <ulink url="http://jxls.sourceforge.net">http://jxls.sourceforge.net</ulink></para>
   </note>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_8">
     <title>Создание нового отчета</title>
@@ -56,7 +56,7 @@
   <section>
     <title>Редактирование отчета</title>
     <para> Для открытия редактора элемента приложения кликните дважды по элементу приложения в дереве проекта. </para>
-    <para>Редактирование шаблона отчета  осуществляется при помощи приложения электронных таблиц. Для разных операционных систем  используются следующее приложениях по-умолчанию:</para>
+    <para>Редактирование шаблона отчета  осуществляется при помощи приложения электронных таблиц. Для разных операционных систем  используются следующее приложениях по умолчанию:</para>
     <itemizedlist>
       <listitem>
         <para>для ОС Windows: <application>Microsoft Excel</application>;</para>
@@ -115,16 +115,16 @@ library.documens = [
  {name:&apos;bar&apos;},
  {name:&apos;baz&apos;}
 ];</programlisting>
-      <para>Добавьте сущности, которые будут связаны с шаблоном  в модель данных отчета.</para>
+      <para>Добавьте сущности, которые будут связаны с шаблоном,  в модель данных отчета.</para>
       <para>При выводе коллекций для каждого элемента коллекции добавляется новая строка и при этом для ее ячеек устанавливается стиль ячейки, в которой находился тэг.</para>
       <para>Если вы заранее знаете размер коллекции, вы можете  не добавлять для  каждого элемента новую строку, а использовать строки шаблона. Для этого установите для коллекции специальное свойство <property>fixed</property> в значение <literal>true</literal>.</para>
       <para>При необходимости задайте динамические стили для ячеек. Такие стили будут изменяться в зависимости от содержимого ячейки. Для этого:</para>
       <itemizedlist>
         <listitem>
-          <para>задайте для специальной ячейки шаблона стиль которой должен динамически применяться к ячейке элемента коллекции, задайте для этой ячейки метку, например, <code>$[0]customRow</code>, данная ячейка может быть размещена на скрытой ячейке шаблона;</para>
+          <para>задайте для специальной ячейки шаблона стиль который должен динамически применяться к ячейке элемента коллекции, задайте для этой ячейки метку, например, <code>$[0]customRow</code>; данная ячейка может быть размещена на скрытой ячейке шаблона;</para>
         </listitem>
         <listitem>
-          <para>для элемента коллекции задайте специальное свойство <property>cellTemplateLabel</property> установив в него строку-ссылки на ячейку стиля, например, <code>cellTemplateLabel=&apos;customRow&apos;</code>.</para>
+          <para>для элемента коллекции задайте специальное свойство <property>cellTemplateLabel</property>, установив в него строку-ссылку на ячейку стиля, например, <code>cellTemplateLabel=&apos;customRow&apos;</code>.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -135,7 +135,7 @@ library.documens = [
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${departments}&quot; var=&quot;department&quot;&gt;
   ${department.name} | ${department.chief}
 &lt;/jx:forEach&gt;</programlisting>
-      <para>Тэги <literal>jx</literal> могут быть вложенными друг в друга. Если вы разместите открывающий и закрывающие тэги на одной строке, то  размножены будут колонки колонки на этой строке. Разместите тэги <literal>jx:forEach</literal> и <literal>jx:forEach</literal> на разных строках для того, чтобы были размножены строки между этими тэгами. Другие ячейки на строках содержащих открывающие и закрывающие тэги будут проигнорированы.</para>
+      <para>Тэги <literal>jx</literal> могут быть вложенными друг в друга. Если вы разместите открывающий и закрывающие тэги на одной строке, то  размножены будут колонки  на этой строке. Разместите тэги <literal>jx:forEach</literal> и <literal>jx:forEach</literal> на разных строках для того, чтобы были размножены строки между этими тэгами. Другие ячейки на строках, содержащих открывающие и закрывающие тэги, будут проигнорированы.</para>
       <para>Тэг <literal>jx:forEach</literal> позволяет осуществить группировку данных коллекции по одному из свойств. Для организации группировки используйте атрибуты <property>groupBy</property> и <property>groupOrder</property>, которые определяют какое свойство должно быть использовано для группировки данных и в каком порядке группы  должны быть выведены, например: </para>
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; groupBy=&quot;age&quot;&gt;
   Age: ${group.item.age}
@@ -146,13 +146,13 @@ library.documens = [
   &lt;/jx:forEach&gt;
 &lt;/jx:forEach&gt;</programlisting>
       <para>В данном примере мы группируем работников по возрасту. При группировке в контексте цикла создается новый объект <property>group</property>, содержащий два свойства: <property>item</property> - текущая группа и <property>items</property> - коллекция всех объектов в группе. </para>
-      <para>По умолчанию при группировке, если атрибут <property>groupOrder</property> отсутствует  будет сохранен первоначальный порядок следования элементов в коллекции. Используйте атрибут <property>groupOrder</property>, присвоив ему значения <literal>asc</literal> или <literal>desc</literal> для прямой и обратной сортировки.</para>
+      <para>По умолчанию при группировке, если атрибут <property>groupOrder</property> отсутствует,  будет сохранен первоначальный порядок следования элементов в коллекции. Используйте атрибут <property>groupOrder</property>, присвоив ему значения <literal>asc</literal> или <literal>desc</literal> для прямой и обратной сортировки.</para>
       <para>Если в тэге<literal> jx:forEach</literal>  используется атрибут <property>groupBy</property> — атрибут var игнорируется.</para>
       <para>Используйте атрибут <property>select</property> для того, чтобы определить, какие элементы коллекции должны быть включены в отчет. В приведенном ниже примере мы включаем только сотрудников с зарплатой больше 2000:</para>
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; select=&quot;${employee.payment &gt; 2000}&quot;&gt;
  ${employee.name} | ${employee.payment} | ${employee.bonus}
 &lt;/jx:forEach&gt;</programlisting>
-      <para>Для того, чтобы получить доступ к индексу текущего элемента коллекции используйте атрибут <property>varStatus</property>, задав ему имя объекта, которому будет присвоен объект статуса. У объекта статуса есть единственное свойство <property>index</property>, например: </para>
+      <para>Для того, чтобы получить доступ к индексу текущего элемента коллекции, используйте атрибут <property>varStatus</property>, задав ему имя объекта, которому будет присвоен объект статуса. У объекта статуса есть единственное свойство <property>index</property>, например: </para>
       <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; varStatus=&quot;status&quot;&gt;
  | ${status.index} 
  | ${employee.name} 
@@ -174,9 +174,9 @@ Chief Name: ${department.chief.name}
       <title>Графики и диаграммы</title>
       <para>Используйте стандартные средства электронных таблиц по выводу графиков и диаграмм. </para>
       <para>При использовании коллекций с фиксированным количеством элементов просто настройте диаграмму <application>Excel</application> на диапазон ячеек в которые будут выведены данные.</para>
-      <para>Если количество элементов в коллекции не известно используйте подход  с использованием функций <literal>OFFSET</literal> и <literal>COUNTA</literal> и созданием именованного диапазона.</para>
+      <para>Если количество элементов в коллекции не известно, используйте подход  с использованием функций <literal>OFFSET</literal> и <literal>COUNTA</literal> и созданием именованного диапазона.</para>
       <note>
-        <para>Прочитайте  статьи по следующим ссылкам для того, чтобы ознакомится с подходом для создания диаграмм с динамическим диапазоном данных: <itemizedlist>
+        <para>Прочитайте  статьи по следующим ссылкам для того, чтобы ознакомиться с подходом для создания диаграмм с динамическим диапазоном данных: <itemizedlist>
             <listitem>
               <para><ulink url="http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518">http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518</ulink></para>
             </listitem>
@@ -189,17 +189,17 @@ Chief Name: ${department.chief.name}
   </section>
   <section>
     <title>Программный код формирования отчета</title>
-    <para>Для того, чтобы сгенерировать отчет — создайте объект отчета, передав в конструктор имя-идентификатор требуемого отчета.</para>
+    <para>Для того, чтобы сгенерировать отчет, создайте объект отчета, передав в конструктор имя-идентификатор требуемого отчета.</para>
     <para>Используйте объект отчета:</para>
     <itemizedlist>
       <listitem>
-        <para>отобразите отчет, вызвав метод <methodname>show</methodname>, при этом отчет будет загружен и дана команда операционной системе его открытие в  приложении электронных таблиц;</para>
+        <para>отобразите отчет, вызвав метод <methodname>show</methodname>, при этом отчет будет загружен и дана команда операционной системе на его открытие в  приложении электронных таблиц;</para>
       </listitem>
       <listitem>
         <para> отправьте отчет на печать, вызвав метод <methodname>print</methodname>;</para>
       </listitem>
       <listitem>
-        <para> сохраните файл отчета на диск, вызвав метод <methodname>save</methodname>, в качестве параметра передайте путь файлу, в который отчет должен быть сохранен;</para>
+        <para> сохраните файл отчета на диск, вызвав метод <methodname>save</methodname>, в качестве параметра передайте путь к файлу, в который отчет должен быть сохранен.</para>
       </listitem>
     </itemizedlist>
     <note>

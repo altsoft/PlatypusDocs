@@ -2916,8 +2916,26 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
       <title>Menu — Меню</title>
       <para>Меню может содержать <emphasis>Элементы меню</emphasis> и <emphasis>Разделители</emphasis>.</para>
       <para>Добавьте новые компоненты <guilabel>Menu</guilabel> на строку меню, для этого перетащите их палитры на компонент <guilabel>Menu Bar</guilabel>.</para>
-      <para>Добавьте  подменю в другие меню, для этого выберите в контекстном меню пункт <guimenuitem>Добавить меню</guimenuitem>.</para>
-      <para>Для того, чтобы изменить текст меню используйте пункт <guimenuitem>Изменить текст </guimenuitem>контекстное меню или свойство <property>text</property> компонента.</para>
+      <para>Добавьте  подменю в другие меню, для этого выберите в контекстном меню пункт <guimenuitem>Add From Palette</guimenuitem>.</para>
+      <para>Список специфических свойств компонента:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Свойство</entry>
+              <entry align="center">Описание </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>text</parameter>
+              </entry>
+              <entry>Текст меню</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
     </section>
     <section>
       <title>Menu Item — Элемент меню</title>
@@ -2944,7 +2962,7 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
     </section>
     <section>
       <title>Menu Item / CheckBox — Элемент меню с флажком</title>
-      <para>Элемент меню совмещенный с виджетом <emphasis>Флажок</emphasis>.</para>
+      <para>Элемент меню, совмещенный с виджетом <emphasis>Флажок</emphasis>.</para>
       <para>Список специфических свойств компонента:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2955,6 +2973,12 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
             </row>
           </thead>
           <tbody>
+            <row>
+              <entry>
+                <parameter>text</parameter>
+              </entry>
+              <entry>Текст пункта меню</entry>
+            </row>
             <row>
               <entry>
                 <parameter>buttonGroup</parameter>
@@ -2974,7 +2998,7 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
     </section>
     <section>
       <title>Menu Item / RadioButton — Элемент меню с переключателем</title>
-      <para>Элемент меню совмещенный с виджетом <emphasis>Кнопка-переключател</emphasis>ь.</para>
+      <para>Элемент меню, совмещенный с виджетом <emphasis>Кнопка-переключател</emphasis>ь.</para>
       <para>Список специфических свойств компонента:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2985,6 +3009,12 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
             </row>
           </thead>
           <tbody>
+            <row>
+              <entry>
+                <parameter>text</parameter>
+              </entry>
+              <entry>Текст пункта меню</entry>
+            </row>
             <row>
               <entry>
                 <parameter>buttonGroup</parameter>
@@ -3005,14 +3035,14 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
     <section>
       <title>Popup Menu — Всплывающее меню</title>
       <para>Всплывающее меню — окно выбора опций, которое может быть назначено любому компоненту.</para>
-      <para>Добавьте компонент<emphasis> Всплывающее меню</emphasis> на форму, для этого перетащите его с палитры. После добавления данный компонент не будет иметь визуального представления в редакторе макета, в дереве компонентов инспектора оно будет добавлено в узел <emphasis>Другие компоненты</emphasis>.</para>
-      <para>Добавьте элементы меню во всплывающее меню аналогично обычному меню.</para>
-      <para>Для того, чтобы назначить всплывающее меню для компонента на форме задайте  свойство <property>componentPopupMenu</property>: выберете  нужное Всплывающее меню из списка.</para>
+      <para>Добавьте компонент<emphasis> Всплывающее меню</emphasis> на форму, для этого перетащите его с палитры. После добавления данный компонент не будет иметь визуального представления в редакторе макета, в дереве компонентов инспектора он будет добавлен в узел <guilabel>Other components</guilabel>.</para>
+      <para>Добавьте элементы  во всплывающее меню аналогично обычному меню.</para>
+      <para>Для того, чтобы назначить всплывающее меню для компонента на форме, задайте  свойство <property>componentPopupMenu</property>: выберете  нужное <emphasis>Всплывающее меню</emphasis> из списка.</para>
     </section>
     <section>
       <title>Menu Separator — Разделитель</title>
       <para>Разделитель элементов меню.</para>
-      <para>Добавьте <emphasis>Разделитель</emphasis> на меню, для того, чтобы визуально отделить группы элементов меню.</para>
+      <para>Добавьте <emphasis>Разделитель</emphasis> на меню для того, чтобы визуально отделить группы элементов меню.</para>
     </section>
   </section>
   <section>
@@ -3020,8 +3050,8 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
     <para>В данном разделе описаны вспомогательные объекты, которые используются при программировании форм Platypus.</para>
     <section>
       <title>Style — Стиль</title>
-      <para>Стиль отображения, значения свойств которого могут быть унаследованы от родительского стиля.</para>
-      <para>Используйте свойства объекта, для того, чтобы задать нужный вам стиль:</para>
+      <para>Объект стиля отображения, значения свойств которого могут быть унаследованы от родительского стиля.</para>
+      <para>Используйте свойства объекта для того, чтобы задать нужный вам стиль:</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
@@ -3088,7 +3118,7 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы создать объект стиля используйте конструктор, который может принимать в качестве параметра объект родительского стиля:</para>
+      <para>Для того, чтобы создать объект стиля, используйте конструктор, который может принимать в качестве параметра объект родительского стиля:</para>
       <programlisting language="JavaScript">var style1 = new Style();
 
 var style2 = new Style(<replaceable>parent</replaceable>);</programlisting>
@@ -3096,7 +3126,7 @@ var style2 = new Style(<replaceable>parent</replaceable>);</programlisting>
     <section>
       <title>Icon — Иконка</title>
       <para>Объект иконки,  растровая картинка.</para>
-      <para>Для того, чтобы создать объект иконки используйте фабричный метод <methodname>load</methodname> объекта <classname>Icon</classname>:</para>
+      <para>Для того, чтобы создать объект иконки, используйте фабричный метод <methodname>load</methodname> объекта <classname>Icon</classname>:</para>
       <programlisting language="JavaScript">var icon = Icon.load(<replaceable>path</replaceable>);</programlisting>
       <para>где <replaceable>path</replaceable> — имя файла иконки, относительный путь приложения или URL.</para>
       <para>Имя файла иконки будет использовано для обращения к встроенной коллекции иконок.</para>
@@ -3107,7 +3137,7 @@ view.add(b);</programlisting>
     </section>
     <section>
       <title>FontStyle — Стиль шрифта</title>
-      <para>Объект констант стилей шрифта.</para>
+      <para>Данный объект содержит  константы, используя которые можно задать стили шрифта.</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
@@ -3144,6 +3174,8 @@ view.add(b);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
+      <para>Пример использования:</para>
+      <programlisting language="JavaScript">var italicFontStyle = FontStyle.ITALIC;</programlisting>
     </section>
     <section>
       <title>Font — Шрифт</title>
@@ -3179,7 +3211,7 @@ view.add(b);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы создать объект шрифта используйте конструктор Font:</para>
+      <para>Для того, чтобы создать объект шрифта, используйте конструктор <classname>Font</classname>:</para>
       <programlisting language="JavaScript">var font = new Font(<replaceable>family</replaceable>, <replaceable>fontStyle</replaceable>, <replaceable>size</replaceable>)</programlisting>
       <para>где <replaceable>family</replaceable> - строка имени семейства шрифтов; <replaceable>fontStyle</replaceable> - стиль шрифта, типа <classname>FontStyle</classname>, <replaceable>size</replaceable> - размер шрифта.</para>
       <para>Пример:</para>
@@ -3187,7 +3219,7 @@ view.add(b);</programlisting>
     </section>
     <section>
       <title>Color — Цвет</title>
-      <para>Объект представляющий цвет.</para>
+      <para>Объект, представляющий цвет.</para>
       <para>В объекте цвета содержатся константы основных цветов: </para>
       <informaltable>
         <tgroup cols="2">
@@ -3273,7 +3305,7 @@ view.add(b);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Для того, чтобы создать объект произвольного цвета используйте конструктор Color, передав ему в качестве парамеров три целых числа RGB:</para>
+      <para>Для того, чтобы создать объект произвольного цвета, используйте конструктор <classname>Color</classname>, передав ему в качестве парамеров три целых числа RGB:</para>
       <programlisting language="JavaScript">var color = new Color(<replaceable>R</replaceable>, <replaceable>G</replaceable>, <replaceable>B</replaceable>);</programlisting>
       <para>где <replaceable>R</replaceable>, <replaceable>G</replaceable>, <replaceable>B</replaceable> — красная, зеленая и синяя составляющие в виде целых чисел.</para>
       <para>Пример использования:</para>
@@ -3285,14 +3317,14 @@ panel.background = IVORY_COLOR;</programlisting>
     <section>
       <title>Anchors — Якоря</title>
       <para>Объект якорной компоновки, определяет якоря привязки компонента.</para>
-      <para>Для того, чтобы создать объект якорной компоновки используйте конструктор <classname>Anchors</classname>, передав в него в качестве параметров значения для соответствующего якоря. </para>
+      <para>Для того, чтобы создать объект якорной компоновки, используйте конструктор <classname>Anchors</classname>, передав в него в качестве параметров значения для соответствующего якоря. </para>
       <programlisting language="JavaScript">var anchors = new Anchors(<replaceable>left</replaceable>, <replaceable>width</replaceable>, <replaceable>right</replaceable>,
             <replaceable>top</replaceable>, <replaceable>height</replaceable>, <replaceable>bottom</replaceable>);</programlisting>
       <para>где <replaceable>left</replaceable> — левый якорь, <replaceable>width</replaceable> — ширина, <replaceable>right</replaceable> — правый якорь ,
 <replaceable> top</replaceable> — верхний якорь, <replaceable>height</replaceable> — высота, <replaceable>bottom</replaceable> —  нижний якорь.</para>
       <para>Каждый якорь может быть задан в пикселях, для этого задайте якорь числом или строкой с добавлением символов &quot;<literal>px</literal>&quot;, например: <literal>100</literal>, &quot;<literal>100px</literal>&quot; или в процентах, для этого задайте якорь строкой с добавлением символа &quot;<literal>%</literal>&quot;, например: &quot;<literal>30%</literal>&quot;.</para>
-      <para>В соответствии с правилами якорной компоновки для трех якорей по и трех вертикали и горизонтали должны быть заданы два значения по каждой координате.</para>
-      <para>Если якорь не задан, передайте  для в соответствующий параметр значение <literal>null</literal>, например:</para>
+      <para>В соответствии с правилами якорной компоновки для якорей должны быть заданы два значения якоря по каждой координате.</para>
+      <para>Если значнеие якоря не задано, передайте  в соответствующий параметр значение <literal>null</literal>, например:</para>
       <programlisting language="JavaScript">var anchors = new Anchors(100, 200, null,
             100, 100, null);</programlisting>
     </section>
@@ -3319,7 +3351,7 @@ panel.background = IVORY_COLOR;</programlisting>
               <entry>
                 <parameter>CENTER</parameter>
               </entry>
-              <entry>По-центру</entry>
+              <entry>По центру</entry>
             </row>
             <row>
               <entry>
@@ -3330,6 +3362,8 @@ panel.background = IVORY_COLOR;</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
+      <para>Пример использования:</para>
+      <programlisting language="JavaScript">var horizontalPosition = HorizontalPosition.CENTER;</programlisting>
     </section>
     <section>
       <title>VerticalPosition — Положение по вертикали</title>
@@ -3354,7 +3388,7 @@ panel.background = IVORY_COLOR;</programlisting>
               <entry>
                 <parameter>CENTER</parameter>
               </entry>
-              <entry>По-центру</entry>
+              <entry>По центру</entry>
             </row>
             <row>
               <entry>
@@ -3365,6 +3399,8 @@ panel.background = IVORY_COLOR;</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
+      <para>Пример использования:</para>
+      <programlisting language="JavaScript">var verticalPosition = VerticalPosition.CENTER;</programlisting>
     </section>
     <section>
       <title>Orientation — Ориентация</title>
@@ -3383,17 +3419,19 @@ panel.background = IVORY_COLOR;</programlisting>
               <entry>
                 <parameter>HORIZONTAL</parameter>
               </entry>
-              <entry>По-горизонтали</entry>
+              <entry>По горизонтали</entry>
             </row>
             <row>
               <entry>
                 <parameter>VERTICAL</parameter>
               </entry>
-              <entry>По-вертикали</entry>
+              <entry>По вертикали</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
+      <para>Пример использования:</para>
+      <programlisting language="JavaScript">var orientation = Orientation.HORIZONTAL;</programlisting>
     </section>
   </section>
   <section>
@@ -3414,8 +3452,8 @@ panel.background = IVORY_COLOR;</programlisting>
             </entry>
             <entry>
               <para>Выводит информационное
-                  сообщение,</para>
-              <para>                  <parameter>message</parameter> — текст сообщения.</para>
+                  сообщение;</para>
+              <para>                  <parameter>message</parameter> — текст сообщения;</para>
               <para><parameter>title</parameter> — заголовок окна сообщения.</para>
             </entry>
           </row>
@@ -3425,8 +3463,9 @@ panel.background = IVORY_COLOR;</programlisting>
             </entry>
             <entry>
               <para>Выводит окно с вопросом, возвращает строку
-                  ответа (по умолчанию - значение параметра
-                  <parameter>defaultvalue</parameter>).</para>
+                  ответа;</para>
+              <para><parameter>message</parameter> - текст сообщения;</para>
+              <para><parameter>defaultvalue</parameter> - значение по умолчанию.</para>
             </entry>
           </row>
           <row>
@@ -3435,7 +3474,7 @@ panel.background = IVORY_COLOR;</programlisting>
             </entry>
             <entry>
               <para>Выводит диалог с
-                  подтверждением,</para>
+                  подтверждением;</para>
               <para>                  <parameter>message</parameter> - текст сообщения.</para>
             </entry>
           </row>
@@ -3444,8 +3483,8 @@ panel.background = IVORY_COLOR;</programlisting>
               <function>fileDialog(<replaceable>curDir</replaceable>, <replaceable>save</replaceable>)</function>
             </entry>
             <entry>
-              <para>Выводит диалог, позволяющий пользвателю выбрать файл, возвращает объект файла,</para>
-              <para>                  <parameter>curDir</parameter> - текущий каталог</para>
+              <para>Выводит диалог, позволяющий пользвателю выбрать файл, возвращает объект файла;</para>
+              <para>                  <parameter>curDir</parameter> - текущий каталог;</para>
               <para>                 <parameter>save</parameter> - флаг, включающий режим сохранения для диалога.</para>
             </entry>
           </row>
@@ -3454,7 +3493,7 @@ panel.background = IVORY_COLOR;</programlisting>
               <function>selectFile(<replaceable>callback(file)</replaceable>)</function>
             </entry>
             <entry>
-              <para>Выводит диалог выбора файла,</para>
+              <para>Выводит диалог выбора файла;</para>
               <para>                  <parameter>callback</parameter> - функция, которая будет вызвана после выбора файла, с параметром</para>
               <para>                 <parameter>file</parameter> - объект файла.</para>
             </entry>
