@@ -9,7 +9,7 @@
     <para>Для получения подробной информации по настройке <application>Apache Tomcat 7</application> обратитесь к его документации.</para>
   </note>
   <para>Настройка источника данных:</para>
-  <orderedlist>
+  <itemizedlist>
     <listitem>
       <para>cкопируйте соответствующий JAR-файл JDBC драйвера в каталог доступный загрузчику классов: <filename><replaceable>CATALINA_HOME</replaceable>/lib</filename>, где <replaceable>CATALINA_HOME</replaceable> - каталог в который был установлен <application>Apache Tomcat</application>;  </para>
     </listitem>
@@ -33,5 +33,5 @@
       <para>Для области безопасности DataSourceRealm задайте названия таблиц, столбцов и алгоритма хэширования для работы с таблицами <literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal>.</para>
       <para>Для использвания другого хранилища данных аутентификации, например, внешнего LDAP-сервера настройте соответствующий тип области безопасности.</para>
     </listitem>
-  </orderedlist>
+  </itemizedlist>
 </appendix>

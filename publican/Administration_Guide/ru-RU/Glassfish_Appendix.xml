@@ -97,7 +97,7 @@
           </table>
         </listitem>
         <listitem>
-          <para>Для использования внешнего сервиса LDAP (Active Directory, OpenLDAP и т.д.) укажите имя класса <classname>com.sun.enterprise.security.auth.realm.ldap.LDAPReam</classname>; Настройте свойства, специфические для этого класса: </para>
+          <para>Для использования внешнего сервиса LDAP (Active Directory, OpenLDAP и т.д.) укажите имя класса <classname>com.sun.enterprise.security.auth.realm.ldap.LDAPReam</classname>; настройте свойства, специфические для этого класса: </para>
           <table>
             <title>Основные и дополнительные свойства области безопасности LDAPReam</title>
             <tgroup cols="2">

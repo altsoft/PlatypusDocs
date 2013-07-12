@@ -4,14 +4,17 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Administration_Guide-J2ee_Chapter">
-  <title>Конфигурирование серверных компонентов Platypus для работы в сервлет-контейнере или J2EE сервере</title>
-  <para>Серверные компоненты <application>Platypus</application> могут работать в  сервлет-контейнере или J2EE сервере. Данная конфигурация имеет  следующие особенности:</para>
+  <title>Работа серверных компонентов Platypus для работы в сервлет-контейнере или J2EE сервере</title>
+  <note>
+    <para>Используйте Platypus Application Designer для автоматического создания структуры web-приложения, см. более подробную информацию в Руководстве разработчика.</para>
+  </note>
+  <para>Серверные компоненты <application>Platypus</application> могут работать в J2EE сервлет-контейнере/сервере приложений. Данная конфигурация имеет  следующие особенности:</para>
   <itemizedlist>
     <listitem>
-      <para>серверные компоненты Platypus развертываются в J2EE сервер как  web-приложение — в виде  WAR-архива или папки, взаимодействие с клиентом обеспечивается при помощи серлета Platypus;</para>
+      <para>серверные компоненты Platypus развертываются в J2EE конетейнер/сервер как  web-приложение — в виде  WAR-архива или папки, взаимодействие с клиентом обеспечивается при помощи специального сервлета;</para>
     </listitem>
     <listitem>
-      <para>возможна работа <application>Java SE клиента (Platypus Client</application>), так и HTML5 браузерного клиента, а также Web-сайта с использованием Platypus Web API;</para>
+      <para>возможна работа как HTML5 браузерного клиента так и Java SE клиента (<application>Platypus Client</application>), так и , а также взаимодействие серверного и браузерного JavaScript кода из &quot;классического&quot; Web-приложения с использованием Platypus Web API;</para>
     </listitem>
     <listitem>
       <para>обмен данными с клиентом происходит по протоколу HTTP/HTTPS;</para>
@@ -23,22 +26,34 @@
       <para>связь сервера приложений Platypus с БД осуществляется через настроенный в виде ресурса JNDI источник данных; </para>
     </listitem>
   </itemizedlist>
-  <para>Использование Platypus Web API позволяет создавать Web-приложения, использующие в качестве источника данных сервер приложений Platypus. Web-приложение может строится с использованием технологий ASP, JSP  и прочих. Platypus Web API приложение может осуществлять удаленный вызов функций серверных модулей, при этом вызов функций является прозрачным для клиентского JavaScript кода.</para>
+  <para>Использование Platypus Web API позволяет создавать web-приложения, использующие в качестве источника данных сервер приложений Platypus. Web-приложение может строится с использованием технологий ASP, JSP  и прочих. Platypus Web API приложение может осуществлять удаленный вызов функций серверных модулей, при этом вызов функций является прозрачным для клиентского JavaScript кода.</para>
   <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_2">
-    <title>Настройка J2EE сервера для работы с Platypus</title>
-    <para>Для запуска Platypus в сервлет-контейнере или J2EE сервере выполните следующие действия:</para>
+    <title>Настройка web-приложения и J2EE контейнера/сервера приложений</title>
+    <para>Для запуска Platypus в J2EE сервлет контейнере или  сервере приложений выполните следующие действия:</para>
     <itemizedlist>
       <listitem>
-        <para>настройте источник данных JDBC в виде ресурса JNDI, задайте его имя, например, <literal>java:/jdbc/TestDB</literal>, настройте JDBC-драйвер, пул ресурсов  и ресурс JNDI, при необходимости скопируйте JAR соответствующего драйвера БД в каталог, доступный загрузчику классов сервера; </para>
+        <para>создайте новый каталог, со структурой, стандатной для web-приложения в J2EE, включая дескриптор развертывания <filename>WEB-INF/web.xml</filename>;</para>
       </listitem>
       <listitem>
-        <para>настройте область безопасности (Realm) для работы со встроенным хранилищем или внешним сервисом аутентификации. Для работы со встроенным хранилищем настройте область безопасности JDBC для рабты с таблицами <literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> - см. раздел Безопасность.</para>
+        <para>создайте страницы HTML, на который будет размещено приложение Platypus; настройте необходимый для начального запуска код JavaScript;</para>
       </listitem>
       <listitem>
-        <para>настройте параметры web-приложения в xml-дескрипторе <filename>WEB-INF/web.xml</filename> и, при необходимости, специфических для данного сервера файлах конфигурации;</para>
+        <para>скопируйте библиотеки, необходимые для работы приложения в каталог <filename>WEB-INF/lib</filename> web-приложения из подкаталога  <filename>bin</filename> каталога платформы Platypus;</para>
       </listitem>
       <listitem>
-        <para>разверните web-приложение в виде WAR-архива или папки.</para>
+        <para>скопируйте каталог JavaScript HTML5 клиента <filename>pwc</filename>,  из подкаталога  <filename>bin</filename> каталога платформы Platypus;</para>
+      </listitem>
+      <listitem>
+        <para>настройте источник данных JDBC в виде ресурса JNDI, задайте его имя, например, <literal>jdbc/main</literal>; настройте  пул соединений  и ресурс JNDI;  скопируйте JAR-файл соответствующего драйвера БД в каталог, доступный загрузчику классов; </para>
+      </listitem>
+      <listitem>
+        <para>настройте область безопасности (Realm) для работы со встроенным хранилищем или внешним сервисом аутентификации;  для работы со встроенным хранилищем настройте область безопасности JDBC для рабты с таблицами <literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> - см. раздел Безопасность.</para>
+      </listitem>
+      <listitem>
+        <para>настройте параметры развертывания web-приложения в файле <filename>WEB-INF/web.xml</filename>; при необходимости настройте параметры в специфических для данного сервера приложений файлах конфигурации;</para>
+      </listitem>
+      <listitem>
+        <para>разверните web-приложение в J2EE контейнер/сервер приложений в виде WAR-архива или папки.</para>
       </listitem>
     </itemizedlist>
     <note>
@@ -47,13 +62,9 @@
     </note>
   </section>
   <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_3">
-    <title>Kонфигурирование сервера приложений Platypus и развертывание в сервлет-контейнер или J2EE сервер</title>
-    <para>Для работы HTML5 браузерного клиента, использования Platypus Web API и Java SE клиента <application>Platypus</application> (по протоколам HTTP/HTTPS) серверные компоненты Platypus должны быть развернуты в сервлет-контейнере или J2EE сервере и соотвествующим образом сконфигрурированы.<note>
-        <para>Используйте Platypus Application Designer для создания структуры web-приложения, см. более подробную информацию в Руководстве разработчика.</para>
-      </note></para>
-    <para>Для конфигурирования web-приложения отредактируйте файл <filename>WEB-INF/web.xml</filename> и при необходимости добавьте или измените другие файлы - специфические для конкретного сервлет-контейнера или J2EE сервера. </para>
-    <para>Для корректной работы сервлета Platypus отредактируйте файл <filename>WEB-INF/web.xml</filename>:</para>
-    <orderedlist>
+    <title>Kонфигурирование дескриптора развертывания web-приложния</title>
+    <para>Для конфигурирования web-приложения отредактируйте файл XML дескриптора развертывания  <filename>WEB-INF/web.xml</filename>. </para>
+    <itemizedlist>
       <listitem>
         <para>задайте параметр инициализации с именем <parameter>ap</parameter> и значением имени пути к папке приложения Platypus, путь может быть абсолютным или относительным внутри web-приложения; в случае если web-приложение упаковывается в war-архив, относительный путь будет работать, если сервер распаковывает этот архив при разврертывании приложения; в случае, если этот параметр не задан, приложение будет загружено из базы данных; в приведенном ниже примере задан абсолютный путь:</para>
         <programlisting>...
@@ -73,12 +84,20 @@
 ...</programlisting>
       </listitem>
       <listitem>
-        <para>задайте необязательный параметр инициализации с именем <parameter>dbschema</parameter> и значением схемы БД по умолчанию, например,   <literal>test</literal>;</para>
+        <para>добавьте обработчик события  сессии:</para>
+        <programlisting>...
+&lt;listener&gt;       
+    &lt;listener-class&gt;
+com.eas.server.httpservlet.PlatypusSessionsSynchronizer
+    &lt;/listener-class&gt;
+&lt;/listener&gt;
+...</programlisting>
       </listitem>
       <listitem>
         <para>добавьте ссылку на  ресурс источика данных:</para>
         <programlisting>...
 &lt;resource-ref&gt;
+    &lt;description&gt;Main database connection&lt;/description&gt;
     &lt;res-ref-name&gt;jdbc/main&lt;/res-ref-name&gt;
     &lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;
     &lt;res-auth&gt;Container&lt;/res-auth&gt;
@@ -86,9 +105,33 @@
 ...</programlisting>
       </listitem>
       <listitem>
+        <para>добавте конфигурацию сервлета Platypus;  в элементе <literal>multipart/location</literal> укажите путь к папке, в которую должны быть сохранены загруженные файлы:</para>
+        <programlisting>...
+&lt;servlet&gt;
+    &lt;servlet-name&gt;PlatypusServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;
+com.eas.server.httpservlet.PlatypusHttpServlet
+    &lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;multipart-config&gt;  
+      &lt;location&gt;
+          /home/user1/pub
+      &lt;/location&gt;
+      &lt;max-file-size&gt;2097152&lt;/max-file-size&gt;
+      &lt;max-request-size&gt;2165824&lt;/max-request-size&gt;
+      &lt;file-size-threshold&gt;1048576&lt;/file-size-threshold&gt;
+    &lt;/multipart-config&gt;
+  &lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;PlatypusServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/application/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+...</programlisting>
+      </listitem>
+      <listitem>
         <para>произведите настройки разграничения доступа и безопасности, информацию по настройке области безопасности смотрите в разделе &quot;Безопасность&quot;.</para>
       </listitem>
-    </orderedlist>
-    <para>После завершения конфигруированя разверните Web-приложение в виде папки или WAR-архива в сервлет-контейнер или J2EE сервер.</para>
+    </itemizedlist>
+    <para>После завершения конфигрурированя разверните web-приложение в виде папки или WAR-архива в сервлет-контейнер или J2EE сервер.</para>
   </section>
 </chapter>
