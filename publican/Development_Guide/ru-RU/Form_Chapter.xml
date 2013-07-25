@@ -574,13 +574,13 @@ view.background = Color.black;</programlisting>
             <entry>
               <parameter>showModal(callback)</parameter>
             </entry>
-            <entry>Отображает форму как диалог подтверждения. Если пользователь подтверждает выбор, то вызывается функция, переданная через параметр <literal>callback</literal>.</entry>
+            <entry>Отображает форму как диалог подтверждения. Если пользователь подтверждает выбор, то вызывается функция, переданная через параметр <parameter>callback</parameter>.</entry>
           </row>
           <row>
             <entry>
               <parameter>showOnPanel(parent)</parameter>
             </entry>
-            <entry>Отображает форму на панели контейнера</entry>
+            <entry>Отображает форму на панели контейнера, <parameter>parent</parameter> — объект панели, на которой нужно показать форму.</entry>
           </row>
           <row>
             <entry>
