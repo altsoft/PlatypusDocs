@@ -299,6 +299,9 @@ Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;, function(txt) {
       <programlisting language="JavaScript">//Loads text synchronously
 var txt = Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;);
 Logger.info(txt);</programlisting>
+      <para>Для того, чтобы получить абсолютный путь к каталогу, содержащему приложение, используйте доступное только для чтения свойство <code>Resource.applicationPath</code>. Данное свойство будет содержать информацию о пути к каталогу приложения в том случае, если приложение исполняется с диска, а не развернуто в базе данных, в противном случае данное свойство вернет значение <literal>null</literal>:</para>
+      <programlisting language="JavaScript">//Reads application&apos;s path
+Logger.info(Resource.applicationPath);</programlisting>
     </section>
     <section>
       <title>Вызов Java кода из JavaScript кода</title>
