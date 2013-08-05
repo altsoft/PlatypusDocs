@@ -154,9 +154,11 @@
           <para>где <code>
               <replaceable>ModuleName</replaceable>
             </code> — строка имени-идентификатора модуля, серверный модуль должен быть помечен аннотацией <code>@public</code> для доступа из клиентского кода.</para>
+            </code> — строка имени-идентификатора модуля;</para>
         </listitem>
       </itemizedlist>
-      <para>Параметром, который передается в конструктор или методом для получения экземпляра модуля является его  имя-идентификатор.</para>
+      <para>Серверный модуль должен быть помечен аннотацией <code>@public</code> для доступа из клиентского кода. </para>
+      <para>По умолчанию на сервере будет создан экземпляр модуля с поддержкой состояния его полей,  существующий в контексте текущей сессии пользователя. В случае, если модуль помечен аннотацией <code>@stateless</code>, состояние модуля не будет поддерживаться и новый экземпляр будет создаваться при каждом вызове любого из методов модуля.</para>
       <para>Для того, чтобы обратится к функции экземпляра модуля, используйте следующую конструкцию, например:</para>
       <programlisting language="JavaScript">var result = moduleInstance.getResult(10);</programlisting>
       <para>Здесь вызывается функция <code>getResult</code>, которой передается в качестве  параметра число <literal>10</literal>, и возвращается результат выполнения функции, который присваивается  локальной переменной <code>result</code>.</para>
@@ -298,6 +300,9 @@ Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;, function(txt) {
       <programlisting language="JavaScript">//Loads text synchronously
 var txt = Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;);
 Logger.info(txt);</programlisting>
+      <para>Для того, чтобы получить абсолютный путь к каталогу, содержащему приложение, используйте доступное только для чтения свойство <code>Resource.applicationPath</code>. Данное свойство будет содержать информацию о пути к каталогу приложения в том случае, если приложение исполняется с диска, а не развернуто в базе данных, в противном случае данное свойство вернет значение <literal>null</literal>:</para>
+      <programlisting language="JavaScript">//Reads application&apos;s path
+Logger.info(Resource.applicationPath);</programlisting>
     </section>
     <section>
       <title>Вызов Java кода из JavaScript кода</title>
