@@ -153,6 +153,7 @@
           <programlisting language="JavaScript">var moduleInstance = new ServerModule(<replaceable>ModuleName</replaceable>);</programlisting>
           <para>где <code>
               <replaceable>ModuleName</replaceable>
+            </code> — строка имени-идентификатора модуля, серверный модуль должен быть помечен аннотацией <code>@public</code> для доступа из клиентского кода.</para>
             </code> — строка имени-идентификатора модуля;</para>
         </listitem>
       </itemizedlist>
@@ -1454,16 +1455,13 @@ if (category[0]) {
         </listitem>
       </itemizedlist>
       <para>Для вставки нового объекта в набор данных используйте функции <methodname>insert</methodname> или <methodname>push</methodname>  сущности. При необходимости присвойте значения свойств для вставленного объекта.</para>
-      <para>Вызовите функцию <methodname>insert</methodname> для вставки нового объекта в данные сущности. При необходимости передайте в функцию в качестве параметров пары ключ-значение, где ключ — имя свойства, а значение — значение этого свойства:</para>
+      <para>Вызовите функцию <methodname>insert</methodname> для вставки нового объекта в данные сущности. При необходимости передайте в функцию в качестве параметров пары ключ-значение, где ключ —  свойство сущности <replaceable>entityName.md.propName</replaceable>, а значение — значение этого свойства:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.insert();</programlisting>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.insert(
   <replaceable>entityName</replaceable>.md.<replaceable>propName1</replaceable>, <replaceable>propValue1</replaceable>,
   <replaceable>entityName</replaceable>.md.<replaceable>propName2</replaceable>, <replaceable>propValue2</replaceable>
   //...
 );</programlisting>
-      <note>
-        <para>Использование функции <methodname>insert</methodname> c парами  поле-значение является устаревшим и не рекомендовано для новых проектов.</para>
-      </note>
       <para>Вызовите функцию push для вставки нового объекта в данные сущности — эта функция является стандартной для вставки нового элемента в массив JavaScript: </para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.push();</programlisting>
       <para>При необходимости передайте в функцию в качестве параметра объект JavaScript, имена свойств которого соответствуют именам свойств в объектах сущности, и их значения будут установлены в качестве значений свойств нового объекта:</para>
