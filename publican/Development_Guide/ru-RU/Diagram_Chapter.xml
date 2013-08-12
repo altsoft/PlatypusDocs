@@ -167,13 +167,10 @@
         <para><guilabel>Size</guilabel> — длина поля;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Precision</guilabel> — точность;</para>
+        <para><guilabel>Scale</guilabel> — масштаб;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Required</guilabel> — обязательное поле (в поле недопустимы значения <literal>NULL)</literal>;</para>
-      </listitem>
-      <listitem>
-        <para><guilabel>Default value</guilabel> — значение по умолчанию.</para>
+        <para><guilabel>Nullable</guilabel> — необязательное поле (в поле допустимы значения <literal>NULL)</literal>;</para>
       </listitem>
     </itemizedlist>
     <informaltable>
