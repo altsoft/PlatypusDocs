@@ -528,6 +528,11 @@
     <important>
       <para>Событие взаимодействия с пользователем для контейнера генерируется лишь в том случае, если оно не было сгенерировано для дочернего компонента. Таким образом,  форма получит событие мыши лишь в том случае, если оно произошло над поверхностью, свободной от  дочерних компонентов. </para>
     </important>
+    <para>В обработчик события в качестве параметра передается объект события. В зависимости от того, что явилось источником данного события это может быть базовый объект события, а также специфические объекты событий, унаследованные от базового.</para>
+    <para>Базовый обект события содержит свойство <property>source</property> — источник события. Специфические объекты событий также содержат это свойство, а также свои собственные свойства. Определены следующие типы специфических событий: событие контейнера, событие клавиатуры и событие мыши.</para>
+    <para>Объект события контейнера содержит свойство <property>child</property> — дочерний элемент который добавляется или удаляется из контейнера.</para>
+    <para>Объект события клавиатуры содержит следующие свойства: <property>key</property> — код нажатой клавиши, <property>altDown</property> — флаг, означающий, что нажата клавиша Alt, <property>controlDown</property> — флаг, означающий, что нажата клавиша Crtl, флаг, <property> shiftDown</property> — флаг, означающий, что нажата клавиша Shift, <property>metaDown</property> — флаг, означающий, что нажата клавиша Meta.</para>
+    <para>Объект события мыши содержит следующие свойства: <property>x</property> — координата X курсора мыши, <property>y</property> — координата Y курсора мыши, <property>button</property> — код нажатой клавиши мыши, <property>altDown</property> — флаг, означающий, что нажата клавиша Alt, <property>controlDown</property> — флаг, означающий, что нажата клавиша Crtl, флаг, <property> shiftDown</property> — флаг, означающий, что нажата клавиша Shift, <property>metaDown</property> — флаг, означающий, что нажата клавиша Meta.</para>
     <para>Событие <varname>windowClosing</varname> удобно использовать для вызова диалога подтверждения закрытия окна: если функция-обработчик вернет <literal>false</literal>, то форма не будет закрыта: </para>
     <programlisting language="JavaScript">//Handles windowClosing event
 function formWindowClosing(evt) {
@@ -537,8 +542,8 @@ function formWindowClosing(evt) {
     <programlisting language="JavaScript">//Sets form&apos;s title
 title = &quot;Document form&quot;;
 
-//Handles windowClosing event
-windowClosing = function() {
+//Handles onWindowClosing event
+onWindowClosing = function() {
   return confirm(&quot;Close the window?&quot;);
 }</programlisting>
     <para>Для доступа к контейнеру верхнего уровня используйте  свойство <varname>view</varname>:</para>
@@ -1976,16 +1981,42 @@ view.add(pf1);</programlisting>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>Для  <emphasis>модельных виджетов</emphasis>, а также для отдельных ячеек виджета <guilabel>Grid</guilabel> можно определить обработчики следующих событий:</para>
+    <para>Для  <emphasis>модельных виджетов</emphasis>, а также для отдельных ячеек и колонок виджета <guilabel>Grid</guilabel> можно определить обработчики следующих событий:</para>
     <itemizedlist>
       <listitem>
         <para>событие <property>onSelect</property> — возникает при нажатии кнопки   выбора, расположенной рядом с компонентом; кнопка выбора отображается лишь в том случае, если задан обработчик; при необходимости определите в  обработчике особый порядок выбора значения: например, откройте форму-диалог выбора значения и т.п.; в обработчик события в качестве параметра передается объект компонента <parameter>aEditor</parameter>, для которого было вызвано это событие; задайте значение для компонента, установив его свойство <property>value</property>.</para>
+        <programlisting language="JavaScript">/**
+* Shows custom select value dialog and sets the cell value.
+*
+*/
+function buttonOnSelect(aEditor) {
+  var selector = new PetSelector();
+  selector.showModal(function(){
+    aEditor.value = selector.pet;
+  });
+}</programlisting>
       </listitem>
       <listitem>
-        <para>событие <property>onRender</property> — генерируется при подготовке отображения виджета как при самостоятельном использовании, так и при использовании в качестве ячейки виджета <guilabel>Grid</guilabel>.</para>
+        <para>событие <property>onRender</property> — возникает при подготовке отображения виджета как при самостоятельном использовании, так и при использовании в качестве ячейки виджета <guilabel>Grid</guilabel>; в обработчик передается объект события <parameter>evt</parameter>, со следующими свойствами: <property>id</property> — первичный ключ ряда к которому принадлежит ячейка, <property>columnId</property> — для разворотных столбцов это первичный ключ, в остальных случаях это порядковый номер столбца, <property>object</property> — ряд ячейки, <property>cell</property> — объект ячейки, со следующими свойствами: <property>display</property> — строка, которая будет показываться в ячейке, <property>style</property> — объект стиля, <property>data</property> — данные ячейки; изменения, которые сделаны в ячейке будут применены в случае, если обработчик события <property>onRender</property> вернет значение <literal>true</literal>.</para>
+        <programlisting language="JavaScript">/**
+ * Categories grid docs names column onRender event handler.
+ * @param evt onRender event object
+ * @returns true to apply changes to the cell
+ */
+function entityOnRender(evt) {
+    var txt = &apos;&apos;;
+    categories.find(categories.md.CAT_ID, evt.id).forEach(function(aDoc) {
+        if(txt.length &gt; 0) {
+            txt += &apos; &apos;;
+        }
+        txt += aCat.NAME ? aDoc.NAME : &apos;&apos;;
+    });
+    evt.cell.display = txt;
+    return true;
+}</programlisting>
       </listitem>
     </itemizedlist>
-    <para>Для <emphasis>модельных виджетов</emphasis>   не рекомендуется определять обработчики низкоуровневых событий (событий движения мыши, клавиатуры и т.п.).</para>
+    <para>Для модельных виджетов   не рекомендуется определять обработчики низкоуровневых событий (событий движения мыши, клавиатуры и т.п.).</para>
     <section>
       <title>Model Check Box — Флажок</title>
       <para>Виджет, состояние которого связано с произвольным полем типа <classname>Boolean</classname>, <classname>Number</classname> или <classname>String</classname> сущности из модели данных.</para>

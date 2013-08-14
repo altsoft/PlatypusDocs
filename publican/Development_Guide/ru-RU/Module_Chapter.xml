@@ -154,7 +154,7 @@
           <para>где <code>
               <replaceable>ModuleName</replaceable>
             </code> — строка имени-идентификатора модуля, серверный модуль должен быть помечен аннотацией <code>@public</code> для доступа из клиентского кода.</para>
-         </listitem>
+        </listitem>
       </itemizedlist>
       <para>Серверный модуль должен быть помечен аннотацией <code>@public</code> для доступа из клиентского кода. </para>
       <para>По умолчанию на сервере будет создан экземпляр модуля с поддержкой состояния его полей,  существующий в контексте текущей сессии пользователя. В случае, если модуль помечен аннотацией <code>@stateless</code>, состояние модуля не будет поддерживаться и новый экземпляр будет создаваться при каждом вызове любого из методов модуля.</para>
@@ -861,7 +861,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
         <para><guilabel>Scale</guilabel> — масштаб для поля;</para>
       </listitem>
       <listitem>
-        <para><guilabel>Nullable</guilabel> — допустимо ли дня поля значение <literal>NULL</literal>.</para>
+        <para><guilabel>Nullable</guilabel> — допустимо ли для поля значение <literal>NULL</literal>.</para>
       </listitem>
     </itemizedlist>
     <para>Для редактирования параметра модели данных выполните следующие действия:</para>
