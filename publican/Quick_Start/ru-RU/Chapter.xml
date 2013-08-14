@@ -403,6 +403,52 @@ function petsWillScroll(evt) {
     <para>В случае, если этот обработчик вернет значение <literal>false</literal> — перемещения курсора не произойдет.</para>
     <para>После написания основного кода необходимо провести тестирование приложения. Для этого запустите приложение в 2-х звенном режиме с использванием Platypus Client и проверьте правильность работы всех компонентов. При необходимости протестируйте JavaScript код в режиме отладки. </para>
   </section>
+  <section>
+    <title>Добавление на форму списка владельцев столбца о питомцах</title>
+    <para>Добавим в сетку данных списка владельцев столбец в котором будут выводится разделенные пробелом имена питомцев  владельца.</para>
+    <para>Откройте в редакторе форму Owners view и перетащите с палитры компонент <guilabel>Model Grid Column</guilabel>  на сетку данных сипска владельцев. Задайте для этогого столбца имя  <guilabel>pets</guilabel> и его заголовок. Не связывайте этот столбец ни с каким полем сущности.</para>
+    <para>Данные по именам питомцев будут запрашиваться из базы данных отдельным запросом  и выводится в новый столбец JavaScript кодом, который мы напишем чуть позже.</para>
+    <para>Создайте новый запрос <classname>OwnersPets</classname>, возвращающий информацию о питомцах для каждого владельца. Сконфигурируйте данный запрос при помощи визуального редактора запроса. Обратите внимание на то, что в данном запросе используется подзапрос <classname>OwnersQuery</classname>. Добавьте этот позапрос и таблицу <literal>Pets</literal>, свяжите поля ключей связью. SQL этого запроса:</para>
+    <programlisting language="SQL">/**
+ * Gets the owners and their pets.
+ * @public
+ * @author vv
+ * @name OwnersPets
+ */ 
+Select q1.OWNERS_ID, t.NAME
+From OwnersQuery q1
+ Left Outer Join PETS t on t.OWNER = q1.OWNERS_ID</programlisting>
+    <para>Добавьте параметр <literal>lastNamePattern</literal> и свяжите этот параметр с параметром подзапроса <classname>OwnersQuery</classname>.</para>
+    <para>В следствии асинхронного характера работы модели данных на клиенте, при использовании нескольких запросов, данные  в разные сущности модели могут приходить в разное время. В случае, если данные из этих запросов должны выводится на одном виджете нам необходимо предпринять специальные действия для того, чтобы обеспечить наличие всех нужных нам данных на момент обновления этого виджета.</para>
+    <para>Добавьте запрос <classname>OwnersPets</classname> в модель данных формы <classname>OwnersView</classname> дайте новой сущности имя <literal>ownersPets</literal>. Удалите связь, которая связывает сущность <literal>owners</literal> и параметр формы <literal>lastNamePattern</literal> и свяжите этот параметр с соответсвующим параметром сущности <literal>ownersPets</literal>. Таким образом, при изменении параметра формы будут автоматически обновляться данные сущности с информацией о питомцах владельцев, а не о самих владельцев.</para>
+    <para>Запрос на обновление данных в сущности <literal>owners</literal> будет осуществляться программно, после того как в сущность  <literal>ownersPets</literal> прийдут новые данные. Для этого добавьте обработчик события onRequired для сущности <literal>ownersPets</literal> и напишите его код:<programlisting language="JavaScript">/**
+ * Called then data is ready in ownersPets entity.
+ * @param evt Event object
+ */
+function ownersPetsOnRequeried(evt) {               
+    owners.params.lastNamePattern = ownersPets.params.lastNamePattern;
+    owners.requery();
+}</programlisting></para>
+    <para>Сетка данных будет перерисована в тот момент, когда придут данные в связанную с ней сущность <literal>owners</literal> и мы гарантировано будтем иметь нужные нам данные о питомцах, поскольку запрос данных о них был выполнен раньше.</para>
+    <para>Добавьте  обработчик и напишите код для события <literal>onRender</literal> столбца <guilabel>pets</guilabel>, в котором будет выводиться информация о питомцах: </para>
+    <programlisting language="JavaScript">/**
+ * Pet&apos;s column onRender handler.
+ * @param evt onRender event object
+ * @returns true to apply changes to the cell
+ */
+function petsOnRender(evt) {
+    var txt = &apos;&apos;;
+    ownersPets.find(ownersPets.md.OWNERS_ID, evt.id).forEach(function(aPet) {
+        if(txt.length &gt; 0) {
+            txt += &apos; &apos;;
+        }
+        txt += aPet.NAME ? aPet.NAME : &apos;&apos;;
+    });
+    evt.cell.display = txt;
+    return true;
+}</programlisting>
+    <para>В данном коде, вызываемом для каждого элемента списка владельцев, мы фильтруем данные по питомцам этого владельца, формируем строку и выводим ее в ячейке сетки. Для тех владельецев, у которых нет питомцев, выводим пустую строку.</para>
+  </section>
   <section id="sect-Installation_Guide-Test_Chapter-Test_Section_6">
     <title>Создание отчета о владельцах</title>
     <para>Сформируем простой отчет о выбранных владельцах. Для этого создайте новый элемент приложения типа <guilabel>Report</guilabel>, задайте его имя-идентификатор <classname>OwnersReport</classname>.</para>
