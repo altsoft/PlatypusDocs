@@ -6,7 +6,7 @@
 <chapter id="chap-Development_Guide-Module_Chapter">
   <title>Модуль</title>
   <para><emphasis>Модуль</emphasis> представляет собой элемент приложения содержащий, исполняемый код JavaScript. </para>
-  <para>Модули могут содержать в  себе код отвечающий за бизнес-логику или любой другой повторно используемый код (библиотеки). </para>
+  <para>Модули могут содержать в  себе код отвечающий за бизнес-логику или любой другой повторно используемый код. </para>
   <para>Модули могут выполняться как на клиентском устройстве в <application>Platypus Client</application> или в  Web-браузере, так и на серверной машине в сервере приложений <application>Platypus Application Server</application> или в  <application>Platypus Servlet</application> в  J2EE сервере/сервлет-контейнере.</para>
   <para>Среда исполнения JavaScript в Platypus для <application>Platypus Client</application> и <application>Platypus Application Server</application>/<application>Platypus Servlet</application> основана на движке Rhino (Mozilla Foundation);</para>
   <para>Модуль включает в себя:</para>
@@ -1397,8 +1397,14 @@ entity1.sort(sorter);</programlisting>
       <para>Модель данных представлена в программном коде объектом <varname>model</varname>: </para>
       <programlisting language="JavaScript">model</programlisting>
       <para>Объект <literal>model</literal> содержит функции и свойства определяющие поведение модели данных.</para>
+      <para>Для обновления всех сущностей модели вызовите функцию <methodname>execute</methodname>, при этом новые данные будут загружены только если значения параметров модели изменились:</para>
+      <programlisting language="JavaScript">model.execute();</programlisting>
       <para>Для принудительного обновления данных всех сущностей модели вызовите функцию <methodname>requery</methodname> объекта <literal>model</literal> : </para>
       <programlisting language="JavaScript">model.requery();</programlisting>
+      <para>Используйте свойство модели <literal>modified</literal> для того, чтобы определить, были ли изменены данные:</para>
+      <programlisting language="JavaScript">model.modified &amp;&amp; Logger.info(&quot;Model data is modified.&quot;);</programlisting>
+      <para>Для сохранения  изменений в модели данных вызовите функцию <methodname>save</methodname> модели:</para>
+      <programlisting language="JavaScript">model.save();</programlisting>
     </section>
     <section>
       <title>Сохранение данных в БД</title>
@@ -1430,8 +1436,6 @@ entity1.sort(sorter);</programlisting>
         </varname> — сущность, <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> — свойство объекта с указанным индексом в данных сущности, <literal>
           <replaceable>newValue</replaceable>
         </literal> — выражение для нового значения.</para>
-      <para>Для сохранения  изменений в модели данных вызовите функцию <methodname>save</methodname> модели:</para>
-      <programlisting language="JavaScript">model.save();</programlisting>
       <para>Пример кода сохранения измененных данных модели: </para>
       <programlisting language="JavaScript">categoryID = 101; //Sets model parameter to load data
 if (category[0]) {
