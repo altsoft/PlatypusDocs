@@ -15,7 +15,7 @@
       <para>Platypus Application Designer</para>
     </listitem>
     <listitem>
-      <para>Apache Tomcat 7 (для запуска риложния в виде web-приложения)</para>
+      <para>Apache Tomcat 7 (для запуска приложения в виде web-приложения)</para>
     </listitem>
   </itemizedlist>
   <para>Для получения справочной информации обратитесь к руководствам разработчика и администратора.</para>
