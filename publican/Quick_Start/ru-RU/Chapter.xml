@@ -104,6 +104,14 @@ From OWNERS t1
 </para>
     <para>В этом запросе мы используем параметр <parameter>lastNamePattern</parameter>, в котором будет задваться шаблон по которому будет осуществляться поиск.</para>
     <para>Обратите внимание, что для всех запросов, к которым будет осуществляться доступ по сети из модели, работающей на клиенте, в заголовочном комментарии запроса должна быть указана аннотация <literal>@public</literal>.</para>
+    <figure>
+      <title>Модель данных списка владельцев</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata align="center" fileref="images/ownersListDataModel.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
     <para>Сохраните запрос и добавьте его в модель данных формы <filename>Owners view</filename>, например, путем перетаскивания запроса из дерева проекта на панель модели данных формы. В свойствах добавленной сущности задайте имя этой сущности как <literal>owners</literal>. Добавьте новый параметр модели данных с именем <literal>lastNamePattern</literal> и свяжите его с соответствующим параметром сущности <literal>owners</literal> этот параметр будет использован позже для поиска информации о владельцах в базе данных.</para>
     <para>Теперь необходимо связать компонент сетки с этой сущностью, для этого в свойствах сетки задайте параметр <menuchoice>
         <guimenuitem>Model binding</guimenuitem>
@@ -218,6 +226,14 @@ From VISIT t1
  */ 
 Select * 
 From PETTYPES t1</programlisting>
+    <figure>
+      <title>Модель данных формы информации о владельце и его питомцах</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata align="center" fileref="images/ownerViewDataModel.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
     <para>Добавьте в параметры модели формы новый параметр <literal>ownerId</literal> типа <classname>Decimal</classname>. Добавьте в модель запросы <classname>OwnerQuery</classname>, <classname>PetsQuery</classname>, <classname>VisitsQuery</classname>, <classname>PetTypesQuery</classname> и задайте для новых сущностей имена <literal>owner</literal>, <literal>pets</literal>, <literal>visits</literal> и <literal>petTypes</literal> соответсвенно.</para>
     <para>Свяжите параметр модели данных формы <literal>ownerID</literal> с одноименным параметром сущности <literal>owner</literal>.  Во время исполнения в эту сущность будут загружены данные, выбранные в соответствии с значением этого параметра. Обратите внимание на то, что в этой сущности всегда будет только одна запись. Также свяжите входные параметры сущностей <literal>pets</literal>, <literal>visits</literal> со полем соответствующим идентификатору владельца, данные которого отображаются на этой форме.</para>
     <para>В сущности <literal>visits</literal> будут находится все визиты для всех питомцев владельца, однако мы хотим, чтобы в правой сетке отображались визиты в отель для  питомца, который выбран в данный момент на левой сетке. Для этого добавьте фильтрующую связь между полем <literal>PETS_ID</literal> сущности <literal>pets</literal> и полем <literal>PET</literal> сущности <literal>visits</literal>. Обратите внимание, что фильтрация происходит на клиенте и не вызывает новых запросов в БД.</para>
@@ -420,6 +436,14 @@ From OwnersQuery q1
  Left Outer Join PETS t on t.OWNER = q1.OWNERS_ID</programlisting>
     <para>Добавьте параметр <literal>lastNamePattern</literal> и свяжите этот параметр с параметром подзапроса <classname>OwnersQuery</classname>.</para>
     <para>Вследствие асинхронного характера работы модели данных на клиенте при использовании нескольких запросов данные  в разные сущности модели могут приходить в разное время. В случае, если данные из этих запросов должны одновременно выводиться на одном виджете, необходимо предпринять специальные действия. </para>
+    <figure>
+      <title>Модель данных списка владельцев</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata align="center" fileref="images/ownersListDataModel2.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
     <para>Добавьте запрос <classname>OwnersPets</classname> в модель данных формы <classname>OwnersView</classname>, дайте новой сущности имя <literal>ownersPets</literal>. Удалите связь между сущностью <literal>owners</literal> и параметром формы <literal>lastNamePattern</literal>, и свяжите указанный параметр с соответсвующим параметром сущности <literal>ownersPets</literal>. Таким образом, при изменении параметра формы будут автоматически обновляться данные сущности с информацией о питомцах владельцев, а не о самих владельцах.</para>
     <para>Запрос на обновление данных в сущности <literal>owners</literal> будет осуществляться программно после того, как в сущность  <literal>ownersPets</literal> прийдут новые данные. Для этого добавьте обработчик события onRequired для сущности <literal>ownersPets</literal> и напишите его код:<programlisting language="JavaScript">/**
  * Called then data is ready in ownersPets entity.
