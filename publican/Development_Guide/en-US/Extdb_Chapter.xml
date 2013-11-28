@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Extdb_Chapter">
+  <title>Connection to an external database</title>
+  <para>Every Platypus Platform application has a connection to the default database. This connection is set when creating an application. Besides, the application can use  connections to any number of  external databases. </para>
+  <para>To define a connection to  external databases, application elements of the <emphasis>Connection to external database</emphasis> type are used.</para>
+  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_5">
+    <title>Creating a new connection to an external database</title>
+    <para>To create a new connection to the external <acronym>database</acronym>, perform the following actions:   
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the <guimenuitem>New</guimenuitem> item in the parent directory context menu, or select the parent directory and click  <guimenuitem>New File</guimenuitem> in the main menu, or click the <guibutton>New File</guibutton> button on the toolbar, or use the hotkey.</para>
+      </listitem>
+      <listitem>
+        <para>Select the  <guilabel>External database connection</guilabel> type in the context menu or select <menuchoice>
+            <guimenu>Choose file type</guimenu>
+            <guisubmenu>Platypus application elements</guisubmenu>
+            <guimenuitem>External database connection</guimenuitem>
+          </menuchoice> on the wizard first step and click <guibutton>Next</guibutton>.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the name of the new application element in the <guilabel>Name</guilabel> field, and click <guibutton>Finish</guibutton> to create it, or click  <guibutton>Cancel</guibutton> to cancel.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_6">
+    <title>Editing connection to an external database</title>
+    <para>Use the special editor for editing the <guilabel>External database connection</guilabel> application element. To open the application element editor, double-click an application element in the project tree. </para>
+    <para>To modify the settings of the connection to the external database, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Fill in the  <guilabel>Name</guilabel> field — specify the ID of the external database connection application element; ID is subject to the requirements of the Platypus application elements names.</para>
+      </listitem>
+      <listitem>
+        <para>Fill in the  <guilabel>JDBC Url</guilabel> field — specify <acronym>URL</acronym> of the connection to the external <acronym>database</acronym> in the <acronym>JDBC</acronym> format.</para>
+      </listitem>
+      <listitem>
+        <para>Fill in the <guilabel>Database User</guilabel> field  — specify the <acronym>database</acronym> user name. </para>
+      </listitem>
+      <listitem>
+        <para>Fill in the <guilabel>Password</guilabel> field — specify the database user password. </para>
+      </listitem>
+      <listitem>
+        <para>Select the default schema of this connection from the dropdown list in the  <guilabel>Default schema</guilabel> field. </para>
+      </listitem>
+      <listitem>
+        <para>Test the connection to the <acronym>database</acronym> by clicking the  <guibutton>Test connection</guibutton> button. </para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking <guibutton>Save All</guibutton> on the <application>Platypus Application Designer</application> toolbar, or by using the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>When the application is running in the <acronym>J2EE</acronym> server environment or servlet container, the connection to the database is provided by the external environment, where the Platypus application is running. Set up the connection to the database as the  <acronym>JNDI</acronym> resource and specify the name of this resource in the <acronym>JDBC</acronym><acronym> URL</acronym> field. In this case, do not fill in the  <guilabel>Database User</guilabel>, <guilabel>Password</guilabel>, and <guilabel>Default schema</guilabel> fields. The procedure is performed without testing the connection.</para>
+  </section>
+</chapter>

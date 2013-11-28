@@ -1,0 +1,492 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Query_Chapter">
+  <title>Database query</title>
+  <para><emphasis>Query</emphasis> in  Platypus is an application element which defines the SQL expression to be executed in the database. In the Platypus Platform, a query is preprocessed before execution.</para>
+  <para>Queries solve several tasks:<itemizedlist>
+      <listitem>
+        <para>Formulate  tasks to sample  data  from the <acronym>database</acronym> (<literal>SELECT</literal> queries).</para>
+      </listitem>
+      <listitem>
+        <para>Define  metadata for processing the sampling results  (<literal>SELECT</literal> queries).</para>
+      </listitem>
+      <listitem>
+        <para>Define  metadata for processing the modifications of data made while the application is running  (<literal>SELECT</literal> queries).</para>
+      </listitem>
+      <listitem>
+        <para>Formulate  tasks to add and update data  in the <acronym>database</acronym> (<literal>INSERT</literal>, <literal>DELETE</literal>, and <literal>UPDATE</literal> queries).</para>
+      </listitem>
+    </itemizedlist><note>
+      <para>In most cases, data adding and updating tasks are carried out by the data model automatically when saving  changes. To do that, you can just specify a query of the  <literal>SELECT</literal> type.</para>
+    </note></para>
+  <para>Queries in the Platypus Platform have the following characteristics:<itemizedlist>
+      <listitem>
+        <para>Queries support  named parameters of the predefined type.</para>
+      </listitem>
+      <listitem>
+        <para>Repeated use is implemented (i.e. inclusion of some queries into other queries without copying their body).</para>
+      </listitem>
+      <listitem>
+        <para>You can edit queries in the visual form and in the text form simultaneously.</para>
+      </listitem>
+      <listitem>
+        <para>Query results are translated into entities which can be processed by the JavaScript code; Platypus Platform JavaScript is responsible for that.</para>
+      </listitem>
+      <listitem>
+        <para>Query allows you to set the pattern for processing  data changes made while the application is running: it is possible to define a list of tables where the changes will be stored, as well as enable or disable saving of changes for the entities received from the database using this query.</para>
+      </listitem>
+    </itemizedlist></para>
+  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_3">
+    <title>Creating a database query</title>
+    <para>To create a new query, perform the following actions:
+   
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the  <guimenuitem>New</guimenuitem> item in the parent directory context menu, or select the parent directory and select the  <guimenuitem>New File</guimenuitem> item in the main menu, or click  <guibutton>New File</guibutton> on the toolbar, or use the hotkey.</para>
+      </listitem>
+      <listitem>
+        <para>Select the <guimenuitem>Query</guimenuitem> type in the context menu, or select  <menuchoice>
+            <guimenu>Choose file type</guimenu>
+            <guisubmenu>Platypus application elements</guisubmenu>
+            <guimenuitem>Query</guimenuitem>
+          </menuchoice> on the wizard first step and click  <guibutton>Next</guibutton>.</para>
+      </listitem>
+      <listitem>
+        <para>Select the connections to the <acronym>database</acronym> and the schema:</para>
+        <itemizedlist>
+          <listitem>
+            <para>Select the default database — click the <guibutton>Default</guibutton> button or a connection to the external database — click the <guibutton>Specific</guibutton> button; select the <guilabel>Db Connection</guilabel> application element using the application element selection dialog.</para>
+          </listitem>
+          <listitem>
+            <para>Click <guibutton>Next</guibutton>.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+      <listitem>
+        <para>Specify the name of the new query in the <guilabel>Name</guilabel> field, and click <guibutton>Finish</guibutton> button to create the new application element, or click <guibutton>Cancel</guibutton> to cancel.</para>
+      </listitem>
+    </itemizedlist>
+    <para>After the query creation wizard completes the steps, a new empty query is created.</para>
+  </section>
+  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_4">
+    <title>Editing the database query</title>
+    <para>A special editor is used to  edit a query. This editor allows you to perform  visual editing of the query and direct editing of the SQL source.</para>
+    <important>
+      <para>Full-featured editing using the visual editor is possible if the connection to the database is established. If there is no connection to the database, only the query source modification is possible. </para>
+    </important>
+    <para>To determine the general properties, use the query properties panel or add the relevant annotation to the query header manually:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the root node in the query inspector.</para>
+      </listitem>
+      <listitem>
+        <para>Edit the query properties on the <guilabel>Properties</guilabel> panel (if necessary, enable the panel in the  <menuchoice>
+            <guimenu>Windows</guimenu>
+            <guimenuitem>Properties</guimenuitem>
+          </menuchoice> global menu).</para>
+        <itemizedlist>
+          <listitem>
+            <para>Check the <guilabel>public</guilabel> option to make the query accessible on the server for calling  from the Platypus Client or the browser — the  <code>@public</code> annotation will be added to the query header.</para>
+          </listitem>
+          <listitem>
+            <para>Check the  <guilabel>procedure</guilabel> option, if the query will be used to call the stored procedure — the <code>@procedure</code> annotation will be added to the query header.</para>
+          </listitem>
+          <listitem>
+            <para>Check the  <guilabel>manual</guilabel> option, if you want to avoid automatic execution of the query, when it works as a part of the module, report, or form data model upon their initialization, for example, if the query contains the call of the stored procedure,  <literal>INSERT</literal> or <literal>UPDATE</literal> expressions — the  <code>@manual</code> annotation will be added to the query header.</para>
+          </listitem>
+          <listitem>
+            <para>Check the  <guilabel>readonly</guilabel> option, if you don&apos;t want to save  changes in the entities data, which were received using this query, in database.</para>
+          </listitem>
+          <listitem>
+            <para>Open the dialog for selecting a connection to the  database, to which this query was assigned, by clicking the  <guibutton>External db connection</guibutton> button, and select the Connection to external database application element, or specify the name of the application element of this type; to assign a query to the default  <acronym>database connection</acronym>, clear this field.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+    <para>For navigation through the query elements, it is convenient to use the query inspector. In the query inspector,  parameters, tables, and sub-queries are represented as a tree structure. Parameters and data fields are the &quot;leaves&quot; of this &quot;tree&quot;.</para>
+    <para>A table or sub-query can be selected both in the visual editor and in the query inspector.</para>
+    <para>You can start query creating  from setting the query parameters (if necessary) or  from using the visual editor. First, let&apos;s discuss  the query visual editor operations.</para>
+    <para>To add a table into the query, perform the following actions:
+   
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the <guilabel>SQL designer</guilabel> tab in the query editor.</para>
+      </listitem>
+      <listitem>
+        <para>Select the <menuchoice>
+            <guimenu>Add table/Add query</guimenu>
+            <guimenuitem>Add table</guimenuitem>
+          </menuchoice> item on the editor toolbar, or use the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>Insert</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+      <listitem>
+        <para>Select the table from the list in the table selection dialog; if necessary, select the schema in the <guilabel>Schema</guilabel> drop-down list; the <guibutton>Default</guibutton> button sets the default schema for the application; if necessary, use the search function by clicking the  <guibutton>Find</guibutton> button.</para>
+      </listitem>
+      <listitem>
+        <para>Click  <guibutton>OK</guibutton> to add the table, or <guibutton>click Cancel</guibutton> to cancel.</para>
+      </listitem>
+      <listitem>
+        <para>If necessary, drag the table to the desired location in the query diagram.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <authorinitials>Platypus Application Designer</authorinitials> toolbar, or by using the  <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To include the existing query  as a sub-query into the query being edited, perform the following actions:
+   
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the  <menuchoice>
+            <guimenu>Add table/Add query</guimenu>
+            <guimenuitem>Add query</guimenuitem>
+          </menuchoice> item in the menu on the editor toolbar.</para>
+      </listitem>
+      <listitem>
+        <para>Select the <guilabel>Query</guilabel> application element type in the selection dialog.</para>
+      </listitem>
+      <listitem>
+        <para>Click <guibutton>OK to add the query, or click</guibutton> <guibutton>Cancel</guibutton> to cancel.</para>
+      </listitem>
+      <listitem>
+        <para>If necessary, drag the query to the desired location in the visual editor diagram.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer toolbar, or by using the</application>  <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>Drag the existing query from the application elements tree of the projects panel  onto the visual editor diagram in order to include it into the query being edited without opening the application elements selection dialog.</para>
+    </note>
+    <para>To assign the table or sub-query alias, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Go to the <guilabel>SQL designer</guilabel> tab.</para>
+      </listitem>
+      <listitem>
+        <para>Select the table or sub-query in the query diagram.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>Properties</guilabel> panel, specify the value in the <guilabel>alias</guilabel> field.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guilabel>Save All</guilabel> button on the <application>Platypus Application Designer</application> toolbar, or by using the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To remove the table or sub-query from the query visual editor diagram, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the table or sub-query in the diagram or in the query inspector.</para>
+      </listitem>
+      <listitem>
+        <para>Click the  <guibutton>Delete</guibutton> button on the query editor toolbar to remove the table or sub-query from the diagram.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by using the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>If the <guilabel>Properties</guilabel> panel is not displayed, enable this panel; to do that, select the <menuchoice>
+          <guimenu>Window</guimenu>
+          <guimenuitem>Properties</guimenuitem>
+        </menuchoice> item in the <application>Platypus Application Designer</application> main menu. </para>
+    </note>
+    <para>To add the query parameters, perform the following actions: </para>
+    <itemizedlist>
+      <listitem>
+        <para>Click the  <guibutton>New field/parameter</guibutton> button on the fields editing tab toolbar to add a field.</para>
+      </listitem>
+      <listitem>
+        <para>Modify the new parameter properties; to do that, select its node among the query parameters nodes in the inspector and edit the parameter properties in the  <guilabel>Properties</guilabel> window.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer toolbar, or by using the</application>  <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Parameter field properties:</para>
+    <itemizedlist>
+      <listitem>
+        <para><guilabel>Name</guilabel> — parameter name.</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>Description</guilabel> — parameter description.</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>Type</guilabel> — parameter type, select in the drop-down list.</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>Type Name</guilabel> — data structure type name, this field is accessible when the  <guilabel>Structure</guilabel> field type is selected.</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>Size</guilabel> — field length or precision.</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>Mode</guilabel> — define this field, if the parameter will be used as the stored procedure parameter.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Modes of using a  parameter  in the stored procedure calls:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Value</entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>in</parameter>
+            </entry>
+            <entry><literal>IN</literal> operation mode</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>in/out</parameter>
+            </entry>
+            <entry><literal>IN/OUT</literal> operation mode</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>out</parameter>
+            </entry>
+            <entry><literal>OUT</literal> operation mode</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>unknown</parameter>
+            </entry>
+            <entry>Parameter operation mode is unknown</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>To edit the query parameter, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the parameter node among the parameters nodes in the inspector.</para>
+      </listitem>
+      <listitem>
+        <para>Edit the parameters; to do that, follow the same steps as when creating a  parameter. </para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the  <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by using the<keycombo>
+            <keycap> Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To remove the parameter, perform the following action:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the parameter on the parameters panel.</para>
+      </listitem>
+      <listitem>
+        <para>Click the  <guibutton>Delete</guibutton> button on the parameters editing tab toolbar, or use the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Delete</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by using the  <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>The query parameter can be linked to a table or sub-query field, or to a sub-query parameter.</para>
+    <para>When linked to field, the parameter will be included into the SQL source  — visually, the link will be displayed as a black arrow. </para>
+    <para>When the parameter is linked to a sub-query parameter,  the parameters will be mapped in the query model — visually, this link will be displayed as a magenta arrow.</para>
+    <para>To add a link between the parameter and a field or  sub-query parameter, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Using the mouse, drag the parameter to the table field or  sub-query parameter to which the parameter should be linked; visually, the link will be displayed as an arrow between  tables / sub-queries fields.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by using the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To remove a link, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the link between a parameter and a table field or sub-query parameter.</para>
+      </listitem>
+      <listitem>
+        <para>Click the <guibutton>Delete</guibutton> button or use the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Delete</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by using the<keycombo>
+            <keycap> Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Modifications of the SQL query made in the visual editor are displayed in the source text on the  <guilabel>SQL Source</guilabel> panel, and vice versa. </para>
+    <para>Modify the SQL source text in the editor, for example, in order to add custom conditions, or write the SQL source text from scratch. Use the query inspector to drag the table fields and parameters from the inspector tree right into the query source text. For the tables fields names, use the auto-fill function.</para>
+    <para>If necessary, custom SQL source can be specified for the query using the SQL dialect for a <acronym>database</acronym>. Enter this source text at the <guilabel>SQL Dialect Source</guilabel> tab. It will be necessary to enter the source text in the   SQL Source field, this source text will be used for determination of the metadata for processing  the query results. If the custom SQL source text is specified, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
+    <important>
+      <para>Use the query custom source text only when it is absolutely necessary, and only if there is no need to enable portability of applications to the multiple database servers.</para>
+    </important>
+    <para>Query execution results fields are determined automatically as a result of the SQL source text processing. </para>
+    <important>
+      <para>Do not use the following names as aliases of the query results fields: <literal>md</literal>, <literal>params</literal>. </para>
+      <para>These names are reserved and used by the data model in  Platypus.</para>
+    </important>
+    <para>It is possible to change the output field type, as well as its description. To do that, perform the following actions: </para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the output field among the output fields nodes in the inspector, and edit its properties in the  <guilabel>Properties</guilabel> editing window.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the output field type in the  <guilabel>Type</guilabel> property by selecting it in the drop-down list.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the output field description  in the <guilabel>Description</guilabel> property.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To execute a database query, for example, for debugging, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the application element and select the  <guilabel>Execute</guilabel> item in the query context menu or in the  <guilabel>SQL Source</guilabel>  editor context menu; execution results will be displayed in the Platypus Application Designer output window.</para>
+      </listitem>
+      <listitem>
+        <para>If the query has parameters, specify them in the query execution dialog; if necessary, modify the query source in the same dialog.</para>
+      </listitem>
+      <listitem>
+        <para>Click <guibutton>OK</guibutton> to execute the query, or click  <guibutton>Cancel</guibutton> to cancel.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To change the size of the query visual representation, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Press the  <guibutton>Zoom In</guibutton> button to scale up, and press the <guibutton>Zoom out</guibutton> button to scale down the query diagram.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To use the search function for searching through the query diagram, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Click the  <guibutton>Find</guibutton> button to open the search dialog for searching through the query diagram.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the search string, select  fields to be searched through: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, and check (uncheck) the following options: <guilabel>Whole words</guilabel> — search for whole words, <guilabel>Match case</guilabel> — perform case-sensitive search. </para>
+      </listitem>
+      <listitem>
+        <para>Click <guibutton>Next</guibutton> and <guibutton>Previous</guibutton> buttons to go to the next search result. </para>
+      </listitem>
+      <listitem>
+        <para>Click <guibutton>Close</guibutton> to close the search dialog. </para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>SQL query source text</title>
+    <section>
+      <title>Query header</title>
+      <para>For every application element of  &quot;Query&quot; type, it is necessary to define its ID within the application in accordance with the general requirements applicable to application elements names in Platypus. After creating a new query, its ID will be defined according to  the file name;  spaces will be replaced by  underscores. After creating a query, the developer can change its name.</para>
+      <para>To specify the query ID, use the  <code>@name</code> annotation in the query header block:</para>
+      <programlisting language="SQL">/**
+ * Query header example
+ * @name AllDocuments
+ **/
+SELECT * 
+FROM Document</programlisting>
+      <para>Query ID is mandatory.</para>
+      <para>In addition to the  <code>@name</code> annotation in the query header, comments and other annotations are acceptable. </para>
+    </section>
+    <section>
+      <title>Query source</title>
+      <para>The query source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. The SQL source is located under the header and can include other comments. </para>
+      <para>The SQL query can contain  sampling of all  <code>SELECT * FROM table</code> fields or only the required ones. The following aliases are assigned to them: <code>SELECT a, b, c FROM table</code>. If the first type of sampling is used, the names of the properties that will be accessible in the JavaScript code are defined by the table columns names, and can be uppercased or lowercased. To create the code compatible with various databases, it is recommended to use the second option with explicit indication of the query output fields.</para>
+      <para>Platypus queries can contain named parameters: <parameter>:<replaceable>paramName</replaceable></parameter>.</para>
+      <para>Example of the SQL query source with the named parameters:</para>
+      <programlisting language="SQL">/**
+ * Device log for period of time
+ * @name Timelog
+ **/
+SELECT * 
+FROM TR_TRACKINGDEVICE_LOG trackingLog
+WHERE trackingLog.DEVICE_ID = :deviceId 
+AND trackingLog.TIME &gt;= :timeFrom 
+AND trackingLog.TIME &lt;= :timeTo
+ORDER BY trackingLog.TIME ASC</programlisting>
+      <para>Platypus queries can be used again in other queries. To use a <emphasis>Query</emphasis> as the sub-query, include its name in the SQL source:</para>
+      <programlisting language="SQL">/**
+ * Time log priority filter
+ * @name Filter
+ **/
+SELECT * 
+FROM Timelog timeLog
+WHERE timeLog.PRIORITY &gt; :priority</programlisting>
+      <para>In the example above, a query named <code>Timelog</code> is used as the sub-query in the <code>Filter</code>  query.<note>
+          <para>If the sub-query contains parameters, it is necessary to associate them with the parameters of the query into which it was embedded.</para>
+        </note></para>
+    </section>
+    <section>
+      <title>Saving the data changes</title>
+      <para><literal>SELECT</literal> query returns a set of entities which can be processed using the JavaScript code. Data of these entities can change while the application is running. The data changes will be automatically converted into the set of SQL commands when saving to the database. To run this mechanism, data returned by the query should contain  primary keys of all relevant tables. This enables the JavaScript ORM to determine which properties of the resulting entities are in charge of their identification. </para>
+      <para>In order to determine, which tables mentioned in the query can be modified using this mechanism, use the following annotations: <code>@writable <replaceable>table1</replaceable><replaceable> table2</replaceable></code> ... For this annotation, specify the list of tables, using spaces to delimit them. If there is no  <code>@writable</code> annotation, all  tables mentioned in the query will become writable. To disable writing to all tables mentioned in the query, add the <code>@readonly</code> annotation to the query header.  </para>
+      <para>In the example  below only the Document table is writable:</para>
+      <programlisting language="SQL">/**
+ * @name docsCategories
+ * @writable Document
+ **/
+SELECT * 
+FROM Document d
+INNER JOIN Category c
+ON d.CategoryID = c.CATEGORY_ID</programlisting>
+    </section>
+    <section>
+      <title>Security in applications</title>
+      <para>Generally, access to  data in the database must be differentiated for various user groups. In Platypus there is an embedded security mechanism which implements the  constraints of  access to the resources based on the roles of the current user  (the user who is performing the current operation).</para>
+      <para>To limit the access to the query for certain roles, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code> ... annotation into the query header. For the added annotation, specify the list of roles  delimiting them by spaces. The roles listed in the  <code>@rolesAllowed</code> annotation are granted with  rights both for  reading and  writing data to the database. If more detailed definition of the data access policy is required, use the  <code>@rolesAllowedRead</code> and <code>@rolesAllowedWrite</code> annotations. </para>
+      <para>Specify the list of roles, for which only data reading is allowed, in the  <code>@rolesAllowedRead</code> annotation. </para>
+      <para>Specify the list of roles, for which only data writing is allowed, in the <code>@rolesAllowedWrite</code> annotation.</para>
+      <para>If none of the   <code>@rolesAllowed</code>, <code>@rolesAllowedRead</code>, or <code>@rolesAllowedWrite</code> annotations are specified for the query, the database data manipulated by the query are readable and writable for any user.</para>
+      <para>An example of the query where  reading and writing rights are granted to the  <literal>admin</literal> role only:</para>
+      <programlisting language="SQL">/**
+ * @name AllCategories
+ * @rolesAllowed admin
+ **/
+SELECT * 
+FROM Category</programlisting>
+    </section>
+  </section>
+</chapter>

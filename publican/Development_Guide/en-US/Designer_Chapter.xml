@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Designer_Chapter">
+  <title>Working with an application project in the Platypus Application Designer</title>
+  <para>In the course of development and further during the application life cycle, the application is represented by the Platypus project. The Platypus project is a directory on the hard drive containing  files with settings and application elements.</para>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
+    <title>Project creation</title>
+    <para>This section contains information about  creating the Platypus project and  basic operations when working with it.</para>
+    <para>To create a  Platypus project, perform the following actions:
+   <itemizedlist>
+        <listitem>
+          <para>Launch the designer (if not launched yet). To do that, use the <guiicon>Platypus Application Designer</guiicon> shortcut on the desktop or the corresponding item in the installed applications menu.</para>
+        </listitem>
+        <listitem>
+          <para>Select <menuchoice>
+              <guimenu>File New</guimenu>
+              <guimenuitem> Project</guimenuitem>
+            </menuchoice> or click the  <guibutton>New Project</guibutton> button on the toolbar. </para>
+        </listitem>
+        <listitem>
+          <para>Select the project type — <classname>Platypus Application Project</classname> — and click  <guibutton>Next.</guibutton> </para>
+        </listitem>
+        <listitem>
+          <para>Specify the project name and location:</para>
+          <itemizedlist>
+            <listitem>
+              <para>Specify the project directory name in the <guilabel>Project Folder Name</guilabel> field.</para>
+            </listitem>
+            <listitem>
+              <para>Select the parent directory, in which the Platypus application project will be created, in the  <guilabel>Project Location</guilabel> field.</para>
+            </listitem>
+            <listitem>
+              <para>Specify the project title in the  <guilabel>Project Title</guilabel> field.</para>
+            </listitem>
+            <listitem>
+              <para>Click <guibutton>Next</guibutton> to proceed to the next step.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>Specify  parameters of the connection to the database:</para>
+          <itemizedlist>
+            <listitem>
+              <para>Specify the URL of the connection to the database in the JDBC format in the  <guilabel>JDBC Url</guilabel> field, for example, JDBC URL for MySQL database looks like <literal>jdbc:mysql://localhost:3306/db_name</literal>; use the  <guibutton>Build JDBC Url</guibutton> button to call the URL generation wizard; in the wizard window, select the database type, host name, port, and the database name —  JDBC URL will be generated automatically. </para>
+            </listitem>
+            <listitem>
+              <para>Specify the  schema name in the database in the <guilabel>Database Schema</guilabel> field. </para>
+            </listitem>
+            <listitem>
+              <para>Specify the user name in the  <guilabel>Database User Name</guilabel> field.</para>
+            </listitem>
+            <listitem>
+              <para>Specify the password in the <guilabel>Database User Password</guilabel> field.</para>
+            </listitem>
+            <listitem>
+              <para>To test the connection to the database, click  the <guibutton>Test connection</guibutton> button.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>Click <guibutton>Finish</guibutton>  to finish the Platypus project creation.</para>
+        </listitem>
+      </itemizedlist>
+New project will be added to the <guilabel>Projects</guilabel> panel. </para>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
+    <title>Project opening</title>
+    <para>To open an existing Platypus project, perform the following actions:
+   <itemizedlist>
+        <listitem>
+          <para>Launch the designer (if not  launched yet) — to do that, use the <guiicon>Platypus Application Designer</guiicon> shortcut on the desktop or an item of  the installed applications menu.</para>
+        </listitem>
+        <listitem>
+          <para>Select  <menuchoice>
+              <guimenu>File Open</guimenu>
+              <guimenuitem> Project</guimenuitem>
+            </menuchoice> or click the  <guibutton>Open Project</guibutton> button on the toolbar. </para>
+        </listitem>
+        <listitem>
+          <para>Select the project parent directory using the selection dialog, select the project folder, and click the <guibutton>Open Project</guibutton> button.</para>
+        </listitem>
+      </itemizedlist>
+Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
+  </section>
+  <section>
+    <title>Project properties setup</title>
+    <para>To change the project properties, select the <guimenuitem>Properties</guimenuitem> item in the project root node context menu.</para>
+    <para>Set  parameters of the main connection to the database:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the  <guilabel>Application Database</guilabel> category.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the  JDBC URL; if necessary, use the  <guibutton>Build JDBC Url</guibutton> wizard.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the database schema.</para>
+      </listitem>
+      <listitem>
+        <para>Specify login and password.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Set the application launching parameters:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the  <guilabel>Run</guilabel> category.</para>
+      </listitem>
+      <listitem>
+        <para>Set the default application starting element; if necessary, use the application element selection dialog.</para>
+      </listitem>
+      <listitem>
+        <para>Set the type of the client application to be launched: <guilabel>Platypus Client</guilabel> or <guilabel>HTML5 browser</guilabel>.</para>
+      </listitem>
+      <listitem>
+        <para>Set the type of the server to be launched: <guilabel>No</guilabel>, <guilabel>Platypus Application Server</guilabel>, <guilabel>J2EE Server</guilabel>.</para>
+      </listitem>
+      <listitem>
+        <para>Check the  <guilabel>Database application</guilabel> option to use an application, which is deployed in the database, when launching.</para>
+      </listitem>
+      <listitem>
+        <para>Check the  <guilabel>Don&apos;t start application server</guilabel> option to launch the client only.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>Client</guilabel> tab, in the <guilabel>Url</guilabel> field specify the URL of the application server which will be used by the Platypus Client application when launching, if the  <guilabel>Don&apos;t start application server</guilabel> option is enabled.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>Client</guilabel> tab, in the <guilabel>Login</guilabel> and <guilabel>Password</guilabel> fields specify  login and password for the Platypus Client application.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>Client</guilabel> tab, in the <guilabel>Options</guilabel> field specify additional parameters of the Platypus Client application launching, for example, LaF (Look and Feel).</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>Platypus Application Server</guilabel> tab, in the <guilabel>Port</guilabel> field specify a  port for the development application server.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>Platypus Application Server</guilabel> tab, in the <guilabel>Options</guilabel> field set  additional parameters of the Platypus application server launching.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>J2EE Server</guilabel> tab, in the <guilabel>Server</guilabel> field select the server instance to be used for the application launching from the list of the installed J2EE servers.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>J2EE Server</guilabel> tab, in the <guilabel>Context</guilabel> field specify the name of the web-application in the J2EE server.</para>
+      </listitem>
+      <listitem>
+        <para>On the <guilabel>J2EE Server</guilabel> tab, check the <guilabel>Enable security</guilabel> option to enable the security; the  mechanism of authentication with forms will be used for the web-application.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Set the debugging parameters:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the <guilabel>Application Database</guilabel> category.</para>
+      </listitem>
+      <listitem>
+        <para>Set the Platypus Client debugging port.</para>
+      </listitem>
+      <listitem>
+        <para>Set the application server debugging port.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
+    <title>Project structure and operations with application elements</title>
+    <para>A Platypus project has the following structure:
+   <itemizedlist>
+        <listitem>
+          <para><guilabel>Application Elements</guilabel> — root directory, which contains the application elements tree.</para>
+        </listitem>
+        <listitem>
+          <para><guilabel>Database Migrations</guilabel> — directory, which contains the database migrations files.</para>
+        </listitem>
+      </itemizedlist></para>
+    <para>You can perform the  following operations on the application elements and directories:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Creating an element  —  <command>New</command> command.</para>
+      </listitem>
+      <listitem>
+        <para>Renaming — to do that, click  the selected application element  or  directory name, and press the  <keycap>F2</keycap> key.</para>
+      </listitem>
+      <listitem>
+        <para>Pasting an application element from the buffer to the specified project location —  <command>Paste</command> command.</para>
+      </listitem>
+      <listitem>
+        <para>Copying and moving the directory or the application elements to the specified project location; to copy, hold the <keycap>Ctrl</keycap> key while dragging —  <command>Drag-and-Drop</command> command. </para>
+      </listitem>
+      <listitem>
+        <para>Deleting an application element — <command>Delete</command> command.</para>
+      </listitem>
+      <listitem>
+        <para>Searching for an element in the project —  <command>Find</command> command.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Do these operations using the element context menu, <menuchoice>
+        <guimenu>Edit</guimenu>
+      </menuchoice> menu in the main menu, or hotkeys. You can perform operations, which are applicable to the application elements of the given type, on the application elements. Specific operations are described in detail in the sections dedicated to the certain types of  application elements.</para>
+    <para>To create a  directory:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the <menuchoice>
+            <guimenuitem>New</guimenuitem>
+          </menuchoice> item in the parent directory context menu or select the parent directory and click  <menuchoice>
+            <guimenuitem>New File</guimenuitem>
+          </menuchoice> in the main menu, or click the <guibutton>New File</guibutton> button on the toolbar, or use the hotkey.</para>
+      </listitem>
+      <listitem>
+        <para>Select the <guimenuitem>Folder</guimenuitem> type in the context menu or select  <menuchoice>
+            <guimenu>Choose file type</guimenu>
+            <guisubmenu> Platypus application elements </guisubmenu>
+            <guimenuitem> Folder</guimenuitem>
+          </menuchoice> on the wizard first step and click <guibutton>Next</guibutton>.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the name of the directory in the <guilabel>Name</guilabel> field and click <guibutton>Finish</guibutton> to create a  directory, or click <guibutton>Cancel</guibutton> to cancel.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To navigate to the application element, if its identifier is known:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select <menuchoice>
+            <guimenu>File</guimenu>
+            <guimenuitem>Go to application element</guimenuitem>
+          </menuchoice>, or use the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>G</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+      <listitem>
+        <para>In the dialog, specify the identifier of the application element in the  <guilabel>Provide application element id</guilabel> field of the dialog.</para>
+      </listitem>
+      <listitem>
+        <para>Click <guibutton>OK</guibutton> to navigate to the application element, or click  <guibutton>Cancel</guibutton> to cancel.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To open an application element, select <guimenuitem>Open</guimenuitem> in the application element context menu, or double-click this element. The application element editor opens as a window in the  <application>Platypus Application Designer</application> editors area. </para>
+    <para>To find out the identifier of an application element:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select an application element in the projects application elements tree.</para>
+      </listitem>
+      <listitem>
+        <para>Select <menuchoice>
+            <guimenu>File</guimenu>
+            <guimenuitem>Application element info</guimenuitem>
+          </menuchoice> menu item, or use the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>Shift</keycap>
+            <keycap>I</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To launch an application:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the application element in the projects application elements tree.</para>
+      </listitem>
+      <listitem>
+        <para>Click the <guibutton>Run project</guibutton> button on the main toolbar or select  <guimenuitem>Run</guimenuitem> in the application element context menu.</para>
+      </listitem>
+    </itemizedlist>
+    <para>If the application launching element is not explicitly selected as the starting element, the application starting element will be set by default according to the project settings.</para>
+    <para>To debug an application:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Set  breakpoints in the JavaScript program.</para>
+      </listitem>
+      <listitem>
+        <para>Select the application element in the projects application elements tree.</para>
+      </listitem>
+      <listitem>
+        <para>Click the <guibutton>Debug project</guibutton> button on the main toolbar or select the <guimenuitem>Debug</guimenuitem> item in the application element context menu.</para>
+      </listitem>
+      <listitem>
+        <para>After the debugger halts at the breakpoint, see the values of  variables and the call stack; to continue the program running, click the <guibutton>Continue</guibutton> button on the main toolbar; use the Step over button or the  <keycap>F8</keycap> key, Step into or the  <keycap>F7</keycap> key, Step out or the <keycombo>
+            <keycap>Ctrl</keycap>
+            <keycap>F7</keycap>
+          </keycombo> shortcut for step-by-step execution of the program.</para>
+      </listitem>
+    </itemizedlist>
+    <para>When launching the application in the J2EE server, <application>Platypus Application Designer</application> uses the  <filename>web</filename> sub-directory, which is created automatically in the project directory. When initializing this sub-directory, its structure is created and  libraries are copied. After initializing  the directory, several files responsible for the configuration (<filename>WEB-INF/web.xml</filename>, specific configuration file for the certain server, and JavaScript file responsible for the application element launching on the HTML page) are modified; in this case,  libraries are not copied again. </para>
+    <para>If it is necessary to update  libraries in the <filename>web</filename> directory — select the  <guimenuitem>Clean</guimenuitem> item in the project context menu. The libraries will be removed, and at the next  launch these libraries will be copied from the Platypus Platform directory.</para>
+  </section>
+  <section>
+    <title>Database connection management</title>
+    <para>To enable full-featured functioning of  <application>the Platypus Application Designer</application>, it is necessary  to arrange a connection to the database during the application development. Connection parameters are specified when creating a new project and can be modified on the project properties form, which can be opened by selecting the Properties item in the project context menu. When opening the project, Platypus Application Designer tries to connect to the database, in case of failure  it switches to the limited functionality mode; then the data model designer becomes inaccessible, and several other functions of the designer are disabled. </para>
+    <para>In the course of development, we recommend that every developer in the team working on the same project creates and uses his / her own copy of the database for debugging and testing purposes. Additionally, a common reference database is created, and all modifications, which have passed the debugging stage at the developers&apos; individual bases, are applied to this common database.  </para>
+    <para>It is convenient to launch the developer&apos;s local database on the H2 databases &quot;light&quot; server, supplied with the Platypus Platform. </para>
+    <para>To launch the H2 database server in the Platypus Application Designer:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Open the  <guilabel>Services</guilabel> panel.</para>
+      </listitem>
+      <listitem>
+        <para>Select the   <menuchoice>
+            <guimenu>Databases</guimenu>
+            <guimenuitem>H2 node and enable the</guimenuitem>
+          </menuchoice>  <guimenuitem>Start</guimenuitem> menu item.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>In the Platypus Platform applications, it is not recommended to use the peculiarities of  individual databases (if possible). Use the standard SQL instead to enable easy transferring of an application to other <acronym>database</acronym> servers supported by the platform. </para>
+    </note>
+    <para>After the  <acronym>database</acronym> server is launched and available via the network or locally, connect to this server by selecting the  <guimenuitem>Connect to project database</guimenuitem> item in the context menu, or by clicking the <guibutton>Establish connection</guibutton> button on the  <guilabel>Application Database</guilabel> form in the project properties, or by selecting the  Connect to project database link on the stub-form of the data model editor.</para>
+    <para>To disconnect, select the <guimenuitem>Disconnect from project database</guimenuitem> item in the project context menu, or click the <guibutton>Drop</guibutton> connection button on the  <guilabel>Application Database</guilabel> form of the project properties.</para>
+  </section>
+  <section>
+    <title>Deployment of the application elements in the database</title>
+    <para>For testing or commercial operation, the application elements may be deployed in the database. After deployment, the application can be executed directly from the database.</para>
+    <para>To deploy an application in the <acronym>database</acronym>: select the  <guimenuitem>Deploy</guimenuitem> item in the project node context menu. When deploying, the application elements from the Application Elements folder are copied to the  <literal>MTD_ENTITIES</literal><acronym> table of the database</acronym>. The application elements, which were present in this table before copying, are removed. When copying, the tree structure of the application directories is preserved.</para>
+    <para>Importing of an application from the database is a process which is  reverse to deployment. To import an application from the database: select the Import item in the project context menu. When importing, the application elements are copied from the <literal>MTD_ENTITIES</literal> table to the <guilabel>Application Elements</guilabel> folder. </para>
+    <important>
+      <para>When importing an application, the <guilabel>Application Elements</guilabel> folder is cleared before copying the application elements from the database.</para>
+    </important>
+  </section>
+  <section>
+    <title>Database migrations</title>
+    <para>The Platypus Platform has an embedded mechanism to control changes occurring in the database structure and data, which constitute a part of  the application. </para>
+    <important>
+      <para>Before applying  migrations make a backup copy of the database.</para>
+    </important>
+    <para>Application data — basic references, initial data, etc. — is  information required to start the application.</para>
+    <para>Database structure and  application data are represented in the form of migrations files. Each migration has a number expressed as a positive integer, which is used as the file name. In the course of development and further during the application life cycle, when changing the database structure or in case of  data modification, a migration is created; later on, this migration can be applied to other copies of the database. In the application database, information about the current <acronym>database</acronym> version is maintained (<literal>MTD_VERSION</literal> table). It corresponds to the up-to-date migration number.  </para>
+    <para>Migrations with the number greater than the  current database version are sequentially applied to the database during synchronization. After the migration is applied successfully, the <acronym>database</acronym> number becomes equal to the number of this migration.</para>
+    <para>Migrations types:</para>
+    <itemizedlist>
+      <listitem>
+        <para><acronym>Database</acronym> structure snapshot — an  <filename>.xdm</filename> file containing database metadata presentation in the XML format.</para>
+      </listitem>
+      <listitem>
+        <para>SQL commands batch  — a  <filename>.batch</filename> file containing the SQL commands delimited by <code>#GO</code> tag. </para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>In the batch SQL file, it is recommended to use  <acronym>DML</acronym> (<literal>INSERT</literal>, <literal>UPDATE</literal> and <literal>DELETE</literal>) commands; although it is technically permissible to use  DDL commands there as well. However, it is not recommended to use  commands which modify the <acronym>database</acronym> structure in the batch SQL file, since it can reduce the application portability.</para>
+    </note>
+    <para>Commands for creating and applying  migrations are available when  a connection to the <acronym>database</acronym> is established.</para>
+    <para>To create a new snapshot of the <acronym>database</acronym> structure, select the <guimenuitem>Add Metadata Migration</guimenuitem> item in the context menu of the  <guilabel>Database Migrations</guilabel> node. As a result,  the database metadata snapshot is created, and the  current <acronym>database</acronym> version is increased by 1. The new file will be assigned a  name according to the  new  <acronym>database</acronym> version.</para>
+    <para>To create a new SQL commands file, select the  <guimenuitem>Add SQL Migration</guimenuitem> item in the context menu of the <guilabel>Database Migrations</guilabel> project node. As a result, the current database version will be increased by 1. The new file will be assigned a name according to the current version of the <acronym>database</acronym>.</para>
+    <para>When applying  migrations, only the metadata snapshots with the version number right before the batch SQL file and a migration with the greatest number are considered and applied.</para>
+    <para>To remove  migrations which are not used (i.e. to clean the migration directory), select the  <guimenuitem>Cleanup</guimenuitem> item in the context menu of the project  <guilabel>Database Migrations</guilabel> directory. Click  <guibutton>Yes</guibutton> to confirm or  <guibutton>No</guibutton> to cancel the command in the confirmation dialog.</para>
+    <para>To apply  migrations from the project migrations directory, select the <guimenuitem>Apply Migrations</guimenuitem> item in the  <guimenu>Database Migrations</guimenu> context menu of the project.</para>
+    <para>In the course of development, sometimes it is necessary to find out the current database version or change it. To find out the  current version of the project database to which the  <application>Platypus Application Designer</application> is connected, select the <guimenuitem>database migration version</guimenuitem> item in the  <guimenu>Database Migrations</guimenu> context menu of the project. The current version of the <acronym>database</acronym> will be displayed in  the <guilabel>Migration version</guilabel> field of the <guilabel>Current Db Migration version</guilabel> dialog. To modify the current version, specify the new number of the current database  version in the  <guilabel>Migration version</guilabel> text field, and click <guibutton>OK</guibutton>. If you don&apos;t want to change the current version of the database, click <guibutton>Cancel</guibutton> or close the dialog.</para>
+  </section>
+  <section>
+    <title>Working with version control systems</title>
+    <para>In the course of development and further during the application life cycle, it is recommended to use a version control system to manage the source project files.</para>
+    <para><application>Platypus Application Designer</application> has built-in support of the following version control systems: </para>
+    <itemizedlist>
+      <listitem>
+        <para><application>Subversion</application></para>
+      </listitem>
+      <listitem>
+        <para><application>Git</application></para>
+      </listitem>
+      <listitem>
+        <para><application>Mercurial</application></para>
+      </listitem>
+    </itemizedlist>
+    <para>To access options of these version control systems, use the <guimenuitem>Team</guimenuitem> item from the global menu and / or  <guisubmenu>Versioning</guisubmenu> sub-menu of the project context menu.</para>
+    <note>
+      <para>Refer to the documentation of the relevant version control system for details about this system usage.</para>
+    </note>
+  </section>
+</chapter>

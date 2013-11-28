@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Install_Chapter">
+  <title>Platypus Application Designer installation and setup</title>
+  <para>This section contains information about  installation of the main application development tool based on the Platypus Platform, which is called  <application>Platypus Application Designer</application>.</para>
+  <para>The application designer software package is included into the developer&apos;s kit and is supplied with the Platypus Platform.</para>
+  <para>Platypus developer&apos;s kit may be supplied:</para>
+  <itemizedlist>
+    <listitem>
+      <para>on CD/DVD, or</para>
+    </listitem>
+    <listitem>
+      <para>as a .zip archive which can be downloaded from the Internet.</para>
+    </listitem>
+  </itemizedlist>
+  <para>If the developer&apos;s kit is supplied as an archive, unpack its contents  to the  folder of your choice on the hard drive.</para>
+  <note>
+    <para>Platypus Platform installation instructions are provided in the Administrator&apos;s Guide.</para>
+  </note>
+  <section id="sect-Administration_Guide-Install_Chapter-Test_Section_1">
+    <title>System requirements for the application designer installation</title>
+    <para>System requirements for installing the developer&apos;s kit on a computer include  minimum system requirements  for installing the executable part of the Platypus Platform with the following corrections:
+   <itemizedlist>
+        <listitem>
+          <para>32-bit (x86) or 64-bit (x64) CPU, 1 GHz or above</para>
+        </listitem>
+        <listitem>
+          <para>2 GB (for 32-bit system) or 3 GB (for 64-bit system) RAM</para>
+        </listitem>
+        <listitem>
+          <para>10 GB of free disk space</para>
+        </listitem>
+        <listitem>
+          <para>Operating system with the graphical user interface</para>
+        </listitem>
+        <listitem>
+          <para>Oracle JDK 7</para>
+        </listitem>
+        <listitem>
+          <para>Internet access for  updates downloading</para>
+        </listitem>
+      </itemizedlist>
+  </para>
+  </section>
+  <section>
+    <title>Application designer installation</title>
+    <para>
+To install the developer&apos;s kit, perform the following actions:<orderedlist>
+        <listitem>
+          <para>Install the Platypus Platform.</para>
+        </listitem>
+        <listitem>
+          <para>Navigate to the  <filename>designer</filename> sub-directory of the Platypus developer&apos;s kit installation package.</para>
+        </listitem>
+        <listitem>
+          <para>Launch the   <filename>platypusdesigner-windows.exe</filename> file for  Windows OS or <filename>platypusdesigner-linux.sh</filename> for Linux.</para>
+          <note>
+            <para>For Linux OS, the user must have  access rights enabling to launch the executable file. </para>
+          </note>
+        </listitem>
+        <listitem>
+          <para>
+Click  <guibutton>Next</guibutton> to proceed to the next installation step.</para>
+        </listitem>
+        <listitem>
+          <para> Read licensing terms and conditions; check the <guilabel>I accept the terms of the license agreement</guilabel> option to accept; click <guibutton>Next</guibutton> to proceed to the next step.</para>
+        </listitem>
+        <listitem>
+          <para>
+Select the applications installation directory and options for creating  shortcuts on the desktop and in the installed programs menu; click <guibutton>Next</guibutton> to proceed to the next step.</para>
+        </listitem>
+        <listitem>
+          <para>
+Click <guibutton>Install</guibutton> to begin the  <application>Platypus Application Designer</application> installation process. </para>
+        </listitem>
+        <listitem>
+          <para>
+After the installation process is finished, click  <guibutton>Finish</guibutton>; check the <guilabel>Launch Platypus application designer after the installer closes</guilabel> option to launch the designer.</para>
+        </listitem>
+      </orderedlist>
+  </para>
+    <note>
+      <para>Specify path to  JDK in the <parameter>jdkhome</parameter> parameter in the <application>Platypus Application Designer</application> configuration file at <filename>platypusdesigner/etc/platypusdesigner.conf</filename>, if the JDK is installed on the hard drive and the installation location is other than default. Incorrect value of  the <parameter>jdkhome</parameter> parameter can lead to errors which may occur when launching the application.</para>
+    </note>
+  </section>
+  <section>
+    <title>Application designer launch setup</title>
+    <para><application>Platypus Application Designer</application> supports  localization of  menus, messages texts, etc. At the present time,  the following languages are supported:</para>
+    <itemizedlist>
+      <listitem>
+        <para>English</para>
+      </listitem>
+      <listitem>
+        <para>Russian</para>
+      </listitem>
+    </itemizedlist>
+    <para>The localization language is selected automatically when you launch the application designer according to  the regional settings of the operating system.</para>
+    <para>To force the change of the localization language: </para>
+    <itemizedlist>
+      <listitem>
+        <para>Edit the <application>Platypus Application Designer</application> configuration file — append the  <parameter>default_options</parameter> parameter with the  <option>--locale ru:RU</option> or <option>--locale en:US</option> option.</para>
+      </listitem>
+      <listitem>
+        <para>Restart the application designer.</para>
+      </listitem>
+    </itemizedlist>
+    <para>You can also change the application designer localization language by adding the <option>--locale ru:RU</option> or <option>--locale en:US</option> option to the command line for launching the  <application>Platypus Application Designer</application>.</para>
+    <para>Platypus designer supports connection of the various user interface styles  (LaF — Look and Feel). There are LaFs for specific operating systems, universal styles  (<literal>Metal</literal> and <literal>Nimbus</literal>), and LaFs which can be supplied by  third-party developers.</para>
+    <warning>
+      <para>Connection of  external LaFs is a rather complicated procedure which is not recommended for beginners.</para>
+    </warning>
+    <para>To change the  <application>Platypus Application Designer</application> LaF:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Edit the designer configuration file — append the  <parameter>default_options</parameter> parameter with the  <option>--laf <replaceable>LaF</replaceable></option> option, where <replaceable>LaF</replaceable> corresponds to the name of LaF or full name of the LaF class; if the third-party LaF is used, it is also necessary to include the style library into the path which can be accessed by the <application>Platypus Application Designer</application> classes loader.</para>
+      </listitem>
+      <listitem>
+        <para>Restart the application designer.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Application designer programming environment setup</title>
+    <para>Specify the location of the Platypus Platform directory in the computer&apos;s file system:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select   <menuchoice>
+            <guimenu>Tools</guimenu>
+            <guimenuitem>Platypus Platform</guimenuitem>
+          </menuchoice> in the main menu.</para>
+      </listitem>
+      <listitem>
+        <para>In the selection dialog, specify  path to the Platypus Platform directory.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Add the J2EE server instance which can be used to launch the Platypus application:</para>
+    <itemizedlist>
+      <listitem>
+        <para>In the <guilabel>Services</guilabel> window of the <guilabel>Servers</guilabel> node context menu select the <guimenuitem>Add server...</guimenuitem> item.</para>
+      </listitem>
+      <listitem>
+        <para>In the J2EE server adding wizard, select the server type, server name, and specify its preferences: path to the server directory, administrator&apos;s login and password.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>The current version of Platypus Application Designer supports launching of applications in  Apache Tomcat 7. Download Apache Tomcat 7 from the developer&apos;s site and install (unpack) it in the directory of your choice on your hard drive.</para>
+    </note>
+  </section>
+  <section id="sect-Administration_Guide-Install_Chapter-Test_Section_4">
+    <title>Application designer removal</title>
+    <para>
+To delete the Platypus application designer from you computer, perform the following actions:
+   <orderedlist>
+        <listitem>
+          <para>Launch the  <application>Uninstall Platypus Application Designer</application> application from the installed programs menu. For Windows OS, use the standard mechanism of programs removal; as an alternative, use the  <filename>uninstall.exe</filename> program for Windows OS or  <filename>uninstall.sh</filename> for Linux OS from the   <application>Platypus Application Designer</application> installation directory.</para>
+        </listitem>
+        <listitem>
+          <para>Confirm the Platypus applications and components removal by clicking  <guibutton>Finish</guibutton> button; if necessary, select the option of removing  configuration data from the user&apos;s directory.</para>
+        </listitem>
+      </orderedlist>
+  </para>
+  </section>
+</chapter>

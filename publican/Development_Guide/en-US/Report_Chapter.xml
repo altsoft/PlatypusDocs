@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Development_Guide-Report_Chapter">
+  <title>Report</title>
+  <para>The application element of the <emphasis>Report</emphasis> type is intended to provide information in the form of a report — as a <application>Microsoft Excel</application> file. You can open a generated report in a spreadsheet application, sent it to print or save it to disk.</para>
+  <para>The  <emphasis>Report</emphasis> application element includes the following:</para>
+  <itemizedlist>
+    <listitem>
+      <para>a report template (a file in the <application>Microsoft Excel</application> format with the <filename>.xls</filename> extension,</para>
+    </listitem>
+    <listitem>
+      <para>JavaScript software code,</para>
+    </listitem>
+    <listitem>
+      <para>a data model.</para>
+    </listitem>
+  </itemizedlist>
+  <para>The Report application element is a descendant of the Module application element, that&apos;s why the description of the module software code, access constraints and data model applies also to the Report. The report identifier is defined in the JavaScript file using the <literal>@name</literal> annotation.</para>
+  <para>Reports in Platypus are based on the jXLS library, which in turn uses the Apache POI library. Markup and formatting of the report are defined in the template file, and linking to data is performed using tags, the syntax of which matches the syntax of jXLS library tags.</para>
+  <para>In the process of report generation, template tags are linked to model entity fields as well as to JavaScript objects.</para>
+  <figure>
+    <title>Transformations when generating a report</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata align="center" fileref="images/reportsFlow.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <note>
+    <para>For more detailed information about tags, which are used in the report template, see documentation for the jXLS library at: <ulink url="http://jxls.sourceforge.net">http://jxls.sourceforge.net</ulink></para>
+  </note>
+  <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_8">
+    <title>Report creation</title>
+    <para>To create a  report, perform the following actions:
+   
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>Select a <guimenuitem>New</guimenuitem>  item in the parent directory context menu, or select the parent directory and click <guimenuitem>New Filе</guimenuitem> in the main menu, or click <guibutton>New File</guibutton> on the toolbar, or use a corresponding shortcut.</para>
+      </listitem>
+      <listitem>
+        <para>Select  a <guilabel>Report </guilabel>type in the context menu, or select <menuchoice>
+            <guimenu>Choose file type</guimenu>
+            <guisubmenu>Platypus application elements</guisubmenu>
+            <guimenuitem>Report</guimenuitem>
+          </menuchoice> on the wizard first step and click <guibutton>Next</guibutton>.</para>
+      </listitem>
+      <listitem>
+        <para>Enter the name of a new application element in the <guilabel>Name</guilabel> field and click <guibutton>Finish</guibutton> to create it, or click <guibutton>Cancel</guibutton> to cancel.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Report editing</title>
+    <para> To open the application element editor, double-click the application element in the project tree. </para>
+    <para>You can edit the report template in the spreadsheet application. The following applications are used by default for different operating systems:</para>
+    <itemizedlist>
+      <listitem>
+        <para>For Windows OS: <application>Microsoft Excel</application>.</para>
+      </listitem>
+      <listitem>
+        <para>For Linux OS: <application>Open/Libre Office Calc</application>.</para>
+      </listitem>
+      <listitem>
+        <para>For Mac OS: <application>Microsoft Excel</application>.</para>
+      </listitem>
+    </itemizedlist>
+    <para>To edit a report:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Open the <guilabel>Layout</guilabel> tab of the report editor, run the template editor by clicking <guilabel>Edit report template</guilabel>.</para>
+      </listitem>
+      <listitem>
+        <para>Specify the report formatting, add tags of linking to data to the template, save the report template in the template editor application.</para>
+      </listitem>
+      <listitem>
+        <para>On the  <guilabel>Datamodel</guilabel> and  <guilabel>Source</guilabel> tabs configure the data model and write the JavaScript software code. </para>
+      </listitem>
+      <listitem>
+        <para>Define report event handlers, write the event handlers code in the JavaScript editor.</para>
+      </listitem>
+      <listitem>
+        <para>Save the application element by clicking <guibutton>Save All</guibutton> on the <application>Platypus Application Designer</application> toolbar or by clicking the<keycombo>
+            <keycap> Ctrl</keycap>
+            <keycap>S</keycap>
+          </keycombo> shortcut.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>We recommend the following: a report should contain the software code, which is directly responsible for the report generation.</para>
+    </note>
+  </section>
+  <section>
+    <title>Report template</title>
+    <para>Edit the report template in the spreadsheet application.</para>
+    <section>
+      <title>Objects and collections</title>
+      <para>Place tags for linking to JavaScript objects and model entities in the template cells. To access data, use the following syntax: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, where <replaceable>objectName</replaceable> is the name of a JavaScript object, JavaScript objects array or model entity, <replaceable>propertyName</replaceable>  is the object property. </para>
+      <para>Example of outputting the name of a document into cells:</para>
+      <programlisting language="JavaScript">${document.name}</programlisting>
+      <para>Similarly, you can gain access to a complex object:</para>
+      <programlisting language="JavaScript">${library.documents.name}</programlisting>
+      <para>You can use multiple tags in a single cell, for example:</para>
+      <programlisting language="JavaScript">Employee: ${employee.name} - ${employee.age} years</programlisting>
+      <para>In the software code, define objects, which will be available in the template tags:</para>
+      <programlisting language="JavaScript">/**
+ * @name documentReport
+ */
+var library = {};
+library.documens = [
+ {name:&apos;foo&apos;}, 
+ {name:&apos;bar&apos;},
+ {name:&apos;baz&apos;}
+];</programlisting>
+      <para>Add entities, which will be linked to the template, to the report data model.</para>
+      <para>When outputting collections, a new row is added for each collection element and the style of a cell, which contains tag, is set for the cells of this row.</para>
+      <para>If you know the size of the collection beforehand, you can use the template rows instead of adding new rows for each element. To do this, set  <literal>true</literal> for the <property>fixed</property> special property of the collection.</para>
+      <para>If necessary, specify dynamic styles for cells. These styles will vary depending on the contents of the cell. To do this:</para>
+      <itemizedlist>
+        <listitem>
+          <para>Define the style, which should be applied dynamically to the collection element cell, for the special template cell, define a label for this cell, for example,  <code>$[0]customRow</code>; this cell can be placed on a hidden template cell.</para>
+        </listitem>
+        <listitem>
+          <para>Set a special <property>cellTemplateLabel</property> property for the collection element by inserting a link to the style cell into it, for example <code>cellTemplateLabel=&apos;customRow&apos;</code>.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+    <section>
+      <title>Tags</title>
+      <para>Use special tags in the template in order to predetermine the transformation of data when generating the report.</para>
+      <para>To display collections, use the <literal>jx:forEach</literal> tag:</para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${departments}&quot; var=&quot;department&quot;&gt;
+  ${department.name} | ${department.chief}
+&lt;/jx:forEach&gt;</programlisting>
+      <para>The <literal>jx</literal> tags may be embedded into each other. If you place opening and closing tags on the same row, columns in this row will be duplicated. Place the <literal>jx:forEach</literal> and  <literal>jx:forEach</literal> tags on different rows to enable duplication of rows between these tags. Other cells in rows, which contain opening and closing tags, will be ignored.</para>
+      <para>The  <literal>jx:forEach</literal> tag allows grouping of collection data by one of the properties. To arrange grouping, use the <property>groupBy</property> and <property>groupOrder</property>, attributes, which determine the property to be used for grouping data and the order of outputting groups, for example:</para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; groupBy=&quot;age&quot;&gt;
+  Age: ${group.item.age}
+  &lt;jx:forEach items=&quot;${group.items}&quot; var=&quot;employee&quot;&gt;
+    ${employee.name} |
+    ${employee.payment} |
+    ${employee.bonus}
+  &lt;/jx:forEach&gt;
+&lt;/jx:forEach&gt;</programlisting>
+      <para>In this example, we group employees by age. When grouping, a new <property>group</property> object is created in the context of the cycle. This object contains two properties: <property>item</property>, which is the current group, and <property>items</property>, which is the collection of all objects in the group. </para>
+      <para>By default, if the <property>groupOrder</property> attribute is not present when grouping, the original order of items in the collection is maintained. Use the <property>groupOrder</property> attribute and assign <literal>asc</literal> and  <literal>desc</literal> values for forward and reverse sorting to this attribute.</para>
+      <para>If the  <property>groupBy</property> attribute is used in the <literal>jx:forEach</literal> tag, the var attribute is ignored.</para>
+      <para>Use the <property>select</property> attribute to determine elements of the collection which should be included into the report. In the example below, we include only employees with salary greater than 2000 into the report:</para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; select=&quot;${employee.payment &gt; 2000}&quot;&gt;
+ ${employee.name} | ${employee.payment} | ${employee.bonus}
+&lt;/jx:forEach&gt;</programlisting>
+      <para>To get access to the index of the current collection element, use the <property>varStatus</property>, attribute and set the name of the object, to which the status object will be assigned, for this attribute. The status object have only an <property>index</property> property, for example:</para>
+      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; varStatus=&quot;status&quot;&gt;
+ | ${status.index} 
+ | ${employee.name} 
+ | ${employee.payment} 
+ | ${employee.bonus}
+&lt;/jx:forEach&gt;</programlisting>
+      <para>Use the <literal>jx:if</literal> tag to control output depending on the condition:</para>
+      <programlisting language="JavaScript">&lt;jx:if test=&quot;${department.chief.payment &gt; 2000.0}&quot;&gt;
+Chief Name: ${department.chief.name}
+&lt;/jx:if&gt;</programlisting>
+      <para>You can use the <literal>jx:if</literal> tag to show or hide columns; to do this, place opening and closing tags in the same row — when exporting data, columns contained in the body of the tag will be displayed or hidden.</para>
+      <para>Use the <literal>jx:outline</literal> tag to group rows:</para>
+      <programlisting language="JavaScript">&lt;jx:outline&gt;
+   //any rows can go here
+&lt;/jx:outline&gt;</programlisting>
+      <para>The  <literal>jx:outline</literal> tag has an optional <property>detail</property> attribute, which determines the state of the row group. By default, it is set to <literal>false</literal>, which means that the row group will be hidden.</para>
+    </section>
+    <section>
+      <title>Graphs and charts</title>
+      <para>Use standard spreadsheet tools for outputting graphs and charts. </para>
+      <para>If a collection with a fixed number of elements is used, just configure the <application>Excel</application> charts for the range of cells in which data will be displayed.</para>
+      <para>If you don&apos;t know the number of elements in the collection, choose the method of using <literal>OFFSET</literal> and <literal>COUNTA</literal> functions and creating the named range.</para>
+      <note>
+        <para>Read the articles at the following websites to find out more about creating charts with a dynamic range of data:<itemizedlist>
+            <listitem>
+              <para><ulink url="http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518">http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518</ulink></para>
+            </listitem>
+            <listitem>
+              <para><ulink url="http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html">http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html</ulink></para>
+            </listitem>
+          </itemizedlist></para>
+      </note>
+    </section>
+  </section>
+  <section>
+    <title>Report generation software code</title>
+    <para>To generate a report, create a report object by passing the required report identifier to the constructor name.</para>
+    <para>Use the report object:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Display a report by calling the <methodname>show</methodname> method; the report will be downloaded and a command to open it in the spreadsheet application will be issued.</para>
+      </listitem>
+      <listitem>
+        <para> Send the report to print by calling the <methodname>print</methodname> method.</para>
+      </listitem>
+      <listitem>
+        <para> Save the report file to disk by calling the <methodname>save</methodname> method; pass the path of the file, to which the report showld be saved, as a parameter.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>When executing the report in the HTML5 browser client, calling the <methodname>show()</methodname>, <methodname>print()</methodname>, and <methodname>save(reportPath)</methodname> methods leads to the same results — the report file will be loaded in browser.</para>
+    </note>
+    <para>In the example below, the report is generated when you click the form button:</para>
+    <programlisting language="JavaScript">/**
+ * Form generates report
+ * @name reportForm
+ */
+
+function reportButtonActionPerformed(evt) {                    var r = new Report(&apos;documentReport&apos;);
+  r.params.documentCategory = &apos;business&apos;; // update model
+  r.show(); // show report
+}</programlisting>
+    <para>Write the data processing logic for the report in the report script.</para>
+    <para>Data processing program can specially prepare data for displaying, calculate new data, etc. The software code can be executed:</para>
+    <itemizedlist>
+      <listitem>
+        <para>When calling the report constructor — put the code on the top level of the report script.</para>
+      </listitem>
+      <listitem>
+        <para>In the <literal>beforeRender</literal> event, which will be called before starting the generation of report — when calling the <methodname>show</methodname>,  <methodname>print</methodname>, or <methodname>save</methodname> methods — put the code into the <varname>beforeRender</varname> event handler.</para>
+      </listitem>
+      <listitem>
+        <para>In the standard events of refreshing model data sets — see the &quot;Data model&quot; chapter in the &quot;Module&quot; section.</para>
+      </listitem>
+    </itemizedlist>
+    <para>The report events are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="4">
+        <thead>
+          <row>
+            <entry align="center">Event</entry>
+            <entry>Cancellable</entry>
+            <entry>Handler parameters</entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>onBeforeRender</parameter>
+            </entry>
+            <entry>no</entry>
+            <entry><parameter>evt</parameter> — an event object</entry>
+            <entry>Is called before starting the generation of the report</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>
