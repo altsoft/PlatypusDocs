@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Administration_Guide-Security_Chapter">
+  <title>Security</title>
+  <para>Platypus platform is equipped with developed security mechanisms and provides restricted access to system resources based on roles, which were assigned to users and groups. Access to the following resources may be restricted:</para>
+  <itemizedlist>
+    <listitem>
+      <para>A program module of any level — on the server or client side</para>
+    </listitem>
+    <listitem>
+      <para>A function in the software module</para>
+    </listitem>
+    <listitem>
+      <para>A form </para>
+    </listitem>
+    <listitem>
+      <para>A database request</para>
+    </listitem>
+    <listitem>
+      <para>A report </para>
+    </listitem>
+  </itemizedlist>
+  <para>Access to resources is constrained on the basis of roles. Roles are introduced on the Platypus application level and are part of it.</para>
+  <para>For an application element of the  <emphasis>Database request</emphasis>  type, you can define access rules for the role: full access, read-only (executing  <literal>SELECT</literal> requests), write (executing  <literal>INSERT</literal>, <literal>DELETE</literal> and <literal>UPDATE</literal>commands).</para>
+  <para>As for authentication, Platypus may use the &quot;security domain.&quot; The security domain may be internal or external and contain information about users and their group membership. Platypus supports the following security domain options:</para>
+  <itemizedlist>
+    <listitem>
+      <para>An integrated &quot;database&quot; of users, which is located in 2 database tables — can be used when using both 2-tier and 3-tier scheme. </para>
+    </listitem>
+    <listitem>
+      <para>External storages of authentication data, for example, the LDAP server (Active Directory, OpenLDAP, etc.), this mode can only be used when using the 3-tier scheme in the servlet container or on the J2EE server.</para>
+    </listitem>
+  </itemizedlist>
+  <para>The security domain is used to ​​define a set of &quot;groups&quot; or &quot;global roles&quot; for the user, which can be associated with roles at the application level.</para>
+  <section>
+    <title>Security configuration on a J2EE container</title>
+    <para>When an application works in the J2EE container, Platypus uses an authentication mechanism and roles provided by the J2EE container. To enable activation of the role access in this case, the user should pass the security constraint and get a role. To do this, configure a URL security constraint as a page containing Platypus forms, for which the access control based on roles should be provided. The following example shows the enabled security constraint for the  <filename>applicationStart.html</filename> page; to get access to this page the user should be assigned any role:</para>
+    <programlisting>...
+&lt;security-constraint&gt;
+  &lt;web-resource-collection&gt;
+      &lt;url-pattern&gt;/application-start.html&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+      &lt;role-name&gt;*&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;
+&lt;login-config&gt;
+    &lt;auth-method&gt;FORM&lt;/auth-method&gt;
+    &lt;form-login-config&gt;
+      &lt;form-login-page&gt;/login.html&lt;/form-login-page&gt;
+      &lt;form-error-page&gt;/login-failed.html&lt;/form-error-page&gt;
+    &lt;/form-login-config&gt;
+&lt;/login-config&gt;
+&lt;security-role&gt;
+    &lt;role-name&gt;*&lt;/role-name&gt;
+&lt;/security-role&gt;
+...</programlisting>
+    <para>Specify the type of authentication, for example,  <literal>FORM</literal>  for authentication using HTML forms or  <literal>BASIC</literal> for basic authentication according to RFC 2617. </para>
+    <para>Platypus Client supports  <literal>BASIC</literal>  authentication, so to its ensure correct operation, that particular type of authentication must be configured. </para>
+    <para>Configure the repository of information about users and J2EE container for using this repository. More detailed information on these settings is provided below.</para>
+    <para>When an application works in the J2EE container, you should use built-in web-server tools in addition to Platypus platform security constraints: </para>
+    <itemizedlist>
+      <listitem>
+        <para>Restrict access to application files over HTTP. </para>
+      </listitem>
+      <listitem>
+        <para>Restrict access to application files for Platypus resources loader, which works over URL of the following type:</para>
+        <para><uri>application/resource/<replaceable>resourcePath</replaceable></uri></para>
+        <para>where   <replaceable>resourcePath</replaceable> is the path to the resource in the Platypus application.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Configure access constraints in the <filename>WEB-INF/web.xml</filename>  descriptor file.</para>
+    <para>The following example shows a portion of the  <filename>WEB-INF/web.xml</filename>  file. It contains constraints of access to files of the Platypus application, located in the <filename>app</filename> directory, except  <filename>public</filename> sub-directory:</para>
+    <programlisting>...
+&lt;security-constraint&gt;
+  &lt;web-resource-collection&gt;
+      &lt;!-- whitelist --&gt;
+      &lt;web-resource-name /&gt;
+      &lt;url-pattern&gt;/app/public/*&lt;/url-pattern&gt;
+      &lt;url-pattern&gt;/application/resource/public/*
+      &lt;/url-pattern&gt;
+   &lt;/web-resource-collection&gt;
+   &lt;!-- No auth constraint here for whitelist --&gt;
+&lt;/security-constraint&gt;
+
+&lt;security-constraint&gt;
+  &lt;web-resource-collection&gt;
+      &lt;!-- everything other is restricted --&gt;
+      &lt;web-resource-name /&gt;
+      &lt;url-pattern&gt;/app/*&lt;/url-pattern&gt;
+      &lt;url-pattern&gt;/application/resource/*&lt;/url-pattern&gt;
+  &lt;/web-resource-collection&gt;
+  &lt;auth-constraint /&gt;
+&lt;/security-constraint&gt;
+...</programlisting>
+  </section>
+  <section id="sect-Administration_Guide-Security_Chapter-Test_Section_2">
+    <title>Setting user&apos;s access rights on a built-in auth data repository</title>
+    <para>Using the built-in repository provides simple tools for storing information about users and groups.</para>
+    <para>This mode is the only one possible when using the 2-tier scheme and when using 3-tier scheme where the Platypus application server works out of the J2EE server, and also can be configured when Platypus works as a part of J2EE server. To use this mode, you should configure the appropriate security domain — Security Realm — in the servlet container or on the J2EE server.</para>
+    <note>
+      <para>See Appendix B &quot;Configuring LDAP security domain&quot; for reference information on configuring security domain for the <application>Glassfish</application> server.</para>
+      <para>See documentation for the <application>
+          <application>Tomcat</application>
+        </application>  servlet container for reference information on configuring security domain for  <application>Apache Tomcat</application>.</para>
+    </note>
+    <para>In this mode, user information is stored in the <literal>MTD_USERS</literal>  table of the application database. Each entry in this table corresponds to one user. Information about groups, which the user belongs to, are stored in the <literal>MTD_GROUPS</literal> table. Each user may be mapped to 0 or more groups.</para>
+    <para>The  <literal>MTD_USERS</literal> table contains the following mandatory fields:</para>
+    <informaltable>
+      <textobject>
+        <para>Параметры запуска сервера</para>
+      </textobject>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Field</entry>
+            <entry align="center">Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>USR_NAME</parameter>
+            </entry>
+            <entry>Username </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>USR_PASSWD</parameter>
+            </entry>
+            <entry>Hash sum of the user password using the MD5 algorithm</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>USR_FORM</parameter>
+            </entry>
+            <entry>Default form identifier, for example <literal>comAppFormsWelcome</literal></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>In addition, the <literal>MTD_USERS</literal>  table can include optional fields containing additional information about the user.</para>
+    <para>The  <literal>MTD_GROUPS</literal>  table contains the following mandatory fields:</para>
+    <informaltable>
+      <textobject>
+        <para>Параметры запуска сервера</para>
+      </textobject>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Field</entry>
+            <entry align="center">Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>USR_NAME</parameter>
+            </entry>
+            <entry>Username </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>GROUP_NAME</parameter>
+            </entry>
+            <entry>Group name</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>For developing and testing applications, use  <literal>admin</literal>  as the technical login and  <literal>masterkey</literal> as the password. The  <literal>admin</literal> user is a member of the <literal>admin</literal> group.</para>
+    <important>
+      <para>Change the technical password before starting the commercial usage of the application!</para>
+    </important>
+  </section>
+  <section>
+    <title>Using the external auth data repository</title>
+    <para>This mode enables to use external services for user authentication, such as  <application>OpenLDAP </application>or  <application>Microsoft Active Directory</application>.</para>
+    <para>This authentication mode is supported by Platypus Web API clients, HTML5 browser-based client and Java SE Platypus client if the connection to the servlet container or J2EE server over HTTP/HTTPS is established. To use this mode, you should configure the appropriate security domain — Security Realm — in the servlet container or on the J2EE server.</para>
+    <note>
+      <para>See Appendix B &quot;Configuring LDAP security domain&quot; for reference information on configuring security domain for the <application>Glassfish</application>  server.</para>
+      <para>See documentation for the <application>Tomcat</application> servlet container for reference information on configuring security domain for  <application>Apache Tomcat</application>.</para>
+    </note>
+  </section>
+</chapter>

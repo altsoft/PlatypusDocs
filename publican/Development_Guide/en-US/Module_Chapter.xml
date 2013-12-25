@@ -1636,8 +1636,8 @@ function validateEmail(email) {
 }</programlisting>
     </section>
     <section>
-      <title>Access to metadata</title>
-      <para>The module software code has access to the entity metadata. It is possible to read types, names, descriptions of entity properties and parameters, and other metadata.</para>
+      <title>Access to an entity metadata</title>
+      <para>The module software code has access to an entity metadata. It is possible to read types, names, descriptions of entity properties and parameters, and other metadata.</para>
       <para>To read the entity property metadata, use its  <varname>md</varname> property:</para>
       <programlisting language="JavaScript">var entityMetadata = <replaceable>entityName</replaceable>.md;</programlisting>
       <para>where <varname>

@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Administration_Guide-Installation_Chapter">
+  <title>Platform&apos;s runtime installation</title>
+  <para>The Platypus platform is provided by the following ways:</para>
+  <itemizedlist>
+    <listitem>
+      <para>On CD or DVD drive</para>
+    </listitem>
+    <listitem>
+      <para>Over the Internet as a zip archive file</para>
+    </listitem>
+  </itemizedlist>
+  <para>If the Platypus platform is delivered as a zip file, unpack its contents to a location according to your preference on your hard drive.</para>
+  <note>
+    <para>Instructions for installing the <application>Platypus Application Designer</application> developer tool are available in the Developer Guide.</para>
+  </note>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
+    <title>System requirements</title>
+    <para>
+Below you can see prerequisites for launching the platform components on your computer:
+   <itemizedlist>
+        <listitem>
+          <para>32-bit (x86) or 64-bit (x64) processor running at 1 gigahertz (GHz) or higher </para>
+        </listitem>
+        <listitem>
+          <para>1 gigabyte (GB) (for 32-bit system) or 2 GB (for 64-bit system) RAM</para>
+        </listitem>
+        <listitem>
+          <para>5 gigabytes (GB) of free hard disk space </para>
+        </listitem>
+        <listitem>
+          <para>Windows, Linux, Mac OS X or other operating system like Unix </para>
+        </listitem>
+        <listitem>
+          <para>Oracle JRE 7 or OpenJDK 7 </para>
+        </listitem>
+        <listitem>
+          <para>Graphical user interface for client operation</para>
+        </listitem>
+        <listitem>
+          <para>Internet access for downloading updates and working with external mapping service (In a corporate network, Internet access may be arranged through a proxy server.)</para>
+        </listitem>
+        <listitem>
+          <para>Google Chrome 19, Mozilla Firefox 10, Internet Explorer 9 or newer versions of browsers for Platypus client HTML5 operation</para>
+        </listitem>
+      </itemizedlist>  </para>
+    <para>Usually, a database server is required for operation of Platypus applications. This database server may be installed on the same computer as the client or application server, or on another computer which is accessible over the network.   </para>
+    <para>The Platypus platform supports the following databases: </para>
+    <itemizedlist>
+      <listitem>
+        <para>Oracle Database 10g and higher</para>
+      </listitem>
+      <listitem>
+        <para>IBM DB2 9 and higher</para>
+      </listitem>
+      <listitem>
+        <para>Microsoft SQL Server 2008 and higher</para>
+      </listitem>
+      <listitem>
+        <para>MySQL (InnoDB) 5.5 and higher</para>
+      </listitem>
+      <listitem>
+        <para>PostgreSQL 9 and higher</para>
+      </listitem>
+      <listitem>
+        <para>H2 Database 1.3 and higher</para>
+      </listitem>
+    </itemizedlist>
+    <para>For information on installing and configuring the database server, refer to the relevant installation and administration manuals, provided by database server manufacturers.</para>
+    <note>
+      <para>The Platypus Platform is supplied with the H2 database. This database is supplied &quot;out of the box&quot;, so it can be used immediately after installing the platform and does not require any additional installation and configuration steps.</para>
+    </note>
+    <para>To enable operation of the application server side in the servlet container or on the J2EE server, install or use an already installed servlet container or J2EE server. The Platypus operation was tested in the following environment:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Apache Tomcat 7</para>
+      </listitem>
+      <listitem>
+        <para>Glassfish 3.1.2</para>
+      </listitem>
+      <listitem>
+        <para>JBoss AS7</para>
+      </listitem>
+    </itemizedlist>
+    <para>For information on installing and configuring the servlet container or J2EE server, refer to the relevant installation and administration manuals, provided by their manufacturers.</para>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
+    <title>Runtime components installation</title>
+    <para> To install the platform components, perform the following actions:<orderedlist>
+        <listitem>
+          <para>
+Go to the <filename>install</filename> subdirectory of the Platypus distribution kit.</para>
+        </listitem>
+        <listitem>
+          <para>
+Run  <filename>install.bat</filename> files for the Windows OS or perform the  <command>sh install.sh</command> command for Linux.</para>
+        </listitem>
+        <listitem>
+          <para>
+Select the language of the installation program user interface.</para>
+        </listitem>
+        <listitem>
+          <para>
+Select the installation directory.</para>
+        </listitem>
+        <listitem>
+          <para>
+Select components to be installed. </para>
+          <itemizedlist>
+            <listitem>
+              <para>Platypus Platform — the Platypus platform core</para>
+            </listitem>
+            <listitem>
+              <para>Java SE client</para>
+            </listitem>
+            <listitem>
+              <para>Modules for working with maps</para>
+            </listitem>
+            <listitem>
+              <para>Application server — includes modules required for operation of the standalone application server and server components in the J2EE servlet containers and on the application servers</para>
+            </listitem>
+            <listitem>
+              <para>Platypus Communications — modules required for operation with COM/DCOM and OPC servers.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+Select settings of shortcuts for running the Platypus client in your system environment. </para>
+        </listitem>
+      </orderedlist>
+  <note>
+        <para>Platform core components are required when installing any configuration.</para>
+      </note></para>
+    <para>After installation, the directory will have the following structure:</para>
+    <itemizedlist>
+      <listitem>
+        <para><filename>platypus/</filename></para>
+        <itemizedlist>
+          <listitem>
+            <para><filename>bin/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>lib/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>etc/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>run/</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>logs/</filename></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
+    <title>Uninstalling recomendations</title>
+    <para>
+To delete the Platypus platform from your computer, perform the following actions:
+   <orderedlist>
+        <listitem>
+          <para>Run the  <application>UninstallPlatypus</application> program from the installed program menu or using the corresponding shortcut. For Windows, use the conventional mechanism for removing programs.</para>
+        </listitem>
+        <listitem>
+          <para>Confirm uninstalling of Platypus components; if necessary, enable an option for removing the working directory.</para>
+        </listitem>
+      </orderedlist>
+  </para>
+  </section>
+</chapter>

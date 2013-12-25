@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<appendix id="appe-Administration_Guide-Tomcat_Appendix">
+  <title>Apache Tomcat 7 configuration</title>
+  <note>
+    <para>For more detailed information on  <application>Apache Tomcat 7</application> setup, refer to the corresponding documentation.</para>
+  </note>
+  <para>Data source setup:</para>
+  <itemizedlist>
+    <listitem>
+      <para>Copy the corresponding JAR file of the JDBC driver to the directory accessible to the class loader: <filename><replaceable>CATALINA_HOME</replaceable>/lib</filename>, where <replaceable>CATALINA_HOME</replaceable> is a <application>Apache Tomcat </application>;  </para>
+    </listitem>
+    <listitem>
+      <para>Create the JNDI resource of the JDBC data source. Edit the <filename>META-INF/context.xml</filename> file of the web application by adding the data source resource:</para>
+      <programlisting>...
+&lt;Resource name=&quot;jdbc/main&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
+       maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
+       username=&quot;sa&quot; password=&quot;te$tPwd&quot; driverClassName=&quot;org.h2.Driver&quot;     url=&quot;jdbc:h2:tcp://localhost/~/h2db/test;schema=test&quot;/&gt;
+...</programlisting>
+      <para>If necessary, configure the connection pool by specifying parameters for removing and cleaning unused connections.</para>
+    </listitem>
+    <listitem>
+      <para>Configure the security domain. Edit the <filename>META-INF/context.xml</filename> file of the web application by adding the security domain. The example below shows configuring of the security domain for working with the built-in repository of user information:</para>
+      <programlisting>...
+&lt;Realm  className=&quot;org.apache.catalina.realm.DataSourceRealm&quot;
+   dataSourceName=&quot;jdbc/TestDB&quot;
+   userTable=&quot;MTD_USERS&quot; userNameCol=&quot;USR_NAME&quot;   userCredCol=&quot;USR_PASSWD&quot;
+   userRoleTable=&quot;MTD_GROUPS&quot; roleNameCol=&quot;GROUP_NAME&quot; digest=&quot;MD5&quot;/&gt;
+...</programlisting>
+      <para>For the DataSourceRealm security domain, specify names of tables, columns and hashing algorithm for working with <literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> tables.</para>
+      <para>If you want to use another authentication data repository, such as an external LDAP server, configure the appropriate type of security domain.</para>
+    </listitem>
+  </itemizedlist>
+</appendix>

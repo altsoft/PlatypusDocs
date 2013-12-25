@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Query_Chapter">
-  <title>Database query</title>
+  <title>Database Query</title>
   <para><emphasis>Query</emphasis> in  Platypus is an application element which defines the SQL expression to be executed in the database. In the Platypus Platform, a query is preprocessed before execution.</para>
   <para>Queries solve several tasks:<itemizedlist>
       <listitem>
@@ -40,7 +40,7 @@
       </listitem>
     </itemizedlist></para>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_3">
-    <title>Creating a database query</title>
+    <title>Creating a database Query</title>
     <para>To create a new query, perform the following actions:
    
   </para>
@@ -420,15 +420,15 @@
     <title>SQL query source text</title>
     <section>
       <title>Query header</title>
-      <para>For every application element of  &quot;Query&quot; type, it is necessary to define its ID within the application in accordance with the general requirements applicable to application elements names in Platypus. After creating a new query, its ID will be defined according to  the file name;  spaces will be replaced by  underscores. After creating a query, the developer can change its name.</para>
-      <para>To specify the query ID, use the  <code>@name</code> annotation in the query header block:</para>
+      <para>For every application element of  &quot;Query&quot; type, it is necessary to define its name within the application in accordance with the general requirements applicable to application elements names in Platypus. After creating a new query, its ID will be defined according to  the file name;  spaces will be replaced by  underscores. After creating a query, the developer can change its name.</para>
+      <para>To specify the query name, use the  <code>@name</code> annotation in the query header block:</para>
       <programlisting language="SQL">/**
  * Query header example
  * @name AllDocuments
  **/
 SELECT * 
 FROM Document</programlisting>
-      <para>Query ID is mandatory.</para>
+      <para>Query name is mandatory.</para>
       <para>In addition to the  <code>@name</code> annotation in the query header, comments and other annotations are acceptable. </para>
     </section>
     <section>
@@ -474,7 +474,7 @@ INNER JOIN Category c
 ON d.CategoryID = c.CATEGORY_ID</programlisting>
     </section>
     <section>
-      <title>Security in applications</title>
+      <title>Security</title>
       <para>Generally, access to  data in the database must be differentiated for various user groups. In Platypus there is an embedded security mechanism which implements the  constraints of  access to the resources based on the roles of the current user  (the user who is performing the current operation).</para>
       <para>To limit the access to the query for certain roles, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code> ... annotation into the query header. For the added annotation, specify the list of roles  delimiting them by spaces. The roles listed in the  <code>@rolesAllowed</code> annotation are granted with  rights both for  reading and  writing data to the database. If more detailed definition of the data access policy is required, use the  <code>@rolesAllowedRead</code> and <code>@rolesAllowedWrite</code> annotations. </para>
       <para>Specify the list of roles, for which only data reading is allowed, in the  <code>@rolesAllowedRead</code> annotation. </para>

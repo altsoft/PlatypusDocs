@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<appendix id="appe-Administration_Guide-Glassfish_Appendix">
+  <title>J2EE Glassfish 3 configuration</title>
+  <note>
+    <para>For more detailed information on <application>Glassfish</application>  setup, refer to the documentation for this application server.</para>
+  </note>
+  <para>Data source setup:</para>
+  <orderedlist>
+    <listitem>
+      <para>Copy the JAR file of the JDBC driver to the directory accessible to the class loader: <filename>glassfish/domains/mydomain/lib </filename></para>
+    </listitem>
+    <listitem>
+      <para>Run the GlassFish administration console. To do this, start the server, for example, by using the asadmin utility. Then navigate to 
+        <filename>http://hostname:4848</filename> in browser, where hostname is the address of the Glassfish application server, for example: <filename>http://localhost:4848</filename>.</para>
+    </listitem>
+    <listitem>
+      <para>Create the JDBC connection pool: <guimenuitem>Resources -&gt; JDBC -&gt; JDBC Connection Pools -&gt; New</guimenuitem>,         <type>javax.sql.ConnectionPoolDataSource</type> resource type, and also specify the database connection parameters: <parameter>url</parameter>,  <parameter>username</parameter>, <parameter>password</parameter>.</para>
+    </listitem>
+    <listitem>
+      <para>Check the pool settings by clicking <guibutton>Ping</guibutton>.</para>
+    </listitem>
+    <listitem>
+      <para>Create the JNDI resource for the connection pool: <guimenuitem>Resources -&gt; JDBC Resources-&gt; New</guimenuitem>. Specify the name of the resource, for example<literal> jdbc/main</literal>, and specify the JDBC connection pool.</para>
+    </listitem>
+  </orderedlist>
+  <para>To configure Platypus for working with internal storage of user data or external authentication service:</para>
+  <itemizedlist>
+    <listitem>
+      <para>Configure J2EE Glassfish server for working with the security domain (Realm) in the external LDAP service.</para>
+    </listitem>
+    <listitem>
+      <para>Configure user accounts.</para>
+    </listitem>
+  </itemizedlist>
+  <para>To configure the Glassfish server:</para>
+  <itemizedlist>
+    <listitem>
+      <para>Add the security domain for Glassfish — to do this, change the server configuration (Configurations -&gt; Server-config -&gt; Security -&gt; Realms -&gt;New).</para>
+      <para>Specify the name of the security domain, select the class name from the list or specify your own class:  </para>
+      <itemizedlist>
+        <listitem>
+          <para>To use the built-in Platypus storage, specify the <classname>com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm</classname> class name. Configure properties, which are specific for this class: </para>
+          <table>
+            <title>JDBCRealm security domain properties</title>
+            <tgroup cols="2">
+              <tbody>
+                <row>
+                  <entry>
+                    <parameter>JAAS Context</parameter>
+                  </entry>
+                  <entry>Identifier of the login module, JDBCRealm</entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>User Table</parameter>
+                  </entry>
+                  <entry>ame of the user tables in the database, MTD_USERS </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>User Name Column</parameter>
+                  </entry>
+                  <entry>Name of the column in the user table for storing user names, USR_NAME </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>Password Column</parameter>
+                  </entry>
+                  <entry>Name of the column in the user table for storing password hashes, USR_PASSWD </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>Group Table</parameter>
+                  </entry>
+                  <entry>Name of the user group table, USR_GROUPS </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>Group Name Column</parameter>
+                  </entry>
+                  <entry>Name of the group name column in the user group table, GROUP_NAME </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>Digest Algorithm</parameter>
+                  </entry>
+                  <entry>Password hashing algorithm, MD5 </entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </listitem>
+        <listitem>
+          <para>To use the external LDAP service (Active Directory, OpenLDAP, etc.) specify the <classname>com.sun.enterprise.security.auth.realm.ldap.LDAPReam</classname> class name; configure properties which are specific for this class.</para>
+          <table>
+            <title>Basic and additional properties of the LDAPReam security domain</title>
+            <tgroup cols="2">
+              <tbody>
+                <row>
+                  <entry>
+                    <parameter>JAAS Context</parameter>
+                  </entry>
+                  <entry>Identifier of the login module, ldapRealm </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>Directory</parameter>
+                  </entry>
+                  <entry>ldap://server:389</entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>Base DN</parameter>
+                  </entry>
+                  <entry>DC=ithit,DC=com </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>Assign Groups</parameter>
+                  </entry>
+                  <entry>platypus_default_role </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>search-filter</parameter>
+                  </entry>
+                  <entry>(&amp;(objectClass=user)(sAMAccountName=%s)) </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>search-bind-password</parameter>
+                  </entry>
+                  <entry>LDAP service password </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>group-search-filter</parameter>
+                  </entry>
+                  <entry>(&amp;(objectClass=group)(member=%d)) </entry>
+                </row>
+                <row>
+                  <entry>
+                    <parameter>search-bind-dn</parameter>
+                  </entry>
+                  <entry>ithit\user</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+          <note>
+            <para>Set values of properties in accordance with the configuration of your LDAP server.  <parameter>Assign Groups</parameter>  property value, platypus_default_role group will be assigned to all users.</para>
+          </note>
+          <para>Configure JVM: Configurations -&gt; server-config -&gt; JVM Settings -&gt; Add JVM Option -  by adding the following option: Djava.naming.referral=follow </para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+    <listitem>
+      <para>In the <filename>WEB-INF/glassfish-web.xml</filename>  file link roles to the security groups:</para>
+      <programlisting>&lt;glassfish-web-app error-url=&quot;&quot;&gt;
+...
+  &lt;context-root&gt;/platypus&lt;/context-root&gt;
+  &lt;security-role-mapping&gt;
+    &lt;role-name&gt;platypus_default_role&lt;/role-name&gt;
+    &lt;group-name&gt;default&lt;/group-name&gt;
+  &lt;/security-role-mapping&gt;
+  &lt;security-role-mapping&gt;
+    &lt;role-name&gt;role1&lt;/role-name&gt;
+    &lt;group-name&gt;role1&lt;/group-name&gt;
+  &lt;/security-role-mapping&gt;
+  &lt;security-role-mapping&gt;
+    &lt;role-name&gt;role2&lt;/role-name&gt;
+    &lt;group-name&gt;role2&lt;/group-name&gt;
+  &lt;/security-role-mapping&gt;
+..
+&lt;/glassfish-web-app&gt;</programlisting>
+    </listitem>
+  </itemizedlist>
+</appendix>

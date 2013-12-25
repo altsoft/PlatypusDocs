@@ -9,7 +9,8 @@
   <section id="sect-Development_Guide-Intro_Chapter-Test_Section_1">
     <title>Platypus Platform purpose and features </title>
     <para>Platypus Platform is a software platform designed for building  applications of various complexity levels. The main scope of these applications is  enterprise-level information systems.</para>
-    <para>The main purpose of the Platypus Platform is to accelerate the  development process, while ensuring maximum automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of the implementation process from the application developer and enables to concentrate on the scope. The Platypus Platform uses two application-oriented programming languages:</para>
+    <para>The main purpose of the Platypus Platform is to accelerate the  development process, while ensuring maximum automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of the implementation process from the application developer and enables to concentrate on the business domain.</para>
+    <para> The Platypus Platform supports two application programming languages:</para>
     <itemizedlist>
       <listitem>
         <para>SQL is used to access data.</para>
@@ -37,7 +38,7 @@
         <para>Modularity support in JavaScript.</para>
       </listitem>
       <listitem>
-        <para>Repeated use of SQL queries.</para>
+        <para>Re-use of SQL queries.</para>
       </listitem>
       <listitem>
         <para>Named parameters in SQL queries.</para>
@@ -46,7 +47,7 @@
         <para>Data model and automatic ORM (Object-Relation Mapping) for JavaScript, based on the database metadata.</para>
       </listitem>
       <listitem>
-        <para>  JavaScript code debugging both on a local computer and on the remote server.</para>
+        <para>  JavaScript code debugging both on a local computer and on a remote server.</para>
       </listitem>
       <listitem>
         <para>Running  SQL queries in the Platypus Application Designer for debugging purposes.</para>
@@ -55,16 +56,16 @@
         <para>Embedded safety mechanisms — users authentication and authorization, constraints  of access to application resources.</para>
       </listitem>
       <listitem>
-        <para>Library of widgets which directly interact with the data model; it allows you to easily implement  rather complex  user interface elements.</para>
+        <para>Library of widgets which directly interact with the data model, allowing  implementation of CRUD  user interface with no or just a little coding.</para>
       </listitem>
       <listitem>
-        <para>Support of database structure and data migrations.</para>
+        <para>Database structure and bootstrap data migrations.</para>
       </listitem>
       <listitem>
-        <para>User interface can be implemented both using the Platypus client application and  HTML5 Web-browser for the same forms.</para>
+        <para>User interface can be implemented both using the Platypus Client cross-platform application and  HTML5 Web-browser for the same forms.</para>
       </listitem>
       <listitem>
-        <para>Access to the platform functionality from the standard Web-application using  Platypus Web API.</para>
+        <para>Public HTTP interface.</para>
       </listitem>
       <listitem>
         <para>Operation of the application server and Platypus client on the Java Virtual Machine (JVM) allows you to use any Java libraries.</para>
@@ -92,7 +93,7 @@
   </para>
     <itemizedlist>
       <listitem>
-        <para>Database structure diagram — a visual representation of the data structure part, for example, relating to a  certain part of the scope.</para>
+        <para>Database structure diagram — a visual representation of the data structure part, for example, relating to a  certain part of the application domain.</para>
       </listitem>
       <listitem>
         <para>Connection to an  external database — this element enables to use several connections to different databases simultaneously within one application.</para>
@@ -110,7 +111,7 @@
     <note>
       <para>In the course of development and debugging, an application is represented as a  file structure on the drive, and for commercial operation the application can be deployed in the  <acronym>database</acronym>.</para>
     </note>
-    <para>Each application element in Platypus should has a corresponding  unique (within this application) identifier. Application element identifier may (or may not) match the name of the file in which this application element is stored on the drive. The identifier is used in other application elements (queries, modules, forms, reports) for unambiguous identification of this element, as well as while deploying the application in the database. The application element identifier is case-sensitive when it is used, i.e. <classname>mymodule</classname> and <classname>myModule</classname> are different names.</para>
+    <para>Each application element in Platypus should has a corresponding  unique (within this application) identifier. Application element identifier may (or may not) match the name of the file in which this application element is stored on the drive. The identifier is used in other application elements (queries, modules, forms, reports) for unambiguous identification of this element, as well as while deploying the application in the database. The application element identifier is case-sensitive, i.e. <classname>mymodule</classname> and <classname>myModule</classname> are different names.</para>
     <para>The application element identifier should be assigned in accordance with the following rules:</para>
     <itemizedlist>
       <listitem>

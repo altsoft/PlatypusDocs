@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Administration_Guide-Server_Chapter">
+  <title>Configuring and running Platypus Application Server</title>
+  <para>The <application>Platypus Application Server</application> is designed for centralized execution of business logic and appears to be an intermediate layer, when Platypus works using the 3-tier scheme.</para>
+  <para>The application server may be deployed independently or in the servlet container/on the J2EE server.</para>
+  <para>3-tier scheme has a number of advantages as compared with 2-tier one:</para>
+  <itemizedlist>
+    <listitem>
+      <para>Improved security, as the client has no direct access to the database and database request text is not transmitted via network.</para>
+    </listitem>
+    <listitem>
+      <para>Improved performance, as business logic is executed on the server.</para>
+    </listitem>
+    <listitem>
+      <para>Improved system maintainability.</para>
+    </listitem>
+    <listitem>
+      <para>Target application scalability. </para>
+    </listitem>
+    <listitem>
+      <para>The ability to use HTML5 web browser as a client (using the J2EE servlet container/application server).</para>
+    </listitem>
+  </itemizedlist>
+  <section id="sect-Administration_Guide-Server_Chapter-Test_Section_2">
+    <title>Standalone Platypus Application Server</title>
+    <para>In this mode, the Platypus application server runs in its own process using its own Java virtual machine (JVM).</para>
+    <para>To start the Platypus application server, you must run the Platypus startup script.
+    </para>
+    <para>Startup script of the Platypus server is located in the
+    <filename>/run</filename> folder:</para>
+    <itemizedlist>
+      <listitem>
+        <para><filename>server.bat</filename> — to start the  server in Windows OS. </para>
+      </listitem>
+      <listitem>
+        <para><filename>server.sh</filename> — to start the server in Linux OS.</para>
+      </listitem>
+    </itemizedlist>
+    <para>For running the Platypus Application server in production environment, it is recommended to configure it as an operating system service.</para>
+  </section>
+  <section>
+    <title>Running Platypus Application Server commands and parameters</title>
+    <para>This section provides detailed reference information on the parameters of the Platypus application server startup command prompt.</para>
+    <para>To configure running of the Platypus server, edit the contents of the startup script files. The following parameters may be configured:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Path to the Platypus application, in this case the database connection parameters will be obtained from the configuration file.  </para>
+      </listitem>
+      <listitem>
+        <para>Database connection settings.  </para>
+      </listitem>
+      <listitem>
+        <para>Network interfaces and protocols.</para>
+      </listitem>
+      <listitem>
+        <para>Modules for processing incoming data and background tasks.</para>
+      </listitem>
+      <listitem>
+        <para>Log level and logging file.</para>
+      </listitem>
+    </itemizedlist>
+    <para>For configuring, edit variables and parameters of the script startup prompt. </para>
+    <para>The command for running the client is as follows:</para>
+    <programlisting>java -cp Server.jar;<replaceable>EXT_CLASSPATH</replaceable> com.eas.server.ServerMain <replaceable>OPTIONS</replaceable></programlisting>
+    <para>where <replaceable>EXT_CLASSPATH</replaceable> are paths, which should be added to the Java class loader search path, <replaceable>OPTIONS</replaceable> are additional running parameters.</para>
+    <para>You can also run the application server using the
+    <parameter>-jar</parameter> parameter:</para>
+    <programlisting>java -jar Server.jar <replaceable>OPTIONS</replaceable></programlisting>
+    <para>This startup option is useful when working with the command prompt, but this approach does not allow you to add external libraries to the path used by the Java loader when searching for classes. For example, libraries, which are responsible for connection to the unconventional databases, or third-party components used by the target application when processing business logic.
+</para>
+    <table>
+      <title>Parameters of running application server using the command prompt</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Parameter</entry>
+            <entry align="center">Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>applicationpath APP_PATH</parameter>
+            </entry>
+            <entry>Path to the folder, which contains the application. If this parameter is specified, the application will be started from this drive folder, otherwise the application will be started from the database. This option has a short ap synonym.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-url JDBC_URL</parameter>
+            </entry>
+            <entry>URL of the connection to the database in the JDBC format.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dbuser DB_USER</parameter>
+            </entry>
+            <entry>Username for authorization in the database.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dbpassword DB_PASSWORD</parameter>
+            </entry>
+            <entry>User password for authorization in the database.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dbschema DB_SCHEMA</parameter>
+            </entry>
+            <entry>Database scheme.</entry>
+          </row>
+          <row>
+            <entry><parameter>-iface</parameter><replaceable> ADRESS:PORT</replaceable>,<replaceable>ADRESS:PORT</replaceable></entry>
+            <entry>Network interfaces and listening ports for the server.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-protocols</parameter>
+              <replaceable> PORT:PROTOCOL,PORT:PROTOCOL</replaceable>
+            </entry>
+            <entry>Network protocols for listening ports.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-loglevel LOG_LEVEL</parameter>
+            </entry>
+            <entry>Logging level. This parameter specifies the minimum level, which will be shown in the log. For the description of logging levels, see Appendix A.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-log LOG_FILE_PATH</parameter>
+            </entry>
+            <entry>Name and path of the log file.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-tasks </parameter>
+              <replaceable>MODULES_NAME</replaceable>
+            </entry>
+            <entry>The list of server modules (separated by comma without spaces) for processing incoming data and background tasks. The <methodname>received(data)</methodname>function should be defined for the incoming data processing module. The incoming data processing modules can have the <property>@stateless</property>annotation, or be without it. Background tasks modules should not have the <property>@stateless annotation. When starting server, modules with this annotation will be skipped.</property></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <para>Example of the Platypus application server running command:</para>
+    <programlisting>java -cp Server.jar com.eas.server.ServerMain -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -loglevel INFO -log serverlog.log -iface 0.0.0.0:8500 -protocols 8500:platypus</programlisting>
+    <para>Example of application server running command using the <parameter>-jar</parameter> parameter:    </para>
+    <programlisting>java -jar Server.jar -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -loglevel INFO -log serverlog.log</programlisting>
+  </section>
+</chapter>

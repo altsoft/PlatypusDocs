@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Administration_Guide-J2ee_Chapter">
+  <title>Platypus Application Server components working in a J2EE container</title>
+  <note>
+    <para>Use Platypus Application Designer to create web-application framework automatically; for detailed information, see the Developer Guide.</para>
+  </note>
+  <para><application>Platypus</application> server components can operate in the J2EE servlet container/on the application server. This configuration has the following features:</para>
+  <itemizedlist>
+    <listitem>
+      <para>Platypus server components are deployed in the J2EE Platypus container/on the server as a web-application — in the form of WAR-archive or folder; interaction with the client is enabled using a special servlet.</para>
+    </listitem>
+    <listitem>
+      <para>It supports operation of HTML5 browser-based client and Java SE client (<application>Platypus Client</application>),  as well as interaction of the server and browser JavaScript code from the &quot;classical &quot; web-application using Platypus Web API.</para>
+    </listitem>
+    <listitem>
+      <para>Communication with the client is performed over HTTP/HTTPS.</para>
+    </listitem>
+    <listitem>
+      <para>It is possible to use an external user authentication service, such as  <application>Microsoft Active Directory</application> service; it allows you to integrate the Platypus platform target application in existing enterprise user space.</para>
+    </listitem>
+    <listitem>
+      <para>Communication of the Platypus application server with the database is performed through a data source configured as a JNDI resource. </para>
+    </listitem>
+  </itemizedlist>
+  <para>Platypus Web API allows you to create web-applications, which use Platypus application server as a data source. Web-based application can be built using ASP, JSP and other technologies. Platypus Web API application can call server module functions remotely, and the function calling process is transparent for the client-side JavaScript code.</para>
+  <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_2">
+    <title>Configuring web-applications and a J2EE container</title>
+    <para>To start Platypus in the J2EE servlet container or on the application server, perform the following actions:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Create a new directory with a standard structure for a web-application in J2EE, including the  <filename>WEB-INF/web.xml</filename>  deployment descriptor.</para>
+      </listitem>
+      <listitem>
+        <para>Create HTML pages, which will contain the Platypus application. Configure JavaScript code, necessary for the initial startup code.</para>
+      </listitem>
+      <listitem>
+        <para>Copy libraries, necessary for the application functioning, to the web-application <filename>WEB-INF/lib</filename> directory from the  <filename>bin</filename> sub-directory of the Platypus platform  directory.</para>
+      </listitem>
+      <listitem>
+        <para>Copy the <filename>pwc</filename> directory of the JavaScript HTML5 client from the  <filename>bin</filename> sub-directory of the Platypus platform  directory.</para>
+      </listitem>
+      <listitem>
+        <para>Configure the JDBC data source as a JNDI resource, specify its name, for example <literal>jdbc/main</literal>. Configure the connection pool and JNDI resource. Copy the JAR file copy of the corresponding database driver to the directory available for the class loader.</para>
+      </listitem>
+      <listitem>
+        <para>Configure the security domain (Realm) for working with built-in storage or external authentication service. For working with built-in storage, configure the JDBC security domain for working with  <literal>MTD_USERS</literal> and <literal>MTD_GROUPS</literal> tables — see the &quot;Security&quot; section.</para>
+      </listitem>
+      <listitem>
+        <para>Configure the parameters of the web-application deployment in the  <filename>WEB-INF/web.xml</filename> file. If necessary, configure settings in the configuration files specific for this application server.</para>
+      </listitem>
+      <listitem>
+        <para>Deploy the web-application in the J2EE container/on the application server as a WAR archive or folder.</para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <para>See Appendix B for <application>Glassfish 3.1</application> J2EE server setup guide.</para>
+      <para>See Appendix C for <application>Apache Tomcat 7</application>  setup guide.</para>
+    </note>
+  </section>
+  <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_3">
+    <title>Configuring the deployment descriptor</title>
+    <para>To configure a web-application, edit the XML file of the  <filename>WEB-INF/web.xml</filename>  deployment descriptor. </para>
+    <itemizedlist>
+      <listitem>
+        <para>Set the initialization parameter and specify  <parameter>ap</parameter>  as its name and path to Platypus application folder as its value; the path may be absolute or relative within the web-application; when the web-application is packed into a war file, the relative path will work if the server unpacks this archive when deploying the application; if this option is not specified, the application will be loaded from the database. In the following example, an absolute path is specified</para>
+        <programlisting>...
+&lt;context-param&gt;
+    &lt;param-name&gt;ap&lt;/param-name&gt;
+    &lt;param-value&gt;/home/Platypus/app&lt;/param-value&gt;
+ &lt;/context-param&gt;
+...</programlisting>
+      </listitem>
+      <listitem>
+        <para>Set the initialization parameter and specify <parameter>url</parameter> as its name and the name of the JNDI resource of the JDBC data source as its value, for example:</para>
+        <programlisting>...
+&lt;context-param&gt;
+    &lt;param-name&gt;url&lt;/param-name&gt;
+    &lt;param-value&gt;jdbc/main&lt;/param-value&gt;
+ &lt;/context-param&gt;
+...</programlisting>
+      </listitem>
+      <listitem>
+        <para>Add the session event handler:</para>
+        <programlisting>...
+&lt;listener&gt;       
+    &lt;listener-class&gt;
+com.eas.server.httpservlet.PlatypusSessionsSynchronizer
+    &lt;/listener-class&gt;
+&lt;/listener&gt;
+...</programlisting>
+      </listitem>
+      <listitem>
+        <para>Add a reference to the data source resource:</para>
+        <programlisting>...
+&lt;resource-ref&gt;
+    &lt;description&gt;Main database connection&lt;/description&gt;
+    &lt;res-ref-name&gt;jdbc/main&lt;/res-ref-name&gt;
+    &lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;
+    &lt;res-auth&gt;Container&lt;/res-auth&gt;
+&lt;/resource-ref&gt;
+...</programlisting>
+      </listitem>
+      <listitem>
+        <para>Add Platypus servlet configuration; in the <literal>multipart/location</literal>  element specify the path to the folder for storing the downloaded files:</para>
+        <programlisting>...
+&lt;servlet&gt;
+    &lt;servlet-name&gt;PlatypusServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;
+com.eas.server.httpservlet.PlatypusHttpServlet
+    &lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;multipart-config&gt;  
+      &lt;location&gt;
+          /home/user1/pub
+      &lt;/location&gt;
+      &lt;max-file-size&gt;2097152&lt;/max-file-size&gt;
+      &lt;max-request-size&gt;2165824&lt;/max-request-size&gt;
+      &lt;file-size-threshold&gt;1048576&lt;/file-size-threshold&gt;
+    &lt;/multipart-config&gt;
+  &lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;PlatypusServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/application/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+...</programlisting>
+      </listitem>
+      <listitem>
+        <para>Configure the access and security constraints; for information on the security domain configuration, see the &quot;Security&quot; section.</para>
+      </listitem>
+    </itemizedlist>
+    <para>After completing configuring, deploy the web-application as a folder or WAR archive in a servlet container or on the J2EE server.</para>
+  </section>
+</chapter>

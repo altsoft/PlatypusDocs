@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<bookinfo id="book-Administration_Guide-Administration_Guide">
+  <title>Platypus Platform Administrator Guide</title>
+  <subtitle/>
+  <productname>Platypus</productname>
+  <productnumber>3.0</productnumber>
+  <edition>0</edition>
+  <pubsnumber>0</pubsnumber>
+  <abstract>
+    <para>
+This guide contains information about installing and administering the Platypus Platform
+runtime components  </para>
+  </abstract>
+</bookinfo>
