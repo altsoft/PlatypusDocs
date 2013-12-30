@@ -5,16 +5,16 @@
 ]>
 <chapter id="chap-Administration_Guide-Installation_Chapter">
   <title>Platform&apos;s runtime installation</title>
-  <para>The Platypus platform is provided by the following ways:</para>
+  <para>The Platypus Platform runtime is provided by the following ways:</para>
   <itemizedlist>
     <listitem>
-      <para>On CD or DVD drive</para>
+      <para>On a CD/DVD</para>
     </listitem>
     <listitem>
-      <para>Over the Internet as a zip archive file</para>
+      <para>Over the Internet as a ZIP archive file</para>
     </listitem>
   </itemizedlist>
-  <para>If the Platypus platform is delivered as a zip file, unpack its contents to a location according to your preference on your hard drive.</para>
+  <para>If the Platypus Platform runtime is delivered as a ZIP file, unpack its contents to a location according to your preference on your hard drive.</para>
   <note>
     <para>Instructions for installing the <application>Platypus Application Designer</application> developer tool are available in the Developer Guide.</para>
   </note>
@@ -74,7 +74,7 @@ Below you can see prerequisites for launching the platform components on your co
     <note>
       <para>The Platypus Platform is supplied with the H2 database. This database is supplied &quot;out of the box&quot;, so it can be used immediately after installing the platform and does not require any additional installation and configuration steps.</para>
     </note>
-    <para>To enable operation of the application server side in the servlet container or on the J2EE server, install or use an already installed servlet container or J2EE server. The Platypus operation was tested in the following environment:</para>
+    <para>To enable operation of the application server side in the servlet container or on the J2EE server, install or use an already installed servlet container or J2EE server. The Platypus operation was tested in the following environments:</para>
     <itemizedlist>
       <listitem>
         <para>Apache Tomcat 7</para>
@@ -112,7 +112,7 @@ Select the installation directory.</para>
 Select components to be installed. </para>
           <itemizedlist>
             <listitem>
-              <para>Platypus Platform — the Platypus platform core</para>
+              <para>Platypus Platform — the Platypus Platform&apos;s core components</para>
             </listitem>
             <listitem>
               <para>Java SE client</para>
@@ -121,7 +121,7 @@ Select components to be installed. </para>
               <para>Modules for working with maps</para>
             </listitem>
             <listitem>
-              <para>Application server — includes modules required for operation of the standalone application server and server components in the J2EE servlet containers and on the application servers</para>
+              <para>Application Server — includes modules required for operation of the standalone application server and server components in the J2EE servlet containers and on the application servers</para>
             </listitem>
             <listitem>
               <para>Platypus Communications — modules required for operation with COM/DCOM and OPC servers.</para>
@@ -163,10 +163,10 @@ Select settings of shortcuts for running the Platypus client in your system envi
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
     <title>Uninstalling recomendations</title>
     <para>
-To delete the Platypus platform from your computer, perform the following actions:
+To delete the Platypus Platform components from your computer, perform the following actions:
    <orderedlist>
         <listitem>
-          <para>Run the  <application>UninstallPlatypus</application> program from the installed program menu or using the corresponding shortcut. For Windows, use the conventional mechanism for removing programs.</para>
+          <para>Run the  <application>UninstallPlatypus</application> program from the installed programs menu or using the corresponding shortcut. For Windows, use the conventional mechanism for removing programs.</para>
         </listitem>
         <listitem>
           <para>Confirm uninstalling of Platypus components; if necessary, enable an option for removing the working directory.</para>
