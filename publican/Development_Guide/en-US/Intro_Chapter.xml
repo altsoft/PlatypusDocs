@@ -5,28 +5,28 @@
 ]>
 <chapter id="chap-Development_Guide-Intro_Chapter">
   <title>Introduction to Platypus Platform</title>
-  <para>This section provides  background information about the Platypus Platform.</para>
+  <para>This section provides general information about  Platypus Platform.</para>
   <section id="sect-Development_Guide-Intro_Chapter-Test_Section_1">
     <title>Platypus Platform purpose and features </title>
-    <para>Platypus Platform is a software platform designed for building  applications of various complexity levels. The main scope of these applications is  enterprise-level information systems.</para>
-    <para>The main purpose of the Platypus Platform is to accelerate the  development process, while ensuring maximum automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of the implementation process from the application developer and enables to concentrate on the business domain.</para>
-    <para> The Platypus Platform supports two application programming languages:</para>
+    <para>Platypus Platform is a software platform designed for rapid building of complex   applications for  enterprise-level information systems.</para>
+    <para>The main goal of the Platypus Platform is to accelerate the  development process, while ensuring maximum possible automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of the implementation process from an application developer and enables to concentrate on  business domain.</para>
+    <para> The Platypus Platform uses two application programming languages:</para>
     <itemizedlist>
+      <listitem>
+        <para>JavaScript (compatible with the ECMA-262-3 standard) is used to write program logic;</para>
+      </listitem>
       <listitem>
         <para>SQL is used to access data.</para>
       </listitem>
-      <listitem>
-        <para>JavaScript (compatible with the ECMA-262-3 standard) is used to write program logic.</para>
-      </listitem>
     </itemizedlist>
-    <para>Application elements creation and editing, deployment, debugging and maintenance of Platypus applications are performed using the Platypus Application Designer development tool. However, individual application files, for example, JavaScript modules, can be edited in any text editor.</para>
-    <para>When building applications, the following visual development tools are used: </para>
+    <para>Application creation and editing, deployment, debugging and maintenance of  applications are performed using the Platypus Application Designer. However, individual application files, for example, JavaScript modules, can be edited in any text editor.</para>
+    <para>Platypus Application Desinger visual development tools: </para>
     <itemizedlist>
       <listitem>
-        <para>Visual editor of the application database structure.</para>
+        <para>Application database structure visual editor;</para>
       </listitem>
       <listitem>
-        <para>Database queries visual editor.</para>
+        <para>Database queries visual editor;</para>
       </listitem>
       <listitem>
         <para>Forms visual editor.</para>
@@ -35,163 +35,117 @@
     <para>Platypus Platform main features: </para>
     <itemizedlist>
       <listitem>
-        <para>Modularity support in JavaScript.</para>
+        <para>JavaScript modules and automatic dependencies resolving.</para>
       </listitem>
       <listitem>
-        <para>Re-use of SQL queries.</para>
-      </listitem>
-      <listitem>
-        <para>Named parameters in SQL queries.</para>
+        <para>Powerful SQL quries with named parameters and SQL clauses re-use.</para>
       </listitem>
       <listitem>
         <para>Data model and automatic ORM (Object-Relation Mapping) for JavaScript, based on the database metadata.</para>
       </listitem>
       <listitem>
-        <para>  JavaScript code debugging both on a local computer and on a remote server.</para>
-      </listitem>
-      <listitem>
-        <para>Running  SQL queries in the Platypus Application Designer for debugging purposes.</para>
-      </listitem>
-      <listitem>
-        <para>Embedded safety mechanisms — users authentication and authorization, constraints  of access to application resources.</para>
-      </listitem>
-      <listitem>
-        <para>Library of widgets which directly interact with the data model, allowing  implementation of CRUD  user interface with no or just a little coding.</para>
-      </listitem>
-      <listitem>
-        <para>Database structure and bootstrap data migrations.</para>
-      </listitem>
-      <listitem>
         <para>User interface can be implemented both using the Platypus Client cross-platform application and  HTML5 Web-browser for the same forms.</para>
       </listitem>
       <listitem>
-        <para>Public HTTP interface.</para>
+        <para>Widgets which directly interact with the data model, allowing  implementation of CRUD  user interface with no or just a little coding.</para>
       </listitem>
       <listitem>
-        <para>Operation of the application server and Platypus client on the Java Virtual Machine (JVM) allows you to use any Java libraries.</para>
+        <para>Embedded security mechanisms — users authentication and authorization, constraints  of access to application resources.</para>
       </listitem>
       <listitem>
-        <para>Integration into J2EE infrastructure.</para>
+        <para>Database schema structure and bootstrap data migrations.</para>
       </listitem>
     </itemizedlist>
   </section>
   <section id="sect-Development_Guide-Intro_Chapter-Test_Section_2">
-    <title>Platypus application main components </title>
-    <para>From the structural point of view, Platypus platform applications have a tree structure which includes:</para>
-    <itemizedlist>
-      <listitem>
-        <para>directories,</para>
-      </listitem>
-      <listitem>
-        <para>application elements,</para>
-      </listitem>
-      <listitem>
-        <para>other files.</para>
-      </listitem>
-    </itemizedlist>
+    <title> Application structure </title>
+    <para>From the structural point of view, Platypus platform applications have a tree structure which contains  directories and files, e.g. modules, JavaScript files, queries, resources etc. Some files or file groups have a special meaning to the platform and called application elements.</para>
     <para> The types of application elements in Platypus Platform are:
   </para>
     <itemizedlist>
       <listitem>
-        <para>Database structure diagram — a visual representation of the data structure part, for example, relating to a  certain part of the application domain.</para>
+        <para>Module — a structural unit of the JavaScript software code, and its data model.</para>
       </listitem>
       <listitem>
-        <para>Connection to an  external database — this element enables to use several connections to different databases simultaneously within one application.</para>
+        <para>Form — a module with a user interface  layout.</para>
       </listitem>
       <listitem>
-        <para>Module — a software module, a structural unit of the JavaScript software code, and its data model.</para>
+        <para>Report — a module with a template of the generated office document.</para>
       </listitem>
       <listitem>
-        <para>Form — a user interface element displayed in  client applications, JavaScript software code, and its data model.</para>
+        <para>Query — a database query in SQL language.</para>
       </listitem>
       <listitem>
-        <para>Report — a template of the generated office document, JavaScript software code, and its data model.</para>
+        <para>Database Structure Diagram — a visual representation of the data structure part, for example, relating to a  certain part of the application domain.</para>
+      </listitem>
+      <listitem>
+        <para>External Database Connection — this element enables to use several connections to different databases simultaneously within one application.</para>
       </listitem>
     </itemizedlist>
     <note>
-      <para>In the course of development and debugging, an application is represented as a  file structure on the drive, and for commercial operation the application can be deployed in the  <acronym>database</acronym>.</para>
+      <para>For production operation the application, including its resources can be deployed directly in the work <acronym>database</acronym>.</para>
     </note>
-    <para>Each application element in Platypus should has a corresponding  unique (within this application) identifier. Application element identifier may (or may not) match the name of the file in which this application element is stored on the drive. The identifier is used in other application elements (queries, modules, forms, reports) for unambiguous identification of this element, as well as while deploying the application in the database. The application element identifier is case-sensitive, i.e. <classname>mymodule</classname> and <classname>myModule</classname> are different names.</para>
-    <para>The application element identifier should be assigned in accordance with the following rules:</para>
-    <itemizedlist>
-      <listitem>
-        <para>It can contain alphanumeric characters and underscore.</para>
-      </listitem>
-      <listitem>
-        <para>It must begin with an alphabetic character or underscore.</para>
-      </listitem>
-    </itemizedlist>
-    <para>The module name must be unique within the application.</para>
-    <para>Examples of acceptable application element  names: </para>
-    <itemizedlist>
-      <listitem>
-        <para><classname>moduleName2</classname></para>
-      </listitem>
-      <listitem>
-        <para><classname>document_processor</classname></para>
-      </listitem>
-    </itemizedlist>
   </section>
   <section>
-    <title>Platypus application architecture</title>
-    <para>In general case, the Platypus platform architecture consists of three tiers. In addition, it may be presented in 2-tier and 3-tier configuration.</para>
+    <title>Platypus Platform application architecture</title>
+    <para>In general, the Platypus Platform architecture consists of three  tiers, but depending of its configuration it may be presented as 2-tier and 3-tier.</para>
     <figure>
-      <title>Platypus platform architecture</title>
+      <title>Platypus Platform architecture</title>
       <mediaobject>
         <imageobject>
           <imagedata width="100%" contentdepth="100%" align="center" scalefit="1" fileref="images/tiers.png" format="PNG"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>In case of 2-tier configuration the presentation tier and logic tier operate in the client application, and in case of 3-tier configuration the presentation tier operates in the client application and the logic tier runs on the Platypus application server.</para>
-    <para>The figure below shows a simplified diagram of components interaction and data exchange in the Platypus application. </para>
+    <para>In case of 2-tier configuration the presentation tier and logic tier operate at Java SE Client, and in case of 3-tier configuration the presentation tier operates in the client, either at Java SE or HTML5 browser and the logic tier runs on the Application Server.</para>
+    <para>The figure below shows a simplified diagram of components interaction and data flow. </para>
     <figure>
-      <title>The components interaction and data exchange in the Platypus application</title>
+      <title>The components interaction and data flow</title>
       <mediaobject>
         <imageobject>
           <imagedata align="center" fileref="images/dataflow.png" format="PNG"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>The application software elements and model compatible user interface elements use a data model to access data.. </para>
-    <para>Data Flow components can operate on the client as well as on the server. In case of 2-tier configuration Data Flow components work on the client. In case of 3-tier configuration Data Flow components work on the client as well as on the server, particularly on different computers, while providing a transparent data exchange.</para>
-    <para>The unique feature of the Platypus platform is its <acronym>ORM</acronym> implementation: the generation of object sets matching the relational entities uses metadata from the database and SQL query texts. The advantage of this approach is that the metadata duplication is avoided and, consequently, there is no need to synchronize them for the object model and database when making changes in the database.  </para>
-    <para>Data model usage simplifies many data processing operations, since it provides automatic synchronization of  entities data, automatic saving of  modified data, simplified support of transactions, centralized management of resources, etc.</para>
-    <para>The process of Platypus application development consists of the following common steps:</para>
+    <para>The JavaScript code and a model compatible user interface controls can use a data model to read and write database data.</para>
+    <para>Data Flow components can operate on a client as well as on a server. In case of 2-tier configuration Data Flow components work on the client. In case of 3-tier configuration Data Flow components work on the client as well as on the server, particularly on different computers, while providing a transparent data exchange.</para>
+    <para>The unique feature of the Platypus platform is its Object-Relational Mapping  <acronym>(ORM)</acronym> implementation: the generation of JavaScript objects sets matching the relational entities uses metadata from the database and SQL query texts. The advantage of this approach is that the metadata duplication is avoided and, consequently, there is no need to synchronize them for the object model and database when making changes in the database.  </para>
+    <para>The usage of Data Model simplifies many data processing operations, since it provides automatic synchronization of  entities data, automatic saving of  modified data, simplified support of transactions, centralized management of resources, etc.</para>
+    <para>The process of Platypus application development usually consists of the following  steps:</para>
     <itemizedlist>
       <listitem>
-        <para>Determination of the data structure to model the scope.</para>
+        <para>Determination of the database structure for the application specific knowledge domain.</para>
       </listitem>
       <listitem>
-        <para>Implementation of this structure in the form of  relational entities in the database using the database structure diagrams designer.</para>
+        <para>Implementation of this structure in the form of  relational entities in the database using the Database Structure Diagrams designer visual tool.</para>
       </listitem>
       <listitem>
-        <para>Writing the data sampling queries; if required, implementation of queries for updating and adding data on SQL (data updating and adding tasks in most cases can be completed automatically by the data model);  query parameters specifying.</para>
+        <para>Writing the data sampling queries; if required, implementation of queries for updating and adding data in SQL language (data updating and adding tasks in most cases can be completed automatically by the data model); specifying the query parameters.</para>
       </listitem>
       <listitem>
-        <para>Implementation of the application logic as modules using the modules designer,</para>
+        <para>Implementation of the application logic as JavaScript modules,</para>
         <para>for each module:</para>
         <itemizedlist>
           <listitem>
-            <para>determination of the module data model and its parameters,</para>
+            <para>determination of the data model;</para>
           </listitem>
           <listitem>
-            <para>writing  the JavaScript code that implements the business-logic.</para>
+            <para>writing  JavaScript code that implements the business-logic.</para>
           </listitem>
         </itemizedlist>
       </listitem>
       <listitem>
-        <para>Implementation of the application user interface as  forms using the forms designer,</para>
+        <para>Implementation of the application user interface as  forms using visual designer tool,</para>
         <para>for each form:</para>
         <itemizedlist>
           <listitem>
-            <para>determination of the form data model and its parameters,</para>
+            <para>determination of the form data model;</para>
           </listitem>
           <listitem>
-            <para>creation of the form layout using the visual editor,</para>
+            <para>creation of the form layout using the visual editor;</para>
           </listitem>
           <listitem>
-            <para>writing the JavaScript software code responsible for  the user interface.</para>
+            <para>writing  JavaScript  code responsible for  the user interface.</para>
           </listitem>
         </itemizedlist>
       </listitem>
@@ -206,7 +160,7 @@
             <para>creation of the report template using the visual editor,</para>
           </listitem>
           <listitem>
-            <para>writing the JavaScript software code for  non-standard report generation processing.</para>
+            <para>writing  JavaScript  code for  non-standard report generation processing.</para>
           </listitem>
         </itemizedlist>
       </listitem>

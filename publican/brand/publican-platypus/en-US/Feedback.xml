@@ -2,14 +2,14 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 ]>
 <section>
-	<title>We Need Feedback!</title>
+	<title>Feedback information</title>
 	 <indexterm>
-		<primary>feedback</primary>
-		 <secondary>contact information for this manual</secondary>
+		<primary>email:platform@altsoft.biz</primary>
+		 <secondary>phone:+7(4932)49-60-63</secondary>
 
 	</indexterm>
 	 <para>
-		You should over ride this by creating your own local Feedback.xml file.
+		Please connect with us by email: platform@altsoft.biz or by phone: +7 4932 496063.
 	</para>
 </section>
 

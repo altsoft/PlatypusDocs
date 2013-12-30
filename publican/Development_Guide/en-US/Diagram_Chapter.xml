@@ -4,8 +4,8 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Diagram_Chapter">
-  <title>Database structure diagram</title>
-  <para><emphasis>Database structure diagram</emphasis> is a  representation of the database structure in the part determined by the developer. For example, the diagram can describe a part of the scope. Generally,  the project contains several database structure diagrams.</para>
+  <title>Database Structure Diagram</title>
+  <para><emphasis>Database Structure Diagram</emphasis> is a  representation of the database structure in the part determined by the developer. For example, the diagram can describe a part of the scope. Generally,  the project contains several database structure diagrams.</para>
   <para>A database structure diagram is a visual representation of the database structure, and it does not directly affect the application functionality.</para>
   <para>The structure of the relational database is determined by  tables and links between them. Links between two tables are implemented through the foreign keys.</para>
   <note>

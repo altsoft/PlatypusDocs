@@ -408,31 +408,6 @@ var str = readString(&apos;/home/user1/Documents/doc1.txt&apos;);
 writeString(&apos;/home/user1/Documents/doc2.txt&apos;, str);</programlisting>
     </section>
     <section>
-      <title>Arrays<!--#1801--></title>
-      <para>To manipulate data presented in the form of lists, use the  <literal>Array</literal> global object. Data model entities (see the &quot;Software interface for working with data&quot; section) also support methods of the  <literal>Array</literal> object. </para>
-      <note>
-        <para>Refer to the JavaScript documentation for more information on working with arrays.</para>
-      </note>
-      <para>Use the following iterative methods for processing array data: <code>filter</code>, <code>forEach</code>, <code>every</code>, <code>map</code>, <code>some</code>, <code>reduce</code>, <code>reduceRight</code>.</para>
-      <para>Example of using the iterative methods:</para>
-      <programlisting language="JavaScript">var arr = [1, 2, 5, 10, 11, 12, 22, 100];
-
-//Logs all array elements
-arr.forEach(function(o) {
-  Logger.info(o);
-});
-
-//Logs only odd elements
-arr.filter(function(o){ return o % 2 }).
-  forEach(function(o) { Logger.info(o) }); </programlisting>
-      <note>
-        <para>Using the arrays<!--#1802--> iterative methods is the preferred method for processing data in arrays than<!--#1805--> using the <literal>for</literal> cycle.</para>
-      </note>
-      <important>
-        <para>Do not add new items to an array or remove items when executing iterations. Use a new array or a copy of an array, if you want to change the structure of the array when executing iterations.</para>
-      </important>
-    </section>
-    <section>
       <title>Working with XML</title>
       <para>To work with data in the <abbrev>XML</abbrev> format, use the script syntax in accordance with the E4X specification <!--#1901 removed redundancy--> (EcmaScript for <abbrev>XML</abbrev>). The E4X technology can be used by the code,  which is executed in the Platypus Client and on the Platypus Application Server in any configuration. </para>
       <para>Use E4X to create variables of the <abbrev>XML</abbrev> type: </para>

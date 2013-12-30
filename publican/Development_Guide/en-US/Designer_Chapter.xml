@@ -4,8 +4,8 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Designer_Chapter">
-  <title>Working with an application project in the Platypus Application Designer</title>
-  <para>In the course of development and further during the application life cycle, the application is represented by the Platypus project. The Platypus project is a directory on the hard drive containing  files with settings and application elements.</para>
+  <title>Working with an application project</title>
+  <para>In the course of development and further during the application life cycle, the application is represented by the Platypus Application project. This project project is a directory on the hard drive containing  files with settings and application elements.</para>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
     <title>Project creation</title>
     <para>This section contains information about  creating the Platypus project and  basic operations when working with it.</para>
@@ -67,7 +67,7 @@
 New project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
-    <title>Project opening</title>
+    <title>Opening an existing project</title>
     <para>To open an existing Platypus project, perform the following actions:
    <itemizedlist>
         <listitem>
@@ -86,7 +86,7 @@ New project will be added to the <guilabel>Projects</guilabel> panel. </para>
 Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section>
-    <title>Project properties setup</title>
+    <title>Project&apos;s properties setup</title>
     <para>To change the project properties, select the <guimenuitem>Properties</guimenuitem> item in the project root node context menu.</para>
     <para>Set  parameters of the main connection to the database:</para>
     <itemizedlist>
@@ -345,7 +345,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     <para>In the course of development, sometimes it is necessary to find out the current database version or change it. To find out the  current version of the project database to which the  <application>Platypus Application Designer</application> is connected, select the <guimenuitem>database migration version</guimenuitem> item in the  <guimenu>Database Migrations</guimenu> context menu of the project. The current version of the <acronym>database</acronym> will be displayed in  the <guilabel>Migration version</guilabel> field of the <guilabel>Current Db Migration version</guilabel> dialog. To modify the current version, specify the new number of the current database  version in the  <guilabel>Migration version</guilabel> text field, and click <guibutton>OK</guibutton>. If you don&apos;t want to change the current version of the database, click <guibutton>Cancel</guibutton> or close the dialog.</para>
   </section>
   <section>
-    <title>Working with version control systems</title>
+    <title>Version control systems support</title>
     <para>In the course of development and further during the application life cycle, it is recommended to use a version control system to manage the source project files.</para>
     <para><application>Platypus Application Designer</application> has built-in support of the following version control systems: </para>
     <itemizedlist>

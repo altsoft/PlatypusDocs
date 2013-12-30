@@ -120,19 +120,16 @@ books_tests  Desktop1  downloads      images  notes  scripts  svgs</screen>
 		</para>
 		 
 <programlisting language="JavaScript">
-$(function () {
-    platypus.api.setServerUrl(Platypus.Common.BASE_URL);
-    var servmod = new ServerModule();
-    servmod.get(Platypus.WebApp.SERVER_MODULE_NAME, 
-        function (servModule) {
-            Platypus.WebApp.platypusApiProtocol.getUserInfo(function(userData) {
-            Platypus.WebApp.userInfo = userData;
-            Platypus.WebApp.serverModule = servModule;
-            Platypus.WebApp.run();     
-        })
-    });
- 
-});
+    /**
+     * Gets the application server URL
+     * @returns {string} a server web application URL
+     */
+    this.getServerUrl = function() {
+        if (serverUrl)
+            return serverUrl;
+        else
+            return "";
+    };
 </programlisting>
 
 	</section>
