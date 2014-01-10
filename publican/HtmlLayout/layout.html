@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <title>Platypus Platform 3.0 - Documentation</title>
+
+        <link rel="stylesheet" href="Common_Content/css/global.css" type="text/css">
+        <link rel="stylesheet" href="Common_Content/css/documentation.css" type="text/css">
+        <!--[if lte IE 7]>
+                <style type="text/css"> body { font-size: 85%; } </style>
+        <![endif]-->
+
+        <!-- REQUIRED scripts for layout widget -->
+        <script type="text/javascript" src="Common_Content/js/jquery-latest.js"></script>
+        <script type="text/javascript" src="Common_Content/js/jquery-ui-latest.js"></script>
+        <script type="text/javascript" src="Common_Content/js/jquery-layout-latest.js"></script>
+        <script type="text/javascript" src="Common_Content/js/global.js"></script>
+
+        <script type="text/javascript">
+            var pageLayout;
+
+            $(document).ready(function() {
+                // create page layout
+                pageLayout = $('body').layout({
+                    scrollToBookmarkOnLoad: false // handled by custom code so can 'unhide' section first
+                    , defaults: {
+                    }
+                    , north: {
+                        size: "auto"
+                        , spacing_open: 0
+                        , closable: false
+                        , resizable: false
+                    }
+                    , west: {
+                        size: 250
+                        , spacing_closed: 22
+                        , togglerLength_closed: 140
+                        , togglerAlign_closed: "top"
+                        , togglerContent_closed: "C<BR>o<BR>n<BR>t<BR>e<BR>n<BR>t<BR>s"
+                        , togglerTip_closed: "Open & Pin Contents"
+                        , sliderTip: "Slide Open Contents"
+                        , slideTrigger_open: "mouseover"
+                    }
+                });
+
+                // goto bookmark after creating the layout
+                scrollToBookmark(self.location.hash);
+
+            });
+        </script>
+
+    </head>
+    <body>
+
+        <div class="ui-layout-north">
+
+            <DIV id="logo">Platypus Platform 3.0 Developer Guide</DIV>
+            <DIV id="navigation">
+                <A href="#">HOME</A>
+                <A href="#">DEMOS</A>
+                <A href="#">DOWNLOADS</A>
+                <A href="#" class="current">DOCUMENTATION</A>
+                <A href="#">ISSUES</A>
+            </DIV>
+        </div>
+
+        <div class="ui-layout-center content">
+            {$content}
+        </div>
+
+        <!--
+                =======================
+                *	TABLE OF CONTENTS  *
+                =======================
+        -->
+        <div class="ui-layout-west" style="display: none;">
+            <div class="header">Contents</div>
+            <div class="ui-layout-content" style="overflow: auto;">
+                {$toc}
+            </div>
+        </div>
+
+    </body>
+</html>
