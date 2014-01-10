@@ -83,7 +83,7 @@ public class HtmlConvertor {
                     destDirPath = args[i + 1];
                     i += 2;
                 } else {
-                    throw new IllegalArgumentException("Destination parent directory argument syntax error");
+                    throw new IllegalArgumentException("Destination directory argument syntax error");
                 }
 
             } else {
