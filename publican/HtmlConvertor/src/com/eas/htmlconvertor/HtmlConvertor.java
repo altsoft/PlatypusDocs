@@ -41,7 +41,6 @@ public class HtmlConvertor {
     private File layoutDir;
     private String destDirPath;
     private File destDir;
-    private String directoryName;
     private File destImagesDir;
     private File destCommonContentDir;
     private File destCommonImagesDir;
@@ -102,7 +101,6 @@ public class HtmlConvertor {
     }
 
     private void run() throws IOException {
-        directoryName = sourceDir.getName();
         prepareDestDirectory();
         copyCommonFiles();
         convertHtmlFiles();
