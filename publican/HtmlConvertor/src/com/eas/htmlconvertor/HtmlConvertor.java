@@ -159,7 +159,7 @@ public class HtmlConvertor {
             if (dt.nextElementSibling() != null && dt.nextElementSibling().tagName().equals("dd")) {
                 Elements span = dt.getElementsByTag("span");
                 if (span != null && span.size() > 0) {
-                    span.before("<span class='disclosure closed'>&nbsp;&nbsp;&nbsp;</span>");
+                    span.before("<span class='disclosure closed'>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
                 }
             }
         }

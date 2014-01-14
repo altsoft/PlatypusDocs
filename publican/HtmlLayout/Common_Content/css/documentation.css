@@ -6,7 +6,7 @@
 */
 
 BODY {
-	background-color: #A4C2C2 !important;
+	background-color: #CCC !important;
 }
 
 TABLE.TOC {
@@ -164,7 +164,7 @@ SPAN.expander {
 
 .ui-layout-north {
 	border-bottom: none;
-	background-color: #677;
+	background-color: #CCC;
 }
 
 .ui-layout-west {

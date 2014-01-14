@@ -7,7 +7,7 @@
 
         <link rel="stylesheet" href="Common_Content/css/global.css" type="text/css">
         <link rel="stylesheet" href="Common_Content/css/documentation.css" type="text/css">
-	<link rel="stylesheet" href="Common_Content/css/common2.css" type="text/css">
+<link rel="stylesheet" href="Common_Content/css/common.css" type="text/css">
         <!--[if lte IE 7]>
                 <style type="text/css"> body { font-size: 85%; } </style>
         <![endif]-->

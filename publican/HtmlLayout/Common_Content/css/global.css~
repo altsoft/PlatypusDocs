@@ -13,18 +13,9 @@
 	border-bottom: 1px solid #FFF;
 	}
 
-#navigation A {
-	/*color: #255;*/
-	font-size: 0.85em;
-	/*font-weight: bold;
-	text-decoration: none;*/
-	letter-spacing: 1px;
-	margin-right: 1em;
-}
-#navigation A:hover {
-	color: #033;
-	text-decoration: none;
-}
+
+
+
 
 
 
