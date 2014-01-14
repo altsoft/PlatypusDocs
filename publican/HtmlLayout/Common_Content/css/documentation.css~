@@ -121,7 +121,7 @@ UL#TOC {
 		width:			16px;
 		height:			16px;
 		cursor:			pointer;
-		background:		url(../images/icon_tree_off.gif) no-repeat center;
+		background:		url(/lib/img/icon_tree_off.gif) no-repeat center;
 	}
 
 
@@ -152,10 +152,10 @@ SPAN.expander {
 	width:		16px;
 	height:		16px;
 	cursor:		pointer;
-	background:	url(../images/icon_tree_on.gif) no-repeat center;
+	background:	url(/lib/img/icon_tree_on.gif) no-repeat center;
 	}
-	SPAN.expander_open   { background-image: url(../images/icon_tree_off.gif); }
-	SPAN.expander_closed { background-image: url(../images/icon_tree_on.gif); }
+	SPAN.expander_open   { background-image: url(/lib/img/icon_tree_off.gif); }
+	SPAN.expander_closed { background-image: url(/lib/img/icon_tree_on.gif); }
 
 
 /*
@@ -183,7 +183,7 @@ SPAN.expander {
 
 /* inner divs inside Outer East/West panes */
 .header { 
-	background: #eee url(../images/eeeeee_40x100_textures_02_glass_90.png) 0 50% repeat-x;
+	background: #eee url(/lib/img/eeeeee_40x100_textures_02_glass_90.png) 0 50% repeat-x;
 	border-bottom: 1px solid #677;
 	font-weight: bold;
 	text-align: center;
@@ -209,33 +209,33 @@ SPAN.expander {
 
 /* north-pane is not resizable*/
 .ui-layout-resizer-north-dragging ,
-.ui-layout-resizer-north:hover		{ background: url(../images/resizable-n.gif) repeat-x center; }
+.ui-layout-resizer-north:hover		{ background: url(/lib/img/resizable-n.gif) repeat-x center; }
 .ui-layout-resizer-south-dragging ,
-.ui-layout-resizer-south:hover		{ background: url(../images/resizable-s.gif) repeat-x center; }
+.ui-layout-resizer-south:hover		{ background: url(/lib/img/resizable-s.gif) repeat-x center; }
 	
 .ui-layout-resizer-west-dragging ,
-.ui-layout-resizer-west-open:hover	{ background: url(../images/resizable-w.gif) repeat-y center; }
+.ui-layout-resizer-west-open:hover	{ background: url(/lib/img/resizable-w.gif) repeat-y center; }
 .ui-layout-resizer-east-dragging ,
-.ui-layout-resizer-east-open:hover	{ background: url(../images/resizable-e.gif) repeat-y center; }
+.ui-layout-resizer-east-open:hover	{ background: url(/lib/img/resizable-e.gif) repeat-y center; }
 
 /* IE6 * HACK - always show resizer graphics because IE6 cannot understand elem:hover */
-/** html .ui-layout-resizer-north		{ background: url(..../images/resizable-n.gif) repeat-x center !important; } */
-* html .ui-layout-resizer-south		{ background: url(../images/resizable-s.gif) repeat-x center  !important; }
-* html .ui-layout-resizer-west-open	{ background: url(../images/resizable-w.gif) repeat-y center  !important; }
-* html .ui-layout-resizer-east-open	{ background: url(../images/resizable-e.gif) repeat-y center  !important; }
+/** html .ui-layout-resizer-north		{ background: url(../lib/img/resizable-n.gif) repeat-x center !important; } */
+* html .ui-layout-resizer-south		{ background: url(/lib/img/resizable-s.gif) repeat-x center  !important; }
+* html .ui-layout-resizer-west-open	{ background: url(/lib/img/resizable-w.gif) repeat-y center  !important; }
+* html .ui-layout-resizer-east-open	{ background: url(/lib/img/resizable-e.gif) repeat-y center  !important; }
 
 /*
 *	SIMPLE TOGGLER BUTTONS
 */
 
 .ui-layout-toggler-north-open ,
-.ui-layout-toggler-south-closed { background: url(../images/toggle-up.gif) no-repeat center bottom; }
+.ui-layout-toggler-south-closed { background: url(/lib/img/toggle-up.gif) no-repeat center bottom; }
 .ui-layout-toggler-north-closed ,
-.ui-layout-toggler-south-open   { background: url(../images/toggle-dn.gif) no-repeat center top; }
+.ui-layout-toggler-south-open   { background: url(/lib/img/toggle-dn.gif) no-repeat center top; }
 .ui-layout-toggler-east-closed ,
-.ui-layout-toggler-west-open    { background: url(../images/toggle-lt.gif) no-repeat center right; }
+.ui-layout-toggler-west-open    { background: url(/lib/img/toggle-lt.gif) no-repeat center right; }
 /*.ui-layout-toggler-west-closed , SEE west-closed BELOW */
-.ui-layout-toggler-east-open    { background: url(../images/toggle-rt.gif) no-repeat center left; }
+.ui-layout-toggler-east-open    { background: url(/lib/img/toggle-rt.gif) no-repeat center left; }
 
 /* 'CONTENTS' TOC TOGGLER BUTTON */
 .ui-layout-resizer-west-closed {
