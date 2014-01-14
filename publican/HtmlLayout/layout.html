@@ -16,40 +16,6 @@
         <script type="text/javascript" src="Common_Content/js/jquery-ui-latest.js"></script>
         <script type="text/javascript" src="Common_Content/js/jquery-layout-latest.js"></script>
         <script type="text/javascript" src="Common_Content/js/global.js"></script>
-
-        <script type="text/javascript">
-            var pageLayout;
-
-            $(document).ready(function() {
-                // create page layout
-                pageLayout = $('body').layout({
-                    scrollToBookmarkOnLoad: false // handled by custom code so can 'unhide' section first
-                    , defaults: {
-                    }
-                    , north: {
-                        size: "auto"
-                        , spacing_open: 0
-                        , closable: false
-                        , resizable: false
-                    }
-                    , west: {
-                        size: 250
-                        , spacing_closed: 22
-                        , togglerLength_closed: 140
-                        , togglerAlign_closed: "top"
-                        , togglerContent_closed: "C<BR>o<BR>n<BR>t<BR>e<BR>n<BR>t<BR>s"
-                        , togglerTip_closed: "Open & Pin Contents"
-                        , sliderTip: "Slide Open Contents"
-                        , slideTrigger_open: "mouseover"
-                    }
-                });
-
-                // goto bookmark after creating the layout
-                scrollToBookmark(self.location.hash);
-
-            });
-        </script>
-
     </head>
     <body>
 

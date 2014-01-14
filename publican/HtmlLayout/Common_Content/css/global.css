@@ -263,4 +263,19 @@ TR.main {
 .grey		{ color: #777; }
 .red		{ color: #F00; }
 
+.hidden {display:none}
+.disclosure {
+	cursor:pointer;
+}
+.disclosure.closed {
+	background:url("../images/closed.png") no-repeat; 
+}
+.disclosure.open {
+	background:url("../images/open.png") no-repeat; 
+}
+
+a.selected {
+	font-weight:bold;
+}
+
 
