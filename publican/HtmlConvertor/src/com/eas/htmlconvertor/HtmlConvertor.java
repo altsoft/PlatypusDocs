@@ -156,10 +156,12 @@ public class HtmlConvertor {
         //insert +/-
         Elements dts = toc.getElementsByTag("dt");
         for (Element dt : dts) {
-            if (dt.nextElementSibling() != null && dt.nextElementSibling().tagName().equals("dd")) {
-                Elements span = dt.getElementsByTag("span");
-                if (span != null && span.size() > 0) {
+            Elements span = dt.getElementsByTag("span");
+            if (span != null && span.size() > 0) {
+                if (dt.nextElementSibling() != null && dt.nextElementSibling().tagName().equals("dd")) {
                     span.before("<span class='disclosure closed'>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+                } else {
+                    span.before("<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
                 }
             }
         }
@@ -170,7 +172,7 @@ public class HtmlConvertor {
         }
         return String.format("<div class='contents_panel'>%s</div>", toc.html());
     }
-    
+
     private String getConvertedHtml(String templateHtml, String toc, String content) {
         return templateHtml.replace("{$toc}", toc).replace("{$content}", content);//NOI18N
     }

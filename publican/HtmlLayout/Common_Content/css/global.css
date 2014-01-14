@@ -1,14 +1,14 @@
 #logo {
 	font: 2em Georgia, "Times New Roman", Times, serif;
-	color: #FFF;
+	/*color: #FFF;*/
 	letter-spacing: 1px;
 	font-weight: bold;
-	padding: 0.5em 15px 2px;
+	padding: 0.2em 15px 2px;
 }
 
 #navigation {
 	padding: 5px 5px 7px 3em;
-	background-color: #CCC;
+	/*background-color: #CCC;*/
 	border-top: 1px solid #FFF;
 	border-bottom: 1px solid #FFF;
 	}
