@@ -4,15 +4,15 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Diagram_Chapter">
-  <title>Database Structure Diagram</title>
-  <para><emphasis>Database Structure Diagram</emphasis> is a  representation of the database structure in the part determined by the developer. For example, the diagram can describe a part of the scope. Generally,  the project contains several database structure diagrams.</para>
+  <title>Database structure diagram</title>
+  <para><emphasis>Database structure diagram</emphasis> is a application element responsible for representation of the database structure. For example, the diagram can specify some part of the knowledge domain. Generally,  the project contains several database structure diagrams at the developer convenience.</para>
   <para>A database structure diagram is a visual representation of the database structure, and it does not directly affect the application functionality.</para>
-  <para>The structure of the relational database is determined by  tables and links between them. Links between two tables are implemented through the foreign keys.</para>
+  <para>The structure of the relational database is determined by the  tables and links between them. Links between two tables are implemented through the foreign keys.</para>
   <note>
-    <para>Refer to the publications dedicated to the relational databases for detailed description of specific terms, such as &quot;table&quot;, &quot;foreign key&quot;, &quot;entity&quot;, etc.</para>
+    <para>Refer to the publications dedicated to the relational databases for detailed description of specific terms, such as table, foreign key, relation, etc.</para>
   </note>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_1">
-    <title>Creating a new database structure diagram</title>
+    <title>Creation</title>
     <para>To create a new database structure diagram, perform the following actions:
    
   </para>
@@ -48,13 +48,19 @@
     <para>After creating  the <acronym>database</acronym> structure diagram, build the table structures. To do that, define the fields and their descriptions. After determination of the table structure define  links between the tables.</para>
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_2">
-    <title>Editing the database structure diagram</title>
-    <para>A special editor is used for editing  database structure diagrams.</para>
-    <para>A database diagram is a visual representation of the base tables, as well as  links between them. In general, one diagram includes a part of the database overall structure, which is, for example, related to the certain segment of the scope. Visual editor allows you to modify the database structure  — add or delete tables, links between tables, and indexes. The same table can be represented in several diagrams.</para>
-    <para>For navigation through a diagram, it is convenient to use the diagram inspector. In the diagram inspector,  tables and their fields are represented in the tree structure. When selecting a table or a field in the inspector, the same selection takes place in the diagram. Besides, it is possible to mutually position the inspector and the diagram. </para>
-    <para>For mutual positioning of a node in the inspector and an object in the diagram, select the  <menuchoice>
-        <guimenu>Show in diagram</guimenu>
-      </menuchoice> item in the table node context menu.</para>
+    <title>Modification</title>
+    <para>A  diagram is a  representation of some  tables in the database, as well as the  links between them. In general, one  includes a part of the database overall structure, which is, for example, related to the certain segment of application functionality. </para>
+    <para>A visual designer tool is used for editing  database structure diagrams.</para>
+    <para>Visual editor allows you to modify the database structure  — add or delete tables, links between tables, and indexes. The same table can be represented in several diagrams.</para>
+    <para>For navigation through a diagram, it is convenient to use the diagram inspector panel. In the inspector,  tables and their fields are represented in the tree structure. When selecting a table or a field in the inspector, the same selection takes place in the diagram editor.</para>
+    <para>For mutual positioning of a node in the inspector and an object in the diagram:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Select the  <menuchoice>
+            <guimenu>Show in diagram</guimenu>
+          </menuchoice> menu item in the inspector&apos;s table node context menu.</para>
+      </listitem>
+    </itemizedlist>
     <para>To add an existing table to the diagram, perform the following actions:
    
   </para>
@@ -113,7 +119,7 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>An identifier numeric field and the primary key limitation will be automatically created for the new table.</para>
+      <para>A numeric primary key field  will be automatically created for a  new table.</para>
     </note>
     <para>To remove a table from the diagram, perform the following actions:</para>
     <itemizedlist>
@@ -124,7 +130,7 @@
         <para>Click the  <guibutton>Delete</guibutton> button on the editor toolbar.</para>
       </listitem>
       <listitem>
-        <para>In the removal confirmation dialog, click the <guibutton>Delete from diagram</guibutton> button to remove the table from the diagram (from the diagram only, not from the <acronym>database</acronym>), click the  <guibutton>Drop table</guibutton> button to remove the table from the database (physical destruction of the table), or click  <guibutton>Cancel</guibutton> to cancel the process.</para>
+        <para>In the  confirmation dialog, click the <guibutton>Delete from diagram</guibutton> button to remove the table from the diagram (from the diagram only, not from the <acronym>database</acronym>). Click the  <guibutton>Drop table</guibutton> button to remove the table from the database (physical destruction of the table), or click  <guibutton>Cancel</guibutton> to cancel the process.</para>
       </listitem>
       <listitem>
         <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by pressing the  <keycombo>
@@ -140,37 +146,31 @@
         <para>Select the table in the diagram.</para>
       </listitem>
       <listitem>
-        <para>Click the  <guibutton>Create new field/parameter</guibutton> button on the toolbar of the table fields editor tab — a field with the default type and automatically generated name will be created.</para>
-      </listitem>
-      <listitem>
-        <para>Modify the table field properties; to do that, select the field node among the table child nodes in the data model inspector, and modify the properties in the  <guilabel>Properties</guilabel> editing window:</para>
+        <para>Click the  <guibutton>Create new field/parameter</guibutton> button on the toolbar of the table fields editor tab. The new field dialog appears. Provide the new table field   properties and click <guibutton>OK</guibutton> button to create the new field or <guibutton>Cancel</guibutton> to cancel the process.</para>
       </listitem>
     </itemizedlist>
     <para>Table field properties:</para>
     <itemizedlist>
       <listitem>
-        <para><guilabel>Name</guilabel> —  field name in the table.</para>
+        <para><guilabel>name</guilabel> —  field name in the table</para>
       </listitem>
       <listitem>
-        <para><guilabel>Description</guilabel> — field description.</para>
+        <para><guilabel>description</guilabel> — field description</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type</guilabel> — data type.</para>
+        <para><guilabel>type</guilabel> — data type</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type Name</guilabel> — data structure type name, this field is enabled if the   <parameter>STRUCT</parameter> data type is selected.</para>
+        <para><guilabel>type Name</guilabel> — data structure type name, this field is enabled if the   <parameter>STRUCT</parameter> data type is selected</para>
       </listitem>
       <listitem>
-        <para><guilabel>Size</guilabel> — field length.</para>
+        <para><guilabel>size</guilabel> — field length</para>
       </listitem>
       <listitem>
-        <para><guilabel>Precision</guilabel> — precision.</para>
+        <para><guilabel>sclale</guilabel> — field scale or precision</para>
       </listitem>
       <listitem>
-        <para><guilabel>Required</guilabel> — mandatory field (<literal>NULL</literal> values are not allowed).</para>
-      </listitem>
-      <listitem>
-        <para><guilabel>Default value</guilabel> — value by default.</para>
+        <para><guilabel>nullable</guilabel> — mandatory field (<literal>NULL</literal> values are not allowed).</para>
       </listitem>
     </itemizedlist>
     <informaltable>
@@ -193,6 +193,12 @@
               <parameter>NUMERIC</parameter>
             </entry>
             <entry>Number</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>DECIMAL</parameter>
+            </entry>
+            <entry>Decimal number</entry>
           </row>
           <row>
             <entry>
@@ -242,16 +248,6 @@
         <para>Edit the field parameters in the  <guilabel>Properties</guilabel> editor window. </para>
       </listitem>
     </itemizedlist>
-    <important>
-      <para>Do not use the following names for the table fields: <literal>md</literal>, <literal>params</literal>.</para>
-      <para>These names are reserved and used by the Platypus data model.</para>
-    </important>
-    <note>
-      <para>If the <guilabel>Properties</guilabel> panel is not displayed, enable this panel; to do that, select the <menuchoice>
-          <guimenu>Window</guimenu>
-          <guimenuitem>Properties</guimenuitem>
-        </menuchoice> item in the<application> Platypus Application Designer</application> main menu. </para>
-    </note>
     <para>To remove the field, perform the following actions:</para>
     <itemizedlist>
       <listitem>
@@ -265,13 +261,13 @@
       </listitem>
     </itemizedlist>
     <para>To edit the table indexes, use the inspector: open the node of the relevant table, and use the  <guilabel>Indexes</guilabel> node.</para>
-    <para>To add a new index,  perform the following actions:</para>
+    <para>To add a new table index,  perform the following actions:</para>
     <itemizedlist>
       <listitem>
-        <para>Select the  <guimenuitem>Add index</guimenuitem> item in the  <guilabel>Indexes</guilabel> node context menu of the corresponding table.</para>
+        <para>Select the  <guimenuitem>Add index</guimenuitem> item in the  <guilabel>Indexes</guilabel> node context menu of the corresponding database table.</para>
       </listitem>
       <listitem>
-        <para>In the table columns selection dialog, select necessary fields and click <guibutton>OK</guibutton> to add the index, or click  <guibutton>Cancel</guibutton> to cancel.</para>
+        <para>In the table columns selection dialog, select necessary fields and click <guibutton>OK</guibutton> to add the table index, or click  <guibutton>Cancel</guibutton> to cancel.</para>
       </listitem>
       <listitem>
         <para>If necessary, remove the field from the index using the <guimenuitem>Delete</guimenuitem> item from the index column context menu.</para>
@@ -295,7 +291,7 @@
         <para>If necessary, check the  <guilabel>Hashed</guilabel> option on the index node properties panel to enable or disable hashing for this index.</para>
       </listitem>
     </itemizedlist>
-    <para>To modify an index,  perform the following actions:</para>
+    <para>To modify an table index,  perform the following actions:</para>
     <itemizedlist>
       <listitem>
         <para>Select the index in the table indexes list.</para>
@@ -318,9 +314,6 @@
       <listitem>
         <para>Using the mouse, drag the field of one table to the primary key field of the other table.</para>
         <para>After that, a foreign key will be created in the database; visually, the link will be represented by the arrow between the tables fields.</para>
-        <important>
-          <para>Types of the fields linked by the foreign key must be the same. To build a tree structure (unary link), drag the table field to the primary key field of the same table using the mouse. </para>
-        </important>
       </listitem>
       <listitem>
         <para>Save the application element by clicking the  <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by using the  <keycombo>
@@ -330,6 +323,10 @@
           </keycombo> shortcut.</para>
       </listitem>
     </itemizedlist>
+    <important>
+      <para>Data types of the fields connected by the foreign key link must be compatible. </para>
+    </important>
+    <para>To build a hierarchical table structure (unary link), drag the table field to the primary key field of the same table using the mouse.</para>
     <para>To remove the table foreign key,  perform the following actions:</para>
     <itemizedlist>
       <listitem>
@@ -350,25 +347,19 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>When working in a developers team, after modification of the <acronym>database</acronym> structure, it is recommended to create a migration — a metadata snapshot, and make it available for all participants of the development process in order to apply the modifications to the rest of the <acronym>database</acronym> copies engaged in the development process.</para>
+      <para>When working in a developers team, after modification of the <acronym>database</acronym> structure, it is recommended to create a migration — a database metadata snapshot, and make it available for all participants of the development process in order to apply the modifications to the rest of the <acronym>database</acronym> copies engaged in the development process.</para>
     </note>
-    <para>To request the data from the table,  perform the following actions:</para>
+    <para>To query the data from the table,  perform the following actions:</para>
     <itemizedlist>
-      <listitem>
-        <para>Go to the  <guilabel>Database schema</guilabel> tab.</para>
-      </listitem>
       <listitem>
         <para>Select the table in the diagram.</para>
       </listitem>
       <listitem>
-        <para>Click the  <guibutton>Query Table Data</guibutton> button — the data will be requested from the table, and the results will be displayed in the editor output area.</para>
+        <para>Click the  <guibutton>Query Table Data</guibutton> button on the local toolbar — the data will be requested from the table, and the results will be displayed in the editor&apos;s output area.</para>
       </listitem>
     </itemizedlist>
     <para>To modify the size of the database structure diagram visual representation,  perform the following actions:</para>
     <itemizedlist>
-      <listitem>
-        <para>Go to the  <guilabel>Database schema</guilabel> tab.</para>
-      </listitem>
       <listitem>
         <para>Click the  <guibutton>Zoom In</guibutton> button to scale up, or  <guibutton>Zoom out</guibutton> button to scale down the representation of the database structure in the editor.</para>
       </listitem>
@@ -376,16 +367,13 @@
     <para>To search through the diagram,  perform the following actions:</para>
     <itemizedlist>
       <listitem>
-        <para>Go to the <guilabel>Database schema</guilabel> tab.</para>
-      </listitem>
-      <listitem>
         <para>Click  <guibutton>Find</guibutton> to open the diagram search dialog.</para>
       </listitem>
       <listitem>
         <para>Specify the search string. </para>
       </listitem>
       <listitem>
-        <para>Select  fields to be searched through: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, and check (uncheck) the following options: <guilabel>Whole words</guilabel> — to search for whole words, <guilabel>Match case</guilabel> — to reform a case-sensitive search. </para>
+        <para>Select  fields to be searched through: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, and check (uncheck) the following options: <guilabel>Whole words</guilabel> — to search for whole words, <guilabel>Match case</guilabel> — to perform a case-sensitive search. </para>
       </listitem>
       <listitem>
         <para>Click  <guibutton>Next</guibutton> and <guibutton>Previous</guibutton> buttons to go to the next found entity. </para>

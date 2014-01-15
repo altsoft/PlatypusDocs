@@ -4,11 +4,11 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Extdb_Chapter">
-  <title>Connection to an external database</title>
-  <para>Every Platypus Platform application has a connection to the default database. This connection is set when creating an application. Besides, the application can use  connections to any number of  external databases. </para>
+  <title>External connection</title>
+  <para>Platypus Platform application has a default connection to the database. This connection configuration is set when creating an application project. Besides, the application can use  connections to any number of  external databases. </para>
   <para>To define a connection to  external databases, application elements of the <emphasis>Connection to external database</emphasis> type are used.</para>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_5">
-    <title>Creating a new connection to an external database</title>
+    <title>Creation</title>
     <para>To create a new connection to the external <acronym>database</acronym>, perform the following actions:   
   </para>
     <itemizedlist>
@@ -28,8 +28,8 @@
     </itemizedlist>
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_6">
-    <title>Editing connection to an external database</title>
-    <para>Use the special editor for editing the <guilabel>External database connection</guilabel> application element. To open the application element editor, double-click an application element in the project tree. </para>
+    <title>Modification</title>
+    <para>Use the special editor for modification the <guilabel>External database connection</guilabel> application element. To open the application element editor, double-click an application element in the project tree. </para>
     <para>To modify the settings of the connection to the external database, perform the following actions:</para>
     <itemizedlist>
       <listitem>

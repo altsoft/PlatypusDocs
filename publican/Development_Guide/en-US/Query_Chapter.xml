@@ -4,43 +4,44 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Query_Chapter">
-  <title>Database Query</title>
-  <para><emphasis>Query</emphasis> in  Platypus is an application element which defines the SQL expression to be executed in the database. In the Platypus Platform, a query is preprocessed before execution.</para>
-  <para>Queries solve several tasks:<itemizedlist>
+  <title>SQL Query</title>
+  <para><emphasis>Query</emphasis> in  Platypus is an application element which defines the SQL expression to be executed in database. In the Platypus Platform, a query&apos;s SQL text is preprocessed before execution.</para>
+  <para>Queries  can solve several tasks:<itemizedlist>
       <listitem>
-        <para>Formulate  tasks to sample  data  from the <acronym>database</acronym> (<literal>SELECT</literal> queries).</para>
+        <para>Formulate  tasks to sample  data  from the <acronym>database</acronym> (<literal>SELECT</literal> type queries).</para>
       </listitem>
       <listitem>
-        <para>Define  metadata for processing the sampling results  (<literal>SELECT</literal> queries).</para>
+        <para>Define  metadata for processing the sampling results  (<literal>SELECT</literal> type queries).</para>
       </listitem>
       <listitem>
-        <para>Define  metadata for processing the modifications of data made while the application is running  (<literal>SELECT</literal> queries).</para>
+        <para>Define  metadata for enabling data modifications    (<literal>SELECT</literal> type queries).</para>
       </listitem>
       <listitem>
-        <para>Formulate  tasks to add and update data  in the <acronym>database</acronym> (<literal>INSERT</literal>, <literal>DELETE</literal>, and <literal>UPDATE</literal> queries).</para>
+        <para>Formulate  tasks to add and update data  in the <acronym>database</acronym> (<literal>INSERT</literal>, <literal>DELETE</literal>, and <literal>UPDATE</literal> type queries).</para>
       </listitem>
-    </itemizedlist><note>
-      <para>In most cases, data adding and updating tasks are carried out by the data model automatically when saving  changes. To do that, you can just specify a query of the  <literal>SELECT</literal> type.</para>
-    </note></para>
+    </itemizedlist></para>
+  <note>
+    <para>In most cases, data adding and updating tasks are carried out by the data model automatically when saving  changes. To do that, you can just specify a query of the  <literal>SELECT</literal> type.</para>
+  </note>
   <para>Queries in the Platypus Platform have the following characteristics:<itemizedlist>
       <listitem>
-        <para>Queries support  named parameters of the predefined type.</para>
+        <para>Queries support  named and typed parameters.</para>
       </listitem>
       <listitem>
-        <para>Repeated use is implemented (i.e. inclusion of some queries into other queries without copying their body).</para>
+        <para>SQL clauses re-use supported — inclusion of some queries into other queries without copying their body.</para>
       </listitem>
       <listitem>
-        <para>You can edit queries in the visual form and in the text form simultaneously.</para>
+        <para>You can edit queries in the visual tool and as SQL text form simultaneously.</para>
       </listitem>
       <listitem>
-        <para>Query results are translated into entities which can be processed by the JavaScript code; Platypus Platform JavaScript is responsible for that.</para>
+        <para>Query results are translated into entities which can be processed by  JavaScript code.</para>
       </listitem>
       <listitem>
         <para>Query allows you to set the pattern for processing  data changes made while the application is running: it is possible to define a list of tables where the changes will be stored, as well as enable or disable saving of changes for the entities received from the database using this query.</para>
       </listitem>
     </itemizedlist></para>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_3">
-    <title>Creating a database Query</title>
+    <title>Creation</title>
     <para>To create a new query, perform the following actions:
    
   </para>
@@ -73,10 +74,10 @@
     <para>After the query creation wizard completes the steps, a new empty query is created.</para>
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_4">
-    <title>Editing the database query</title>
-    <para>A special editor is used to  edit a query. This editor allows you to perform  visual editing of the query and direct editing of the SQL source.</para>
+    <title>Modification</title>
+    <para>A special editor is used to  edit a query SQL and its support configuration files. This editor allows you to perform  visual editing of the query and direct modicatation of the SQL source text.</para>
     <important>
-      <para>Full-featured editing using the visual editor is possible if the connection to the database is established. If there is no connection to the database, only the query source modification is possible. </para>
+      <para>Full-featured editing using the visual editor is possible if the connection to the database is established. If there is no connection to the database, only the SQL source modification is possible. </para>
     </important>
     <para>To determine the general properties, use the query properties panel or add the relevant annotation to the query header manually:</para>
     <itemizedlist>
@@ -107,10 +108,10 @@
         </itemizedlist>
       </listitem>
     </itemizedlist>
-    <para>For navigation through the query elements, it is convenient to use the query inspector. In the query inspector,  parameters, tables, and sub-queries are represented as a tree structure. Parameters and data fields are the &quot;leaves&quot; of this &quot;tree&quot;.</para>
+    <para>For navigation through the query elements, it is convenient to use the query inspector panel. In the query inspector,  parameters, tables, and sub-queries are represented as a tree structure. Parameters and data fields are the leaves of this tree.</para>
     <para>A table or sub-query can be selected both in the visual editor and in the query inspector.</para>
-    <para>You can start query creating  from setting the query parameters (if necessary) or  from using the visual editor. First, let&apos;s discuss  the query visual editor operations.</para>
-    <para>To add a table into the query, perform the following actions:
+    <para>You can start editing the SQL query  from setting the query parameters (if necessary) or  from using the visual editor. First, let&apos;s discuss  the query visual editor operations.</para>
+    <para>To add a database table to the query, perform the following actions:
    
   </para>
     <itemizedlist>
@@ -128,7 +129,7 @@
           </keycombo> shortcut.</para>
       </listitem>
       <listitem>
-        <para>Select the table from the list in the table selection dialog; if necessary, select the schema in the <guilabel>Schema</guilabel> drop-down list; the <guibutton>Default</guibutton> button sets the default schema for the application; if necessary, use the search function by clicking the  <guibutton>Find</guibutton> button.</para>
+        <para>Select the table from the list in the table selection dialog; if necessary, select the schema in the <guilabel>Schema</guilabel> drop-down list. The <guibutton>Default</guibutton> button sets the default schema for the application, if necessary, use the search function by clicking the  <guibutton>Find</guibutton> button.</para>
       </listitem>
       <listitem>
         <para>Click  <guibutton>OK</guibutton> to add the table, or <guibutton>click Cancel</guibutton> to cancel.</para>
@@ -172,13 +173,10 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>Drag the existing query from the application elements tree of the projects panel  onto the visual editor diagram in order to include it into the query being edited without opening the application elements selection dialog.</para>
+      <para>Drag the existing query from the application elements tree of the <guilabel>Projects</guilabel> panel  onto the visual editor diagram in order to include it into the query being edited without opening the application elements selection dialog.</para>
     </note>
     <para>To assign the table or sub-query alias, perform the following actions:</para>
     <itemizedlist>
-      <listitem>
-        <para>Go to the <guilabel>SQL designer</guilabel> tab.</para>
-      </listitem>
       <listitem>
         <para>Select the table or sub-query in the query diagram.</para>
       </listitem>
@@ -330,7 +328,7 @@
     <para>To add a link between the parameter and a field or  sub-query parameter, perform the following actions:</para>
     <itemizedlist>
       <listitem>
-        <para>Using the mouse, drag the parameter to the table field or  sub-query parameter to which the parameter should be linked; visually, the link will be displayed as an arrow between  tables / sub-queries fields.</para>
+        <para>Using the mouse, drag the parameter to the table field or  sub-query parameter to which the parameter should be linked; visually, the link will be displayed as an arrow between  tables and sub-queries fields.</para>
       </listitem>
       <listitem>
         <para>Save the application element by clicking the <guibutton>Save All</guibutton> button on the <application>Platypus Application Designer</application> toolbar, or by using the <keycombo>
@@ -360,20 +358,16 @@
       </listitem>
     </itemizedlist>
     <para>Modifications of the SQL query made in the visual editor are displayed in the source text on the  <guilabel>SQL Source</guilabel> panel, and vice versa. </para>
-    <para>Modify the SQL source text in the editor, for example, in order to add custom conditions, or write the SQL source text from scratch. Use the query inspector to drag the table fields and parameters from the inspector tree right into the query source text. For the tables fields names, use the auto-fill function.</para>
-    <para>If necessary, custom SQL source can be specified for the query using the SQL dialect for a <acronym>database</acronym>. Enter this source text at the <guilabel>SQL Dialect Source</guilabel> tab. It will be necessary to enter the source text in the   SQL Source field, this source text will be used for determination of the metadata for processing  the query results. If the custom SQL source text is specified, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
+    <para>Modify the SQL source text in the editor, for example, in order to add custom conditions, or write the SQL source text from scratch. Use the query inspector to drag the table fields and parameters from the inspector tree right into the query source text. For the tables fields names, use the SQL code auto-completion function.</para>
+    <para>If necessary, database specific SQL clause can be provided for the query. Enter this SQL source text at the <guilabel>SQL Dialect Source</guilabel> tab. It will be necessary to enter the source text in the <guilabel>SQL Source</guilabel> field, this source text will be used for determination of the metadata for processing  the query results. If the specific SQL source text is provided, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
     <important>
-      <para>Use the query custom source text only when it is absolutely necessary, and only if there is no need to enable portability of applications to the multiple database servers.</para>
+      <para>Use the database specific SQL only when it is really necessary, and only if there is no need to enable portability of applications to the different databases.</para>
     </important>
-    <para>Query execution results fields are determined automatically as a result of the SQL source text processing. </para>
-    <important>
-      <para>Do not use the following names as aliases of the query results fields: <literal>md</literal>, <literal>params</literal>. </para>
-      <para>These names are reserved and used by the data model in  Platypus.</para>
-    </important>
-    <para>It is possible to change the output field type, as well as its description. To do that, perform the following actions: </para>
+    <para>Query execution output fields are determined automatically as a result of the SQL source text processing. Check this output field in the inspector&apos;s <guilabel>Output Fields</guilabel> node. </para>
+    <para>It is possible to change the output field type, as well as its description. To do that, perform the following actions:</para>
     <itemizedlist>
       <listitem>
-        <para>Select the output field among the output fields nodes in the inspector, and edit its properties in the  <guilabel>Properties</guilabel> editing window.</para>
+        <para>Select the output field among the <guilabel>Output Fields</guilabel> node children in the inspector, and edit its properties in the  <guilabel>Properties</guilabel> editing window.</para>
       </listitem>
       <listitem>
         <para>Specify the output field type in the  <guilabel>Type</guilabel> property by selecting it in the drop-down list.</para>
@@ -382,13 +376,13 @@
         <para>Specify the output field description  in the <guilabel>Description</guilabel> property.</para>
       </listitem>
     </itemizedlist>
-    <para>To execute a database query, for example, for debugging, perform the following actions:</para>
+    <para>To execute a database SQL query in the database, perform the following actions:</para>
     <itemizedlist>
       <listitem>
-        <para>Select the application element and select the  <guilabel>Execute</guilabel> item in the query context menu or in the  <guilabel>SQL Source</guilabel>  editor context menu; execution results will be displayed in the Platypus Application Designer output window.</para>
+        <para>Select the application element and select the  <guilabel>Execute</guilabel> item in the query context menu or in the  <guilabel>SQL Source</guilabel>  editor context menu; execution results will be displayed in the application designer output window.</para>
       </listitem>
       <listitem>
-        <para>If the query has parameters, specify them in the query execution dialog; if necessary, modify the query source in the same dialog.</para>
+        <para>If the query has parameters, specify them in the query execution dialog. If necessary, modify the query source in the same dialog.</para>
       </listitem>
       <listitem>
         <para>Click <guibutton>OK</guibutton> to execute the query, or click  <guibutton>Cancel</guibutton> to cancel.</para>
@@ -417,10 +411,10 @@
     </itemizedlist>
   </section>
   <section>
-    <title>SQL query source text</title>
+    <title>SQL source</title>
     <section>
       <title>Query header</title>
-      <para>For every application element of  &quot;Query&quot; type, it is necessary to define its name within the application in accordance with the general requirements applicable to application elements names in Platypus. After creating a new query, its ID will be defined according to  the file name;  spaces will be replaced by  underscores. After creating a query, the developer can change its name.</para>
+      <para>For every Query application element, it is necessary to define its name within the application in accordance with the general requirements applicable to application elements names in Platypus. On creating a new query, its name will be defined according to  the file name,  spaces will be replaced by  underscores. After creating a query, the developer can change its name.</para>
       <para>To specify the query name, use the  <code>@name</code> annotation in the query header block:</para>
       <programlisting language="SQL">/**
  * Query header example
@@ -432,7 +426,7 @@ FROM Document</programlisting>
       <para>In addition to the  <code>@name</code> annotation in the query header, comments and other annotations are acceptable. </para>
     </section>
     <section>
-      <title>Query source</title>
+      <title>SQL source</title>
       <para>The query source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. The SQL source is located under the header and can include other comments. </para>
       <para>The SQL query can contain  sampling of all  <code>SELECT * FROM table</code> fields or only the required ones. The following aliases are assigned to them: <code>SELECT a, b, c FROM table</code>. If the first type of sampling is used, the names of the properties that will be accessible in the JavaScript code are defined by the table columns names, and can be uppercased or lowercased. To create the code compatible with various databases, it is recommended to use the second option with explicit indication of the query output fields.</para>
       <para>Platypus queries can contain named parameters: <parameter>:<replaceable>paramName</replaceable></parameter>.</para>

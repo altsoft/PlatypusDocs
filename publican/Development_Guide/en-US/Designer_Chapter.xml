@@ -4,15 +4,14 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Designer_Chapter">
-  <title>Working with an application project</title>
-  <para>In the course of development and further during the application life cycle, the application is represented by the Platypus Application project. This project project is a directory on the hard drive containing  files with settings and application elements.</para>
+  <title>Application project</title>
+  <para>In the course of development and further during the application life cycle, the application is represented by the application project.</para>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
     <title>Project creation</title>
-    <para>This section contains information about  creating the Platypus project and  basic operations when working with it.</para>
-    <para>To create a  Platypus project, perform the following actions:
+    <para>To create a  project, perform the following actions:
    <itemizedlist>
         <listitem>
-          <para>Launch the designer (if not launched yet). To do that, use the <guiicon>Platypus Application Designer</guiicon> shortcut on the desktop or the corresponding item in the installed applications menu.</para>
+          <para>Launch the application designer (if not launched yet). To do that, use the <guiicon>Platypus Application Designer</guiicon> shortcut on the desktop or the corresponding item in the installed applications menu.</para>
         </listitem>
         <listitem>
           <para>Select <menuchoice>
@@ -44,7 +43,7 @@
           <para>Specify  parameters of the connection to the database:</para>
           <itemizedlist>
             <listitem>
-              <para>Specify the URL of the connection to the database in the JDBC format in the  <guilabel>JDBC Url</guilabel> field, for example, JDBC URL for MySQL database looks like <literal>jdbc:mysql://localhost:3306/db_name</literal>; use the  <guibutton>Build JDBC Url</guibutton> button to call the URL generation wizard; in the wizard window, select the database type, host name, port, and the database name —  JDBC URL will be generated automatically. </para>
+              <para>Specify the URL of the connection to the database in the JDBC format in the  <guilabel>JDBC Url</guilabel> field, for example, JDBC URL for MySQL database looks like <literal>jdbc:mysql://localhost:3306/db_name</literal>. Use the  <guibutton>Build JDBC Url</guibutton> button to open the JDBC URL generation wizard. In the wizard window, select the database type, host name, port, and the database name —  JDBC URL will be generated automatically. </para>
             </listitem>
             <listitem>
               <para>Specify the  schema name in the database in the <guilabel>Database Schema</guilabel> field. </para>
@@ -67,12 +66,9 @@
 New project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
-    <title>Opening an existing project</title>
-    <para>To open an existing Platypus project, perform the following actions:
+    <title>Opening an project</title>
+    <para>To open an existing  project, perform the following actions:
    <itemizedlist>
-        <listitem>
-          <para>Launch the designer (if not  launched yet) — to do that, use the <guiicon>Platypus Application Designer</guiicon> shortcut on the desktop or an item of  the installed applications menu.</para>
-        </listitem>
         <listitem>
           <para>Select  <menuchoice>
               <guimenu>File Open</guimenu>
@@ -86,7 +82,7 @@ New project will be added to the <guilabel>Projects</guilabel> panel. </para>
 Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section>
-    <title>Project&apos;s properties setup</title>
+    <title>Project properties</title>
     <para>To change the project properties, select the <guimenuitem>Properties</guimenuitem> item in the project root node context menu.</para>
     <para>Set  parameters of the main connection to the database:</para>
     <itemizedlist>
@@ -94,7 +90,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>Select the  <guilabel>Application Database</guilabel> category.</para>
       </listitem>
       <listitem>
-        <para>Specify the  JDBC URL; if necessary, use the  <guibutton>Build JDBC Url</guibutton> wizard.</para>
+        <para>Specify the  JDBC URL, if necessary, use the  <guibutton>Build JDBC Url</guibutton> wizard.</para>
       </listitem>
       <listitem>
         <para>Specify the database schema.</para>
@@ -162,7 +158,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     </itemizedlist>
   </section>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
-    <title>Project structure and operations with application elements</title>
+    <title>Project structure</title>
     <para>A Platypus project has the following structure:
    <itemizedlist>
         <listitem>
@@ -193,10 +189,10 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>Searching for an element in the project —  <command>Find</command> command.</para>
       </listitem>
     </itemizedlist>
-    <para>Do these operations using the element context menu, <menuchoice>
+    <para>These operations can be performed using the element context menu, <menuchoice>
         <guimenu>Edit</guimenu>
-      </menuchoice> menu in the main menu, or hotkeys. You can perform operations, which are applicable to the application elements of the given type, on the application elements. Specific operations are described in detail in the sections dedicated to the certain types of  application elements.</para>
-    <para>To create a  directory:</para>
+      </menuchoice> menu in the main menu, or hotkeys. Some application elements nodes supports some specific operations. Specific operations are described in detail in the sections dedicated to the certain types of  application elements.</para>
+    <para>To create a subdirectory in the applicaton tree:</para>
     <itemizedlist>
       <listitem>
         <para>Select the <menuchoice>
@@ -274,20 +270,23 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>Click the <guibutton>Debug project</guibutton> button on the main toolbar or select the <guimenuitem>Debug</guimenuitem> item in the application element context menu.</para>
       </listitem>
       <listitem>
-        <para>After the debugger halts at the breakpoint, see the values of  variables and the call stack; to continue the program running, click the <guibutton>Continue</guibutton> button on the main toolbar; use the Step over button or the  <keycap>F8</keycap> key, Step into or the  <keycap>F7</keycap> key, Step out or the <keycombo>
+        <para>After the debugger halts at the breakpoint, see the values of  variables and the call stack. To continue the program running, click the <guibutton>Continue</guibutton> button on the main toolbar. Use the Step over button or the  <keycap>F8</keycap> key, Step into or the  <keycap>F7</keycap> key, Step out or the <keycombo>
             <keycap>Ctrl</keycap>
             <keycap>F7</keycap>
           </keycombo> shortcut for step-by-step execution of the program.</para>
       </listitem>
     </itemizedlist>
-    <para>When launching the application in the J2EE server, <application>Platypus Application Designer</application> uses the  <filename>web</filename> sub-directory, which is created automatically in the project directory. When initializing this sub-directory, its structure is created and  libraries are copied. After initializing  the directory, several files responsible for the configuration (<filename>WEB-INF/web.xml</filename>, specific configuration file for the certain server, and JavaScript file responsible for the application element launching on the HTML page) are modified; in this case,  libraries are not copied again. </para>
-    <para>If it is necessary to update  libraries in the <filename>web</filename> directory — select the  <guimenuitem>Clean</guimenuitem> item in the project context menu. The libraries will be removed, and at the next  launch these libraries will be copied from the Platypus Platform directory.</para>
+    <para>When launching the application in a J2EE server, <application>Platypus Application Designer</application> uses the  <filename>web</filename> sub-directory, which is created automatically in the project directory. When initializing this sub-directory, its initial structure is created and  libraries are copied. After initializing  the directory,  files responsible for the configuration (<filename>WEB-INF/web.xml</filename>, server specific configuration file, and JavaScript file responsible for the application  launching on the HTML page) are modified, but the  libraries are not copied again. </para>
+    <para>If it is necessary to update  libraries in the <filename>web</filename> directory — select the  <guimenuitem>Clean</guimenuitem> menu item in the project context menu. The libraries will be removed, and at the next  launch these libraries will be copied from the Platypus Platform runtime directory.</para>
   </section>
   <section>
-    <title>Database connection management</title>
-    <para>To enable full-featured functioning of  <application>the Platypus Application Designer</application>, it is necessary  to arrange a connection to the database during the application development. Connection parameters are specified when creating a new project and can be modified on the project properties form, which can be opened by selecting the Properties item in the project context menu. When opening the project, Platypus Application Designer tries to connect to the database, in case of failure  it switches to the limited functionality mode; then the data model designer becomes inaccessible, and several other functions of the designer are disabled. </para>
-    <para>In the course of development, we recommend that every developer in the team working on the same project creates and uses his / her own copy of the database for debugging and testing purposes. Additionally, a common reference database is created, and all modifications, which have passed the debugging stage at the developers&apos; individual bases, are applied to this common database.  </para>
-    <para>It is convenient to launch the developer&apos;s local database on the H2 databases &quot;light&quot; server, supplied with the Platypus Platform. </para>
+    <title>The default database connection</title>
+    <para>To enable full-featured application development of the  designer tools, it is necessary  to arrange a connection to the default database. Connection parameters are specified when creating a new project and can be modified on the project properties panel, which can be opened using  the <guimenuitem>Properties</guimenuitem> item in the project context menu.</para>
+    <para>When opening the project, the application designer tries to connect to the database, in case of failure  it switches to the limited functionality mode, and several tools and  functions of the designer are disabled. </para>
+    <note>
+      <para>In the course of development, we recommend that every developer in the team working on the same project creates and uses his/her own copy of the database for debugging and testing purposes. Additionally, a common reference database is created, and all modifications, which have passed the debugging stage at the developers&apos; individual bases, are applied to this common database.  </para>
+    </note>
+    <para>It is recommened to use the developer&apos;s local database on the H2 databas server, supplied with the platform. </para>
     <para>To launch the H2 database server in the Platypus Application Designer:</para>
     <itemizedlist>
       <listitem>
@@ -301,36 +300,36 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
       </listitem>
     </itemizedlist>
     <note>
-      <para>In the Platypus Platform applications, it is not recommended to use the peculiarities of  individual databases (if possible). Use the standard SQL instead to enable easy transferring of an application to other <acronym>database</acronym> servers supported by the platform. </para>
+      <para>In the platform applications, it is not recommended to use the database special SQL syntax (if possible). Use the standard SQL instead to enable easy transferring of an application to other <acronym>database</acronym> servers supported by the platform. </para>
     </note>
     <para>After the  <acronym>database</acronym> server is launched and available via the network or locally, connect to this server by selecting the  <guimenuitem>Connect to project database</guimenuitem> item in the context menu, or by clicking the <guibutton>Establish connection</guibutton> button on the  <guilabel>Application Database</guilabel> form in the project properties, or by selecting the  Connect to project database link on the stub-form of the data model editor.</para>
     <para>To disconnect, select the <guimenuitem>Disconnect from project database</guimenuitem> item in the project context menu, or click the <guibutton>Drop</guibutton> connection button on the  <guilabel>Application Database</guilabel> form of the project properties.</para>
   </section>
   <section>
-    <title>Deployment of the application elements in the database</title>
-    <para>For testing or commercial operation, the application elements may be deployed in the database. After deployment, the application can be executed directly from the database.</para>
-    <para>To deploy an application in the <acronym>database</acronym>: select the  <guimenuitem>Deploy</guimenuitem> item in the project node context menu. When deploying, the application elements from the Application Elements folder are copied to the  <literal>MTD_ENTITIES</literal><acronym> table of the database</acronym>. The application elements, which were present in this table before copying, are removed. When copying, the tree structure of the application directories is preserved.</para>
-    <para>Importing of an application from the database is a process which is  reverse to deployment. To import an application from the database: select the Import item in the project context menu. When importing, the application elements are copied from the <literal>MTD_ENTITIES</literal> table to the <guilabel>Application Elements</guilabel> folder. </para>
+    <title>Deployment to a database</title>
+    <para> The application elements may be deployed in the special database table. After deployment, the application can be executed directly from the database.</para>
+    <para>To deploy an application in the <acronym>database</acronym>: use   <guimenuitem>Deploy</guimenuitem> item in the project&apos;s root node context menu. When deploying, the application elements from the Application Elements folder are copied to the table   <literal>MTD_ENTITIES</literal>.  When copying, the tree structure of the application directories is preserved.</para>
+    <para>Importing of an application from a  database to a files is a process which is  reverse to deployment. To import an application from the database: select the Import item in the project context menu. When importing, the application elements are copied from the <literal>MTD_ENTITIES</literal> table to the project&apos;s <guilabel>Application Elements</guilabel> folder. </para>
     <important>
-      <para>When importing an application, the <guilabel>Application Elements</guilabel> folder is cleared before copying the application elements from the database.</para>
+      <para>When deploying and importing an application, the destiantion table or <guilabel>Application Elements</guilabel> folder is cleared before the copy process starts.</para>
     </important>
   </section>
   <section>
     <title>Database migrations</title>
-    <para>The Platypus Platform has an embedded mechanism to control changes occurring in the database structure and data, which constitute a part of  the application. </para>
+    <para>The Platypus Platform has an built-in mechanism to control changes occurring in the database schema and its initial data, which appear as a part of  the application. </para>
     <important>
       <para>Before applying  migrations make a backup copy of the database.</para>
     </important>
-    <para>Application data — basic references, initial data, etc. — is  information required to start the application.</para>
-    <para>Database structure and  application data are represented in the form of migrations files. Each migration has a number expressed as a positive integer, which is used as the file name. In the course of development and further during the application life cycle, when changing the database structure or in case of  data modification, a migration is created; later on, this migration can be applied to other copies of the database. In the application database, information about the current <acronym>database</acronym> version is maintained (<literal>MTD_VERSION</literal> table). It corresponds to the up-to-date migration number.  </para>
-    <para>Migrations with the number greater than the  current database version are sequentially applied to the database during synchronization. After the migration is applied successfully, the <acronym>database</acronym> number becomes equal to the number of this migration.</para>
+    <para>Initial application data — basic references, bootstarp data, etc. — is  information required to start the application.</para>
+    <para>Database structure and initioal application data are represented in the form of migrations files. Each migration has a number expressed as a positive integer, which is used as the file name. In the course of development and further during the application life cycle, when changing the database structure or in case of  data modification, a migration is created. Later on, this migration can be applied to other  databases. In the application database, information about the current <acronym>database</acronym> version is maintained in the <literal>MTD_VERSION</literal> table. </para>
+    <para>Migrations with the number greater than the  current database version are sequentially applied to the database during synchronization process. After the migration is applied successfully, the <acronym>database</acronym> number becomes equals to the number of this migration.</para>
     <para>Migrations types:</para>
     <itemizedlist>
       <listitem>
         <para><acronym>Database</acronym> structure snapshot — an  <filename>.xdm</filename> file containing database metadata presentation in the XML format.</para>
       </listitem>
       <listitem>
-        <para>SQL commands batch  — a  <filename>.batch</filename> file containing the SQL commands delimited by <code>#GO</code> tag. </para>
+        <para>SQL commands batch  — a  <filename>.batch</filename> file containing the SQL commands delimited by <code>#GO</code> separators tag. </para>
       </listitem>
     </itemizedlist>
     <note>
@@ -342,12 +341,14 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     <para>When applying  migrations, only the metadata snapshots with the version number right before the batch SQL file and a migration with the greatest number are considered and applied.</para>
     <para>To remove  migrations which are not used (i.e. to clean the migration directory), select the  <guimenuitem>Cleanup</guimenuitem> item in the context menu of the project  <guilabel>Database Migrations</guilabel> directory. Click  <guibutton>Yes</guibutton> to confirm or  <guibutton>No</guibutton> to cancel the command in the confirmation dialog.</para>
     <para>To apply  migrations from the project migrations directory, select the <guimenuitem>Apply Migrations</guimenuitem> item in the  <guimenu>Database Migrations</guimenu> context menu of the project.</para>
-    <para>In the course of development, sometimes it is necessary to find out the current database version or change it. To find out the  current version of the project database to which the  <application>Platypus Application Designer</application> is connected, select the <guimenuitem>database migration version</guimenuitem> item in the  <guimenu>Database Migrations</guimenu> context menu of the project. The current version of the <acronym>database</acronym> will be displayed in  the <guilabel>Migration version</guilabel> field of the <guilabel>Current Db Migration version</guilabel> dialog. To modify the current version, specify the new number of the current database  version in the  <guilabel>Migration version</guilabel> text field, and click <guibutton>OK</guibutton>. If you don&apos;t want to change the current version of the database, click <guibutton>Cancel</guibutton> or close the dialog.</para>
+    <para>In the course of development, sometimes it is necessary to find out the current database version or change it.</para>
+    <para>To find out the  current version of the project database to which the  <application>Platypus Application Designer</application> is connected, select the <guimenuitem>database migration version</guimenuitem> item in the  <guimenu>Database Migrations</guimenu> context menu of the project. The current version of the <acronym>database</acronym> will be displayed in  the <guilabel>Migration version</guilabel> field of the <guilabel>Current Db Migration version</guilabel> dialog. </para>
+    <para>To modify the current version, specify the new number of the current database  version in the  <guilabel>Migration version</guilabel> text field, and click <guibutton>OK</guibutton>. If you don&apos;t want to change the current version of the database, click <guibutton>Cancel</guibutton> or close the dialog.</para>
   </section>
   <section>
-    <title>Version control systems support</title>
-    <para>In the course of development and further during the application life cycle, it is recommended to use a version control system to manage the source project files.</para>
-    <para><application>Platypus Application Designer</application> has built-in support of the following version control systems: </para>
+    <title>Version control systems</title>
+    <para>During the application development and further during the application life cycle, it is recommended to use a version control system to manage the source project files.</para>
+    <para><application>The application designer</application> has built-in support of the following version control systems: </para>
     <itemizedlist>
       <listitem>
         <para><application>Subversion</application></para>
@@ -359,7 +360,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para><application>Mercurial</application></para>
       </listitem>
     </itemizedlist>
-    <para>To access options of these version control systems, use the <guimenuitem>Team</guimenuitem> item from the global menu and / or  <guisubmenu>Versioning</guisubmenu> sub-menu of the project context menu.</para>
+    <para>To access options of these version control systems, use the <guimenuitem>Team</guimenuitem> item from the global menu and/or  <guisubmenu>Versioning</guisubmenu> sub-menu of the project context menu.</para>
     <note>
       <para>Refer to the documentation of the relevant version control system for details about this system usage.</para>
     </note>

@@ -4,14 +4,14 @@
 %BOOK_ENTITIES;
 ]>
 <bookinfo id="book-Development_Guide-Development_Guide">
-  <title>Platypus Platform 3.0 Developer Guide</title>
-  <subtitle>An introduction to application development tools in Platypus Platform</subtitle>
+  <title>Platypus Platform 3.0 Development Guide</title>
+  <subtitle>An application development manual</subtitle>
   <productname>Platypus Platform</productname>
   <productnumber>3.0</productnumber>
   <edition>0</edition>
   <pubsnumber>0</pubsnumber>
   <abstract>
     <para>
-This document contains information requiered for creating JavaScript applications using Platypus Platform  </para>
+This document contains information requiered for creating, running, debugging and deploying JavaScript applications on Platypus Platform using Platypus Application Designer IDE. </para>
   </abstract>
 </bookinfo>

@@ -4,8 +4,8 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Install_Chapter">
-  <title>Platypus Application Designer installation and configuration</title>
-  <para>The application designer software package is included into the developer&apos;s kit and is supplied with the Platypus Platform.</para>
+  <title>Application Designer</title>
+  <para>The application designer software package is included into the developer&apos;s kit and can be bundled with Platypus Platform runtime installation.</para>
   <para>Platypus developer&apos;s kit may be supplied:</para>
   <itemizedlist>
     <listitem>
@@ -17,11 +17,11 @@
   </itemizedlist>
   <para>If the developer&apos;s kit is supplied as an archive, unpack its contents  to the  folder of your choice on the hard drive.</para>
   <note>
-    <para>Platypus Platform installation instructions are provided in the Administrator&apos;s Guide.</para>
+    <para>Platypus Platform runtime installation instructions are provided in the Administration Guide.</para>
   </note>
   <section id="sect-Administration_Guide-Install_Chapter-Test_Section_1">
     <title>System requirements </title>
-    <para>System requirements for installing the developer&apos;s kit on a computer include  minimum system requirements  for installing the executable part of the Platypus Platform with the following corrections:
+    <para>System requirements for installing the developer&apos;s kit on a computer includes:
    <itemizedlist>
         <listitem>
           <para>32-bit (x86) or 64-bit (x64) CPU, 1 GHz or above</para>
@@ -33,7 +33,7 @@
           <para>10 GB of free disk space</para>
         </listitem>
         <listitem>
-          <para>Operating system with the graphical user interface</para>
+          <para>Operating system with the graphical user interface: Windows or Linux</para>
         </listitem>
         <listitem>
           <para>Oracle JDK 7</para>
@@ -48,12 +48,6 @@
     <title>Installation</title>
     <para>
 To install the developer&apos;s kit, perform the following actions:<orderedlist>
-        <listitem>
-          <para>Install the Platypus Platform.</para>
-        </listitem>
-        <listitem>
-          <para>Navigate to the  <filename>designer</filename> sub-directory of the Platypus developer&apos;s kit installation package.</para>
-        </listitem>
         <listitem>
           <para>Launch the   <filename>platypusdesigner-windows.exe</filename> file for  Windows OS or <filename>platypusdesigner-linux.sh</filename> for Linux.</para>
           <note>
@@ -86,7 +80,7 @@ After the installation process is finished, click  <guibutton>Finish</guibutton>
     </note>
   </section>
   <section>
-    <title>Launch setup</title>
+    <title>Configuration</title>
     <para><application>Platypus Application Designer</application> supports  localization of  menus, messages texts, etc. At the present time,  the following languages are supported:</para>
     <itemizedlist>
       <listitem>
@@ -107,14 +101,11 @@ After the installation process is finished, click  <guibutton>Finish</guibutton>
       </listitem>
     </itemizedlist>
     <para>You can also change the application designer localization language by adding the <option>--locale ru:RU</option> or <option>--locale en:US</option> option to the command line for launching the  <application>Platypus Application Designer</application>.</para>
-    <para>Platypus Application Designer supports connection of the various user interface styles  (LaF — Look and Feel). There are LaFs for specific operating systems, universal styles  (<literal>Metal</literal> and <literal>Nimbus</literal>), and LaFs which can be supplied by  third-party developers.</para>
-    <warning>
-      <para>Connection of  external LaFs is a rather complicated procedure which is not recommended for beginners.</para>
-    </warning>
-    <para>To change the  <application>Platypus Application Designer</application> LaF:</para>
+    <para>Platypus Application Designer supports connection of the various user interface Look and Feel  (LaF). There are LaFs for specific operating systems, universal styles  (<literal>Metal</literal> and <literal>Nimbus</literal>), and LaFs which can be supplied by  third-party developers.</para>
+    <para>To change the  <application>Application Designer</application> LaF:</para>
     <itemizedlist>
       <listitem>
-        <para>Edit the designer configuration file — append the  <parameter>default_options</parameter> parameter with the  <option>--laf <replaceable>LaF</replaceable></option> option, where <replaceable>LaF</replaceable> corresponds to the name of LaF or full name of the LaF class; if the third-party LaF is used, it is also necessary to include the style library into the path which can be accessed by the <application>Platypus Application Designer</application> classes loader.</para>
+        <para>Edit the designer configuration file — append the  <parameter>default_options</parameter> parameter with the  <option>--laf <replaceable>LaF</replaceable></option> option, where <replaceable>LaF</replaceable> corresponds to the name of LaF or full name of the LaF class. If the third-party LaF is used, it is also necessary to include the style library into the path which can be accessed by the <application>Application Designer</application> classloader.</para>
       </listitem>
       <listitem>
         <para>Restart the application designer.</para>
@@ -123,7 +114,8 @@ After the installation process is finished, click  <guibutton>Finish</guibutton>
   </section>
   <section>
     <title>Environment setup</title>
-    <para>Specify the location of the Platypus Platform directory in the computer&apos;s file system:</para>
+    <para>Platypus Platform runtime is required for a developer to start, debug and deploy applications.</para>
+    <para>Specify the location of the Platypus Platform runtime directory in the computer&apos;s file system:</para>
     <itemizedlist>
       <listitem>
         <para>Select   <menuchoice>
@@ -154,10 +146,10 @@ After the installation process is finished, click  <guibutton>Finish</guibutton>
 To delete the Platypus Application Designer from you computer, perform the following actions:
    <orderedlist>
         <listitem>
-          <para>For Windows OS, use the standard mechanism of programs removal; as an alternative, use the  <filename>uninstall.exe</filename> program for Windows OS or  <filename>uninstall.sh</filename> for Linux OS from the   <application>Platypus Application Designer</application> installation directory.</para>
+          <para>For Windows, use the standard mechanism of programs removal; as an alternative, use the  <filename>uninstall.exe</filename> program for Windows or  <filename>uninstall.sh</filename> for Linux from the   <application>Platypus Application Designer</application> installation directory.</para>
         </listitem>
         <listitem>
-          <para>Confirm the Platypus applications and components removal by clicking  <guibutton>Finish</guibutton> button; if necessary, select the option of removing  configuration data from the user&apos;s directory.</para>
+          <para>Confirm the  components removal by clicking  <guibutton>Finish</guibutton> button; if necessary, select the option of removing  configuration data from the user&apos;s directory.</para>
         </listitem>
       </orderedlist>
   </para>
