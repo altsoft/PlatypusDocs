@@ -134,11 +134,13 @@ public class HtmlConvertor {
 
     private void convertHtmlFiles() throws IOException {
         String templateHtml = getTemplateHtml();
-        String toc = getTocHtml();
+        Document indexDocument = getIndexDocument();
+        String title = getTitle(indexDocument);
+        String toc = getTocHtml(indexDocument);
         for (File f : sourceDir.listFiles(new HtmlFilesFilter())) {
             File convertedHtmlFile = new File(destDir, f.getName());
             convertedHtmlFile.createNewFile();
-            FileUtils.writeString(convertedHtmlFile, getConvertedHtml(templateHtml, toc, getContentHtml(f)), UNICODE_ENCODING);
+            FileUtils.writeString(convertedHtmlFile, getConvertedHtml(templateHtml, title, toc, getContentHtml(f)), UNICODE_ENCODING);
         }
     }
 
@@ -147,11 +149,23 @@ public class HtmlConvertor {
         return FileUtils.readString(layoutHmlFile, UNICODE_ENCODING);
     }
 
-    private String getTocHtml() throws IOException {
+    private String getTitle(Document indexDocument) throws IOException {
+        Elements titleElements = indexDocument.select("h1.title");
+        if (titleElements != null && titleElements.size() > 0) {
+            return titleElements.text();
+        } else {
+            throw new IllegalStateException("Title element not found.");
+        }
+    }
+    
+    private Document getIndexDocument() throws IOException {
         File indexHmlFile = new File(sourceDir, INDEX_FILE_NAME);
         String indexHtml = FileUtils.readString(indexHmlFile, UNICODE_ENCODING);
-        Document doc = Jsoup.parse(indexHtml);
-        Element toc = doc.select("div.toc").get(0);//NOI18N
+        return Jsoup.parse(indexHtml);
+    }
+
+    private String getTocHtml(Document indexDocument) throws IOException {
+        Element toc = indexDocument.select("div.toc").get(0);//NOI18N
         StringBuilder sb = new StringBuilder();
         //insert +/-
         Elements dts = toc.getElementsByTag("dt");
@@ -173,8 +187,8 @@ public class HtmlConvertor {
         return String.format("<div class='contents_panel'>%s</div>", toc.html());
     }
 
-    private String getConvertedHtml(String templateHtml, String toc, String content) {
-        return templateHtml.replace("{$toc}", toc).replace("{$content}", content);//NOI18N
+    private String getConvertedHtml(String templateHtml, String title, String toc, String content) {
+        return templateHtml.replace("{$title}", title).replace("{$toc}", toc).replace("{$content}", content);//NOI18N
     }
 
     private String getContentHtml(File file) throws IOException {
