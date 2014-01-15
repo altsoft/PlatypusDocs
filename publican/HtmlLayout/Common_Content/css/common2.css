@@ -1107,11 +1107,11 @@ div.section {
 	margin-top:1em;
 	page-break-inside: auto;
 }
-
+/*
 div.note, div.important, div.warning {
     width: 700px;
 }
-
+*/
 div.note .replaceable, 
 div.important .replaceable, 
 div.warning .replaceable, 
