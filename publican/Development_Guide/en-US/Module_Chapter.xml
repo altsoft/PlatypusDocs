@@ -973,90 +973,86 @@ try {
     </section>
     <section>
       <title>Entities</title>
-      <para>Data model entities are available in the code in the form of similarly-named objects:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable></programlisting>
-      <para>where <varname>
+      <para>Data model entities are available as the data model object&apos;s properties: <code>model.<replaceable>entityName</replaceable></code>, where <varname>
           <replaceable>entityName</replaceable>
         </varname> is the script presentation of an entity.</para>
-      <para>Entities in a data model may have different parameters and can be updated independently from the model.</para>
-      <para>To update data in an entity:</para>
-      <itemizedlist>
-        <listitem>
-          <para>Set values for the entity parameters.</para>
-        </listitem>
-        <listitem>
-          <para>Enable the entity data update.</para>
-        </listitem>
-      </itemizedlist>
+      <para>Entities may have its own parameters and can be updated independently from the other model entities.</para>
       <para>To access entity parameters, use the  <literal>params</literal> entity property:</para>
       <programlisting language="JavaScript">var entityParams = <replaceable>entityName</replaceable>.params</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an object of the corresponding entity.</para>
-      <para>To access the specific parameters, use properties of the  <code><replaceable>entityName</replaceable>.params</code> object with names, which match the entity parameter names: </para>
-      <programlisting language="JavaScript">var entityParam = <replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable></programlisting>
+      <para>To access the specific parameters, use properties of the  <code>model.<replaceable>entityName</replaceable>.params</code> object with names, which match the entity parameter names: </para>
+      <programlisting language="JavaScript">var entityParam = model.<replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable></programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
-        </varname>  is an entity,<varname>
+        </varname>  is an entity object,<varname>
           <replaceable> paramName</replaceable>
         </varname> is the property of the corresponding parameter.</para>
       <para>To set the parameter value, assign a new value to it:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
+      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
       <para>where <literal>newValue</literal> is a new value of the parameter.</para>
       <note>
-        <para>Setting a new value for the entity parameter doesn&apos;t result in automatic update of its data.</para>
+        <para>Setting a new value for the entity parameter doesn&apos;t result in automatic update of the dataset.</para>
       </note>
-      <para>To update entity data and related entities, call the  <methodname>execute</methodname>, function. New data will be loaded only if the entity parameter values were changed: </para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.execute();</programlisting>
+      <para>To update entity data and related entities, use the  <methodname>execute</methodname>, function. New data will be loaded only if the entity parameter values were changed: </para>
+      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.execute(onSuccess, onFailure);</programlisting>
+      <para>where <varname>
+          <replaceable>entityName</replaceable>
+        </varname>  is an entity object, <code>onSuccess</code> is the handler function for refresh data on success event (optional) and <code>onFailure</code> is the  handler function for refresh data on failure event (optional).</para>
       <para>To force the update of entity data and related entities, use the  <methodname>requery</methodname> function:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.requery([aCallback]);</programlisting>
-      <para><parameter>aCallback</parameter> parameter is used for developing client code, as the model works in an asynchronous mode in clients. Function passed in this parameter will be called when the database request is executed and its results come to the client over the network</para>
-      <important>
-        <para>Handler of the  <code>onRequeried</code> entity event will be called in any case, regardless of the method of calling the <code>requery</code> function.</para>
-      </important>
+      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.requery(onSuccess, onFailure);</programlisting>
+      <para>where <varname>
+          <replaceable>entityName</replaceable>
+        </varname>  is an entity object, <code>onSuccess</code> is the handler function for refresh data on success event (optional), <code>onFailure</code> is the  handler function for refresh data on failure event (optional). Callback functions are called when the database request is executed and its results come to the client over the network.</para>
+      <para>Handler of the  <code>onRequeried</code> entity event will be called in any case, regardless of the method of calling the <code>requery</code> function.</para>
       <note>
-        <para>Update of entity data does not cancel the data changes made earlier, so after saving the model these changes will be applied to the <acronym>database</acronym>. Changes in data are reset only after saving or updating the entire model.</para>
+        <para>Update of entity data does not cancel the data changes made in the entity dataset earlier, so after saving the model these changes will be applied to the <acronym>database</acronym>. Data changes  are reset only after saving the entire model.</para>
       </note>
     </section>
     <section>
-      <title>Entity data</title>
-      <para>To obtain access to data, refer to the entity as to the objects<!--#2401--> array:</para>
-      <programlisting language="JavaScript">var item = <replaceable>entityName</replaceable>[<replaceable>i</replaceable>]</programlisting>
+      <title>Dataset array</title>
+      <para>To  access to the entity&apos;s data, refer to the entity dataset as a regular JavaScript array:</para>
+      <programlisting language="JavaScript">var item = model.<replaceable>entityName</replaceable>[<replaceable>i</replaceable>]</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity, <literal>
           <replaceable>i</replaceable>
         </literal>  is an index of the array element within the  <code>0..<replaceable>entityName</replaceable>.length - 1</code> range.</para>
-      <para>An array element is an object (instance) of an entity, which was obtained as a result of executing the query which was sent to the database. To access properties, refer to them by name:</para>
-      <programlisting language="JavaScript">var propValue = <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable></programlisting>
+      <para>An array element is an data row instance, which was obtained as a result of executing the query in the database. To access row&apos;s fields, refer to them by name:</para>
+      <programlisting language="JavaScript">var propValue = <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>fieldName</replaceable></programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an object of the corresponding entity, <literal>
           <replaceable>i</replaceable>
         </literal> is an index of the array element within the  <code>0..<replaceable>entityName</replaceable>.length - 1</code> range, <varname>
-          <replaceable>propName</replaceable>
-        </varname> is a property of the entity object having the same name as the query results field.</para>
-      <para>The following example shows the process of enumerating all documents in the<!--#7402--> <literal>documents</literal> entity and outputting their names into a log:</para>
-      <programlisting language="JavaScript">// Logs all documents names
+          <replaceable>fieldName</replaceable>
+        </varname> is a property of the entity object having the same name as the rowset field.</para>
+      <para>The following example shows the process of enumerating document rows in the <literal>documents</literal> entity:</para>
+      <programlisting language="JavaScript">var documents = model.documents;
+
+// Logs all documents names
 for (var i = 0; i &lt; documents.length; i++) {
   logger.info(documents[i].NAME);
 }</programlisting>
       <para>In the legacy  <acronym>API</acronym>, the following syntax with the <methodname>getRow</methodname> function may be used:</para>
-      <programlisting language="JavaScript">var row = <replaceable>entityName</replaceable>.getRow(<replaceable>rowIndex</replaceable>)</programlisting>
+      <programlisting language="JavaScript">var row = model.<replaceable>entityName</replaceable>.getRow(<replaceable>rowIndex</replaceable>)</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an object of the corresponding entity,  <literal>
           <replaceable>rowIndex</replaceable>
         </literal>  is an index of the cursor within the  <code>1..<replaceable>entityName</replaceable>.size</code> range.</para>
-      <para>Example of using such  <acronym>API</acronym>:</para>
-      <programlisting language="JavaScript">for (var i = 1; i &lt;= documents.size; i++) {
-  logger.info(documents.getRow(i).NAME);
+      <para>Example of using of such  <acronym>API</acronym>:</para>
+      <programlisting language="JavaScript">for (var i = 1; i &lt;= model.documents.size; i++) {
+  logger.info(model.documents.getRow(i).NAME);
 }</programlisting>
-      <para>Executing this piece of code leads to the same results as for a piece, which uses the above mentioned array.</para>
       <note>
         <para>It is not recommended to use the legacy data access API in the new projects.</para>
       </note>
-      <para>If an external key link<!--#2403--> is established between two entities, you can get access to the data instances of the connected entity by using data instance property having the same name as the connected entity. If the entity contains an external key, the corresponding property points to the connected data instance in the connected entity:</para>
+    </section>
+    <section>
+      <title>OR/M and linked entities</title>
+      <para>If an external key link is established between two entities, you can get access to the data  of the connected entity by using data instance property having the same name as the connected entity. This properties are generated during OR/M resolution. If the entity&apos;s underlying database table contains an external key reference, the corresponding property represents the connected entity.</para>
       <programlisting language="JavaScript">var propValue = <replaceable>entityName1</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName2</replaceable>.<replaceable>propName</replaceable></programlisting>
       <para>where  <varname>
           <replaceable>entityName1</replaceable>
@@ -1076,15 +1072,18 @@ for (var i = 0; i &lt; documents.length; i++) {
         </literal> is an index of the connected object array element, <varname>
           <replaceable>propName</replaceable>
         </varname> is a property of the entity object having the same name as the query results field.</para>
-      <para>One object instance<!--#2403--> among all entity data can be the current default object. Default object properties are available with the same name as the properties of the entity itself:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable><replaceable>.propName</replaceable></programlisting>
+    </section>
+    <section>
+      <title>Cursor API</title>
+      <para>To get access to the  dataset row pointed out by the entity cursor use the <code>model.<replaceable>entityName</replaceable>.cursor</code> property, for example:</para>
+      <programlisting language="JavaScript">var currentValue = model.<replaceable>entityName</replaceable>.cursor<replaceable>.propName</replaceable></programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an object of the corresponding entity, <varname>
           <replaceable>propName</replaceable>
         </varname>  is a property having the same name as the default object property.</para>
-      <para>The current default object is defined by the position of the cursor in the entity data array. In addition to pointing to some object, the cursor can point to the position  <emphasis>before the first object</emphasis> and <emphasis>after the last object</emphasis>. In this case the default object for the entity is not defined.</para>
-      <para>After loading and/or filtering data the cursor is placed on the first object of the entity data array. </para>
+      <para>The current row object is defined by the position of the cursor in the entity data array. In addition to pointing to some object, the cursor can point to the position  <emphasis>before the first object</emphasis> and <emphasis>after the last object</emphasis>. In this case the default object for the entity is not defined.</para>
+      <para>After loading or filtering dataset the cursor is placed on the first object of the entity data array. </para>
       <para>To manage moving the cursor over the object array, use the  <methodname>beforeFirst</methodname>, <methodname>afterLast</methodname>, <methodname>first</methodname>, <methodname>next</methodname>, <methodname>prev</methodname>, <methodname>last</methodname>, and <methodname>pos</methodname> entity methods. </para>
       <informaltable>
         <tgroup cols="2">
@@ -1181,22 +1180,22 @@ for (var i = 0; i &lt; documents.length; i++) {
           </tbody>
         </tgroup>
       </informaltable>
-      <para>You can use the  <varname>rowIndex</varname> property to move the cursor to the specified position.</para>
+      <para>Use the  <varname>rowIndex</varname> property to move the cursor to the specified position.</para>
       <para>The following example uses cursor moving control functions; in this example enumeration of all  <varname>documents</varname> entity objects and outputting document names into a log are implemented:</para>
-      <programlisting language="JavaScript">documents.requery();//Cursor is on the first object
-while (!documents.eof) { 
-  Logger.info(documents.NAME);
-  documents.next();
+      <programlisting language="JavaScript">model.documents.requery();//Cursor is on the first object
+while (!model.documents.eof) { 
+  Logger.info(model.documents.cursor.NAME);
+  model.documents.next();
 }</programlisting>
-      <para>To check for instances of data in the entity data array, use its  <varname>empty</varname> property:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.empty</programlisting>
-      <para>The  <varname>empty</varname> property returns  <literal>true</literal> if the entity data array is empty, and  <literal>false</literal>, if it contains objects. For example, the following piece of code outputs a message into the log, if the  <literal>documents</literal>entity data array is empty::</para>
-      <programlisting language="JavaScript">documents.empty &amp;&amp; Logger.info(&apos;Documents is empty.&apos;);</programlisting>
+      <para>To check for instances of data in the entity data array, use its  <varname>empty</varname> property: <code>model.<replaceable>entityName</replaceable>.empty</code>.</para>
+      <para>The  <varname>empty</varname> property returns  <literal>true</literal> if the entity data array is empty, and  <literal>false</literal> otherwise. For example, the following snippet outputs a message into the log, if the  <literal>documents</literal> entity data array is empty:</para>
+      <programlisting language="JavaScript">model.documents.empty &amp;&amp; Logger.info(&apos;Documents is empty.&apos;);</programlisting>
     </section>
     <section>
-      <title>Searching<!--#2501--></title>
-      <para>This chapter describes operations, which can be performed after loading entity data. These operations are performed inside the model and do not cause sending new requests to the  <acronym>database</acronym>.</para>
-      <para>To find an object by its identifier<!--#2502-->, use the  <methodname>findById</methodname> entity function by passing a search key to it:</para>
+      <title>Searching API</title>
+      <para>Search operations can be performed after the data model loads its entities data. </para>
+      <para>Search is performed in the model and do not cause sending new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
+      <para>To find an object by its identifier, use the  <methodname>findById</methodname> entity function by passing a search key to it:</para>
       <programlisting language="JavaScript">var item = <replaceable>entityName</replaceable>.findById(<replaceable>idValue</replaceable>);</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
@@ -1204,14 +1203,14 @@ while (!documents.eof) {
           <replaceable>idValue</replaceable>
         </literal> is an expression for the search key.</para>
       <para>If nothing is found, the  <methodname>findById</methodname> function returns the  <literal>null</literal> value.</para>
-      <para>Example of code for searching for a document by its identifier<!--#2506--> and displaying its name in the log:</para>
+      <para>Example of code for searching for a document by its identifier and displaying its name in the log:</para>
       <programlisting language="JavaScript">var documentId = 101;
-var document = documents.findById(documentId);
+var document = model.documents.findById(documentId);
 if (document) {
   Logger.info(&apos;Document name is &apos; + document.NAME);
 }</programlisting>
-      <para>To perform search by arbitrary properties of objects, use the  <methodname>find</methodname> entity&apos;s<!--#2507--> function. Pass the &quot;key-value&quot; pairs corresponding to the property and search value as parameters of the <methodname>find</methodname>  function. The search is performed by checking the equality of the entity object property values and values to search for. </para>
-      <programlisting language="JavaScript">var items = <replaceable>entityName</replaceable>.find(
+      <para>To perform search by arbitrary properties of objects, use the  <methodname>find</methodname> entity&apos;s function. Pass the &quot;key-value&quot; pairs corresponding to the property and search value as parameters of the <methodname>find</methodname>  function. The search is performed by checking the equality of the entity object property values and values to search for.</para>
+      <programlisting language="JavaScript">var items = model.<replaceable>entityName</replaceable>.find(
   prop1, propValue1,
   prop2, propValue2
   //...
@@ -1225,51 +1224,44 @@ if (document) {
           <replaceable>propValue1</replaceable>
         </literal> — <classname>Object</classname> is a value to search for.</para>
       <note>
-        <para><methodname>findById</methodname> и <methodname>find</methodname> functions are searching for objects using prepared hashes of data arrays by corresponding properties and don&apos;t enumerate all the objects. Therefore, it is recommended to logically separate the code for searching and changing data, as after any change of data prepared hashes are marked as obsolete, and are rebuilded when you attempt to perform the search next time.</para>
+        <para><methodname>findById</methodname> и <methodname>find</methodname> functions are searching for objects using prepared hash table by corresponding properties and don&apos;t enumerate  the row objects. Therefore, it is recommended to logically separate the code for searching and changing data, as after any change of data prepared hashes are marked as obsolete, and are rebuilded when you attempt to perform the search next time.</para>
       </note>
       <para>To get an object-property of the entity, use entity metadata:</para>
-      <programlisting language="JavaScript">var field = <replaceable>entityName</replaceable>.md.<replaceable>propName</replaceable>;</programlisting>
+      <programlisting language="JavaScript">var field = model.<replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable>;</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity, <varname>
           <replaceable>propName</replaceable>
         </varname>  is the name of the corresponding property.</para>
-      <note>
-        <para>For more information on accessing metadata, see the &quot;Access to metadata&quot; chapter.</para>
-      </note>
       <para>The search returns an array of found objects or an empty array if nothing was found.</para>
-      <para>Below is an example of code, which searches documents by their names and by the set flag; then the results are output to the log:</para>
+      <para>This code snippet illustrates search documents by their names and by the set flag:</para>
       <programlisting language="JavaScript">var documentName = &apos;Document 1&apos;;
 var isChecked = true;
+var documents = model.documents;
 var foundDocuments = documents.find(
-  documents.md.NAME, documentName,
-  documents.md.CHECKED, isChecked,
+  documents.schema.NAME, documentName,
+  documents.schema.CHECKED, isChecked,
 );
 for(var i=0; i&lt;foundDocuments.size(); i++) {
   var foundDocument = foundDocuments[i];
   Logger.info(foundDocument.DESC);
 }</programlisting>
-      <note>
-        <para>Search operations do not change the original entity data.</para>
-      </note>
     </section>
     <section>
-      <title>Data filtration</title>
-      <para>This chapter describes operations, which can be performed after loading entity data. These operations are performed inside the model and do not cause sending new requests to the  <acronym>database</acronym>.</para>
-      <para>You can specify filtering rules for each entity. Filtering rules will be applied every time the data is loaded. Data, which failed to pass the filtration, is not lost, but becomes invisible to the application code.</para>
-      <para>To create a filter, use the  <methodname>createFiter</methodname> entity function and pass entity properties, by which the filtration should be performed, as parameters to this function:</para>
-      <programlisting language="JavaScript">var filter = <replaceable>entityName</replaceable>.createFilter(
-  <replaceable>entityName</replaceable>.md.<replaceable>prop1</replaceable>,
-  <replaceable>entityName</replaceable>.md.<replaceable>prop2</replaceable>,
+      <title>Data filtering</title>
+      <para>Filtering operations can be performed after the data model loads its entities data. </para>
+      <para>Data filtering is performed in the model and do not cause sending new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
+      <para>You can specify filtering rules for any entity. Filtering rules will be applied every time the data is loaded. Data rows, which failed to pass the filtration condition, are not lost, but becomes invisible to the application code.</para>
+      <para>To create a filter, use the  <methodname>createFiter</methodname> entity function and pass entity schema properties, by which the filtration to be performed, as parameters:</para>
+      <programlisting language="JavaScript">var filter = model.<replaceable>entityName</replaceable>.createFilter(
+  model.<replaceable>entityName</replaceable>.schema.<replaceable>prop1</replaceable>,
+  model.<replaceable>entityName</replaceable>.schema.<replaceable>prop2</replaceable>,
   //...
-  <replaceable>entityName</replaceable>.md.<replaceable>propN</replaceable>);</programlisting>
+  model.<replaceable>entityName</replaceable>.shema.<replaceable>propN</replaceable>);</programlisting>
       <para>where  <varname>
           <replaceable>entityName</replaceable>
-        </varname> is an entity, <varname><replaceable>entityName</replaceable>.md.<replaceable>propN</replaceable></varname>  is an entity property.</para>
-      <note>
-        <para>For more information on accessing metadata, see the &quot;Access to metadata&quot; chapter.</para>
-      </note>
-      <para>To apply a filter to data, use the <methodname>apply</methodname> filter function by passing values, by which the filtration should be performed, to this function in the same order, in which fields were specified:</para>
+        </varname> is an entity,<varname> model.<replaceable>entityName</replaceable>.schema.<replaceable>propN</replaceable></varname>  is an entity field metadata property.</para>
+      <para>To apply a filter to data, use the <methodname>apply</methodname> function and  pass filters values in the same order, in which filtered fields were specified:</para>
       <programlisting language="JavaScript">filter.apply(
   filterValue1,
   filterValue2,
@@ -1278,13 +1270,14 @@ for(var i=0; i&lt;foundDocuments.size(); i++) {
       <para>where <literal>filterValueN</literal>  is a value, by which the corresponding property will be filtered.</para>
       <para>To cancel the filter, call the  <methodname>cancel</methodname> filter function:</para>
       <programlisting language="JavaScript">filter.cancel();</programlisting>
-      <important>
+      <note>
         <para>You can specify only one filter for each entity at a time. When you apply a filter to the already filtered dataset, the previous filter is replaced by a new one.</para>
-      </important>
-      <para>Example of using filtration and subsequent enumeration of results:</para>
+      </note>
+      <para>Example of using data filtrating and  enumeration of results:</para>
       <programlisting language="JavaScript">//Set filter values
 var status = 1;
 var checked = true;
+var documents = model.documents;
 //Create and apply filter
 var filter = documents.createFilter(
   entity1.md.STATUS,
@@ -1301,27 +1294,29 @@ filter.cancel();</programlisting>
     </section>
     <section>
       <title>Data sorting</title>
-      <para>This chapter describes operations, which can be performed after loading entity data. These operations are performed inside the model and do not cause sending new requests to the <acronym>database</acronym>.</para>
+      <para>Sorting operations, which can be performed after loading entity data. </para>
+      <para>Data filtering is performed in the model and do not cause sending new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
       <para>Entity data can be sorted by several fields using the sorting rules.</para>
-      <para>To specify the sorting rules, create sorting objects. To do this, use the  <methodname>createSorting</methodname> entity&apos;s<!--#2601--> function. Pass pairs defining the sorting order and a property, by which sorting should be performed, as the parameters to this function:</para>
-      <programlisting language="JavaScript">var sorting = <replaceable>entityName</replaceable>.createSorting(
-  <replaceable>entityName</replaceable>.md.<replaceable>prop1</replaceable>, <replaceable>ascDesc1</replaceable>,
-  <replaceable>entityName</replaceable>.md.<replaceable>prop2</replaceable>, <replaceable>ascDesc2</replaceable>,
+      <para>To specify the  rules, create the sorting objects. To do this, use   <methodname>createSorting</methodname> entity&apos;s function. Pass pairs defining the sorting order and a property, by which sorting should be performed, as the parameters to this function:</para>
+      <programlisting language="JavaScript">var sorting = model.<replaceable>entityName</replaceable>.createSorting(
+  model.<replaceable>entityName</replaceable>.schema.<replaceable>prop1</replaceable>, <replaceable>ascDesc1</replaceable>,
+  model.<replaceable>entityName</replaceable>.schema.<replaceable>prop2</replaceable>, <replaceable>ascDesc2</replaceable>,
   //...
-  <replaceable>entityName</replaceable>.md.<replaceable>propN</replaceable>, <replaceable>ascDescN</replaceable>);</programlisting>
+  model.<replaceable>entityName</replaceable>.schema.<replaceable>propN</replaceable>, <replaceable>ascDescN</replaceable>);</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
-        </varname> is an entity,  <varname><replaceable>entityName</replaceable>.md.<replaceable>propN</replaceable></varname> — <classname>Object</classname>  is a property, by which sorting of data of the entity, the  <methodname>createSorting</methodname> function of which is called, will be performed; <literal> ascDescN</literal> — <classname>Boolean</classname>: the ascending sorting order  — <literal>true</literal> or the descending sorting order —  <literal>false</literal>.</para>
+        </varname> is an entity,  <varname><replaceable>entityName</replaceable>.schema.<replaceable>propN</replaceable></varname> —  is a property, by which sorting of data of the entity, the  <methodname>createSorting</methodname> function of which is called, will be performed; <literal> ascDescN</literal> — the ascending sorting order  — <literal>true</literal> or the descending sorting order —  <literal>false</literal>.</para>
       <para>To sort data, use the  <methodname>sort</methodname>  entity function passing a sorting object as a parameter to this function:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.sort(<replaceable>sorter</replaceable>);</programlisting>
+      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.sort(<replaceable>sorter</replaceable>);</programlisting>
       <para>where <varname>
           <replaceable>sorter</replaceable>
         </varname> is a sorting object.</para>
       <para>Example of sorting entity data by name and reverse sorting by flag:</para>
-      <programlisting language="JavaScript">//Create sorter
+      <programlisting language="JavaScript">var documents = model.documents;
+//Create sorter
 var sorter = documents.createSorting(
-  documents.md.NAME, true,
-  documents.md.CHECKED, false);
+  documents.schema.NAME, true,
+  documents.schema.CHECKED, false);
 
 //Sort objects
 entity1.sort(sorter);</programlisting>
@@ -1331,22 +1326,20 @@ entity1.sort(sorter);</programlisting>
           <replaceable>entityName</replaceable>
         </varname> is an entity, <methodname>sortingFunction</methodname> — <classname>Function</classname> is a function, which takes two objects as parameters and compares them. The comparison function returns a negative integer, if the first object is smaller than the second one, returns 0, if they are equal, and returns a positive integer, if the first object is greater than the second one.</para>
       <para>The following example shows the process of sorting entity data using an anonymous comparison function. Sorting is performed by the length of the document name:</para>
-      <programlisting language="JavaScript">documents.sort(function(doc1, doc2) {
+      <programlisting language="JavaScript">module.documents.sort(function(doc1, doc2) {
   var length1 = doc1.NAME != null ? doc1.NAME.length : 0;
   var length2 = doc2.NAME != null ? doc2.NAME.length : 0;
   return length1 - length2;
 });</programlisting>
     </section>
     <section>
-      <title>Data model object<!--#2701--></title>
-      <para>The data model is presented as a  <varname>model</varname> object  in the code : </para>
-      <programlisting language="JavaScript">model</programlisting>
-      <para> <literal>model</literal> contains functions and properties, which determine the behavior of data model.</para>
-      <para>To force updating of data of all model entities, call the  <methodname>requery</methodname> function of the <literal>model</literal> object: </para>
-      <programlisting language="JavaScript">model.requery();</programlisting>
+      <title>Requiring data model</title>
+      <para>To force updating of all data model entities, call the  <methodname>requery</methodname> function of the <literal>model</literal> object: </para>
+      <programlisting language="JavaScript">model.requery(onSuccess, onFailure)</programlisting>
+      <para>where  <code>onSuccess</code> is the handler function for refresh data on success event (optional), <code>onFailure</code> is the  handler function for refresh data on failure event (optional).</para>
     </section>
     <section>
-      <title>Saving data in database</title>
+      <title>Saving data</title>
       <para>The data model in Platypus provides automatic tracking of data changes. Data can be saved only as part of entire model.</para>
       <para>To edit, insert, or delete data, perform the following actions:</para>
       <itemizedlist>
@@ -1357,9 +1350,8 @@ entity1.sort(sorter);</programlisting>
           <para>Call the  <methodname>save</methodname> method of the model.</para>
         </listitem>
       </itemizedlist>
-      <para>For information on fetching<!--#2801--> data, filtering and searching, see the &quot;Entity data&quot;, &quot;Filtering&quot; and &quot;Searching data&quot; sections.</para>
       <para>Change the appropriate property of the entity to change the default object, i.e. the object, which the cursor is pointing to:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable><replaceable>.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
+      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable><replaceable>.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity,  <varname>
@@ -1377,19 +1369,7 @@ entity1.sort(sorter);</programlisting>
         </literal> is an expression for the new value.</para>
       <para>To save changes in the data model, call the  <methodname>save</methodname> function of the model:</para>
       <programlisting language="JavaScript">model.save();</programlisting>
-      <para>Example of code for saving changed model data: </para>
-      <programlisting language="JavaScript">categoryID = 101; //Sets model parameter to load data
-if (category[0]) {
-  //Changes category name
-  category.NAME = &apos;New category name&apos;;
-  //Changes document name
-  documents[0] &amp;&amp; documents.NAME = &apos;New document name&apos;;
-  //Saves the model
-  model.save();
-} else {
-  Logger.error(&apos;No category found for ID:&apos; + categoryID);
-}</programlisting>
-      <para>To add a new object:</para>
+      <para>To insert a new object to a dataset and :</para>
       <itemizedlist>
         <listitem>
           <para>Add a new object to entity data.</para>
@@ -1398,12 +1378,12 @@ if (category[0]) {
           <para>Call the <methodname>save</methodname> method of the data model.</para>
         </listitem>
       </itemizedlist>
-      <para>To insert a new object into a dataset, use the <methodname>insert</methodname>or <methodname>push</methodname> entity functions. If necessary, set property values for the inserted object.</para>
-      <para>Call the  <methodname>insert</methodname> function to insert a new object into the entity data. If necessary, pass &quot;key-value&quot; pairs as parameters to this function. Here, a key is the  <replaceable>entityName.md.propName</replaceable> entity property, and a value is the value of this property:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.insert();</programlisting>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.insert(
-  <replaceable>entityName</replaceable>.md.<replaceable>propName1</replaceable>, <replaceable>propValue1</replaceable>,
-  <replaceable>entityName</replaceable>.md.<replaceable>propName2</replaceable>, <replaceable>propValue2</replaceable>
+      <para>To insert a new object into a dataset, use the <methodname>insert</methodname> or <methodname>push</methodname> entity functions. If necessary, set property values for the inserted object.</para>
+      <para>Call the  <methodname>insert</methodname> function to insert a new object into the entity data. If necessary, pass &quot;key-value&quot; pairs as parameters to this function. Here, a key is the  <code><replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable></code>  entity property, and a value is the value of this property:</para>
+      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.insert();</programlisting>
+      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.insert(
+  model.<replaceable>entityName</replaceable>.schema.<replaceable>propName1</replaceable>, <replaceable>propValue1</replaceable>,
+  model.<replaceable>entityName</replaceable>.schema.<replaceable>propName2</replaceable>, <replaceable>propValue2</replaceable>
   //...
 );</programlisting>
       <para>Call the push function to insert a new object in the entity data — this function is a standard method of inserting a new element into the JavaScript array:</para>
