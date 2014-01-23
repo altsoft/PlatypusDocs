@@ -4,32 +4,9 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Module_Chapter">
-  <title>Module</title>
-  <para><emphasis>A module</emphasis> is an application element, which contains <!--#1001 "a piece of" - removed-->JavaScript executable code. </para>
-  <para>Modules may contain a piece of code responsible for the business logic, or any other reusable code <!--#1002 "(of a library)" removed as well form original document-->. </para>
-  <para>Modules can be executed both on a client device in the <application>Platypus Client</application> or in the web-browser and on a server machine in the <application>Platypus Application Server</application> <!--#1003 removed (redundacy)-->or in the  <application>Platypus Servlet</application> in the J2EE server/servlet container.</para>
-  <para>JavaScript execution environment in Platypus for   <application>Platypus Client</application> and  <application>Platypus Application Server</application>/<application>Platypus Servlet</application> is based on the Rhino engine (Mozilla Foundation).</para>
-  <para>A module includes the following:</para>
-  <itemizedlist>
-    <listitem>
-      <para>JavaScript software code</para>
-    </listitem>
-    <listitem>
-      <para>Data model</para>
-    </listitem>
-  </itemizedlist>
-  <para>Module code contains the following:</para>
-  <itemizedlist>
-    <listitem>
-      <para>A module header — a comment in the  <abbrev>JsDoc</abbrev> format containing the  <code>@name</code> annotation, which specifies the module identifier; this annotation is mandatory for any module</para>
-    </listitem>
-    <listitem>
-      <para>JavaScript program text</para>
-    </listitem>
-  </itemizedlist>
-  <note>
-    <para><abbrev>JsDoc</abbrev> annotations are also used to set access rights for the entire module or for its individual functions.</para>
-  </note>
+  <title>JavaScript module</title>
+  <para><emphasis>A Module</emphasis> is a just regular JavaScript file containing constructor function. Modules  contain data model responsible for data access. </para>
+  <para>Modules can be executed both under JVM in a client and server  is in  Mozilla Rhino engine or in a browser client.</para>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_5">
     <title>New module creation</title>
     <para>To create a new module, perform the following actions:
@@ -52,7 +29,7 @@
     </itemizedlist>
   </section>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_6">
-    <title>JavaScript code editing</title>
+    <title>JavaScript code editor</title>
     <para>You can edit the module code in the JavaScript code editor. To open the application element editor, double-click an application element in the project tree. </para>
     <para>To edit the JavaScript code:</para>
     <itemizedlist>
@@ -63,7 +40,7 @@
         <para>Change text in the JavaScript code editor.</para>
       </listitem>
       <listitem>
-        <para>Use the Auto code completion function for autoprompting field names and functions of objects and modules.</para>
+        <para>Use the  code completion for field names and functions of objects and modules.</para>
       </listitem>
       <listitem>
         <para>Use  automatic transition  to declarations of variables, functions, and to the functions of other modules; to do this, click a module ID or function while holding down the  <keycap>Ctrl</keycap> key.</para>
@@ -96,74 +73,94 @@
     <para>To configure auto completion modes, go to the  <guilabel>Code Completion</guilabel> tab and enable or disable corresponding options.</para>
   </section>
   <section>
-    <title>Module software code</title>
-    <note>
-      <para>For details of working with data and using data models in the program, see &quot;Software interface for working with data.&quot;</para>
-    </note>
-    <para>Using modules allows you to manage the complexity of the software according to the object-oriented programming principles. The <!--#1102 module designer -> module's constructor: e.g/ var m = new Module1() - Module1() is a constructor-->module&apos;s constructor is used to create instances of the module <!--#1106 --> (objects). </para>
-    <para>The software code of a module includes functions and fields, which define the behavior and state of objects<!--#1107 removed as well as from original text because of redundancy-->. </para>
-    <para>For a code, which uses a module instance, functions and variables defined in its top-level scope are available.</para>
-    <para>A module in Platypus module can be called an equivalent of a class in other programming languages, such as in Java or С++.</para>
+    <title>JavaScript code</title>
+    <para>Using modules allows you to manage the complexity of the software according to the object-oriented programming principles.</para>
+    <para>A module is an equivalent of a class in other programming languages, such as in Java or С++.</para>
     <section>
-      <title>Module header</title>
-      <para>Each module in Platypus must have a header, which is represented as a comment in the  <abbrev>JsDoc</abbrev> format and is located at the top of the module text.</para>
-      <para>The header should include a  <code>@name <replaceable>moduleName</replaceable></code> annotation, where  <code>
-          <replaceable>moduleName</replaceable>
-        </code> is an identifying name of the module. The module name is subject to the requirements of any identifying name of a Platypus application element. </para>
-      <para>In addition to the  <code>@name</code> annotation, a header may contain the module description, annotations for <!--#1108-->defining security constraints and other  <abbrev>JsDoc</abbrev> annotations.</para>
-      <para>Example of a module name: <literal>WebSupport</literal>.</para>
-      <para>Example of a module header:</para>
+      <title>Module structure</title>
+      <para>Every module has to contain a constructor function, this function is to be used for creating of module&apos;s instanses. </para>
+      <para>A constructor function  can have  a header, which is represented as a comment in the  <abbrev>JsDoc</abbrev> format and is located at the top of the module text.</para>
+      <para>Example of a module with a header:</para>
       <programlisting language="JavaScript">/**
  * Module description goes here
  *
- * @name WebSupport
+ * @module
  * @rolesAllowed admin
  *
  */
 
-//Module implementation starts here..</programlisting>
+function ModuleConstructor(p) {
+  ...
+}
+
+function otherFunction() {
+  ...
+}</programlisting>
+      <para>If a JavaScript file contains exactly one top-level fucntion, this fuction is considered as a module constructor, otherwise the module constructor must be marked with the <code>@module</code> annotation.</para>
+      <para>In addition to the  <code>@module</code> annotation, a header may contain the module description, annotations for defining security constraints and other  <abbrev>JsDoc</abbrev> annotations.</para>
+      <para>Specify module public methods:</para>
+      <programlisting language="JavaScript">function ModuleConstructor() {
+   
+   this.somePublicMethod = fucntion(p) { //public method
+      ...
+   }
+}</programlisting>
+      <para>Module public methods are available for the external code.</para>
+      <para>Add module private methods and fields:</para>
+      <programlisting language="JavaScript">function ModuleConstructor() {
+   var a, b, c;//private fields
+
+   this.somePublicMethod = fucntion(p) {
+      ...
+   }
+
+   fucntion somePrivateMethod() { //private method
+      ...
+   }
+}</programlisting>
     </section>
     <section>
-      <title>Module instances and dependencies resolution</title>
+      <title>Using modules instances</title>
       <para>You can create or get a module instance by the following ways:</para>
       <itemizedlist>
         <listitem>
-          <para>Create an instance of the module with the help of the  <literal>new</literal> keyword, using a module constructor<!--#1201-->, for example:</para>
+          <para>Create an instance of the module with the help of the  <literal>new</literal> keyword, using a module constructor, for example:</para>
           <programlisting language="JavaScript">var moduleInstance = new <replaceable>ModuleName</replaceable>();</programlisting>
           <para>where  <code>
               <replaceable>ModuleName</replaceable>
-            </code> is a module constructor<!--#1202-->, the name of which  matches the identifier<!--#1204--> of the module.</para>
+            </code> is a module constructor.</para>
         </listitem>
         <listitem>
-          <para>Create an instance of the module with the help of the <literal>new</literal> keyword using special <literal>Module</literal> constructor<!--#1207 changed as well in original document-->, for example:</para>
+          <para>Create an instance of the module with the help of the <literal>new</literal> keyword using special <literal>Module</literal> constructor, for example:</para>
           <programlisting language="JavaScript">var moduleInstance = new Module(<replaceable>ModuleName</replaceable>);</programlisting>
           <para>where  <code>
               <replaceable>ModuleName</replaceable>
-            </code> is the module ID string, for example, <literal>&quot;WebModule&quot;</literal>;</para>
+            </code> is the module constructor name string, for example, <literal>&quot;WebModule&quot;</literal>;</para>
         </listitem>
         <listitem>
-          <para>Get a module instance from the module pool:</para>
+          <para>Get a module instance from the modules pool using <literal>Modules</literal> object:</para>
           <programlisting language="JavaScript">var moduleInstance = Modules.get(<replaceable>ModuleName</replaceable>);</programlisting>
           <para>where <code>
               <replaceable>ModuleName</replaceable>
-            </code> is the module identifier<!--#1210--> string.</para>
+            </code> is the module  constructor name string.</para>
         </listitem>
         <listitem>
-          <para>Create a proxy stub for the server module, and the module code will be executed on the application server:</para>
+          <para>Create a proxy stub for the server module, to invoke the server code  on the application server:</para>
           <programlisting language="JavaScript">var moduleInstance = new ServerModule(<replaceable>ModuleName</replaceable>);</programlisting>
           <para>where  <code>
               <replaceable>ModuleName</replaceable>
-            </code> is the module identifier<!--#1211--> string; the server module should be marked with the <code>@public</code> annotation to enable access from the client code.</para>
+            </code> is the module constructor name string, the server module should be marked with the <code>@public</code> annotation to enable access from the external client code.</para>
         </listitem>
       </itemizedlist>
-      <para>The server module should be marked with the  <code>@public</code> annotation to enable access from the client code.  </para>
-      <para>By default, a stateful<!--#1214--> module instance is created on the server. This module exists in the context of the current user session. If a module is marked with the <code>@stateless</code> annotation, the module state is not supported and a new instance is created every time you call any of the module&apos;s<!--#1215--> methods.</para>
-      <para>To call the module&apos;s<!--#1216--> instance function, use the following structure, for example:</para>
+      <para>By default, a stateful module instance is created on the server. This module exists in the context of the current user session. If a module is marked with the <code>@stateless</code> annotation, the module state is not supported and a new instance is created every time you call any of the module&apos;s methods.</para>
+      <para>To call the module&apos;s public function, use the following structure, for example:</para>
       <programlisting language="JavaScript">var result = moduleInstance.getResult(10);</programlisting>
-      <para>Here the  <code>getResult</code> function is called, to which value of<!--#1218-->  <literal>10</literal> is passed as a parameter. The result of the function execution is returned, which is assigned to the  <code>result</code> local variable.</para>
-      <para>In the web browser, all application modules and other elements are loaded from the server before launching application. It is performed in the process of automatic dependencies resolution. </para>
-      <para>When executing the code on the application server or on the <application>Platypus client</application> it initially loads only the application element, the name of which is directly specified for running at the starting form, and then application elements, on which it depends, are loaded as needed in the process of automatic dependencies resolution.</para>
-      <para>Automatic dependencies resolution works as follows:</para>
+    </section>
+    <section>
+      <title>Dependencies resolving</title>
+      <para>When executing the code on a application server or on a desktop client, all application modules and other elements are loaded  before launching the application.</para>
+      <para>In a web browser, the runtime initially loads only the application element, the name of which is directly specified for running at the starting form, and then application elements, on which it depends, are loaded as needed in the process of automatic dependencies resolution.</para>
+      <para>Automatic dependencies resolving works as follows:</para>
       <itemizedlist>
         <listitem>
           <para>The source code is analyzed and expressions of the following types are searched for in it:</para>
@@ -171,19 +168,18 @@
           <programlisting language="JavaScript">Modules.get(&quot;<replaceable>ModuleName</replaceable>&quot;)</programlisting>
           <programlisting language="JavaScript">new Form(&quot;<replaceable>FormName</replaceable>&quot;)</programlisting>
           <programlisting language="JavaScript">new <replaceable>FormName</replaceable>()</programlisting>
-          <para>where a string literal, i.e. an application element identifier<!--#1220-->, is an argument of the designer or a <code>get</code> function. </para>
         </listitem>
         <listitem>
           <para>Application elements with the specified names are loaded.</para>
         </listitem>
         <listitem>
-          <para>The process continues for the loaded modules.</para>
+          <para>The process continues recursevly for the loaded modules.</para>
         </listitem>
       </itemizedlist>
-      <para>If it is not necessary or not possible to resolve the dependency automatically, for example, if you want to determine the called module dynamically, you can use the manual dependencies resolution. To do this, call the  <code>require</code>. global function. You can also use the  <code>require</code> function to download JavaScript resources.</para>
-      <programlisting language="JavaScript">require(<replaceable>param</replaceable>, <replaceable>callback</replaceable>)</programlisting>
-      <para>where  <replaceable>param</replaceable> is the module identifier<!--#1221--> name, the relative path to the JavaScript file in the application or an array of these elements;  <replaceable>callback</replaceable> is a function, which will be called when all the specified application elements are downloaded and available for calling.</para>
-      <para>Example of using the manual dependencies resolution function for modules:</para>
+      <para>If it is not necessary or not possible to resolve the dependency automatically, for example, if you want to determine the called module in a dynamic way, you can use the manual dependencies resolving. To do this, use the  <code>require</code> global function. You can also use the  <code>require</code> function to download plain JavaScript files.</para>
+      <programlisting language="JavaScript">require([<replaceable>param</replaceable>], <replaceable>callback</replaceable>)</programlisting>
+      <para>where  <replaceable>param</replaceable> is the module constructor name, or the relative path to the JavaScript file in the application, or an array of these elements;  <replaceable>callback</replaceable> is a function, which will be called when all the specified modules are downloaded and available.</para>
+      <para>Example of using the manual dependencies resolving:</para>
       <programlisting language="JavaScript">var moduleName1 = &quot;Module1&quot;,
     moduleName2 = &quot;Module2&quot;;
 require([moduleName1, moduleName2], function() {
@@ -192,7 +188,7 @@ require([moduleName1, moduleName2], function() {
   var m2 = new Module(moduleName2);
   m2.foo();
 });</programlisting>
-      <para>The following example shows how to use the  <code>require</code> function for loading the module by its identifier<!--#1222--> as well as the JavaScript code from the specified file and by URL:</para>
+      <para>The following example shows how to use the  <code>require</code> function for loading the module by its constructor name as well as the plain JavaScript file by specifing its path:</para>
       <programlisting language="JavaScript">require([&quot;Module1&quot;,
  &quot;localLib.js&quot;], function() {
   
@@ -203,8 +199,8 @@ require([moduleName1, moduleName2], function() {
   // Constructor LibObject is defined in localLib.js
   var o1 = new LibObject();
 });</programlisting>
-      <para>Relative paths are counted off from the <filename>src</filename> directory of the Platypus application. If the JavaScript file path matches the Platypus module identifier<!--#1223--> name, the Platypus module will be loaded.</para>
-      <para>The  <code>require</code> function also has a synchronous variant, which can be used in the server code. In this case, if you don&apos;t need to maintain compatibility with the client&apos;s<!--#1224--> code, the second parameter is optional:</para>
+      <para>Relative paths are counted off from the <filename>src</filename> directory of the Platypus application. If the JavaScript file path matches the Platypus module identifier name, the Platypus module will be loaded.</para>
+      <para>The  <code>require</code> function also has a synchronous variant, which can be used in the server code. In this case, if you don&apos;t need to maintain compatibility with the client&apos;s code, the second parameter is optional:</para>
       <programlisting language="JavaScript">require(&quot;localLib.js&quot;);
 // Constructor LibObject is defined in localLib.js
 var obj = new LibObject();</programlisting>
@@ -218,70 +214,45 @@ require([moduleName1, moduleName2], function() {
   m2.foo();
 });</programlisting>
       <para>This code leads to the automatic dependencies resolution regarding to the  <classname>SampleModule1</classname> и <classname>SampleModule2</classname>, as calls of their designers are present in the code in explicit form. </para>
-      <para>On the other hand, creating modules/forms/reports in the  <code>var m = new SampleModule1();</code> form is preferred. In order to avoid automatic resolution of dependencies of modules/forms/reports, which are created this way, explicitly specify module identifier<!--#1225--> names in the form of string literals the <function>require</function> function parameter:</para>
+      <para>On the other hand, creating modules in the  <code>var m = new SampleModule1()</code> form is preferred. In order to avoid automatic resolving of dependencies, explicitly specify module constructor names in the form of string literals the <function>require</function> function parameter:</para>
       <programlisting>require([&quot;SampleModule1&quot;, &quot;SampleModule2&quot;], function() {
   var m1 = new SampleModule1();
   m1.bar();
   var m2 = new SampleModule2();
   m2.foo();
 });</programlisting>
-      <para>This method of calling the <code>require</code> function excludes these explicitly specified modules/forms/reports identifier<!--#1226--> names in the first parameter from the automatic dependencies resolution. So,   <classname>SampleModule1</classname> and  <classname>SampleModule2</classname> will be loaded only when calling the <code>require</code>, rather than before starting the application. </para>
-    </section>
-    <section>
-      <title>Software code structure</title>
-      <para>Module software code should be written in JavaScript in accordance with the ECMA 262-3 standard.</para>
-      <para>Specify top-level scope variables<!--#1301--> as the module fields, which define its state:</para>
-      <programlisting language="JavaScript">/**
- * Module&apos;s field is defined at module&apos;s top level scope
- *
- */
-var moduleState;</programlisting>
-      <para>Module fields are available for the external code.</para>
-      <para>Specify top-level scope<!--#1302--> functions as the module functions available for calling from the outside — the public module interface:</para>
-      <programlisting language="JavaScript">/**
- * Public function is defined at module&apos;s top level scope
- *
- */
-function publicFunction(param) {
-
-// Function&apos;s implementation
-
-}</programlisting>
-      <para>Implement the module&apos;s<!--#1304--> logic in its functions.</para>
-      <note>
-        <para>Module code, which is included in the top-level domain (written out of any functions), is executed when initializing the module instance.</para>
-      </note>
+      <para>This method of calling the <code>require</code> function excludes these explicitly specified constructor names in the first parameter from the automatic dependencies resolution. So,   <classname>SampleModule1</classname> and  <classname>SampleModule2</classname> will be loaded only when calling the <code>require</code>, rather than before starting the application. </para>
     </section>
     <section>
       <title>Security</title>
-      <para>The executable module code is a resource, access to which can be delimitated on the basis of the current user roles. When a user, who has no rights to execute some code, tries to call it, a security exception <!--#1401-->is thrown.</para>
+      <para>The executable module code is a resource, access to which can be delimitated on the basis of the current user roles. When a user, who has no rights to execute some code, tries to call it, a security exception is thrown.</para>
       <para>In order to restrict access to the entire module code, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code>... annotation to the module header. Specify roles of users, who have access to the module code execution, in the  <code>@rolesAllowed</code> annotation, dividing them by spaces. If their annotation is missed, access to the module is granted to all users.</para>
       <para>You can delimit access to the module code on the level of an individual function. To do this, add the  <code>@rolesAllowed</code> annotation to the <abbrev> JsDoc</abbrev> function. The restrictions on the function level have a higher priority than the module level restrictions. For example, only a user with the <code>f2</code> role from the following example will have access to the <literal>role2</literal>: </para>
       <programlisting language="JavaScript">/**
- * @name WebSupport
+ * @module
  * @rolesAllowed role1 role2
  *
  */
-
-/**
- * @rolesAllowed role2
- *
- */
-function f2() {
-//...
+function ModuleName {
+   /**
+    * @rolesAllowed role2
+    */
+   this.f2 = function() {
+      //...
+   }
 }</programlisting>
-      <para>You can get access to information about the current user in the executable code; to do this, use the  <code>principal</code> property. This property is read-only. The object of information about the user contains the <code>name</code> property, i.e. the name of the current user, and the <code>hasRole(<replaceable>role</replaceable>)</code>method, which allows you to check if this user has any role:</para>
+      <para>Use the  <code>principal</code> property to get access to the information about the current user in the executable code.  The <code>principal</code>  property is read-only. The object of information about the user contains the <code>name</code> property, i.e. the name of the current user, and the <code>hasRole(<replaceable>role</replaceable>)</code>method, which allows you to check if this user has any role:</para>
       <programlisting language="JavaScript">Logger.info(&apos;Current user: &apos; + principal.name);
 
 if (principal.hasRole(&apos;Manager&apos;)) {
   // Some operations allowed only to managers ...
 }</programlisting>
-      <para>Use the <function>logout(<replaceable>callback</replaceable>())</function> global function, where <function><replaceable>callback</replaceable>()</function> — is a function, which will be called after the session is terminated<!--#1402-->. Open forms will be closed and the user will see the login and password entering form. </para>
+      <para>Use the <function>logout(<replaceable>callback</replaceable>())</function> global function, where <function><replaceable>callback</replaceable>()</function> — is a function, which will be called after the session is terminated. Open forms will be closed and the user will see the login and password entering form. </para>
     </section>
     <section>
-      <title>Resources downloading</title>
-      <para>Platypus Platform enables loading of resources in the form of binary data and text. Resources may be loaded using application relative paths or URLs<!--#1501-->. Relative paths are counted off from the <filename>src</filename> directory of the Platypus application. Use the <classname>Resource</classname>  object methods in the JavaScript software code.</para>
-      <para>To download a binary resource, use the <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code> method, where <parameter>path</parameter> is a relative <!--#1502 error in source document--> path or URL,  <parameter>callback(obj)</parameter> is a function, which will be called after the resource is loaded,    <parameter>obj</parameter> is an array of bytes of the downloaded resource for the server code and Platypus Client or an object of the  <classname>ArrayBuffer</classname> type for the HTML5 browser:</para>
+      <title>Resources loading</title>
+      <para>Platypus Platform enables loading of resources in the form of binary data and text. Resources may be loaded using their relative paths or URLs. Relative paths are counted off from the <filename>src</filename> root directory of the  application. Use the <classname>Resource</classname>  object methods for resource loading.</para>
+      <para>To download a binary resource, use the <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code> method, where <parameter>path</parameter> is a relative  path or URL,  <parameter>callback(obj)</parameter> is a function, which will be called after the resource is loaded,    <parameter>obj</parameter> is an array of bytes of the downloaded resource for the server code and Platypus Client or an object of the  <classname>ArrayBuffer</classname> type for the HTML5 browser:</para>
       <programlisting language="JavaScript">//Loads binary resource
 Resource.load(&quot;res/pict.bin&quot;, function(obj) {
   ...
@@ -290,7 +261,7 @@ Resource.load(&quot;res/pict.bin&quot;, function(obj) {
       <programlisting language="JavaScript">//Loads binary resource synchronously
 var obj = Resource.load(&quot;res/pict.bin&quot;);
 ...</programlisting>
-      <para>To download text, use the  <code>Resource.loadText(<parameter>path</parameter>, <parameter>encoding</parameter>, <parameter>callback</parameter><parameter>(txt</parameter>))</code> method, where <parameter>path</parameter>  is a relative <!--#1503 error in source document--> path or URL,  <parameter>encoding</parameter> is the name of the text encoding,  <parameter>callback(txt)</parameter> is a function, which will be called after the resource is loaded, <parameter>txt</parameter> is the downloaded text:</para>
+      <para>To download text, use the  <code>Resource.loadText(<parameter>path</parameter>, <parameter>encoding</parameter>, <parameter>callback</parameter><parameter>(txt</parameter>))</code> method, where <parameter>path</parameter>  is a relative  path or URL,  <parameter>encoding</parameter> is the name of the text encoding,  <parameter>callback(txt)</parameter> is a function, which will be called after the resource is loaded, <parameter>txt</parameter> is the downloaded text:</para>
       <programlisting language="JavaScript">//Loads text
 Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;, function(txt) {
   Logger.info(txt);
@@ -304,8 +275,8 @@ Logger.info(txt);</programlisting>
 Logger.info(Resource.applicationPath);</programlisting>
     </section>
     <section>
-      <title>Calling Java code from the JavaScript code</title>
-      <para>Calling Java  code from the JavaScript code is possible for applications, which are executed in the <application>Platypus client</application> or on the application server in any configuration.</para>
+      <title>Scripting Java</title>
+      <para>Calling Java classes from  JavaScript code is possible for applications, which are executed in the <application>Platypus client</application> or on the application server in any configuration.</para>
       <para>To access the Java packages and classes, use the <classname>Java</classname> global object. For example, to get access to the <classname>File</classname> class, use the  <classname>java.io.File</classname> object.</para>
       <programlisting language="JavaScript">//Deletes file
 var aFile = new java.io.File(&quot;/home/user/afile.txt&quot;);
@@ -358,8 +329,8 @@ var navData = sensor.getData();</programlisting>
     </section>
     <section>
       <title>Multithreading</title>
-      <para>You can use multithreading in JavaScript for the code, which is executed in the  <application>Platypus Client application</application> and on the <application>Platypus</application> Application Server in any configuration.</para>
-      <para>To run a function in a separate thread, call the  <methodname>invokeBackground</methodname> on the function&apos;s<!--#1601--> object, providing it with the necessary arguments:</para>
+      <para>You can use multithreading in JavaScript for the code, which is executed in the desktop client as well on the server code.</para>
+      <para>To run a function in a separate thread, call the  <methodname>invokeBackground</methodname> on the function&apos;s object, providing it with the necessary arguments:</para>
       <programlisting language="JavaScript">function process(p) {
   // lengthy operation here
 }
@@ -375,9 +346,9 @@ Logger.info(getThreadPoolSize());// 16</programlisting>
       <para>Variables and properties of JavaScript objects ensure security of reading and writing when accessing them from multiple threads.</para>
       <para>If it is necessary to implement the synchronization mechanism independently, use the  <literal>Lock</literal>, object, which is a JavaScript shell for the <classname>java.util.concurrent.locks.ReentrantLock</classname> Java class. Refer to the Java documentation for more information.</para>
       <warning>
-        <para>Multithreaded programming is complex<!--#1603 changed in the source-->. Incorrectly implemented thread synchronization plan can lead to hardly detectable errors and unexpected program behavior. Considering this fact, we recommend beginning developers to use <methodname>invokeBackground</methodname> with caution.</para>
+        <para>Multithreaded programming is rather complex. Incorrectly implemented thread synchronization scheme can lead to hardly detectable errors and unexpected program behavior.</para>
       </warning>
-      <para>To update the user interface items of an application, running in the  <application>Platypus client</application>, create<!--#1604--> a thread, which is not a GUI thread (a thread of events processing), call the  <methodname>invokeLater</methodname> function of the function object, which accesses the user interface items, for example:</para>
+      <para>To update the user interface items in the  <application>desktop client</application>, create a thread, which is not a GUI thread (a thread of events processing), call the  <methodname>invokeLater</methodname> function of the function object, which accesses the user interface items, for example:</para>
       <programlisting language="JavaScript">(function() {
   var text = complexComputation();
   
@@ -387,8 +358,8 @@ Logger.info(getThreadPoolSize());// 16</programlisting>
 }).invokeBackground();</programlisting>
     </section>
     <section>
-      <title>Logging</title>
-      <para>Logging system in Platypus is built on the base of the Java Logging  <abbrev>API </abbrev>infrastructure.</para>
+      <title>Logging messages</title>
+      <para>The logging subsystem  is built on the base of the Java Logging  <abbrev>API </abbrev>infrastructure.</para>
       <para>To write into the log, use the  <literal>Logger</literal> object, which is a shell for the  <classname>java.util.logging.Logger</classname> class. The <literal>Logger</literal> object is also available in the HTML5 web browser client.</para>
       <para>Example of using the  <literal>Logger</literal> object:</para>
       <programlisting language="JavaScript">Logger.info(&quot;info text&quot;);
@@ -399,9 +370,9 @@ Logger.severe(&quot;severe error&quot;);</programlisting>
       </note>
     </section>
     <section>
-      <title>Input-output</title>
+      <title>Filesystem input-output</title>
       <para>To read and write files, use tools provided by Java. </para>
-      <para>To read and write strings, use  <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code>, and <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code> global<!--#1701 changed in the source--> functions, where <parameter>path</parameter> &gt; is a path to the file, <parameter>text</parameter> is a string, <parameter>encoding</parameter> is the name of encoding. The  <parameter>encoding</parameter> parameter in both functions is optional and by default is set for the UTF-8 encoding. </para>
+      <para>To read and write strings, use  <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code>, and <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code> global functions, where <parameter>path</parameter> &gt; is a path to the file, <parameter>text</parameter> is a string, <parameter>encoding</parameter> is the name of encoding. The  <parameter>encoding</parameter> parameter in both functions is optional and by default is set for the UTF-8 encoding. </para>
       <para>Example of using functions for reading and writing strings to a file:</para>
       <programlisting language="JavaScript">//Read from one text file and write to another
 var str = readString(&apos;/home/user1/Documents/doc1.txt&apos;);
@@ -409,8 +380,11 @@ writeString(&apos;/home/user1/Documents/doc2.txt&apos;, str);</programlisting>
     </section>
     <section>
       <title>Working with XML</title>
-      <para>To work with data in the <abbrev>XML</abbrev> format, use the script syntax in accordance with the E4X specification <!--#1901 removed redundancy--> (EcmaScript for <abbrev>XML</abbrev>). The E4X technology can be used by the code,  which is executed in the Platypus Client and on the Platypus Application Server in any configuration. </para>
-      <para>Use E4X to create variables of the <abbrev>XML</abbrev> type: </para>
+      <para>To work with data in the <abbrev>XML</abbrev> format, use the script syntax in accordance with the E4X specification  (EcmaScript for <abbrev>XML</abbrev>). The E4X technology can be used by the code,  which is executed on Rhino runtime engine. </para>
+      <warning>
+        <para>This E4X is obsolete. Although it is still supported, its usage is discouraged in new projects. Try to avoid using it.</para>
+      </warning>
+      <para>XML type variables creation example: </para>
       <programlisting language="JavaScript">// Creates empty XML element
 var element = &lt;foo/&gt;;
 
@@ -558,23 +532,26 @@ XML.ignoreProcessingInstructions = false;</programlisting>
     </section>
   </section>
   <section>
-    <title>General information about the Platypus Platform data model</title>
-    <para>The data model is intended to provide the JavaScript program access to data obtained from the  <abbrev>database</abbrev>. Using the data model allows you to perform the following tasks:</para>
+    <title>Data model</title>
+    <para>The data model is a module&apos;s persistent state holder. It provides  access to the data obtained from a relational  <abbrev>database or any other data source</abbrev>. Using the data model allows you to perform the following tasks:</para>
     <itemizedlist>
       <listitem>
-        <para>Requesting data from the  <abbrev>database</abbrev></para>
+        <para>Fetch data from the  <abbrev>data source(s)</abbrev> to entities datasets.</para>
       </listitem>
       <listitem>
-        <para>Linking data from different entities after receiving from the  <abbrev>database</abbrev></para>
+        <para>Store consistent data in entities after receiving from the  <abbrev>database</abbrev>.</para>
       </listitem>
       <listitem>
-        <para>Saving changes made in the received data (adding, editing, deleting)</para>
+        <para>Automatically update the consistent  data  on model&apos;s input parameters changes.</para>
       </listitem>
       <listitem>
-        <para>Supporting events in the<!--#2001-->  data</para>
+        <para>Save changes made in the entities data (insert, update and delete).</para>
+      </listitem>
+      <listitem>
+        <para>Use entities data change events.</para>
       </listitem>
     </itemizedlist>
-    <para>A data model consists of entities and relations and is configured using the visual designer.</para>
+    <para>Data model consists of entities and links and is configured using the visual editor.</para>
     <figure>
       <title>Data model structure</title>
       <mediaobject>
@@ -583,74 +560,74 @@ XML.ignoreProcessingInstructions = false;</programlisting>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>To represent data from the database in the form of objects, entities are used.  The following types of entities can be used in the data model: </para>
+    <para>To store data from the database in the form of objects, entities with datasets are used.  The following types of entities can be used in the data model: </para>
     <itemizedlist>
       <listitem>
-        <para>Query Entity — is created on the base of an application element of the <emphasis>Query</emphasis>  type.</para>
+        <para>Regular entity — is created using a  module implements special datasouce interface methods or  a query application element.</para>
       </listitem>
       <listitem>
-        <para>Table — is a table in the database; when using it, a query entity, which selects all data from the table, is automatically created.</para>
+        <para>Table entity — is a table in the database; when using it, a query entity, which selects all data from the table, is automatically created.</para>
       </listitem>
     </itemizedlist>
     <note>
-      <para>An entity of the Table type can be used on the application server or in the <application>Platypus client</application> only in the 2-tier configuration. </para>
+      <para>A table entitycan be used on the application server or in the <application>desktop client</application> with direct database connection. </para>
     </note>
-    <para>Each entity can have parameters and contains a set of data — Rowset — with predefined fields according to the configuration of an application element of the  <emphasis>Query </emphasis> type, on the basis of which the entity was created.</para>
-    <para>Input parameters of the data model are contained in the<!--#2002--> special entity — Parameters — which is present in each data model and does not have a data set.</para>
-    <para>In general, a dataset is an array of objects, each of which corresponds to a string in the database sample.</para>
-    <para>There is a cursor for each dataset. The cursor can point to some row<!--#2005--> in the dataset and determines the current item of this set.</para>
-    <para>Entity fields and/or parameters may be connected by links<!--#2006-->. The following types of links<!--#2007--> can be used in the data model:</para>
+    <para>Each entity can have parameters and contains a dataset  with predefined fields according to the data schema defined by the module or query application element, on the basis of which the entity was created.</para>
+    <para>The parameters of the data model are contained in the special entity named Parameters — which is present in each data model and does not have a full-featured dataset.</para>
+    <para>In general, a dataset is an array of objects, each of which corresponds to a tuple in the query results.</para>
+    <para>There is a cursor for each dataset. The cursor can point to some row in the dataset and determines the current item of this set. Also the dataset cursor can point to the positions &quot;before the first row&quot; and &quot;after the last row&quot;. The entity cursor position can affect to the linked entities data.</para>
+    <para>Entity fields and parameters may be connected by links. The following link types are used in a data model:</para>
     <itemizedlist>
       <listitem>
-        <para>Query link<!--#2008--> — if the endpoint of connection is a parameter.</para>
+        <para>Query link — if the target field of connection is an entity parameter field.</para>
       </listitem>
       <listitem>
-        <para>Filter link<!--#2009--> — if the endpoint of connection is a field.</para>
+        <para>Filter link — if the target filed of connection is a entity data field.</para>
       </listitem>
       <listitem>
-        <para>Link<!--#2010-->is<!--#2011--> defined by external keys for the entity data fields.</para>
+        <para>Link  defined by the database table external keys.</para>
       </listitem>
     </itemizedlist>
-    <para>The query connection provides an update of the entity dataset according to the new parameter value (the endpoint of the <!--#2012-->link). The new parameter value is determined according to the starting point of the link<!--#2013-->. A value in the field of current dataset element or the parameter value can be used. When changing it, data is requested from the database.</para>
+    <para>The query link updates the target entity dataset according to the   parameter value change. The new parameter value is determined according to the source point of the link. Both dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, new data is requested from the database and reoladed in  the target entity.</para>
     <important>
       <para>When the module operates in the browser, data comes asynchronously from the network. When the module operates in the server modules on the application server, data comes synchronously. Even though when the model works on the Java SE client, data is also obtained synchronously, it is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser using the Platypus HTML5 client.</para>
     </important>
-    <para>The filter link<!--#2014--> provides the filtration of the entity dataset according to the new filter value (the endpoint of connection).  The new filter value is determined according to the starting point of connection. A value in the field of current dataset element or the parameter value can be used. When changing the value, a query is not send to the database.</para>
-    <para>The link<!--#2015--> defined by external keys is created automatically, if datasets contains fields included to the external key.  This type of connection does not affect the content of the datasets and is used to generate logical connections between instances of entities represented by the corresponding properties in these instances. Connection of this type is visually shown as a dashed line on the data model diagram.</para>
+    <para>The filter link provides the rows restriction of the target entity dataset according to the new filter value.  The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
+    <para>The link defined by a database table external keys is created automatically, if datasets contains fields included to this external key.  This type of connection does not affect the content of the datasets and is used to generate logical connections between instances of entities represented by the corresponding  OR/M JavaScript properties in these instances. The link of this type is visually shown as a dashed line on the data model diagram.</para>
     <note>
-      <para>To ensure operation of logic connections presentations of entity data instances, fields which are included to external keys should be present in the datasets in SQL queries without modifications.</para>
+      <para>To ensure operation of logic connections presentations of entity data instances, fields which are included to the  database table&apos;s primary and  external keys are required adn must be present in the datasets without modifications.</para>
     </note>
     <figure>
-      <title>Query and filtration connections</title>
+      <title>Query and filtration types links</title>
       <mediaobject>
         <imageobject>
           <imagedata align="center" fileref="images/dataModelLinks.png" format="PNG"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>The figure shows an example of operation of filter and query links<!--#2021--> for three entities in the data model. In the  <literal>Persons</literal> entity, a cursor is pointing to a string corresponding to a person named  <literal>Mike</literal>.</para>
-    <para>When initializing the module, data corresponding to the input parameter values is loaded into the model by default, then every change of input parameters leads to a cascade update of all datasets, which are associated with the modified parameter.</para>
-    <para>For any dataset you can determine the required number of incoming and outgoing links<!--#2022--> of both types. When building connections you should consider the following restrictions:</para>
+    <para>The figure shows an example of operation of filter and query links for the three entities in the data model. In the  <literal>Persons</literal> entity, a cursor is pointing to a string corresponding to a person named  <literal>Mike</literal>.</para>
+    <para>When initializing a module, data corresponding to the input parameter values is loaded into the model by default, then every change of input parameters leads to a cascade update of all datasets, which are directly or inderectly associated with the modified parameter.</para>
+    <para>For any dataset you can determine any number of incoming and outgoing links of both types. When building connections you should consider the following restrictions:</para>
     <itemizedlist>
       <listitem>
-        <para>Links<!--#2024--> should not create circular references.</para>
+        <para>Links should not create circular references.</para>
       </listitem>
       <listitem>
-        <para>Links<!--#2026--> field/parameter of &quot;left&quot; and &quot;right&quot; entities should match by type; types of connected fields and parameters should allow the mutual conversion of values, for example, if there&apos;s a number specified for the connection on the left, and a string specified the connection on the right, it is quite possible, since there is a possibility of an unambiguous conversion of a number to a string, but not vice versa.</para>
+        <para>Links fields and parameters of the souce and the target entities must match by its type: the types of connected fields and parameters must allow the mutual conversion of values. For example, it is possible to connect field if there&apos;s a number specified for the connection on the source, and a string specified the connection on the target, it is quite possible, since there is a possibility of an unambiguous conversion of a number to a string, but not vice versa.</para>
       </listitem>
     </itemizedlist>
-    <para>The batch change of the model input parameters is also possible; in this case, data is updated only after changing all the required parameters.</para>
+    <para>The batch change of the model input parameters is also possible, in this case, data is updated only after changing all the required parameters.</para>
     <para>Added, deleted and changed datasets of these entities objects are saved to the database or sent to the application server for subsequent saving when calling the  <methodname>save</methodname> function of the data model.</para>
   </section>
   <section>
-    <title>Data model configuring</title>
-    <para>Data model is configured using a visual editor.</para>
-    <para>For navigating data model elements, it is convenient to use a data model inspector. In the data model inspector, entity and model parameters are presented in the form of a tree structure. You can select an entity or a connection both in the visual editor and in the query inspector. Mutual positioning of the model data inspector and its diagram is possible.</para>
+    <title>Data model editor</title>
+    <para>A data model is configured using the visual editor.</para>
+    <para>For navigating data model elements, it is convenient to use a data model inspector panel. In the data model inspector, entity and model parameters are presented in the form of a tree structure. You can select an entity or a connection both in the visual editor and in the data model inspector. Mutual positioning of the model data inspector and its diagram is possible.</para>
     <para>To add a table entity to the data model, perform the following steps:   
   </para>
     <itemizedlist>
       <listitem>
-        <para>Select the  <guilabel>Datamodel</guilabel> tab of the module&apos;s<!--#2101--> editor.</para>
+        <para>Select the  <guilabel>Datamodel</guilabel> tab of the module&apos;s editor.</para>
       </listitem>
       <listitem>
         <para>Select the  <menuchoice>
@@ -707,9 +684,9 @@ XML.ignoreProcessingInstructions = false;</programlisting>
       </listitem>
     </itemizedlist>
     <note>
-      <para>Drag an existing query from the application elements tree on the project panel to the visual editor diagram of the data model to include it into the editable data model.</para>
+      <para>Drag an existing query or a module from the application elements tree on the project panel to the visual editor diagram of the data model to include it into the editable data model.</para>
     </note>
-    <para>The entity is<!--#2102--> available from the script code by its name. When you add a new entity, its name will be specified according to the identifier<!--#2105--> name of the application element of the Query type or a table name in the database. To change the name of the entity, perform the following steps:</para>
+    <para>An entity object and its data  is available from module&apos;s JavaScript code. When you add a new entity, its name will be specified by default, according to the query, or module consturctor name  or a table name in the database. To change the name of the entity, perform the following steps:</para>
     <itemizedlist>
       <listitem>
         <para>Go to the  <guilabel>Datamodel</guilabel> tab.</para>
@@ -718,7 +695,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
         <para>Select the corresponding entity on the data model diagram or in the data model inspector.</para>
       </listitem>
       <listitem>
-        <para>In the  <guilabel>Properties</guilabel> editing window specify the name value in the  <guilabel>name</guilabel> field; entity name is case-sensitive and must meet the requirements for the<!--#2106--> JavaScript identifiers.</para>
+        <para>In the  <guilabel>Properties</guilabel> editing window specify the name value in the  <guilabel>name</guilabel> field; entity name is case-sensitive and must meet the requirements for the JavaScript identifiers.</para>
       </listitem>
       <listitem>
         <para>Save the application element by clicking  <guibutton>Save All</guibutton>  on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
@@ -728,7 +705,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
           </keycombo> keyboard shortcut.</para>
       </listitem>
     </itemizedlist>
-    <para>To link the entity events with the handlers, perform the following actions:</para>
+    <para>To add entity  dataset events handlers, perform the following actions:</para>
     <itemizedlist>
       <listitem>
         <para>Go to the  <guilabel>Datamodel — Datasets</guilabel> tab.</para>
@@ -750,7 +727,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
           </keycombo> keyboard shortcut.</para>
       </listitem>
     </itemizedlist>
-    <para>After adding the event handler, a protected section of the handler will be added to the code editor:</para>
+    <para>After adding the event handler function, a protected section  will be added to the code editor:</para>
     <programlisting language="JavaScript">function rowDeleted() {
    //TODO add your handling code here:
 }</programlisting>
@@ -811,7 +788,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
           </keycombo> keyboard shortcut.</para>
       </listitem>
     </itemizedlist>
-    <para>Data model parameter properties:</para>
+    <para>Data model parameters have the following properties:</para>
     <itemizedlist>
       <listitem>
         <para><guilabel>Name</guilabel> — is the name of the parameter.</para>
@@ -835,7 +812,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
         <para><guilabel>Nullable</guilabel> — select, weather the  <literal>NULL</literal> value is available for the field.</para>
       </listitem>
     </itemizedlist>
-    <para>To edit the data model parameter, perform the following actions:</para>
+    <para>To edit the data model parameter properties, perform the following actions:</para>
     <itemizedlist>
       <listitem>
         <para>Select a parameter on the diagram or in the data model inspector.</para>
@@ -851,7 +828,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
           </keycombo>  keyboard shortcut.</para>
       </listitem>
     </itemizedlist>
-    <para>To delete a parameter, perform the following actions:</para>
+    <para>To delete a data model parameter, perform the following actions:</para>
     <itemizedlist>
       <listitem>
         <para>Select a parameter on the data model diagram.</para>
@@ -869,13 +846,13 @@ XML.ignoreProcessingInstructions = false;</programlisting>
           </keycombo> keyboard shortcut.</para>
       </listitem>
     </itemizedlist>
-    <para>To add the query or filter link<!--#2110-->:</para>
+    <para>To add a query or a filter link between two entites:</para>
     <itemizedlist>
       <listitem>
         <para>Go to the  <guilabel>Datasets</guilabel> tab of the data model editor.</para>
       </listitem>
       <listitem>
-        <para>Move the parameter to the field of an entity, with which you want to connect this parameter — visually the connection will be displayed as a line with an arrow between fields/parameters of the entity.</para>
+        <para>Move the parameter to the field of an entity, with which you want to connect this parameter — visually the connection will be displayed as a line with an arrow between fields or parameters of the entity.</para>
       </listitem>
       <listitem>
         <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
@@ -886,9 +863,9 @@ XML.ignoreProcessingInstructions = false;</programlisting>
       </listitem>
     </itemizedlist>
     <note>
-      <para>Connection of the &quot;query link<!--#2111-->&quot; type in the visual editor is highlighted by purple, connection of the &quot;filter link<!--#2112-->&quot; type is highlighted by blue, the endpoint of the connection is shown by an arrow.</para>
+      <para>Query link type in the visual editor is highlighted by purple. Filter link is highlighted by blue. The link target field is shown by an arrow.</para>
     </note>
-    <para>To delete a link<!--#2113-->, perform the following actions:</para>
+    <para>To delete a link, perform the following actions:</para>
     <itemizedlist>
       <listitem>
         <para>Go to the  <guilabel>Datasets</guilabel> tab.</para>
@@ -909,7 +886,7 @@ XML.ignoreProcessingInstructions = false;</programlisting>
           </keycombo> keyboard shortcut.</para>
       </listitem>
     </itemizedlist>
-    <para>To change the size of the data model visual presentation:</para>
+    <para>To zoom-in or zoom-out the data model visual presentation:</para>
     <itemizedlist>
       <listitem>
         <para>Go to the  <guilabel>Datasets</guilabel> tab.</para>
@@ -938,56 +915,53 @@ XML.ignoreProcessingInstructions = false;</programlisting>
     </itemizedlist>
   </section>
   <section>
-    <title>Software interface for working with data</title>
-    <para>This section provides information on working with data using the Data Model API.</para>
+    <title>Data model API</title>
+    <para>This section provides information on working with data using the data model API.</para>
+    <para>The data model is represented in the module constructor by the <code>this.model</code> object. For convenience, we will assing this object to the model variable:</para>
     <para>When developing an application, perform the following standard operations with database data: </para>
+    <programlisting language="JavaScript">function ModuleConstructor() {
+   var model = this.model;
+   //...
+}</programlisting>
     <itemizedlist>
       <listitem>
-        <para>Set the data model parameters — data of the connected entities is updated automatically.</para>
+        <para>Set the data model parameters to update the  data of the linked entities.</para>
       </listitem>
       <listitem>
-        <para>Get access to data for further processing, analysis, and so on.</para>
+        <para>Get access to data for data processing, analysis, and so on.</para>
       </listitem>
       <listitem>
-        <para>Get access to data in the linked<!--#2201--> entities.</para>
+        <para>Navigate  to the data in the linked entities.</para>
       </listitem>
       <listitem>
-        <para>Use the cursor to move through data rows<!--#2202 clarification-->.</para>
+        <para>Use the cursor to move through  the data rows.</para>
       </listitem>
       <listitem>
-        <para>Specify entity event handlers and write their code.</para>
+        <para>Specify entity event handler functions and write their JavaScript code.</para>
       </listitem>
       <listitem>
         <para>Alter, remove or add objects in the entity and allow the data model to save the changes.</para>
       </listitem>
       <listitem>
-        <para>Read entity metadata for special needs.</para>
+        <para>Read entity fields metadata for special needs.</para>
       </listitem>
     </itemizedlist>
     <section>
       <title>Data model parameters</title>
-      <para>To fetch<!--#2301--> data, selected by specific criteria, from the database, use the data model parameters.</para>
-      <para>Data model parameters are presented in the source code in the form of module variables with names, specified when configuring the data model:</para>
-      <programlisting language="JavaScript"><replaceable>paramName</replaceable> = newValue;</programlisting>
+      <para>Use the data model parameters to fetch specific data to the data model.</para>
+      <para>Data model parameters object is in the <code>model.params</code> property. To set a new value to the data model parameter:</para>
+      <programlisting language="JavaScript">model.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
       <para>where  <varname>
           <replaceable>paramName</replaceable>
-        </varname>  is the corresponding parameter, and  <literal>newValue</literal>  is a new value of the parameter (literal, variable, or expression). </para>
+        </varname>  is the corresponding parameter name, and  <literal>newValue</literal>  is a new value of the parameter (literal, variable, or expression). </para>
       <para>Below you can see a piece of code, the execution of which will result in loading the new model entity data by assigning a new value to the <parameter>documentID</parameter> parameter:</para>
-      <programlisting language="JavaScript">documentID = 1; // Changes data model parameter</programlisting>
-      <para>Access to the data model parameters is also possible using the alternate syntax. Data model parameters are presented by the  <varname>params</varname>  object in the module code.</para>
-      <para>To access the specific parameters, use the following code:</para>
-      <programlisting language="JavaScript">params.<replaceable>paramName</replaceable> = newValue;</programlisting>
-      <para>where <varname>
-          <replaceable>paramName</replaceable>
-        </varname> is the property, corresponding to the parameter, <literal>newValue</literal> is a new value of the parameter (literal, variable, or expression). </para>
-      <para>Below you can see a piece of code, the execution of which will result in loading the new model entity data similarly to the piece of code, given above:</para>
-      <programlisting language="JavaScript">params.documentID = 1; // Changes data model parameter</programlisting>
+      <programlisting language="JavaScript">model.params.documentID = 1; // Changes data model parameter</programlisting>
       <para>Each change of any data model parameter leads to the automatic update of data of the model entities, which are directly or indirectly connected with it.</para>
-      <important>
-        <para>Data in the model are updated only if the value of the model parameter was changed. To force updating of entity data, use the    <methodname>requery</methodname> function — see the &quot;Model&quot; chapter.</para>
-      </important>
+      <note>
+        <para>Datasets in the model are updated only if the value of the model parameter was changed. To force updating of entity data, use the    <methodname>requery</methodname> function.</para>
+      </note>
       <para>It is often necessary to change some parameters before updating data. To do this, use the  <methodname>beginUpdate</methodname> and <methodname>endUpdate</methodname> functions of the  <varname>params</varname> object:</para>
-      <programlisting language="JavaScript">params.beginUpdate();
+      <programlisting language="JavaScript">model.params.beginUpdate();
 try {
   // Update parameters here, 
   // for example:
@@ -1614,27 +1588,27 @@ function validateEmail(email) {
       <title>Access to an entity metadata</title>
       <para>The module software code has access to an entity metadata. It is possible to read types, names, descriptions of entity properties and parameters, and other metadata.</para>
       <para>To read the entity property metadata, use its  <varname>md</varname> property:</para>
-      <programlisting language="JavaScript">var entityMetadata = <replaceable>entityName</replaceable>.md;</programlisting>
+      <programlisting language="JavaScript">var entityMetadata = <replaceable>entityName</replaceable>.schema;</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity, which metadata you are interested in.</para>
       <para>The same data can be obtained using the object-instance of this entity:</para>
       <programlisting language="JavaScript">var item = <replaceable>entityName</replaceable>[<replaceable>itemIndex</replaceable>];// Gets some item
-var entityMetadata = item.md;</programlisting>
+var entityMetadata = item.schema;</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity, <literal>
           <replaceable>itemIndex</replaceable>
         </literal>  is an object index.</para>
       <para>To get access to the property metadata:</para>
-      <programlisting language="JavaScript">var propMetadata = <replaceable>entityName</replaceable>.md.<replaceable>propName</replaceable>;</programlisting>
+      <programlisting language="JavaScript">var propMetadata = <replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable>;</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname>  is an entity, <varname>
           <replaceable>propName</replaceable>
         </varname> is the name of the corresponding property.</para>
       <para>Example of code, which checks if the  <literal>id</literal> property of the documents entity is an object&apos;s<!--#2901--> key.</para>
-      <programlisting language="JavaScript">if (documents.md.id.pk) {
+      <programlisting language="JavaScript">if (documents.schema.id.pk) {
   Logger.info(&apos;id is key attribute of entity.&apos;);
 }</programlisting>
       <para>You can read metadata composed of the following for the entity properties:</para>
@@ -1742,28 +1716,28 @@ var entityMetadata = item.md;</programlisting>
         </tgroup>
       </informaltable>
       <para>To get the number of properties in the entity, use the  <code>length</code> property in the entity metadata object:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.md.length</programlisting>
+      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.schema.length</programlisting>
       <para>You can call the property metadata by index as an array element:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.md[<varname>i</varname>]</programlisting>
+      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.schema[<varname>i</varname>]</programlisting>
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity, and <varname>
           <replaceable>i</replaceable>
         </varname> is within the range from  <code>0</code> to <code>entityMetadata.length-1</code>.</para>
       <para>Below you can find an example of outputting all properties of the documents entity into the log: </para>
-      <programlisting language="JavaScript">for (var i = 0; i &lt; documents.md.length; i++) {
+      <programlisting language="JavaScript">for (var i = 0; i &lt; documents.schema.length; i++) {
   Logger.info(documents.md[i]);
 }</programlisting>
       <para>To read the entity parameter metadata, use the  <varname>md</varname> property of the  <varname>params</varname> object of a data model or entity:</para>
-      <programlisting language="JavaScript">var paramsMetadata = params.md;</programlisting>
-      <programlisting language="JavaScript">var paramsMetadata = <replaceable>entityName</replaceable>.params.md;</programlisting>
+      <programlisting language="JavaScript">var paramsMetadata = params.schema;</programlisting>
+      <programlisting language="JavaScript">var paramsMetadata = <replaceable>entityName</replaceable>.params.schema;</programlisting>
       <para>To get access to the metadata of a specific parameter:</para>
       <programlisting language="JavaScript">var paramMetadata = paramsMetadata.<replaceable>paramName</replaceable>;</programlisting>
       <para>where <varname>
           <replaceable>paramName</replaceable>
         </varname> is a name of the parameter.</para>
       <para>Example of code, which checks if the  <literal>documentID</literal> parameter of the  data model was changed:</para>
-      <programlisting language="JavaScript">if (params.md.documentID.modified) {
+      <programlisting language="JavaScript">if (params.schema.documentID.modified) {
   Logger.info(&apos;Parameter documentID was modified.&apos;);
 }</programlisting>
       <para>You can read metadata composed of the following for the parameter:</para>
@@ -1898,28 +1872,28 @@ var entityMetadata = item.md;</programlisting>
         </tgroup>
       </informaltable>
       <para>To get the number of model parameters, use the <code>length</code> property of the model parameter metadata object:</para>
-      <programlisting language="JavaScript">params.md.length</programlisting>
+      <programlisting language="JavaScript">params.schema.length</programlisting>
       <para>or just the  <code>length</code> property of the model parameters:</para>
       <programlisting language="JavaScript">params.length</programlisting>
       <para>To get the number of the entity parameters:</para>
-      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.md.length</programlisting>
+      <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.schema.length</programlisting>
       <para>or:</para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.length</programlisting>
       <para> where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity.</para>
       <para>To access parameter metadata by index, call it as an array element:</para>
-      <programlisting language="JavaScript">params.md[<replaceable>i</replaceable>]</programlisting>
+      <programlisting language="JavaScript">params.schema[<replaceable>i</replaceable>]</programlisting>
       <para>where <literal>
           <replaceable>i</replaceable>
-        </literal> is within the range from 0 to <code>params.md.length-1</code>.</para>
+        </literal> is within the range from 0 to <code>params.schema.length-1</code>.</para>
       <para>Below you can see an example of outputting all model data parameters into the log: </para>
-      <programlisting language="JavaScript">for (var i = 0; i &lt; params.md.length; i++) {
+      <programlisting language="JavaScript">for (var i = 0; i &lt; params.schema.length; i++) {
   Logger.info(params.md[i]);
 }</programlisting>
     </section>
     <section>
-      <title>Executing the SQL arbitrary code</title>
+      <title>Executing arbitrary SQL code</title>
       <para>In addition to using entities based on the application elements of the  <emphasis>Query</emphasis> type data model allows to execute <!--#3101--> an SQL arbitrary code. Using entities based on the application elements provides a number of advantages, such as providing the security management, ability to work with the client code, however, if necessary, you can also execute an SQL arbitrary code. This code can be generated dynamically, read from the resource file, etc.</para>
       <para>Execution of an SQL arbitrary code is available in the software code, which is executed on the server or in the Platypus Client in the 2-tier configuration.</para>
       <para>Use the following  <varname>model</varname> object methods to execute the SQL arbitrary code:</para>

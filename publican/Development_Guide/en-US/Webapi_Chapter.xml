@@ -4,12 +4,14 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Webapi_Chapter">
-  <title>Platypus Web</title>
+  <title>HTTP</title>
   <section>
-    <title>External HTTP interface</title>
-    <para>External HTTP interface allows you to call JavaScript code on the server over the network. The module method may be called using the GET or POST HTTP request.</para>
+    <title>HTTP interface</title>
+    <para>This feature allows you to invoke JavaScript code on the server over the network using simple  GET or POST HTTP requests.</para>
     <para>To make the module available for external requests, mark it with the <code>@public</code> annotation. </para>
-    <para>To call the server method, send a request by URL formed using the base URL of the Platypus servlet and the <filename>/api</filename> suffix for accessing Web API. Specify the request type, the module name, the method name and parameters of method calling in the URL parameters or in the body of the POST request in the <classname>application/x-www-form-urlencoded</classname> format. The request body will contain a value, which was returned in the executed method. If the JavaScript object is returned, it will be serialized as JSON; if the object of the <classname>String</classname> or XML type is returned, it will be returned as a string.</para>
+    <para>To invoke a server method, send a request by URL formed using the base URL of the Platypus Servlet and the <filename>/api</filename> suffix for accessing HTTP API. </para>
+    <para>Specify the request type, the module name, the method name and parameters of method calling in the URL parameters or in the body of the POST request in the <classname>application/x-www-form-urlencoded</classname> format. The request body will contain a value, which was returned in the executed method. </para>
+    <para>If the JavaScript object is returned, it will be serialized as JSON; if the object of the <classname>String</classname> or XML type is returned, it will be returned as a string, it is also possible to specify the response content type explicitly.</para>
     <para>Parameters of the module method execution request:</para>
     <informaltable>
       <tgroup cols="2">
@@ -55,177 +57,11 @@
         </tbody>
       </tgroup>
     </informaltable>
-    <para>Example of URL for calling a server module method, two parameters are passed to the module:  <parameter>Hello Platypus</parameter> string and  <parameter>1</parameter>  number (URL is not encoded):</para>
+    <para>Example of URL for calling a server module method (URL is not encoded):</para>
     <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=TestModule&amp;__methodName=say&amp;__param[]=Hello Platypus&amp;__param[]=1</uri></para>
   </section>
   <section>
-    <title>JavaScript API</title>
-    <para>JavaScript API is intended to implement the software interface of the module running on the application server, Platypus, from the Web-based application client code. This API can be used, for example, to call functions in the remote mode and to read/write properties. HTML pages of this application may be generated using any server technology, such as JSP. Server functions are usually called to request data, which can be displayed on the client, to saves changes, etc.</para>
-    <para>JavaScript API provides a set of relatively low-level functions and infrastructures to peform a remote call of procedures (RPC — Remote Procedure Call).</para>
-    <para>JavaScript API methods belong to the <code>platypus.api</code> object.</para>
-    <para>JavaScript API functions list:</para>
-    <informaltable>
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry align="center">Method</entry>
-            <entry align="center">Description</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>
-              <parameter>setServerUrl(url)</parameter>
-            </entry>
-            <entry>Specifies the server URL, at which the Platypus servlet is available, in the <parameter>url</parameter> parameter.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>login(callback)</parameter>
-            </entry>
-            <entry>
-              <para>Not used.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>logout(callback)</parameter>
-            </entry>
-            <entry>
-              <para>Closes the authorization session, <parameter>callback</parameter> is a function, which will be called upon successful session completion.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>hello(callback)</parameter>
-            </entry>
-            <entry>
-              <para>Not used.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>disposeServerModule(moduleName, callback)</parameter>
-            </entry>
-            <entry>
-              <para>Removes a module from the user&apos;s session, <parameter>moduleName</parameter> is a module name,  <parameter>callback</parameter>  is a function, which will be called upon successful execution.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>createServerModule(moduleName, callback)</parameter>
-            </entry>
-            <entry>
-              <para>Creates a module in the user&apos;s session,<parameter>moduleName</parameter> is a module name,  <parameter>callback</parameter> is a function, which will be called upon successful execution.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>executeServerModuleMethod(moduleName, methodName, params, callback(result))</parameter>
-            </entry>
-            <entry>
-              <para>Executes the server module method. If necessary, the module will be automatically created in the user&apos;s session. <parameter>moduleName</parameter> is a module name, <parameter>methodName</parameter>  is the name of the method in this module, <parameter>callback(result)</parameter> is a function, which will be called upon successful execution.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>keepAlive(callback)</parameter>
-            </entry>
-            <entry>
-              <para>Clears the timeout of the current session,<parameter>callback</parameter> is a function, which will be called upon successful execution.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>executeServerReport(moduleName)</parameter>
-            </entry>
-            <entry>
-              <para>Executes the server report, <parameter>moduleName</parameter> is a module name.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>getServerModuleProperty(moduleName, propName)</parameter>
-            </entry>
-            <entry>
-              <para>Gets the server module property, <parameter>moduleName</parameter> is a module name, <parameter>propName</parameter>  is the name of the property in this module. Is performed synchronously.</para>
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>setServerModuleProperty(moduleName, propName, propValue)</parameter>
-            </entry>
-            <entry>
-              <para>Sets the server module property. <parameter>moduleName</parameter> is a module name,  <parameter>propName</parameter>  is the property name in this module, <parameter>propValue</parameter> is the property value. Is performed synchronously.</para>
-            </entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-    <para>The module can be loaded into the user&apos;s session explicitly using the <parameter>createServerModule(moduleName, callback)</parameter> method  or automatically when calling the functions of server method execution or module properties reading/setting.</para>
-    <para>To use the Platypus Web API, connect the JavaScript library provided with the Platypus Platform: <filename>pwa.js</filename>. To enable Platypus Web API operation, you should connect the jQuery library.</para>
-    <programlisting language="JavaScript">&lt;html&gt;
- &lt;head&gt;
-     &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.min.js&quot;&gt;
-     &lt;/script&gt;
-     &lt;script type=&quot;text/javascript&quot; src=&quot;js/pwa.js&quot;&gt;
-     &lt;/script&gt;
-  &lt;/head&gt;
-  ...
-&lt;/html&gt; </programlisting>
-    <para>Set the base  <acronym>URL</acronym>, at which the Platypus application server is working, using the <methodname>platypus.api.setServerUrl(url)</methodname>function:</para>
-    <programlisting language="JavaScript">$(function() {
-  platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
-  ...
-});</programlisting>
-    <para>The following example shows the sample code, in which the <methodname>testModule.testMethod</methodname> server method is called, including the  <parameter>Hello</parameter> and  <parameter>Platypus</parameter> string parameters and a returned object, the<property>prop1</property> property of which will be displayed in the console:</para>
-    <programlisting language="JavaScript">$(function() {
-  platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
-  platypus.api.executeServerModuleMethod(
-     &apos;WebModule&apos;,
-     &apos;testMethod&apos;,
-      [&apos;Hello&apos;, &apos;Platypus&apos;],
-       function(result) { 
-          console.log(result.prop1);
-      })
-});</programlisting>
-    <para>Example of the corresponding server module code:</para>
-    <programlisting language="JavaScript">/**
- * @public
- * @name WebModule
- */
-
-function testMethod(p1, p2) {
-  return { prop1 : p1 + &apos; &apos; +  p2};
-}</programlisting>
-    <para>To access resources, which require authentication, use standard tools provided by the application server or the servlet container. The Platypus application server may be configured to work with BASIC or FORMS authentication. To terminate the authorized session of working with the Platypus application server, use the <methodname>platypus.api.logout</methodname> method:</para>
-    <programlisting language="JavaScript">platypus.api.logout();</programlisting>
-    <para>To make server methods calling more convenient, use the built-in support of the remote procedure calling — RPC (Remote Procedure Call). Server module methods calling is performed transparently for the client code. In fact, proxy object methods are called. Marshaling (serialization/deserialization of arguments and returned results as well as networking ) is performed automatically &quot;under the hood.&quot; For the server code, a module function is called &quot;as usual&quot; — deserialized JavaScript objects, which were transferred on the client side, are passed to the function arguments. The server method returns JavaScript object, which will be serialized, transferred over the network and deserialized on the client side.</para>
-    <para>To call the server module function or read/set property:</para>
-    <itemizedlist>
-      <listitem>
-        <para>Request to create a proxy object for the module by calling <methodname> platypus.server.module.get</methodname>, pass the module identifier as the first parameter, the second parameter is the function which will be called after creating a stub.</para>
-      </listitem>
-      <listitem>
-        <para>Call the stub object method by passing parameters; as the last parameter, passed the function which will be called asynchronously with an argument that is the result of the server function execution.</para>
-      </listitem>
-      <listitem>
-        <para>Read or set the proxy object property — then, the Ajax request will be executed synchronously.</para>
-      </listitem>
-    </itemizedlist>
-    <para>An example of the client code: after the page is loaded, the <methodname>testModule.testMethod</methodname> server method is called with the  <parameter>Hello</parameter> and  <parameter>Platypus</parameter> string parameters and the returned object, the <property>prop1</property> property of which will be displayed in the console:</para>
-    <programlisting language="JavaScript">$(function() {
- platypus.api.setServerUrl(&apos;/platypus/application/&apos;);
- platypus.server.Module.get(&quot;WebModule&quot;, testModuleReady);
- function testModuleReady(module) {
-     module.testMethod(&quot;Hello&quot;, &quot;world&quot;, 
-         function(result) {
-         console.log(result.prop1);
-      });
-}});</programlisting>
-  </section>
-  <section>
-    <title>Program access to the HTTP request and response</title>
+    <title>HTTP request and response objects</title>
     <para>To access HTTP request and response in the JavaScript server code by program means, use the <code>http</code> property, which is available, if the method is called by the external HTTP request.</para>
     <para>The  <code>http</code> property contains the following objects:</para>
     <informaltable>

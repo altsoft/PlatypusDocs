@@ -54,7 +54,7 @@
     </itemizedlist>
   </section>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_9">
-    <title>Form editing</title>
+    <title>Form editor</title>
     <para>You can edit the form layout in the visual form editor. To open the application element editor, double-click the application element in the project tree. </para>
     <para>To edit the form visual presentation:</para>
     <itemizedlist>

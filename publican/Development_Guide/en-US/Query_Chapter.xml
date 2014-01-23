@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Development_Guide-Query_Chapter">
-  <title>SQL Query</title>
+  <title>SQL query</title>
   <para><emphasis>Query</emphasis> in  Platypus is an application element which defines the SQL expression to be executed in database. In the Platypus Platform, a query&apos;s SQL text is preprocessed before execution.</para>
   <para>Queries  can solve several tasks:<itemizedlist>
       <listitem>
@@ -41,7 +41,7 @@
       </listitem>
     </itemizedlist></para>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_3">
-    <title>Creation</title>
+    <title>New query creation</title>
     <para>To create a new query, perform the following actions:
    
   </para>
@@ -74,7 +74,7 @@
     <para>After the query creation wizard completes the steps, a new empty query is created.</para>
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_4">
-    <title>Modification</title>
+    <title>Query editor</title>
     <para>A special editor is used to  edit a query SQL and its support configuration files. This editor allows you to perform  visual editing of the query and direct modicatation of the SQL source text.</para>
     <important>
       <para>Full-featured editing using the visual editor is possible if the connection to the database is established. If there is no connection to the database, only the SQL source modification is possible. </para>
@@ -91,13 +91,13 @@
           </menuchoice> global menu).</para>
         <itemizedlist>
           <listitem>
-            <para>Check the <guilabel>public</guilabel> option to make the query accessible on the server for calling  from the Platypus Client or the browser — the  <code>@public</code> annotation will be added to the query header.</para>
+            <para>Check the <guilabel>public</guilabel> option to make the query accessible to remote invocation, e.g. on the server and using  from the Platypus Client or  browser data model.</para>
           </listitem>
           <listitem>
-            <para>Check the  <guilabel>procedure</guilabel> option, if the query will be used to call the stored procedure — the <code>@procedure</code> annotation will be added to the query header.</para>
+            <para>Check the  <guilabel>procedure</guilabel> option, if the query will be used to call the stored procedure.</para>
           </listitem>
           <listitem>
-            <para>Check the  <guilabel>manual</guilabel> option, if you want to avoid automatic execution of the query, when it works as a part of the module, report, or form data model upon their initialization, for example, if the query contains the call of the stored procedure,  <literal>INSERT</literal> or <literal>UPDATE</literal> expressions — the  <code>@manual</code> annotation will be added to the query header.</para>
+            <para>Check the  <guilabel>manual</guilabel> option, if you want to avoid automatic execution of the query, when it works as a part of the module, report, or form data model upon their initialization, for example, if the query contains the call of the stored procedure,  <literal>INSERT</literal> or <literal>UPDATE</literal> expressions.</para>
           </listitem>
           <listitem>
             <para>Check the  <guilabel>readonly</guilabel> option, if you don&apos;t want to save  changes in the entities data, which were received using this query, in database.</para>
@@ -250,7 +250,7 @@
         <para><guilabel>Mode</guilabel> — define this field, if the parameter will be used as the stored procedure parameter.</para>
       </listitem>
     </itemizedlist>
-    <para>Modes of using a  parameter  in the stored procedure calls:</para>
+    <para>Stored procedure parameter modes:</para>
     <informaltable>
       <tgroup cols="2">
         <thead>
@@ -359,9 +359,9 @@
     </itemizedlist>
     <para>Modifications of the SQL query made in the visual editor are displayed in the source text on the  <guilabel>SQL Source</guilabel> panel, and vice versa. </para>
     <para>Modify the SQL source text in the editor, for example, in order to add custom conditions, or write the SQL source text from scratch. Use the query inspector to drag the table fields and parameters from the inspector tree right into the query source text. For the tables fields names, use the SQL code auto-completion function.</para>
-    <para>If necessary, database specific SQL clause can be provided for the query. Enter this SQL source text at the <guilabel>SQL Dialect Source</guilabel> tab. It will be necessary to enter the source text in the <guilabel>SQL Source</guilabel> field, this source text will be used for determination of the metadata for processing  the query results. If the specific SQL source text is provided, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
+    <para>If necessary, database specific SQL clause can be provided for the query.</para>
     <important>
-      <para>Use the database specific SQL only when it is really necessary, and only if there is no need to enable portability of applications to the different databases.</para>
+      <para>Use the database specific SQL only when it is really necessary, and only if there is no need to enable portability of applications to  different databases.</para>
     </important>
     <para>Query execution output fields are determined automatically as a result of the SQL source text processing. Check this output field in the inspector&apos;s <guilabel>Output Fields</guilabel> node. </para>
     <para>It is possible to change the output field type, as well as its description. To do that, perform the following actions:</para>
@@ -411,25 +411,23 @@
     </itemizedlist>
   </section>
   <section>
-    <title>SQL source</title>
+    <title>Query SQL sources</title>
     <section>
-      <title>Query header</title>
-      <para>For every Query application element, it is necessary to define its name within the application in accordance with the general requirements applicable to application elements names in Platypus. On creating a new query, its name will be defined according to  the file name,  spaces will be replaced by  underscores. After creating a query, the developer can change its name.</para>
-      <para>To specify the query name, use the  <code>@name</code> annotation in the query header block:</para>
+      <title>Main SQL source</title>
+      <para>The query source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. </para>
+      <para>SQL source text must begin with a special header, in a form of multiline SQL comment. </para>
+      <para>It is required to define a query name within the application in accordance with the  requirements applicable to JavaScript identifiers. On creating a new query in Platypus Application Designer, its name will be generated according to  the created files name,  spaces will be replaced by  underscores.</para>
+      <para>To specify the query name, use the  <code>@name</code> annotation in the query header:</para>
       <programlisting language="SQL">/**
  * Query header example
  * @name AllDocuments
  **/
 SELECT * 
 FROM Document</programlisting>
-      <para>Query name is mandatory.</para>
-      <para>In addition to the  <code>@name</code> annotation in the query header, comments and other annotations are acceptable. </para>
-    </section>
-    <section>
-      <title>SQL source</title>
-      <para>The query source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. The SQL source is located under the header and can include other comments. </para>
-      <para>The SQL query can contain  sampling of all  <code>SELECT * FROM table</code> fields or only the required ones. The following aliases are assigned to them: <code>SELECT a, b, c FROM table</code>. If the first type of sampling is used, the names of the properties that will be accessible in the JavaScript code are defined by the table columns names, and can be uppercased or lowercased. To create the code compatible with various databases, it is recommended to use the second option with explicit indication of the query output fields.</para>
-      <para>Platypus queries can contain named parameters: <parameter>:<replaceable>paramName</replaceable></parameter>.</para>
+      <para><code>@public</code> annotation enables using this query in a remote client&apos;s data model, which fetches and writes data over network.</para>
+      <para><code>@procedure</code> annotation enables using this query with database stored procedure.</para>
+      <para>The SQL <code>SELECT</code> query can contain  sampling of all  fields using <code>*</code> symbol or only the required ones using explicit fields definition.  If the first type of sampling is used, the names of the properties that will be accessible in the JavaScript code are defined by the table columns names, and can be uppercased or lowercased. To create the code compatible with various databases, it is recommended to use the second option with explicit indication of the query output fields, for example <code>SELECT a, b, c FROM table</code>.</para>
+      <para>Platypus queries can contain named parameters. Every parameter must begin with <code>:</code> prefix: <parameter>:<replaceable>paramName</replaceable></parameter>.</para>
       <para>Example of the SQL query source with the named parameters:</para>
       <programlisting language="SQL">/**
  * Device log for period of time
@@ -441,22 +439,43 @@ WHERE trackingLog.DEVICE_ID = :deviceId
 AND trackingLog.TIME &gt;= :timeFrom 
 AND trackingLog.TIME &lt;= :timeTo
 ORDER BY trackingLog.TIME ASC</programlisting>
-      <para>Platypus queries can be used again in other queries. To use a <emphasis>Query</emphasis> as the sub-query, include its name in the SQL source:</para>
+      <para>Platypus queries can be used again in other queries. To use a query  as the sub-query, include its name in the SQL source with <code>#</code> prefix: <code>#<replaceable>SubQuery</replaceable></code>:</para>
       <programlisting language="SQL">/**
  * Time log priority filter
  * @name Filter
  **/
 SELECT * 
-FROM Timelog timeLog
+FROM #Timelog timeLog
 WHERE timeLog.PRIORITY &gt; :priority</programlisting>
-      <para>In the example above, a query named <code>Timelog</code> is used as the sub-query in the <code>Filter</code>  query.<note>
+      <para>In the example above, a query named <code>
+          <code>Timelog</code>
+        </code> is used as the sub-query in the <code>Filter</code>  query.<note>
           <para>If the sub-query contains parameters, it is necessary to associate them with the parameters of the query into which it was embedded.</para>
         </note></para>
     </section>
     <section>
-      <title>Saving the data changes</title>
-      <para><literal>SELECT</literal> query returns a set of entities which can be processed using the JavaScript code. Data of these entities can change while the application is running. The data changes will be automatically converted into the set of SQL commands when saving to the database. To run this mechanism, data returned by the query should contain  primary keys of all relevant tables. This enables the JavaScript ORM to determine which properties of the resulting entities are in charge of their identification. </para>
-      <para>In order to determine, which tables mentioned in the query can be modified using this mechanism, use the following annotations: <code>@writable <replaceable>table1</replaceable><replaceable> table2</replaceable></code> ... For this annotation, specify the list of tables, using spaces to delimit them. If there is no  <code>@writable</code> annotation, all  tables mentioned in the query will become writable. To disable writing to all tables mentioned in the query, add the <code>@readonly</code> annotation to the query header.  </para>
+      <title>Dialect SQL source</title>
+      <para>Enter the database specific SQL source text at the <guilabel>SQL Dialect Source</guilabel> tab. It will be necessary to enter the source text in the <guilabel>SQL Source</guilabel> field, this source text will be used for determination of the metadata for processing  the query results. If the specific SQL source text is provided, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
+      <important>
+        <para>Use the database specific SQL only when it is really necessary, and only if there is no need to enable portability of applications to the different databases.</para>
+      </important>
+      <para>An example of a Oracle  database specific hierarchical query:</para>
+      <programlisting language="SQL">SELECT LEVEL, ename &quot;employee&quot;, empno, mgr &quot;manager&quot;
+ FROM emp START WITH mgr IS NULL
+ CONNECT BY PRIOR empno = mgr;</programlisting>
+      <para>For the dialect query example above the main SQL source can be:</para>
+      <programlisting language="SQL">/**
+ * Hierarchial employees query
+ * @name Employees
+ **/
+SELECT * FROM emp</programlisting>
+    </section>
+    <section>
+      <title>Automatic data saving</title>
+      <para><literal>SELECT</literal> query type returns a dataset which is loaded to the some data model and can be processed using the JavaScript code. Concrete data values of these dataset  can be changed  while the application is running. When enabled, this data changes can be automatically converted into the set of SQL <code>INSERT</code> and <code>UPDATE</code> commands when saving to the database. To make  this mechanism working, the dataset returned by the query should contain  primary keys of all relevant tables. This enables the JavaScript O/RM to determine to which database table row write the changed data. </para>
+      <para>In order to determine, which tables mentioned in the query can be modified using this mechanism, use the following annotations: <code>@writable <replaceable>table1</replaceable><replaceable> table2</replaceable></code> ... For this annotation, specify the list of tables, using spaces to delimit them.</para>
+      <para>If there is no  <code>@writable</code> annotation, all  tables mentioned in the query will become writable. </para>
+      <para>To disable writing to all tables mentioned in the query, add the <code>@readonly</code> annotation to the query header.  </para>
       <para>In the example  below only the Document table is writable:</para>
       <programlisting language="SQL">/**
  * @name docsCategories
@@ -468,9 +487,10 @@ INNER JOIN Category c
 ON d.CategoryID = c.CATEGORY_ID</programlisting>
     </section>
     <section>
-      <title>Security</title>
-      <para>Generally, access to  data in the database must be differentiated for various user groups. In Platypus there is an embedded security mechanism which implements the  constraints of  access to the resources based on the roles of the current user  (the user who is performing the current operation).</para>
-      <para>To limit the access to the query for certain roles, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code> ... annotation into the query header. For the added annotation, specify the list of roles  delimiting them by spaces. The roles listed in the  <code>@rolesAllowed</code> annotation are granted with  rights both for  reading and  writing data to the database. If more detailed definition of the data access policy is required, use the  <code>@rolesAllowedRead</code> and <code>@rolesAllowedWrite</code> annotations. </para>
+      <title>Data access security</title>
+      <para>Generally, access to  data in the database must be differentiated for various user groups. In Platypus there is an embedded security mechanism which implements the  constraints of  access to the resources based on the roles of the logged in user who is performing the current operation.</para>
+      <para>To limit the access to the query for certain roles, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code> ... annotation into the query header. For the added annotation, specify the list of roles  delimiting them by spaces. </para>
+      <para>The roles listed in the  <code>@rolesAllowed</code> annotation are granted with  rights both for  reading and  writing data to the database. If more detailed definition of the data access policy is required, use the  <code>@rolesAllowedRead</code> and <code>@rolesAllowedWrite</code> annotations. </para>
       <para>Specify the list of roles, for which only data reading is allowed, in the  <code>@rolesAllowedRead</code> annotation. </para>
       <para>Specify the list of roles, for which only data writing is allowed, in the <code>@rolesAllowedWrite</code> annotation.</para>
       <para>If none of the   <code>@rolesAllowed</code>, <code>@rolesAllowedRead</code>, or <code>@rolesAllowedWrite</code> annotations are specified for the query, the database data manipulated by the query are readable and writable for any user.</para>

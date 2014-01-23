@@ -5,7 +5,7 @@
 ]>
 <chapter id="chap-Development_Guide-Report_Chapter">
   <title>Report</title>
-  <para>The application element of the <emphasis>Report</emphasis> type is intended to provide information in the form of a report — as a <application>Microsoft Excel</application> file. You can open a generated report in a spreadsheet application, sent it to print or save it to disk.</para>
+  <para>The  <emphasis>Report</emphasis> is intended to provide information in the form of a report — as a <application>Microsoft Excel</application> file. You can open a generated report in a spreadsheet application, sent it to print or save it to disk.</para>
   <para>The  <emphasis>Report</emphasis> application element includes the following:</para>
   <itemizedlist>
     <listitem>
