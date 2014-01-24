@@ -60,8 +60,8 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-Development_Guide-Intro_Chapter-Test_Section_2">
-    <title>Application elements </title>
+  <section>
+    <title>Application architecture</title>
     <para>Platypus  applications have a tree structure which contains  directories and files. Some files or file groups have a special meaning to the platform and called application elements. That is the building bricks for an application.</para>
     <para> The types of application elements in Platypus Platform are:
   </para>
@@ -85,9 +85,6 @@
     <note>
       <para>During the  development process, the application tree is stored on the disk in the project&apos;s <filename>src</filename> subfolder, but for production operation the application, including its resources can be deployed directly in the  database <literal>MTD_ENTITIES</literal> table.</para>
     </note>
-  </section>
-  <section>
-    <title>Application architecture</title>
     <para>In general, the platform works on three-tier archeticture including presentation, logic and database tiers. The presentation and the logic tier can be combined in some configurations.</para>
     <figure>
       <title>Applicaton tiers</title>

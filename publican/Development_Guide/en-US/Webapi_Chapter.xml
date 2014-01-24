@@ -7,7 +7,7 @@
   <title>HTTP</title>
   <section>
     <title>HTTP interface</title>
-    <para>This feature allows you to invoke JavaScript code on the server over the network using simple  GET or POST HTTP requests.</para>
+    <para>Platypus Platform allows you to invoke JavaScript code on the server over the network using simple  GET or POST  requests.</para>
     <para>To make the module available for external requests, mark it with the <code>@public</code> annotation. </para>
     <para>To invoke a server method, send a request by URL formed using the base URL of the Platypus Servlet and the <filename>/api</filename> suffix for accessing HTTP API. </para>
     <para>Specify the request type, the module name, the method name and parameters of method calling in the URL parameters or in the body of the POST request in the <classname>application/x-www-form-urlencoded</classname> format. The request body will contain a value, which was returned in the executed method. </para>
@@ -61,8 +61,18 @@
     <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=TestModule&amp;__methodName=say&amp;__param[]=Hello Platypus&amp;__param[]=1</uri></para>
   </section>
   <section>
-    <title>HTTP request and response objects</title>
-    <para>To access HTTP request and response in the JavaScript server code by program means, use the <code>http</code> property, which is available, if the method is called by the external HTTP request.</para>
+    <title>Request and response objects</title>
+    <para>To access HTTP request and response in the JavaScript server code, use the <code>http</code> property, which is available, if the method is called by the external HTTP request.</para>
+    <programlisting language="JavaScript">function ModuleConstructor() {
+   var http = this.http;
+   
+   /**
+   * @public
+   */
+   this.doSomething() {
+       //..
+   }
+}</programlisting>
     <para>The  <code>http</code> property contains the following objects:</para>
     <informaltable>
       <tgroup cols="2">

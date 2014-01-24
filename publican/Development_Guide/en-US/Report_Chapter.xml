@@ -33,7 +33,7 @@
     <para>For more detailed information about tags, which are used in the report template, see documentation for the jXLS library at: <ulink url="http://jxls.sourceforge.net">http://jxls.sourceforge.net</ulink></para>
   </note>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_8">
-    <title>Report creation</title>
+    <title>New report creation</title>
     <para>To create a  report, perform the following actions:
    
   </para>
@@ -54,7 +54,7 @@
     </itemizedlist>
   </section>
   <section>
-    <title>Report editing</title>
+    <title>Report editor</title>
     <para> To open the application element editor, double-click the application element in the project tree. </para>
     <para>You can edit the report template in the spreadsheet application. The following applications are used by default for different operating systems:</para>
     <itemizedlist>
@@ -89,24 +89,22 @@
           </keycombo> shortcut.</para>
       </listitem>
     </itemizedlist>
-    <note>
-      <para>We recommend the following: a report should contain the software code, which is directly responsible for the report generation.</para>
-    </note>
   </section>
   <section>
     <title>Report template</title>
-    <para>Edit the report template in the spreadsheet application.</para>
-    <section>
-      <title>Objects and collections</title>
-      <para>Place tags for linking to JavaScript objects and model entities in the template cells. To access data, use the following syntax: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, where <replaceable>objectName</replaceable> is the name of a JavaScript object, JavaScript objects array or model entity, <replaceable>propertyName</replaceable>  is the object property. </para>
-      <para>Example of outputting the name of a document into cells:</para>
-      <programlisting language="JavaScript">${document.name}</programlisting>
-      <para>Similarly, you can gain access to a complex object:</para>
-      <programlisting language="JavaScript">${library.documents.name}</programlisting>
-      <para>You can use multiple tags in a single cell, for example:</para>
-      <programlisting language="JavaScript">Employee: ${employee.name} - ${employee.age} years</programlisting>
-      <para>In the software code, define objects, which will be available in the template tags:</para>
-      <programlisting language="JavaScript">/**
+  </section>
+  <section>
+    <title>Template tags</title>
+    <para>Edit the report template in a spreadsheet application.</para>
+    <para>Place tags for linking to JavaScript objects and model entities in the template cells. To access data, use the following syntax: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, where <replaceable>objectName</replaceable> is the name of a JavaScript object, JavaScript objects array or model entity, <replaceable>propertyName</replaceable>  is the object property. </para>
+    <para>Example of outputting the name of a document into cells:</para>
+    <programlisting language="JavaScript">${document.name}</programlisting>
+    <para>Similarly, you can gain access to a complex object:</para>
+    <programlisting language="JavaScript">${library.documents.name}</programlisting>
+    <para>You can use multiple tags in a single cell, for example:</para>
+    <programlisting language="JavaScript">Employee: ${employee.name} - ${employee.age} years</programlisting>
+    <para>In the software code, define objects, which will be available in the template tags:</para>
+    <programlisting language="JavaScript">/**
  * @name documentReport
  */
 var library = {};
@@ -115,29 +113,26 @@ library.documens = [
  {name:&apos;bar&apos;},
  {name:&apos;baz&apos;}
 ];</programlisting>
-      <para>Add entities, which will be linked to the template, to the report data model.</para>
-      <para>When outputting collections, a new row is added for each collection element and the style of a cell, which contains tag, is set for the cells of this row.</para>
-      <para>If you know the size of the collection beforehand, you can use the template rows instead of adding new rows for each element. To do this, set  <literal>true</literal> for the <property>fixed</property> special property of the collection.</para>
-      <para>If necessary, specify dynamic styles for cells. These styles will vary depending on the contents of the cell. To do this:</para>
-      <itemizedlist>
-        <listitem>
-          <para>Define the style, which should be applied dynamically to the collection element cell, for the special template cell, define a label for this cell, for example,  <code>$[0]customRow</code>; this cell can be placed on a hidden template cell.</para>
-        </listitem>
-        <listitem>
-          <para>Set a special <property>cellTemplateLabel</property> property for the collection element by inserting a link to the style cell into it, for example <code>cellTemplateLabel=&apos;customRow&apos;</code>.</para>
-        </listitem>
-      </itemizedlist>
-    </section>
-    <section>
-      <title>Tags</title>
-      <para>Use special tags in the template in order to predetermine the transformation of data when generating the report.</para>
-      <para>To display collections, use the <literal>jx:forEach</literal> tag:</para>
-      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${departments}&quot; var=&quot;department&quot;&gt;
+    <para>Add entities, which will be linked to the template, to the report data model.</para>
+    <para>When outputting collections, a new row is added for each collection element and the style of a cell, which contains tag, is set for the cells of this row.</para>
+    <para>If you know the size of the collection beforehand, you can use the template rows instead of adding new rows for each element. To do this, set  <literal>true</literal> for the <property>fixed</property> special property of the collection.</para>
+    <para>If necessary, specify dynamic styles for cells. These styles will vary depending on the contents of the cell. To do this:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Define the style, which should be applied dynamically to the collection element cell, for the special template cell, define a label for this cell, for example,  <code>$[0]customRow</code>; this cell can be placed on a hidden template cell.</para>
+      </listitem>
+      <listitem>
+        <para>Set a special <property>cellTemplateLabel</property> property for the collection element by inserting a link to the style cell into it, for example <code>cellTemplateLabel=&apos;customRow&apos;</code>.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Use special tags in the template in order to predetermine the transformation of data when generating the report.</para>
+    <para>To display collections, use the <literal>jx:forEach</literal> tag:</para>
+    <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${departments}&quot; var=&quot;department&quot;&gt;
   ${department.name} | ${department.chief}
 &lt;/jx:forEach&gt;</programlisting>
-      <para>The <literal>jx</literal> tags may be embedded into each other. If you place opening and closing tags on the same row, columns in this row will be duplicated. Place the <literal>jx:forEach</literal> and  <literal>jx:forEach</literal> tags on different rows to enable duplication of rows between these tags. Other cells in rows, which contain opening and closing tags, will be ignored.</para>
-      <para>The  <literal>jx:forEach</literal> tag allows grouping of collection data by one of the properties. To arrange grouping, use the <property>groupBy</property> and <property>groupOrder</property>, attributes, which determine the property to be used for grouping data and the order of outputting groups, for example:</para>
-      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; groupBy=&quot;age&quot;&gt;
+    <para>The <literal>jx</literal> tags may be embedded into each other. If you place opening and closing tags on the same row, columns in this row will be duplicated. Place the <literal>jx:forEach</literal> and  <literal>jx:forEach</literal> tags on different rows to enable duplication of rows between these tags. Other cells in rows, which contain opening and closing tags, will be ignored.</para>
+    <para>The  <literal>jx:forEach</literal> tag allows grouping of collection data by one of the properties. To arrange grouping, use the <property>groupBy</property> and <property>groupOrder</property>, attributes, which determine the property to be used for grouping data and the order of outputting groups, for example:</para>
+    <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; groupBy=&quot;age&quot;&gt;
   Age: ${group.item.age}
   &lt;jx:forEach items=&quot;${group.items}&quot; var=&quot;employee&quot;&gt;
     ${employee.name} |
@@ -145,50 +140,49 @@ library.documens = [
     ${employee.bonus}
   &lt;/jx:forEach&gt;
 &lt;/jx:forEach&gt;</programlisting>
-      <para>In this example, we group employees by age. When grouping, a new <property>group</property> object is created in the context of the cycle. This object contains two properties: <property>item</property>, which is the current group, and <property>items</property>, which is the collection of all objects in the group. </para>
-      <para>By default, if the <property>groupOrder</property> attribute is not present when grouping, the original order of items in the collection is maintained. Use the <property>groupOrder</property> attribute and assign <literal>asc</literal> and  <literal>desc</literal> values for forward and reverse sorting to this attribute.</para>
-      <para>If the  <property>groupBy</property> attribute is used in the <literal>jx:forEach</literal> tag, the var attribute is ignored.</para>
-      <para>Use the <property>select</property> attribute to determine elements of the collection which should be included into the report. In the example below, we include only employees with salary greater than 2000 into the report:</para>
-      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; select=&quot;${employee.payment &gt; 2000}&quot;&gt;
+    <para>In this example, we group employees by age. When grouping, a new <property>group</property> object is created in the context of the cycle. This object contains two properties: <property>item</property>, which is the current group, and <property>items</property>, which is the collection of all objects in the group. </para>
+    <para>By default, if the <property>groupOrder</property> attribute is not present when grouping, the original order of items in the collection is maintained. Use the <property>groupOrder</property> attribute and assign <literal>asc</literal> and  <literal>desc</literal> values for forward and reverse sorting to this attribute.</para>
+    <para>If the  <property>groupBy</property> attribute is used in the <literal>jx:forEach</literal> tag, the var attribute is ignored.</para>
+    <para>Use the <property>select</property> attribute to determine elements of the collection which should be included into the report. In the example below, we include only employees with salary greater than 2000 into the report:</para>
+    <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; select=&quot;${employee.payment &gt; 2000}&quot;&gt;
  ${employee.name} | ${employee.payment} | ${employee.bonus}
 &lt;/jx:forEach&gt;</programlisting>
-      <para>To get access to the index of the current collection element, use the <property>varStatus</property>, attribute and set the name of the object, to which the status object will be assigned, for this attribute. The status object have only an <property>index</property> property, for example:</para>
-      <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; varStatus=&quot;status&quot;&gt;
+    <para>To get access to the index of the current collection element, use the <property>varStatus</property>, attribute and set the name of the object, to which the status object will be assigned, for this attribute. The status object have only an <property>index</property> property, for example:</para>
+    <programlisting language="JavaScript">&lt;jx:forEach items=&quot;${employees}&quot; var=&quot;employee&quot; varStatus=&quot;status&quot;&gt;
  | ${status.index} 
  | ${employee.name} 
  | ${employee.payment} 
  | ${employee.bonus}
 &lt;/jx:forEach&gt;</programlisting>
-      <para>Use the <literal>jx:if</literal> tag to control output depending on the condition:</para>
-      <programlisting language="JavaScript">&lt;jx:if test=&quot;${department.chief.payment &gt; 2000.0}&quot;&gt;
+    <para>Use the <literal>jx:if</literal> tag to control output depending on the condition:</para>
+    <programlisting language="JavaScript">&lt;jx:if test=&quot;${department.chief.payment &gt; 2000.0}&quot;&gt;
 Chief Name: ${department.chief.name}
 &lt;/jx:if&gt;</programlisting>
-      <para>You can use the <literal>jx:if</literal> tag to show or hide columns; to do this, place opening and closing tags in the same row — when exporting data, columns contained in the body of the tag will be displayed or hidden.</para>
-      <para>Use the <literal>jx:outline</literal> tag to group rows:</para>
-      <programlisting language="JavaScript">&lt;jx:outline&gt;
+    <para>You can use the <literal>jx:if</literal> tag to show or hide columns; to do this, place opening and closing tags in the same row — when exporting data, columns contained in the body of the tag will be displayed or hidden.</para>
+    <para>Use the <literal>jx:outline</literal> tag to group rows:</para>
+    <programlisting language="JavaScript">&lt;jx:outline&gt;
    //any rows can go here
 &lt;/jx:outline&gt;</programlisting>
-      <para>The  <literal>jx:outline</literal> tag has an optional <property>detail</property> attribute, which determines the state of the row group. By default, it is set to <literal>false</literal>, which means that the row group will be hidden.</para>
-    </section>
-    <section>
-      <title>Graphs and charts</title>
-      <para>Use standard spreadsheet tools for outputting graphs and charts. </para>
-      <para>If a collection with a fixed number of elements is used, just configure the <application>Excel</application> charts for the range of cells in which data will be displayed.</para>
-      <para>If you don&apos;t know the number of elements in the collection, choose the method of using <literal>OFFSET</literal> and <literal>COUNTA</literal> functions and creating the named range.</para>
-      <note>
-        <para>Read the articles at the following websites to find out more about creating charts with a dynamic range of data:<itemizedlist>
-            <listitem>
-              <para><ulink url="http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518">http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518</ulink></para>
-            </listitem>
-            <listitem>
-              <para><ulink url="http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html">http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html</ulink></para>
-            </listitem>
-          </itemizedlist></para>
-      </note>
-    </section>
+    <para>The  <literal>jx:outline</literal> tag has an optional <property>detail</property> attribute, which determines the state of the row group. By default, it is set to <literal>false</literal>, which means that the row group will be hidden.</para>
   </section>
   <section>
-    <title>Report generation software code</title>
+    <title>Graphs and charts</title>
+    <para>Use standard spreadsheet tools for outputting graphs and charts. </para>
+    <para>If a collection with a fixed number of elements is used, just configure the <application>Excel</application> charts for the range of cells in which data will be displayed.</para>
+    <para>If you don&apos;t know the number of elements in the collection, choose the method of using <literal>OFFSET</literal> and <literal>COUNTA</literal> functions and creating the named range.</para>
+    <note>
+      <para>Read the articles at the following websites to find out more about creating charts with a dynamic range of data:<itemizedlist>
+          <listitem>
+            <para><ulink url="http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518">http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518</ulink></para>
+          </listitem>
+          <listitem>
+            <para><ulink url="http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html">http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html</ulink></para>
+          </listitem>
+        </itemizedlist></para>
+    </note>
+  </section>
+  <section>
+    <title>JavaScript code</title>
     <para>To generate a report, create a report object by passing the required report identifier to the constructor name.</para>
     <para>Use the report object:</para>
     <itemizedlist>
