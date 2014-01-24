@@ -137,6 +137,7 @@
       <note>
         <para>Alignment buttons become active when you select multiple widgets. To select multiple widgets, click them while holding down the <keycap>Ctrl</keycap> key. </para>
       </note>
+      <para>Use the </para>
     </section>
     <section>
       <title> Border layout</title>
@@ -151,7 +152,7 @@
       </figure>
       <para>Explicitly set the value of the property, which controls the position of the component in the container. To do this, change widget <guilabel>Direction</guilabel> property fields at the <guilabel>Layout</guilabel> property group, by selecting one of the values from the drop-down list.</para>
       <section>
-        <title>Grid Layout — arranging by a grid</title>
+        <title>Grid layout</title>
         <para>Grid layout  distributes components by the grid; all columns must have the same width and all rows must have the same height. </para>
         <figure>
           <title>Grid Layout — arranging by a grid</title>
@@ -2616,6 +2617,12 @@ pane.add(comp,
       </warning>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(pane);</programlisting>
+    </section>
+    <section>
+      <title>BorderPane</title>
+    </section>
+    <section>
+      <title>GridPane</title>
     </section>
     <section>
       <title>Tabbed Pane</title>

@@ -1627,6 +1627,10 @@ e.executeUpdate();</programlisting>
     <programlisting language="JavaScript">model.executeSql(&quot;DROP TABLE Document&quot;);</programlisting>
   </section>
   <section>
+    <title>Server module</title>
+    <para/>
+  </section>
+  <section>
     <title>Scripting Java</title>
     <para>Calling Java classes from  JavaScript code is possible for applications, which are executed in the <application>Platypus client</application> or on the application server in any configuration.</para>
     <para>To access the Java packages and classes, use the <classname>Java</classname> global object. For example, to get access to the <classname>File</classname> class, use the  <classname>java.io.File</classname> object.</para>
