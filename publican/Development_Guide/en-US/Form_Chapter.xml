@@ -5,25 +5,12 @@
 ]>
 <chapter id="chap-Development_Guide-Form_Chapter">
   <title>Form</title>
-  <para>To organize the user interface in Platypus, use an application element of the  <emphasis>Form </emphasis>type. A form can be displayed both in the  <application>Platypus Client</application> application and in the HTML5 web-browser.</para>
-  <para>The form includes the following:</para>
-  <itemizedlist>
-    <listitem>
-      <para>A layout (a visual representation)</para>
-    </listitem>
-    <listitem>
-      <para>A module (JavaScript software code)</para>
-    </listitem>
-    <listitem>
-      <para>A data model</para>
-    </listitem>
-  </itemizedlist>
-  <para>The  <emphasis>Form</emphasis> is a descendant of the  <emphasis>Module </emphasis>application element, that&apos;s why the description of the module software code, access constraints and data model applies also to the Form. The form identifier is defined in the JavaScript file using the <code>@name</code> annotation.</para>
-  <para>The form includes a top-level container, which can hold widgets and containers. </para>
-  <para>A <emphasis>widget </emphasis> is a component, which has a visual representation.</para>
-  <para>A <emphasis>container </emphasis> is a component, which holds widgets and other containers.</para>
-  <para>A top-level container is the first component of the form. It has a special  <literal>view</literal> name and is available from the script. Since it can&apos;t be removed (it has no parent) or replaced, you can set its layout manager only using a designer.</para>
-  <para>Each component, as well as the form itself, has a set of properties, which define the component appearance and behavior, and a set of events (user actions, for which you can set handlers).</para>
+  <para>A form is a user interface building block wich can be represented as a top-level window with a title and a border or can be build-in on a panel on another form.</para>
+  <para>A form can be displayed both in the desktop client or in the HTML5 web-browser.</para>
+  <para>A form is a regular Platypus JavaScript module with a  components layout XML file.</para>
+  <para>Any form includes a top-level container, which can hold widgets and containers. </para>
+  <para>A widget is a component, which has a visual representation. A container is a component, which holds widgets and other containers.</para>
+  <para>Each component, as well as the form itself, has a set of properties, which define the component appearance and behavior, and a set of events (e.g. user actions, for which you can define handlers).</para>
   <figure>
     <title>Form</title>
     <mediaobject>
@@ -32,31 +19,31 @@
       </imageobject>
     </mediaobject>
   </figure>
-  <para>When using <application>Platypus Client</application> as a client application, forms are displayed in separate windows, can be minimized or expanded to the full screen, displayed in other forms as built-in elements (frames) and as internal windows in the Desktop component. In the HTML5 browser client, forms are displayed in the same way, but within a browser page.</para>
-  <para>You can simultaneously open any number of forms in the Platypus application.</para>
+  <para>In the desktop client, forms are displayed in separate windows, can be minimized or expanded to the full screen, displayed in other forms as built-in elements (frames) and as internal windows in the Desktop component. In the  HTML5 browser client, forms are displayed in the same way, but within a browser page.</para>
+  <para>You can simultaneously open any number of forms in a application.</para>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_7">
     <title>New form creation</title>
     <para>To create a new form, perform the following actions:   
   </para>
     <itemizedlist>
       <listitem>
-        <para>Select  <guimenuitem>New</guimenuitem> in the parent directory context menu, or select the parent directory and click  <guimenuitem>New File</guimenuitem> in the main menu, or click <guibutton>New File</guibutton> on the tool bar, or use a corresponding shortcut.</para>
+        <para>Select  <guimenuitem>New</guimenuitem> in the parent directory context menu, or select the parent directory and click  <guimenuitem>New File</guimenuitem> in the main menu, or click <guibutton>New File</guibutton> on the main toolbar, or use a corresponding keyboard shortcut.</para>
       </listitem>
       <listitem>
-        <para>Select Form type of the Platypus application element in the context menu, or select  <menuchoice>
+        <para>Select <guilabel>Form</guilabel> type of the Platypus application element in the context menu, or select  <menuchoice>
             <guimenu>Choose file type</guimenu>
             <guisubmenu>Platypus application elements</guisubmenu>
           </menuchoice> on the wizard first step and click  <guibutton>Next</guibutton>.</para>
       </listitem>
       <listitem>
-        <para>Enter a name for the new application element in the  <guilabel>Name</guilabel> field and click  <guibutton>Finish</guibutton> to create it, or click  <guibutton>Cancel</guibutton> to cancel.</para>
+        <para>Enter the name for the new application element in the  <guilabel>Name</guilabel> field and click  <guibutton>Finish</guibutton> to create it, or click  <guibutton>Cancel</guibutton> to cancel.</para>
       </listitem>
     </itemizedlist>
   </section>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_9">
     <title>Form editor</title>
-    <para>You can edit the form layout in the visual form editor. To open the application element editor, double-click the application element in the project tree. </para>
-    <para>To edit the form visual presentation:</para>
+    <para>You can edit the form components layout in using the visual form editor. To open the editor double-click the application element in the project tree. </para>
+    <para>To edit the form:</para>
     <itemizedlist>
       <listitem>
         <para>Open the  <guilabel>Design</guilabel> tab of the module editor.</para>
@@ -65,74 +52,75 @@
         <para>Drag a widget, a container or a menu from the components palette onto the form.</para>
       </listitem>
       <listitem>
-        <para>Set the general properties of the form and properties of each component on the  <guilabel>Properties</guilabel> panel.</para>
+        <para>Arrange the components on the form.</para>
       </listitem>
       <listitem>
-        <para>Specify handlers of the form and components on the  <guilabel>Properties/Events</guilabel>, write the event handlers code in the JavaScript editor.</para>
+        <para>Set the general properties of the form and properties of each component on the  <guilabel>Properties</guilabel> panel, e.g. text font, foreground and background colors.</para>
       </listitem>
       <listitem>
-        <para>If necessary, use the special widget settings editor.</para>
+        <para>Specify handlers functions of the form and components on the  <guilabel>Properties/Events</guilabel>, write the event handlers code in the JavaScript editor.</para>
       </listitem>
       <listitem>
-        <para>Configure the form data model and write JavaScript software code. </para>
+        <para>Configure the form&apos;s data model and write code responsible for data manipulations. </para>
       </listitem>
       <listitem>
-        <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the <application>Platypus Application Designer</application> tool bar or by pressing  <keycombo>
+        <para>Save the form by clicking  <guibutton>Save All</guibutton> on the <application>Platypus Application Designer</application> tool bar or by pressing  <keycombo>
             <keycap>Ctrl</keycap>
             <keycap>S</keycap>
           </keycombo> shortcut.</para>
       </listitem>
     </itemizedlist>
     <note>
-      <para>We recommend the following: a form should contain software code, which is responsible only for displaying and interaction with users, and the business logic should be located in modules for execution on the application server.</para>
+      <para>A form should contain JavaScript code, responsible for the user interface, and the business logic should be located in modules for execution on the application server.</para>
     </note>
-    <para>The form structure is presented as a tree in the form  <emphasis>inspector</emphasis>. Use the inspector to select a widget, a container or a menu, to transfer a component from one container to another, and to select the container layout manager.</para>
+    <para>Form structure is presented as a tree in the form inspector panel. Use the inspector to select a widget, a container or a menu, to move a component from one container to another, and to select the container layout.</para>
     <para>Drag components up or down in the inspector tree or activate the  <guilabel>Move Up</guilabel>, <guilabel>Move Down</guilabel>, and <guilabel>Change Order</guilabel> context menu items to set the order along the Z axis. </para>
-    <para>To run the quick preview of the form, click  <guibutton>Preview design</guibutton> on the visual editor tool bar. Then a window opens, showing a visual representation of the form, which is identical to its appearance at the application runtime.</para>
+    <para>To run a quick preview of the form, click  <guibutton>Preview design</guibutton> on the visual editor tool bar. The preview window opens, showing a visual representation of the form, which is identical to its look in  runtime.</para>
   </section>
   <section>
-    <title>Positioning components on the form</title>
-    <para>The position of each component on the form is determined by the layout manager of the container, in which this component is located. On the upper level, this container is presented by the form itself. </para>
-    <para>Platypus supports the following layout managers:</para>
+    <title>Layouts</title>
+    <para>The positionioning of each component  is determined by the layout manager of the container, to which this component belongs.</para>
+    <para>The top-level container is a root component of the form and avaliable as a  <literal>view</literal>  property. Since it can&apos;t be removed (it has no parent) or replaced, you can set its layout  only using visual  editor.</para>
+    <para>Containers support the following layouts:</para>
     <itemizedlist>
       <listitem>
-        <para>Anchors Layout</para>
+        <para>Anchors layout — arranging and resizing its components using rules provided by the anchors</para>
       </listitem>
       <listitem>
-        <para>Border Layout — arranging by borders</para>
+        <para>Border layout — arranging and resizing to fit the  container&apos;s borders regions</para>
       </listitem>
       <listitem>
-        <para>Grid Layout — arranging by a grid </para>
+        <para>Grid layout — lays the container components in a rectangular grid </para>
       </listitem>
       <listitem>
-        <para>Flow Layout — arranging into a line with transfers</para>
+        <para>Flow layout — arranges components in a directional flow</para>
       </listitem>
       <listitem>
-        <para>Card Layout — arranging into a stack of cards</para>
+        <para>Card layout — arranges components in a stack of cards</para>
       </listitem>
       <listitem>
-        <para>Box Layout — arranging into a box </para>
+        <para>Box layout —  allows multiple components to be laid out either vertically or horizontally</para>
       </listitem>
       <listitem>
-        <para>Absolute Layout — explicit<!--instead of clear--> defining of component coordinates in the application code</para>
+        <para>Absolute layout — explicit positionioning of the component</para>
       </listitem>
     </itemizedlist>
-    <para>Anchors Layout (the manager for arranging components based on the anchors) is the default layout manager in Platypus. This layout manager allows you to build a complex arrangement of components.   </para>
-    <para>Border Layout, Grid Layout, Flow Layout, Card Layout, Box Layout, and Absolute Layout managers implement simple layout algorithms and can be used to run specific tasks.</para>
-    <para>To choose a layout manager for the container, select it from the context menu of the corresponding component tree in the  <guisubmenu>Set Layout</guisubmenu> submenu.</para>
+    <para>Border, Grid, Flow, Card, Box, and Absolute layouts implement simple layout algorithms and can be used to perform  specific positioning tasks.</para>
+    <para>To choose a layout  for the container, select the correspondent menu item in the  <guisubmenu>Set Layout</guisubmenu> submenu from the container&apos;s context menu in the inspector component tree.</para>
     <section>
-      <title>Anchors Layout</title>
-      <para>Arranging with the use of anchors provides a simple, flexible, but powerful layout algorithm, which allows you to build complex user interfaces.</para>
-      <para>When using the anchor layout, you can configure the position and behavior of a widget in the container by defining  <guilabel>Left</guilabel>, <guilabel>Top</guilabel>, <guilabel>Right</guilabel>, <guilabel>Bottom</guilabel> anchors and <guilabel>Width</guilabel> and <guilabel>Height</guilabel> settings of the component. You can specify only two properties by one axis (horizontal/vertical) at the same time: both anchors or one anchor and width/height values. The defined properties are fixed and maintained when changing dimensions of the container. If the property is not defined, it is also changed (stretched) along with the dimensions of the container.</para>
+      <title>Anchors layout</title>
+      <para>Anchors layout  provides a simple, flexible yet powerful layout algorithm, which allows you to build complex user interfaces.</para>
+      <para>Configure the position and behavior of a widget in the container by defining  <guilabel>Left</guilabel>, <guilabel>Top</guilabel>, <guilabel>Right</guilabel>, <guilabel>Bottom</guilabel> anchors and <guilabel>Width</guilabel> and <guilabel>Height</guilabel> settings of the component. You can specify  two of the three properties   by the horizontal and vertical axis. Аt the same time can be set two anchors or one anchor and one dimension values. The set properties are fixed and maintained when changing dimensions of the container. If the property is not defined, it is stretched along with the dimensions of the container.</para>
       <figure>
-        <title>Anchor Layout: anchors and width/height</title>
+        <title>Anchor layout: anchors and component&apos;s width and height dimensions</title>
         <mediaobject>
           <imageobject>
             <imagedata align="center" fileref="images/anchorLayout.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </figure>
-      <para>When adding a component, anchors for the nearest container sides and width and height values are automatically set in the container. You can change dimensions of the component and its location by using the mouse or arrow keys. When you move a component using arrow keys, the position of the component is tied to the grid. Hold down the <keycap>Ctrl</keycap> to move the component smoothly. Hold down the <keycap>Shift</keycap> key to expand the widget.</para>
+      <para>Add a component from the pallete using the visual editor, anchors are attached for the nearest container&apos;s sides and width and height values are automatically set. </para>
+      <para>Change dimensions of the component and its location by using the mouse or arrow keys. When you move a component using arrow keys, the position of the component is tied to the grid. Hold down the <keycap>Ctrl</keycap> to move the component smoothly. Hold down the <keycap>Shift</keycap> key to expand the widget.</para>
       <note>
         <para>To define the grid parameters and other settings, use the properties setting form in the form editor:<menuchoice>
             <guimenu> Tools</guimenu>
@@ -141,30 +129,30 @@
             <guimenuitem>GUI Builder</guimenuitem>
           </menuchoice>.</para>
       </note>
-      <para>To enable/disable an anchor, use buttons for setting anchors on the form editor tool bar.</para>
-      <para>As an alternative way to specify the layout anchors, you can use widget node menu in the inspector: enable the corresponding anchor in the  <guisubmenu>Anchor</guisubmenu> submenu. Thus, if there&apos;s one anchor enabled for one coordinate, then this anchor and the appropriate dimension will be used; if there are two anchors enabled, then they will be used, and the dimension will be &quot;extended&quot;.</para>
-      <para>If necessary, explicitly specify values for anchors and dimensions. To do this, change values of the widget properties in the  <guilabel>Layout</guilabel> properties group: <guilabel>Left</guilabel>, <guilabel>Top</guilabel>, <guilabel>Right</guilabel>, <guilabel>Bottom</guilabel>, <guilabel>Left</guilabel>, <guilabel>Width</guilabel>, and <guilabel>Height</guilabel>.</para>
-      <para>Property values are specified as a string together with the indication of measurement units: pixels or percentages. If measurement units are not specified, pixels are used. Examples of anchor property values:  <literal>60px</literal>, <literal>30%</literal>, <literal>40</literal>. If a value is defined as a percentage, this anchor and dimension will be changed while maintaining the defined value when changing dimensions of the container.</para>
+      <para>To enable or disable an anchor, use anchors buttons on the form editor toolbar.</para>
+      <para>As an alternative way to specify the layout anchors, use widget node menu in the inspector: enable the corresponding anchor in the  <guisubmenu>Anchor</guisubmenu> submenu. Thus, if there&apos;s one anchor enabled for one coordinate, then this anchor and the appropriate dimension will be used. If there are two anchors enabled, then they will be used, and the dimension will be extended.</para>
+      <para>Explicitly specify values for anchors and dimensions,  change the values of the component&apos;s properties panel in the  <guilabel>Layout</guilabel> properties group: <guilabel>Left</guilabel>, <guilabel>Top</guilabel>, <guilabel>Right</guilabel>, <guilabel>Bottom</guilabel>, <guilabel>Left</guilabel>, <guilabel>Width</guilabel>, and <guilabel>Height</guilabel>.</para>
+      <para>Anchors property values are specified as a string together with the indication of measurement units: pixels or percentages, if measurement units are not specified, pixels are used.  If a value is defined as a percentage, this anchor and dimension will be changed while maintaining the defined value when changing dimensions of the container, for example :  <literal>60px</literal>, <literal>30%</literal>, <literal>40</literal>.</para>
       <para>Use the component alignment control buttons on the form editor tool bar to align widgets in relation to each other.  </para>
       <note>
         <para>Alignment buttons become active when you select multiple widgets. To select multiple widgets, click them while holding down the <keycap>Ctrl</keycap> key. </para>
       </note>
     </section>
     <section>
-      <title> Border Layout — arranging by borders</title>
-      <para>Border layout is a simple way of arranging components, when a container changes the position and dimensions of its components to fill the five areas: northern, southern, western, eastern and center. Each area can contain only one component, which is determined by one of the following constants: <guilabel>North</guilabel>, <guilabel>South</guilabel>, <guilabel>East</guilabel>, <guilabel>West</guilabel>, <guilabel>Center</guilabel>.</para>
+      <title> Border layout</title>
+      <para>Border layout is a simple way of arranging components, when a container changes the position and dimensions of its components to  the fit five regions: northern, southern, western, eastern and center. Each area can contain only one component, which is determined by one of the following constants: <guilabel>North</guilabel>, <guilabel>South</guilabel>, <guilabel>East</guilabel>, <guilabel>West</guilabel>, <guilabel>Center</guilabel>.</para>
       <figure>
-        <title>Border Layout — arranging by borders</title>
+        <title>Border layout</title>
         <mediaobject>
           <imageobject>
             <imagedata align="center" fileref="images/borderLayout.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </figure>
-      <para>Explicitly set the value of the parameter, which controls the position of the component in the container. To do this, change widget property fields (<guilabel>Layout</guilabel> property group,  <guilabel>Direction</guilabel> property) by selecting one of the values from the drop-down list.</para>
+      <para>Explicitly set the value of the property, which controls the position of the component in the container. To do this, change widget <guilabel>Direction</guilabel> property fields at the <guilabel>Layout</guilabel> property group, by selecting one of the values from the drop-down list.</para>
       <section>
         <title>Grid Layout — arranging by a grid</title>
-        <para>Grid Layout manager distributes components by the grid; all columns must have the same width and all rows must have the same height. </para>
+        <para>Grid layout  distributes components by the grid; all columns must have the same width and all rows must have the same height. </para>
         <figure>
           <title>Grid Layout — arranging by a grid</title>
           <mediaobject>
@@ -231,7 +219,7 @@
     </section>
   </section>
   <section>
-    <title>Properties, events and methods of a form</title>
+    <title>Form properties, events and methods</title>
     <para>To set properties and/or form event handlers:</para>
     <itemizedlist>
       <listitem>
