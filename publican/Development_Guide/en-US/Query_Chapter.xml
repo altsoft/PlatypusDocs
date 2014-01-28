@@ -413,7 +413,7 @@
   <section>
     <title>Main SQL source</title>
     <para>The query source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. </para>
-    <para>SQL source text must begin with a special header, in a form of multiline SQL comment. </para>
+    <para>The SQL source text must begin with a special header, in a form of multiline SQL comment. </para>
     <para>It is required to define a query name within the application in accordance with the  requirements applicable to JavaScript identifiers. On creating a new query in Platypus Application Designer, its name will be generated according to  the created files name,  spaces will be replaced by  underscores.</para>
     <para>To specify the query name, use the  <code>@name</code> annotation in the query header:</para>
     <programlisting language="SQL">/**
