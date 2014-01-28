@@ -5,7 +5,7 @@
 ]>
 <chapter id="chap-Development_Guide-Query_Chapter">
   <title>SQL query</title>
-  <para><emphasis>Query</emphasis> in  Platypus is an application element which defines the SQL expression to be executed in database. In the Platypus Platform, a query&apos;s SQL text is preprocessed before execution.</para>
+  <para>Query  is an application element which defines the SQL expression to be executed in database. A query&apos;s SQL text is preprocessed before execution.</para>
   <para>Queries  can solve several tasks:<itemizedlist>
       <listitem>
         <para>Formulate  tasks to sample  data  from the <acronym>database</acronym> (<literal>SELECT</literal> type queries).</para>
@@ -232,22 +232,22 @@
     <para>Parameter field properties:</para>
     <itemizedlist>
       <listitem>
-        <para><guilabel>Name</guilabel> — parameter name.</para>
+        <para><guilabel>Name</guilabel> is the parameter name.</para>
       </listitem>
       <listitem>
-        <para><guilabel>Description</guilabel> — parameter description.</para>
+        <para><guilabel>Description</guilabel> is the parameter description.</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type</guilabel> — parameter type, select in the drop-down list.</para>
+        <para><guilabel>Type</guilabel> is the parameter type, select in the drop-down list.</para>
       </listitem>
       <listitem>
-        <para><guilabel>Type Name</guilabel> — data structure type name, this field is accessible when the  <guilabel>Structure</guilabel> field type is selected.</para>
+        <para><guilabel>Type Name</guilabel> is the data structure type name, this field is accessible when the  <guilabel>Structure</guilabel> field type is selected.</para>
       </listitem>
       <listitem>
-        <para><guilabel>Size</guilabel> — field length or precision.</para>
+        <para><guilabel>Size</guilabel> is the field length or precision.</para>
       </listitem>
       <listitem>
-        <para><guilabel>Mode</guilabel> — define this field, if the parameter will be used as the stored procedure parameter.</para>
+        <para><guilabel>Mode</guilabel>  defines this parameter mode, in the case the parameter will be used as the stored procedure parameter.</para>
       </listitem>
     </itemizedlist>
     <para>Stored procedure parameter modes:</para>
@@ -324,7 +324,7 @@
     </itemizedlist>
     <para>The query parameter can be linked to a table or sub-query field, or to a sub-query parameter.</para>
     <para>When linked to field, the parameter will be included into the SQL source  — visually, the link will be displayed as a black arrow. </para>
-    <para>When the parameter is linked to a sub-query parameter,  the parameters will be mapped in the query model — visually, this link will be displayed as a magenta arrow.</para>
+    <para>When the parameter is linked to a sub-query parameter,  the parameters will be mapped in the query model, visually, this link will be displayed as a magenta arrow.</para>
     <para>To add a link between the parameter and a field or  sub-query parameter, perform the following actions:</para>
     <itemizedlist>
       <listitem>

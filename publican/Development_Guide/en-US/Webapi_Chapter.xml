@@ -61,7 +61,7 @@
     <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=TestModule&amp;__methodName=say&amp;__param[]=Hello Platypus&amp;__param[]=1</uri></para>
   </section>
   <section>
-    <title>Request and response objects</title>
+    <title>Request and response APIs</title>
     <para>To access HTTP request and response in the JavaScript server code, use the <code>http</code> property, which is available, if the method is called by the external HTTP request.</para>
     <programlisting language="JavaScript">function ModuleConstructor() {
    var http = this.http;

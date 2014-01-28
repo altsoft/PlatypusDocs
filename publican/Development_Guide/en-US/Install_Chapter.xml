@@ -82,7 +82,7 @@ After the installation process is finished, click  <guibutton>Finish</guibutton>
 To remove  Platypus Application Designer from you computer, perform the following actions:
    <orderedlist>
         <listitem>
-          <para>For Windows, use the standard mechanism of programs removal; as an alternative, use the  <filename>uninstall.exe</filename> program for Windows or  <filename>uninstall.sh</filename> for Linux from the   <application>Platypus Application Designer</application> installation directory.</para>
+          <para>Use the your OS standard mechanism of programs removal, as an alternative, use the  <filename>uninstall.exe</filename> program for Windows or  <filename>uninstall.sh</filename> for Linux from the   installation directory.</para>
         </listitem>
         <listitem>
           <para>Confirm the  components removal by clicking  <guibutton>Finish</guibutton> button; if necessary, select the option of removing  configuration data from the user&apos;s directory.</para>

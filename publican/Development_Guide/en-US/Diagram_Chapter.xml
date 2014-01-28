@@ -31,27 +31,27 @@
         <para>Select the connection to database and database schema:</para>
         <itemizedlist>
           <listitem>
-            <para>Select the default database    — click the  <guibutton>Default</guibutton> button or a connection to the external database  — click the  <guibutton>Specific</guibutton> button.</para>
+            <para>Select the default database—click the  <guibutton>Default</guibutton> button or a connection to the external database—click the  <guibutton>Specific</guibutton> button and select a specific database connection.</para>
           </listitem>
           <listitem>
             <para>Select a schema in the database in the  <guilabel>Schema</guilabel> drop-down list; click the <guibutton>Default button to select the default schema</guibutton>.</para>
           </listitem>
           <listitem>
-            <para>Click <guibutton>Next</guibutton>.</para>
+            <para>Click the <guibutton>Next</guibutton> button.</para>
           </listitem>
         </itemizedlist>
       </listitem>
       <listitem>
-        <para>Specify the name of the new <acronym>database</acronym> structure diagram in the <guilabel>Name</guilabel> field, and click <guibutton>Finish</guibutton> to create a new application element, or click <guibutton>Cancel</guibutton> to cancel.</para>
+        <para>Specify the name of the new <acronym>database</acronym> structure diagram in the <guilabel>Name</guilabel> field, and click the <guibutton>Finish</guibutton> button to create a new application element, or click <guibutton>Cancel</guibutton> to abort.</para>
       </listitem>
     </itemizedlist>
-    <para>After creating  the <acronym>database</acronym> structure diagram, build the table structures. To do that, define the fields and their descriptions. After determination of the table structure define  links between the tables.</para>
+    <para>After creating  the <acronym>database</acronym> structure diagram, fill it with the database tables structures. To do that, define the tables, its fields and their descriptions. After determination of the table structure define foreign key links between the tables.</para>
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_2">
     <title>Diagram visual editor</title>
     <para>A  diagram is a  representation of some  tables in the database, as well as the  links between them. In general, one  includes a part of the database overall structure, which is, for example, related to the certain segment of application functionality. </para>
     <para>A visual editor tool is used for editing  database structure diagrams.</para>
-    <para>Visual editor allows you to modify the database structure  — add or delete tables, links between tables, and indexes. The same table can be represented in several diagrams.</para>
+    <para>Visual editor allows you to modify the database structure e.g. add or delete tables, links between tables, and indexes. The same table can be represented in several diagrams.</para>
     <para>For navigation through a diagram, it is convenient to use the diagram inspector panel. In the inspector,  tables and their fields are represented in the tree structure. When selecting a table or a field in the inspector, the same selection takes place in the diagram editor.</para>
     <para>For mutual positioning of a node in the inspector and an object in the diagram:</para>
     <itemizedlist>
@@ -152,25 +152,25 @@
     <para>Table field properties:</para>
     <itemizedlist>
       <listitem>
-        <para><guilabel>name</guilabel> —  field name in the table</para>
+        <para><guilabel>name</guilabel> is the  field&apos;s name in the table</para>
       </listitem>
       <listitem>
-        <para><guilabel>description</guilabel> — field description</para>
+        <para><guilabel>description</guilabel> is the field&apos;s description</para>
       </listitem>
       <listitem>
-        <para><guilabel>type</guilabel> — data type</para>
+        <para><guilabel>type</guilabel> is the field&apos;s data type</para>
       </listitem>
       <listitem>
-        <para><guilabel>type Name</guilabel> — data structure type name, this field is enabled if the   <parameter>STRUCT</parameter> data type is selected</para>
+        <para><guilabel>type name</guilabel> is the data structure type name, this field is enabled if the   <parameter>STRUCT</parameter> data type is selected</para>
       </listitem>
       <listitem>
-        <para><guilabel>size</guilabel> — field length</para>
+        <para><guilabel>size</guilabel> is the field length</para>
       </listitem>
       <listitem>
-        <para><guilabel>sclale</guilabel> — field scale or precision</para>
+        <para><guilabel>sclale</guilabel> is the field scale or precision</para>
       </listitem>
       <listitem>
-        <para><guilabel>nullable</guilabel> — mandatory field (<literal>NULL</literal> values are not allowed).</para>
+        <para><guilabel>nullable</guilabel> determines if <literal>NULL</literal> values are  allowed for the field.</para>
       </listitem>
     </itemizedlist>
     <informaltable>
@@ -373,7 +373,7 @@
         <para>Specify the search string. </para>
       </listitem>
       <listitem>
-        <para>Select  fields to be searched through: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, and check (uncheck) the following options: <guilabel>Whole words</guilabel> — to search for whole words, <guilabel>Match case</guilabel> — to perform a case-sensitive search. </para>
+        <para>Select  fields to be searched through: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, and check (uncheck) the following options: use the option <guilabel>Whole words</guilabel> to search for whole words and the <guilabel>Match case</guilabel>  to perform a case-sensitive search. </para>
       </listitem>
       <listitem>
         <para>Click  <guibutton>Next</guibutton> and <guibutton>Previous</guibutton> buttons to go to the next found entity. </para>

@@ -220,7 +220,7 @@ require([moduleName1, moduleName2], function() {
   </section>
   <section>
     <title>Security</title>
-    <para>The executable module code is a resource, access to which can be delimitated on the basis of the current user roles. When a user, who has no rights to execute some code, tries to call it, a security exception is thrown.</para>
+    <para>The executable module code is a resource, access to which can be delimitated on the basis of the  roles associated with the current user. When a user, who has no rights to execute some code, tries to call it, a security exception is thrown.</para>
     <para>In order to restrict access to the entire module code, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code>... annotation to the module header. Specify roles of users, who have access to the module code execution, in the  <code>@rolesAllowed</code> annotation, dividing them by spaces. If their annotation is missed, access to the module is granted to all users.</para>
     <para>You can delimit access to the module code on the level of an individual function. To do this, add the  <code>@rolesAllowed</code> annotation to the <abbrev> JsDoc</abbrev> function. The restrictions on the function level have a higher priority than the module level restrictions. For example, only a user with the <code>f2</code> role from the following example will have access to the <literal>role2</literal>: </para>
     <programlisting language="JavaScript">/**
@@ -301,10 +301,10 @@ Logger.info(Resource.applicationPath);</programlisting>
     <para>To store data from the database in the form of objects, entities with datasets are used.  The following types of entities can be used in the data model: </para>
     <itemizedlist>
       <listitem>
-        <para>Regular entity — is created using a  module implements special datasouce interface methods or  a query application element.</para>
+        <para>Regular entity  is created using a  module implements special datasouce interface methods or  a query application element.</para>
       </listitem>
       <listitem>
-        <para>Table entity — is a table in the database; when using it, a query entity, which selects all data from the table, is automatically created.</para>
+        <para>Table entity  is a table in the database; when using it, a query entity, which selects all data from the table, is automatically created.</para>
       </listitem>
     </itemizedlist>
     <note>
@@ -317,10 +317,10 @@ Logger.info(Resource.applicationPath);</programlisting>
     <para>Entity fields and parameters may be connected by links. The following link types are used in a data model:</para>
     <itemizedlist>
       <listitem>
-        <para>Query link — if the target field of connection is an entity parameter field.</para>
+        <para>Query link—if the target field of connection is an entity parameter field.</para>
       </listitem>
       <listitem>
-        <para>Filter link — if the target filed of connection is a entity data field.</para>
+        <para>Filter link—if the target filed of connection is a entity data field.</para>
       </listitem>
       <listitem>
         <para>Link  defined by the database table external keys.</para>
@@ -674,10 +674,10 @@ Logger.info(Resource.applicationPath);</programlisting>
         <para>Click  <guibutton>Find</guibutton> to open the search dialog in the data model editor.</para>
       </listitem>
       <listitem>
-        <para>Enter the search line, select fields to be used for searching: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, and also check the necessary options:  <guilabel>Whole words</guilabel> — to search for the whole words. <guilabel>Match case</guilabel> — to perform the case-sensitive search. </para>
+        <para>Enter the search line, select fields to be used for searching: <guilabel>Datasets</guilabel>, <guilabel>Fields</guilabel>, <guilabel>Params</guilabel>, and also check the necessary options: use the   <guilabel>Whole words</guilabel> option to search for the whole words. Use the <guilabel>Match case</guilabel> option to perform the case-sensitive search. </para>
       </listitem>
       <listitem>
-        <para>Click  <guibutton>Next</guibutton> and <guibutton>Previous</guibutton> &gt; to go to the next or previous search result. </para>
+        <para>Click  <guibutton>Next</guibutton> and <guibutton>Previous</guibutton>  to go to the next or previous search result. </para>
       </listitem>
       <listitem>
         <para>Click  <guibutton>Close</guibutton> to close the search dialog. </para>
@@ -1199,7 +1199,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>no</entry>
             <entry/>
-            <entry>Is alled after removing an object from the entity data</entry>
+            <entry>Is called after removing an object from the dataset</entry>
           </row>
           <row>
             <entry>
@@ -1207,7 +1207,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>no</entry>
             <entry><parameter>aField</parameter> — <classname>Object</classname>, a changed property; <parameter>aOldValue</parameter> — <classname>Object</classname>, an old value; <parameter>aNewValue</parameter> — <classname>Object</classname>, a new value; <parameter>aObj</parameter> — a changed property</entry>
-            <entry>Is called after changing the entity object properties</entry>
+            <entry>Is called after changing the dataset object</entry>
           </row>
           <row>
             <entry>
@@ -1215,7 +1215,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>no</entry>
             <entry/>
-            <entry>Is called after inserting a new object into entity data</entry>
+            <entry>Is called after inserting a new object into the entity dataset</entry>
           </row>
           <row>
             <entry>
@@ -1223,7 +1223,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>no</entry>
             <entry/>
-            <entry>Is called after filtrating entity data</entry>
+            <entry>Is called after filtering the entity dataset</entry>
           </row>
           <row>
             <entry>
@@ -1231,7 +1231,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>no</entry>
             <entry/>
-            <entry>Is called after re-requesting entity data, including the first data request during the module startup</entry>
+            <entry>Is called after re-requesting the dataset data, including the first request during the module&apos;s startup</entry>
           </row>
           <row>
             <entry>
@@ -1239,7 +1239,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>no</entry>
             <entry><parameter>aOldIndex</parameter> — <classname>Numeric</classname>, an old cursor position; <parameter>aNewIndex</parameter> - <classname>Number</classname>, a new cursor position</entry>
-            <entry>Is called after changing the cursor position in the entity data array.</entry>
+            <entry>Is called after changing the cursor position in the entity dataset array</entry>
           </row>
           <row>
             <entry>
@@ -1247,7 +1247,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>yes</entry>
             <entry><parameter>aField</parameter> — <classname>Object</classname>, a changed property; <parameter>aOldValue</parameter> — <classname>Object</classname>, an old value; <parameter>aNewValue</parameter> — <classname>Object</classname>, a new value; <parameter>aObj</parameter> — a changed object</entry>
-            <entry>Is called before inserting the object properties into entity data</entry>
+            <entry>Is called before changing the rowset object</entry>
           </row>
           <row>
             <entry>
@@ -1255,7 +1255,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>yes</entry>
             <entry/>
-            <entry>Is called before removing an object from entity data</entry>
+            <entry>Is called before removing an object from the dataset</entry>
           </row>
           <row>
             <entry>
@@ -1263,7 +1263,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>yes</entry>
             <entry/>
-            <entry>Is called before inserting an object into entity data</entry>
+            <entry>Is called before inserting an object into the dataset</entry>
           </row>
           <row>
             <entry>
@@ -1271,7 +1271,7 @@ entity1.sort(sorter);</programlisting>
             </entry>
             <entry>yes</entry>
             <entry><parameter>aNewIndex</parameter> — <classname>Number</classname>, a future cursor position</entry>
-            <entry>Is called before moving the cursor over the entity data array</entry>
+            <entry>Is called before moving the cursor over the entity dataset</entry>
           </row>
         </tbody>
       </tgroup>
@@ -1726,7 +1726,7 @@ Logger.severe(&quot;severe error&quot;);</programlisting>
     </note>
   </section>
   <section>
-    <title>Filesystem input-output</title>
+    <title>Filesystem I/O</title>
     <para>To read and write files, use tools provided by Java. </para>
     <para>To read and write strings, use  <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code>, and <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code> global functions, where <parameter>path</parameter> &gt; is a path to the file, <parameter>text</parameter> is a string, <parameter>encoding</parameter> is the name of encoding. The  <parameter>encoding</parameter> parameter in both functions is optional and by default is set for the UTF-8 encoding. </para>
     <para>Example of using functions for reading and writing strings to a file:</para>
@@ -1736,11 +1736,12 @@ writeString(&apos;/home/user1/Documents/doc2.txt&apos;, str);</programlisting>
   </section>
   <section>
     <title>Working with XML</title>
-    <para>To work with data in the <abbrev>XML</abbrev> format, use the script syntax in accordance with the E4X specification  (EcmaScript for <abbrev>XML</abbrev>). The E4X technology can be used by the code,  which is executed on Rhino runtime engine. </para>
+    <para>To work with data in the <abbrev>XML</abbrev> format, use the script syntax in accordance with the E4X specification  (EcmaScript for <abbrev>XML</abbrev>). The E4X technology can be used by the code,  which is executed on Rhino runtime engine. For more information refer to the E4X documentation.</para>
     <warning>
       <para>This E4X is obsolete. Although it is still supported, its usage is discouraged in new projects. Try to avoid using it.</para>
     </warning>
-    <para>XML type variables creation example: </para>
+    <para>The  materials in this section  are based on the MDN E4X manual.</para>
+    <para>To create a new XML type variables use the following syntax: </para>
     <programlisting language="JavaScript">// Creates empty XML element
 var element = &lt;foo/&gt;;
 
@@ -1882,8 +1883,5 @@ info.uri; // returns &quot;http://www.w3.org/1999/xhtml&quot;</programlisting>
     <para>Use the <varname>prettyIndent</varname> (<literal>2</literal> by default) of the <abbrev>XML</abbrev>, global object to manage the shift size when performing the   <methodname>toXMLString</methodname> function.</para>
     <programlisting language="JavaScript">XML.ignoreComments = false;
 XML.ignoreProcessingInstructions = false;</programlisting>
-    <note>
-      <para>For more detailed information on working with <abbrev>XML</abbrev> in JavaScript, refer to the E4X documentation.</para>
-    </note>
   </section>
 </chapter>

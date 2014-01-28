@@ -5,11 +5,11 @@
 ]>
 <chapter id="chap-Development_Guide-Report_Chapter">
   <title>Report</title>
-  <para>The  <emphasis>Report</emphasis> is intended to provide information in the form of a report — as a <application>Microsoft Excel</application> file. You can open a generated report in a spreadsheet application, sent it to print or save it to disk.</para>
-  <para>The  <emphasis>Report</emphasis> application element includes the following:</para>
+  <para>The  reporting tools is intended to provide data in the form of a report — as a <application>Microsoft Excel</application> file. You can open a generated report in a spreadsheet application, sent it to print or save it to disk.</para>
+  <para>The  report application element includes the following:</para>
   <itemizedlist>
     <listitem>
-      <para>a report template (a file in the <application>Microsoft Excel</application> format with the <filename>.xls</filename> extension,</para>
+      <para>a report template (a file in the <application>Microsoft Excel</application> format with the <filename>.xlsx</filename> extension,</para>
     </listitem>
     <listitem>
       <para>JavaScript software code,</para>
@@ -89,9 +89,6 @@
           </keycombo> shortcut.</para>
       </listitem>
     </itemizedlist>
-  </section>
-  <section>
-    <title>Report template</title>
   </section>
   <section>
     <title>Template tags</title>
@@ -187,7 +184,10 @@ Chief Name: ${department.chief.name}
     <para>Use the report object:</para>
     <itemizedlist>
       <listitem>
-        <para>Display a report by calling the <methodname>show</methodname> method; the report will be downloaded and a command to open it in the spreadsheet application will be issued.</para>
+        <para>Create an report instance using either <code>Report</code> or <code>ServerReport</code> constuctors, <code>ServerReport</code> is for a report generated on the server side.</para>
+      </listitem>
+      <listitem>
+        <para>Display a report by calling the <methodname>show</methodname> method, the report will be downloaded and a command to open it in the spreadsheet application will be issued.</para>
       </listitem>
       <listitem>
         <para> Send the report to print by calling the <methodname>print</methodname> method.</para>
@@ -199,30 +199,27 @@ Chief Name: ${department.chief.name}
     <note>
       <para>When executing the report in the HTML5 browser client, calling the <methodname>show()</methodname>, <methodname>print()</methodname>, and <methodname>save(reportPath)</methodname> methods leads to the same results — the report file will be loaded in browser.</para>
     </note>
-    <para>In the example below, the report is generated when you click the form button:</para>
-    <programlisting language="JavaScript">/**
- * Form generates report
- * @name reportForm
- */
-
-function reportButtonActionPerformed(evt) {                    var r = new Report(&apos;documentReport&apos;);
-  r.params.documentCategory = &apos;business&apos;; // update model
-  r.show(); // show report
-}</programlisting>
-    <para>Write the data processing logic for the report in the report script.</para>
-    <para>Data processing program can specially prepare data for displaying, calculate new data, etc. The software code can be executed:</para>
+    <para>In the example below, the report is generated on a desktop client:</para>
+    <programlisting language="JavaScript">var r = new Report(&apos;DocumentReport&apos;);
+r.params.documentCategory = &apos;business&apos;; // update the model
+r.show(); // show report</programlisting>
+    <para>To execute the report on the server side from a HTML5 browser client:</para>
+    <programlisting language="JavaScript">var r = new ServerReport(&apos;DocumentReport&apos;);
+r.params.documentCategory = &apos;business&apos;; // update the model
+r.show();</programlisting>
+    <para>Report&apos;s JavaScript code prepares data for displaying, calculating new data, etc. </para>
     <itemizedlist>
       <listitem>
-        <para>When calling the report constructor — put the code on the top level of the report script.</para>
+        <para>Write code in the report&apos;s constructor to perform initialization activities.</para>
       </listitem>
       <listitem>
-        <para>In the <literal>beforeRender</literal> event, which will be called before starting the generation of report — when calling the <methodname>show</methodname>,  <methodname>print</methodname>, or <methodname>save</methodname> methods — put the code into the <varname>beforeRender</varname> event handler.</para>
+        <para>Add code in the <literal>beforeRender</literal> event hanler function, which will be invoked before starting the generation of report, when client calls the <methodname>show</methodname>,  <methodname>print</methodname>, or <methodname>save</methodname> methods.</para>
       </listitem>
       <listitem>
-        <para>In the standard events of refreshing model data sets — see the &quot;Data model&quot; chapter in the &quot;Module&quot; section.</para>
+        <para>Add handler functions for the standard events of refreshing model datasets.</para>
       </listitem>
     </itemizedlist>
-    <para>The report events are listed in the following table:</para>
+    <para>The report events:</para>
     <informaltable>
       <tgroup cols="4">
         <thead>

@@ -67,19 +67,19 @@
   </para>
     <itemizedlist>
       <listitem>
-        <para>Module — a structural unit of the JavaScript software code, and its data model.</para>
+        <para><emphasis>Module</emphasis>—a structural unit of the JavaScript software code, and its data model.</para>
       </listitem>
       <listitem>
-        <para>Form — a module with a user interface  layout.</para>
+        <para><emphasis>Form</emphasis>—a module with a user interface  layout.</para>
       </listitem>
       <listitem>
-        <para>Report — a module with a template of the generated office document.</para>
+        <para><emphasis>Report</emphasis>—a module with a template of the generated office document.</para>
       </listitem>
       <listitem>
-        <para>Query — a database query in SQL language.</para>
+        <para><emphasis>Query</emphasis> — a database query in SQL language.</para>
       </listitem>
       <listitem>
-        <para>Database  diagram — a visual representation of the database structure, for example, relating to a  certain part of the application domain.</para>
+        <para><emphasis>Database diagram</emphasis>—a visual representation of the database structure.</para>
       </listitem>
     </itemizedlist>
     <note>
@@ -106,7 +106,7 @@
     </figure>
     <para>JavaScript code and the data model compatible user interface widgets can use the data model to read and write database data.</para>
     <para>Data flow components can operate on a client as well as on a server. In case of no-server configuration the data flow components work on the client. In case of configuration with an application server, data flow components work on the client as well as on the server, particularly on different computers, while providing a transparent data exchange.</para>
-    <para>The unique feature of the Platypus platform is its Object/Relational Mapping  <acronym>(O/RM)</acronym> implementation: its generates JavaScript objects datasets matching the database relations. To enable this process it uses schema information from the database and the SQL query texts. The advantage of this approach is that the metadata duplication is avoided and, consequently, there is almost no need to synchronize them for the object model and database when making changes in the database.  </para>
+    <para>The unique feature of the  platform is its Object/Relational Mapping  <acronym>(O/RM)</acronym> implementation. In runtime  its generates JavaScript objects datasets matching the database relations. To enable this process it uses schema information from the database and the SQL query texts. </para>
     <para>The usage of data model simplifies many data processing operations, since it provides automatic synchronization of  entities data, automatic saving of  modified data, simplified support of transactions, centralized management of resources, etc.</para>
     <para>The  application development workflow usually consists of the following  steps:</para>
     <itemizedlist>

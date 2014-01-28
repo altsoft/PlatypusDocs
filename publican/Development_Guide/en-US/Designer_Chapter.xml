@@ -20,7 +20,7 @@
             </menuchoice> or click the  <guibutton>New Project</guibutton> button on the toolbar. </para>
         </listitem>
         <listitem>
-          <para>Select the project type — <classname>Platypus Application Project</classname> — and click  <guibutton>Next.</guibutton> </para>
+          <para>Select the project type as the <classname>Platypus Application Project</classname>  and click  <guibutton>Next.</guibutton> </para>
         </listitem>
         <listitem>
           <para>Specify the project name and location:</para>
@@ -36,26 +36,6 @@
             </listitem>
             <listitem>
               <para>Click <guibutton>Next</guibutton> to proceed to the next step.</para>
-            </listitem>
-          </itemizedlist>
-        </listitem>
-        <listitem>
-          <para>Specify  parameters of the connection to the database:</para>
-          <itemizedlist>
-            <listitem>
-              <para>Specify the URL of the connection to the database in the JDBC format in the  <guilabel>JDBC Url</guilabel> field, for example, JDBC URL for MySQL database looks like <literal>jdbc:mysql://localhost:3306/db_name</literal>. Use the  <guibutton>Build JDBC Url</guibutton> button to open the JDBC URL generation wizard. In the wizard window, select the database type, host name, port, and the database name —  JDBC URL will be generated automatically. </para>
-            </listitem>
-            <listitem>
-              <para>Specify the  schema name in the database in the <guilabel>Database Schema</guilabel> field. </para>
-            </listitem>
-            <listitem>
-              <para>Specify the user name in the  <guilabel>Database User Name</guilabel> field.</para>
-            </listitem>
-            <listitem>
-              <para>Specify the password in the <guilabel>Database User Password</guilabel> field.</para>
-            </listitem>
-            <listitem>
-              <para>To test the connection to the database, click  the <guibutton>Test connection</guibutton> button.</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -159,33 +139,33 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
           <para>The project configuration files.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Application Elements</guilabel> — root directory, which contains the application elements tree.</para>
+          <para>The <guilabel>Application Elements</guilabel> node is the root directory, which contains the application elements tree.</para>
         </listitem>
       </itemizedlist></para>
     <para>You can perform the  following operations on the application elements and directories:</para>
     <itemizedlist>
       <listitem>
-        <para>Create a new element  —  <command>New</command> command.</para>
+        <para>Create a new element using the  <command>New</command> command.</para>
       </listitem>
       <listitem>
-        <para>Rename an application element — to do that, click  the selected application element  or  directory name, and press the  <keycap>F2</keycap> key.</para>
+        <para>Rename an application element—click  the selected application element  or  directory name, and press the  <keycap>F2</keycap> key.</para>
       </listitem>
       <listitem>
-        <para>Copy and Paste an application element from the buffer to the specified project location —  <command>Paste</command> command.</para>
+        <para>Copy and Paste an application element from the buffer to the specified project location using the  <command>Paste</command> command.</para>
       </listitem>
       <listitem>
-        <para>Copy and Move the directory or the application elements to the specified project location; to copy, hold the <keycap>Ctrl</keycap> key while dragging —  <command>Drag-and-Drop</command> command. </para>
+        <para>Copy and Move the directory or the application elements to the specified project location. To copy, hold the <keycap>Ctrl</keycap> key while dragging a node. </para>
       </listitem>
       <listitem>
-        <para>Delete an application element — <command>Delete</command> command.</para>
+        <para>Delete an application element using the <command>Delete</command> command.</para>
       </listitem>
       <listitem>
-        <para>Search for an element in the project —  <command>Find</command> command.</para>
+        <para>Search for an element in the project using the  <command>Find</command> command.</para>
       </listitem>
     </itemizedlist>
-    <para>These operations can be performed using the element context menu, <menuchoice>
+    <para>These operations also avaliable by the element context menu, <menuchoice>
         <guimenu>Edit</guimenu>
-      </menuchoice> menu in the main menu, or hotkeys. Some application elements nodes supports some specific operations. Specific operations are described in detail in the sections dedicated to the certain types of  application elements.</para>
+      </menuchoice> menu in the main menu, or the keyboard hotkeys. Some application elements nodes supports some specific operations, e.g. running or debugging. Specific operations are described in detail in the sections dedicated to the certain types of  application elements.</para>
     <para>To create a subdirectory in the applicaton tree:</para>
     <itemizedlist>
       <listitem>
@@ -271,17 +251,20 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
       </listitem>
     </itemizedlist>
     <para>When launching the application in a J2EE server, <application>Platypus Application Designer</application> uses the  <filename>web</filename> sub-directory, which is created automatically in the project directory. When initializing this sub-directory, its initial structure is created and  libraries are copied. After initializing  the directory,  files responsible for the configuration (<filename>WEB-INF/web.xml</filename>, server specific configuration file, and JavaScript file responsible for the application  launching on the HTML page) are modified, but the  libraries are not copied again. </para>
-    <para>If it is necessary to update  libraries in the <filename>web</filename> directory — select the  <guimenuitem>Clean</guimenuitem> menu item in the project context menu. The libraries will be removed, and at the next  launch these libraries will be copied from the Platypus Platform runtime directory.</para>
+    <para>Select the  <guimenuitem>Clean and Run</guimenuitem> menu item in the project context menu, if it is necessary to update the libraries in the <filename>web</filename> directory. The libraries will be removed, and at the next application launch these libraries will be copied from the platform&apos;s runtime directory.</para>
   </section>
   <section>
-    <title>The default database connection</title>
-    <para>To enable full-featured application development of the  designer tools, it is necessary  to arrange a connection to the default database. Connection parameters are specified when creating a new project and can be modified on the project properties panel, which can be opened using  the <guimenuitem>Properties</guimenuitem> item in the project context menu.</para>
-    <para>When opening the project, the application designer tries to connect to the database, in case of failure  it switches to the limited functionality mode, and several tools and  functions of the designer are disabled. </para>
+    <title>Database connections management</title>
+    <para>To enable full-featured application development of the  designer tools, it is necessary  to define a project&apos;s database connections and the default connetion. The default connection is used when the database is not explicitely referenced in  application elements. </para>
+    <para>Add a new database connection(s): go to the <guilabel>Services</guilabel> panel and select the  <guimenuitem>New Connection</guimenuitem>menu item of the <guilabel>Databases</guilabel> node.  In the <guilabel>New Connection</guilabel> dialog select the JDBC driver and provide a JDBC URL, database credentials and the connection name. This name will be used to refer to the connection in the application. </para>
+    <para>A JDBC URL example for the H2 database server with a database located in the user&apos;s home directory <filename>db</filename>  subdirectory: <literal>jdbc:h2:tcp://localhost:9092/~/db</literal></para>
+    <para>Specify the project&apos;s default database connection: go to the project&apos;s <guilabel>Properties</guilabel> and Application database form. Select the default connection from the <guilabel>Default connection</guilabel> combobox.</para>
+    <para>When opening the project, the application designer tries to connect to the database, in case of failure  it switches to the limited functionality mode, and some editor tools  are disabled. </para>
     <note>
-      <para>In the course of development, we recommend that every developer in the team working on the same project creates and uses his/her own copy of the database for debugging and testing purposes. Additionally, a common reference database is created, and all modifications, which have passed the debugging stage at the developers&apos; individual databases, are applied to this common one.  </para>
+      <para>We recommend that a developer in the team working on the  project creates and uses his/her own copy of the database for debugging and testing purposes. Additionally, a common reference database is created, and all modifications, which have passed the debugging stage at the developers&apos; individual databases, are applied to this common one.  </para>
     </note>
-    <para>It is recommended to use the developer&apos;s local database on the H2 database server, supplied with the platform. </para>
-    <para>To launch the H2 database server in the Platypus Application Designer:</para>
+    <para>Use the developer&apos;s local database on the H2 database server, supplied with the platform. </para>
+    <para>To launch the built-in H2 database server:</para>
     <itemizedlist>
       <listitem>
         <para>Open the  <guilabel>Services</guilabel> panel.</para>
@@ -294,9 +277,9 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
       </listitem>
     </itemizedlist>
     <note>
-      <para>In the platform applications, it is not recommended to use the database specific SQL syntax (if possible). Use the standard SQL instead to enable easy transferring of an application to other <acronym>database</acronym> servers supported by the platform. </para>
+      <para>In your applications try to use  standard SQL whether possible  to enable easy transferring of an application to other <acronym>database</acronym> servers supported by the platform. </para>
     </note>
-    <para>After the  <acronym>database</acronym> server is launched and available via the network or locally, connect to this server by selecting the  <guimenuitem>Connect to project database</guimenuitem> item in the context menu, or by clicking the <guibutton>Establish connection</guibutton> button on the  <guilabel>Application Database</guilabel> form in the project properties, or by selecting the  Connect to project database link on the stub-form of the data model editor.</para>
+    <para>After the  <acronym>database</acronym> server is launched and become available via the network or locally, connect to this server by selecting the  <guimenuitem>Connect to project database</guimenuitem> item in the context menu, or by clicking the <guibutton>Establish connection</guibutton> button on the  <guilabel>Application Database</guilabel> form in the project properties, or by selecting the  Connect to project database link on the stub-form of the data model editor.</para>
     <para>To disconnect, select the <guimenuitem>Disconnect from project database</guimenuitem> item in the project context menu, or click the <guibutton>Drop</guibutton> connection button on the  <guilabel>Application Database</guilabel> form of the project properties.</para>
   </section>
   <section>
@@ -320,15 +303,16 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     <para>Migrations types:</para>
     <itemizedlist>
       <listitem>
-        <para><acronym>Database</acronym> structure snapshot — an  <filename>.xdm</filename> file containing database metadata presentation in the XML format.</para>
+        <para><acronym>Database</acronym> structure snapshot is  a  <filename>.xdm</filename> file containing database metadata presentation in the XML format.</para>
       </listitem>
       <listitem>
-        <para>SQL commands batch  — a  <filename>.batch</filename> file containing the SQL commands delimited by <code>#GO</code> separators tag. </para>
+        <para>SQL commands batch is  a  <filename>.batch</filename> file containing the SQL commands delimited by <code>#GO</code> separators tag. </para>
       </listitem>
     </itemizedlist>
     <note>
       <para>In the batch SQL file, it is recommended to use  <acronym>DML</acronym> (<literal>INSERT</literal>, <literal>UPDATE</literal> and <literal>DELETE</literal>) commands; although it is technically permissible to use  DDL commands there as well. However, it is not recommended to use  commands which modify the <acronym>database</acronym> structure in the batch SQL file, since it can reduce the application portability.</para>
     </note>
+    <para>Refer to the Administration Guide for more information about using database migration tools.</para>
   </section>
   <section>
     <title>Version control</title>
