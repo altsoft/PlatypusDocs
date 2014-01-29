@@ -5,11 +5,11 @@
 ]>
 <chapter id="chap-Development_Guide-Diagram_Chapter">
   <title>Database diagram</title>
-  <para><emphasis>Database diagram</emphasis> is a application element responsible for representation of the database structure. For example, the diagram can specify some part of the knowledge domain. Generally,  the project contains several database structure diagrams at the developer convenience.</para>
+  <para>Database diagram is an application element responsible for representation of the database structure. For example, the diagram can specify some part of the knowledge domain. Generally,  the project contains several database structure diagrams at the developer convenience.</para>
   <para>A database structure diagram is a visual representation of the database structure, and it does not directly affect the application functionality.</para>
   <para>The structure of the relational database is determined by the  tables and links between them. Links between two tables are implemented through the foreign keys.</para>
   <note>
-    <para>Refer to the publications dedicated to the relational databases for detailed description of specific terms, such as table, foreign key, relation, etc.</para>
+    <para>Refer to the publications dedicated to the relational databases for detailed description of specific terms, such as table, foreign key, relations, etc.</para>
   </note>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_1">
     <title>New diagram creation</title>
@@ -167,7 +167,7 @@
         <para><guilabel>size</guilabel> is the field length</para>
       </listitem>
       <listitem>
-        <para><guilabel>sclale</guilabel> is the field scale or precision</para>
+        <para><guilabel>scale</guilabel> is the field scale or precision</para>
       </listitem>
       <listitem>
         <para><guilabel>nullable</guilabel> determines if <literal>NULL</literal> values are  allowed for the field.</para>
@@ -324,7 +324,7 @@
       </listitem>
     </itemizedlist>
     <important>
-      <para>Data types of the fields connected by the foreign key link must be compatible. </para>
+      <para>Data types of the fields connected by the foreign key link must be the same. </para>
     </important>
     <para>To build a hierarchical table structure (unary link), drag the table field to the primary key field of the same table using the mouse.</para>
     <para>To remove the table foreign key,  perform the following actions:</para>

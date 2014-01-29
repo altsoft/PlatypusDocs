@@ -112,9 +112,6 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     <para>Set the debugging parameters:</para>
     <itemizedlist>
       <listitem>
-        <para>Select the <guilabel>Application Database</guilabel> category.</para>
-      </listitem>
-      <listitem>
         <para>Set the Platypus Client debugging port.</para>
       </listitem>
       <listitem>
@@ -123,9 +120,6 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     </itemizedlist>
     <para>Specify the applicaton&apos;s default  connection to the database:</para>
     <itemizedlist>
-      <listitem>
-        <para>Select the  <guilabel>Application Database</guilabel> category.</para>
-      </listitem>
       <listitem>
         <para>Select  the default database connecton from the list.</para>
       </listitem>
@@ -255,10 +249,23 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section>
     <title>Database connections management</title>
-    <para>To enable full-featured application development of the  designer tools, it is necessary  to define a project&apos;s database connections and the default connetion. The default connection is used when the database is not explicitely referenced in  application elements. </para>
-    <para>Add a new database connection(s): go to the <guilabel>Services</guilabel> panel and select the  <guimenuitem>New Connection</guimenuitem>menu item of the <guilabel>Databases</guilabel> node.  In the <guilabel>New Connection</guilabel> dialog select the JDBC driver and provide a JDBC URL, database credentials and the connection name. This name will be used to refer to the connection in the application. </para>
-    <para>A JDBC URL example for the H2 database server with a database located in the user&apos;s home directory <filename>db</filename>  subdirectory: <literal>jdbc:h2:tcp://localhost:9092/~/db</literal></para>
-    <para>Specify the project&apos;s default database connection: go to the project&apos;s <guilabel>Properties</guilabel> and Application database form. Select the default connection from the <guilabel>Default connection</guilabel> combobox.</para>
+    <para>Define an application project&apos;s database connections and the  default connection of the application. The default connection  to be  used when a connection is not explicitly referenced in  application elements. </para>
+    <para>Add a new database connection:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Open the  <guilabel>Services</guilabel> panel.</para>
+      </listitem>
+      <listitem>
+        <para>Select the  <guimenuitem>New Connection</guimenuitem>menu item of the <guilabel>Databases</guilabel> node.</para>
+      </listitem>
+      <listitem>
+        <para> In the <guilabel>New Connection</guilabel> dialog select the JDBC driver and provide a JDBC URL, database credentials and the connection name. This name will be used as an string identifier to refer to the connection JNDI resource in the application.</para>
+      </listitem>
+    </itemizedlist>
+    <para>A JDBC URL example for the H2 database server with a database located in the user&apos;s home directory <filename>db</filename>  subdirectory: <literal>jdbc:h2:tcp://localhost:9092/~/db</literal>.<note>
+        <para>Beware of exact naming of database connections. The name of a database connection will be refered to by various application parts.</para>
+      </note></para>
+    <para>Specify the project&apos;s default database connection: go to the project&apos;s <guilabel>Properties</guilabel> and to the <guilabel>Running</guilabel> panel. Select the default connection from the <guilabel>Datasource</guilabel> combobox.</para>
     <para>When opening the project, the application designer tries to connect to the database, in case of failure  it switches to the limited functionality mode, and some editor tools  are disabled. </para>
     <note>
       <para>We recommend that a developer in the team working on the  project creates and uses his/her own copy of the database for debugging and testing purposes. Additionally, a common reference database is created, and all modifications, which have passed the debugging stage at the developers&apos; individual databases, are applied to this common one.  </para>
@@ -280,22 +287,22 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
       <para>In your applications try to use  standard SQL whether possible  to enable easy transferring of an application to other <acronym>database</acronym> servers supported by the platform. </para>
     </note>
     <para>After the  <acronym>database</acronym> server is launched and become available via the network or locally, connect to this server by selecting the  <guimenuitem>Connect to project database</guimenuitem> item in the context menu, or by clicking the <guibutton>Establish connection</guibutton> button on the  <guilabel>Application Database</guilabel> form in the project properties, or by selecting the  Connect to project database link on the stub-form of the data model editor.</para>
-    <para>To disconnect, select the <guimenuitem>Disconnect from project database</guimenuitem> item in the project context menu, or click the <guibutton>Drop</guibutton> connection button on the  <guilabel>Application Database</guilabel> form of the project properties.</para>
+    <para>To disconnect, select the <guimenuitem>Disconnect from project database</guimenuitem> item in the project context menu.</para>
   </section>
   <section>
     <title>Application in the database </title>
-    <para>The application elements may be deployed in the special database table. After deployment, the application can be executed directly from the database.</para>
+    <para>The application elements may be deployed in the special database table. After deployment, the application elements can be hosted in  the database.</para>
     <para>To deploy an application in the <acronym>database</acronym>: use   <guimenuitem>Deploy</guimenuitem> item in the project&apos;s root node context menu. When deploying, the application elements from the Application Elements folder are copied to the table   <literal>MTD_ENTITIES</literal>.  When copying, the tree structure of the application directories is preserved.</para>
     <para>Importing of an application from a  database to a files is a process which is  reverse to deployment. To import an application from the database: select the Import item in the project context menu. When importing, the application elements are copied from the <literal>MTD_ENTITIES</literal> table to the project&apos;s <guilabel>Application Elements</guilabel> folder. </para>
     <important>
-      <para>When deploying and importing an application, the destination table or <guilabel>Application Elements</guilabel> folder is cleared before the copy process starts.</para>
+      <para>When deploying and importing an application, the destination table or the <guilabel>Application Elements</guilabel> folder is cleared before the copy process starts.</para>
     </important>
   </section>
   <section>
     <title>Database migrations tools</title>
     <para>The Platypus Platform has an built-in mechanism to control changes occurring in the database schema and its initial data, which appear as a part of  the application. </para>
     <important>
-      <para>Before applying  migrations make a backup copy of the database.</para>
+      <para>Before applying  migrations make a backup of the database.</para>
     </important>
     <para>Initial application data includes basic references, bootstrap data, etc., the  information required to start the application.</para>
     <para>Database structure and initial application data are represented in the form of migrations files. Each migration has a number expressed as a positive integer, which is used as the file name. In the course of development and further during the application life cycle, when changing the database structure or in case of  data modification, a migration is created. Later on, this migration can be applied to other  databases. In the application database, information about the current <acronym>database</acronym> version is maintained in the <literal>MTD_VERSION</literal> table. </para>

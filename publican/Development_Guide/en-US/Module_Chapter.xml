@@ -5,8 +5,8 @@
 ]>
 <chapter id="chap-Development_Guide-Module_Chapter">
   <title>JavaScript module</title>
-  <para><emphasis>A Module</emphasis> is a just regular JavaScript file containing constructor function. Modules  contain data model responsible for data access. </para>
-  <para>Modules can be executed both under JVM in a client and server  is in  Mozilla Rhino engine or in a browser client.</para>
+  <para>A Module is a JavaScript file containing the constructor function. Modules  contain data model responsible for data access. </para>
+  <para>Modules can be executed both under JVM in a client and server via  Mozilla Rhino engine or in a browser.</para>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_5">
     <title>New module creation</title>
     <para>To create a new module, perform the following actions:
@@ -74,9 +74,9 @@
   </section>
   <section>
     <title>Module constructor</title>
-    <para>Using modules allows you to manage the complexity of the software according to the object-oriented programming principles.</para>
+    <para>Using modules allows you to manage the complexity  according to the object-oriented programming principles.</para>
     <para>A module is an equivalent of a class in other programming languages, such as in Java or С++.</para>
-    <para>Every module has to contain a constructor function, this function is to be used for creating of module&apos;s instanses. </para>
+    <para>Every module  contains a constructor function. This function is used for module&apos;s instanses creation.</para>
     <para>A constructor function  can have  a header, which is represented as a comment in the  <abbrev>JsDoc</abbrev> format and is located at the top of the module text.</para>
     <para>Example of a module with a header:</para>
     <programlisting language="JavaScript">/**
@@ -96,23 +96,23 @@ function otherFunction() {
 }</programlisting>
     <para>If a JavaScript file contains exactly one top-level fucntion, this fuction is considered as a module constructor, otherwise the module constructor must be marked with the <code>@module</code> annotation.</para>
     <para>In addition to the  <code>@module</code> annotation, a header may contain the module description, annotations for defining security constraints and other  <abbrev>JsDoc</abbrev> annotations.</para>
-    <para>Specify module public methods:</para>
-    <programlisting language="JavaScript">function ModuleConstructor() {
+    <para>Specify module instance methods:</para>
+    <programlisting language="JavaScript">function ModuleA() {
    
-   this.somePublicMethod = fucntion(p) { //public method
+   this.somePublicMethod = fucntion(p) { //instance method
       ...
    }
 }</programlisting>
-    <para>Module public methods are available for the external code.</para>
-    <para>Add module private methods and fields:</para>
-    <programlisting language="JavaScript">function ModuleConstructor() {
+    <para>Module instance methods are available for the client code.</para>
+    <para>Add module scope methods and fields:</para>
+    <programlisting language="JavaScript">function ModuleB() {
    var a, b, c;//private fields
 
-   this.somePublicMethod = fucntion(p) { //public method
+   this.somePublicMethod = function(p) { //instance method
       ...
    }
 
-   fucntion somePrivateMethod() { //private method
+   function somePrivateMethod() { //scope function
       ...
    }
 }</programlisting>
@@ -147,33 +147,37 @@ function otherFunction() {
           </code> is the module constructor name string, the server module should be marked with the <code>@public</code> annotation to enable access from the external client code.</para>
       </listitem>
     </itemizedlist>
-    <para>By default, a stateful module instance is created on the server. This module exists in the context of the current user session. If a module is marked with the <code>@stateless</code> annotation, the module state is not supported and a new instance is created every time you call any of the module&apos;s methods.</para>
-    <para>To call the module&apos;s public function, use the following structure, for example:</para>
+    <para>To call the module&apos;s instance method, use the following structure, for example:</para>
     <programlisting language="JavaScript">var result = moduleInstance.getResult(10);</programlisting>
   </section>
   <section>
     <title>Dependencies resolving</title>
-    <para>When executing the code on a application server or on a desktop client, all application modules and other elements are loaded  before launching the application.</para>
-    <para>In a web browser, the runtime initially loads only the application element, the name of which is directly specified for running at the starting form, and then application elements, on which it depends, are loaded as needed in the process of automatic dependencies resolution.</para>
+    <para>When executing the code on a application server or on a desktop client, all application modules and other elements are loaded on demand.</para>
+    <para>In a web browser, all application elements, on which initial application element depends, are loaded during the process of automatic dependencies resolution.</para>
     <para>Automatic dependencies resolving works as follows:</para>
     <itemizedlist>
       <listitem>
-        <para>The source code is analyzed and expressions of the following types are searched for in it:</para>
+        <para>The source code is analyzed and expressions of the following types are searched for:</para>
+        <programlisting>new <replaceable>ModuleName</replaceable>()</programlisting>
         <programlisting language="JavaScript">new Module(&quot;<replaceable>ModuleName</replaceable>&quot;)</programlisting>
         <programlisting language="JavaScript">Modules.get(&quot;<replaceable>ModuleName</replaceable>&quot;)</programlisting>
-        <programlisting language="JavaScript">new Form(&quot;<replaceable>FormName</replaceable>&quot;)</programlisting>
         <programlisting language="JavaScript">new <replaceable>FormName</replaceable>()</programlisting>
+        <programlisting language="JavaScript">new Form(&quot;<replaceable>FormName</replaceable>&quot;)</programlisting>
+        <programlisting>new ServerModule(&quot;<replaceable>ServerModuleName</replaceable>&quot;)</programlisting>
+        <programlisting>new ServerReport(&quot;<replaceable>ServerReportName</replaceable>&quot;)</programlisting>
       </listitem>
       <listitem>
-        <para>Application elements with the specified names are loaded.</para>
+        <para>Application elements with the specified names are loaded or server proxies for server modules/reports are generated.</para>
       </listitem>
       <listitem>
-        <para>The process continues recursevly for the loaded modules.</para>
+        <para>The process continues recursevly for the loaded modules, except for the server proxies.</para>
       </listitem>
     </itemizedlist>
-    <para>If it is not necessary or not possible to resolve the dependency automatically, for example, if you want to determine the called module in a dynamic way, you can use the manual dependencies resolving. To do this, use the  <code>require</code> global function. You can also use the  <code>require</code> function to download plain JavaScript files.</para>
+    <para>If it is not necessary or not possible to resolve the dependency automatically, for example, if you want to determine the called module in a dynamic manner, you can use the manual dependencies resolving. To do this, use the  <code>require</code> global function. You can also use the  <code>require</code> function to download plain JavaScript files.</para>
     <programlisting language="JavaScript">require([<replaceable>param</replaceable>], <replaceable>callback</replaceable>)</programlisting>
-    <para>where  <replaceable>param</replaceable> is the module constructor name, or the relative path to the JavaScript file in the application, or an array of these elements;  <replaceable>callback</replaceable> is a function, which will be called when all the specified modules are downloaded and available.</para>
+    <para>where  <replaceable>param</replaceable> is the module constructor name, or the relative path to the JavaScript file in the application, or an array of these elements;  <replaceable>callback</replaceable> is a function, which will be called when all the specified modules are downloaded and executed.<note>
+        <para>Don&apos;t use manual dependencies resolving against a server module. It will  lead to attempt to download the module body on the client.</para>
+      </note></para>
     <para>Example of using the manual dependencies resolving:</para>
     <programlisting language="JavaScript">var moduleName1 = &quot;Module1&quot;,
     moduleName2 = &quot;Module2&quot;;
@@ -197,9 +201,9 @@ require([moduleName1, moduleName2], function() {
     <para>Relative paths are counted off from the <filename>src</filename> directory of the Platypus application. If the JavaScript file path matches the Platypus module identifier name, the Platypus module will be loaded.</para>
     <para>The  <code>require</code> function also has a synchronous variant, which can be used in the server code. In this case, if you don&apos;t need to maintain compatibility with the client&apos;s code, the second parameter is optional:</para>
     <programlisting language="JavaScript">require(&quot;localLib.js&quot;);
-// Constructor LibObject is defined in localLib.js
+// LibObject is defined in localLib.js
 var obj = new LibObject();</programlisting>
-    <para>You should pay attention to the combination of automatic and manual dependencies resolution functions. For example, in the following piece of code it is not necessary to call the  <code>require</code> function:</para>
+    <para>You should pay attention to the combination of automatic and manual dependencies resolution. For example, in the following snippet it is not necessary to call the  <code>require</code> function:</para>
     <programlisting>var moduleName1 = &quot;SampleModule1&quot;,
     moduleName2 = &quot;SampleModule2&quot;;
 require([moduleName1, moduleName2], function() {
@@ -208,7 +212,7 @@ require([moduleName1, moduleName2], function() {
   var m2 = new SampleModule2();
   m2.foo();
 });</programlisting>
-    <para>This code leads to the automatic dependencies resolution regarding to the  <classname>SampleModule1</classname> и <classname>SampleModule2</classname>, as calls of their designers are present in the code in explicit form. </para>
+    <para>This code leads to the automatic dependencies resolution regarding to the  <classname>SampleModule1</classname> и <classname>SampleModule2</classname>, as calls of their constructors are present in the code in explicit form. </para>
     <para>On the other hand, creating modules in the  <code>var m = new SampleModule1()</code> form is preferred. In order to avoid automatic resolving of dependencies, explicitly specify module constructor names in the form of string literals the <function>require</function> function parameter:</para>
     <programlisting>require([&quot;SampleModule1&quot;, &quot;SampleModule2&quot;], function() {
   var m1 = new SampleModule1();
@@ -220,15 +224,18 @@ require([moduleName1, moduleName2], function() {
   </section>
   <section>
     <title>Security</title>
-    <para>The executable module code is a resource, access to which can be delimitated on the basis of the  roles associated with the current user. When a user, who has no rights to execute some code, tries to call it, a security exception is thrown.</para>
-    <para>In order to restrict access to the entire module code, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code>... annotation to the module header. Specify roles of users, who have access to the module code execution, in the  <code>@rolesAllowed</code> annotation, dividing them by spaces. If their annotation is missed, access to the module is granted to all users.</para>
-    <para>You can delimit access to the module code on the level of an individual function. To do this, add the  <code>@rolesAllowed</code> annotation to the <abbrev> JsDoc</abbrev> function. The restrictions on the function level have a higher priority than the module level restrictions. For example, only a user with the <code>f2</code> role from the following example will have access to the <literal>role2</literal>: </para>
+    <para>The executable module code is a resource, access to which can be restricted on the basis of the  roles. When a user, who has no rights to execute some code, tries to call it, a security exception is thrown.</para>
+    <para>In order to restrict access to the entire module code, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code>... annotation to the module header. Specify roles, allowed to access the module code execution, in the  <code>@rolesAllowed</code> annotation, dividing them by spaces. If the annotation is omitted, access to the module is granted to all users.</para>
+    <para>You can restrict access to the module code on the level of an individual function. To do this, add the  <code>@rolesAllowed</code> annotation to the function&apos;s <abbrev>JsDoc</abbrev>. The restrictions on the function level have a higher priority than the module level restrictions. For example, only a user with the <code>role2</code> role from the following example will have access to the <literal>f2</literal>: </para>
     <programlisting language="JavaScript">/**
  * @module
  * @rolesAllowed role1 role2
  *
  */
-function ModuleName {
+function ModuleC {
+
+   var self = this;
+
    /**
     * @rolesAllowed role2
     */
@@ -237,12 +244,14 @@ function ModuleName {
    }
 }</programlisting>
     <para>Use the  <code>principal</code> property to get access to the information about the current user in the executable code.  The <code>principal</code>  property is read-only. The object of information about the user contains the <code>name</code> property, i.e. the name of the current user, and the <code>hasRole(<replaceable>role</replaceable>)</code>method, which allows you to check if this user has any role:</para>
-    <programlisting language="JavaScript">Logger.info(&apos;Current user: &apos; + principal.name);
+    <programlisting language="JavaScript">Logger.info(&apos;Current user: &apos; + self.principal.name);
 
-if (principal.hasRole(&apos;Manager&apos;)) {
+if (self.principal.hasRole(&apos;Manager&apos;)) {
   // Some operations allowed only to managers ...
 }</programlisting>
-    <para>Use the <function>logout(<replaceable>callback</replaceable>())</function> global function, where <function><replaceable>callback</replaceable>()</function> — is a function, which will be called after the session is terminated. Open forms will be closed and the user will see the login and password entering form. </para>
+    <para>Use the <function>logout(<replaceable>callback</replaceable>)</function> global function, where <function>
+        <replaceable>callback</replaceable>
+      </function>  is a function, which will be called after the session is terminated. Open forms will be closed and the user will see the login and password entering form. </para>
   </section>
   <section>
     <title>Resources loading</title>
@@ -271,22 +280,19 @@ Logger.info(Resource.applicationPath);</programlisting>
   </section>
   <section>
     <title>Data model</title>
-    <para>The data model is a module&apos;s persistent state holder. It provides  access to the data obtained from a relational  <abbrev>database or any other data source</abbrev>. Using the data model allows you to perform the following tasks:</para>
+    <para>Data model is a module&apos;s persistence manager. It provides  access to the data obtained from a relational  <abbrev>database or any other data source</abbrev>. Data model allows you to perform the following tasks:</para>
     <itemizedlist>
       <listitem>
-        <para>Fetch data from the  <abbrev>data source(s)</abbrev> to entities datasets.</para>
+        <para>Fetch data from the  <abbrev>data source(s)</abbrev> to the entities datasets.</para>
       </listitem>
       <listitem>
-        <para>Store consistent data in entities after receiving from the  <abbrev>database</abbrev>.</para>
+        <para>Automatically requery/filter  data, according to the inter-entities links.</para>
       </listitem>
       <listitem>
-        <para>Automatically update the consistent  data  on model&apos;s input parameters changes.</para>
+        <para>Save changes made to the entities data (insert, update and delete).</para>
       </listitem>
       <listitem>
-        <para>Save changes made in the entities data (insert, update and delete).</para>
-      </listitem>
-      <listitem>
-        <para>Use entities data change events.</para>
+        <para>Entities data change events handling with JavaScript.</para>
       </listitem>
     </itemizedlist>
     <para>Data model consists of entities and links and is configured using the visual editor.</para>
@@ -298,7 +304,8 @@ Logger.info(Resource.applicationPath);</programlisting>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>To store data from the database in the form of objects, entities with datasets are used.  The following types of entities can be used in the data model: </para>
+    <para>The data from some datasource is stored in the form of JavaScript objects.</para>
+    <para>The following types of entities can be used in the data model: </para>
     <itemizedlist>
       <listitem>
         <para>Regular entity  is created using a  module implements special datasouce interface methods or  a query application element.</para>
@@ -308,9 +315,9 @@ Logger.info(Resource.applicationPath);</programlisting>
       </listitem>
     </itemizedlist>
     <note>
-      <para>A table entitycan be used on the application server or in the <application>desktop client</application> with direct database connection. </para>
+      <para>A table entity can be used on the application server or in the <application>desktop client</application> only with direct  connection to a database.</para>
     </note>
-    <para>Each entity can have parameters and contains a dataset  with predefined fields according to the data schema defined by the module or query application element, on the basis of which the entity was created.</para>
+    <para>Each entity can have parameters and contains a dataset  with predefined fields according to the data schema defined by the module or query application element, on the basis of which the entity is created.</para>
     <para>The parameters of the data model are contained in the special entity named Parameters — which is present in each data model and does not have a full-featured dataset.</para>
     <para>In general, a dataset is an array of objects, each of which corresponds to a tuple in the query results.</para>
     <para>There is a cursor for each dataset. The cursor can point to some row in the dataset and determines the current item of this set. Also the dataset cursor can point to the positions &quot;before the first row&quot; and &quot;after the last row&quot;. The entity cursor position can affect to the linked entities data.</para>
@@ -326,14 +333,14 @@ Logger.info(Resource.applicationPath);</programlisting>
         <para>Link  defined by the database table external keys.</para>
       </listitem>
     </itemizedlist>
-    <para>The query link updates the target entity dataset according to the   parameter value change. The new parameter value is determined according to the source point of the link. Both dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, new data is requested from the database and reoladed in  the target entity.</para>
-    <important>
-      <para>When the module operates in the browser, data comes asynchronously from the network. When the module operates in the server modules on the application server, data comes synchronously. Even though when the model works on the Java SE client, data is also obtained synchronously, it is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser using the Platypus HTML5 client.</para>
-    </important>
-    <para>The filter link provides the rows restriction of the target entity dataset according to the new filter value.  The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
-    <para>The link defined by a database table external keys is created automatically, if datasets contains fields included to this external key.  This type of connection does not affect the content of the datasets and is used to generate logical connections between instances of entities represented by the corresponding  OR/M JavaScript properties in these instances. The link of this type is visually shown as a dashed line on the data model diagram.</para>
+    <para>The query link requeries the target entity&apos;s dataset according to the   parameter value change. The new parameter value is determined according to the source point of the link. Both dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, new data is requested from the database and reoladed in  the target entity.</para>
     <note>
-      <para>To ensure operation of logic connections presentations of entity data instances, fields which are included to the  database table&apos;s primary and  external keys are required adn must be present in the datasets without modifications.</para>
+      <para>When the module operates in the browser, data comes asynchronously from the network. When the module operates in the server modules on the application server, data comes synchronously. Even though when the model works on the Java SE client, data is also obtained synchronously, it is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser.</para>
+    </note>
+    <para>The filter link provides the rows restriction of the target entity dataset according to the new filter value.  The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
+    <para>The link defined by a database table foreign keys is created automatically, if a dataset contains fields included to such foreign key.  This type of link does not affect the content of the datasets and is used to generate inter-instance connections between instances of entities. This is done via new properties, wich are created while data fetching. The link of this type is visually shown as a dashed line on the data model diagram.</para>
+    <note>
+      <para>To get inter-instance connections work, primary and foreign keys are required. Such keys may come from database structure definitions or from schema definitions in a JavaScript datasource module.</para>
     </note>
     <figure>
       <title>Query and filtration types links</title>
@@ -357,8 +364,8 @@ Logger.info(Resource.applicationPath);</programlisting>
     <para>The batch change of the model input parameters is also possible, in this case, data is updated only after changing all the required parameters.</para>
     <para>Added, deleted and changed datasets of these entities objects are saved to the database or sent to the application server for subsequent saving when calling the  <methodname>save</methodname> function of the data model object.</para>
     <para>The data model is represented in the module constructor by the <code>this.model</code> object. For convenience, we will assing this object to the model variable:</para>
-    <para>When developing an application, perform the following standard operations with database data: </para>
-    <programlisting language="JavaScript">function ModuleConstructor() {
+    <para>Create an alias variable for the data model object, in the following code snippets we will use this alis object: </para>
+    <programlisting language="JavaScript">function ModuleD() {
    var model = this.model;
    //...
 }</programlisting>
@@ -370,7 +377,7 @@ Logger.info(Resource.applicationPath);</programlisting>
         <para>Get access to data for data processing, analysis, and so on.</para>
       </listitem>
       <listitem>
-        <para>Navigate  to the data in the linked entities.</para>
+        <para>Use inter-instances connections to process the data in ORM manner.</para>
       </listitem>
       <listitem>
         <para>Use the cursor to move through  the data rows.</para>
@@ -619,9 +626,6 @@ Logger.info(Resource.applicationPath);</programlisting>
     <para>To add a query or a filter link between two entites:</para>
     <itemizedlist>
       <listitem>
-        <para>Go to the  <guilabel>Datasets</guilabel> tab of the data model editor.</para>
-      </listitem>
-      <listitem>
         <para>Move the parameter to the field of an entity, with which you want to connect this parameter — visually the connection will be displayed as a line with an arrow between fields or parameters of the entity.</para>
       </listitem>
       <listitem>
@@ -633,7 +637,7 @@ Logger.info(Resource.applicationPath);</programlisting>
       </listitem>
     </itemizedlist>
     <note>
-      <para>Query link type in the visual editor is highlighted by purple. Filter link is highlighted by blue. The link target field is shown by an arrow.</para>
+      <para>Query link type in the visual editor is highlighted by purple. Filter link is highlighted by black. The link target field is shown by an arrow.</para>
     </note>
     <para>To delete a link, perform the following actions:</para>
     <itemizedlist>
@@ -785,7 +789,7 @@ for (var i = 0; i &lt; documents.length; i++) {
       <para>It is not recommended to use the legacy data access API in the new projects.</para>
     </note>
     <para>If an external key link is established between two entities, you can get access to the data  of the connected entity by using data instance property having the same name as the connected entity. This properties are generated during OR/M resolution. If the entity&apos;s underlying database table contains an external key reference, the corresponding property represents the connected entity.</para>
-    <programlisting language="JavaScript">var propValue = <replaceable>entityName1</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName2</replaceable>.<replaceable>propName</replaceable></programlisting>
+    <programlisting language="JavaScript">var propValue = model.<replaceable>entityName1</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName2</replaceable>.<replaceable>propName</replaceable></programlisting>
     <para>where  <varname>
         <replaceable>entityName1</replaceable>
       </varname> is an entity, which contains the external key reference,  <literal>
@@ -794,7 +798,7 @@ for (var i = 0; i &lt; documents.length; i++) {
         <replaceable>propName</replaceable>
       </varname> is a property of the entity object having the same name as the query results field.</para>
     <para>If the entity contains a field, which is referenced by the external key, the property contains an array of the connected entity objects:</para>
-    <programlisting language="JavaScript">var propValue = <replaceable>entityName2</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName1[j]</replaceable>.<replaceable>propName</replaceable></programlisting>
+    <programlisting language="JavaScript">var propValue = model.<replaceable>entityName2</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName1[j]</replaceable>.<replaceable>propName</replaceable></programlisting>
     <para>where  <varname>
         <replaceable>entityName1</replaceable>
       </varname>  is an entity, which contains the external key reference,  <literal>
@@ -946,13 +950,13 @@ while (!model.documents.eof) {
         <replaceable>newValue</replaceable>
       </literal> is an expression for the new value.</para>
     <para>To obtain access to the entity arbitrary objects, use the syntax of referring to an array element: </para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
       </varname> is an entity, <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> is an object property with the specified index in the entity data.  <literal>
         <replaceable>newValue</replaceable>
       </literal> is an expression for the new value.</para>
-    <para>To save changes in the data model, call the  <methodname>save</methodname> function of the model:</para>
+    <para>To save changes the data model changes, use its   <methodname>save</methodname> method:</para>
     <programlisting language="JavaScript">model.save();</programlisting>
     <para>To insert a new object to a dataset add</para>
     <itemizedlist>
@@ -972,9 +976,9 @@ while (!model.documents.eof) {
   //...
 );</programlisting>
     <para>Call the push function to insert a new object in the entity data — this function is a standard method of inserting a new element into the JavaScript array:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.push();</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.push();</programlisting>
     <para>If necessary, pass the JavaScript object, the property names of which match the names of properties in the entity objects, as a parameter to the function. Their values will be set as values of the new object properties:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.push( {
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.push( {
   <replaceable>propName1</replaceable>: <replaceable>propValue1</replaceable>,
   <replaceable>propName2</replaceable>: <replaceable>propValue2 </replaceable>});</programlisting>
     <para>When using the  <methodname>insert</methodname> function, as well as when using the  <methodname>push</methodname> function, the cursor will point to a new object. </para>
@@ -994,18 +998,18 @@ while (!model.documents.eof) {
       </listitem>
     </itemizedlist>
     <para>Example of code for inserting a new object into the  <literal>documents</literal> entity:</para>
-    <programlisting language="JavaScript">documens.push({ ID:101, NAME:&apos;New document name&apos;});
+    <programlisting language="JavaScript">model.documens.push({ ID:101, NAME:&apos;New document name&apos;});
 model.save();</programlisting>
     <para>To delete an entry, use the  <methodname>deleteRow</methodname> or <methodname>splice</methodname> entity functions.</para>
     <para>Call the  <methodname>deleteRow</methodname> function without parameters to delete the current object, i.e. the object, which the cursor is pointing to.</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.deleteRow();</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow();</programlisting>
     <para>Pass an index of the object, which you want to delete, as a parameter to the  <methodname>deleteRow</methodname> function:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.deleteRow(<replaceable>rowIndex</replaceable>);</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow(<replaceable>rowIndex</replaceable>);</programlisting>
     <para>where <literal>
         <replaceable>rowIndex</replaceable>
       </literal> can take on  <code>1..<replaceable>entityName</replaceable>.length</code> values.</para>
     <para>Use the  <methodname>splice</methodname> function to delete an object from the entity data by passing an index and a number of elements to be deleted as arguments:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.splice(<replaceable>index</replaceable>, <replaceable>howMany</replaceable>);</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.splice(<replaceable>index</replaceable>, <replaceable>howMany</replaceable>);</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
       </varname> is an entity, <literal>index</literal>  is an index of the entity data array element. <literal>index</literal> can take on a value within the  <code>0..<replaceable>entityName</replaceable>.length-1</code> range, <literal>
@@ -1013,13 +1017,13 @@ model.save();</programlisting>
       </literal> is a number of elements to be deleted.</para>
     <para>Example of deleting the current object from the <literal>documents</literal> entity and from the <acronym>database</acronym>:</para>
     <programlisting language="JavaScript">// Removes first element
-documents.splice(0, 1);
+model.documents.splice(0, 1);
 model.save();</programlisting>
     <para>To remove all objects from the entity data, use the  <methodname>deleteAll</methodname> entity function:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.deleteAll();</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteAll();</programlisting>
     <para>Example of deleting all objects from the  <literal>documents</literal> entity and from the <acronym>database</acronym>:</para>
     <programlisting language="JavaScript">// Removes all elements
-documents.deleteAll();
+model.documents.deleteAll();
 model.save();</programlisting>
     <para>By default, calling the save function results in saving changes and confirming the transaction. However, in some cases it is necessary to delay the transaction confirmation. This behavior can be used when changing data by several modules, such as modules, which are called from each other. In this case the transaction confirmation should be performed upon completion of data changing operations.</para>
     <para>To manage the model transaction mode, use the  <varname>commitable</varname>property of the  <varname>model</varname> object:</para>
@@ -1041,7 +1045,7 @@ model.save();// Commit all changes</programlisting>
     <para>Search operations can be performed after the data model loads its entities data. </para>
     <para>Search is performed in the model and do not cause sending new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
     <para>To find an object by its identifier, use the  <methodname>findById</methodname> entity function by passing a search key to it:</para>
-    <programlisting language="JavaScript">var item = <replaceable>entityName</replaceable>.findById(<replaceable>idValue</replaceable>);</programlisting>
+    <programlisting language="JavaScript">var item = model.<replaceable>entityName</replaceable>.findById(<replaceable>idValue</replaceable>);</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
       </varname> is an entity, <literal>
@@ -1125,8 +1129,8 @@ var checked = true;
 var documents = model.documents;
 //Create and apply filter
 var filter = documents.createFilter(
-  entity1.md.STATUS,
-  entity1.md.CHECKED);
+  entity1.schema.STATUS,
+  entity1.schema.CHECKED);
 filter.apply(status, checked);
 
 // List filtered data
@@ -1150,7 +1154,7 @@ filter.cancel();</programlisting>
   model.<replaceable>entityName</replaceable>.schema.<replaceable>propN</replaceable>, <replaceable>ascDescN</replaceable>);</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
-      </varname> is an entity,  <varname><replaceable>entityName</replaceable>.schema.<replaceable>propN</replaceable></varname> —  is a property, by which sorting of data of the entity, the  <methodname>createSorting</methodname> function of which is called, will be performed; <literal> ascDescN</literal> — the ascending sorting order  — <literal>true</literal> or the descending sorting order —  <literal>false</literal>.</para>
+      </varname> is an entity,  <varname><replaceable>entityName</replaceable>.schema.<replaceable>propN</replaceable></varname>   is a property, by which sorting of data of the entity, the  <methodname>createSorting</methodname> function of which is called, will be performed; <literal> ascDescN</literal> is  the boolean ascending sorting order attribute wich is equals  <literal>true</literal> or for the descending sorting order is equals to   <literal>false</literal>.</para>
     <para>To sort data, use the  <methodname>sort</methodname>  entity function passing a sorting object as a parameter to this function:</para>
     <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.sort(<replaceable>sorter</replaceable>);</programlisting>
     <para>where <varname>
@@ -1164,12 +1168,12 @@ var sorter = documents.createSorting(
   documents.schema.CHECKED, false);
 
 //Sort objects
-entity1.sort(sorter);</programlisting>
+model.entity1.sort(sorter);</programlisting>
     <para>To define the specific comparison logic, use an alternative version of the  <methodname>sort</methodname> function. To do this, pass a function, which implements the comparison of two elements, as a parameter:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.sort(sortingFunction);</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.sort(sortingFunction);</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
-      </varname> is an entity, <methodname>sortingFunction</methodname> — <classname>Function</classname> is a function, which takes two objects as parameters and compares them. The comparison function returns a negative integer, if the first object is smaller than the second one, returns 0, if they are equal, and returns a positive integer, if the first object is greater than the second one.</para>
+      </varname> is an entity, <methodname>sortingFunction</methodname> is a function, which takes two objects as parameters and compares them. The comparison function returns a negative integer, if the first object is smaller than the second one, returns 0, if they are equal, and returns a positive integer, if the first object is greater than the second one.</para>
     <para>The following example shows the process of sorting entity data using an anonymous comparison function. Sorting is performed by the length of the document name:</para>
     <programlisting language="JavaScript">module.documents.sort(function(doc1, doc2) {
   var length1 = doc1.NAME != null ? doc1.NAME.length : 0;
@@ -1292,12 +1296,12 @@ function validateEmail(email) {
     <title>Entity data schema</title>
     <para>The module software code has access to an entity metadata. It is possible to read types, names, descriptions of entity properties and parameters, and other metadata.</para>
     <para>To read the entity property metadata, use its  <varname>md</varname> property:</para>
-    <programlisting language="JavaScript">var entityMetadata = <replaceable>entityName</replaceable>.schema;</programlisting>
+    <programlisting language="JavaScript">var entityMetadata = model.<replaceable>entityName</replaceable>.schema;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
       </varname> is an entity, which metadata you are interested in.</para>
     <para>The same data can be obtained using the object-instance of this entity:</para>
-    <programlisting language="JavaScript">var item = <replaceable>entityName</replaceable>[<replaceable>itemIndex</replaceable>];// Gets some item
+    <programlisting language="JavaScript">var item = model.<replaceable>entityName</replaceable>[<replaceable>itemIndex</replaceable>];// Gets some item
 var entityMetadata = item.schema;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
@@ -1305,7 +1309,7 @@ var entityMetadata = item.schema;</programlisting>
         <replaceable>itemIndex</replaceable>
       </literal>  is an object index.</para>
     <para>To get access to the property metadata:</para>
-    <programlisting language="JavaScript">var propMetadata = <replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable>;</programlisting>
+    <programlisting language="JavaScript">var propMetadata = model.<replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable>;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
       </varname>  is an entity, <varname>
@@ -1420,9 +1424,9 @@ var entityMetadata = item.schema;</programlisting>
       </tgroup>
     </informaltable>
     <para>To get the number of properties in the entity, use the  <code>length</code> property in the entity metadata object:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.schema.length</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.schema.length</programlisting>
     <para>You can call the property metadata by index as an array element:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.schema[<varname>i</varname>]</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.schema[<varname>i</varname>]</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
       </varname> is an entity, and <varname>
@@ -1580,7 +1584,7 @@ var entityMetadata = item.schema;</programlisting>
     <para>or just the  <code>length</code> property of the model parameters:</para>
     <programlisting language="JavaScript">model.params.length</programlisting>
     <para>To get the number of the entity parameters:</para>
-    <programlisting language="JavaScript"><replaceable>entityName</replaceable>.params.schema.length</programlisting>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.params.schema.length</programlisting>
     <para>or:</para>
     <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.params.length</programlisting>
     <para> where <varname>
@@ -1628,7 +1632,7 @@ e.executeUpdate();</programlisting>
   </section>
   <section>
     <title>Server module</title>
-    <para/>
+    <para>A module being created on the server is stateful by default. Such module exists in the context of the current user session. Mark the module with the <code>@stateless</code> annotation if you want to make the  module stateless. A new instance of stateless module is created every time the module is called via a network.</para>
   </section>
   <section>
     <title>Scripting Java</title>
@@ -1656,7 +1660,7 @@ aFile.delete();</programlisting>
     <warning>
       <para>To avoid potential name conflicts, do not use the  <literal>java</literal> name for your objects and variables.</para>
     </warning>
-    <para>External Java libraries are also available for the JavaScript code. To use them:</para>
+    <para>External Java libraries are also available in JavaScript code. To use them:</para>
     <itemizedlist>
       <listitem>
         <para>Make  <filename>.jar</filename> or <filename>.class</filename> files of external libraries available for the class loader; when using the <application>Platypus Client</application> application they should be moved to the  <filename>ext</filename> folder; when deploying the application into the <abbrev>J2EE</abbrev> container, they should be usually placed into the <filename>WEB-INF/lib</filename> folder.</para>
@@ -1679,9 +1683,6 @@ var navData = sensor.getData();</programlisting>
 var sensor = new NavSensor();
 //Gets navigation data
 var navData = sensor.getData();</programlisting>
-    <note>
-      <para>Refer to the Rhino documentation for more detailed information on using Java from the JavaScript code. </para>
-    </note>
   </section>
   <section>
     <title>Multithreading</title>
@@ -1740,7 +1741,7 @@ writeString(&apos;/home/user1/Documents/doc2.txt&apos;, str);</programlisting>
     <warning>
       <para>This E4X is obsolete. Although it is still supported, its usage is discouraged in new projects. Try to avoid using it.</para>
     </warning>
-    <para>The  materials in this section  are based on the MDN E4X manual.</para>
+    <para>The  materials in this section  are based on the Mozilla Development Network E4X manual.</para>
     <para>To create a new XML type variables use the following syntax: </para>
     <programlisting language="JavaScript">// Creates empty XML element
 var element = &lt;foo/&gt;;

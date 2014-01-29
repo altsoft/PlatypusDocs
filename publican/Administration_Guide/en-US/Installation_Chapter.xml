@@ -4,19 +4,10 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Administration_Guide-Installation_Chapter">
-  <title>Platform&apos;s runtime installation</title>
-  <para>The Platypus Platform runtime is provided by the following ways:</para>
-  <itemizedlist>
-    <listitem>
-      <para>On a CD/DVD</para>
-    </listitem>
-    <listitem>
-      <para>Over the Internet as a ZIP archive file</para>
-    </listitem>
-  </itemizedlist>
+  <title>Platform&apos;s installation</title>
   <para>If the Platypus Platform runtime is delivered as a ZIP file, unpack its contents to a location according to your preference on your hard drive.</para>
   <note>
-    <para>Instructions for installing the <application>Platypus Application Designer</application> developer tool are available in the Developer Guide.</para>
+    <para>Instructions for installing the <application>Platypus Application Designer</application> developer tool are available in the Development Guide.</para>
   </note>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
     <title>System requirements</title>
@@ -48,8 +39,7 @@ Below you can see prerequisites for launching the platform components on your co
           <para>Google Chrome 19, Mozilla Firefox 10, Internet Explorer 9 or newer versions of browsers for Platypus client HTML5 operation</para>
         </listitem>
       </itemizedlist>  </para>
-    <para>Usually, a database server is required for operation of Platypus applications. This database server may be installed on the same computer as the client or application server, or on another computer which is accessible over the network.   </para>
-    <para>The Platypus platform supports the following databases: </para>
+    <para>The Platypus Platform supports the following database servers: </para>
     <itemizedlist>
       <listitem>
         <para>Oracle Database 10g and higher</para>
@@ -71,10 +61,8 @@ Below you can see prerequisites for launching the platform components on your co
       </listitem>
     </itemizedlist>
     <para>For information on installing and configuring the database server, refer to the relevant installation and administration manuals, provided by database server manufacturers.</para>
-    <note>
-      <para>The Platypus Platform is supplied with the H2 database. This database is supplied &quot;out of the box&quot;, so it can be used immediately after installing the platform and does not require any additional installation and configuration steps.</para>
-    </note>
-    <para>To enable operation of the application server side in the servlet container or on the J2EE server, install or use an already installed servlet container or J2EE server. The Platypus operation was tested in the following environments:</para>
+    <para>The platform runtime is supplied with the H2 database. This database  does not require any additional installation and configuration steps.</para>
+    <para>For running applicatons on server side in a J2EE servlet container use a  J2EE server or container, for example:</para>
     <itemizedlist>
       <listitem>
         <para>Apache Tomcat 7</para>
@@ -89,7 +77,7 @@ Below you can see prerequisites for launching the platform components on your co
     <para>For information on installing and configuring the servlet container or J2EE server, refer to the relevant installation and administration manuals, provided by their manufacturers.</para>
   </section>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
-    <title>Runtime components installation</title>
+    <title>Installation guide</title>
     <para> To install the platform components, perform the following actions:<orderedlist>
         <listitem>
           <para>
@@ -112,19 +100,19 @@ Select the installation directory.</para>
 Select components to be installed. </para>
           <itemizedlist>
             <listitem>
-              <para>Platypus Platform — the Platypus Platform&apos;s core components</para>
+              <para>The platform&apos;s core components (required)</para>
             </listitem>
             <listitem>
-              <para>Java SE client</para>
+              <para>Java SE desktop client</para>
             </listitem>
             <listitem>
-              <para>Modules for working with maps</para>
+              <para>Geospacial and maps components</para>
             </listitem>
             <listitem>
-              <para>Application Server — includes modules required for operation of the standalone application server and server components in the J2EE servlet containers and on the application servers</para>
+              <para>Components required for operation of the standalone application server and  in  J2EE servlet containers and on the application servers</para>
             </listitem>
             <listitem>
-              <para>Platypus Communications — modules required for operation with COM/DCOM and OPC servers.</para>
+              <para>Components required for operation with COM/DCOM and OPC servers</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -133,10 +121,8 @@ Select components to be installed. </para>
 Select settings of shortcuts for running the Platypus client in your system environment. </para>
         </listitem>
       </orderedlist>
-  <note>
-        <para>Platform core components are required when installing any configuration.</para>
-      </note></para>
-    <para>After installation, the directory will have the following structure:</para>
+  </para>
+    <para>After installation, the platform&apos;s directory will have the following structure:</para>
     <itemizedlist>
       <listitem>
         <para><filename>platypus/</filename></para>
@@ -161,17 +147,17 @@ Select settings of shortcuts for running the Platypus client in your system envi
     </itemizedlist>
   </section>
   <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
-    <title>Uninstalling recomendations</title>
+    <title>Uninstallation guide</title>
     <para>
-To delete the Platypus Platform components from your computer, perform the following actions:
-   <orderedlist>
+To delete the platform components from your computer, perform the following actions:
+   <itemizedlist>
         <listitem>
-          <para>Run the  <application>UninstallPlatypus</application> program from the installed programs menu or using the corresponding shortcut. For Windows, use the conventional mechanism for removing programs.</para>
+          <para>Select the  <application>UninstallPlatypus</application> menu item from the installed programs menu. For Windows, use the conventional mechanism for removing programs.</para>
         </listitem>
         <listitem>
-          <para>Confirm uninstalling of Platypus components; if necessary, enable an option for removing the working directory.</para>
+          <para>Confirm uninstalling of Platypus components. If necessary, enable an option for removing the working directory.</para>
         </listitem>
-      </orderedlist>
+      </itemizedlist>
   </para>
   </section>
 </chapter>

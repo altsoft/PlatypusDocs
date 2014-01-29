@@ -41,10 +41,10 @@
         <para>JavaScript modules  automatic dependencies resolving, manual  resolving is also avaliable.</para>
       </listitem>
       <listitem>
-        <para>SQL quries with named parameters and SQL clauses re-use.</para>
+        <para>SQL queries with named parameters and SQL clauses re-use.</para>
       </listitem>
       <listitem>
-        <para>Data model and automatic O/RM (Object-Relation Mapping) for JavaScript.</para>
+        <para>Data model and  ORM (Object-Relation Mapping) for JavaScript.</para>
       </listitem>
       <listitem>
         <para>Desktop cross-platform as well as  HTML5 web-browser user interface presentation sharing  the same code and the GUI layout.</para>
@@ -61,31 +61,34 @@
     </itemizedlist>
   </section>
   <section>
-    <title>Application architecture</title>
+    <title>Application structure</title>
     <para>Platypus  applications have a tree structure which contains  directories and files. Some files or file groups have a special meaning to the platform and called application elements. That is the building bricks for an application.</para>
     <para> The types of application elements in Platypus Platform are:
   </para>
     <itemizedlist>
       <listitem>
-        <para><emphasis>Module</emphasis>—a structural unit of the JavaScript software code, and its data model.</para>
+        <para><emphasis>Module</emphasis> is a structural unit of the JavaScript  code, and its data model.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Form</emphasis>—a module with a user interface  layout.</para>
+        <para><emphasis>Form</emphasis> is a module with a user interface  layout.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Report</emphasis>—a module with a template of the generated office document.</para>
+        <para><emphasis>Report</emphasis> is a module with a template of the generated office document.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Query</emphasis> — a database query in SQL language.</para>
+        <para><emphasis>Query</emphasis> is a database query in SQL language.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Database diagram</emphasis>—a visual representation of the database structure.</para>
+        <para><emphasis>Database diagram</emphasis> is a visual representation of the database structure.</para>
       </listitem>
     </itemizedlist>
     <note>
-      <para>During the  development process, the application tree is stored on the disk in the project&apos;s <filename>src</filename> subfolder, but for production operation the application, including its resources can be deployed directly in the  database <literal>MTD_ENTITIES</literal> table.</para>
+      <para>During the  development process, the application tree is stored on the disk in the project&apos;s <filename>src</filename> subfolder, but for production operation the application, including its resources can be deployed directly to the  database <literal>MTD_ENTITIES</literal> table.</para>
     </note>
-    <para>In general, the platform works on three-tier archeticture including presentation, logic and database tiers. The presentation and the logic tier can be combined in some configurations.</para>
+  </section>
+  <section>
+    <title>Runtime configurations</title>
+    <para>In general, the platform works on three-tier archeticture including presentation, logic and data storage tiers. The presentation and the logic tier can be combined in some configurations.</para>
     <figure>
       <title>Applicaton tiers</title>
       <mediaobject>
@@ -94,7 +97,62 @@
         </imageobject>
       </mediaobject>
     </figure>
-    <para>In case no-server configuration the presentation tier and logic tier operate at Java SE desktop client, and in case server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
+    <para>In case of no-server configuration the presentation tier and logic tier operate at Java SE desktop client, and in case server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
+    <para>The platform&apos;s applications can work in the following configurations:</para>
+    <itemizedlist>
+      <listitem>
+        <para>No-server configuration is the Java SE desktop client connects directly to the database server. This scheme is recommended for relatively simple applications, which do not require any application server.</para>
+        <figure>
+          <title>No-server configuration</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/2-tiers.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </listitem>
+      <listitem>
+        <para>The configuration with  Platypus Application Server (PAS). In this configuration the desktop client connects to the
+PAS. This server is a lightweight non-J2EE Java application server. The custom binary protocol is used to transmit data. The application server, in turn, interacts with a database server.</para>
+        <figure>
+          <title>The configuration using PAS</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/3-tiers.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </listitem>
+      <listitem>
+        <para>The configuration with a J2EE compatible server to host the platfroms server components. The deskotp client or HTML5 browser connects to the servlet container or J2EE server.  HTTP/HTTPS protocol is used to transmit data. In this case, the data source resources are managed by the container.</para>
+        <figure>
+          <title>The configuration on Java EE</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/3-tiers-j2ee.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </listitem>
+    </itemizedlist>
+    <para>3-tier configuration has a number of advantages as compared with 2-tier one:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Improved security, as the client has no direct access to the database and database request text is not transmitted via network.</para>
+      </listitem>
+      <listitem>
+        <para>Improved performance, as business logic is executed on the server.</para>
+      </listitem>
+      <listitem>
+        <para>Improved system maintainability.</para>
+      </listitem>
+      <listitem>
+        <para>Target application scalability. </para>
+      </listitem>
+      <listitem>
+        <para>The ability to use HTML5 web browser as a client (using the J2EE servlet container/application server).</para>
+      </listitem>
+    </itemizedlist>
     <para>The figure below shows a simplified diagram of components interaction and data flow. </para>
     <figure>
       <title>The data flow</title>
@@ -106,58 +164,61 @@
     </figure>
     <para>JavaScript code and the data model compatible user interface widgets can use the data model to read and write database data.</para>
     <para>Data flow components can operate on a client as well as on a server. In case of no-server configuration the data flow components work on the client. In case of configuration with an application server, data flow components work on the client as well as on the server, particularly on different computers, while providing a transparent data exchange.</para>
-    <para>The unique feature of the  platform is its Object/Relational Mapping  <acronym>(O/RM)</acronym> implementation. In runtime  its generates JavaScript objects datasets matching the database relations. To enable this process it uses schema information from the database and the SQL query texts. </para>
-    <para>The usage of data model simplifies many data processing operations, since it provides automatic synchronization of  entities data, automatic saving of  modified data, simplified support of transactions, centralized management of resources, etc.</para>
-    <para>The  application development workflow usually consists of the following  steps:</para>
+    <para>The unique feature of the  platform is its Object-Relational Mapping  <acronym>(ORM)</acronym> implementation. In runtime  its generates JavaScript objects datasets matching the database relations. To enable this process it uses schema information from the database and the SQL query texts. </para>
+    <para>The usage of data model simplifies many data processing operations, since it provides  entities&apos; data loading, automatic saving of changes, simplified support of transactions, centralized management of resources, etc.</para>
+  </section>
+  <section>
+    <title>Development workflow</title>
+    <para>To develop an  application use the following workflow:</para>
     <itemizedlist>
       <listitem>
-        <para>Determination of the database structure for the application specific knowledge domain.</para>
+        <para>Determine database structure for the application domain.</para>
       </listitem>
       <listitem>
-        <para>Implementation of this structure in the form of  relational entities in the database using the Database structure diagrams  visual editor.</para>
+        <para>Specify  this structure in the form of  relational entities in the database using the Database structure diagrams  visual editor.</para>
       </listitem>
       <listitem>
-        <para>Writing the data sampling queries and its parameters; if required, implementation of queries for updating and adding data in SQL language (data inserting/updating in most cases can be completed automatically by the data model).</para>
+        <para>Write the data sampling queries and specify theirs parameters; if required, implement the queries for updating and adding data in SQL language (it is not needed in general, because data inserts/updates/deletions in most cases can be completed automatically by the data model).</para>
       </listitem>
       <listitem>
-        <para>Implementation of the application logic as JavaScript modules,</para>
+        <para>Implement  the application logic as JavaScript modules,</para>
         <para>for each module:</para>
         <itemizedlist>
           <listitem>
-            <para>determination module&apos;s of the data model using visual tool;</para>
+            <para>specify the module&apos;s data model using visual tool;</para>
           </listitem>
           <listitem>
-            <para>writing  JavaScript code, for example to implement the business-logic.</para>
+            <para>write the  JavaScript code, for example to implement the business-logic.</para>
           </listitem>
         </itemizedlist>
       </listitem>
       <listitem>
-        <para>Implementation of the application user interface as  forms using visual  tool,</para>
+        <para>Implement the application user interface as  forms using visual  tool,</para>
         <para>for each form:</para>
         <itemizedlist>
           <listitem>
-            <para>determination of the form&apos;s data model;</para>
+            <para>specify the form&apos;s data model;</para>
           </listitem>
           <listitem>
-            <para>creation of the form layout using the visual editor;</para>
+            <para>create  the form&apos;s layout using the visual editor;</para>
           </listitem>
           <listitem>
-            <para>writing  JavaScript  code responsible for  the user interface.</para>
+            <para>write  JavaScript  code responsible for  the user interface.</para>
           </listitem>
         </itemizedlist>
       </listitem>
       <listitem>
-        <para>Implementation of  reports using the reports tool,</para>
+        <para>Implement  reports using the reports tool,</para>
         <para>for each report:</para>
         <itemizedlist>
           <listitem>
-            <para>determination of the report&apos;s data model;</para>
+            <para>specify the report&apos;s data model;</para>
           </listitem>
           <listitem>
-            <para>creation of the report template using the visual editor;</para>
+            <para>create the report template using the visual editor;</para>
           </listitem>
           <listitem>
-            <para>writing  JavaScript  code if some  non-standard report generation processing required.</para>
+            <para>write  JavaScript  code if some  non-standard data  processing required.</para>
           </listitem>
         </itemizedlist>
       </listitem>

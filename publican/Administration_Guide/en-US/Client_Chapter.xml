@@ -4,129 +4,73 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Administration_Guide-Client_Chapter">
-  <title>Configuring and running the Platypus Client</title>
-  <para>The Platypus Client is a Java SE desktop application  to provide  user interface and/or execute the application logic on the end user&apos;s computer. The Platypus Client loads required application elements from the application server or from the database or reads them directly from a drive folder, which was specified during configuration.  </para>
-  <para>The Platypus client provides an automatic check for updates and offers their installation.</para>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_1">
-    <title>Platypus Client operation modes</title>
-    <para>The Platypus client can work in the following modes:</para>
-    <itemizedlist>
-      <listitem>
-        <para>2-tier mode — the Java SE client connects directly to the database server. This scheme is recommended for relatively simple applications, which do not require the execution of business logic on the server.</para>
-        <figure>
-          <title>2-tier mode</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata align="center" fileref="images/2-tiers.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
-      </listitem>
-      <listitem>
-        <para>3-tier mode with the Platypus server — the client connects to the
-<application> Platypus Application Server</application>. The binary Platypus Protocol is used to transmit data. The application server, in turn, interacts with the database server. This mode is recommended for applications of medium complexity, which involve the execution of business logic on the application server.</para>
-        <figure>
-          <title> 3-tier mode with the Platypus Application Server</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata align="center" fileref="images/3-tiers.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
-      </listitem>
-      <listitem>
-        <para>3-tier mode with the J2EE server — the client connects to the servlet container or J2EE server, on which the Platypus server components are deployed. In this case, both Java SE client and HTML5 browser (<application>Chrome</application>, <application>Opera</application>, <application>Firefox</application>, etc.) can serve as a client. The HTTP/HTTPS protocol is used to transmit data.In this case, the data source resource provided by the container is used to connect to databases. For this type of connection, the Platypus server components should be deployed in the servlet container or on the J2EE server.</para>
-        <figure>
-          <title>3-tier mode with a J2EE server</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata align="center" fileref="images/3-tiers-j2ee.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
-      </listitem>
-    </itemizedlist>
-  </section>
+  <title>Desktop client</title>
+  <para>The desktop client is a Java SE desktop application  to provide  user interface and/or execute the application logic on the end user&apos;s computer. The desktop client loads required application elements from the application server,  from the database or  directly from a disk, according to its configuration.  </para>
+  <para>The desktop client supports automatic  updates via network.</para>
   <section id="sect-Administration_Guide-Client_Chapter-Test_Section_2">
-    <title>Running the Platypus Client</title>
-    <para>To run the Java SE client, you should use  <guilabel>Platypus Client</guilabel> shortcut on the desktop or the <guilabel>Start</guilabel> menu, or run the startup script.
-    </para>
+    <title>Running desktop client</title>
     <para>Startup scripts and Platypus client loader are located in the
     <filename>/run</filename> folder:</para>
     <itemizedlist>
       <listitem>
-        <para><filename>platypus.exe</filename> — to run the client in Windows OS without creating the command prompt window with preliminary running the client update; this command ensures the correct functioning with UAC (User Account Control) in the Windows OS. </para>
+        <para><filename>platypus.exe</filename> — to run the client in Windows without creating the command prompt window with preliminary running the client update; this command ensures the correct functioning with UAC (User Account Control). </para>
       </listitem>
       <listitem>
-        <para><filename>platypus.js</filename> — a script to run the client in Windows OS without checking for updates.</para>
+        <para><filename>platypus.js</filename> — a script to run the client in Windows  without checking for updates.</para>
       </listitem>
       <listitem>
-        <para><filename>platypus.sh</filename> — to run the client in Linux OS.</para>
+        <para><filename>platypus.sh</filename> — to run the client in Linux.</para>
       </listitem>
       <listitem>
-        <para><filename>startupdate.sh</filename> — to run the client in Linux OS with preliminary running the client update.</para>
+        <para><filename>startupdate.sh</filename> — to run the client in Linux with preliminary running the client update.</para>
       </listitem>
     </itemizedlist>
-    <para>If the client was started successfully, it displays a dialog box for entering the user name and password and selecting a preconfigured connection to the server.</para>
-    <para>You can create and use several preconfigured connections to the database or Platypus server. Your distribution kit can include a default preconfigured connection.</para>
-    <para>If the 2-tier scheme is used, enter the username and password of the database connection, and the username and password for the Platypus applications. </para>
-    <para>If the 3-tier scheme is used, enter only the username and password for the Platypus applications.</para>
+    <para>If the desktop client is started successfully, it displays a dialog box for entering the user name and password and selecting a preconfigured connection to the server.</para>
+    <para>You can create and use several preconfigured connections to the database or to an app server. Your distribution kit can include a default preconfigured connection.</para>
+    <para>If the 2-tier configuration is used, enter the username and password of the database connection, and the username and password. </para>
+    <para>If the 3-tier configuration is used, enter only the username and password.</para>
     <para>Use the <guilabel>Remember database password</guilabel> and  <guilabel>Remember password</guilabel> check boxes, if it is necessary to remember the database password and/or Platypus applications password.</para>
     <para>Use the <guilabel>&gt;&gt;&gt;</guilabel> and <guilabel>&lt;&lt;&lt;</guilabel> buttons to display and hide the preconfigured connections panel.</para>
     <para>Select a preconfigured connection from the list to connect to the server and run the client.</para>
-    <para>Creating and editing preconfigured connections.</para>
     <para>To display the dialog for creating a connection, click the <guibutton>New</guibutton> button on the preconfigured connections panel.</para>
     <para>To change a preconfigured connection, select it from the list and click the <guibutton>Change</guibutton> button on the preconfigured connections panel.</para>
-    <para>Enter or modify the following fields in the &quot;Connection settings&quot; dialogue:</para>
+    <para>Enter or modify the following fields in the <guilabel>Connection settings</guilabel> dialog:</para>
     <itemizedlist>
       <listitem>
-        <para><guilabel>Name</guilabel> — the connection name, for example  <literal>myserver</literal>; you can enter any name in this field. </para>
+        <para><guilabel>Name</guilabel> is the connection name, for example  <literal>myserver</literal>; you can enter any name in this field. </para>
       </listitem>
       <listitem>
-        <para><guilabel>Connection URL</guilabel> — the string of connection to the server. For working on the 2-tier scheme, the connection URL should be in the JDBC URL format, for example, <literal>jdbc:oracle:thin:@dbhost:1521:adb</literal>.</para>
+        <para><guilabel>Connection URL</guilabel> is  the string of connection to the server. For working on the 2-tier scheme, the connection URL should be in the JDBC URL format, for example, <literal>jdbc:oracle:thin:@dbhost:1521:adb</literal>.</para>
         <para>For working on the 3-tier scheme over the Platypus Protocol, use URL of the <literal>platypus://<replaceable>host</replaceable><replaceable>:port</replaceable></literal> format, for example,  <literal>platypus://serverhost:8500</literal>,  port 8500 is the default port for the Platypus protocol and in this case it can be omitted.</para>
         <para>For working on the 3-tier scheme over the HTTP protocol, use URL of the <literal>http://<replaceable>host</replaceable><replaceable>:port/platypus_servlet/application</replaceable></literal>  format, for example, <literal>http://localhost/myapp/application</literal>.</para>
       </listitem>
       <listitem>
-        <para><guilabel>Scheme</guilabel> — the default database scheme, for example, <literal>myschema</literal>; not used in case of the 3-tier connection.</para>
+        <para><guilabel>Scheme</guilabel> is  the default database scheme, for example, <literal>myschema</literal> (not used in case of the 3-tier configuration).</para>
       </listitem>
       <listitem>
-        <para><guilabel>Database user</guilabel> — the default  database username, for example, <literal>user1</literal>; not used in case of the 3-tier connection.</para>
+        <para><guilabel>Database user</guilabel> is the default  database username, for example, <literal>user1</literal> (not used in case of the 3-tier configuration).</para>
       </listitem>
       <listitem>
-        <para>To save the new connection settings, click <guibutton>OK</guibutton> in the dialogue; to cancel, click  <guibutton>Cancel</guibutton>.</para>
+        <para>To save the new connection settings, click <guibutton>OK</guibutton> in the dialog, to cancel, click  <guibutton>Cancel</guibutton>.</para>
       </listitem>
     </itemizedlist>
     <para>To remove a preconfigured connection, select the connection from the list and click the  <guibutton>Delete</guibutton> button on the preconfigured connections panel. The connection is deleted when the user clicks <guibutton>OK</guibutton>  in the removal confirmation dialog.</para>
     <para>To run the client using the selected connection, click <guibutton>OK</guibutton>. To close the connection selection dialog, click <guibutton>Cancel</guibutton>. </para>
-    <para>After starting the client, the default application element (a form, a report, or a module ) for a given user or an application element, which is clearly specified in the <parameter>-appElement</parameter>  parameter of the startup command prompt, will be launched.</para>
   </section>
   <section>
-    <title>Platypus Client startup commands and parameters</title>
-    <para>This section provides detailed reference information on the parameters of the Platypus client launch command prompt.</para>
-    <para>To configure starting of the Platypus client, edit the contents of the launch script files. The following parameters can be configured:</para>
-    <itemizedlist>
-      <listitem>
-        <para>The default application element — an identifier of the form, report, or module, which will be open when you run the client, for example,  <literal>appStartForm</literal>, if this parameter is not specified, the client will use the default element for the current user.  </para>
-      </listitem>
-      <listitem>
-        <para>Look and Feel (LaF) of the client. The Platypus client can use LaF of the Swing graphical shell of the Java SE platform. It is possible to use both standard LaFs of the operating system and LaFs from third-party libraries.</para>
-      </listitem>
-      <listitem>
-        <para>Level of log customization and log file.</para>
-      </listitem>
-    </itemizedlist>
+    <title>Command line options</title>
+    <para>To configure starting of the desktop client, edit the contents of the launch script files. </para>
+    <para>The deskop client is a Java SE Swing application. Specify the startup JVM options and the applications parameters. </para>
     <para>The command for running the Platypus client is as follows:</para>
     <programlisting>java -cp Application.jar;<replaceable>EXT_CLASSPATH</replaceable>com.eas.client.application.PlatypusClientApplication <replaceable>OPTIONS</replaceable></programlisting>
     <para>where <replaceable>EXT_CLASSPATH</replaceable> are paths which should be added to the Java class loader search path,  <replaceable>OPTIONS</replaceable> are additional running parameters.</para>
-    <para>At the beginning of configuring it is recommended to run scripts using the command prompt to display possible error messages. In case of a successful running, the authorization dialog appears.</para>
     <para>You can also run the client using the 
     <parameter>-jar</parameter> parameter:</para>
     <programlisting>java -jar Application.jar <replaceable>OPTIONS</replaceable></programlisting>
     <para>This starting option is useful when working with the command prompt, but this approach does not allow you to add external libraries to the path used by the Java loader when searching for classes, for example, to connect arbitrary Look and Feel themes.
     </para>
     <table>
-      <title>Parameters of running Platypus Client from the command prompt</title>
+      <title> Command line options</title>
       <tgroup cols="2">
         <tbody>
           <row>
@@ -187,16 +131,10 @@
             </entry>
             <entry>Logging level. This parameter specifies the minimum level which will be shown in the log. For the description of logging levels, see Appendix A.</entry>
           </row>
-          <row>
-            <entry>
-              <parameter>-log LOG_FILE_PATH</parameter>
-            </entry>
-            <entry>Name and path of the log file.</entry>
-          </row>
         </tbody>
       </tgroup>
     </table>
-    <para>If parameters of the database connection or the Platypus user name and password are not specified, the &quot;Connection settings&quot; dialog to enter these parameters appears.</para>
+    <para>If parameters of the database connection or some credential are not specified, the <guilabel>Connection settings</guilabel> dialog to enter these parameters appears.</para>
     <para>Example of the Platypus client running command:</para>
     <programlisting>java -cp Application.jar;CoolLaf.jar -laf CoolLaf com.eas.client.application.PlatypusClientApplication -appElement mainForm</programlisting>
     <para>Example of running the client using the <parameter>-jar</parameter>  parameter:</para>

@@ -4,15 +4,15 @@
 %BOOK_ENTITIES;
 ]>
 <bookinfo id="book-Administration_Guide-Administration_Guide">
-  <title>Platypus Platform Administrator Guide</title>
-  <subtitle/>
+  <title>Platypus Platform 3.0 Administration Guide</title>
+  <subtitle>An administration guide</subtitle>
   <productname>Platypus</productname>
   <productnumber>3.0</productnumber>
   <edition>0</edition>
   <pubsnumber>0</pubsnumber>
   <abstract>
     <para>
-This guide contains information about installing and administering the Platypus Platform
+This guide contains information about installing, configuring and administering the Platypus Platform
 runtime components  </para>
   </abstract>
 </bookinfo>

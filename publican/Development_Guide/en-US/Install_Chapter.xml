@@ -6,15 +6,6 @@
 <chapter id="chap-Development_Guide-Install_Chapter">
   <title>Platypus Application Designer</title>
   <para>The application designer software package is included into the developer&apos;s kit and can be bundled with the Platypus Platform runtime installation.</para>
-  <para>The developer&apos;s kit may be supplied:</para>
-  <itemizedlist>
-    <listitem>
-      <para>on a CD/DVD</para>
-    </listitem>
-    <listitem>
-      <para>as an installer archive which can be downloaded from the Internet.</para>
-    </listitem>
-  </itemizedlist>
   <para>If the developer&apos;s kit is supplied as an archive, unpack its contents  to the  folder of your choice on the hard drive.</para>
   <note>
     <para>Platypus Platform runtime installation instructions are provided in the Administration Guide.</para>
@@ -49,10 +40,7 @@
     <para>
 To install the developer&apos;s kit, perform the following actions:<orderedlist>
         <listitem>
-          <para>Launch the   <filename>platypusdesigner-windows.exe</filename> file for  Windows OS or <filename>platypusdesigner-linux.sh</filename> for Linux.</para>
-          <note>
-            <para>For Linux OS, the user must have  access rights enabling to launch the executable file. </para>
-          </note>
+          <para>Run the   <filename>platypusdesigner-windows.exe</filename> file for  Windows OS or <filename>platypusdesigner-linux.sh</filename> for Linux. The Linux user must have  access rights  to launch the installer.</para>
         </listitem>
         <listitem>
           <para>
@@ -125,7 +113,7 @@ To remove  Platypus Application Designer from you computer, perform the followin
   </section>
   <section>
     <title>Runtime environment setup</title>
-    <para>The Platypus Platform runtime is required  to start, debug and deploy applications. You must specify the path to the runtime directory for the Platypus Application Designer to be able to run and debug your applications.</para>
+    <para>The Platypus Platform runtime is required  to start, debug and deploy it&apos;s applications. You must specify the path to the runtime directory for the Platypus Application Designer to be able to run and debug your applications.</para>
     <para>Specify the location of the Platypus Platform runtime directory in the computer&apos;s file system:</para>
     <itemizedlist>
       <listitem>
@@ -148,7 +136,7 @@ To remove  Platypus Application Designer from you computer, perform the followin
       </listitem>
     </itemizedlist>
     <note>
-      <para>The current version of Platypus Application Designer supports launching of applications in  Apache Tomcat 7. Download Apache Tomcat 7 from the developer&apos;s site and unpack it in the directory of your choice on your hard drive.</para>
+      <para>The current version of Platypus Application Designer supports launching of applications in  Apache Tomcat 7+. Download Apache Tomcat from the developer&apos;s site and unpack it in the directory of your choice on your hard drive.</para>
     </note>
   </section>
 </chapter>
