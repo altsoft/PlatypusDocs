@@ -25,7 +25,7 @@
     </listitem>
   </itemizedlist>
   <note>
-    <para>Use Platypus Application Designer to create web-application framework automatically; for detailed information, see the Developer Guide.</para>
+    <para>Use Platypus Application Designer to create web application. For detailed information, refer to the Development Guide.</para>
   </note>
   <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_2">
     <title>Configuring J2EE server</title>
@@ -38,46 +38,43 @@
         <para>Create HTML pages, which will contain the Platypus application. Configure JavaScript code, necessary for the initial startup code.</para>
       </listitem>
       <listitem>
-        <para>Copy libraries, necessary for the application functioning, to the web-application <filename>WEB-INF/lib</filename> directory from the  <filename>bin</filename> sub-directory of the Platypus platform  directory.</para>
+        <para>Copy libraries, necessary for the application functioning, to the web-application <filename>WEB-INF/lib</filename> directory from the  <filename>bin</filename> sub-directory of the  platform runtime  directory.</para>
       </listitem>
       <listitem>
-        <para>Copy the <filename>pwc</filename> directory of the JavaScript HTML5 client from the  <filename>bin</filename> sub-directory of the Platypus platform  directory.</para>
+        <para>Copy the <filename>pwc</filename> directory of the JavaScript HTML5 client from the  <filename>bin</filename> sub-directory of the  platform runtime  directory.</para>
       </listitem>
       <listitem>
         <para>Configure the JDBC data source as a JNDI resource, specify its name, for example <literal>jdbc/main</literal>. Configure the connection pool and JNDI resource. Copy the JAR file copy of the corresponding database driver to the directory available for the class loader.</para>
       </listitem>
       <listitem>
-        <para>Configure the security domain (Realm) for working with built-in storage or external authentication service. For working with built-in storage, configure the JDBC security domain for working with  <literal>MTD_USERS</literal> and <literal>MTD_GROUPS</literal> tables — see the &quot;Security&quot; section.</para>
+        <para>Configure the security domain (Realm) for working with built-in storage or external authentication service. For working with built-in storage, configure the JDBC security domain for working with  <literal>MTD_USERS</literal> and <literal>MTD_GROUPS</literal> tables — see Security section.</para>
       </listitem>
       <listitem>
         <para>Configure the parameters of the web-application deployment in the  <filename>WEB-INF/web.xml</filename> file. If necessary, configure settings in the configuration files specific for this application server.</para>
       </listitem>
       <listitem>
-        <para>Deploy the web-application in the J2EE container/on the application server as a WAR archive or folder.</para>
+        <para>Deploy the web-application in the J2EE container/on the application server as a WAR archive or as a directory.</para>
       </listitem>
     </itemizedlist>
-    <note>
-      <para>See Appendix B for <application>Glassfish 3.1</application> J2EE server setup guide. See Appendix C for <application>Apache Tomcat 7</application>  setup guide.</para>
-    </note>
   </section>
   <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_3">
     <title>Configuring the deployment descriptor</title>
     <para>To configure a web-application, edit the XML file of the  <filename>WEB-INF/web.xml</filename>  deployment descriptor. </para>
     <itemizedlist>
       <listitem>
-        <para>Set the initialization parameter and specify  <parameter>ap</parameter>  as its name and path to Platypus application folder as its value; the path may be absolute or relative within the web-application; when the web-application is packed into a war file, the relative path will work if the server unpacks this archive when deploying the application; if this option is not specified, the application will be loaded from the database. In the following example, an absolute path is specified</para>
+        <para>Set the initialization parameter and specify  <parameter>url</parameter>  as its name and path to Platypus application folder as its value; the path may be absolute or relative within the web-application; when the web-application is packed into a war file, the relative path will work if the server unpacks this archive when deploying the application; if this option is not specified, the application will be loaded from the database. In the following example, an absolute path is specified</para>
         <programlisting>...
 &lt;context-param&gt;
-    &lt;param-name&gt;ap&lt;/param-name&gt;
-    &lt;param-value&gt;/home/Platypus/app&lt;/param-value&gt;
+    &lt;param-name&gt;url&lt;/param-name&gt;
+    &lt;param-value&gt;file:///home/Platypus/app&lt;/param-value&gt;
  &lt;/context-param&gt;
 ...</programlisting>
       </listitem>
       <listitem>
-        <para>Set the initialization parameter and specify <parameter>url</parameter> as its name and the name of the JNDI resource of the JDBC data source as its value, for example:</para>
+        <para>Set the initialization parameter and specify <parameter>default-datasource</parameter> as its name and the name of the JNDI resource of the JDBC data source as its value, for example:</para>
         <programlisting>...
 &lt;context-param&gt;
-    &lt;param-name&gt;url&lt;/param-name&gt;
+    &lt;param-name&gt;default-datasource&lt;/param-name&gt;
     &lt;param-value&gt;jdbc/main&lt;/param-value&gt;
  &lt;/context-param&gt;
 ...</programlisting>
@@ -135,7 +132,7 @@ com.eas.server.httpservlet.PlatypusHttpServlet
   </section>
   <section>
     <title>Authentication configuration on a J2EE container</title>
-    <para>When an application works in the J2EE container, Platypus uses an authentication mechanism and roles provided by the J2EE container. To enable activation of the role access in this case, the user should pass the security constraint and get a role. To do this, configure a URL security constraint as a page containing Platypus forms, for which the access control based on roles should be provided. The following example shows the enabled security constraint for the  <filename>applicationStart.html</filename> page; to get access to this page the user should be assigned any role:</para>
+    <para>When an application works in a J2EE container, the platform runtime uses an authentication mechanism and roles provided by the container. To enable activation of the role access in this case, the user should pass the security constraint and get a role. To do this, configure a URL security constraint as a page containing Platypus forms, for which the access control based on roles should be provided. The following example shows the enabled security constraint for the  <filename>applicationStart.html</filename> page; to get access to this page the user should be assigned any role:</para>
     <programlisting>...
 &lt;security-constraint&gt;
   &lt;web-resource-collection&gt;
