@@ -80,24 +80,19 @@ Below you can see prerequisites for launching the platform components on your co
     <title>Installation guide</title>
     <para> To install the platform components, perform the following actions:<orderedlist>
         <listitem>
-          <para>
-Go to the <filename>install</filename> subdirectory of the Platypus distribution kit.</para>
+          <para>Go to the <filename>install</filename> subdirectory of the Platypus distribution kit.</para>
         </listitem>
         <listitem>
-          <para>
-Run  <filename>install.bat</filename> files for the Windows OS or perform the  <command>sh install.sh</command> command for Linux.</para>
+          <para>Run  <filename>install.bat</filename> files for the Windows OS or perform the  <command>sh install.sh</command> command for Linux.</para>
         </listitem>
         <listitem>
-          <para>
-Select the language of the installation program user interface.</para>
+          <para>Select the language of the installation program user interface.</para>
         </listitem>
         <listitem>
-          <para>
-Select the installation directory.</para>
+          <para>Select the installation directory.</para>
         </listitem>
         <listitem>
-          <para>
-Select components to be installed. </para>
+          <para>Select components to be installed. </para>
           <itemizedlist>
             <listitem>
               <para>The platform&apos;s core components (required)</para>
@@ -117,8 +112,7 @@ Select components to be installed. </para>
           </itemizedlist>
         </listitem>
         <listitem>
-          <para>
-Select settings of shortcuts for running the Platypus client in your system environment. </para>
+          <para>Select settings of shortcuts for running the Platypus client in your system environment. </para>
         </listitem>
       </orderedlist>
   </para>

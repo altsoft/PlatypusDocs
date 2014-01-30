@@ -75,7 +75,7 @@
               <parameter>-tasks </parameter>
               <replaceable>MODULES_NAME</replaceable>
             </entry>
-            <entry>The list of server modules (separated by comma without spaces) for processing incoming data and background tasks. The <methodname>received(data)</methodname>function should be defined for the incoming data processing module. The incoming data processing modules can have the <property>@stateless</property>annotation, or be without it. Background tasks modules should not have the <property>@stateless annotation. When starting server, modules with this annotation will be skipped.</property></entry>
+            <entry>The list of server modules (separated by comma without spaces) for processing incoming data and background tasks. The <methodname>received(data)</methodname>function should be defined for the incoming data processing module. The incoming data processing modules can have the <literal>@stateless</literal> annotation, or be without it. Background tasks modules should not have the <property><literal>@stateless</literal> annotation. When starting server, modules with this annotation will be skipped.</property></entry>
           </row>
           <row>
             <entry>
