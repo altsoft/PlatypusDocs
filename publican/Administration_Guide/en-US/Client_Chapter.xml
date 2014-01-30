@@ -60,14 +60,14 @@
   <section>
     <title>Command line options</title>
     <para>To configure starting of the desktop client, edit the contents of the launch script files. </para>
-    <para>The deskop client is a Java SE Swing application. Specify the startup JVM options and the applications parameters. </para>
+    <para>The deskop client is a Java SE Swing application. To customize it, specify the startup JVM options and the applications parameters. </para>
     <para>The command for running the Platypus client is as follows:</para>
     <programlisting>java <replaceable>JVM_OPTIONS</replaceable> -cp Application.jar;<replaceable>EXT_CLASSPATH</replaceable>com.eas.client.application.PlatypusClientApplication <replaceable>OPTIONS</replaceable></programlisting>
     <para>where <replaceable>JVM_OPTIONS</replaceable> is Java Virtual Machine options, <replaceable>EXT_CLASSPATH</replaceable> are paths which should be added to the Java class loader search path,  <replaceable>OPTIONS</replaceable> are additional running parameters.</para>
     <para>To specify the look and feel (L&amp;F) in command line use  the -D flag to set the <property>swing.defaultlaf</property> property, for example, to acitvate the Nimbus L&amp;F add the following in the <replaceable>JVM_OPTIONS</replaceable>: <literal>-Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel</literal>.</para>
     <para>For the information how to specify the application&apos;s current log level refer to Java documentation. </para>
     <table>
-      <title> Command line options</title>
+      <title> Command line parameters</title>
       <tgroup cols="2">
         <tbody>
           <row>
@@ -76,21 +76,45 @@
           </row>
           <row>
             <entry>
+              <parameter>-url URL</parameter>
+            </entry>
+            <entry>URL to the applicaion. Can be one of the follow: <literal>file://<replaceable>path</replaceable></literal> to specify to a directory or <literal>jndi://<replaceable>datasource</replaceable></literal> to specify to a datasource. </entry>
+          </row>
+          <row>
+            <entry>
               <parameter>-appElement APP_ELEMENT</parameter>
             </entry>
-            <entry>ID of the application element to run.</entry>
+            <entry>Module or form element&apos;s name to run.</entry>
           </row>
           <row>
             <entry>
-              <parameter>-ap APP_PATH</parameter>
+              <parameter>-user USER_NAME</parameter>
             </entry>
-            <entry>A path to the folder which contains elements of the Platypus application. If this parameter is specified, then the Platypus client will look for Platypus application elements in this folder, otherwise the Platypus client will look for application elements in the corresponding database tables.</entry>
+            <entry>Username for logging to the application.</entry>
           </row>
           <row>
             <entry>
-              <parameter>-url JDBC_URL</parameter>
+              <parameter>-password PASSWORD</parameter>
             </entry>
-            <entry>URL of the connection to the database in the JDBC format.</entry>
+            <entry>User password for logging to the application.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-default-datasource DEFAULT_DS</parameter>
+            </entry>
+            <entry>Name of the application&apos;s default datasource.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-datasource DS</parameter>
+            </entry>
+            <entry>Datasource name.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dburl DB_URL</parameter>
+            </entry>
+            <entry>JDBC URL database connection.</entry>
           </row>
           <row>
             <entry>
@@ -102,38 +126,21 @@
             <entry>
               <parameter>-dbpassword DB_PASSWORD</parameter>
             </entry>
-            <entry>User password for authorization in the database.</entry>
+            <entry>Password for authorization in the database.</entry>
           </row>
           <row>
             <entry>
               <parameter>-dbschema DB_SCHEMA</parameter>
             </entry>
-            <entry>Database scheme.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-user USER_NAME</parameter>
-            </entry>
-            <entry>Username for the Platypus application.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-password PASSWORD</parameter>
-            </entry>
-            <entry>User password for the Platypus application.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-loglevel LOG_LEVEL</parameter>
-            </entry>
-            <entry>Logging level. This parameter specifies the minimum level which will be shown in the log. For the description of logging levels, see Appendix A.</entry>
+            <entry>Database scheme (optional).</entry>
           </row>
         </tbody>
       </tgroup>
     </table>
-    <para>If parameters of the database connection or some credential are not specified, the <guilabel>Connection settings</guilabel> dialog to enter these parameters appears.</para>
+    <para>Define zero or more datasources for a single application. A datasource is represented in a group of the following parameters: <parameter>-datasource</parameter>, <parameter>-dburl</parameter>, <parameter>-dbuser,</parameter> <parameter>-dbpassword</parameter> and optional <parameter>-dbschema</parameter> provided jointly. One of the datasource can be specified as a default using the <parameter>-default-datasource</parameter> parameter.</para>
+    <para>If  database connection parameters or some credential are not specified, the <guilabel>Connection settings</guilabel> dialog  appears.</para>
     <para>To specify the look and feel (L&amp;F) in command line use  the -D flag to set the <property>swing.defaultlaf</property> property, for example: -Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel</para>
-    <para>Example of the Platypus client running command:</para>
-    <programlisting>java -Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel -cp Application.jar com.eas.client.application.PlatypusClientApplication -appElement mainForm</programlisting>
+    <para>The example of desktop client running command:</para>
+    <programlisting>java -Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel -cp Application.jar com.eas.client.application.PlatypusClientApplication -appElement mainForm -url file://~/testApp -default-datasource ds -datasource ds dburl jdbc:h2:tcp://localhost:9092/testDb -dbuser sa -dbpassword sa</programlisting>
   </section>
 </chapter>

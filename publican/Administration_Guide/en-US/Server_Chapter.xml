@@ -22,7 +22,6 @@
   </section>
   <section>
     <title>Command line options</title>
-    <para>To configure running of the Platypus server, edit the contents of the startup script files.</para>
     <para>The command for running the server is as follows:</para>
     <programlisting>java <replaceable>JVM_OPTIONS</replaceable> -cp Server.jar;<replaceable>EXT_CLASSPATH</replaceable> com.eas.server.ServerMain <replaceable>OPTIONS</replaceable></programlisting>
     <para>where <replaceable>JVM_OPTIONS</replaceable> is Java Virtual Machine options, <replaceable>EXT_CLASSPATH</replaceable> are paths to be added to the Java class loader search path, <replaceable>OPTIONS</replaceable> are server application running parameters.</para>
@@ -37,38 +36,20 @@
         </thead>
         <tbody>
           <row>
-            <entry>
-              <parameter>applicationpath APP_PATH</parameter>
-            </entry>
-            <entry>Path to the folder, which contains the application. If this parameter is specified, the application will be started from this drive folder, otherwise the application will be started from the database. This option has a short ap synonym.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-url JDBC_URL</parameter>
-            </entry>
-            <entry>URL of the connection to the database in the JDBC format.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-dbuser DB_USER</parameter>
-            </entry>
-            <entry>Username for authorization in the database.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-dbpassword DB_PASSWORD</parameter>
-            </entry>
-            <entry>User password for authorization in the database.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-dbschema DB_SCHEMA</parameter>
-            </entry>
-            <entry>Database scheme.</entry>
-          </row>
-          <row>
             <entry><parameter>-iface</parameter><replaceable> ADRESS:PORT</replaceable>,<replaceable>ADRESS:PORT</replaceable></entry>
             <entry>Network interfaces and listening ports for the server.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-url URL</parameter>
+            </entry>
+            <entry>URL to the applicaion. Can be one of the follow: <literal>file://<replaceable>path</replaceable></literal> to specify to a directory or <literal>jndi://<replaceable>datasource</replaceable></literal> to specify to a datasource. </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-appelement APP_ELEMENT</parameter>
+            </entry>
+            <entry>Module or form element&apos;s name to run.</entry>
           </row>
           <row>
             <entry>
@@ -96,10 +77,47 @@
             </entry>
             <entry>The list of server modules (separated by comma without spaces) for processing incoming data and background tasks. The <methodname>received(data)</methodname>function should be defined for the incoming data processing module. The incoming data processing modules can have the <property>@stateless</property>annotation, or be without it. Background tasks modules should not have the <property>@stateless annotation. When starting server, modules with this annotation will be skipped.</property></entry>
           </row>
+          <row>
+            <entry>
+              <parameter>-default-datasource DEFAULT_DS</parameter>
+            </entry>
+            <entry>Name of the application&apos;s default datasource.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-datasource DS</parameter>
+            </entry>
+            <entry>Datasource name.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dburl DB_URL</parameter>
+            </entry>
+            <entry>JDBC URL database connection.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dbuser DB_USER</parameter>
+            </entry>
+            <entry>Username for authorization in the database.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dbpassword DB_PASSWORD</parameter>
+            </entry>
+            <entry>Password for authorization in the database.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>-dbschema DB_SCHEMA</parameter>
+            </entry>
+            <entry>Database scheme (optional).</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
-    <para>Example of the Platypus application server running command:</para>
-    <programlisting>java -cp Server.jar com.eas.server.ServerMain -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -loglevel INFO -log serverlog.log -iface 0.0.0.0:8500 -protocols 8500:platypus</programlisting>
+    <para>Define zero or more datasources for a single application. A datasource is represented in a group of the following parameters: <parameter>-datasource</parameter>, <parameter>-dburl</parameter>, <parameter>-dbuser,</parameter> <parameter>-dbpassword</parameter> and optional <parameter>-dbschema</parameter> provided jointly. One of the datasource can be specified as a default using the <parameter>-default-datasource</parameter> parameter.</para>
+    <para>The example of the  application server running command:</para>
+    <programlisting>java -cp Server.jar com.eas.server.ServerMain -iface 0.0.0.0:8500 -protocols 8500:platypus -url jndi://ds -default-datasource ds -datasource ds dburl jdbc:h2:tcp://localhost:9092/testServer -dbuser sa -dbpassword sa</programlisting>
   </section>
 </chapter>
