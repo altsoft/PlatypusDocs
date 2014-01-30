@@ -9,13 +9,13 @@
   <para>This configuration has the following features:</para>
   <itemizedlist>
     <listitem>
-      <para>Server components are deployed in the J2EE Platypus container/on the server as a web-application as a WAR-archive or  a folder. Special sevlet provides interaction with the clients.</para>
+      <para>Server components are deployed in the J2EE  container/on the server as a web-application as a WAR-archive or  a folder. Special sevlet provides interaction with the clients.</para>
     </listitem>
     <listitem>
       <para>Desktop client and HTML5 browser are supported as clients.</para>
     </listitem>
     <listitem>
-      <para>It is possible to use an external user authentication service, such as  <application>Microsoft Active Directory</application> service; it allows you to integrate the Platypus platform target application in existing enterprise user space.</para>
+      <para>It is possible to use an external user authentication service, such as  <application>Microsoft Active Directory</application> service; it allows you to integrate the  platform target application in existing enterprise user space.</para>
     </listitem>
     <listitem>
       <para>Database connecions are configrued as a  JNDI resources. </para>
