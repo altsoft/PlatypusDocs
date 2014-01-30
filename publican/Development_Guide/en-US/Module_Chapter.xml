@@ -1661,11 +1661,9 @@ bFile.delete();</programlisting>
 
 var aFile = new File(&quot;/home/user/afile.txt&quot;);
 aFile.delete();</programlisting>
-    <important>
-      <para><classname>java.lang.*</classname> packages are imported in Java by default, but this is not true for JavaScript, because JavaScript has its own  <classname>Boolean</classname>, <classname>Math</classname>, <classname>Number</classname>, <classname>Object</classname>, and  <classname>String</classname> objects. That&apos;s why import of the <classname>java.lang</classname> package is not recommended.</para>
-    </important>
     <warning>
       <para>To avoid potential name conflicts, do not use the  <literal>java</literal> name for your objects and variables.</para>
+      <para><classname>java.lang.*</classname> packages are imported in Java by default, but this is not true for JavaScript, because JavaScript has its own  <classname>Boolean</classname>, <classname>Math</classname>, <classname>Number</classname>, <classname>Object</classname>, and  <classname>String</classname> objects. That&apos;s why import of the <classname>java.lang</classname> package is not recommended.</para>
     </warning>
     <para>External Java libraries are also available in JavaScript code. To use them:</para>
     <itemizedlist>
