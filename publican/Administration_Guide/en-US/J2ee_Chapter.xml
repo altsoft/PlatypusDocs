@@ -28,7 +28,7 @@
     <para>Use Platypus Application Designer to create web-application framework automatically; for detailed information, see the Developer Guide.</para>
   </note>
   <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_2">
-    <title>Configuring web-applications and a J2EE container</title>
+    <title>Configuring J2EE server</title>
     <para>To run the plafrom&apos;s application in a J2EE servlet container or on the application server, perform the following actions:</para>
     <itemizedlist>
       <listitem>

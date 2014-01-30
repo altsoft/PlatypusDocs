@@ -100,8 +100,8 @@ To remove  Platypus Application Designer from you computer, perform the followin
       </listitem>
     </itemizedlist>
     <para>You can also change the application designer localization language by adding the <option>--locale ru:RU</option> or <option>--locale en:US</option> option to the command line for launching the  <application>Platypus Application Designer</application>.</para>
-    <para>Platypus Application Designer supports connection of the various user interface Look and Feel  (LaF). There are LaFs for specific operating systems, universal styles  (<literal>Metal</literal> and <literal>Nimbus</literal>), and LaFs which can be supplied by  third-party developers.</para>
-    <para>To change the  <application>Application Designer</application> LaF:</para>
+    <para>Platypus Application Designer supports connection of the various user interface Look and Feel  (L&amp;F). There are L&amp;Fs for specific operating systems, universal styles  (<literal>Metal</literal> and <literal>Nimbus</literal>), and LaFs which can be supplied by  third-party developers.</para>
+    <para>To change the  <application>Application Designer</application> L&amp;F:</para>
     <itemizedlist>
       <listitem>
         <para>Edit the designer configuration file — append the  <parameter>default_options</parameter> parameter with the  <option>--laf <replaceable>LaF</replaceable></option> option, where <replaceable>LaF</replaceable> corresponds to the name of LaF or full name of the LaF class. If the third-party LaF is used, it is also necessary to include the style library into the path which can be accessed by the <application>Application Designer</application> classloader.</para>

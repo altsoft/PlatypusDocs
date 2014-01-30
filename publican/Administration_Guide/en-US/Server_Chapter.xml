@@ -24,12 +24,8 @@
     <title>Command line options</title>
     <para>To configure running of the Platypus server, edit the contents of the startup script files.</para>
     <para>The command for running the server is as follows:</para>
-    <programlisting>java -cp Server.jar;<replaceable>EXT_CLASSPATH</replaceable> com.eas.server.ServerMain <replaceable>OPTIONS</replaceable></programlisting>
-    <para>where <replaceable>EXT_CLASSPATH</replaceable> are paths, which should be added to the Java class loader search path, <replaceable>OPTIONS</replaceable> are additional running parameters.</para>
-    <para>You can also run the application server using the
-    <parameter>-jar</parameter> parameter:</para>
-    <programlisting>java -jar Server.jar <replaceable>OPTIONS</replaceable></programlisting>
-    <para>This startup option is useful when working with the command prompt, but this approach does not allow you to add external libraries to the path used by the Java classloader when searching for classes.</para>
+    <programlisting>java <replaceable>JVM_OPTIONS</replaceable> -cp Server.jar;<replaceable>EXT_CLASSPATH</replaceable> com.eas.server.ServerMain <replaceable>OPTIONS</replaceable></programlisting>
+    <para>where <replaceable>JVM_OPTIONS</replaceable> is Java Virtual Machine options, <replaceable>EXT_CLASSPATH</replaceable> are paths to be added to the Java class loader search path, <replaceable>OPTIONS</replaceable> are server application running parameters.</para>
     <table>
       <title>Command line options</title>
       <tgroup cols="2">
@@ -105,7 +101,5 @@
     </table>
     <para>Example of the Platypus application server running command:</para>
     <programlisting>java -cp Server.jar com.eas.server.ServerMain -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -loglevel INFO -log serverlog.log -iface 0.0.0.0:8500 -protocols 8500:platypus</programlisting>
-    <para>Example of application server running command using the <parameter>-jar</parameter> parameter:    </para>
-    <programlisting>java -jar Server.jar -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -loglevel INFO -log serverlog.log</programlisting>
   </section>
 </chapter>

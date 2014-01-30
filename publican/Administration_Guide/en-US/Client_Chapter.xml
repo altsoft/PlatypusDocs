@@ -27,8 +27,8 @@
     </itemizedlist>
     <para>If the desktop client is started successfully, it displays a dialog box for entering the user name and password and selecting a preconfigured connection to the server.</para>
     <para>You can create and use several preconfigured connections to the database or to an app server. Your distribution kit can include a default preconfigured connection.</para>
-    <para>If the 2-tier configuration is used, enter the username and password of the database connection, and the username and password. </para>
-    <para>If the 3-tier configuration is used, enter only the username and password.</para>
+    <para>If the no-server configuration is used, enter the username and password of the database connection, and the username and password. </para>
+    <para>If the  configuration with a server is used, enter only the username and password.</para>
     <para>Use the <guilabel>Remember database password</guilabel> and  <guilabel>Remember password</guilabel> check boxes, if it is necessary to remember the database password and/or Platypus applications password.</para>
     <para>Use the <guilabel>&gt;&gt;&gt;</guilabel> and <guilabel>&lt;&lt;&lt;</guilabel> buttons to display and hide the preconfigured connections panel.</para>
     <para>Select a preconfigured connection from the list to connect to the server and run the client.</para>
@@ -62,13 +62,10 @@
     <para>To configure starting of the desktop client, edit the contents of the launch script files. </para>
     <para>The deskop client is a Java SE Swing application. Specify the startup JVM options and the applications parameters. </para>
     <para>The command for running the Platypus client is as follows:</para>
-    <programlisting>java -cp Application.jar;<replaceable>EXT_CLASSPATH</replaceable>com.eas.client.application.PlatypusClientApplication <replaceable>OPTIONS</replaceable></programlisting>
-    <para>where <replaceable>EXT_CLASSPATH</replaceable> are paths which should be added to the Java class loader search path,  <replaceable>OPTIONS</replaceable> are additional running parameters.</para>
-    <para>You can also run the client using the 
-    <parameter>-jar</parameter> parameter:</para>
-    <programlisting>java -jar Application.jar <replaceable>OPTIONS</replaceable></programlisting>
-    <para>This starting option is useful when working with the command prompt, but this approach does not allow you to add external libraries to the path used by the Java loader when searching for classes, for example, to connect arbitrary Look and Feel themes.
-    </para>
+    <programlisting>java <replaceable>JVM_OPTIONS</replaceable> -cp Application.jar;<replaceable>EXT_CLASSPATH</replaceable>com.eas.client.application.PlatypusClientApplication <replaceable>OPTIONS</replaceable></programlisting>
+    <para>where <replaceable>JVM_OPTIONS</replaceable> is Java Virtual Machine options, <replaceable>EXT_CLASSPATH</replaceable> are paths which should be added to the Java class loader search path,  <replaceable>OPTIONS</replaceable> are additional running parameters.</para>
+    <para>To specify the look and feel (L&amp;F) in command line use  the -D flag to set the <property>swing.defaultlaf</property> property, for example, to acitvate the Nimbus L&amp;F add the following in the <replaceable>JVM_OPTIONS</replaceable>: <literal>-Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel</literal>.</para>
+    <para>For the information how to specify the application&apos;s current log level refer to Java documentation. </para>
     <table>
       <title> Command line options</title>
       <tgroup cols="2">
@@ -135,9 +132,8 @@
       </tgroup>
     </table>
     <para>If parameters of the database connection or some credential are not specified, the <guilabel>Connection settings</guilabel> dialog to enter these parameters appears.</para>
+    <para>To specify the look and feel (L&amp;F) in command line use  the -D flag to set the <property>swing.defaultlaf</property> property, for example: -Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel</para>
     <para>Example of the Platypus client running command:</para>
-    <programlisting>java -cp Application.jar;CoolLaf.jar -laf CoolLaf com.eas.client.application.PlatypusClientApplication -appElement mainForm</programlisting>
-    <para>Example of running the client using the <parameter>-jar</parameter>  parameter:</para>
-    <programlisting>java -jar Application.jar -appElement mainForm</programlisting>
+    <programlisting>java -Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel -cp Application.jar com.eas.client.application.PlatypusClientApplication -appElement mainForm</programlisting>
   </section>
 </chapter>

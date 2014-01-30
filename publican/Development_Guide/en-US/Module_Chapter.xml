@@ -56,7 +56,7 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>Use the  <guilabel>Format</guilabel> function to format the JavaScript code automatically</para>
+      <para>Use the editor&apos;s context menu  <guilabel>Format</guilabel> menu item to format the JavaScript code automatically.</para>
     </note>
     <para>If necessary, configure the code editor parameters; to do this:</para>
     <itemizedlist>
@@ -274,8 +274,11 @@ Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;, function(txt) {
     <programlisting language="JavaScript">//Loads text synchronously
 var txt = Resource.loadText(&quot;res/res.txt&quot;, &quot;UTF-8&quot;);
 Logger.info(txt);</programlisting>
+    <note>
+      <para><code>Resource.loadText(&quot;resourceUrl&quot;, function(){})</code> loads text without an encoding specified. When resource is loaded via http,  encoding comes from http headers and it is <literal>utf-8</literal> otherwise.</para>
+    </note>
     <para>To get the absolute path to the directory, which contains an application, use the  <code>Resource.applicationPath</code> read-only property. This property will contain information about the path to the application directory if the application is executed from the drive and is not deployed in the database, otherwise this property returns the <literal>null</literal> value:</para>
-    <programlisting language="JavaScript">//Reads application&apos;s path
+    <programlisting language="JavaScript">//Reads the application&apos;s path
 Logger.info(Resource.applicationPath);</programlisting>
   </section>
   <section>
@@ -311,13 +314,10 @@ Logger.info(Resource.applicationPath);</programlisting>
         <para>Regular entity  is created using a  module implements special datasouce interface methods or  a query application element.</para>
       </listitem>
       <listitem>
-        <para>Table entity  is a table in the database; when using it, a query entity, which selects all data from the table, is automatically created.</para>
+        <para>Table entity  is a special query entity, which selects all data from the table. It  is  created automatically by runtime. A table entity can be used on the application server or in the <application>desktop client</application> only with direct  connection to a database.</para>
       </listitem>
     </itemizedlist>
-    <note>
-      <para>A table entity can be used on the application server or in the <application>desktop client</application> only with direct  connection to a database.</para>
-    </note>
-    <para>Each entity can have parameters and contains a dataset  with predefined fields according to the data schema defined by the module or query application element, on the basis of which the entity is created.</para>
+    <para>Each entity can have parameters and contains a dataset  with predefined fields according to the data schema defined by the module or query, on the basis of which the entity is created.</para>
     <para>The parameters of the data model are contained in the special entity named Parameters — which is present in each data model and does not have a full-featured dataset.</para>
     <para>In general, a dataset is an array of objects, each of which corresponds to a tuple in the query results.</para>
     <para>There is a cursor for each dataset. The cursor can point to some row in the dataset and determines the current item of this set. Also the dataset cursor can point to the positions &quot;before the first row&quot; and &quot;after the last row&quot;. The entity cursor position can affect to the linked entities data.</para>
@@ -337,7 +337,7 @@ Logger.info(Resource.applicationPath);</programlisting>
     <note>
       <para>When the module operates in the browser, data comes asynchronously from the network. When the module operates in the server modules on the application server, data comes synchronously. Even though when the model works on the Java SE client, data is also obtained synchronously, it is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser.</para>
     </note>
-    <para>The filter link provides the rows restriction of the target entity dataset according to the new filter value.  The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
+    <para>The filter link provides the restricted rows view of the target entity dataset according to the new filter value.  The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
     <para>The link defined by a database table foreign keys is created automatically, if a dataset contains fields included to such foreign key.  This type of link does not affect the content of the datasets and is used to generate inter-instance connections between instances of entities. This is done via new properties, wich are created while data fetching. The link of this type is visually shown as a dashed line on the data model diagram.</para>
     <note>
       <para>To get inter-instance connections work, primary and foreign keys are required. Such keys may come from database structure definitions or from schema definitions in a JavaScript datasource module.</para>
@@ -700,9 +700,9 @@ Logger.info(Resource.applicationPath);</programlisting>
     <programlisting language="JavaScript">model.params.documentID = 1; // Changes data model parameter</programlisting>
     <para>Each change of any data model parameter leads to the automatic update of data of the model entities, which are directly or indirectly connected with it.</para>
     <note>
-      <para>Datasets in the model are updated only if the value of the model parameter was changed. To force updating of entity data, use the    <methodname>requery</methodname> function.</para>
+      <para>Datasets in the model are updated only if the value of the model parameter was changed. To force updating of entity data, use the    <methodname>requery</methodname> method.</para>
     </note>
-    <para>It is often necessary to change some parameters before updating data. To do this, use the  <methodname>beginUpdate</methodname> and <methodname>endUpdate</methodname> functions of the  <varname>params</varname> object:</para>
+    <para>It is often necessary to change some parameters before updating data. To do this, use the  <methodname>beginUpdate</methodname> and <methodname>endUpdate</methodname> methods of the  <varname>params</varname> object:</para>
     <programlisting language="JavaScript">model.params.beginUpdate();
 try {
   // Update parameters here, 
@@ -774,21 +774,7 @@ try {
 for (var i = 0; i &lt; documents.length; i++) {
   logger.info(documents[i].NAME);
 }</programlisting>
-    <para>In the legacy  <acronym>API</acronym>, the following syntax with the <methodname>getRow</methodname> function may be used:</para>
-    <programlisting language="JavaScript">var row = model.<replaceable>entityName</replaceable>.getRow(<replaceable>rowIndex</replaceable>)</programlisting>
-    <para>where <varname>
-        <replaceable>entityName</replaceable>
-      </varname> is an object of the corresponding entity,  <literal>
-        <replaceable>rowIndex</replaceable>
-      </literal>  is an index of the cursor within the  <code>1..<replaceable>entityName</replaceable>.size</code> range.</para>
-    <para>Example of using of such  <acronym>API</acronym>:</para>
-    <programlisting language="JavaScript">for (var i = 1; i &lt;= model.documents.size; i++) {
-  logger.info(model.documents.getRow(i).NAME);
-}</programlisting>
-    <note>
-      <para>It is not recommended to use the legacy data access API in the new projects.</para>
-    </note>
-    <para>If an external key link is established between two entities, you can get access to the data  of the connected entity by using data instance property having the same name as the connected entity. This properties are generated during OR/M resolution. If the entity&apos;s underlying database table contains an external key reference, the corresponding property represents the connected entity.</para>
+    <para>If an external key link is established between two entities, you can get access to the data  of the connected entity by using data instance property having the same name as the connected entity. This properties are generated during ORM resolution. If the entity&apos;s underlying database table contains an external key reference, the corresponding property represents the connected entity.</para>
     <programlisting language="JavaScript">var propValue = model.<replaceable>entityName1</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName2</replaceable>.<replaceable>propName</replaceable></programlisting>
     <para>where  <varname>
         <replaceable>entityName1</replaceable>
@@ -815,12 +801,12 @@ for (var i = 0; i &lt; documents.length; i++) {
     <programlisting language="JavaScript">var currentValue = model.<replaceable>entityName</replaceable>.cursor<replaceable>.propName</replaceable></programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
-      </varname> is an object of the corresponding entity, <varname>
+      </varname> is a corresponding entity, <varname>
         <replaceable>propName</replaceable>
-      </varname>  is a property having the same name as the default object property.</para>
-    <para>The current row object is defined by the position of the cursor in the entity data array. In addition to pointing to some object, the cursor can point to the position  <emphasis>before the first object</emphasis> and <emphasis>after the last object</emphasis>. In this case the default object for the entity is not defined.</para>
-    <para>After loading or filtering dataset the cursor is placed on the first object of the entity data array. </para>
-    <para>To manage moving the cursor over the object array, use the  <methodname>beforeFirst</methodname>, <methodname>afterLast</methodname>, <methodname>first</methodname>, <methodname>next</methodname>, <methodname>prev</methodname>, <methodname>last</methodname>, and <methodname>pos</methodname> entity methods. </para>
+      </varname>  is a property of interest.</para>
+    <para>The cursor is defined by position in the entity data array. In addition to pointing to some object, the cursor can point to the position  <emphasis>before the first object</emphasis> and <emphasis>after the last object</emphasis>. In this case cursor property is null.</para>
+    <para>After loading or filtering dataset the cursor is placed on the first object of the entity&apos;s data array. </para>
+    <para>To move the cursor over the data array, use the  <methodname>beforeFirst</methodname>, <methodname>afterLast</methodname>, <methodname>first</methodname>, <methodname>next</methodname>, <methodname>prev</methodname>, <methodname>last</methodname>, and <methodname>pos</methodname> entity&apos;s methods. </para>
     <informaltable>
       <tgroup cols="2">
         <thead>
@@ -917,19 +903,19 @@ for (var i = 0; i &lt; documents.length; i++) {
       </tgroup>
     </informaltable>
     <para>Use the  <varname>rowIndex</varname> property to move the cursor to the specified position.</para>
-    <para>The following example uses cursor moving control functions; in this example enumeration of all  <varname>documents</varname> entity objects and outputting document names into a log are implemented:</para>
+    <para>The following example uses cursor moving control functions to enumerate   <varname>documents</varname> entity objects and output document names:</para>
     <programlisting language="JavaScript">model.documents.requery();//Cursor is on the first object
 while (!model.documents.eof) { 
   Logger.info(model.documents.cursor.NAME);
   model.documents.next();
 }</programlisting>
     <para>To check for instances of data in the entity data array, use its  <varname>empty</varname> property: <code>model.<replaceable>entityName</replaceable>.empty</code>.</para>
-    <para>The  <varname>empty</varname> property returns  <literal>true</literal> if the entity data array is empty, and  <literal>false</literal> otherwise. For example, the following snippet outputs a message into the log, if the  <literal>documents</literal> entity data array is empty:</para>
+    <para>The  <varname>empty</varname> property is  <literal>true</literal> if the entity data array is empty, and  <literal>false</literal> otherwise. For example, the following snippet outputs a message into the log, if the  <literal>documents</literal> entity data array is empty:</para>
     <programlisting language="JavaScript">model.documents.empty &amp;&amp; Logger.info(&apos;Documents is empty.&apos;);</programlisting>
   </section>
   <section>
     <title>Saving data</title>
-    <para>The data model in Platypus provides automatic tracking of data changes. Data can be saved only as part of entire model.</para>
+    <para>The data model provides automatic tracking of data changes. Data changes can be saved only as part of entire model.</para>
     <para>To edit, insert, or delete data, perform the following actions:</para>
     <itemizedlist>
       <listitem>
@@ -939,16 +925,6 @@ while (!model.documents.eof) {
         <para>Call the  <methodname>save</methodname> method of the model.</para>
       </listitem>
     </itemizedlist>
-    <para>Change the appropriate property of the entity to change the default object, i.e. the object, which the cursor is pointing to:</para>
-    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable><replaceable>.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
-    <para>where <varname>
-        <replaceable>entityName</replaceable>
-      </varname> is an entity,  <varname>
-        <replaceable>entityName</replaceable>
-        <replaceable>.propName</replaceable>
-      </varname>  is a  property in the current cursor position in the entity data, <literal>
-        <replaceable>newValue</replaceable>
-      </literal> is an expression for the new value.</para>
     <para>To obtain access to the entity arbitrary objects, use the syntax of referring to an array element: </para>
     <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
     <para>where <varname>
@@ -956,12 +932,22 @@ while (!model.documents.eof) {
       </varname> is an entity, <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> is an object property with the specified index in the entity data.  <literal>
         <replaceable>newValue</replaceable>
       </literal> is an expression for the new value.</para>
+    <para>To change the appropriate property of the entity&apos;s cursor, use the following way:</para>
+    <programlisting language="JavaScript">model.<replaceable>entityName</replaceable><replaceable>.cursor.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
+    <para>where <varname>
+        <replaceable>entityName</replaceable>
+      </varname> is an entity,  <varname>
+        <replaceable>entityName</replaceable>
+        <replaceable>.cursor.propName</replaceable>
+      </varname>  is a  property in the current cursor position in the entity data, <literal>
+        <replaceable>newValue</replaceable>
+      </literal> is an expression for the new value.</para>
     <para>To save changes the data model changes, use its   <methodname>save</methodname> method:</para>
     <programlisting language="JavaScript">model.save();</programlisting>
-    <para>To insert a new object to a dataset add</para>
+    <para>To insert a new object to a dataset:</para>
     <itemizedlist>
       <listitem>
-        <para>Add a new object to entity datas.</para>
+        <para>Add a new object to entity dataset.</para>
       </listitem>
       <listitem>
         <para>Call the <methodname>save</methodname> method of the data model.</para>
@@ -985,7 +971,7 @@ while (!model.documents.eof) {
     <para>After inserting, the new object will have the following properties:</para>
     <itemizedlist>
       <listitem>
-        <para>An identifying property gets the generated ID value, if a value was not explicitly assigned to this property when inserting. </para>
+        <para>An identifying property gets the generated value, if a value was not explicitly assigned to this property when inserting. </para>
       </listitem>
       <listitem>
         <para>Properties, which form a part of the filter (if any), get values of the corresponding filtration keys; a filter can be applied by the model filtering connections or by the custom code.</para>
@@ -1000,7 +986,7 @@ while (!model.documents.eof) {
     <para>Example of code for inserting a new object into the  <literal>documents</literal> entity:</para>
     <programlisting language="JavaScript">model.documens.push({ ID:101, NAME:&apos;New document name&apos;});
 model.save();</programlisting>
-    <para>To delete an entry, use the  <methodname>deleteRow</methodname> or <methodname>splice</methodname> entity functions.</para>
+    <para>To delete an object, use the  <methodname>deleteRow</methodname> or <methodname>splice</methodname> entity functions.</para>
     <para>Call the  <methodname>deleteRow</methodname> function without parameters to delete the current object, i.e. the object, which the cursor is pointing to.</para>
     <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow();</programlisting>
     <para>Pass an index of the object, which you want to delete, as a parameter to the  <methodname>deleteRow</methodname> function:</para>
@@ -1025,14 +1011,15 @@ model.save();</programlisting>
     <programlisting language="JavaScript">// Removes all elements
 model.documents.deleteAll();
 model.save();</programlisting>
-    <para>By default, calling the save function results in saving changes and confirming the transaction. However, in some cases it is necessary to delay the transaction confirmation. This behavior can be used when changing data by several modules, such as modules, which are called from each other. In this case the transaction confirmation should be performed upon completion of data changing operations.</para>
+    <para>By default, calling the save function results in saving changes and commiting the transaction. However, in some cases it is necessary to delay the transaction commit. This behavior can be used when changing data by several modules, such as modules, which are called from each other. In this case the transaction confirmation should be performed upon completion of data changing operations in a whole group of modules.</para>
     <para>To manage the model transaction mode, use the  <varname>commitable</varname>property of the  <varname>model</varname> object:</para>
     <programlisting language="JavaScript">model.commitable = false;</programlisting>
-    <para>In this mode, when calling the  <methodname>save</methodname> function changes are saved in the  <acronym>database</acronym>, but the transaction is not confirmed.</para>
+    <para>In this mode, when calling the  <methodname>save</methodname> function changes are accumulated, but the transaction is not confirmed.</para>
     <para>Assign the  <literal>true</literal> value to this property in order to enable the transaction confirmation and call the <methodname>save</methodname>  function to confirm the transaction:</para>
     <programlisting language="JavaScript">model.commitable = true;
 model.save();// Commit all changes</programlisting>
-    <para>Calling the  <methodname>save</methodname> function may lead to an exception, for example, if saved data are inconsistent with the <acronym>database</acronym> schema. In this case data are not saved to the  <acronym>database</acronym>. To handle this exception, use the  <code>try-catch-finally</code> structures:</para>
+    <para>It might be cases when some module is the &quot;main&quot; and it is responsible for transactions commitment. In such case it&apos;s there is no need to manipulate <literal>model.commitable</literal> property. Module&apos;s model is commitabel by default. When it&apos;s model.save method will be called all changes from the whole group of modules with uncommitable models will go in a single transaction.</para>
+    <para>Calling the  <methodname>save</methodname> function may lead to an exception, for example, if saved data are inconsistent with the <acronym>database</acronym> schema. In this case data are not saved to the  <acronym>database</acronym>. To handle this exception, use the  <code>try-catch-finally</code> statement:</para>
     <programlisting language="JavaScript">try {
   model.save();
 } catch (e) {
@@ -1041,10 +1028,10 @@ model.save();// Commit all changes</programlisting>
     <para>After handling the error, you can try to correct the cause of the problem and re-call the  <methodname>save</methodname> function.</para>
   </section>
   <section>
-    <title>Searching API</title>
-    <para>Search operations can be performed after the data model loads its entities data. </para>
-    <para>Search is performed in the model and do not cause sending new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
-    <para>To find an object by its identifier, use the  <methodname>findById</methodname> entity function by passing a search key to it:</para>
+    <title>Search API</title>
+    <para>Search operations can be performed after the data model loads its entities&apos; data. </para>
+    <para>Search is performed in the model and doesn&apos;t  send new requests to the  <acronym>database neither changes the data</acronym>.</para>
+    <para>To find an object by its identifier, use the  <methodname>findById</methodname> entity method by passing a  key value to it:</para>
     <programlisting language="JavaScript">var item = model.<replaceable>entityName</replaceable>.findById(<replaceable>idValue</replaceable>);</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
@@ -1069,9 +1056,9 @@ if (document) {
         <replaceable>entityName</replaceable>
       </varname> is an entity, <varname>
         <replaceable>propN</replaceable>
-      </varname> — <classname>Object</classname> is an entity property; <literal>
+      </varname> — is an entity property in the form of <code><replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable></code>; <literal>
         <replaceable>propValue1</replaceable>
-      </literal> — <classname>Object</classname> is a value to search for.</para>
+      </literal> —  is a value to search for.</para>
     <note>
       <para><methodname>findById</methodname> и <methodname>find</methodname> functions are searching for objects using prepared hash table by corresponding properties and don&apos;t enumerate  the row objects. Therefore, it is recommended to logically separate the code for searching and changing data, as after any change of data prepared hashes are marked as obsolete, and are rebuilded when you attempt to perform the search next time.</para>
     </note>
@@ -1097,7 +1084,7 @@ for(var i=0; i&lt;foundDocuments.size(); i++) {
 }</programlisting>
   </section>
   <section>
-    <title>Data filtering API</title>
+    <title>Filter API</title>
     <para>Filtering operations can be performed after the data model loads its entities data. </para>
     <para>Data filtering is performed in the model and do not cause sending new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
     <para>You can specify filtering rules for any entity. Filtering rules will be applied every time the data is loaded. Data rows, which failed to pass the filtration condition, are not lost, but becomes invisible to the application code.</para>
@@ -1142,7 +1129,7 @@ while(documents.next()) {
 filter.cancel();</programlisting>
   </section>
   <section>
-    <title>Data sorting API</title>
+    <title>Sort API</title>
     <para>To sort datasets objects according to some criteria  use entity sorting operations. Sorting  can be performed after  entity data is loaded. </para>
     <para>Data sorting is performed in the model and do not spawn new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
     <para>Entity data can be sorted by several fields using the sorting rules.</para>
@@ -1183,7 +1170,7 @@ model.entity1.sort(sorter);</programlisting>
   </section>
   <section>
     <title>Entity events</title>
-    <para>To implement some logic to react to the  an entity dataset data  events specify entity events handlers functions. To create these handler functions use data model editor.</para>
+    <para>To implement some logic to react to the data  events specify entity events handlers functions. To create these handler functions assign functions to entities&apos; properties or use data model editor.</para>
     <para>Some events are cancelable from the handler function by returning the  <literal>false</literal> value.</para>
     <para>Entity data events list is given in the table below:</para>
     <informaltable>
@@ -1294,12 +1281,12 @@ function validateEmail(email) {
   </section>
   <section>
     <title>Entity data schema</title>
-    <para>The module software code has access to an entity metadata. It is possible to read types, names, descriptions of entity properties and parameters, and other metadata.</para>
-    <para>To read the entity property metadata, use its  <varname>md</varname> property:</para>
+    <para>The module  code has access to an entity schema. It is possible to read types, names, descriptions of entity properties and parameters, and etc.</para>
+    <para>To read the entity property schema, use its  <varname>md</varname> property:</para>
     <programlisting language="JavaScript">var entityMetadata = model.<replaceable>entityName</replaceable>.schema;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
-      </varname> is an entity, which metadata you are interested in.</para>
+      </varname> is an entity, which schema you are interested in.</para>
     <para>The same data can be obtained using the object-instance of this entity:</para>
     <programlisting language="JavaScript">var item = model.<replaceable>entityName</replaceable>[<replaceable>itemIndex</replaceable>];// Gets some item
 var entityMetadata = item.schema;</programlisting>
@@ -1319,7 +1306,7 @@ var entityMetadata = item.schema;</programlisting>
     <programlisting language="JavaScript">if (model.documents.schema.id.pk) {
   Logger.info(&apos;id is key attribute of entity.&apos;);
 }</programlisting>
-    <para>You can read metadata composed of the following for the entity properties:</para>
+    <para>The schema composed of the following  properties:</para>
     <informaltable>
       <tgroup cols="3">
         <thead>
@@ -1423,20 +1410,20 @@ var entityMetadata = item.schema;</programlisting>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>To get the number of properties in the entity, use the  <code>length</code> property in the entity metadata object:</para>
+    <para>To get the number of properties in the entity, use the  <code>length</code> property in the entity schema object:</para>
     <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.schema.length</programlisting>
-    <para>You can call the property metadata by index as an array element:</para>
+    <para>You can read the property&apos;s metadata by index as an array element:</para>
     <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.schema[<varname>i</varname>]</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
       </varname> is an entity, and <varname>
         <replaceable>i</replaceable>
       </varname> is within the range from  <code>0</code> to <code>entityMetadata.length-1</code>.</para>
-    <para>Below you can find an example of outputting all properties of the documents entity into the log: </para>
+    <para>Below you can find an example of output all properties of the documents entity into the log: </para>
     <programlisting language="JavaScript">for (var i = 0; i &lt; model.documents.schema.length; i++) {
   Logger.info(documents.md[i]);
 }</programlisting>
-    <para>To read the entity parameter metadata, use the  <varname>md</varname> property of the  <varname>params</varname> object of a data model or entity:</para>
+    <para>To read the entity parameter metadata, use the  <varname>schema</varname> property of the  <varname>params</varname> object of a data model or entity:</para>
     <programlisting language="JavaScript">var paramsMetadata = model.params.schema;</programlisting>
     <programlisting language="JavaScript">var paramsMetadata = model.<replaceable>entityName</replaceable>.params.schema;</programlisting>
     <para>To get access to the metadata of a specific parameter:</para>
@@ -1579,7 +1566,7 @@ var entityMetadata = item.schema;</programlisting>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>To get the number of model parameters, use the <code>length</code> property of the model parameter metadata object:</para>
+    <para>To get the number of model parameters, use the <code>length</code> property of the model parameter schema object:</para>
     <programlisting language="JavaScript">model.params.schema.length</programlisting>
     <para>or just the  <code>length</code> property of the model parameters:</para>
     <programlisting language="JavaScript">model.params.length</programlisting>
@@ -1603,12 +1590,10 @@ var entityMetadata = item.schema;</programlisting>
   <section>
     <title>Executing arbitrary SQL</title>
     <para>In addition to using entities based on a query, data model allows to execute  arbitrary  SQL code. Using entities based on a query instance provides a number of advantages, such as providing security management or ability to work with the client code. However, if necessary, you can  execute arbitrary SQL. This code can be generated dynamically, read from a resource file, etc.</para>
-    <para>Execution of SQL  is available on the server or in the desktop client.</para>
-    <para>Use the  <methodname>model.createEntity(<replaceable>sqlQuery</replaceable>, <replaceable>dataSourceName</replaceable>)</methodname> method to dynamically create a new entity, which can be used for executing the SQL code, where <parameter>
+    <para>Execution of SQL  is available on the server or in the desktop client wich is directly connection to a database.</para>
+    <para>Use the  <methodname>model.createEntity(<replaceable>sqlQuery</replaceable>)</methodname> method to dynamically create a new entity, which can be used for executing the SQL code, where <parameter>
         <replaceable>sqlQuery</replaceable>
-      </parameter> is the query text, <parameter>
-        <replaceable>dataSourceName</replaceable>
-      </parameter> is the data source name (optional, if it is not specified, the default data source is used) for creating a new model entity. The generated entity may be used to read, insert or modify objects:</para>
+      </parameter> is the query text. The generated entity may be used to read, insert or modify objects:</para>
     <programlisting language="JavaScript">var docEntity = model.createEntity(&quot;SELECT * FROM Document&quot;);
 docEntity.requery();
 
@@ -1623,11 +1608,9 @@ model.save();</programlisting>
     <para>Use <methodname>executeUpdate</methodname> entity method to execute the SQL code, which contains the  <code>INSERT</code>, <code>UPDATE</code>,  <code>DELETE</code> or <abbrev>DDL</abbrev> commands:</para>
     <programlisting language="JavaScript">var e = model.createEntity(&quot;DELETE * FROM Document d WHERE d.DOC_TYPE = 1&quot;);
 e.executeUpdate();</programlisting>
-    <para>Use   <methodname>executeSql(sqlQuery, dataSourceName)</methodname> model&apos;s method to execute the SQL code, which contains the  <code>INSERT</code>, <code>UPDATE</code>,  <code>DELETE</code> commands,  where  <parameter>
+    <para>Use   <methodname>executeSql(sqlQuery)</methodname> model&apos;s method to execute the SQL code, which contains the  <code>INSERT</code>, <code>UPDATE</code>,  <code>DELETE</code> commands,  where  <parameter>
         <replaceable>sqlQuery</replaceable>
-      </parameter>  is the query text <parameter>
-        <replaceable>dataSourceName</replaceable>
-      </parameter> is the name of the data source, which is used to create a new model entity (optional, if it is not specified, the default data source is used):</para>
+      </parameter>  is the query text:</para>
     <programlisting language="JavaScript">model.executeSql(&quot;DROP TABLE Document&quot;);</programlisting>
   </section>
   <section>
