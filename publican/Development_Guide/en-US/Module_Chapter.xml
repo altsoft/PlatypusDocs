@@ -5,7 +5,7 @@
 ]>
 <chapter id="chap-Development_Guide-Module_Chapter">
   <title>JavaScript module</title>
-  <para>A Module is a JavaScript file containing the constructor function. Modules  contain data model responsible for data access. </para>
+  <para>Module is a JavaScript file containing the constructor function. Modules  contain data model responsible for data access. </para>
   <para>Modules can be executed both under JVM in a client and server via  Mozilla Rhino engine or in a browser.</para>
   <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_5">
     <title>New module creation</title>
@@ -75,9 +75,9 @@
   <section>
     <title>Module constructor</title>
     <para>Using modules allows you to manage the complexity  according to the object-oriented programming principles.</para>
-    <para>A module is an equivalent of a class in other programming languages, such as in Java or С++.</para>
+    <para>Module is an equivalent of a class in other programming languages, such as in Java or С++.</para>
     <para>Every module  contains a constructor function. This function is used for module&apos;s instanses creation.</para>
-    <para>A constructor function  can have  a header, which is represented as a comment in the  <abbrev>JsDoc</abbrev> format and is located at the top of the module text.</para>
+    <para>Constructor function  can have  a header, which is represented as a comment in the  <abbrev>JsDoc</abbrev> format and is located at the top of the module text.</para>
     <para>Example of a module with a header:</para>
     <programlisting language="JavaScript">/**
  * Module description goes here
@@ -243,19 +243,19 @@ function ModuleC {
       //...
    }
 }</programlisting>
-    <para>Use the  <code>principal</code> property to get access to the information about the current user in the executable code.  The <code>principal</code>  property is read-only. The object of information about the user contains the <code>name</code> property, i.e. the name of the current user, and the <code>hasRole(<replaceable>role</replaceable>)</code>method, which allows you to check if this user has any role:</para>
+    <para>Use   <code>principal</code> property to get access to the information about the current user in the executable code.  The <code>principal</code>  property is read-only. The object of information about the user contains the <code>name</code> property, i.e. the name of the current user, and the <code>hasRole(<replaceable>role</replaceable>)</code>method, which allows you to check if this user has any role:</para>
     <programlisting language="JavaScript">Logger.info(&apos;Current user: &apos; + self.principal.name);
 
 if (self.principal.hasRole(&apos;Manager&apos;)) {
   // Some operations allowed only to managers ...
 }</programlisting>
-    <para>Use the <function>logout(<replaceable>callback</replaceable>)</function> global function, where <function>
+    <para>Use  <function>logout(<replaceable>callback</replaceable>)</function> global function, where <function>
         <replaceable>callback</replaceable>
       </function>  is a function, which will be called after the session is terminated. Open forms will be closed and the user will see the login and password entering form. </para>
   </section>
   <section>
     <title>Resources loading</title>
-    <para>Platypus Platform enables loading of resources in the form of binary data and text. Resources may be loaded using their relative paths or URLs. Relative paths are counted off from the <filename>src</filename> root directory of the  application. Use the <classname>Resource</classname>  object methods for resource loading.</para>
+    <para>The platfrom runtime enables loading of resources in the form of binary data and text. Resources may be loaded using their relative paths or URLs. Relative paths are counted off from the <filename>src</filename> root directory of the  application. Use the <classname>Resource</classname>  object methods for resource loading.</para>
     <para>To download a binary resource, use the <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code> method, where <parameter>path</parameter> is a relative  path or URL,  <parameter>callback(obj)</parameter> is a function, which will be called after the resource is loaded,    <parameter>obj</parameter> is an array of bytes of the downloaded resource for the server code and Platypus Client or an object of the  <classname>ArrayBuffer</classname> type for the HTML5 browser:</para>
     <programlisting language="JavaScript">//Loads binary resource
 Resource.load(&quot;res/pict.bin&quot;, function(obj) {
@@ -307,7 +307,7 @@ Logger.info(Resource.applicationPath);</programlisting>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>The data from some datasource is stored in the form of JavaScript objects.</para>
+    <para>Data  is stored in the form of JavaScript objects within an etnity&apos;s array.</para>
     <para>The following types of entities can be used in the data model: </para>
     <itemizedlist>
       <listitem>
@@ -333,12 +333,12 @@ Logger.info(Resource.applicationPath);</programlisting>
         <para>Link  defined by the database table external keys.</para>
       </listitem>
     </itemizedlist>
-    <para>The query link requeries the target entity&apos;s dataset according to the   parameter value change. The new parameter value is determined according to the source point of the link. Both dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, new data is requested from the database and reoladed in  the target entity.</para>
+    <para>Query link requeries the target entity&apos;s dataset according to the   parameter value change. The new parameter value is determined according to the source point of the link. Both dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, new data is requested from the database and reoladed in  the target entity.</para>
     <note>
-      <para>When the module operates in the browser, data comes asynchronously from the network. When the module operates in the server modules on the application server, data comes synchronously. Even though when the model works on the Java SE client, data is also obtained synchronously, it is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser.</para>
+      <para>When a module operates in the browser, data comes asynchronously from the network. When a module operates in the server modules on the application server, data comes synchronously. Even though when data model works on  Java SE desktor client, data is also obtained synchronously, it is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser.</para>
     </note>
-    <para>The filter link provides the restricted rows view of the target entity dataset according to the new filter value.  The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
-    <para>The link defined by a database table foreign keys is created automatically, if a dataset contains fields included to such foreign key.  This type of link does not affect the content of the datasets and is used to generate inter-instance connections between instances of entities. This is done via new properties, wich are created while data fetching. The link of this type is visually shown as a dashed line on the data model diagram.</para>
+    <para>Filter link provides the restricted rows view of the target entity dataset according to the new filter value. The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
+    <para>Link defined by a database table foreign keys is created automatically, if a dataset contains fields included to such foreign key.  This type of link does not affect the content of the datasets and is used to generate inter-instance connections between instances of entities. This is done via new properties, wich are created while data fetching. The link of this type is visually shown as a dashed line on the data model diagram.</para>
     <note>
       <para>To get inter-instance connections work, primary and foreign keys are required. Such keys may come from database structure definitions or from schema definitions in a JavaScript datasource module.</para>
     </note>
@@ -361,10 +361,10 @@ Logger.info(Resource.applicationPath);</programlisting>
         <para>Links fields and parameters of the souce and the target entities must match by its type: the types of connected fields and parameters must allow the mutual conversion of values. For example, it is possible to connect field if there&apos;s a number specified for the connection on the source, and a string specified the connection on the target, it is quite possible, since there is a possibility of an unambiguous conversion of a number to a string, but not vice versa.</para>
       </listitem>
     </itemizedlist>
-    <para>The batch change of the model input parameters is also possible, in this case, data is updated only after changing all the required parameters.</para>
+    <para>Batch change of the model input parameters is also possible, in this case, data is updated only after changing all the required parameters.</para>
     <para>Added, deleted and changed datasets of these entities objects are saved to the database or sent to the application server for subsequent saving when calling the  <methodname>save</methodname> function of the data model object.</para>
-    <para>The data model is represented in the module constructor by the <code>this.model</code> object. For convenience, we will assing this object to the model variable:</para>
-    <para>Create an alias variable for the data model object, in the following code snippets we will use this alis object: </para>
+    <para>The data model object is represented in the module constructor by the <code>this.model</code> object.</para>
+    <para>Create an alias variable for the data model object, in the following code snippets we will use this model alias object: </para>
     <programlisting language="JavaScript">function ModuleD() {
    var model = this.model;
    //...
@@ -398,8 +398,8 @@ Logger.info(Resource.applicationPath);</programlisting>
   </section>
   <section>
     <title>Data model editor</title>
-    <para>A data model is configured using the visual editor.</para>
-    <para>For navigating data model elements, it is convenient to use a data model inspector panel. In the data model inspector, entity and model parameters are presented in the form of a tree structure. You can select an entity or a connection both in the visual editor and in the data model inspector. Mutual positioning of the model data inspector and its diagram is possible.</para>
+    <para>Data model is configured using the visual editor.</para>
+    <para>For navigating to a data model elements, it is convenient to use a data model inspector panel. In the data model inspector, entity and model parameters are presented in the form of a tree structure. You can select an entity or a connection both in the visual editor and in the data model inspector. Mutual positioning of the model data inspector and its diagram is possible.</para>
     <para>To add a table entity to the data model, perform the following steps:   
   </para>
     <itemizedlist>
@@ -915,7 +915,7 @@ while (!model.documents.eof) {
   </section>
   <section>
     <title>Saving data</title>
-    <para>The data model provides automatic tracking of data changes. Data changes can be saved only as part of entire model.</para>
+    <para>Module&apos;s data model provides automatic tracking of data changes. Data changes can be saved only as a part of entire model.</para>
     <para>To edit, insert, or delete data, perform the following actions:</para>
     <itemizedlist>
       <listitem>
@@ -1069,7 +1069,7 @@ if (document) {
       </varname> is an entity, <varname>
         <replaceable>propName</replaceable>
       </varname>  is the name of the corresponding property.</para>
-    <para>The search returns an array of found objects or an empty array if nothing was found.</para>
+    <para>Search operation returns an array of found objects or an empty array if nothing was found.</para>
     <para>This code snippet illustrates search documents by their names and by the set flag:</para>
     <programlisting language="JavaScript">var documentName = &apos;Document 1&apos;;
 var isChecked = true;
@@ -1281,8 +1281,8 @@ function validateEmail(email) {
   </section>
   <section>
     <title>Entity data schema</title>
-    <para>The module  code has access to an entity schema. It is possible to read types, names, descriptions of entity properties and parameters, and etc.</para>
-    <para>To read the entity property schema, use its  <varname>md</varname> property:</para>
+    <para>Module JavaScript code has access to an entity schema. It is possible to read types, names, descriptions of entity properties and parameters, and etc.</para>
+    <para>To read the entity&apos;s schema, use its  <varname>schema</varname> property:</para>
     <programlisting language="JavaScript">var entityMetadata = model.<replaceable>entityName</replaceable>.schema;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
@@ -1588,12 +1588,36 @@ var entityMetadata = item.schema;</programlisting>
 }</programlisting>
   </section>
   <section>
-    <title>Executing arbitrary SQL</title>
-    <para>In addition to using entities based on a query, data model allows to execute  arbitrary  SQL code. Using entities based on a query instance provides a number of advantages, such as providing security management or ability to work with the client code. However, if necessary, you can  execute arbitrary SQL. This code can be generated dynamically, read from a resource file, etc.</para>
-    <para>Execution of SQL  is available on the server or in the desktop client wich is directly connection to a database.</para>
-    <para>Use the  <methodname>model.createEntity(<replaceable>sqlQuery</replaceable>)</methodname> method to dynamically create a new entity, which can be used for executing the SQL code, where <parameter>
+    <title>Dynamic entities</title>
+    <para>Use  model&apos;s <methodname>loadEntity(<replaceable>queryName</replaceable>)</methodname>method, where <replaceable>queryName</replaceable> is the name of the query to dynamically create an entity in the data model. The generated entity can be used to read, insert or modify objects:</para>
+    <programlisting language="JavaScript">var docEntity = model.loadEntity(&quot;Documents&quot;);
+docEntity.requery();
+
+//Print all documents names
+docEntity.foreach(function(doc) {
+  Logger.info(doc.NAME);
+});
+
+//Change first document&apos;s name
+docEntity[0] &amp;&amp; docEntity[0].NAME = &quot;New document&quot;;
+model.save();</programlisting>
+  </section>
+  <section>
+    <title>Executing arbitary SQL</title>
+    <para>In addition to using entities based on a query, data model allows to execute  arbitrary  SQL code. Using entities based on a query instance provides a number of advantages, such as providing security management or ability to work with the client code. However, if necessary, you can  execute arbitrary SQL.</para>
+    <para>SQL execution  is available on a server or on a desktop client wich has a direct connection to a database.</para>
+    <para>Use the following  methods of  <varname>model</varname>:</para>
+    <itemizedlist>
+      <listitem>
+        <para><methodname>createEntity</methodname> to dinamically create a new entity.</para>
+      </listitem>
+      <listitem>
+        <para><methodname>executeSql</methodname> to execute SQL  without any preprocessing.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Use   <methodname>model.createEntity(<replaceable>sqlQuery</replaceable>, <replaceable>dataSourceName</replaceable>)</methodname> method, where <parameter>
         <replaceable>sqlQuery</replaceable>
-      </parameter> is the query text. The generated entity may be used to read, insert or modify objects:</para>
+      </parameter> is the query text, <replaceable>dataSourceName</replaceable> is the datasource name (optional)  to dynamically create a new entity, which can be used for executing the SQL code. The generated entity can be used to read, insert or modify objects:</para>
     <programlisting language="JavaScript">var docEntity = model.createEntity(&quot;SELECT * FROM Document&quot;);
 docEntity.requery();
 
@@ -1669,7 +1693,7 @@ var navData = sensor.getData();</programlisting>
   </section>
   <section>
     <title>Multithreading</title>
-    <para>You can use multithreading in JavaScript for the code, which is executed in the desktop client as well on the server code.</para>
+    <para>Use multithreading in JavaScript for the code, which is executed in the desktop client as well on the server code.</para>
     <para>To run a function in a separate thread, call the  <methodname>invokeBackground</methodname> on the function&apos;s object, providing it with the necessary arguments:</para>
     <programlisting language="JavaScript">function process(p) {
   // lengthy operation here
@@ -1711,7 +1735,7 @@ Logger.severe(&quot;severe error&quot;);</programlisting>
   </section>
   <section>
     <title>Filesystem I/O</title>
-    <para>To read and write files, use tools provided by Java. </para>
+    <para>To read and write files, use  Java classes. </para>
     <para>To read and write strings, use  <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code>, and <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code> global functions, where <parameter>path</parameter> &gt; is a path to the file, <parameter>text</parameter> is a string, <parameter>encoding</parameter> is the name of encoding. The  <parameter>encoding</parameter> parameter in both functions is optional and by default is set for the UTF-8 encoding. </para>
     <para>Example of using functions for reading and writing strings to a file:</para>
     <programlisting language="JavaScript">//Read from one text file and write to another

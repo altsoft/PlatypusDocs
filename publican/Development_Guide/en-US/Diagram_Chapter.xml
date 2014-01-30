@@ -49,8 +49,8 @@
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_2">
     <title>Diagram visual editor</title>
-    <para>A  diagram is a  representation of some  tables in the database, as well as the  links between them. In general, one  includes a part of the database overall structure, which is, for example, related to the certain segment of application functionality. </para>
-    <para>A visual editor tool is used for editing  database structure diagrams.</para>
+    <para>Diagram is a  representation of some  tables in the database, as well as the  links between them. In general, one  includes a part of the database overall structure, which is, for example, related to the certain segment of application functionality. </para>
+    <para>Visual editor tool is used for editing  database structure diagrams.</para>
     <para>Visual editor allows you to modify the database structure e.g. add or delete tables, links between tables, and indexes. The same table can be represented in several diagrams.</para>
     <para>For navigation through a diagram, it is convenient to use the diagram inspector panel. In the inspector,  tables and their fields are represented in the tree structure. When selecting a table or a field in the inspector, the same selection takes place in the diagram editor.</para>
     <para>For mutual positioning of a node in the inspector and an object in the diagram:</para>

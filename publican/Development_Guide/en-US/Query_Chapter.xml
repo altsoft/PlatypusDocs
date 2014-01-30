@@ -72,7 +72,7 @@
   </section>
   <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_4">
     <title>Query editor</title>
-    <para>A special editor is used to  edit a query SQL and its support configuration files. This editor allows you to perform  visual editing of the query and direct modicatation of the SQL source text.</para>
+    <para>The special editor is used to  edit a query SQL and its support configuration files. This editor allows you to perform  visual editing of the query and direct modicatation of the SQL source text.</para>
     <important>
       <para>Full-featured editing using the visual editor is possible if the connection to the database is established. If there is no connection to the database, only the SQL source modification is possible. </para>
     </important>
@@ -407,7 +407,7 @@
   </section>
   <section>
     <title>SQL source</title>
-    <para>The query source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. </para>
+    <para>Query&apos;s SQL source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. </para>
     <para>The SQL source text must begin with a special header, in a form of multiline SQL comment. </para>
     <para>It is required to define a query name within the application in accordance with the  requirements applicable to JavaScript identifiers. On creating a new query in Platypus Application Designer, its name will be generated according to  the created files name,  spaces will be replaced by  underscores.</para>
     <para>To specify the query name, use the  <code>@name</code> annotation in the query header:</para>
@@ -419,9 +419,9 @@ SELECT *
 FROM Document</programlisting>
     <para><code>@public</code> annotation enables using this query in a remote client&apos;s data model, which fetches and writes data over network.</para>
     <para><code>@procedure</code> annotation enables using this query with database stored procedure.</para>
-    <para>The SQL <code>SELECT</code> query can contain  sampling of all  fields using <code>*</code> symbol or only the required ones using explicit fields definition.  If the first type of sampling is used, the names of the properties that will be accessible in the JavaScript code are defined by the table columns names, and can be uppercased or lowercased. To create the code compatible with various databases, it is recommended to use the second option with explicit indication of the query output fields, for example <code>SELECT a, b, c FROM table</code>.</para>
+    <para>SQL <code>SELECT</code> query can contain  sampling of all  fields using <code>*</code> symbol or only the required ones using explicit fields definition.  If the first type of sampling is used, the names of the properties that will be accessible in the JavaScript code are defined by the table columns names, and can be uppercased or lowercased. To create the code compatible with various databases, it is recommended to use the second option with explicit indication of the query output fields, for example <code>SELECT a, b, c FROM table</code>.</para>
     <para>Platypus queries can contain named parameters. Every parameter must begin with <code>:</code> prefix: <parameter>:<replaceable>paramName</replaceable></parameter>.</para>
-    <para>Example of the SQL query source with the named parameters:</para>
+    <para>Example of a SQL query source with the named parameters:</para>
     <programlisting language="SQL">/**
  * Device log for period of time
  * @name Timelog
@@ -432,7 +432,7 @@ WHERE trackingLog.DEVICE_ID = :deviceId
 AND trackingLog.TIME &gt;= :timeFrom 
 AND trackingLog.TIME &lt;= :timeTo
 ORDER BY trackingLog.TIME ASC</programlisting>
-    <para>Platypus queries can be used again in other queries. To use a query  as the sub-query, include its name in the SQL source with <code>#</code> prefix: <code>#<replaceable>SubQuery</replaceable></code>:</para>
+    <para>Queries can be used again in other queries. To use a query  as the sub-query, include its name in the SQL source with <code>#</code> prefix: <code>#<replaceable>SubQuery</replaceable></code>:</para>
     <programlisting language="SQL">/**
  * Time log priority filter
  * @name Filter
@@ -449,7 +449,7 @@ WHERE timeLog.PRIORITY &gt; :priority</programlisting>
     <para>In order to determine, which tables mentioned in the query can be modified using this mechanism, use the following annotations: <code>@writable <replaceable>table1</replaceable><replaceable> table2</replaceable></code> ... For this annotation, specify the list of tables, using spaces to delimit them.</para>
     <para>If there is no  <code>@writable</code> annotation, all  tables mentioned in the query will become writable. </para>
     <para>To disable writing to all tables mentioned in the query, add the <code>@readonly</code> annotation to the query header.  </para>
-    <para>In the example  below only the Document table is writable:</para>
+    <para>In the example  below only the <literal>Document</literal> table is writable:</para>
     <programlisting language="SQL">/**
  * @name docsCategories
  * @writable Document
@@ -461,11 +461,11 @@ ON d.CategoryID = c.CATEGORY_ID</programlisting>
   </section>
   <section>
     <title>SQL dialect source</title>
-    <para>Enter the database specific SQL source text at the <guilabel>SQL dialect source</guilabel> tab. It will be necessary to enter the source text in the <guilabel>SQL source</guilabel> field, this source text will be used for determination of the metadata for processing  the query results. If the specific SQL source text is provided, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
+    <para>Enter  database specific SQL source text at the <guilabel>SQL dialect source</guilabel> tab. It will be necessary to enter the source text in the <guilabel>SQL source</guilabel> field, this source text will be used for determination of the metadata for processing  the query results. If  specific SQL source text is provided, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
     <important>
       <para>Use the database specific SQL only when it is really necessary, and only if there is no need to enable portability of applications to the different databases.</para>
     </important>
-    <para>An example of a Oracle  database specific hierarchical query:</para>
+    <para>An example of an Oracle  database specific hierarchical query:</para>
     <programlisting language="SQL">SELECT LEVEL, ename &quot;employee&quot;, empno, mgr &quot;manager&quot;
  FROM emp START WITH mgr IS NULL
  CONNECT BY PRIOR empno = mgr;</programlisting>

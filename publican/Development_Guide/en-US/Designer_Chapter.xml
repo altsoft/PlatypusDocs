@@ -291,7 +291,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section>
     <title>Application in the database </title>
-    <para>The application elements may be deployed in the special database table. After deployment, the application elements can be hosted in  the database.</para>
+    <para>An application can be deployed in the special database table. After deployment, the application elements can be hosted in  the database.</para>
     <para>To deploy an application in the <acronym>database</acronym>: use   <guimenuitem>Deploy</guimenuitem> item in the project&apos;s root node context menu. When deploying, the application elements from the Application Elements folder are copied to the table   <literal>MTD_ENTITIES</literal>.  When copying, the tree structure of the application directories is preserved.</para>
     <para>Importing of an application from a  database to a files is a process which is  reverse to deployment. To import an application from the database: select the Import item in the project context menu. When importing, the application elements are copied from the <literal>MTD_ENTITIES</literal> table to the project&apos;s <guilabel>Application Elements</guilabel> folder. </para>
     <important>
@@ -300,11 +300,11 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section>
     <title>Database migrations tools</title>
-    <para>The Platypus Platform has an built-in mechanism to control changes occurring in the database schema and its initial data, which appear as a part of  the application. </para>
+    <para>To store and restore database(s) schema and its bootstrap data and use the database migration tools. </para>
     <important>
-      <para>Before applying  migrations make a backup of the database.</para>
+      <para>Backup you databases before applying  migrations.</para>
     </important>
-    <para>Initial application data includes basic references, bootstrap data, etc., the  information required to start the application.</para>
+    <para>Bootstrap data includes basic references, bootstrap data, etc., the  information required to start the application.</para>
     <para>Database structure and initial application data are represented in the form of migrations files. Each migration has a number expressed as a positive integer, which is used as the file name. In the course of development and further during the application life cycle, when changing the database structure or in case of  data modification, a migration is created. Later on, this migration can be applied to other  databases. In the application database, information about the current <acronym>database</acronym> version is maintained in the <literal>MTD_VERSION</literal> table. </para>
     <para>Migrations with the number greater than the  current database version are sequentially applied to the database during synchronization process. After the migration is applied successfully, the <acronym>database</acronym> number becomes equals to the number of this migration.</para>
     <para>Migrations types:</para>
@@ -323,7 +323,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
   <section>
     <title>Version control</title>
-    <para>During the application development and further during the application life cycle, it is recommended to use a version control system to manage the source project files.</para>
+    <para>During  application development and further during the application life cycle, it is recommended to use a version control system to manage the source project files.</para>
     <para><application>The application designer</application> has built-in support of the following version control systems: </para>
     <itemizedlist>
       <listitem>
