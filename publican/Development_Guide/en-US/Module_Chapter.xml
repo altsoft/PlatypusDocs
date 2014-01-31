@@ -1282,7 +1282,7 @@ function validateEmail(email) {
   <section>
     <title>Entity data schema</title>
     <para>Module JavaScript code has access to an entity schema. It is possible to read types, names, descriptions of entity properties and parameters, and etc.</para>
-    <para>To read the entity&apos;s schema, use its  <varname>schema</varname> property:</para>
+    <para>To read an entity&apos;s schema, use its  <varname>schema</varname> property:</para>
     <programlisting language="JavaScript">var entityMetadata = model.<replaceable>entityName</replaceable>.schema;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
@@ -1294,8 +1294,8 @@ var entityMetadata = item.schema;</programlisting>
         <replaceable>entityName</replaceable>
       </varname> is an entity, <literal>
         <replaceable>itemIndex</replaceable>
-      </literal>  is an object index.</para>
-    <para>To get access to the property metadata:</para>
+      </literal>  is an object&apos;s index.</para>
+    <para>To get access to the an entitiy&apos;s property metadata:</para>
     <programlisting language="JavaScript">var propMetadata = model.<replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable>;</programlisting>
     <para>where <varname>
         <replaceable>entityName</replaceable>
@@ -1604,12 +1604,12 @@ model.save();</programlisting>
   </section>
   <section>
     <title>Executing arbitary SQL</title>
-    <para>In addition to using entities based on a query, data model allows to execute  arbitrary  SQL code. Using entities based on a query instance provides a number of advantages, such as providing security management or ability to work with the client code. However, if necessary, you can  execute arbitrary SQL.</para>
+    <para>In addition to using entities based on a query, data model allows to execute  arbitrary  SQL code. Using entities based on a query instance have a number of advantages, such as  security management or ability to work with the client code. However, if necessary, you can  execute arbitrary SQL.</para>
     <para>SQL execution  is available on a server or on a desktop client wich has a direct connection to a database.</para>
     <para>Use the following  methods of  <varname>model</varname>:</para>
     <itemizedlist>
       <listitem>
-        <para><methodname>createEntity</methodname> to dinamically create a new entity.</para>
+        <para><methodname>createEntity</methodname> to dynamically create a new entity.</para>
       </listitem>
       <listitem>
         <para><methodname>executeSql</methodname> to execute SQL  without any preprocessing.</para>
@@ -1691,7 +1691,7 @@ var navData = sensor.getData();</programlisting>
   </section>
   <section>
     <title>Multithreading</title>
-    <para>Use multithreading in JavaScript for the code, which is executed in the desktop client as well on the server code.</para>
+    <para>Use multithreading in JavaScript for  code, which is executed in the desktop client as well on the server code.</para>
     <para>To run a function in a separate thread, call the  <methodname>invokeBackground</methodname> on the function&apos;s object, providing it with the necessary arguments:</para>
     <programlisting language="JavaScript">function process(p) {
   // lengthy operation here
@@ -1721,7 +1721,7 @@ Logger.info(getThreadPoolSize());// 16</programlisting>
   </section>
   <section>
     <title>Logging</title>
-    <para>The logging subsystem  is built on the base of the Java Logging  <abbrev>API </abbrev>infrastructure.</para>
+    <para>The logging subsystem  is built on the base of the Java Logging  infrastructure.</para>
     <para>To write into the log, use the  <literal>Logger</literal> object, which is a shell for the  <classname>java.util.logging.Logger</classname> class. The <literal>Logger</literal> object is also available in the HTML5 web browser client.</para>
     <para>Example of using the  <literal>Logger</literal> object:</para>
     <programlisting language="JavaScript">Logger.info(&quot;info text&quot;);
@@ -1744,7 +1744,7 @@ writeString(&apos;/home/user1/Documents/doc2.txt&apos;, str);</programlisting>
     <title>Working with XML</title>
     <para>To work with data in the <abbrev>XML</abbrev> format, use the script syntax in accordance with the E4X specification  (EcmaScript for <abbrev>XML</abbrev>). The E4X technology can be used by the code,  which is executed on Rhino runtime engine. For more information refer to the E4X documentation.</para>
     <warning>
-      <para>This E4X is obsolete. Although it is still supported, its usage is discouraged in new projects. Try to avoid using it.</para>
+      <para>E4X is obsolete. Although it is still supported, its usage is discouraged in new projects. Try to avoid using it.</para>
     </warning>
     <para>The  materials in this section  are based on the Mozilla Development Network E4X manual.</para>
     <para>To create a new XML type variables use the following syntax: </para>
