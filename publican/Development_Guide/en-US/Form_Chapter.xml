@@ -5,7 +5,7 @@
 ]>
 <chapter id="gui-chapter">
   <title>User interface guide</title>
-  <section id="form">
+  <section id="form-intro">
     <title>Form</title>
     <para>A form is a user interface building block wich can be represented as a top-level window with a title and a border or can be build-in on a panel or on another form.</para>
     <para>A form can be displayed both in the desktop client or in the HTML5 web-browser.</para>
@@ -502,7 +502,7 @@ function closeSampleForm() {
     <para>The keyboard event object contains the following properties: <property>key</property> — the pressed key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property>shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> a flag, which means that the Meta key is pressed.</para>
     <para>The mouse event object contains the following properties: <property>x</property> — X coordinate of the mouse pointer, <property>y</property> — Y coordinate of the mouse pointer, <property>button</property> — the pressed mouse key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property> shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> — a flag, which means that the Meta key is pressed.</para>
   </section>
-  <section id="form-containers">
+  <section id="ui-containers">
     <title>Containers</title>
     <para>Containers are components, which can contain other components e.g. widgets or other containers  and control their child components size and location. </para>
     <para>Change the layout  of a container using the form editor. At runtime this container will be replaced by the corresponding container.</para>
@@ -551,7 +551,7 @@ function closeSampleForm() {
       </tgroup>
     </informaltable>
     <para>The sizes and locations of child components are determined by its parent  container.</para>
-    <section>
+    <section id="ui-containers-anchorspane">
       <title>AnchorsPane</title>
       <para><code>AnchorsPane</code> is a lightweight container with the anchor layout.</para>
       <para>Anchors layout  provides a simple, flexible yet powerful layout algorithm, which allows you to build complex user interfaces.</para>
@@ -613,7 +613,7 @@ pane.add(comp,
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">self.view.add(pane);</programlisting>
     </section>
-    <section>
+    <section id="ui-containers-borderpane">
       <title>BorderPane</title>
       <para><code>BorderPane</code> is a lightweight container with the border layout.</para>
       <para>Border layout is a simple way of arranging components, when a container changes the position and dimensions of its components to  the fit five regions: northern, southern, western, eastern and center. Each area can contain only one component, which is determined by one of the following constants: <guilabel>North</guilabel>, <guilabel>South</guilabel>, <guilabel>East</guilabel>, <guilabel>West</guilabel>, <guilabel>Center</guilabel>.</para>
@@ -627,7 +627,7 @@ pane.add(comp,
       </figure>
       <para>Explicitly set the value of the property, which controls the position of the component in the container. To do this, change widget <guilabel>Direction</guilabel> property fields at the <guilabel>Layout</guilabel> property group, by selecting one of the values from the drop-down list.</para>
     </section>
-    <section>
+    <section id="ui-containers-absolutepane">
       <title>AsolutePane</title>
       <para><code>AbsolutePane</code> is a lightweight container with the absolute positioning, e.g. without layout rules.</para>
       <para>The absolute layout positons child components using its explicit position and dimensions.  </para>
@@ -641,7 +641,7 @@ pane.add(comp,
         </figure></para>
       <para>Set X, Y, width and height parameters for each component in the container. To do this, select a component and set values for the <guilabel>X</guilabel>, <guilabel>Y</guilabel>, <guilabel>Width</guilabel> and <guilabel>Height</guilabel> fields on the properties panel in the <guilabel>Layout</guilabel> properties group. The <guilabel>Preferred</guilabel> value allows you to set the automatic calculation of width and height of the components according to their content.</para>
     </section>
-    <section>
+    <section id="ui-containers-gridpane">
       <title>GridPane</title>
       <para><code>GridPane</code> is a lightweight container with the grid layout.</para>
       <para><code>GridPane</code> lays components out by the grid, all columns must have the same width and all rows must have the same height. </para>
@@ -656,7 +656,7 @@ pane.add(comp,
       <para>To set the number of columns and rows and the vertical and horizontal interval between cells, select the  <guilabel>GridLayout</guilabel> node in the component tree of the inspector and change the corresponding values on the properties panel.</para>
       <para>If you set a value other than zero for the number of columns and rows, column number setting is ignored. Instead of this, the number of columns is determined by the number of rows and the total number of components in the container.</para>
     </section>
-    <section>
+    <section id="ui-containers-flowpane">
       <title>FlowPane</title>
       <para><code>FlowPane</code> is a lightweight container with the flow layout.</para>
       <para>Flow layout aligns components into a row/line. Dimensions of the components are calculated according to their content (component preferences). If the component doesn&apos;t fit into a row, it is transferred to the next line.</para>
@@ -669,7 +669,7 @@ pane.add(comp,
         </mediaobject>
       </figure>
     </section>
-    <section>
+    <section lang="" id="ui-containers-cardpane">
       <title>CardPane</title>
       <para><code>CardPane</code> is a lightweight container with the card layout.</para>
       <para>Card layout  allows you to arrange components as a stack of cards, one above the other; only the top component is visible. This layout manager is usually used to create a step-by-step wizard.</para>
@@ -677,7 +677,7 @@ pane.add(comp,
           <replaceable>cardName</replaceable>
         </parameter> is the card name.</para>
     </section>
-    <section>
+    <section id="ui-containers-boxpane">
       <title>BoxPane</title>
       <para><code>BoxPane</code> is a lightweight container with the box layout.</para>
       <para>The box layout  arranges components in the order, in which they were added to the container, one after the other, back to back.</para>
@@ -698,7 +698,7 @@ pane.add(comp,
       </itemizedlist>
       <para>To define an axis, select the  <guilabel>BoxLayout</guilabel> node in the inspector component tree and select the  <guilabel>Axis</guilabel> property value from the list on the properties panel.</para>
     </section>
-    <section>
+    <section id="ui-containers-tabbedpane">
       <title>TabbedPane</title>
       <para><code>TabbedPane</code> component allows the user to switch between a group of components by clicking tabs with titles and icons.</para>
       <para>Component&apos;s specific properties:</para>
@@ -771,7 +771,7 @@ view.add(pane);</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container, for example:</para>
       <programlisting language="JavaScript">view.add(pane);</programlisting>
     </section>
-    <section>
+    <section id="ui-containers-splitpane">
       <title>SplitPane</title>
       <para><code>SplitPane</code> container is used to display two (and only two) splitted components; the user can change their size by moving the separator. </para>
       <para>Split pane setup:</para>
@@ -816,7 +816,7 @@ pane.add(comp1);
 pane.add(comp1);
 view.add(pane);</programlisting>
     </section>
-    <section>
+    <section id="ui-containers-scrollpane">
       <title>ScrollPane</title>
       <para><code>ScrollPane</code> is a lightweight container, which supports scrolling of its content. Usually another container is added to this one, using  <guilabel>ScrollPane</guilabel> as &quot;wrapper&quot;.</para>
       <para>Specific properties of the   container:</para>
@@ -857,7 +857,7 @@ var pane = new AnchorsPane();
 wrapper.add(pane);
 view.add(wrapper);</programlisting>
     </section>
-    <section>
+    <section id="ui-containers-toolbar">
       <title>ToolBar</title>
       <para><code>ToolBar</code> is a container used to display components, which are usually responsible for the most common user actions. </para>
       <para>Tool bars are intended to display a set of buttons (usually, it is a special type of buttons — without labels, but with tooltips and small, clearly visible icons) which trigger the launch of the most frequently used application commands. Toolbars also include the most popular components. </para>
@@ -867,7 +867,7 @@ view.add(wrapper);</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the parent container, for example:</para>
       <programlisting language="JavaScript">view.add(pnl1);</programlisting>
     </section>
-    <section>
+    <section id="ui-containers-desktoppane">
       <title>DesktopPane</title>
       <para><code>DesktopPane</code> is used to create a multi-document interface or a virtual desktop.</para>
       <para>Forms with a title can be displayed inside this container. Forms are added to the container by the JavaScript program. After adding, these forms can be moved, closed, minimized or expanded to the full container size.</para>
@@ -1162,7 +1162,7 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
     <note>
       <para>The properties are grouped on the properties panel. Hereinafter the properties are given without grouping. Properties, which determine how a component is displayed in the layout manager usin the <guilabel>Layout</guilabel> property group, are not provided in the text and are specific for each layout manager.</para>
     </note>
-    <section>
+    <section id="widget-label">
       <title>Label</title>
       <para><code>Label</code> is a widget with a short piece of text, images or text with an image. The label does not respond to keyboard input events and can&apos;t get the keyboard focus. </para>
       <para>The specific properties of this component are listed in the following table:</para>
@@ -1263,7 +1263,7 @@ var label4 = new Label(<replaceable>text</replaceable>, <replaceable>icon</repla
       <programlisting language="JavaScript">label1.text = &quot;Message text&quot;;
 view.add(label1);</programlisting>
     </section>
-    <section>
+    <section id="widget-button">
       <title>Button</title>
       <para><code>Button</code> is a  simple button, which responds to the click action.</para>
       <para>The  properties of this component are listed in the following table:</para>
@@ -1380,7 +1380,7 @@ btn1.onActionPerformed = function() {
 }
 view.add(btn1);</programlisting>
     </section>
-    <section>
+    <section id="widget-togglebutton">
       <title>ToggleButton</title>
       <para><code>ToggleButton</code> is a button with two states: selected/not selected.</para>
       <para>This component looks like a standard button, but after a  click action it and it will stay in a toggled state. You can use this widget, for example, when it is necessary to choose from the two options, but flags or switches are not suitable.</para>
@@ -1451,7 +1451,7 @@ btn1.onActionPerformed = function() {
 }
 view.add(btn1);</programlisting>
     </section>
-    <section>
+    <section id="widget-checkbox">
       <title>CheckBox</title>
       <para><code>CheckBox</code> is a component with two states: selected/not selected.</para>
       <para>The   specific component events are listed in the following table:</para>
@@ -1494,7 +1494,7 @@ cb1.onActionPerformed = function() {
 }
 view.add(cb1);</programlisting>
     </section>
-    <section>
+    <section id="widget-radiobutton">
       <title>RadioButton</title>
       <para><code>RadioButton</code> is a component with two states: selected/not selected. Widgets of this type can be joined into groups. Only one widget of this type can be selected in one group.</para>
       <para>The list of  <emphasis>Radio Button</emphasis> widget properties is identical to the <emphasis>Button</emphasis> widget properties, but it includes the following specific properties:</para>
@@ -1562,7 +1562,7 @@ rb1.selected &amp;&amp; alert(&quot;Radio button 1 selected!&quot;);
 }
 view.add(rb1);</programlisting>
     </section>
-    <section>
+    <section id="widget-buttongroup">
       <title>ButtonGroup</title>
       <para><code>ButtonGroup</code> is a component without visual representation. After adding to the form, the button group component will be added to the  <guilabel>Other components</guilabel> tree node on the inspector panel.</para>
       <para>Quite often there are situations when it is necessary to put the user before the fact: even if it is possible to choose something, only one option out of many can be selected. The direct use of several radio buttons won&apos;t give the desired effect — they will change their state independently of each other. </para>
@@ -1575,7 +1575,7 @@ view.add(rb1);</programlisting>
 bg1.add(rb2);// Add radio button 2
 view.add(bg1);</programlisting>
     </section>
-    <section>
+    <section id="widget-textfield">
       <title>TextField</title>
       <para><code>TextField</code> is a simple component, which allows you to edit single line of text.</para>
       <para>The properties of this component are listed  in the following table:</para>
@@ -1673,7 +1673,7 @@ var tf2 = new TextField(<replaceable>text</replaceable>);</programlisting>
       <programlisting language="JavaScript">tf.text = &quot;Default text&quot;;
 view.add(rb1);</programlisting>
     </section>
-    <section>
+    <section id="widget-slider">
       <title>Slider</title>
       <para><code>Slider</code> is a component, which allows you to visually select a value by moving the slider lever within the specified interval. </para>
       <para>The properties of this component are listed in the following table:</para>
@@ -1809,7 +1809,7 @@ s1l.onActionPerformed = function(evt) {
 }
 view.add(sl1);</programlisting>
     </section>
-    <section>
+    <section id="widget-progressbar">
       <title>ProgressBar</title>
       <para><code>ProgressBar</code> is a component, which visually shows the progress of some task. </para>
       <para>For example, during the execution of a task the percentage of its completion may be displayed. In this case, set the  <guilabel>minimum</guilabel> property value to  0, <guilabel>maximum</guilabel> set the maximum property value to 100 and specify the <guilabel>value</guilabel> when receiving new data on the progress of this task.</para>
@@ -1907,7 +1907,7 @@ pb1.minimum = 0;
 pb1.maximum = 100;
 view.add(pb1);</programlisting>
     </section>
-    <section>
+    <section id="widget-formattedfield">
       <title>FormattedField</title>
       <para><code>FormattedField</code> is a component, which allows you to edit value of some specific type as the text. So, a user sees just text and a program sees a value of specific type e.g. date, number, boolean, string and etc. Specify the set of characters, which will be considered acceptable to enter in this field. Provide the value&apos;s format and the widget&apos;s value. The  value is  converted  into the required format before displaying. </para>
       <para>For example, you can configure the widget to enter some date some predefined formats, and also set the custom format to enter strings.</para>
@@ -1965,7 +1965,7 @@ view.add(ff);</programlisting>
         <para>The formatted field is intended to display and enter values of a particular type. The format of displaying and editing can vary only within a given type. Therefore, when you programmatically create this widget, you should specify a value determining the type, within which this widget will work, before defining the format. After determining the value type, the format can be changed anyhow and at any time if the new format will be suitable for displaying and editing the values of this type.</para>
       </important>
     </section>
-    <section>
+    <section id="widget-passwordfield">
       <title>PasswordField</title>
       <para><code>PasswordField</code> is a simple input component, which allows you to edit single line of text. It displays placeholders instead of actual characters. </para>
       <para>The <code>PasswordField</code> list of   properties and events are identical to the <code>TextField</code>   widget properties.</para>
@@ -1980,7 +1980,7 @@ var pf2 = new PasswordField(<replaceable>text</replaceable>);</programlisting>
       <programlisting language="JavaScript">var pf1 = new PasswordField();
 view.add(pf1);</programlisting>
     </section>
-    <section>
+    <section id="widget-separator">
       <title>Separator</title>
       <para><code>Separator</code> is a general-purpose component for creating dividing lines between  components.</para>
       <para>The specific properties of this component  are listed in the following table:</para>
@@ -2003,13 +2003,13 @@ view.add(pf1);</programlisting>
         </tgroup>
       </informaltable>
     </section>
-    <section>
+    <section id="widget-textarea">
       <title>TextArea</title>
       <para><code>TextArea</code> is the text component for editing and displaying the multistring text.</para>
       <programlisting language="JavaScript">var textArea = new TextArea();
 view.add(textArea);</programlisting>
     </section>
-    <section>
+    <section id="widget-htmlarea">
       <title>HtmlArea</title>
       <para><code>HtmlArea</code> is a component for editing and displaying HTML documents. </para>
       <para>When displaying a form in the web-browser, the editor area  is displayed as the  <acronym>HTML</acronym> <acronym>WYSIWYG</acronym> editor.</para>
@@ -2017,7 +2017,7 @@ view.add(textArea);</programlisting>
 view.add(htmlArea);</programlisting>
     </section>
   </section>
-  <section>
+  <section id="mwidgets">
     <title>Model widgets </title>
     <para>Model widgets are components, which can independently and directly interact with the form&apos;s data model as well as respond to the model&apos;s datasets  events.</para>
     <para>You can bind a model widget to some data model entity and its fields. The bound entity&apos;s state  will change automatically in response to the user actions with the widget. Changes of the entity dataset state will lead to automatic update of data displayed on all model widgets bound to the  entity. A widget can be bound to a data model or an entity parameter or to a entity dataset field. For the linked field, the widget values are synchronized with the entity dataset row at the cursor position.</para>
@@ -2160,7 +2160,7 @@ function entityOnRender(evt) {
       </listitem>
     </itemizedlist>
     <para>It is not recommended to determine handlers of low-level events (keyboard, mouse movement events, etc.) for model widgets.</para>
-    <section>
+    <section id="widget-modelcheck">
       <title>ModelCheck</title>
       <para>A widget, the state of which is linked to a free field of a  <classname>Boolean</classname>, <classname>Number</classname>, or <classname>String</classname> data model entity type.</para>
       <para>Reading and writing of the field values is performed according to the following rules:</para>
@@ -2189,7 +2189,7 @@ function entityOnRender(evt) {
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(modelCheck);</programlisting>
     </section>
-    <section>
+    <section id="widget-modelcombo">
       <title>ModelCombo</title>
       <para><code>ModelCombo</code> widget looks up a display with actual value used as a key. It  allows you to select a value from a list. List items are displayed also via the lookup mechanism. </para>
       <para>To configure the widget:</para>
@@ -2215,7 +2215,7 @@ function entityOnRender(evt) {
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(modelCombo, anchors);</programlisting>
     </section>
-    <section>
+    <section id="widget-modeldate">
       <title>ModelDate</title>
       <para><code>ModelDate</code> is a widget bound to some date field in the model.</para>
       <para>To configure the widget: </para>
@@ -2238,7 +2238,7 @@ function entityOnRender(evt) {
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(modelDate);</programlisting>
     </section>
-    <section>
+    <section id="widget-modelgrid">
       <title>ModelGrid</title>
       <para><code>ModelGrid</code> widget is intended to display and enter data, which is presented in a tabular form as rows/columns and as a tree. <code>ModelGrid</code> widget  is the most powerful UI component. The component allows you to perform the following actions: </para>
       <itemizedlist>
@@ -2436,7 +2436,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(modelGrid);</programlisting>
     </section>
-    <section>
+    <section id="widget-modelimage">
       <title>ModelImage</title>
       <para>This widget is designed to display an image. The state of this component is linked to a free type field of the data model, which contains binary data of the image in one of the following formats: GIF, JPEG, PNG.</para>
       <note>
@@ -2466,7 +2466,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(modelImage);</programlisting>
     </section>
-    <section>
+    <section id="widget-modeltext">
       <title>ModelText</title>
       <para>A widget, the state of which is linked to a free field of the data model string or number type. The widget can be used to display and enter text. You can apply specified formatting to the displayed value and impose restrictions on entered data.</para>
       <para>To configure the widget: </para>
@@ -2486,7 +2486,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(mff);</programlisting>
     </section>
-    <section>
+    <section id="widget-modeltextarea">
       <title>ModelTextArea</title>
       <para>A widget, the state of which is linked to a free field of the data model string or number type. The widget can be used to display and enter text. You can&apos;t apply formatting to the displayed value.</para>
       <para>To configure the widget:</para>
@@ -2503,7 +2503,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(mta);</programlisting>
     </section>
-    <section>
+    <section id="widget-modelmap">
       <title>ModelMap</title>
       <para>A widget is used to display a map and objects on it; it displays the map mount by loading bitmap tiles from the network using a given <acronym>URL</acronym>. An arbitrary number of layers are imposed upon the map to display objects. </para>
       <para>The map component allows you to position the map, change its scale, turn layers on and off, select objects, etc. </para>
@@ -2648,7 +2648,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">view.add(modelMap);</programlisting>
     </section>
-    <section>
+    <section id="widget-modelspin">
       <title>ModelSpin</title>
       <para><code>ModelSpin</code> widget, the state of which is linked to a free field of a data model entity number type. The widget can be used to display and enter integral and non-integral numbers You can input numbers either from the keyboard or using buttons to increase/decrease values. </para>
       <para>To configure the widget: </para>
@@ -2678,15 +2678,15 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <programlisting language="JavaScript">view.add(modelSpin);</programlisting>
     </section>
   </section>
-  <section>
+  <section id="menus">
     <title>Menus</title>
     <para>Components which enable the implementation of form&apos;s menus.</para>
-    <section>
+    <section id="menu-menubar">
       <title>MenuBar</title>
       <para><code>MenuBar</code> component is a form&apos;s main menu bar, into which individual menus can be added. </para>
       <para>After adding this component from the  palette, the menu bar contains default some default menus, this menus can be changed or deleted.</para>
     </section>
-    <section>
+    <section id="menu-menu">
       <title>Menu</title>
       <para>A menu can contain <code>MenuItem</code> and <code>Separator</code> components.</para>
       <para>Add new  <guilabel>Menu</guilabel> components to the menu bar; to do this, drag their palettes onto the <guilabel>Menu Bar</guilabel> component.</para>
@@ -2711,14 +2711,14 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
         </tgroup>
       </informaltable>
     </section>
-    <section>
+    <section id="menu-popupmenu">
       <title>PopupMenu</title>
       <para>A pop-up menu is an option selection window, which can be assigned to any component. </para>
       <para>Add the <code>PopupMenu</code> component onto the form by dragging it from the palette. After adding, this component will have no visual representation in the layout editor; it will be added into the  <guilabel>Other components</guilabel> node in the inspector component tree.</para>
       <para>Add items to the pop-up menu the same way as to the standard menu.</para>
       <para>To assign a popup menu for a component on the form, define the <property>component PopupMenu</property> property: select the required  <emphasis>Popup Menu</emphasis> from the list.</para>
     </section>
-    <section>
+    <section id="menu-menuitem">
       <title>MenuItem</title>
       <para>Menu items are buttons organized in a list.</para>
       <para>The list of specific properties of the component:</para>
@@ -2741,7 +2741,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
         </tgroup>
       </informaltable>
     </section>
-    <section>
+    <section id="menu-checkboxmenuitem">
       <title>CheckBoxMenuItem</title>
       <para>A menu item combined with a checkbox.</para>
       <para>The list of specific properties of the component:</para>
@@ -2777,7 +2777,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       </informaltable>
       <para>A menu item of this type can has the  <emphasis>Button Group </emphasis>component assigned, which is shared by other check boxes and radio buttons, including elements which are not present in the menu.</para>
     </section>
-    <section>
+    <section id="menu-radiobuttonmenu">
       <title>RadioButtonMenuItem</title>
       <para>A menu item combined with a radiobutton widget.</para>
       <para>The list of specific properties of the component:</para>
@@ -2813,12 +2813,12 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       </informaltable>
       <para>A menu item of this type can has the <code>ButtonGroup</code> component assigned, which is shared by other check boxes and radio buttons, including elements which are not present in the menu.</para>
     </section>
-    <section>
+    <section id="menu-separatormenuitem">
       <title>SeparatorMenuItem</title>
       <para><code>SeparatorMenuItem</code> is a separator of menu items. Use this component to visually split groups of menu items. </para>
     </section>
   </section>
-  <section>
+  <section id="ui-utils-api">
     <title>UI utilities API</title>
     <section>
       <title>Style</title>
@@ -2895,7 +2895,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
 
 var style2 = new Style(<replaceable>parent</replaceable>);</programlisting>
     </section>
-    <section>
+    <section id="ui-utils-icon">
       <title>Icon</title>
       <para>An icon object, a bitmap picture.</para>
       <para>To create an icon object, use the factory  <methodname>load</methodname> method of the  <classname>Icon</classname> object:</para>
@@ -2907,7 +2907,7 @@ var style2 = new Style(<replaceable>parent</replaceable>);</programlisting>
 var b = new Button(&quot;Car&quot;, carIcon);
 view.add(b);</programlisting>
     </section>
-    <section>
+    <section id="ui-utils-fontstyle">
       <title>FontStyle</title>
       <para>This object contains constants, which can be used to set font styles.</para>
       <informaltable>
@@ -2949,7 +2949,7 @@ view.add(b);</programlisting>
       <para>Example of usage: </para>
       <programlisting language="JavaScript">var italicFontStyle = FontStyle.ITALIC;</programlisting>
     </section>
-    <section>
+    <section id="ui-utils-font">
       <title>Font</title>
       <para>Font object.</para>
       <para>Object properties:</para>
@@ -2989,7 +2989,7 @@ view.add(b);</programlisting>
       <para>Example:</para>
       <programlisting language="JavaScript">var font = new Font(&quot;Verdana&quot;, FontStyle.BOLD, 14);</programlisting>
     </section>
-    <section>
+    <section id="ui-utils-color">
       <title>Color</title>
       <para>An object representing a color.</para>
       <para>The color object contains constants of main colors: </para>
@@ -3086,7 +3086,7 @@ view.add(b);</programlisting>
 var IVORY_COLOR = new Color(255, 255, 240);
 panel.background = IVORY_COLOR;</programlisting>
     </section>
-    <section>
+    <section id="ui-utils-horizontalposition">
       <title>HorizontalPosition</title>
       <para>A horizontal position object.</para>
       <para>This object contains constants, which determine the horizontal position:</para>
@@ -3123,7 +3123,7 @@ panel.background = IVORY_COLOR;</programlisting>
       <para>Example of usage: </para>
       <programlisting language="JavaScript">var horizontalPosition = HorizontalPosition.CENTER;</programlisting>
     </section>
-    <section>
+    <section id="ui-utils-verticalpositon">
       <title>VerticalPosition</title>
       <para>A vertical position object.</para>
       <para>This object contains constants, which determine the vertical position:</para>
@@ -3160,7 +3160,7 @@ panel.background = IVORY_COLOR;</programlisting>
       <para>Example of usage:</para>
       <programlisting language="JavaScript">var verticalPosition = VerticalPosition.CENTER;</programlisting>
     </section>
-    <section>
+    <section id="ui-utils-orientation">
       <title>Orientation</title>
       <para>Selection of orientation — horizontal or vertical.</para>
       <para>This object contains constants, which determine the orientation:</para>
@@ -3192,7 +3192,7 @@ panel.background = IVORY_COLOR;</programlisting>
       <programlisting language="JavaScript">var orientation = Orientation.HORIZONTAL;</programlisting>
     </section>
   </section>
-  <section>
+  <section id="ui-dialogs">
     <title>Dialogs API</title>
     <para>Use this global functions to display  custom dialogs:</para>
     <informaltable>

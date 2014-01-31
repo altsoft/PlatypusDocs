@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Report_Chapter">
+<chapter id="report-chapter">
   <title>Report</title>
   <para>The  reporting tools is intended to provide data in the form of a report — as a <application>Microsoft Excel</application> file. You can open a generated report in a spreadsheet application, sent it to print or save it to disk.</para>
   <para>The  report application element includes the following:</para>
@@ -32,7 +32,7 @@
   <note>
     <para>For more detailed information about tags, which are used in the report template, see documentation for the jXLS library at: <ulink url="http://jxls.sourceforge.net">http://jxls.sourceforge.net</ulink></para>
   </note>
-  <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_8">
+  <section id="new-report">
     <title>New report creation</title>
     <para>To create a  report, perform the following actions:
    
@@ -53,7 +53,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section>
+  <section label="" id="report-editor">
     <title>Report editor</title>
     <para> To open the application element editor, double-click the application element in the project tree. </para>
     <para>You can edit the report template in the spreadsheet application. The following applications are used by default for different operating systems:</para>
@@ -90,7 +90,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section>
+  <section id="report-template-tags">
     <title>Template tags</title>
     <para>Edit the report template in a spreadsheet application.</para>
     <para>Place tags for linking to JavaScript objects and model entities in the template cells. To access data, use the following syntax: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, where <replaceable>objectName</replaceable> is the name of a JavaScript object, JavaScript objects array or model entity, <replaceable>propertyName</replaceable>  is the object property. </para>
@@ -162,7 +162,7 @@ Chief Name: ${department.chief.name}
 &lt;/jx:outline&gt;</programlisting>
     <para>The  <literal>jx:outline</literal> tag has an optional <property>detail</property> attribute, which determines the state of the row group. By default, it is set to <literal>false</literal>, which means that the row group will be hidden.</para>
   </section>
-  <section>
+  <section id="report-graphs-charts">
     <title>Graphs and charts</title>
     <para>Use standard spreadsheet tools for outputting graphs and charts. </para>
     <para>If a collection with a fixed number of elements is used, just configure the <application>Excel</application> charts for the range of cells in which data will be displayed.</para>
@@ -178,7 +178,7 @@ Chief Name: ${department.chief.name}
         </itemizedlist></para>
     </note>
   </section>
-  <section>
+  <section id="report-js">
     <title>JavaScript code</title>
     <para>To generate a report, create a report object by passing the required report identifier to the constructor name.</para>
     <para>Use the report object:</para>

@@ -3,9 +3,9 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Webapi_Chapter">
+<chapter id="web-chapter">
   <title>HTTP</title>
-  <section>
+  <section id="web-http">
     <title>HTTP interface</title>
     <para>Server JavaScript modules instance methods can be remotely invoked over  network using simple  GET or POST HTTP requests.</para>
     <para>To make the module instance methods  available for external requests, mark it with the <code>@public</code> annotation. </para>
@@ -60,7 +60,7 @@
     <para>Example of URL for calling a server module method (URL is not encoded):</para>
     <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=TestModule&amp;__methodName=say&amp;__param[]=Hello Platypus&amp;__param[]=1</uri></para>
   </section>
-  <section>
+  <section id="web-req-resp">
     <title>Request and response APIs</title>
     <para>To access HTTP request and response in the JavaScript server code, use the <code>http</code> property, which is available, if the method is called by the external HTTP request.</para>
     <programlisting language="JavaScript">function ModuleConstructor() {

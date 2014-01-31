@@ -1682,16 +1682,16 @@ function DataSourceModule(){
   </section>
   <section id="module-server">
     <title>Server module</title>
-    <section>
+    <section label="" id="module-server-stateless">
       <title>Stateless module</title>
       <para>A module being created on  server is stateful by default. Such module exists in the context of the current user session. </para>
       <para>Mark a module with  <code>@stateless</code> annotation if you want to make the  module stateless. A new instance of stateless module is created every time the module is called via a network.</para>
     </section>
-    <section>
+    <section id="module-server-resident">
       <title>Resident module</title>
       <para>Use <code>@resident</code> annotation to make a server module resident. A resident modules are loaded and instanciated during the server components startup. Resident modules are resides in the system session.</para>
     </section>
-    <section>
+    <section id="module-server-validator">
       <title>Data validators</title>
       <para>Use annotation <code>@validator <replaceable>DATA_SOURCE</replaceable>, <replaceable>DATA_SOURCE2</replaceable> ...</code>, where <replaceable>DATA_SOURCE</replaceable> is a data source name to enable server side validation. Implement validation logic in the instance metheod <code>validate(<replaceable>log</replaceable>, <replaceable>datasource</replaceable>, <replaceable>session</replaceable>)</code>, where <replaceable>log</replaceable> is an array of changes representing the log of changes made by clients or server side data driven code to be applied, <code>
           <replaceable>datasource</replaceable>
@@ -1709,7 +1709,7 @@ function ValidatorA(){
     };
 }</programlisting>
     </section>
-    <section>
+    <section id="module-server-auth">
       <title>Authorizers and dynamic roles</title>
       <para>Use <code>@authorizer</code> annotation to implement dynamic roles assignment for an arbitary user. The runtime checks all module authorizers as well as checks the system and if any of them approves the user&apos;s role this role is considered authorized. </para>
       <para>For example:</para>
