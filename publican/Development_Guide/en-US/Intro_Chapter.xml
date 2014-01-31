@@ -5,15 +5,15 @@
 ]>
 <chapter id="chap-Development_Guide-Intro_Chapter">
   <title>Introduction</title>
-  <para>This section provides general information about  Platypus Platform.</para>
+  <para>This section provides general information about the Platypus Platform.</para>
   <section id="sect-Development_Guide-Intro_Chapter-Test_Section_1">
     <title>About Platypus Platform </title>
-    <para>The Platypus Platform is a software platform designed for rapid building of complex   applications for  enterprise-level information systems in JavaScript.</para>
+    <para>The Platypus Platform is a software platform  for rapid development of complex   applications for  enterprise-level information systems in JavaScript.</para>
     <para>The main goal of the platform is to accelerate   development process, providing maximum possible automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of the implementation  from a  developer and enables  to concentrate on application business domain.</para>
     <para> The Platypus Platform uses two application programming languages:</para>
     <itemizedlist>
       <listitem>
-        <para>JavaScript (compatible with the ECMA-262-3 standard) is used to write program logic;</para>
+        <para>JavaScript (compatible with the ECMA-262-3 standard) is used to write program logic.</para>
       </listitem>
       <listitem>
         <para>SQL is used to access data.</para>
@@ -23,13 +23,13 @@
     <para>The Platypus Application Designer includes  following  development tools: </para>
     <itemizedlist>
       <listitem>
-        <para>Application database structure visual editor;</para>
+        <para>Application database structure visual editor.</para>
       </listitem>
       <listitem>
-        <para>SQL queries visual editor;</para>
+        <para>SQL queries visual editor.</para>
       </listitem>
       <listitem>
-        <para>JavaScript code editor;</para>
+        <para>JavaScript code editor.</para>
       </listitem>
       <listitem>
         <para>User interface forms visual editor.</para>
@@ -83,7 +83,7 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>During the  development process, the application tree is stored on the disk in the project&apos;s <filename>src</filename> subfolder, but for production operation the application, including its resources can be deployed directly to the  database <literal>MTD_ENTITIES</literal> table.</para>
+      <para>During   development process, the application tree is stored on the disk in the project&apos;s <filename>src</filename> subfolder, but for production operation the application, including its resources can be deployed directly to the  database <literal>MTD_ENTITIES</literal> table.</para>
     </note>
   </section>
   <section>

@@ -552,7 +552,7 @@ function closeSampleForm() {
     <para>The sizes and locations of child components are determined by its parent  container.</para>
     <section>
       <title>AnchorsPane</title>
-      <para>An <code>AnchorsPane</code> is a lightweight container with the anchor layout.</para>
+      <para><code>AnchorsPane</code> is a lightweight container with the anchor layout.</para>
       <para>Anchors layout  provides a simple, flexible yet powerful layout algorithm, which allows you to build complex user interfaces.</para>
       <figure>
         <title>Anchor layout: anchors and component&apos;s width and height dimensions</title>
@@ -573,6 +573,19 @@ function closeSampleForm() {
 var comp = new Button(&quot;Sample&quot;);
 pane.add(comp, new Anchors(12, null, 14, 22, null, 24));</programlisting>
       <para>In the above example a button with the specified  <guilabel>Left</guilabel>, <guilabel>Right</guilabel>, <guilabel>Top</guilabel>, and <guilabel>Bottom</guilabel> anchors is added to the anchor pane.</para>
+      <para><code>Anchors</code> object  defines component&apos;s binding anchors in a container with anchors layout.</para>
+      <para>To create an <code>Anchors</code> object, use its constructor by passing values for the corresponding anchor as parameters:</para>
+      <programlisting language="JavaScript">var anchors = new Anchors(<replaceable>left</replaceable>, <replaceable>width</replaceable>, <replaceable>right</replaceable>,
+            <replaceable>top</replaceable>, <replaceable>height</replaceable>, <replaceable>bottom</replaceable>);</programlisting>
+      <para>where <replaceable>left</replaceable> is a left anchor, <replaceable>width</replaceable> is width, <replaceable>right</replaceable> is a right anchor,
+<replaceable>top</replaceable> is a top anchor, <replaceable>height</replaceable> is height, <replaceable>bottom</replaceable> is a bottom anchor.</para>
+      <para>Each anchor can be specified in pixels; to do this, define an anchor using a number or string with the &quot; <literal>px</literal>&quot; symbols added, for example: <literal>100</literal>, &quot;<literal>100px</literal>&quot;. To specify an anchor in percents, define an anchor using a string with the  &quot;<literal>%</literal>&quot; symbol added, for example:  &quot;<literal>30%</literal>&quot;.</para>
+      <para>According to the rules of anchor layout, you can define two anchor values per coordinate.</para>
+      <para>If the anchor value is not set, pass the <literal>null</literal> value to the corresponding parameter, for example:</para>
+      <programlisting language="JavaScript">var anchors = new Anchors(100, 200, null,
+            100, 100, null);
+var panel = new AnchorsPane();
+panel.add(new Label(&quot;Test&quot;), anchors);</programlisting>
       <para>There&apos;s also alternative syntax for adding a child component: pass the JavaScript object with the <property>
           <property>left</property>
         </property>, <property>
@@ -601,7 +614,7 @@ pane.add(comp,
     </section>
     <section>
       <title>BorderPane</title>
-      <para>A <code>BorderPane</code> is a lightweight container with the border layout.</para>
+      <para><code>BorderPane</code> is a lightweight container with the border layout.</para>
       <para>Border layout is a simple way of arranging components, when a container changes the position and dimensions of its components to  the fit five regions: northern, southern, western, eastern and center. Each area can contain only one component, which is determined by one of the following constants: <guilabel>North</guilabel>, <guilabel>South</guilabel>, <guilabel>East</guilabel>, <guilabel>West</guilabel>, <guilabel>Center</guilabel>.</para>
       <figure>
         <title>Border layout</title>
@@ -615,7 +628,7 @@ pane.add(comp,
     </section>
     <section>
       <title>AsolutePane</title>
-      <para>An <code>AbsolutePane</code> is a lightweight container with the absolute positioning, e.g. without layout rules.</para>
+      <para><code>AbsolutePane</code> is a lightweight container with the absolute positioning, e.g. without layout rules.</para>
       <para>The absolute layout positons child components using its explicit position and dimensions.  </para>
       <para>It is generally not recommended to use this layout, because when changing the dimensions of the container, the position of its components is not changed or you&apos;ll have to recalculate positions and sizes by your program. However, in some cases, using this layout makes sense, for example, when creating a simple animation.<figure>
           <title>Absolute layout</title>
@@ -629,8 +642,8 @@ pane.add(comp,
     </section>
     <section>
       <title>GridPane</title>
-      <para>A <code>GridPane</code> is a lightweight container with the grid layout.</para>
-      <para>GridPane lays components out by the grid, all columns must have the same width and all rows must have the same height. </para>
+      <para><code>GridPane</code> is a lightweight container with the grid layout.</para>
+      <para><code>GridPane</code> lays components out by the grid, all columns must have the same width and all rows must have the same height. </para>
       <figure>
         <title>Grid Layout — arranging by a grid</title>
         <mediaobject>
@@ -644,8 +657,8 @@ pane.add(comp,
     </section>
     <section>
       <title>FlowPane</title>
-      <para>A <code>FlowPane</code> is a lightweight container with the flow layout.</para>
-      <para>Flow Layout aligns components into a row/line. Dimensions of the components are calculated according to their content (component preferences). If the component doesn&apos;t fit into a row, it is transferred to the next line.</para>
+      <para><code>FlowPane</code> is a lightweight container with the flow layout.</para>
+      <para>Flow layout aligns components into a row/line. Dimensions of the components are calculated according to their content (component preferences). If the component doesn&apos;t fit into a row, it is transferred to the next line.</para>
       <figure>
         <title>Flow Layout — arranging into a line</title>
         <mediaobject>
@@ -657,7 +670,7 @@ pane.add(comp,
     </section>
     <section>
       <title>CardPane</title>
-      <para>A <code>CardPane</code> is a lightweight container with the card layout.</para>
+      <para><code>CardPane</code> is a lightweight container with the card layout.</para>
       <para>Card layout  allows you to arrange components as a stack of cards, one above the other; only the top component is visible. This layout manager is usually used to create a step-by-step wizard.</para>
       <para>Each component has an assigned card name, which can be set on the component properties panel in the  <guilabel>Card Name</guilabel> field of the  <guilabel>Layout</guilabel> properties group. This name can be used later to select a visible component. To select a visible component, call the <methodname>show(<replaceable>cardName</replaceable>)</methodname> container method, where  <parameter>
           <replaceable>cardName</replaceable>
@@ -665,8 +678,8 @@ pane.add(comp,
     </section>
     <section>
       <title>BoxPane</title>
-      <para>A <code>BoxPane</code> is a lightweight container with the box layout.</para>
-      <para>The Box layout  arranges components in the order, in which they were added to the container, one after the other, back to back.</para>
+      <para><code>BoxPane</code> is a lightweight container with the box layout.</para>
+      <para>The box layout  arranges components in the order, in which they were added to the container, one after the other, back to back.</para>
       <para>Specify an axis, along which the Box Layout manager will arrange components:</para>
       <itemizedlist>
         <listitem>
@@ -686,7 +699,7 @@ pane.add(comp,
     </section>
     <section>
       <title>TabbedPane</title>
-      <para>The  <code>TabbedPane</code> component allows the user to switch between a group of components by clicking tabs with titles and icons.</para>
+      <para><code>TabbedPane</code> component allows the user to switch between a group of components by clicking tabs with titles and icons.</para>
       <para>Component&apos;s specific properties:</para>
       <informaltable>
         <tgroup cols="2">
@@ -759,7 +772,7 @@ view.add(pane);</programlisting>
     </section>
     <section>
       <title>SplitPane</title>
-      <para>The <code>SplitPane</code> container is used to display two (and only two) splitted components; the user can change their size by moving the separator. </para>
+      <para><code>SplitPane</code> container is used to display two (and only two) splitted components; the user can change their size by moving the separator. </para>
       <para>Split pane setup:</para>
       <itemizedlist>
         <listitem>
@@ -804,7 +817,7 @@ view.add(pane);</programlisting>
     </section>
     <section>
       <title>ScrollPane</title>
-      <para>A lightweight container, which supports scrolling of its content. Usually another container is added to this one, using  <guilabel>ScrollPane</guilabel> as &quot;wrapper&quot;.</para>
+      <para><code>ScrollPane</code> is a lightweight container, which supports scrolling of its content. Usually another container is added to this one, using  <guilabel>ScrollPane</guilabel> as &quot;wrapper&quot;.</para>
       <para>Specific properties of the   container:</para>
       <informaltable>
         <tgroup cols="2">
@@ -845,7 +858,7 @@ view.add(wrapper);</programlisting>
     </section>
     <section>
       <title>ToolBar</title>
-      <para>A <emphasis>ToolBar </emphasis>is a container used to display components, which are usually responsible for the most common user actions. </para>
+      <para><code>ToolBar</code> is a container used to display components, which are usually responsible for the most common user actions. </para>
       <para>Tool bars are intended to display a set of buttons (usually, it is a special type of buttons — without labels, but with tooltips and small, clearly visible icons) which trigger the launch of the most frequently used application commands. Toolbars also include the most popular components. </para>
       <para>Components in the toolbar are stacked one-to-one according to the applied orientation.</para>
       <para>To create a component of this type by program means, use the  <classname>ToolBar</classname> constructor, which can be called with a different number of parameters:</para>
@@ -855,7 +868,7 @@ view.add(wrapper);</programlisting>
     </section>
     <section>
       <title>DesktopPane</title>
-      <para>The <emphasis>DesktopPane</emphasis> is used to create a multi-document interface or a virtual desktop.</para>
+      <para><code>DesktopPane</code> is used to create a multi-document interface or a virtual desktop.</para>
       <para>Forms with a title can be displayed inside this container. Forms are added to the container by the JavaScript program. After adding, these forms can be moved, closed, minimized or expanded to the full container size.</para>
       <para>To add a form to the  <emphasis>DesktopPane</emphasis>:</para>
       <itemizedlist>
@@ -1150,7 +1163,7 @@ myForm.showInternalFrame(desktopPane);</programlisting></para>
     </note>
     <section>
       <title>Label</title>
-      <para> A <code>Label</code> is a widget with a short piece of text, images or text with an image. The label does not respond to keyboard input events and can&apos;t get the keyboard focus. </para>
+      <para><code>Label</code> is a widget with a short piece of text, images or text with an image. The label does not respond to keyboard input events and can&apos;t get the keyboard focus. </para>
       <para>The specific properties of this component are listed in the following table:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1251,7 +1264,7 @@ view.add(label1);</programlisting>
     </section>
     <section>
       <title>Button</title>
-      <para>A <code>Button</code> is a  simple button, which responds to the click action.</para>
+      <para><code>Button</code> is a  simple button, which responds to the click action.</para>
       <para>The  properties of this component are listed in the following table:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1368,7 +1381,7 @@ view.add(btn1);</programlisting>
     </section>
     <section>
       <title>ToggleButton</title>
-      <para>A <code>ToggleButton</code> is a button with two states: selected/not selected.</para>
+      <para><code>ToggleButton</code> is a button with two states: selected/not selected.</para>
       <para>This component looks like a standard button, but after a  click action it and it will stay in a toggled state. You can use this widget, for example, when it is necessary to choose from the two options, but flags or switches are not suitable.</para>
       <para>The list of   <code>ToggleButton</code> widget properties is identical to the   <code>Button</code> widget properties, with the  the following specific properties:</para>
       <informaltable>
@@ -1439,7 +1452,7 @@ view.add(btn1);</programlisting>
     </section>
     <section>
       <title>CheckBox</title>
-      <para>A <code>CheckBox</code> is a component with two states: selected/not selected.</para>
+      <para><code>CheckBox</code> is a component with two states: selected/not selected.</para>
       <para>The   specific component events are listed in the following table:</para>
       <informaltable>
         <tgroup cols="4">
@@ -1482,7 +1495,7 @@ view.add(cb1);</programlisting>
     </section>
     <section>
       <title>RadioButton</title>
-      <para>A <code>RadioButton</code> is a component with two states: selected/not selected. Widgets of this type can be joined into groups. Only one widget of this type can be selected in one group.</para>
+      <para><code>RadioButton</code> is a component with two states: selected/not selected. Widgets of this type can be joined into groups. Only one widget of this type can be selected in one group.</para>
       <para>The list of  <emphasis>Radio Button</emphasis> widget properties is identical to the <emphasis>Button</emphasis> widget properties, but it includes the following specific properties:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1550,10 +1563,10 @@ view.add(rb1);</programlisting>
     </section>
     <section>
       <title>ButtonGroup</title>
-      <para>A <emphasis>Button Group</emphasis> is a component without visual representation. After adding to the form, the  <emphasis>Button Group</emphasis> component will be added to the  <emphasis>Other components</emphasis> tree node on the inspector panel.</para>
+      <para><code>ButtonGroup</code> is a component without visual representation. After adding to the form, the button group component will be added to the  <guilabel>Other components</guilabel> tree node on the inspector panel.</para>
       <para>Quite often there are situations when it is necessary to put the user before the fact: even if it is possible to choose something, only one option out of many can be selected. The direct use of several radio buttons won&apos;t give the desired effect — they will change their state independently of each other. </para>
-      <para>The group of buttons is designed to enable the simultaneous selection of only one of widgets belonging to the  <emphasis>Toggle Button</emphasis>, <emphasis>Radio Button</emphasis>, and <emphasis>Switchable Menu Item</emphasis> types, for which the same button group is assigned. When you select one of the widgets in the group, the other widgets will be reset. </para>
-      <para>Set the  <literal>buttonGroup</literal> property for the components of the  <emphasis>Toggle Button</emphasis>, <emphasis>Radio Button</emphasis>, and <emphasis>Switchable Menu Item </emphasis>types; to do this, select the appropriate button group from the property field list on the properties panel.</para>
+      <para>The group of buttons is designed to enable the simultaneous selection of only one of widgets belonging to the  <code>ToggleButton</code>, <code>RadioButton</code>, and <code>CheckBoxMenuItem</code> types, for which the same button group is assigned. When you select one of the widgets in the group, the other widgets will be reset. </para>
+      <para>Set the  <literal>buttonGroup</literal> property for the supported components types. To do this, select the appropriate button group from the property field list on the properties panel.</para>
       <para>To create a component of this type by program means, use the  <classname>ButtonGroup</classname> constructor:</para>
       <programlisting language="JavaScript">var bg1 = new ButtonGroup();</programlisting>
       <para>After creating, add button widgets to the group:</para>
@@ -1563,7 +1576,7 @@ view.add(bg1);</programlisting>
     </section>
     <section>
       <title>TextField</title>
-      <para>A <emphasis>Text Field</emphasis> is a simple component, which allows you to edit single line of text.</para>
+      <para><code>TextField</code> is a simple component, which allows you to edit single line of text.</para>
       <para>The properties of this component are listed  in the following table:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1661,7 +1674,7 @@ view.add(rb1);</programlisting>
     </section>
     <section>
       <title>Slider</title>
-      <para>A <emphasis>Slider</emphasis> is a component, which allows you to visually select a value by moving the slider lever within the specified interval. </para>
+      <para><code>Slider</code> is a component, which allows you to visually select a value by moving the slider lever within the specified interval. </para>
       <para>The properties of this component are listed in the following table:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1797,7 +1810,7 @@ view.add(sl1);</programlisting>
     </section>
     <section>
       <title>ProgressBar</title>
-      <para>A <emphasis>Progress Bar</emphasis> is a component, which visually shows the progress of some task. </para>
+      <para><code>ProgressBar</code> is a component, which visually shows the progress of some task. </para>
       <para>For example, during the execution of a task the percentage of its completion may be displayed. In this case, set the  <guilabel>minimum</guilabel> property value to  0, <guilabel>maximum</guilabel> set the maximum property value to 100 and specify the <guilabel>value</guilabel> when receiving new data on the progress of this task.</para>
       <para>If you have no information about the current task progress or such data can&apos;t be obtained, use the uncertainty mode, in which the indicator will show that the task was started but is not completed yet instead of its progress.</para>
       <para>The specific properties of this component are listed in the following table:</para>
@@ -1895,7 +1908,7 @@ view.add(pb1);</programlisting>
     </section>
     <section>
       <title>FormattedField</title>
-      <para>A <code>FormattedField</code> is a component, which allows you to edit value of some specific type as the text. So, a user sees just text and a program sees a value of specific type e.g. date, number, boolean, string and etc. Specify the set of characters, which will be considered acceptable to enter in this field. Provide the value&apos;s format and the widget&apos;s value. The  value is  converted  into the required format before displaying. </para>
+      <para><code>FormattedField</code> is a component, which allows you to edit value of some specific type as the text. So, a user sees just text and a program sees a value of specific type e.g. date, number, boolean, string and etc. Specify the set of characters, which will be considered acceptable to enter in this field. Provide the value&apos;s format and the widget&apos;s value. The  value is  converted  into the required format before displaying. </para>
       <para>For example, you can configure the widget to enter some date some predefined formats, and also set the custom format to enter strings.</para>
       <para>The <code>FormattedField</code> properties is identical to the <code>TextField</code>   widget properties, but it includes the following specific properties:</para>
       <informaltable>
@@ -1953,7 +1966,7 @@ view.add(ff);</programlisting>
     </section>
     <section>
       <title>PasswordField</title>
-      <para>A <code>PasswordField</code> is a simple input component, which allows you to edit single line of text. It displays placeholders instead of actual characters. </para>
+      <para><code>PasswordField</code> is a simple input component, which allows you to edit single line of text. It displays placeholders instead of actual characters. </para>
       <para>The <code>PasswordField</code> list of   properties and events are identical to the <code>TextField</code>   widget properties.</para>
       <para>To create a component of this type by program means, use the  <classname>PasswordField</classname> constructor, which can be called with a different number of parameters:</para>
       <programlisting language="JavaScript">var pf1 = new PasswordField();
@@ -1968,7 +1981,7 @@ view.add(pf1);</programlisting>
     </section>
     <section>
       <title>Separator</title>
-      <para>A <code>Separator</code> is a general-purpose component for creating dividing lines between  components.</para>
+      <para><code>Separator</code> is a general-purpose component for creating dividing lines between  components.</para>
       <para>The specific properties of this component  are listed in the following table:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1991,13 +2004,13 @@ view.add(pf1);</programlisting>
     </section>
     <section>
       <title>TextArea</title>
-      <para>A <code>TextArea</code> is the text component for editing and displaying the multistring text.</para>
+      <para><code>TextArea</code> is the text component for editing and displaying the multistring text.</para>
       <programlisting language="JavaScript">var textArea = new TextArea();
 view.add(textArea);</programlisting>
     </section>
     <section>
       <title>HtmlArea</title>
-      <para>A <code>HtmlArea</code> is a component for editing and displaying HTML documents. </para>
+      <para><code>HtmlArea</code> is a component for editing and displaying HTML documents. </para>
       <para>When displaying a form in the web-browser, the editor area  is displayed as the  <acronym>HTML</acronym> <acronym>WYSIWYG</acronym> editor.</para>
       <programlisting language="JavaScript">var htmlArea = new HtmlArea();
 view.add(htmlArea);</programlisting>
@@ -2177,7 +2190,7 @@ function entityOnRender(evt) {
     </section>
     <section>
       <title>ModelCombo</title>
-      <para>A <code>ModelCombo</code> widget looks up a display with actual value used as a key. It  allows you to select a value from a list. List items are displayed also via the lookup mechanism. </para>
+      <para><code>ModelCombo</code> widget looks up a display with actual value used as a key. It  allows you to select a value from a list. List items are displayed also via the lookup mechanism. </para>
       <para>To configure the widget:</para>
       <itemizedlist>
         <listitem>
@@ -2203,7 +2216,7 @@ function entityOnRender(evt) {
     </section>
     <section>
       <title>ModelDate</title>
-      <para>ModelDate is a widget bound to some date field in the model.</para>
+      <para><code>ModelDate</code> is a widget bound to some date field in the model.</para>
       <para>To configure the widget: </para>
       <itemizedlist>
         <listitem>
@@ -2226,7 +2239,7 @@ function entityOnRender(evt) {
     </section>
     <section>
       <title>ModelGrid</title>
-      <para>The <code>ModelGrid</code> widget is intended to display and enter data, which is presented in a tabular form as rows/columns and as a tree. <code>ModelGrid</code> widget  is the most powerful UI component. The component allows you to perform the following actions: </para>
+      <para><code>ModelGrid</code> widget is intended to display and enter data, which is presented in a tabular form as rows/columns and as a tree. <code>ModelGrid</code> widget  is the most powerful UI component. The component allows you to perform the following actions: </para>
       <itemizedlist>
         <listitem>
           <para>To display a tree grid view of data.</para>
@@ -2491,7 +2504,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
     </section>
     <section>
       <title>ModelMap</title>
-      <para>The widget is used to display a map and objects on it; it displays the map mount by loading bitmap tiles from the network using a given <acronym>URL</acronym>. An arbitrary number of layers are imposed upon the map to display objects. </para>
+      <para>A widget is used to display a map and objects on it; it displays the map mount by loading bitmap tiles from the network using a given <acronym>URL</acronym>. An arbitrary number of layers are imposed upon the map to display objects. </para>
       <para>The map component allows you to position the map, change its scale, turn layers on and off, select objects, etc. </para>
       <note>
         <para>In the current Platypus Platform version, the  <emphasis>Map </emphasis>component is executed only in the  <application>Platypus Client</application>.</para>
@@ -2636,7 +2649,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
     </section>
     <section>
       <title>ModelSpin</title>
-      <para>A <code>ModelSpin</code> widget, the state of which is linked to a free field of a data model entity number type. The widget can be used to display and enter integral and non-integral numbers You can input numbers either from the keyboard or using buttons to increase/decrease values. </para>
+      <para><code>ModelSpin</code> widget, the state of which is linked to a free field of a data model entity number type. The widget can be used to display and enter integral and non-integral numbers You can input numbers either from the keyboard or using buttons to increase/decrease values. </para>
       <para>To configure the widget: </para>
       <itemizedlist>
         <listitem>
@@ -2669,7 +2682,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
     <para>Components which enable the implementation of form&apos;s menus.</para>
     <section>
       <title>MenuBar</title>
-      <para>A <code>MenuBar</code> component is a form&apos;s main menu bar, into which individual menus can be added. </para>
+      <para><code>MenuBar</code> component is a form&apos;s main menu bar, into which individual menus can be added. </para>
       <para>After adding this component from the  palette, the menu bar contains default some default menus, this menus can be changed or deleted.</para>
     </section>
     <section>
@@ -2801,14 +2814,14 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
     </section>
     <section>
       <title>SeparatorMenuItem</title>
-      <para>A <code>SeparatorMenuItem</code> is a separator of menu items. Use this component to visually split groups of menu items. </para>
+      <para><code>SeparatorMenuItem</code> is a separator of menu items. Use this component to visually split groups of menu items. </para>
     </section>
   </section>
   <section>
     <title>UI utilities API</title>
     <section>
       <title>Style</title>
-      <para>A  <code>Style</code> object, which can inherit the property values from the parent style.</para>
+      <para><code>Style</code> object, which can inherit the property values from the parent style.</para>
       <para><code>Style</code> properites list:</para>
       <informaltable>
         <tgroup cols="2">
@@ -3071,20 +3084,6 @@ view.add(b);</programlisting>
 
 var IVORY_COLOR = new Color(255, 255, 240);
 panel.background = IVORY_COLOR;</programlisting>
-    </section>
-    <section>
-      <title>Anchors</title>
-      <para><code>Anchors</code> object  defines component&apos;s binding anchors in a container with anchors layout.</para>
-      <para>To create an <code>Anchors</code> object, use its constructor by passing values for the corresponding anchor as parameters:</para>
-      <programlisting language="JavaScript">var anchors = new Anchors(<replaceable>left</replaceable>, <replaceable>width</replaceable>, <replaceable>right</replaceable>,
-            <replaceable>top</replaceable>, <replaceable>height</replaceable>, <replaceable>bottom</replaceable>);</programlisting>
-      <para>where <replaceable>left</replaceable> is a left anchor, <replaceable>width</replaceable> is width, <replaceable>right</replaceable> is a right anchor,
-<replaceable>top</replaceable> is a top anchor, <replaceable>height</replaceable> is height, <replaceable>bottom</replaceable> is a bottom anchor.</para>
-      <para>Each anchor can be specified in pixels; to do this, define an anchor using a number or string with the &quot; <literal>px</literal>&quot; symbols added, for example: <literal>100</literal>, &quot;<literal>100px</literal>&quot;. To specify an anchor in percents, define an anchor using a string with the  &quot;<literal>%</literal>&quot; symbol added, for example:  &quot;<literal>30%</literal>&quot;.</para>
-      <para>According to the rules of anchor layout, you can define two anchor values per coordinate.</para>
-      <para>If the anchor value is not set, pass the <literal>null</literal> value to the corresponding parameter, for example:</para>
-      <programlisting language="JavaScript">var anchors = new Anchors(100, 200, null,
-            100, 100, null);</programlisting>
     </section>
     <section>
       <title>HorizontalPosition</title>
