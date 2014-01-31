@@ -3,14 +3,14 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Install_Chapter">
+<chapter id="install-chapter">
   <title>Platypus Application Designer</title>
   <para>The application designer software package is included into the developer&apos;s kit and can be bundled with the Platypus Platform runtime installation.</para>
   <para>If the developer&apos;s kit is supplied as an archive, unpack its contents  to the  folder of your choice on the hard drive.</para>
   <note>
     <para>Platypus Platform runtime installation instructions are provided in the Administration Guide.</para>
   </note>
-  <section id="sect-Administration_Guide-Install_Chapter-Test_Section_1">
+  <section id="system-requirements">
     <title>System requirements </title>
     <para>System requirements for installing the developer&apos;s kit on a computer includes:
    <itemizedlist>
@@ -35,7 +35,7 @@
       </itemizedlist>
   </para>
   </section>
-  <section>
+  <section arch="" id="installation-guide">
     <title>Installation guide</title>
     <para>
 To install the developer&apos;s kit, perform the following actions:<orderedlist>
@@ -78,7 +78,7 @@ To remove  Platypus Application Designer from you computer, perform the followin
       </orderedlist>
   </para>
   </section>
-  <section>
+  <section arch="" id="conf-tips">
     <title>Configuration tips</title>
     <para><application>Platypus Application Designer</application> supports  localization of  menus, messages texts, etc. Currently,  the following languages are supported:</para>
     <itemizedlist>
@@ -111,7 +111,7 @@ To remove  Platypus Application Designer from you computer, perform the followin
       </listitem>
     </itemizedlist>
   </section>
-  <section>
+  <section id="runtime-setup">
     <title>Runtime environment setup</title>
     <para>The Platypus Platform runtime is required  to start, debug and deploy it&apos;s applications. You must specify the path to the runtime directory for the Platypus Application Designer to be able to run and debug your applications.</para>
     <para>Specify the location of the Platypus Platform runtime directory in the computer&apos;s file system:</para>

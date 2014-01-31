@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Diagram_Chapter">
+<chapter id="diargram-chapter">
   <title>Database diagram</title>
   <para>Database diagram is an application element responsible for representation of the database structure. For example, the diagram can specify some part of the knowledge domain. Generally,  the project contains several database structure diagrams at the developer convenience.</para>
   <para>A database structure diagram is a visual representation of the database structure, and it does not directly affect the application functionality.</para>
@@ -11,7 +11,7 @@
   <note>
     <para>Refer to the publications dedicated to the relational databases for detailed description of specific terms, such as table, foreign key, relations, etc.</para>
   </note>
-  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_1">
+  <section id="new-diagram">
     <title>New diagram creation</title>
     <para>To create a new database  diagram, perform the following actions:
    
@@ -47,7 +47,7 @@
     </itemizedlist>
     <para>After creating  the <acronym>database</acronym> structure diagram, fill it with the database tables structures. To do that, define the tables, its fields and their descriptions. After determination of the table structure define foreign key links between the tables.</para>
   </section>
-  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_2">
+  <section id="diagram-editor">
     <title>Diagram visual editor</title>
     <para>Diagram is a  representation of some  tables in the database, as well as the  links between them. In general, one  includes a part of the database overall structure, which is, for example, related to the certain segment of application functionality. </para>
     <para>Visual editor tool is used for editing  database structure diagrams.</para>

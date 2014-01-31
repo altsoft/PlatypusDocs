@@ -3,11 +3,11 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Module_Chapter">
+<chapter id="module-chapter">
   <title>JavaScript module</title>
   <para>Module is a JavaScript file containing the constructor function. Modules  contain data model responsible for data access. </para>
   <para>Modules can be executed both under JVM in a client and server on  Mozilla Rhino engine or in a browser.</para>
-  <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_5">
+  <section id="new-module">
     <title>New module creation</title>
     <para>To create a new module, perform the following actions:
    
@@ -28,7 +28,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_6">
+  <section id="module-js-editor">
     <title>JavaScript code editor</title>
     <para>You can edit the module code in the JavaScript code editor. To open the application element editor, double-click an application element in the project tree. </para>
     <para>To edit the JavaScript code:</para>
@@ -72,7 +72,7 @@
     </itemizedlist>
     <para>To configure auto completion modes, go to the  <guilabel>Code Completion</guilabel> tab and enable or disable corresponding options.</para>
   </section>
-  <section>
+  <section label="" id="module-constructor">
     <title>Module constructor</title>
     <para>Using modules allows you to manage the complexity  according to the object-oriented programming principles.</para>
     <para>Module is an equivalent of a class in other programming languages, such as in Java or С++.</para>
@@ -150,7 +150,7 @@ function otherFunction() {
     <para>To call the module&apos;s instance method, use the following structure, for example:</para>
     <programlisting language="JavaScript">var result = moduleInstance.getResult(10);</programlisting>
   </section>
-  <section>
+  <section id="moudule-deps">
     <title>Dependencies resolving</title>
     <para>When executing the code on a application server or on a desktop client, all application modules and other elements are loaded on demand.</para>
     <para>In a web browser, all application elements, on which initial application element depends, are loaded during the process of automatic dependencies resolution.</para>
@@ -222,7 +222,7 @@ require([moduleName1, moduleName2], function() {
 });</programlisting>
     <para>This method of calling the <code>require</code> function excludes these explicitly specified constructor names in the first parameter from the automatic dependencies resolution. So,   <classname>SampleModule1</classname> and  <classname>SampleModule2</classname> will be loaded only when calling the <code>require</code>, rather than before starting the application. </para>
   </section>
-  <section>
+  <section id="module-security">
     <title>Security</title>
     <para>The executable module code is a resource, access to which can be restricted on the basis of the  roles. When a user, who has no rights to execute some code, tries to call it, a security exception is thrown.</para>
     <para>In order to restrict access to the entire module code, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code>... annotation to the module header. Specify roles, allowed to access the module code execution, in the  <code>@rolesAllowed</code> annotation, dividing them by spaces. If the annotation is omitted, access to the module is granted to all users.</para>
@@ -253,7 +253,7 @@ if (self.principal.hasRole(&apos;Manager&apos;)) {
         <replaceable>callback</replaceable>
       </function>  is a function, which will be called after the session is terminated. Open forms will be closed and the user will see the login and password entering form. </para>
   </section>
-  <section>
+  <section id="module-resources">
     <title>Resources loading</title>
     <para>The platfrom runtime enables loading of resources in the form of binary data and text. Resources may be loaded using their relative paths or URLs. Relative paths are counted off from the <filename>src</filename> root directory of the  application. Use the <classname>Resource</classname>  object methods for resource loading.</para>
     <para>To download a binary resource, use the <code>Resource.load(<parameter>path</parameter>, <parameter>callback(obj)</parameter>)</code> method, where <parameter>path</parameter> is a relative  path or URL,  <parameter>callback(obj)</parameter> is a function, which will be called after the resource is loaded,    <parameter>obj</parameter> is an array of bytes of the downloaded resource for the server code and Platypus Client or an object of the  <classname>ArrayBuffer</classname> type for the HTML5 browser:</para>
@@ -281,11 +281,11 @@ Logger.info(txt);</programlisting>
     <programlisting language="JavaScript">//Reads the application&apos;s path
 Logger.info(Resource.applicationPath);</programlisting>
   </section>
-  <section>
+  <section id="module-datamodel">
     <title>Data model</title>
-    <section>
+    <section id="datamodel-intro">
       <title>Introduction to data model</title>
-      <para>Data model is a module&apos;s persistence manager. It provides  access to the data obtained from a relational  <abbrev>database or any other data source</abbrev>. Data model allows you to perform the following tasks:</para>
+      <para>Data model is a module&apos;s persistence manager. It provides  access to the data obtained from a relational database or any other data source. Data model allows you to perform the following tasks:</para>
       <itemizedlist>
         <listitem>
           <para>Fetch data from the  <abbrev>data source(s)</abbrev> to the entities datasets.</para>
@@ -337,7 +337,7 @@ Logger.info(Resource.applicationPath);</programlisting>
       </itemizedlist>
       <para>Query link requeries the target entity&apos;s dataset according to the   parameter value change. The new parameter value is determined according to the source point of the link. Both dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, new data is requested from the database and reoladed in  the target entity.</para>
       <note>
-        <para>When a module operates in the browser, data comes asynchronously from the network. When a module operates in the server modules on the application server, data comes synchronously. Even though when data model works on  Java SE desktor client, data is also obtained synchronously, it is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser.</para>
+        <para>When a module runs in  browser, data comes asynchronously from the network. When a module runs  on desktop client and on  application server, data comes synchronously. It is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser.</para>
       </note>
       <para>Filter link provides the restricted rows view of the target entity dataset according to the new filter value. The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
       <para>Link defined by a database table foreign keys is created automatically, if a dataset contains fields included to such foreign key.  This type of link does not affect the content of the datasets and is used to generate inter-instance connections between instances of entities. This is done via new properties, wich are created while data fetching. The link of this type is visually shown as a dashed line on the data model diagram.</para>
@@ -357,7 +357,7 @@ Logger.info(Resource.applicationPath);</programlisting>
       <para>For any dataset you can determine any number of incoming and outgoing links of both types. When building connections you should consider the following restrictions:</para>
       <itemizedlist>
         <listitem>
-          <para>Links should not create circular references.</para>
+          <para>Links must not create circular references.</para>
         </listitem>
         <listitem>
           <para>Links fields and parameters of the souce and the target entities must match by its type: the types of connected fields and parameters must allow the mutual conversion of values. For example, it is possible to connect field if there&apos;s a number specified for the connection on the source, and a string specified the connection on the target, it is quite possible, since there is a possibility of an unambiguous conversion of a number to a string, but not vice versa.</para>
@@ -398,7 +398,7 @@ Logger.info(Resource.applicationPath);</programlisting>
       <programlisting language="JavaScript">model.requery(onSuccess, onFailure)</programlisting>
       <para>where  <code>onSuccess</code> is the handler function for refresh data on success event (optional), <code>onFailure</code> is the  handler function for refresh data on failure event (optional).</para>
     </section>
-    <section>
+    <section id="datamodel-editor">
       <title>Data model editor</title>
       <para>Data model is configured using the visual editor.</para>
       <para>For navigating to a data model elements, it is convenient to use a data model inspector panel. In the data model inspector, entity and model parameters are presented in the form of a tree structure. You can select an entity or a connection both in the visual editor and in the data model inspector. Mutual positioning of the model data inspector and its diagram is possible.</para>
@@ -487,16 +487,16 @@ Logger.info(Resource.applicationPath);</programlisting>
       <para>To add entity  dataset events handlers, perform the following actions:</para>
       <itemizedlist>
         <listitem>
-          <para>Go to the  <guilabel>Datamodel — Datasets</guilabel> tab.</para>
+          <para>Go to the  <guilabel>Datamodel</guilabel> tab.</para>
         </listitem>
         <listitem>
-          <para>Select an entity on the data model diagram or in the data model inspector.</para>
+          <para>Select the corresponding entity on the data model diagram or in the data model inspector.</para>
         </listitem>
         <listitem>
-          <para>On the properties panel select the  <guilabel>Events</guilabel> tab and specify the name of the handler for the event.</para>
+          <para>On the <guilabel>Properties</guilabel> panel select the  <guilabel>Events</guilabel> tab and specify the name of the handler for the corresponding event.</para>
         </listitem>
         <listitem>
-          <para>Go to the  <guilabel>Source</guilabel> editor tab and write the event handler code.</para>
+          <para>Go to the  <guilabel>Source</guilabel> editor tab and write  the JavaScript code for the event handler.</para>
         </listitem>
         <listitem>
           <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
@@ -506,7 +506,7 @@ Logger.info(Resource.applicationPath);</programlisting>
             </keycombo> keyboard shortcut.</para>
         </listitem>
       </itemizedlist>
-      <para>After adding the event handler function, a protected section  will be added to the code editor:</para>
+      <para>After adding the event handler function, a protected code section  will be added to the code editor:</para>
       <programlisting language="JavaScript">function rowDeleted() {
    //TODO add your handling code here:
 }</programlisting>
@@ -690,7 +690,7 @@ Logger.info(Resource.applicationPath);</programlisting>
         </listitem>
       </itemizedlist>
     </section>
-    <section>
+    <section id="datamodel-params">
       <title>Data model parameters</title>
       <para>Use the data model parameters to fetch specific data to the data model.</para>
       <para>Data model parameters object is in the <code>model.params</code> property. To set a new value to the data model parameter:</para>
@@ -715,7 +715,7 @@ try {
   params.endUpdate();
 }</programlisting>
     </section>
-    <section>
+    <section id="datamodel-entities">
       <title>Entities</title>
       <para>Data model entities are available as the data model object&apos;s properties: <code>model.<replaceable>entityName</replaceable></code>, where <varname>
           <replaceable>entityName</replaceable>
@@ -796,8 +796,9 @@ for (var i = 0; i &lt; documents.length; i++) {
         </literal> is an index of the connected object array element, <varname>
           <replaceable>propName</replaceable>
         </varname> is a property of the entity object having the same name as the query results field.</para>
+      <para>Change </para>
     </section>
-    <section>
+    <section id="datamodel-cursor">
       <title>Cursor API</title>
       <para>To get access to the  dataset row pointed out by the entity cursor use the <code>model.<replaceable>entityName</replaceable>.cursor</code> property, for example:</para>
       <programlisting language="JavaScript">var currentValue = model.<replaceable>entityName</replaceable>.cursor<replaceable>.propName</replaceable></programlisting>
@@ -915,7 +916,7 @@ while (!model.documents.eof) {
       <para>The  <varname>empty</varname> property is  <literal>true</literal> if the entity data array is empty, and  <literal>false</literal> otherwise. For example, the following snippet outputs a message into the log, if the  <literal>documents</literal> entity data array is empty:</para>
       <programlisting language="JavaScript">model.documents.empty &amp;&amp; Logger.info(&apos;Documents is empty.&apos;);</programlisting>
     </section>
-    <section>
+    <section id="datamodel-save">
       <title>Saving data</title>
       <para>Module&apos;s data model provides automatic tracking of data changes. Data changes can be saved only as a part of entire model.</para>
       <para>To edit, insert, or delete data, perform the following actions:</para>
@@ -1034,7 +1035,7 @@ model.save();// Commit all changes</programlisting>
 }</programlisting>
       <para>After handling the error, you can try to correct the cause of the problem and re-call the  <methodname>save</methodname> function.</para>
     </section>
-    <section>
+    <section id="datamodel-search">
       <title>Search API</title>
       <para>Search operations can be performed after the data model loads its entities&apos; data. </para>
       <para>Search is performed in the model and doesn&apos;t  send new requests to the  <acronym>database neither changes the data</acronym>.</para>
@@ -1090,7 +1091,7 @@ for(var i=0; i&lt;foundDocuments.size(); i++) {
   Logger.info(foundDocument.DESC);
 }</programlisting>
     </section>
-    <section>
+    <section id="datamodel-filter">
       <title>Filter API</title>
       <para>Filtering operations can be performed after the data model loads its entities data. </para>
       <para>Data filtering is performed in the model and do not cause sending new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
@@ -1135,7 +1136,7 @@ while(documents.next()) {
 // Cancel filter
 filter.cancel();</programlisting>
     </section>
-    <section>
+    <section id="datamodel-sort">
       <title>Sort API</title>
       <para>To sort datasets objects according to some criteria  use entity sorting operations. Sorting  can be performed after  entity data is loaded. </para>
       <para>Data sorting is performed in the model and do not spawn new requests to the  <acronym>database neither changes the data model data</acronym>.</para>
@@ -1175,7 +1176,7 @@ model.entity1.sort(sorter);</programlisting>
   return length1 - length2;
 });</programlisting>
     </section>
-    <section>
+    <section id="datamodel-entity-events">
       <title>Entity events</title>
       <para>To implement some logic to react to the data  events specify entity events handlers functions. To create these handler functions assign functions to entities&apos; properties or use data model editor.</para>
       <para>Some events are cancelable from the handler function by returning the  <literal>false</literal> value.</para>
@@ -1286,7 +1287,7 @@ function validateEmail(email) {
     return re.test(email);
 }</programlisting>
     </section>
-    <section>
+    <section id="datamodel-entity-schema">
       <title>Entity data schema</title>
       <para>Module JavaScript code has access to an entity schema. It is possible to read types, names, descriptions of entity properties and parameters, and etc.</para>
       <para>To read an entity&apos;s schema, use its  <varname>schema</varname> property:</para>
@@ -1594,7 +1595,7 @@ var entityMetadata = item.schema;</programlisting>
   Logger.info(params.md[i]);
 }</programlisting>
     </section>
-    <section>
+    <section id="datamodel-dynamic-entities">
       <title>Dynamic entities</title>
       <para>Use  model&apos;s <methodname>loadEntity(<replaceable>queryName</replaceable>)</methodname>method, where <replaceable>queryName</replaceable> is the name of the query to dynamically create an entity in the data model. The generated entity can be used to read, insert or modify objects:</para>
       <programlisting language="JavaScript">var docEntity = model.loadEntity(&quot;Documents&quot;);
@@ -1609,7 +1610,7 @@ docEntity.foreach(function(doc) {
 docEntity[0] &amp;&amp; docEntity[0].NAME = &quot;New document&quot;;
 model.save();</programlisting>
     </section>
-    <section>
+    <section id="datamodel-execute-sql">
       <title>Executing arbitary SQL</title>
       <para>In addition to using entities based on a query, data model allows to execute  arbitrary  SQL code. Using entities based on a query instance have a number of advantages, such as  security management or ability to work with the client code. However, if necessary, you can  execute arbitrary SQL.</para>
       <para>SQL execution  is available on a server or on a desktop client wich has a direct connection to a database.</para>
@@ -1645,7 +1646,7 @@ e.executeUpdate();</programlisting>
       <programlisting language="JavaScript">model.executeSql(&quot;DROP TABLE Document&quot;);</programlisting>
     </section>
   </section>
-  <section>
+  <section id="module-ds">
     <title>Data source module</title>
     <para>A module can be used as a data source in other modules data models just like a query. </para>
     <para>To use a module as a data source implement the instance <code>schema</code> property as well as the following methods:  <code>fetch(<replaceable>params</replaceable>)</code>, where <replaceable>params</replaceable> is an object, with properties as defined in this module&apos;s model&apos;s parameters and <code>apply(<replaceable>log</replaceable>, <replaceable>session</replaceable>)</code>, where <replaceable>log</replaceable> is an array represents the log of changes made by clients or server side data driven code to be applied, <replaceable>session</replaceable> is a current user session identifier. </para>
@@ -1679,7 +1680,7 @@ function DataSourceModule(){
         });
     };</programlisting>
   </section>
-  <section>
+  <section id="module-server">
     <title>Server module</title>
     <section>
       <title>Stateless module</title>
@@ -1729,7 +1730,7 @@ function AuthorizerA(){
 }</programlisting>
     </section>
   </section>
-  <section>
+  <section id="module-java">
     <title>Scripting Java</title>
     <para>Calling Java classes from  JavaScript code is possible for applications, which are executed in the <application>Platypus client</application> or on the application server in any configuration.</para>
     <para>To access the Java packages and classes, use the <classname>Java</classname> global object. For example, to get access to the <classname>File</classname> class, use the  <classname>java.io.File</classname> object.</para>
@@ -1777,7 +1778,7 @@ var sensor = new NavSensor();
 //Gets navigation data
 var navData = sensor.getData();</programlisting>
   </section>
-  <section>
+  <section id="module-multithreading">
     <title>Multithreading</title>
     <para>Use multithreading in JavaScript for  code, which is executed in the desktop client as well on the server code.</para>
     <para>To run a function in a separate thread, call the  <methodname>invokeBackground</methodname> on the function&apos;s object, providing it with the necessary arguments:</para>
@@ -1807,7 +1808,7 @@ Logger.info(getThreadPoolSize());// 16</programlisting>
 
 }).invokeBackground();</programlisting>
   </section>
-  <section>
+  <section id="module-logging">
     <title>Logging</title>
     <para>The logging subsystem  is built on the base of the Java Logging  infrastructure.</para>
     <para>To write into the log, use the  <literal>Logger</literal> object, which is a shell for the  <classname>java.util.logging.Logger</classname> class. The <literal>Logger</literal> object is also available in the HTML5 web browser client.</para>
@@ -1817,7 +1818,7 @@ Logger.warning(&quot;warning text&quot;);
 Logger.severe(&quot;severe error&quot;);</programlisting>
     <para>Check the Administration Guide and Java documentation for information about configuring logging in runtime.</para>
   </section>
-  <section>
+  <section id="module-io">
     <title>Filesystem I/O</title>
     <para>To read and write files, use  Java API from the <code>java.io.*</code> and other dedicated packages. </para>
     <para>To read and write strings, use  <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code>, and <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code> global functions, where <parameter>path</parameter> &gt; is a path to the file, <parameter>text</parameter> is a string, <parameter>encoding</parameter> is the name of encoding. The  <parameter>encoding</parameter> parameter in both functions is optional and by default is set for the UTF-8 encoding. </para>
@@ -1826,7 +1827,7 @@ Logger.severe(&quot;severe error&quot;);</programlisting>
 var str = readString(&apos;/home/user1/Documents/doc1.txt&apos;);
 writeString(&apos;/home/user1/Documents/doc2.txt&apos;, str);</programlisting>
   </section>
-  <section>
+  <section id="module-xml">
     <title>Working with XML</title>
     <para>To work with data in the <abbrev>XML</abbrev> format, use the script syntax in accordance with the E4X specification  (EcmaScript for <abbrev>XML</abbrev>). The E4X technology can be used by the code,  which is executed on Rhino runtime engine. For more information refer to the E4X documentation.</para>
     <warning>

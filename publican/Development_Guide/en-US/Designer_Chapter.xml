@@ -3,10 +3,10 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Designer_Chapter">
+<chapter id="designer-chapter">
   <title>Application project</title>
   <para>In the course of development and further during the application life cycle, the application is represented by the application project.</para>
-  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
+  <section id="new-project">
     <title>New project creation</title>
     <para>To create a  project, perform the following actions:
    <itemizedlist>
@@ -45,7 +45,7 @@
       </itemizedlist>
 New project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
-  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
+  <section id="open-project">
     <title>Opening an existing project</title>
     <para>To open an existing  project, perform the following actions:
    <itemizedlist>
@@ -61,7 +61,7 @@ New project will be added to the <guilabel>Projects</guilabel> panel. </para>
       </itemizedlist>
 Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
   </section>
-  <section>
+  <section id="project-properties">
     <title>Project properties</title>
     <para>To change the project properties, select the <guimenuitem>Properties</guimenuitem> item in the project root node context menu.</para>
     <para>Set the application launching parameters:</para>
@@ -125,7 +125,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
+  <section id="project-structure">
     <title>Project structure</title>
     <para>A Platypus Platform project has the following structure:
    <itemizedlist>
@@ -247,7 +247,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     <para>When launching the application in a J2EE server, <application>Platypus Application Designer</application> uses the  <filename>web</filename> sub-directory, which is created automatically in the project directory. When initializing this sub-directory, its initial structure is created and  libraries are copied. After initializing  the directory,  files responsible for the configuration (<filename>WEB-INF/web.xml</filename>, server specific configuration file, and JavaScript file responsible for the application  launching on the HTML page) are modified, but the  libraries are not copied again. </para>
     <para>Select the  <guimenuitem>Clean and Run</guimenuitem> menu item in the project context menu, if it is necessary to update the libraries in the <filename>web</filename> directory. The libraries will be removed, and at the next application launch these libraries will be copied from the platform&apos;s runtime directory.</para>
   </section>
-  <section>
+  <section id="conn-management">
     <title>Database connections management</title>
     <para>Define an application project&apos;s database connections and the  default connection of the application. The default connection  to be  used when a connection is not explicitly referenced in  application elements. </para>
     <para>Add a new database connection:</para>
@@ -256,15 +256,13 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>Open the  <guilabel>Services</guilabel> panel.</para>
       </listitem>
       <listitem>
-        <para>Select the  <guimenuitem>New Connection</guimenuitem>menu item of the <guilabel>Databases</guilabel> node.</para>
+        <para>Select the  <guimenuitem>New Connection</guimenuitem> menu item of the <guilabel>Databases</guilabel> node.</para>
       </listitem>
       <listitem>
         <para> In the <guilabel>New Connection</guilabel> dialog select the JDBC driver and provide a JDBC URL, database credentials and the connection name. This name will be used as an string identifier to refer to the connection JNDI resource in the application.</para>
       </listitem>
     </itemizedlist>
-    <para>A JDBC URL example for the H2 database server with a database located in the user&apos;s home directory <filename>db</filename>  subdirectory: <literal>jdbc:h2:tcp://localhost:9092/~/db</literal>.<note>
-        <para>Beware of exact naming of database connections. The name of a database connection will be refered to by various application parts.</para>
-      </note></para>
+    <para>A JDBC URL example for the H2 database server with a database located in the user&apos;s home directory <filename>db</filename>  subdirectory: <literal>jdbc:h2:tcp://localhost:9092/~/db</literal>.</para>
     <para>Specify the project&apos;s default database connection: go to the project&apos;s <guilabel>Properties</guilabel> and to the <guilabel>Running</guilabel> panel. Select the default connection from the <guilabel>Datasource</guilabel> combobox.</para>
     <para>When opening the project, the application designer tries to connect to the database, in case of failure  it switches to the limited functionality mode, and some editor tools  are disabled. </para>
     <note>
@@ -289,7 +287,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     <para>After the  <acronym>database</acronym> server is launched and become available via the network or locally, connect to this server by selecting the  <guimenuitem>Connect to project database</guimenuitem> item in the context menu, or by clicking the <guibutton>Establish connection</guibutton> button on the  <guilabel>Application Database</guilabel> form in the project properties, or by selecting the  Connect to project database link on the stub-form of the data model editor.</para>
     <para>To disconnect, select the <guimenuitem>Disconnect from project database</guimenuitem> item in the project context menu.</para>
   </section>
-  <section>
+  <section id="app-db">
     <title>Application in the database </title>
     <para>An application can be deployed in the special database table. After deployment, the application elements can be hosted in  the database.</para>
     <para>To deploy an application in the <acronym>database</acronym>: use   <guimenuitem>Deploy</guimenuitem> item in the project&apos;s root node context menu. When deploying, the application elements from the Application Elements folder are copied to the table   <literal>MTD_ENTITIES</literal>.  When copying, the tree structure of the application directories is preserved.</para>
@@ -298,7 +296,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
       <para>When deploying and importing an application, the destination table or the <guilabel>Application Elements</guilabel> folder is cleared before the copy process starts.</para>
     </important>
   </section>
-  <section>
+  <section arch="" id="db-migrations">
     <title>Database migrations tools</title>
     <para>To store and restore database(s) schema and its bootstrap data and use the database migration tools. </para>
     <important>
@@ -321,7 +319,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     </note>
     <para>Refer to the Administration Guide for more information about using database migration tools.</para>
   </section>
-  <section>
+  <section id="version-ctrl">
     <title>Version control</title>
     <para>During  application development and further during the application life cycle, it is recommended to use a version control system to manage the source project files.</para>
     <para><application>The application designer</application> has built-in support of the following version control systems: </para>

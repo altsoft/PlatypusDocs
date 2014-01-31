@@ -3,9 +3,9 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Form_Chapter">
+<chapter id="gui-chapter">
   <title>User interface guide</title>
-  <section>
+  <section id="form">
     <title>Form</title>
     <para>A form is a user interface building block wich can be represented as a top-level window with a title and a border or can be build-in on a panel or on another form.</para>
     <para>A form can be displayed both in the desktop client or in the HTML5 web-browser.</para>
@@ -23,7 +23,7 @@
     </figure>
     <para>In the desktop client, forms are displayed in separate windows, can be minimized or expanded to the full screen, displayed in other forms as built-in elements (frames) and as internal windows in the DesktopPane component. In the  HTML5 browser client, forms are displayed in the same way, but within a browser page.</para>
   </section>
-  <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_7">
+  <section id="new-form">
     <title>New form creation</title>
     <para>To create a new form, perform the following actions:   
   </para>
@@ -42,7 +42,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-Development_Guide-Diagram_Chapter-Test_Section_9">
+  <section id="form-editor">
     <title>Visual UI editor</title>
     <para>Edit form components layout using the visual form editor. To open the editor double-click the application element in the project tree. </para>
     <para>To edit the form:</para>
@@ -95,7 +95,7 @@
     <para>Anchors properties values are specified as a strings together with the indication of measurement units: pixels or percentages. If measurement units are not specified, pixels are used.  If a value is defined as a percentage, this anchor and dimension will be changed while maintaining the defined value when changing dimensions of the container, for example :  <literal>60px</literal>, <literal>30%</literal>, <literal>40</literal>.</para>
     <para>Use the component alignment control buttons on the form editor tool bar to align widgets in relation to each other. Alignment buttons become active when you select multiple widgets. To select multiple widgets, click them while holding down the <keycap>Ctrl</keycap> key.  </para>
   </section>
-  <section>
+  <section id="form-api">
     <title>Form API</title>
     <para>Form&apos;s properties are accessible as properties of JavaScript module instance.</para>
     <para>To set properties and/or form event handlers:</para>
@@ -139,7 +139,7 @@
             <entry>
               <parameter>title</parameter>
             </entry>
-            <entry>Form title</entry>
+            <entry>Form&apos;s title text</entry>
           </row>
           <row>
             <entry>
@@ -199,7 +199,7 @@
             <entry>
               <parameter>opacity</parameter>
             </entry>
-            <entry>Opacity of the form, <classname>Number</classname>: 1 — completely opaque, 0 — completely transparent </entry>
+            <entry>Opacity of the form, <classname>Number</classname> value: 1 — completely opaque, 0 — completely transparent </entry>
           </row>
           <row>
             <entry>
@@ -234,9 +234,7 @@
         </tbody>
       </tgroup>
     </informaltable>
-    <note>
-      <para>It is recommended to set the  <varname>defaultCloseOperation</varname> form property to  <literal>DISPOSE</literal>. If all forms, which are processed by the  <application>Platypus client</application>, will have this property value, then after closing the last form the process of the   <application>Platypus client</application> will be terminated  automatically.</para>
-    </note>
+    <para>It is recommended to set the  <varname>defaultCloseOperation</varname> form property to the   <literal>DISPOSE</literal>. If all forms, which are running on a   <application>desktop client</application> will have <literal>DISPOSE</literal> value for <varname>defaultCloseOperation</varname>, then after closing the last form the process of the   application will be terminated  automatically.</para>
     <para>The form events are listed in the following table:</para>
     <informaltable>
       <tgroup cols="4">
@@ -388,11 +386,6 @@
         </tbody>
       </tgroup>
     </informaltable>
-    <para>The component events are not propogated to the its parent. A   container&apos;s event  is generated only if it has not been generated for its child components. Thus, the form will recieve the mouse event only if it has occurred over an area, which is free from its children.  </para>
-    <para>The base event object contains the  <property>source</property> property — an event source. The specific event objects also contain this property, as well as their own properties. The following types of specific events are defined: container event, keyboard event and mouse event.</para>
-    <para>The container event object contains the <property>child</property> property — a child element, which is added to or removed from the container.</para>
-    <para>The keyboard event object contains the following properties: <property>key</property> — the pressed key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property>shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> a flag, which means that the Meta key is pressed.</para>
-    <para>The mouse event object contains the following properties: <property>x</property> — X coordinate of the mouse pointer, <property>y</property> — Y coordinate of the mouse pointer, <property>button</property> — the pressed mouse key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property> shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> — a flag, which means that the Meta key is pressed.</para>
     <para>The  <varname>windowClosing</varname> event is useful for invoking a dialog to confirm the window closing: if the handler returns  <literal>false</literal>, the form won&apos;t be closed:</para>
     <programlisting language="JavaScript">//Handles windowClosing event
 function formWindowClosing(evt) {
@@ -501,7 +494,15 @@ function closeSampleForm() {
   }
 }</programlisting>
   </section>
-  <section>
+  <section id="form-events">
+    <title>Events</title>
+    <para>Component events are not propogated to the its parent. A   container&apos;s event  is generated only if it has not been generated for its child components. Thus, the form will recieve the mouse event only if it has occurred over an area, which is free from its children.  </para>
+    <para>The base event object contains the  <property>source</property> property — an event source. The specific event objects also contain this property, as well as their own properties. The following types of specific events are defined: container event, keyboard event and mouse event.</para>
+    <para>The container event object contains the <property>child</property> property — a child element, which is added to or removed from the container.</para>
+    <para>The keyboard event object contains the following properties: <property>key</property> — the pressed key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property>shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> a flag, which means that the Meta key is pressed.</para>
+    <para>The mouse event object contains the following properties: <property>x</property> — X coordinate of the mouse pointer, <property>y</property> — Y coordinate of the mouse pointer, <property>button</property> — the pressed mouse key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property> shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> — a flag, which means that the Meta key is pressed.</para>
+  </section>
+  <section id="form-containers">
     <title>Containers</title>
     <para>Containers are components, which can contain other components e.g. widgets or other containers  and control their child components size and location. </para>
     <para>Change the layout  of a container using the form editor. At runtime this container will be replaced by the corresponding container.</para>
@@ -883,7 +884,7 @@ view.add(wrapper);</programlisting>
 myForm.showInternalFrame(desktopPane);</programlisting></para>
     </section>
   </section>
-  <section>
+  <section id="form-standart-widgets">
     <title>Standard widgets</title>
     <para>Standard widgets are components intended to organize displaying and interacting with the user. </para>
     <para>To determine the visual presentation of the widget, set its properties in the designer on the properties panel or in JavaScript code. To determine the behavior of the component and its response to the user actions, set its event handlers in the designer on the property/event panel. </para>

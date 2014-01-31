@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Query_Chapter">
+<chapter id="query-chapter">
   <title>SQL query</title>
   <para>Query  is an application element which defines the SQL expression to be executed in database. A query&apos;s SQL text is preprocessed before execution.</para>
   <para>Queries  can solve several tasks:<itemizedlist>
@@ -37,7 +37,7 @@
         <para>Query allows you to define the pattern for processing  data changes made while the application is running. It is possible to define a list of tables where the changes will be stored.</para>
       </listitem>
     </itemizedlist></para>
-  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_3">
+  <section id="new-query">
     <title>New query creation</title>
     <para>To create a new query, perform the following actions:
    
@@ -70,7 +70,7 @@
     </itemizedlist>
     <para>After the query creation wizard completes the steps, a new empty query is created.</para>
   </section>
-  <section id="sect-Administration_Guide-Diagram_Chapter-Test_Section_4">
+  <section id="query-editor">
     <title>Query editor</title>
     <para>The special editor is used to  edit a query SQL and its support configuration files. This editor allows you to perform  visual editing of the query and direct modicatation of the SQL source text.</para>
     <important>
@@ -405,7 +405,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section>
+  <section id="query-sql-source">
     <title>SQL source</title>
     <para>Query&apos;s SQL source on the  <guilabel>SQL Source</guilabel> tab must comply with the SQL-92 standard. </para>
     <para>The SQL source text must begin with a special header, in a form of multiline SQL comment. </para>
@@ -459,7 +459,7 @@ FROM Document d
 INNER JOIN Category c
 ON d.CategoryID = c.CATEGORY_ID</programlisting>
   </section>
-  <section>
+  <section id="query-sql-dialect">
     <title>SQL dialect source</title>
     <para>Enter  database specific SQL source text at the <guilabel>SQL dialect source</guilabel> tab. It will be necessary to enter the source text in the <guilabel>SQL source</guilabel> field, this source text will be used for determination of the metadata for processing  the query results. If  specific SQL source text is provided, it will be used during the query execution, and the main SQL source text will be used to extract the metadata.</para>
     <important>
@@ -476,7 +476,7 @@ ON d.CategoryID = c.CATEGORY_ID</programlisting>
  **/
 SELECT * FROM emp</programlisting>
   </section>
-  <section>
+  <section id="query-security">
     <title>Security</title>
     <para>Generally, access to  data in the database must be differentiated for various user groups. In Platypus there is an embedded security mechanism which implements the  constraints of  access to the resources based on the roles of the logged in user who is performing the current operation.</para>
     <para>To limit the access to the query for certain roles, add the <code>@rolesAllowed <replaceable>role1</replaceable><replaceable> role2</replaceable></code> ... annotation into the query header. For the added annotation, specify the list of roles  delimiting them by spaces. </para>

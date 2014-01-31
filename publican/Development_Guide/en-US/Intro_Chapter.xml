@@ -3,13 +3,13 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Development_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Development_Guide-Intro_Chapter">
+<chapter id="intro-chapter">
   <title>Introduction</title>
   <para>This section provides general information about the Platypus Platform.</para>
-  <section id="sect-Development_Guide-Intro_Chapter-Test_Section_1">
-    <title>About Platypus Platform </title>
+  <section id="about-platform">
+    <title>About the Platypus Platform </title>
     <para>The Platypus Platform is a software platform  for rapid development of complex   applications for  enterprise-level information systems in JavaScript.</para>
-    <para>The main goal of the platform is to accelerate   development process, providing maximum possible automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of the implementation  from a  developer and enables  to concentrate on application business domain.</para>
+    <para>The main goal of the platform is to accelerate   development process, providing maximum possible automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of  implementation  from a  developer and enables  to concentrate on application business domain.</para>
     <para> The Platypus Platform uses two application programming languages:</para>
     <itemizedlist>
       <listitem>
@@ -19,7 +19,7 @@
         <para>SQL is used to access data.</para>
       </listitem>
     </itemizedlist>
-    <para>Application creation and editing, deployment, debugging and maintenance  are performed using the  <application>Platypus Application Designer</application> based on the NetBeans. However, individual  files, for example, JavaScript modules, can be edited in any text editor.</para>
+    <para>Application creation and editing, deployment, debugging and maintenance  are performed using the  <application>Platypus Application Designer IDE</application> based on the NetBeans. However, individual  files, for example, JavaScript modules, can be edited in any text editor.</para>
     <para>The Platypus Application Designer includes  following  development tools: </para>
     <itemizedlist>
       <listitem>
@@ -35,7 +35,7 @@
         <para>User interface forms visual editor.</para>
       </listitem>
     </itemizedlist>
-    <para>The platform also offers a set of  features, making development process extremely productive: </para>
+    <para>The platform  offers a set of  features, making development process extremely productive: </para>
     <itemizedlist>
       <listitem>
         <para>JavaScript modules  automatic dependencies resolving, manual  resolving is also avaliable.</para>
@@ -60,7 +60,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section>
+  <section id="app-structure">
     <title>Application structure</title>
     <para>Platypus  applications have a tree structure which contains  directories and files. Some files or file groups have a special meaning to the platform and called application elements. That is the building bricks for an application.</para>
     <para> The types of application elements in Platypus Platform are:
@@ -86,7 +86,7 @@
       <para>During   development process, the application tree is stored on the disk in the project&apos;s <filename>src</filename> subfolder, but for production operation the application, including its resources can be deployed directly to the  database <literal>MTD_ENTITIES</literal> table.</para>
     </note>
   </section>
-  <section>
+  <section id="runtime-conf">
     <title>Runtime configurations</title>
     <para>In general, the platform works on three-tier archeticture including presentation, logic and data storage tiers. The presentation and the logic tier can be combined in some configurations.</para>
     <figure>
@@ -167,61 +167,29 @@ PAS. This server is a lightweight non-J2EE Java application server. The custom b
     <para>The unique feature of the  platform is its Object-Relational Mapping  <acronym>(ORM)</acronym> implementation. In runtime  its generates JavaScript objects datasets matching the database relations. To enable this process it uses schema information from the database and the SQL query texts. </para>
     <para>The usage of data model simplifies many data processing operations, since it provides  entities&apos; data loading, automatic saving of changes, simplified support of transactions, centralized management of resources, etc.</para>
   </section>
-  <section>
+  <section id="dev-workflow">
     <title>Development workflow</title>
     <para>To develop an  application use the following workflow:</para>
     <itemizedlist>
       <listitem>
-        <para>Determine database structure for the application domain.</para>
+        <para>Determine database structure for the application knowledge domain.</para>
       </listitem>
       <listitem>
-        <para>Specify  this structure in the form of  relational entities in the database using the Database structure diagrams  visual editor.</para>
+        <para>Specify  this structure in the form of  relational entities in the database using the database structure diagrams  visual editor.</para>
       </listitem>
       <listitem>
         <para>Write the data sampling queries and specify theirs parameters; if required, implement the queries for updating and adding data in SQL language (it is not needed in general, because data inserts/updates/deletions in most cases can be completed automatically by the data model).</para>
       </listitem>
       <listitem>
-        <para>Implement  the application logic as JavaScript modules,</para>
-        <para>for each module:</para>
-        <itemizedlist>
-          <listitem>
-            <para>specify the module&apos;s data model using visual tool;</para>
-          </listitem>
-          <listitem>
-            <para>write the  JavaScript code, for example to implement the business-logic.</para>
-          </listitem>
-        </itemizedlist>
+        <para>Implement  the application logic as JavaScript modules. Specify the module&apos;s data model using visual tool. Write the  JavaScript code, for example to implement the business-logic.</para>
       </listitem>
       <listitem>
-        <para>Implement the application user interface as  forms using visual  tool,</para>
-        <para>for each form:</para>
-        <itemizedlist>
-          <listitem>
-            <para>specify the form&apos;s data model;</para>
-          </listitem>
-          <listitem>
-            <para>create  the form&apos;s layout using the visual editor;</para>
-          </listitem>
-          <listitem>
-            <para>write  JavaScript  code responsible for  the user interface.</para>
-          </listitem>
-        </itemizedlist>
+        <para>Implement the application user interface as  forms using visual  tool. Specify the form&apos;s data model. Create  the form&apos;s layout using the visual editor. Write  JavaScript  code responsible for  the user interface.</para>
       </listitem>
       <listitem>
-        <para>Implement  reports using the reports tool,</para>
-        <para>for each report:</para>
-        <itemizedlist>
-          <listitem>
-            <para>specify the report&apos;s data model;</para>
-          </listitem>
-          <listitem>
-            <para>create the report template using the visual editor;</para>
-          </listitem>
-          <listitem>
-            <para>write  JavaScript  code if some  non-standard data  processing required.</para>
-          </listitem>
-        </itemizedlist>
+        <para>Implement  reports using the reports tool. Specify the report&apos;s data model. Create the report template using the visual editor. Write  JavaScript  code if some  non-standard data  processing required.</para>
       </listitem>
     </itemizedlist>
+    <para>Repeat the steps above if required.</para>
   </section>
 </chapter>

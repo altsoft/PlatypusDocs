@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Installation_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<preface id="pref-Installation_Guide-Preface">
+<preface id="preface">
   <title>Preface</title>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Common_Content/Conventions.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Feedback.xml">
