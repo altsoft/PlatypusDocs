@@ -116,7 +116,7 @@ function otherFunction() {
       ...
    }
 }</programlisting>
-    <para>You can create or get a module instance by the following ways:</para>
+    <para>Create or get  a module instance by the following ways:</para>
     <itemizedlist>
       <listitem>
         <para>Create an instance of the module with the help of the  <literal>new</literal> keyword, using a module constructor, for example:</para>
@@ -340,7 +340,7 @@ Logger.info(Resource.applicationPath);</programlisting>
         <para>When a module runs in  browser, data comes asynchronously from the network. When a module runs  on desktop client and on  application server, data comes synchronously. It is recommended to build the client side of applications as if data were obtained asynchronously in all cases. It will allow to avoid compatibility issues when transferring the client side of applications to the browser.</para>
       </note>
       <para>Filter link provides the restricted rows view of the target entity dataset according to the new filter value. The new filter value is determined according to the source point of the link. A dataset  field&apos;s current value  or a parameter value can be used. When the value at the link source changes, no data is fetched from the database.</para>
-      <para>Link defined by a database table foreign keys is created automatically, if a dataset contains fields included to such foreign key.  This type of link does not affect the content of the datasets and is used to generate inter-instance connections between instances of entities. This is done via new properties, wich are created while data fetching. The link of this type is visually shown as a dashed line on the data model diagram.</para>
+      <para>Foreign key link is  defined by a database table foreign keys. This kind of link is created automatically, if a dataset contains fields included to such foreign key.  This type of link does not affect the content of the datasets and is used to generate inter-instance connections between instances of entities. This is done via new properties, wich are created while data fetching. The link of this type is visually shown as a dashed line on the data model diagram.</para>
       <note>
         <para>To get inter-instance connections work, primary and foreign keys are required. Such keys may come from database structure definitions or from schema definitions in a JavaScript datasource module.</para>
       </note>
@@ -419,7 +419,7 @@ Logger.info(Resource.applicationPath);</programlisting>
             </keycombo> shortcut.</para>
         </listitem>
         <listitem>
-          <para>Select the table from the list in the table selection dialog, if necessary select a schema from the drop-down  <guilabel>Schema</guilabel> list; the  <guibutton>Default</guibutton> button sets the default schema for the application; use the search option by clicking<guibutton>Find</guibutton>, if necessary.</para>
+          <para>Select the table from the list in the table selection dialog, if necessary select a schema from the drop-down  <guilabel>Schema</guilabel> list; the  <guibutton>Default</guibutton> button sets the default schema for the application; use the search option by clicking <guibutton>Find</guibutton>, if necessary.</para>
         </listitem>
         <listitem>
           <para>Click  <guibutton>OK</guibutton> add the table or click  <guibutton>Cancel</guibutton> to cancel.</para>
@@ -428,7 +428,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>If necessary, move the table on the model diagram to the right place.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking <guibutton>Save All</guibutton> on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking <guibutton>Save All</guibutton> on the  main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -455,7 +455,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>If necessary, move the query on the visual editor diagram to the right place.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the<application>Platypus Application Designer</application>  toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the main   toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -477,7 +477,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>In the  <guilabel>Properties</guilabel> editing window specify the name value in the  <guilabel>name</guilabel> field; entity name is case-sensitive and must meet the requirements for the JavaScript identifiers.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton>  on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton>  on the  main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -499,7 +499,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>Go to the  <guilabel>Source</guilabel> editor tab and write  the JavaScript code for the event handler.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -522,7 +522,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>On the properties panel select the <guilabel>Events</guilabel> tab for the event and delete the event handler name.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the Platypus Application Designer toolbar or by using the <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the main toolbar or by using the <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -544,7 +544,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>Click  <guibutton>Delete</guibutton> on the editor toolbar.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  <application>Platypus Application Designer</application> toolbar or by using the <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  main toolbar or by using the <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -560,7 +560,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>Change the parameter properties in the  <guilabel>Properties</guilabel> editor window.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking <guibutton>Save All</guibutton> on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking <guibutton>Save All</guibutton> on the  main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -600,7 +600,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>Edit the properties of the parameter in the <guilabel>Properties</guilabel> window.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -618,7 +618,7 @@ Logger.info(Resource.applicationPath);</programlisting>
             </keycombo> shortcut.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking Save All on the Platypus Application Designer toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking Save All on the main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -631,7 +631,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>Move the parameter to the field of an entity, with which you want to connect this parameter — visually the connection will be displayed as a line with an arrow between fields or parameters of the entity.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -644,10 +644,7 @@ Logger.info(Resource.applicationPath);</programlisting>
       <para>To delete a link, perform the following actions:</para>
       <itemizedlist>
         <listitem>
-          <para>Go to the  <guilabel>Datasets</guilabel> tab.</para>
-        </listitem>
-        <listitem>
-          <para>Select the connection.</para>
+          <para>Select the link to remove.</para>
         </listitem>
         <listitem>
           <para>Click  <guibutton>Delete</guibutton> or use the  <keycombo>
@@ -655,7 +652,26 @@ Logger.info(Resource.applicationPath);</programlisting>
             </keycombo> key.</para>
         </listitem>
         <listitem>
-          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  <application>Platypus Application Designer</application> toolbar or by using the  <keycombo>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  main toolbar or by using the  <keycombo>
+              <keycap>Ctrl</keycap>
+              <keycap>Shift</keycap>
+              <keycap>S</keycap>
+            </keycombo> keyboard shortcut.</para>
+        </listitem>
+      </itemizedlist>
+      <para>To edit a foreign key link properties, perform the following actions:</para>
+      <itemizedlist>
+        <listitem>
+          <para>Select a dashed link.</para>
+        </listitem>
+        <listitem>
+          <para>Select <guimenuitem>Scalar and collection properties</guimenuitem> menu item from the foreign key link context menu.</para>
+        </listitem>
+        <listitem>
+          <para>In the dialog specify the <guilabel>Scalar property name</guilabel> and <guilabel>Collection property name</guilabel> fields.</para>
+        </listitem>
+        <listitem>
+          <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the   main toolbar or by using the  <keycombo>
               <keycap>Ctrl</keycap>
               <keycap>Shift</keycap>
               <keycap>S</keycap>
@@ -665,17 +681,11 @@ Logger.info(Resource.applicationPath);</programlisting>
       <para>To zoom-in or zoom-out the data model visual presentation:</para>
       <itemizedlist>
         <listitem>
-          <para>Go to the  <guilabel>Datasets</guilabel> tab.</para>
-        </listitem>
-        <listitem>
           <para>Click  <guibutton>Zoom In</guibutton> to scale up the data model presentation in the editor; click <guibutton>Zoom out</guibutton> to scale it down.</para>
         </listitem>
       </itemizedlist>
       <para>To use the search function on the data model diagram:</para>
       <itemizedlist>
-        <listitem>
-          <para>Go to the  <guilabel>Datasets</guilabel> tab.</para>
-        </listitem>
         <listitem>
           <para>Click  <guibutton>Find</guibutton> to open the search dialog in the data model editor.</para>
         </listitem>
@@ -731,14 +741,12 @@ try {
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname>  is an entity object,<varname>
-          <replaceable> paramName</replaceable>
+           <replaceable>paramName</replaceable>
         </varname> is the property of the corresponding parameter.</para>
       <para>To set the parameter value, assign a new value to it:</para>
       <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
       <para>where <literal>newValue</literal> is a new value of the parameter.</para>
-      <note>
-        <para>Setting a new value for the entity parameter doesn&apos;t result in automatic update of the dataset.</para>
-      </note>
+      <para>Setting a new value for a entity parameter doesn&apos;t result in automatic update of the dataset.</para>
       <para>To update entity data and related entities, use the  <methodname>execute</methodname>, function. New data will be loaded only if the entity parameter values were changed: </para>
       <programlisting language="JavaScript"><replaceable>entityName</replaceable>.execute(onSuccess, onFailure);</programlisting>
       <para>where <varname>
@@ -776,11 +784,11 @@ try {
 for (var i = 0; i &lt; documents.length; i++) {
   logger.info(documents[i].NAME);
 }</programlisting>
-      <para>If an external key link is established between two entities, you can get access to the data  of the connected entity by using data instance property having the same name as the connected entity. This properties are generated during ORM resolution. If the entity&apos;s underlying database table contains an external key reference, the corresponding property represents the connected entity.</para>
+      <para>If an external key link is established between two entities, you can get access to the data  of the connected entity by using data instance property having the same name as the connected entity. This properties are generated during ORM resolution. If the entity&apos;s underlying database table contains an foreign key reference, the corresponding property represents the connected entity.</para>
       <programlisting language="JavaScript">var propValue = model.<replaceable>entityName1</replaceable>[<replaceable>i</replaceable>].<replaceable>entityName2</replaceable>.<replaceable>propName</replaceable></programlisting>
       <para>where  <varname>
           <replaceable>entityName1</replaceable>
-        </varname> is an entity, which contains the external key reference,  <literal>
+        </varname> is the name of an entity, which contains the external key reference,  <literal>
           <replaceable>i</replaceable>
         </literal> is an index of the array element within the  <code>0..<replaceable>entityName</replaceable>.length - 1</code> range, <replaceable>entityName2</replaceable> is an entity containing the field, which is referenced by the external key, <varname>
           <replaceable>propName</replaceable>
@@ -796,7 +804,7 @@ for (var i = 0; i &lt; documents.length; i++) {
         </literal> is an index of the connected object array element, <varname>
           <replaceable>propName</replaceable>
         </varname> is a property of the entity object having the same name as the query results field.</para>
-      <para>Change </para>
+      <para>Change for a foregn key link scalar and collection properties if required. The changed values will be used as a properties names in the correspondent entities.</para>
     </section>
     <section id="datamodel-cursor">
       <title>Cursor API</title>
@@ -1681,23 +1689,23 @@ function DataSourceModule(){
     };</programlisting>
   </section>
   <section id="module-server">
-    <title>Server module</title>
+    <title>Server modules</title>
     <section label="" id="module-server-stateless">
-      <title>Stateless module</title>
+      <title>Statefull and stateless session modules</title>
       <para>A module being created on  server is stateful by default. Such module exists in the context of the current user session. </para>
       <para>Mark a module with  <code>@stateless</code> annotation if you want to make the  module stateless. A new instance of stateless module is created every time the module is called via a network.</para>
     </section>
     <section id="module-server-resident">
       <title>Resident module</title>
-      <para>Use <code>@resident</code> annotation to make a server module resident. A resident modules are loaded and instanciated during the server components startup. Resident modules are resides in the system session.</para>
+      <para>Use <code>@resident</code> annotation to make a server module resident. A resident modules are loaded and instanciated during the server  startup. Resident modules are resides in the system session. They are can&apos;t be stateless.</para>
     </section>
     <section id="module-server-validator">
       <title>Data validators</title>
       <para>Use annotation <code>@validator <replaceable>DATA_SOURCE</replaceable>, <replaceable>DATA_SOURCE2</replaceable> ...</code>, where <replaceable>DATA_SOURCE</replaceable> is a data source name to enable server side validation. Implement validation logic in the instance metheod <code>validate(<replaceable>log</replaceable>, <replaceable>datasource</replaceable>, <replaceable>session</replaceable>)</code>, where <replaceable>log</replaceable> is an array of changes representing the log of changes made by clients or server side data driven code to be applied, <code>
           <replaceable>datasource</replaceable>
         </code> is a datasource name mentioned in <code>@validator</code> annotation (relational datasource or script datasource module name), <replaceable>session</replaceable> is current user session identifier, the method returns <literal>false</literal> to stop validating process (e.g. break validators chain), nothing or true otherwise or throws an exception if validation fails.</para>
-      <para>A module with no data sources in <code>@validatior</code> annotation is invoked for all  data model data save operations of every module.</para>
-      <para>Server-side validator example is as the follows:</para>
+      <para>A module with no data sources in <code>@validatior</code> annotation is invoked for default application datasource.</para>
+      <para>Server-side validator example is as follows:</para>
       <programlisting language="JavaScript">/**
  * @module
  * @validator DataSource1
@@ -1715,7 +1723,7 @@ function ValidatorA(){
       <para>For example:</para>
       <programlisting language="JavaScript">/**
  * @module
- * @validator DataSource1
+ * @authorizer
  */ 
 function AuthorizerA(){
     var self = this, model = this.model;
@@ -1745,7 +1753,7 @@ var aFile = new File(&quot;/home/user/afile.txt&quot;);
 aFile.delete();
 var bFile = new File(&quot;/home/user/bfile.txt&quot;);
 bFile.delete();</programlisting>
-    <para>Another approach to facilitate working with Java packages is using the  <code>importPackage</code> global function, which serves the same purpose as the  <code>import</code> declaration in Java.</para>
+    <para>Another approach to facilitate working with Java packages is using   <code>importPackage</code> global function, which serves the same purpose as the  <code>import</code> declaration in Java.</para>
     <programlisting language="JavaScript">importPackage(java.io);
 
 var aFile = new File(&quot;/home/user/afile.txt&quot;);
@@ -1762,18 +1770,18 @@ aFile.delete();</programlisting>
     </itemizedlist>
     <itemizedlist>
       <listitem>
-        <para>Use packages and classes of the external library similar to packages and classes built into   <acronym>JRE</acronym>.</para>
+        <para>Use <code>Packages</code> object to access to external packages. Check the following examples:</para>
       </listitem>
     </itemizedlist>
-    <programlisting language="JavaScript">var sensor = new biz.altsoft.sensors.NavSensor();
+    <programlisting language="JavaScript">var sensor = new Packages.biz.altsoft.sensors.NavSensor();
 //Gets navigation data
 var navData = sensor.getData();</programlisting>
-    <programlisting language="JavaScript">importPackage(biz.altsoft.sensors);
+    <programlisting language="JavaScript">importPackage(Packages.biz.altsoft.sensors);
 var sensor = new NavSensor();
 //Gets navigation data
 var navData = sensor.getData();</programlisting>
     <para>Use the <code>importClass</code> global function to import only a single class:</para>
-    <programlisting language="JavaScript">importClass(biz.altsoft.sensors.NavSensor);
+    <programlisting language="JavaScript">importClass(Packages.biz.altsoft.sensors.NavSensor);
 var sensor = new NavSensor();
 //Gets navigation data
 var navData = sensor.getData();</programlisting>

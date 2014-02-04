@@ -193,10 +193,10 @@ public class HtmlConvertor {
 
     private String getContentHtml(File file) throws IOException {
         Document doc = Jsoup.parse(FileUtils.readString(file, UNICODE_ENCODING));
-        doc.getElementById("title").remove();
-        for (Element e : doc.select("div.mediaobject")) {
-            e.attr("align", "left");
-        }
+//        doc.getElementById("title").remove();
+//        for (Element e : doc.select("div.mediaobject")) {
+//            e.attr("align", "left");
+//        }
         return doc.body().html();
     }
 

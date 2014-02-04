@@ -7,14 +7,13 @@
   <title>User interface guide</title>
   <section id="form-intro">
     <title>Form</title>
-    <para>A form is a user interface building block wich can be represented as a top-level window with a title and a border or can be build-in on a panel or on another form.</para>
-    <para>A form can be displayed both in the desktop client or in the HTML5 web-browser.</para>
-    <para>A form is a regular  JavaScript module with a visual  components.</para>
-    <para>Any form includes a top-level container, which holds widgets and other containers. </para>
+    <para><code>Form</code> is a user interface building block wich can be represented as a top-level window with a title and a border or can be build-in on a panel or on another form.</para>
+    <para>A form is a regular  JavaScript module with  visual  components. Any form  can be displayed both in  desktop client as well in  HTML5 web-browser.</para>
+    <para><code>Form</code> includes a top-level container, which holds widgets and other containers and accessible under <code>view</code> property. </para>
     <para>A widget is a component, which has a visual representation. A container is a component, which holds widgets and other containers.</para>
     <para>Each component, as well as the form itself, has a set of properties, which defines the component appearance and behavior, and a set of events (e.g. user actions, for which you can define handlers).</para>
     <figure>
-      <title>Form</title>
+      <title>Form&apos;s components layout</title>
       <mediaobject>
         <imageobject>
           <imagedata align="center" fileref="images/form.png" format="PNG"/>
@@ -73,12 +72,12 @@
       </listitem>
     </itemizedlist>
     <note>
-      <para>A form should contain JavaScript code, responsible for the user interface, and the business logic should be located in modules for execution on the application server.</para>
+      <para>A form should  contain JavaScript code, responsible for  user interface. Business logic should be implemented in server modules.</para>
     </note>
-    <para>Form structure is presented as a tree in the form inspector panel. Use the inspector to select a widget, a container or a menu, to move a component from one container to another, and to select the container layout.</para>
+    <para>Form&apos;s structure is presented as a tree in the form inspector panel. Use the inspector to select a widget, a container or a menu, to move a component from one container to another, and to select the container layout.</para>
     <para>Drag components up or down in the inspector tree or activate the  <guilabel>Move Up</guilabel>, <guilabel>Move Down</guilabel>, and <guilabel>Change Order</guilabel> context menu items to set the order along the Z axis. </para>
     <para>To run a quick preview of the form, click  <guibutton>Preview design</guibutton> on the visual editor tool bar. The preview window opens, showing a visual representation of the form, which is identical to its look in  runtime.</para>
-    <para>The Anchors layout is enabled for all form&apos;s containers by default. To choose some other layout  for the specific container, select the layout menu item in the  <guisubmenu>Set Layout</guisubmenu> submenu from the container&apos;s context menu in the inspector component tree.</para>
+    <para>The anchors layout is enabled for all form&apos;s containers by default. To choose some other layout  for the specific container, select the layout menu item in the  <guisubmenu>Set Layout</guisubmenu> submenu from the container&apos;s context menu in the inspector component tree.</para>
     <para>Add a component from the pallete using the visual editor, anchors are attached for the nearest container&apos;s sides and width and height values are automatically set. </para>
     <para>Change dimensions of the component and its location by using the mouse or arrows keys. When you move a component using arrows keys, the position of the component is tied to the grid. Hold down the <keycap>Ctrl</keycap> to move the component smoothly. Hold down the <keycap>Shift</keycap> key to expand the widget.</para>
     <note>
@@ -94,11 +93,7 @@
     <para>Specify values for anchors and dimensions explicitly,  changing the values of the component&apos;s properties panel in the  <guilabel>Layout</guilabel> properties group: <guilabel>Left</guilabel>, <guilabel>Top</guilabel>, <guilabel>Right</guilabel>, <guilabel>Bottom</guilabel>, <guilabel>Left</guilabel>, <guilabel>Width</guilabel>, and <guilabel>Height</guilabel>.</para>
     <para>Anchors properties values are specified as a strings together with the indication of measurement units: pixels or percentages. If measurement units are not specified, pixels are used.  If a value is defined as a percentage, this anchor and dimension will be changed while maintaining the defined value when changing dimensions of the container, for example :  <literal>60px</literal>, <literal>30%</literal>, <literal>40</literal>.</para>
     <para>Use the component alignment control buttons on the form editor tool bar to align widgets in relation to each other. Alignment buttons become active when you select multiple widgets. To select multiple widgets, click them while holding down the <keycap>Ctrl</keycap> key.  </para>
-  </section>
-  <section id="form-api">
-    <title>Form API</title>
-    <para>Form&apos;s properties are accessible as properties of JavaScript module instance.</para>
-    <para>To set properties and/or form event handlers:</para>
+    <para>Specify a component&apos;s the properties  and event handlers:</para>
     <itemizedlist>
       <listitem>
         <para>Click a form area, which is free from other components, or select a form node in the component inspector.</para>
@@ -116,9 +111,48 @@
         <para>To remove an event handler, delete the name of the handler from the corresponding event field; as a result, the  <guilabel>&lt;none&gt;</guilabel> name is assigned to the handler and the handler function will be removed from the code.</para>
       </listitem>
     </itemizedlist>
-    <note>
-      <para>The property can be found in the designer or can be accessed programmatically from the JavaScript code.</para>
-    </note>
+  </section>
+  <section id="form-api">
+    <title>Form API</title>
+    <para>Create   a module instance in client JavaScript as follows:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Create an instance of a form with the help of the  <literal>new</literal> keyword, using a module constructor, for example:</para>
+        <programlisting language="JavaScript">var formInstance = new <replaceable>FormName</replaceable>();</programlisting>
+        <para>where  <code>
+            <replaceable>FormName</replaceable>
+          </code> is a form&apos;s constructor.</para>
+      </listitem>
+      <listitem>
+        <para>Create an instance of the module with the help of the <literal>new</literal> keyword using special <literal>Form</literal> constructor, for example:</para>
+        <programlisting language="JavaScript">var formInstance = new Form(<replaceable>FormName</replaceable>);</programlisting>
+        <para>where  <code>
+            <replaceable>FormName</replaceable>
+          </code> is the module constructor name string, for example, <literal>&quot;MainForm&quot;</literal>;</para>
+      </listitem>
+    </itemizedlist>
+    <para>To make a form visible use the <code>show</code> method:</para>
+    <programlisting language="JavaScript">formInstance.show();</programlisting>
+    <para>An application supports a registry of its shown forms. For every form a identifier can be specifyed to refer to the shown form in this registry, to do this use form&apos;s instance <code>formKey</code> property. By default a form&apos;s key set to its constructor name. </para>
+    <para>Use the <code>Form.getShownForm(<replaceable>formKey</replaceable>)</code>  method, where <replaceable>formKey</replaceable> is a form&apos;s key to get the shown form by its key.</para>
+    <programlisting language="JavaScript">var form = new FormA(), 
+    form2 = new FormA();
+form.formKey += &apos;first&apos;;
+form2.formKey += &apos;second&apos;;
+form.show();
+form2.show();
+Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
+    <para>Get the array of the application&apos;s shown forms registry using   <code>Form</code> object <code>shown</code> property:</para>
+    <programlisting language="JavaScript">var shownForms = Form.shown();
+for(var i=0;i &lt; shownForm.length;i++) {
+    Logger.info(shownForms[i].title);
+}</programlisting>
+    <para>Explicitly provide form keys before  using <code>Form.shown</code> because the shown forms registry uses this keys as  identifiers.</para>
+    <para>Add a handler function to the shown form&apos;s registry change event. Use the <code>Form</code> object <code>onChange</code> property: </para>
+    <programlisting language="JavaScript">Form.onChange = function(e) {
+    Logger.info(e.source.formKey);
+    Logger.info(e.source.visible);
+};</programlisting>
     <para>The  form properties are listed in the following table:</para>
     <informaltable>
       <tgroup cols="2">
@@ -131,135 +165,218 @@
         <tbody>
           <row>
             <entry>
-              <parameter>defaultCloseOperation</parameter>
+              <parameter>title</parameter>
             </entry>
-            <entry>A default operation, performed when clicking the form close button: <literal>HIDE</literal>, <literal>EXIT_ON_CLOSE</literal>, <literal>DO_NOTHING</literal>, <literal>DISPOSE</literal></entry>
+            <entry>Form&apos;s title text.</entry>
           </row>
           <row>
             <entry>
-              <parameter>title</parameter>
+              <parameter>top</parameter>
             </entry>
-            <entry>Form&apos;s title text</entry>
+            <entry>The distance from the parent container top side.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>left</parameter>
+            </entry>
+            <entry>The distance from the parent container left side.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>width</parameter>
+            </entry>
+            <entry>The form&apos;s width.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>height</parameter>
+            </entry>
+            <entry>The form&apos;s height.</entry>
           </row>
           <row>
             <entry>
               <parameter>allwaysOnTop</parameter>
             </entry>
-            <entry>Flag, which defines that the form should be displayed on top of all windows</entry>
+            <entry><code>true</code> if the form should be displayed on top of all other windows and <code>false</code> otherwise.</entry>
           </row>
           <row>
             <entry>
-              <parameter>background</parameter>
+              <parameter>formKey</parameter>
             </entry>
-            <entry>Form background color</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>cursor</parameter>
-            </entry>
-            <entry>Appearance of the cursor above the form</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>enabled</parameter>
-            </entry>
-            <entry>Form activity flag </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>focusable</parameter>
-            </entry>
-            <entry>Flag, which allows the form to get the keyboard focus </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>font</parameter>
-            </entry>
-            <entry>Font, which is used in the form by default </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>foreground</parameter>
-            </entry>
-            <entry>Drawing color, which is used by default</entry>
+            <entry>The form&apos;s identifier in the open forms registry.</entry>
           </row>
           <row>
             <entry>
               <parameter>icon</parameter>
             </entry>
-            <entry>Not used </entry>
+            <entry>The form&apos;s <code>Icon</code>.</entry>
           </row>
           <row>
             <entry>
               <parameter>locationByPlatform</parameter>
             </entry>
-            <entry>Flag, which means that the form will be opened on the default position for this platform </entry>
+            <entry><code>true</code> if form should appear at the default location for the native windowing system or at the current location and <code>false</code> otherwise.</entry>
           </row>
           <row>
             <entry>
               <parameter>opacity</parameter>
             </entry>
-            <entry>Opacity of the form, <classname>Number</classname> value: 1 — completely opaque, 0 — completely transparent </entry>
+            <entry>Opacity of the form, <classname>Number</classname> in the range of 0..1: 0 when it is completely transparent, 1 when form is completely opaque. </entry>
           </row>
           <row>
             <entry>
               <parameter>resizable</parameter>
             </entry>
-            <entry>Flag, which allows changing of the form dimensions</entry>
+            <entry><code>true</code> if it is allowed changing of the form dimensions and <code>false</code> otherwise.</entry>
           </row>
           <row>
             <entry>
               <parameter>undecorated</parameter>
             </entry>
-            <entry>Flag, which enables displaying of the system borders and form buttons</entry>
+            <entry><code>true</code> to enable displaying of the system borders and form buttons and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>minimizable</parameter>
+            </entry>
+            <entry><code>true</code> if the form is minimizable, and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>maximizable</parameter>
+            </entry>
+            <entry><code>true</code> if the form is maximizable, and <code>false</code> otherwise.</entry>
           </row>
           <row>
             <entry>
               <parameter>minimized</parameter>
             </entry>
-            <entry>Form state flag (a form can be minimized or expanded)</entry>
+            <entry><code>true</code> if the form is minimized, and <code>false</code> otherwise (read-only).</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>maximized</parameter>
+            </entry>
+            <entry><code>true</code> if the form is maximized, and <code>false</code> otherwise (read-only).</entry>
           </row>
           <row>
             <entry>
               <parameter>visible</parameter>
             </entry>
-            <entry>Form visibility flag </entry>
+            <entry><code>true</code> if the form is visible and <code>false</code> otherwise.</entry>
           </row>
           <row>
             <entry>
               <parameter>view</parameter>
             </entry>
-            <entry>Top-level container of the form</entry>
+            <entry>The top-level container of the form.</entry>
           </row>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>It is recommended to set the  <varname>defaultCloseOperation</varname> form property to the   <literal>DISPOSE</literal>. If all forms, which are running on a   <application>desktop client</application> will have <literal>DISPOSE</literal> value for <varname>defaultCloseOperation</varname>, then after closing the last form the process of the   application will be terminated  automatically.</para>
-    <para>The form events are listed in the following table:</para>
+    <para>The form methods are listed in the following table:</para>
     <informaltable>
-      <tgroup cols="4">
+      <tgroup cols="2">
         <thead>
           <row>
-            <entry align="center">Event </entry>
-            <entry>Cancellable </entry>
-            <entry>Handler parameters </entry>
+            <entry align="center">Method </entry>
             <entry align="center">Description </entry>
           </row>
         </thead>
         <tbody>
           <row>
             <entry>
+              <parameter>show()</parameter>
+            </entry>
+            <entry>Displays the form. </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>showInternalFrame(desktopPane)</parameter>
+            </entry>
+            <entry>Displays the form within the <code>DesktopPane</code> container provided as a <parameter>desktopPane</parameter> parameter.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>showModal(callback)</parameter>
+            </entry>
+            <entry>Displays the form as a confirmation dialog. If the user confirms the selection, then a function, which is passed through the <parameter>callback</parameter> parameter is called.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>showOnPanel(parent)</parameter>
+            </entry>
+            <entry>Displays the form on the container panel, <parameter>parent</parameter> is an object of the panel, on which the form should be shown.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>close(selected)</parameter>
+            </entry>
+            <entry>Closes the form. This method may be used to return a value, selected using the dialog. If the <parameter>selected</parameter> parameter is specified, it will be passed as the <literal>callback</literal> argument of the function, which is passed in turn as a parameter to the <literal>showModal(<replaceable>callback</replaceable>)</literal> method of the parent form. If the <parameter>selected</parameter> parameter has the <literal>null</literal> value, the <literal>callback</literal> function will still be called. If the <parameter>selected</parameter> parameter is not passed at all, the <literal>callback</literal> function won&apos;t be called</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>minimize()</parameter>
+            </entry>
+            <entry>Minimizes the form </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>maximize()</parameter>
+            </entry>
+            <entry>Maximizes the form </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>restore()</parameter>
+            </entry>
+            <entry>Restores the previous state of the form </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>toFront()</parameter>
+            </entry>
+            <entry>Brings the form to the forefront</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para><code>Form</code> events are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry align="center">Event </entry>
+            <entry>Event type</entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>onMouseWheelMoved</parameter>
+            </entry>
+            <entry>Mouse wheel</entry>
+            <entry>Is called after rotating the mouse wheel </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseClicked</parameter>
+            </entry>
+            <entry>Mouse wheel</entry>
+            <entry>Is called after the mouse is clicked</entry>
+          </row>
+          <row>
+            <entry>
               <parameter>onComponentAdded</parameter>
             </entry>
-            <entry>no</entry>
-            <entry><parameter>evt</parameter> — an event object </entry>
+            <entry>Container</entry>
             <entry>Is called after adding a component into the form</entry>
           </row>
           <row>
             <entry>
               <parameter>onComponentHidden</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after hiding a component </entry>
           </row>
@@ -267,7 +384,6 @@
             <entry>
               <parameter>onComponentRemoved</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after removing a component from the form</entry>
           </row>
@@ -275,7 +391,6 @@
             <entry>
               <parameter>onComponentResized</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after changing the component size </entry>
           </row>
@@ -283,7 +398,6 @@
             <entry>
               <parameter>onComponentShown</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after displaying the component</entry>
           </row>
@@ -291,7 +405,6 @@
             <entry>
               <parameter>onFocusGained</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after getting the keyboard focus</entry>
           </row>
@@ -299,7 +412,6 @@
             <entry>
               <parameter>onFocusLost</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after losing the keyboard focus</entry>
           </row>
@@ -307,7 +419,6 @@
             <entry>
               <parameter>onKeyPressed</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after pressing the keyboard key </entry>
           </row>
@@ -315,23 +426,13 @@
             <entry>
               <parameter>onKeyReleased</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after releasing the keyboard key</entry>
           </row>
           <row>
             <entry>
-              <parameter>onMouseWheelMoved</parameter>
-            </entry>
-            <entry>no</entry>
-            <entry><parameter>evt</parameter> — an event object</entry>
-            <entry>Is called after rotating the mouse wheel </entry>
-          </row>
-          <row>
-            <entry>
               <parameter>onWindowActivated</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after the window activation </entry>
           </row>
@@ -339,7 +440,6 @@
             <entry>
               <parameter>onWindowClosed</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after closing the form window </entry>
           </row>
@@ -347,7 +447,6 @@
             <entry>
               <parameter>onWindowClosing</parameter>
             </entry>
-            <entry>yes</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called before closing the form window </entry>
           </row>
@@ -355,7 +454,6 @@
             <entry>
               <parameter>onWindowDeactivated</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>object Is called after deactivating the form window</entry>
           </row>
@@ -363,7 +461,6 @@
             <entry>
               <parameter>onWindowDeiconified</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after retrieving the form from an icon on the panel</entry>
           </row>
@@ -371,7 +468,6 @@
             <entry>
               <parameter>onWindowMinimized</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after minimizing the form </entry>
           </row>
@@ -379,14 +475,13 @@
             <entry>
               <parameter>onWindowOpened</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called after opening the form window</entry>
           </row>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>The  <varname>windowClosing</varname> event is useful for invoking a dialog to confirm the window closing: if the handler returns  <literal>false</literal>, the form won&apos;t be closed:</para>
+    <para>The  <varname>windowClosing</varname> event is cancelable. This event is useful for invoking a dialog to confirm the window closing: if the handler returns  <literal>false</literal>, the form won&apos;t be closed:</para>
     <programlisting language="JavaScript">//Handles windowClosing event
 function formWindowClosing(evt) {
   return confirm(&quot;Close the window?&quot;);
@@ -406,101 +501,142 @@ self.view.background = Color.black;</programlisting>
     <note>
       <para>For the top-level container, the layout  should be set by the designer and can&apos;t be changed by program means.</para>
     </note>
-    <para>The form methods are listed in the following table:</para>
+  </section>
+  <section id="form-events">
+    <title>Events</title>
+    <para>Component events are not propogated to the its parent. A   container&apos;s event  is generated only if it has not been generated for its child components. Thus, the form will recieve the mouse event only if it has occurred over an area, which is free from its children.  </para>
+    <para>The base <code>Event</code> object contains  <code>source</code> property that contains the event&apos;s source component.</para>
+    <para>Use an Event object in an event handler function  as follows: </para>
+    <programlisting language="JavaScript">function onEventHandler(e) {
+   e.source.background = Color.WHITE;
+}</programlisting>
+    <para>The specific event objects also contain <code>source</code> property, as well as their own specific properties. The following types of specific events are defined: <code>ContainerEvent</code>, <code>KeyboardEvent</code> and <code>MouseEvent</code>.</para>
+    <para><code>ContainerEvent</code> event object represents an event what is called when something happens with the container, e.g. an component added or removed.</para>
+    <para><code>ContainerEvent</code> object contains the specific propetries are listed in the following table:</para>
     <informaltable>
       <tgroup cols="2">
         <thead>
           <row>
-            <entry align="center">Method </entry>
+            <entry align="center">Property </entry>
             <entry align="center">Description </entry>
           </row>
         </thead>
         <tbody>
           <row>
             <entry>
-              <parameter>show()</parameter>
+              <parameter>child</parameter>
             </entry>
-            <entry>Displays the form </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>showInternalFrame(desktopPane)</parameter>
-            </entry>
-            <entry>Displays the form within the Desktop Pane</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>showModal(callback)</parameter>
-            </entry>
-            <entry>Displays the form as a confirmation dialog. If the user confirms the selection, then a function, which is passed through the <parameter>callback</parameter> parameter, is called</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>showOnPanel(parent)</parameter>
-            </entry>
-            <entry>Displays the form on the container panel, <parameter>parent</parameter> is an object of the panel, on which the form should be shown</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>close(selected)</parameter>
-            </entry>
-            <entry>Closes the form. May be used to return a value, selected using the dialog. If the <parameter>selected</parameter> parameter is specified, it will be passed as the <literal>callback</literal> argument of the function, which is passed in turn as a parameter to the <literal>showModal(<replaceable>callback</replaceable>)</literal> method of the parent form. If the <parameter>selected</parameter> parameter has the <literal>null</literal> value, the <literal>callback</literal> function will still be called. If the <parameter>selected</parameter> parameter is not passed at all, the <literal>callback</literal> function won&apos;t be called</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>minimize()</parameter>
-            </entry>
-            <entry>Minimizes the form </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>maximize()</parameter>
-            </entry>
-            <entry>Expands the form </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>restore()</parameter>
-            </entry>
-            <entry>Restores the previous state of the form </entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>toFront()</parameter>
-            </entry>
-            <entry>Brings the form to the forefront</entry>
+            <entry>Child component container operation is performed on.</entry>
           </row>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>An example of a module containing the function, which &quot;lazily&quot; creates and displays the form, and also the function to close the form:</para>
-    <programlisting language="JavaScript">/**
- * @name FormSupport 
- *
- */
-
-var sampleForm;
-
-function showSampleForm() {
-  if (!sampleForm) {
-    sampleForm = new SampleForm();
-  }
-  sampleForm.show();
-}
-
-function closeSampleForm() {
-  if (sampleForm) {
-    sampleForm.close();
-  }
-}</programlisting>
-  </section>
-  <section id="form-events">
-    <title>Events</title>
-    <para>Component events are not propogated to the its parent. A   container&apos;s event  is generated only if it has not been generated for its child components. Thus, the form will recieve the mouse event only if it has occurred over an area, which is free from its children.  </para>
-    <para>The base event object contains the  <property>source</property> property — an event source. The specific event objects also contain this property, as well as their own properties. The following types of specific events are defined: container event, keyboard event and mouse event.</para>
-    <para>The container event object contains the <property>child</property> property — a child element, which is added to or removed from the container.</para>
-    <para>The keyboard event object contains the following properties: <property>key</property> — the pressed key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property>shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> a flag, which means that the Meta key is pressed.</para>
-    <para>The mouse event object contains the following properties: <property>x</property> — X coordinate of the mouse pointer, <property>y</property> — Y coordinate of the mouse pointer, <property>button</property> — the pressed mouse key code, <property>altDown</property> — a flag, which means that the Alt key is pressed, <property>controlDown</property> — a flag, which means that the Crtl key is pressed, <property> shiftDown</property> — a flag, which means that the Shift key is pressed, <property>metaDown</property> — a flag, which means that the Meta key is pressed.</para>
+    <para><code>KeyEvent</code> event object contains information about a keyboard event, e.g. a key pressed or released.</para>
+    <para><code>KeyEvent</code> object specific the propetries are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Property </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>key</parameter>
+            </entry>
+            <entry>Key code associated with this event.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>altDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Alt</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>controlDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Ctrl</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>shiftDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Shift</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>metaDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Meta</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para><code>MouseEvent</code> event object contains information about a mouse event, e.g. a mouse moved or a mouse key is clicked.</para>
+    <para><code>MouseEvent</code> object specific the propetries are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Property </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>x</parameter>
+            </entry>
+            <entry>Key code associated with this event.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>y</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Alt</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>button</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Ctrl</keycode> key is down on this event and <code>false</code> otherwise.One of the following <code>Number</code> values: 0 for no button, 1 for the button 1, 2 for the button 2 and 3 for the button 3.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>clickCount</parameter>
+            </entry>
+            <entry>The number of mouse clicks associated with this event.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>altDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Alt</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>controlDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Ctrl</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>shiftDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Shift</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>metaDown</parameter>
+            </entry>
+            <entry><code>true</code> if <keycode>Meta</keycode> key is down on this event and <code>false</code> otherwise.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
   </section>
   <section id="ui-containers">
     <title>Containers</title>
@@ -565,11 +701,11 @@ function closeSampleForm() {
       </figure>
       <para>Configure the position and behavior of a widget in the container by defining  <guilabel>Left</guilabel>, <guilabel>Top</guilabel>, <guilabel>Right</guilabel>, <guilabel>Bottom</guilabel> anchors and <guilabel>Width</guilabel> and <guilabel>Height</guilabel> settings of the component. You can specify  two of the three properties   by the horizontal and vertical axis. </para>
       <para>Аt the same time can be set two anchors or one anchor and one dimension values. The set properties are fixed and maintained when changing dimensions of the container. If the property is not defined, it is stretched along with the dimensions of the container.</para>
-      <para>Use the  <classname>AnchorsPanel</classname> constructor in form&apos;s JavaScript code:</para>
+      <para>Use   <classname>AnchorsPane</classname> constructor in form&apos;s JavaScript code:</para>
       <programlisting language="JavaScript">var pane = new AnchorsPane();</programlisting>
       <para>To add child components to the container, use the  <methodname>add</methodname> method and pass a child component and object of the <classname>Anchors</classname> type as parameters to this method.</para>
       <programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>, <replaceable>anchors</replaceable>);</programlisting>
-      <para>where  <replaceable>component</replaceable> is a component, which is added, <replaceable>anchors</replaceable> is an object  of the  <classname>Anchors</classname> type.</para>
+      <para>where  <replaceable>component</replaceable> is a component to add, <replaceable>anchors</replaceable> is an object  of the  <classname>Anchors</classname> type.</para>
       <programlisting language="JavaScript">var pane = new AnchorsPane();
 var comp = new Button(&quot;Sample&quot;);
 pane.add(comp, new Anchors(12, null, 14, 22, null, 24));</programlisting>
@@ -605,10 +741,10 @@ panel.add(new Label(&quot;Test&quot;), anchors);</programlisting>
 var comp = new Button(&quot;Sample&quot;);
 pane.add(comp, 
   {
-    &quot;left&quot; : 12,
-    &quot;right&quot; : 14,
-    &quot;top&quot; : 22,
-    &quot;bottom&quot; : 24
+    left : 12,
+    right : 14,
+    top : 22,
+    bottom : 24
 });</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">self.view.add(pane);</programlisting>
@@ -626,6 +762,19 @@ pane.add(comp,
         </mediaobject>
       </figure>
       <para>Explicitly set the value of the property, which controls the position of the component in the container. To do this, change widget <guilabel>Direction</guilabel> property fields at the <guilabel>Layout</guilabel> property group, by selecting one of the values from the drop-down list.</para>
+      <para>Use   <classname>BorderPane</classname> constructor to create this container in JavaScript code: </para>
+      <programlisting language="JavaScript">var pane = new BorderPane(hgap, vgap);</programlisting>
+      <para>where <code>hgap</code> is the horizontal gap (optional) and <code>vgap</code> is  the vertical gap (optional).</para>
+      <para>To add child components to the container, use   <methodname>add</methodname> instance method:</para>
+      <para><programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>, <replaceable>place</replaceable>, <replaceable>size</replaceable>);</programlisting></para>
+      <para>where <replaceable>component</replaceable> is a component to add, <replaceable>place</replaceable> is an instance of a <code>HorizontalPosition</code> or <code>VerticalPosition</code> constants, determining the region (optional) and <replaceable>size</replaceable> is the size of the component by the provided place direction (optional).</para>
+      <para>The following example shows how to create a <code>BorderPane</code> container and add to this container two child components: </para>
+      <programlisting language="JavaScript">var pane = new BorderPane();
+var topComp = new Button(&quot;Top&quot;);
+pane.add(topComp, VerticalPosition.TOP);
+var bottomComp = new Button(&quot;Bottom&quot;);
+pane.add(bottomComp, VerticalalPosition.BOTTOM);
+self.view.add(pane);</programlisting>
     </section>
     <section id="ui-containers-absolutepane">
       <title>AsolutePane</title>
@@ -640,6 +789,21 @@ pane.add(comp,
           </mediaobject>
         </figure></para>
       <para>Set X, Y, width and height parameters for each component in the container. To do this, select a component and set values for the <guilabel>X</guilabel>, <guilabel>Y</guilabel>, <guilabel>Width</guilabel> and <guilabel>Height</guilabel> fields on the properties panel in the <guilabel>Layout</guilabel> properties group. The <guilabel>Preferred</guilabel> value allows you to set the automatic calculation of width and height of the components according to their content.</para>
+      <para>Use   <classname>AbsolutePane</classname> constructor to create this container in JavaScript code: </para>
+      <programlisting language="JavaScript">var pane = new AbsolutePane();</programlisting>
+      <para>To add child components to the container, use   <methodname>add</methodname> instance method:</para>
+      <para><programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>, <replaceable>anchors</replaceable>);</programlisting></para>
+      <para>where <replaceable>component</replaceable> is a component to add and anchors is an JavaScript object with the <code>left</code>, <code>width</code>, <code>top</code>, <code>height</code>  properties.</para>
+      <para>The following example shows how to create an <code>AbosolutePane</code> container and add to this container a component: </para>
+      <programlisting language="JavaScript">var pane = new AboslutePane();
+var comp = new Button(&quot;Sample&quot;);
+pane.add(comp, {
+    left : 100,
+    right : 150,
+    width : 32,
+    height : 32
+});
+self.view.add(pane);</programlisting>
     </section>
     <section id="ui-containers-gridpane">
       <title>GridPane</title>
@@ -655,6 +819,20 @@ pane.add(comp,
       </figure>
       <para>To set the number of columns and rows and the vertical and horizontal interval between cells, select the  <guilabel>GridLayout</guilabel> node in the component tree of the inspector and change the corresponding values on the properties panel.</para>
       <para>If you set a value other than zero for the number of columns and rows, column number setting is ignored. Instead of this, the number of columns is determined by the number of rows and the total number of components in the container.</para>
+      <para>Use   <classname>GridPane</classname> constructor to create this container in JavaScript code: </para>
+      <programlisting language="JavaScript">var pane = new GridPane(<replaceable>rows</replaceable>, <replaceable>cols</replaceable>, <replaceable>hgap</replaceable>, <replaceable>vgap</replaceable>);</programlisting>
+      <para>Where <replaceable>rows</replaceable> is the number of grid rows, <replaceable>cols</replaceable> is  the number of grid columns, <replaceable>hgap</replaceable> is the horizontal gap (optional) and  <replaceable>vgap</replaceable> vgap the vertical gap (optional).</para>
+      <para>To add child components to the container, use   <methodname>add</methodname> instance method:</para>
+      <para><programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>);</programlisting></para>
+      <para>where <replaceable>component</replaceable> is a component to add.</para>
+      <para>Use <code>child</code> method to get an child component at the specified row and column, if the target position is empty the method will return <code>null</code>:</para>
+      <para><programlisting language="JavaScript">var comp = pane.child(<replaceable>row</replaceable>, <replaceable>column</replaceable>);</programlisting></para>
+      <para>where <replaceable>row</replaceable> is the row of the component and  <replaceable>column</replaceable>  is the column of the grid position.</para>
+      <para>The following example shows how to create an <code>GridPane</code> container and add to this container a component: </para>
+      <programlisting language="JavaScript">var pane = new GridPane(3, 3);
+var comp = new Button(&quot;Sample&quot;);
+pane.add(comp);
+self.view.add(pane);</programlisting>
     </section>
     <section id="ui-containers-flowpane">
       <title>FlowPane</title>
@@ -668,14 +846,43 @@ pane.add(comp,
           </imageobject>
         </mediaobject>
       </figure>
+      <para>Use   <classname>FlowPane</classname> constructor to create this container in JavaScript code: </para>
+      <programlisting language="JavaScript">var pane = new FlowPane(<replaceable>hgap</replaceable>, <replaceable>vgap</replaceable>);</programlisting>
+      <para>Where  <replaceable>hgap</replaceable> is the horizontal gap (optional) and  <replaceable>vgap</replaceable> vgap the vertical gap (optional).</para>
+      <para>To add child components to the container, use   <methodname>add</methodname> instance method:</para>
+      <para><programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>);</programlisting></para>
+      <para>where <replaceable>component</replaceable> is a component to add.</para>
+      <para>The following example shows how to create an <code>FlowPane</code> container and add to this container a component: </para>
+      <programlisting language="JavaScript">var pane = new FlowPane();
+var comp = new Button(&quot;Sample&quot;);
+pane.add(comp);
+self.view.add(pane);</programlisting>
     </section>
-    <section lang="" id="ui-containers-cardpane">
+    <section id="ui-containers-cardpane" lang="">
       <title>CardPane</title>
       <para><code>CardPane</code> is a lightweight container with the card layout.</para>
       <para>Card layout  allows you to arrange components as a stack of cards, one above the other; only the top component is visible. This layout manager is usually used to create a step-by-step wizard.</para>
-      <para>Each component has an assigned card name, which can be set on the component properties panel in the  <guilabel>Card Name</guilabel> field of the  <guilabel>Layout</guilabel> properties group. This name can be used later to select a visible component. To select a visible component, call the <methodname>show(<replaceable>cardName</replaceable>)</methodname> container method, where  <parameter>
+      <para>Each component has an assigned card name, which can be set on the component properties panel in the  <guilabel>Card Name</guilabel> field of the  <guilabel>Layout</guilabel> properties group. This name can be used later to select a visible component. </para>
+      <para>To select a visible component, use <methodname>show(<replaceable>cardName</replaceable>)</methodname> method, where  <parameter>
           <replaceable>cardName</replaceable>
         </parameter> is the card name.</para>
+      <para>Use   <classname>CardPane</classname> constructor to create this container in JavaScript code: </para>
+      <programlisting language="JavaScript">var pane = new CardPane(<replaceable>hgap</replaceable>, <replaceable>vgap</replaceable>);</programlisting>
+      <para>Where  <replaceable>hgap</replaceable> is the horizontal gap (optional) and  <replaceable>vgap</replaceable> vgap the vertical gap (optional).</para>
+      <para>To add child components to the container, use   <methodname>add</methodname> instance method:</para>
+      <para><programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>, <replaceable>cardName</replaceable>);</programlisting></para>
+      <para>where <replaceable>component</replaceable> is a component to add and <replaceable>cardName</replaceable> is the name of the card.</para>
+      <para>The following example shows how to create an <code>FlowPane</code> container and add to this container a component: </para>
+      <programlisting language="JavaScript">var pane = new CardPane();
+var compA = new Button(&quot;SampleA&quot;);
+pane.add(comp, &quot;A&quot;);
+var compB = new Button(&quot;SampleB&quot;);
+pane.add(comp, &quot;B&quot;);
+var compC = new Button(&quot;SampleC&quot;);
+pane.add(comp, &quot;C&quot;);
+self.view.add(pane);
+
+pane.show(&quot;B&quot;);//Shows the SampleB button</programlisting>
     </section>
     <section id="ui-containers-boxpane">
       <title>BoxPane</title>
@@ -871,7 +1078,7 @@ view.add(wrapper);</programlisting>
       <title>DesktopPane</title>
       <para><code>DesktopPane</code> is used to create a multi-document interface or a virtual desktop.</para>
       <para>Forms with a title can be displayed inside this container. Forms are added to the container by the JavaScript program. After adding, these forms can be moved, closed, minimized or expanded to the full container size.</para>
-      <para>To add a form to the  <emphasis>DesktopPane</emphasis>:</para>
+      <para>To add a form to a <code>DesktopPane</code>:</para>
       <itemizedlist>
         <listitem>
           <para>Create a new form instance.</para>

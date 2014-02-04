@@ -62,29 +62,27 @@
   </section>
   <section id="app-structure">
     <title>Application structure</title>
-    <para>Platypus  applications have a tree structure which contains  directories and files. Some files or file groups have a special meaning to the platform and called application elements. That is the building bricks for an application.</para>
-    <para> The types of application elements in Platypus Platform are:
+    <para>Application has a tree structure which contains  directories and files. Some files or file groups, called application elements, have a special meaning to the platform.</para>
+    <para> The types of application elements  are:
   </para>
     <itemizedlist>
       <listitem>
-        <para><emphasis>Module</emphasis> is a structural unit of the JavaScript  code, and its data model.</para>
+        <para><link linkend="query-chapter">Query</link> is a data source based on  SQL query.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Form</emphasis> is a module with a user interface  layout.</para>
+        <para><link linkend="module-chapter">Module</link> is a structural unit of the JavaScript  code.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Report</emphasis> is a module with a template of the generated office document.</para>
+        <para><link linkend="form-intro">Form</link> is a module with  UI  layout.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Query</emphasis> is a database query in SQL language.</para>
+        <para><link linkend="report-chapter">Report</link>  is a module with a template.</para>
       </listitem>
       <listitem>
-        <para><emphasis>Database diagram</emphasis> is a visual representation of the database structure.</para>
+        <para><link linkend="diargram-chapter">Database diagram</link>  is a visual representation of the database structure.</para>
       </listitem>
     </itemizedlist>
-    <note>
-      <para>During   development process, the application tree is stored on the disk in the project&apos;s <filename>src</filename> subfolder, but for production operation the application, including its resources can be deployed directly to the  database <literal>MTD_ENTITIES</literal> table.</para>
-    </note>
+    <para>During   development process, the application tree is stored on  disk in the project&apos;s directory <filename>src</filename> subfolder. For production operation application can be deployed into the  database <literal>MTD_ENTITIES</literal> table.</para>
   </section>
   <section id="runtime-conf">
     <title>Runtime configurations</title>
@@ -93,17 +91,16 @@
       <title>Applicaton tiers</title>
       <mediaobject>
         <imageobject>
-          <imagedata width="100%" contentdepth="100%" align="center" scalefit="1" fileref="images/tiers.png" format="PNG"/>
+          <imagedata fileref="images/tiers.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>In case of no-server configuration the presentation tier and logic tier operate at Java SE desktop client, and in case server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
     <para>The platform&apos;s applications can work in the following configurations:</para>
     <itemizedlist>
       <listitem>
-        <para>No-server configuration is the Java SE desktop client connects directly to the database server. This scheme is recommended for relatively simple applications, which do not require any application server.</para>
+        <para>2-tier solution is the Java SE desktop client connects directly to the database server. This scheme is recommended for relatively simple applications, which do not require any application server.</para>
         <figure>
-          <title>No-server configuration</title>
+          <title>2-tier solution</title>
           <mediaobject>
             <imageobject>
               <imagedata align="center" fileref="images/2-tiers.png" format="PNG"/>
@@ -112,10 +109,9 @@
         </figure>
       </listitem>
       <listitem>
-        <para>The configuration with  Platypus Application Server (PAS). In this configuration the desktop client connects to the
-PAS. This server is a lightweight non-J2EE Java application server. The custom binary protocol is used to transmit data. The application server, in turn, interacts with a database server.</para>
+        <para>The 3-tier solution with deskop client and   Platypus Application Server (PAS).  This server is a lightweight non-J2EE Java application server. The custom binary protocol is used to transmit data. The application server, in turn, interacts with a database server.</para>
         <figure>
-          <title>The configuration using PAS</title>
+          <title>3-tier configuration using PAS</title>
           <mediaobject>
             <imageobject>
               <imagedata align="center" fileref="images/3-tiers.png" format="PNG"/>
@@ -124,9 +120,9 @@ PAS. This server is a lightweight non-J2EE Java application server. The custom b
         </figure>
       </listitem>
       <listitem>
-        <para>The configuration with a J2EE compatible server to host the platfroms server components. The deskotp client or HTML5 browser connects to the servlet container or J2EE server.  HTTP/HTTPS protocol is used to transmit data. In this case, the data source resources are managed by the container.</para>
+        <para>The 3-tier solution with a Java EE compatible server to host the platfroms server components. The deskotp client or HTML5 browser connects to the servlet container or J2EE server using  HTTP/HTTPS protocol. In this case, an application&apos;s data source resources are managed by the Java EE container.</para>
         <figure>
-          <title>The configuration on Java EE</title>
+          <title>3-tier configuration on Java EE</title>
           <mediaobject>
             <imageobject>
               <imagedata align="center" fileref="images/3-tiers-j2ee.png" format="PNG"/>
@@ -153,6 +149,10 @@ PAS. This server is a lightweight non-J2EE Java application server. The custom b
         <para>The ability to use HTML5 web browser as a client (using the J2EE servlet container/application server).</para>
       </listitem>
     </itemizedlist>
+    <para>In case of no-server configuration the presentation tier and logic tier operate at Java SE desktop client, and in case server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
+  </section>
+  <section>
+    <title>Data flow</title>
     <para>The figure below shows a simplified diagram of components interaction and data flow. </para>
     <figure>
       <title>The data flow</title>
@@ -168,7 +168,7 @@ PAS. This server is a lightweight non-J2EE Java application server. The custom b
     <para>The usage of data model simplifies many data processing operations, since it provides  entities&apos; data loading, automatic saving of changes, simplified support of transactions, centralized management of resources, etc.</para>
   </section>
   <section id="dev-workflow">
-    <title>Development workflow</title>
+    <title>Development steps</title>
     <para>To develop an  application use the following workflow:</para>
     <itemizedlist>
       <listitem>
