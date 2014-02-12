@@ -8,9 +8,8 @@
   <para>This section provides general information about the Platypus Platform.</para>
   <section id="about-platform">
     <title>About the Platypus Platform </title>
-    <para>The Platypus Platform is a software platform  for rapid development of complex   applications for  enterprise-level information systems in JavaScript.</para>
-    <para>The main goal of the platform is to accelerate   development process, providing maximum possible automation of routine operations. To perform common tasks, ready-to-go and proven solutions are provided. The platform hides technical aspects of  implementation  from a  developer and enables  to concentrate on application business domain.</para>
-    <para> The Platypus Platform uses two application programming languages:</para>
+    <para>The Platypus Platform is a JavaScript client and server   applications platform  for rapid development of   enterprise-level information systems.</para>
+    <para> The platform uses two application programming languages:</para>
     <itemizedlist>
       <listitem>
         <para>JavaScript (compatible with the ECMA-262-3 standard) is used to write program logic.</para>
@@ -19,8 +18,8 @@
         <para>SQL is used to access data.</para>
       </listitem>
     </itemizedlist>
-    <para>Application creation and editing, deployment, debugging and maintenance  are performed using the  <application>Platypus Application Designer IDE</application> based on the NetBeans. However, individual  files, for example, JavaScript modules, can be edited in any text editor.</para>
-    <para>The Platypus Application Designer includes  following  development tools: </para>
+    <para>Application creation and editing, deployment, debugging and maintenance  are performed using the  <application>Platypus Application Designer IDE</application> based on the NetBeans Platform. However, individual  files, for example, JavaScript modules, can be edited in any text editor.</para>
+    <para>The IDE includes  following  development tools: </para>
     <itemizedlist>
       <listitem>
         <para>Application database structure visual editor.</para>
@@ -103,7 +102,7 @@
           <title>2-tier solution</title>
           <mediaobject>
             <imageobject>
-              <imagedata align="center" fileref="images/2-tiers.png" format="PNG"/>
+              <imagedata fileref="images/2-tiers.png"/>
             </imageobject>
           </mediaobject>
         </figure>
@@ -111,10 +110,10 @@
       <listitem>
         <para>The 3-tier solution with deskop client and   Platypus Application Server (PAS).  This server is a lightweight non-J2EE Java application server. The custom binary protocol is used to transmit data. The application server, in turn, interacts with a database server.</para>
         <figure>
-          <title>3-tier configuration using PAS</title>
+          <title>3-tier solution using PAS</title>
           <mediaobject>
             <imageobject>
-              <imagedata align="center" fileref="images/3-tiers.png" format="PNG"/>
+              <imagedata fileref="images/3-tiers.png"/>
             </imageobject>
           </mediaobject>
         </figure>
@@ -125,7 +124,7 @@
           <title>3-tier configuration on Java EE</title>
           <mediaobject>
             <imageobject>
-              <imagedata align="center" fileref="images/3-tiers-j2ee.png" format="PNG"/>
+              <imagedata fileref="images/3-tiers-j2ee.png"/>
             </imageobject>
           </mediaobject>
         </figure>
@@ -151,14 +150,14 @@
     </itemizedlist>
     <para>In case of no-server configuration the presentation tier and logic tier operate at Java SE desktop client, and in case server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
   </section>
-  <section>
+  <section arch="data-flow">
     <title>Data flow</title>
     <para>The figure below shows a simplified diagram of components interaction and data flow. </para>
     <figure>
       <title>The data flow</title>
       <mediaobject>
         <imageobject>
-          <imagedata align="center" fileref="images/dataflow.png" format="PNG"/>
+          <imagedata fileref="images/dataflow.png"/>
         </imageobject>
       </mediaobject>
     </figure>

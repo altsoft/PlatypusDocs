@@ -25,7 +25,7 @@
     <title>Transformations when generating a report</title>
     <mediaobject>
       <imageobject>
-        <imagedata align="center" fileref="images/reportsFlow.png" format="PNG" width="655" depth="338"/>
+        <imagedata fileref="images/reportsFlow.png"/>
       </imageobject>
     </mediaobject>
   </figure>
@@ -53,19 +53,19 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section label="" id="report-editor">
-    <title>Report editor</title>
-    <para> To open the application element editor, double-click the application element in the project tree. </para>
-    <para>You can edit the report template in the spreadsheet application. The following applications are used by default for different operating systems:</para>
+  <section>
+    <title>Reports editor</title>
+    <para>To open reports editor, double-click the application element in the project tree. </para>
+    <para>Edit the report template in the spreadsheet application. The following applications are used by default for different operating systems:</para>
     <itemizedlist>
       <listitem>
-        <para>For Windows OS: <application>Microsoft Excel</application>.</para>
+        <para>Windows: <application>Microsoft Excel</application>.</para>
       </listitem>
       <listitem>
-        <para>For Linux OS: <application>Open/Libre Office Calc</application>.</para>
+        <para>Linux: <application>Open/Libre Office Calc</application>.</para>
       </listitem>
       <listitem>
-        <para>For Mac OS: <application>Microsoft Excel</application>.</para>
+        <para>Mac OS: <application>Microsoft Excel</application>.</para>
       </listitem>
     </itemizedlist>
     <para>To edit a report:</para>
@@ -162,24 +162,8 @@ Chief Name: ${department.chief.name}
 &lt;/jx:outline&gt;</programlisting>
     <para>The  <literal>jx:outline</literal> tag has an optional <property>detail</property> attribute, which determines the state of the row group. By default, it is set to <literal>false</literal>, which means that the row group will be hidden.</para>
   </section>
-  <section id="report-graphs-charts">
-    <title>Graphs and charts</title>
-    <para>Use standard spreadsheet tools for outputting graphs and charts. </para>
-    <para>If a collection with a fixed number of elements is used, just configure the <application>Excel</application> charts for the range of cells in which data will be displayed.</para>
-    <para>If you don&apos;t know the number of elements in the collection, choose the method of using <literal>OFFSET</literal> and <literal>COUNTA</literal> functions and creating the named range.</para>
-    <note>
-      <para>Read the articles at the following websites to find out more about creating charts with a dynamic range of data:<itemizedlist>
-          <listitem>
-            <para><ulink url="http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518">http://pubs.logicalexpressions.com/pub0009/LPMArticle.asp?ID=518</ulink></para>
-          </listitem>
-          <listitem>
-            <para><ulink url="http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html">http://www.tushar-mehta.com/excel/newsgroups/dynamic_charts/index.html</ulink></para>
-          </listitem>
-        </itemizedlist></para>
-    </note>
-  </section>
   <section id="report-js">
-    <title>JavaScript code</title>
+    <title>Report API</title>
     <para>To generate a report, create a report object by passing the required report identifier to the constructor name.</para>
     <para>Use the report object:</para>
     <itemizedlist>

@@ -8,9 +8,6 @@
   <para>Database diagram is an application element responsible for representation of the database structure. For example, the diagram can specify some part of the knowledge domain. Generally,  the project contains several database structure diagrams at the developer convenience.</para>
   <para>A database structure diagram is a visual representation of the database structure, and it does not directly affect the application functionality.</para>
   <para>The structure of the relational database is determined by the  tables and links between them. Links between two tables are implemented through the foreign keys.</para>
-  <note>
-    <para>Refer to the publications dedicated to the relational databases for detailed description of specific terms, such as table, foreign key, relations, etc.</para>
-  </note>
   <section id="new-diagram">
     <title>New diagram creation</title>
     <para>To create a new database  diagram, perform the following actions:

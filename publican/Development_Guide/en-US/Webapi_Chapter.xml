@@ -61,7 +61,7 @@
     <para><uri>http://server/platypus/application/api?__type=14&amp;__moduleName=TestModule&amp;__methodName=say&amp;__param[]=Hello Platypus&amp;__param[]=1</uri></para>
   </section>
   <section id="web-req-resp">
-    <title>Request and response APIs</title>
+    <title>HTTP request and response API</title>
     <para>To access HTTP request and response in the JavaScript server code, use the <code>http</code> property, which is available, if the method is called by the external HTTP request.</para>
     <programlisting language="JavaScript">function ModuleConstructor() {
    var http = this.http;
@@ -137,7 +137,23 @@
               <parameter>contentType</parameter>
             </entry>
             <entry>
-              <para>MIME type of the request body or null if the type is unknown.</para>
+              <para>MIME type of the request body or <code>null</code> if the type is unknown.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>body</parameter>
+            </entry>
+            <entry>
+              <para>Request body as a string.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>bodyBuffer</parameter>
+            </entry>
+            <entry>
+              <para>Request body as a bytes array.</para>
             </entry>
           </row>
           <row>
@@ -323,12 +339,6 @@
         <tbody>
           <row>
             <entry>
-              <parameter>headers</parameter>
-            </entry>
-            <entry>Response headers in the &quot;key-value&quot; form.</entry>
-          </row>
-          <row>
-            <entry>
               <parameter>status</parameter>
             </entry>
             <entry>
@@ -342,6 +352,28 @@
             <entry>
               <para>MIME type of the response body.</para>
             </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>body</parameter>
+            </entry>
+            <entry>
+              <para>The text body sent in this response. The body must be set after content type. Note that content length is set automatically.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>bodyBuffer</parameter>
+            </entry>
+            <entry>
+              <para>The binary body sent in this response, as a bytes array. The body must be set after content type. Note that content length is set automatically.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>headers</parameter>
+            </entry>
+            <entry>Response headers in &quot;key-value&quot; form.</entry>
           </row>
           <row>
             <entry>
@@ -370,7 +402,7 @@
         </tbody>
       </tgroup>
     </informaltable>
-    <para>The cookie object contains the following properties:</para>
+    <para>The <code>cookie</code> object contains the following properties:</para>
     <informaltable>
       <tgroup cols="2">
         <thead>

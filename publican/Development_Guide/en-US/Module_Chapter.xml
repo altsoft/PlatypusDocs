@@ -72,7 +72,7 @@
     </itemizedlist>
     <para>To configure auto completion modes, go to the  <guilabel>Code Completion</guilabel> tab and enable or disable corresponding options.</para>
   </section>
-  <section label="" id="module-constructor">
+  <section>
     <title>Module constructor</title>
     <para>Using modules allows you to manage the complexity  according to the object-oriented programming principles.</para>
     <para>Module is an equivalent of a class in other programming languages, such as in Java or С++.</para>
@@ -157,14 +157,17 @@ function otherFunction() {
     <para>Automatic dependencies resolving works as follows:</para>
     <itemizedlist>
       <listitem>
-        <para>The source code is analyzed and expressions of the following types are searched for:</para>
-        <programlisting>new <replaceable>ModuleName</replaceable>()</programlisting>
-        <programlisting language="JavaScript">new Module(&quot;<replaceable>ModuleName</replaceable>&quot;)</programlisting>
-        <programlisting language="JavaScript">Modules.get(&quot;<replaceable>ModuleName</replaceable>&quot;)</programlisting>
-        <programlisting language="JavaScript">new <replaceable>FormName</replaceable>()</programlisting>
-        <programlisting language="JavaScript">new Form(&quot;<replaceable>FormName</replaceable>&quot;)</programlisting>
-        <programlisting>new ServerModule(&quot;<replaceable>ServerModuleName</replaceable>&quot;)</programlisting>
-        <programlisting>new ServerReport(&quot;<replaceable>ServerReportName</replaceable>&quot;)</programlisting>
+        <para>The source code is analyzed and expressions of the following types are searched for the following expressions:</para>
+        <para><code>new <replaceable>ModuleName</replaceable>()</code></para>
+        <para><code>new Module(&quot;<replaceable>ModuleName</replaceable>&quot;)</code></para>
+        <para><code>Modules.get(&quot;<replaceable>ModuleName</replaceable>&quot;)</code></para>
+        <para><code>new ServerModule(&quot;<replaceable>ServerModuleName</replaceable>&quot;)</code></para>
+        <para><code>new <replaceable>FormName</replaceable>()</code></para>
+        <para><code>new Form(&quot;<replaceable>FormName</replaceable>&quot;)</code></para>
+        <para><code>new <replaceable>ReportName</replaceable>()</code></para>
+        <para><code>new Report(&quot;<replaceable>ReportName</replaceable>&quot;)</code></para>
+        <para><code>new ServerReport(&quot;<replaceable>ServerReportName</replaceable>&quot;)</code></para>
+        <para>where <replaceable>ModuleName</replaceable> is the name of the module, form and reports are in fact a special kind of a module. </para>
       </listitem>
       <listitem>
         <para>Application elements with the specified names are loaded or server proxies for server modules/reports are generated.</para>
@@ -173,12 +176,12 @@ function otherFunction() {
         <para>The process continues recursevly for the loaded modules, except for the server proxies.</para>
       </listitem>
     </itemizedlist>
-    <para>If it is not necessary or not possible to resolve the dependency automatically, for example, if you want to determine the called module in a dynamic manner, you can use the manual dependencies resolving. To do this, use the  <code>require</code> global function. You can also use the  <code>require</code> function to download plain JavaScript files.</para>
-    <programlisting language="JavaScript">require([<replaceable>param</replaceable>], <replaceable>callback</replaceable>)</programlisting>
-    <para>where  <replaceable>param</replaceable> is the module constructor name, or the relative path to the JavaScript file in the application, or an array of these elements;  <replaceable>callback</replaceable> is a function, which will be called when all the specified modules are downloaded and executed.<note>
-        <para>Don&apos;t use manual dependencies resolving against a server module. It will  lead to attempt to download the module body on the client.</para>
-      </note></para>
-    <para>Example of using the manual dependencies resolving:</para>
+    <para>If it is not necessary or not possible to resolve the dependency automatically, for example, if you want to determine the called module in a dynamic manner, you can use the manual dependencies resolving with <code>require</code>. </para>
+    <para>Use   <code>require([<replaceable>param</replaceable>], <replaceable>callback</replaceable>)</code> global function, where  <replaceable>param</replaceable> is the module constructor name, or the relative path to the JavaScript file in the application, or an array of these elements,  <replaceable>callback</replaceable> is a function, which will be called when all the specified modules are downloaded and executed.</para>
+    <note>
+      <para>Don&apos;t use manual dependencies resolving against a server modules. It will  lead to attempt to download the module body on the client.</para>
+    </note>
+    <para>Example of using  manual dependencies resolving is as follows:</para>
     <programlisting language="JavaScript">var moduleName1 = &quot;Module1&quot;,
     moduleName2 = &quot;Module2&quot;;
 require([moduleName1, moduleName2], function() {
@@ -305,7 +308,7 @@ Logger.info(Resource.applicationPath);</programlisting>
         <title>Data model structure</title>
         <mediaobject>
           <imageobject>
-            <imagedata align="center" fileref="images/dataModel.png" format="PNG"/>
+            <imagedata fileref="images/dataModel.png"/>
           </imageobject>
         </mediaobject>
       </figure>
@@ -320,7 +323,7 @@ Logger.info(Resource.applicationPath);</programlisting>
         </listitem>
       </itemizedlist>
       <para>Each entity can have parameters and contains a dataset  with predefined fields according to the data schema defined by the module or query, on the basis of which the entity is created.</para>
-      <para>The parameters of the data model are contained in the special entity named Parameters — which is present in each data model and does not have a full-featured dataset.</para>
+      <para>The parameters of the data model are contained in the special entity named Parameters, which is present in each data model and does not have a full-featured dataset.</para>
       <para>In general, a dataset is an array of objects, each of which corresponds to a tuple in the query results.</para>
       <para>There is a cursor for each dataset. The cursor can point to some row in the dataset and determines the current item of this set. Also the dataset cursor can point to the positions &quot;before the first row&quot; and &quot;after the last row&quot;. The entity cursor position can affect to the linked entities data.</para>
       <para>Entity fields and parameters may be connected by links. The following link types are used in a data model:</para>
@@ -348,7 +351,7 @@ Logger.info(Resource.applicationPath);</programlisting>
         <title>Query and filtration types links</title>
         <mediaobject>
           <imageobject>
-            <imagedata align="center" fileref="images/dataModelLinks.png" format="PNG"/>
+            <imagedata fileref="images/dataModelLinks.png"/>
           </imageobject>
         </mediaobject>
       </figure>
@@ -741,7 +744,7 @@ try {
       <para>where <varname>
           <replaceable>entityName</replaceable>
         </varname>  is an entity object,<varname>
-           <replaceable>paramName</replaceable>
+          <replaceable>paramName</replaceable>
         </varname> is the property of the corresponding parameter.</para>
       <para>To set the parameter value, assign a new value to it:</para>
       <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.params.<replaceable>paramName</replaceable> = newValue;</programlisting>
@@ -1042,6 +1045,7 @@ model.save();// Commit all changes</programlisting>
   Logger.error(&apos;Save data error: &apos; + e);
 }</programlisting>
       <para>After handling the error, you can try to correct the cause of the problem and re-call the  <methodname>save</methodname> function.</para>
+      <para>Use model&apos;s <code>revert</code> method to revert model data changes. After this method call, no data changes are avaliable for <code>save()</code> method, but the model still attempts to commit. Call <code>save()</code> on commitable and unchanged model nevertheless leads to a commit.</para>
     </section>
     <section id="datamodel-search">
       <title>Search API</title>
@@ -1187,15 +1191,172 @@ model.entity1.sort(sorter);</programlisting>
     <section id="datamodel-entity-events">
       <title>Entity events</title>
       <para>To implement some logic to react to the data  events specify entity events handlers functions. To create these handler functions assign functions to entities&apos; properties or use data model editor.</para>
-      <para>Some events are cancelable from the handler function by returning the  <literal>false</literal> value.</para>
+      <para>Use an event handler function  as follows: </para>
+      <programlisting language="JavaScript">function EntityOnEventHandler(evt) {
+   //..code to handle this event
+}</programlisting>
       <para>Entity data events list is given in the table below:</para>
       <informaltable>
-        <tgroup cols="4">
+        <tgroup cols="3">
           <thead>
             <row>
               <entry align="center">Event</entry>
-              <entry>Can cancel an action</entry>
-              <entry>Handler parameters</entry>
+              <entry>Event type</entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>onChanged</parameter>
+              </entry>
+              <entry>
+                <code>ChangeEvent</code>
+              </entry>
+              <entry>Is called after changing the dataset object</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>onDeleted</parameter>
+              </entry>
+              <entry>
+                <code>DeleteEvent</code>
+              </entry>
+              <entry>Is called after removing an object from the dataset</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>onInserted</parameter>
+              </entry>
+              <entry>
+                <code>InsertEvent</code>
+              </entry>
+              <entry>Is called after inserting a new object into the entity dataset</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>onFiltered</parameter>
+              </entry>
+              <entry>
+                <code>EntityEvent</code>
+              </entry>
+              <entry>Is called after filtering the entity dataset</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>onRequeried</parameter>
+              </entry>
+              <entry>
+                <code>EntityEvent</code>
+              </entry>
+              <entry>Is called after re-requesting the dataset data, including the first request during the module&apos;s startup</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>onScrolled</parameter>
+              </entry>
+              <entry>
+                <code>CursorChangeEvent</code>
+              </entry>
+              <entry>Is called after changing the cursor position in the entity dataset array</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>willChange</parameter>
+              </entry>
+              <entry>
+                <code>ChangeEvent</code>
+              </entry>
+              <entry>Is called before changing the rowset object</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>willDelete</parameter>
+              </entry>
+              <entry>
+                <code>DeleteEvent</code>
+              </entry>
+              <entry>Is called before removing an object from the dataset</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>willInsert</parameter>
+              </entry>
+              <entry>
+                <code>InsertEvent</code>
+              </entry>
+              <entry>Is called before inserting an object into the dataset</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>willScroll</parameter>
+              </entry>
+              <entry>
+                <code>CursorChangeEvent</code>
+              </entry>
+              <entry>Is called before moving the cursor over the entity dataset</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>The events that are invoked before some action  are cancelable from the handler function by returning the  <literal>false</literal> value. That way you can cancel the following events: <code>willChange</code>, <code>willDelete</code>, <code>willInsert</code> and <code>willScroll</code>.</para>
+      <para><code>EntityEvent</code>  is a generic entity object and contains the following property:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>source</parameter>
+              </entry>
+              <entry>Event source object.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>Other entity events  contain <code>source</code> property as in  <code>EntityEvent</code>, as well as their own specific properties.</para>
+      <para><code>ChangeEvent</code> object specific  propetries are listed in the following table:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>propertyName</parameter>
+              </entry>
+              <entry>Changed property name.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>oldValue</parameter>
+              </entry>
+              <entry>The value before change.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>newValue</parameter>
+              </entry>
+              <entry>The value after change.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para><code>DeleteEvent</code> object specific propetries are listed in the following table:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
               <entry align="center">Description </entry>
             </row>
           </thead>
@@ -1204,89 +1365,59 @@ model.entity1.sort(sorter);</programlisting>
               <entry>
                 <parameter>deleted</parameter>
               </entry>
-              <entry>no</entry>
-              <entry/>
-              <entry>Is called after removing an object from the dataset</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>changed</parameter>
-              </entry>
-              <entry>no</entry>
-              <entry><parameter>aField</parameter> — <classname>Object</classname>, a changed property; <parameter>aOldValue</parameter> — <classname>Object</classname>, an old value; <parameter>aNewValue</parameter> — <classname>Object</classname>, a new value; <parameter>aObj</parameter> — a changed property</entry>
-              <entry>Is called after changing the dataset object</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>inserted</parameter>
-              </entry>
-              <entry>no</entry>
-              <entry/>
-              <entry>Is called after inserting a new object into the entity dataset</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>filtered</parameter>
-              </entry>
-              <entry>no</entry>
-              <entry/>
-              <entry>Is called after filtering the entity dataset</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>requeried</parameter>
-              </entry>
-              <entry>no</entry>
-              <entry/>
-              <entry>Is called after re-requesting the dataset data, including the first request during the module&apos;s startup</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>scrolled</parameter>
-              </entry>
-              <entry>no</entry>
-              <entry><parameter>aOldIndex</parameter> — <classname>Numeric</classname>, an old cursor position; <parameter>aNewIndex</parameter> - <classname>Number</classname>, a new cursor position</entry>
-              <entry>Is called after changing the cursor position in the entity dataset array</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>willChange</parameter>
-              </entry>
-              <entry>yes</entry>
-              <entry><parameter>aField</parameter> — <classname>Object</classname>, a changed property; <parameter>aOldValue</parameter> — <classname>Object</classname>, an old value; <parameter>aNewValue</parameter> — <classname>Object</classname>, a new value; <parameter>aObj</parameter> — a changed object</entry>
-              <entry>Is called before changing the rowset object</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>willDelete</parameter>
-              </entry>
-              <entry>yes</entry>
-              <entry/>
-              <entry>Is called before removing an object from the dataset</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>willInsert</parameter>
-              </entry>
-              <entry>yes</entry>
-              <entry/>
-              <entry>Is called before inserting an object into the dataset</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>willScroll</parameter>
-              </entry>
-              <entry>yes</entry>
-              <entry><parameter>aNewIndex</parameter> — <classname>Number</classname>, a future cursor position</entry>
-              <entry>Is called before moving the cursor over the entity dataset</entry>
+              <entry>The deleted object.</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Example of using an event handler function to validate the value of the object property:  </para>
+      <para><code>InserteEvent</code> object specific  propetries are listed in the following table:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>inserted</parameter>
+              </entry>
+              <entry>The inserted object.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para><code>CursorChangeEvent</code> object specific  propetries are listed in the following table:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>oldIndex</parameter>
+              </entry>
+              <entry>The cursor position index before position change.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>newIndex</parameter>
+              </entry>
+              <entry>The cursor position index after position change.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>Example of using an event handler function for validation:  </para>
       <programlisting language="JavaScript">//Handles willChange event
-function usersWillChange(aField, aOldValue, aNewValue, aObj) {
-  return validateEmail(aNewValue);
+function usersWillChange(evt) {
+  return validateEmail(evt.newValue);
 }
 
 //Simple e-mail validation
@@ -1487,7 +1618,7 @@ var entityMetadata = item.schema;</programlisting>
               <entry>
                 <classname>Boolean</classname>
               </entry>
-              <entry><literal>true</literal>, if the parameter was changed</entry>
+              <entry><literal>true</literal>, if the parameter was changed and <code>false</code> otherwise</entry>
             </row>
             <row>
               <entry>
@@ -1496,7 +1627,7 @@ var entityMetadata = item.schema;</programlisting>
               <entry>
                 <classname>Boolean</classname>
               </entry>
-              <entry><literal>true</literal>, if the parameter is a primary key</entry>
+              <entry><literal>true</literal>, if the parameter is a primary key and <code>false</code> otherwise</entry>
             </row>
             <row>
               <entry>
@@ -1505,7 +1636,7 @@ var entityMetadata = item.schema;</programlisting>
               <entry>
                 <classname>Boolean</classname>
               </entry>
-              <entry><literal>true</literal>, if the field is an foreign key referring to another entity</entry>
+              <entry><literal>true</literal>, if the field is an foreign key referring to another entity and <code>false</code> otherwise</entry>
             </row>
             <row>
               <entry>
@@ -1532,7 +1663,7 @@ var entityMetadata = item.schema;</programlisting>
               <entry>
                 <classname>Boolean</classname>
               </entry>
-              <entry><literal>true</literal>, if the parameter is read-only</entry>
+              <entry><literal>true</literal>, if the parameter is read-only and <code>false</code> otherwise</entry>
             </row>
             <row>
               <entry>
@@ -1568,7 +1699,7 @@ var entityMetadata = item.schema;</programlisting>
               <entry>
                 <classname>Boolean</classname>
               </entry>
-              <entry><literal>true</literal>, if the parameter has a <classname>Number</classname> type and can take on negative values</entry>
+              <entry><literal>true</literal>, if the parameter has a <classname>Number</classname> type and can take on negative values and <code>false</code> otherwise</entry>
             </row>
             <row>
               <entry>
@@ -1577,7 +1708,7 @@ var entityMetadata = item.schema;</programlisting>
               <entry>
                 <classname>Boolean</classname>
               </entry>
-              <entry><literal>true</literal>, if the parameter is not mandatory</entry>
+              <entry><literal>true</literal>, if the parameter is not mandatory and <code>false</code> otherwise</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1803,7 +1934,7 @@ process.invokeBackground(0);</programlisting>
 setThreadPoolSize(16);
 Logger.info(getThreadPoolSize());// 16</programlisting>
     <para>Variables and properties of JavaScript objects ensure security of reading and writing when accessing them from multiple threads.</para>
-    <para>If it is necessary to implement the synchronization mechanism independently, use the  <literal>Lock</literal>, object, which is a JavaScript shell for the <classname>java.util.concurrent.locks.ReentrantLock</classname> Java class. Refer to the Java documentation for more information.</para>
+    <para>If it is necessary to implement the synchronization mechanism independently, use the  <literal>Lock</literal>, object, which is a JavaScript wrapper for the <classname>java.util.concurrent.locks.ReentrantLock</classname> Java class. Refer to  Java documentation for more information.</para>
     <warning>
       <para>Multithreaded programming is rather complex. Incorrectly implemented thread synchronization scheme can lead to hardly detectable errors and unexpected program behavior.</para>
     </warning>
@@ -1864,9 +1995,6 @@ element1.appendChild(element2);   </programlisting>
     <programlisting language="JavaScript">var a = 2;  
 var bar = &apos;bar&apos;;  
 var foo = &lt;foo {bar}={a}&gt;hi&lt;/foo&gt;;   </programlisting>
-    <note>
-      <para>Note that  <abbrev>XML</abbrev> elements may contain only text data, while the <code>toString</code> is used for embedding into     <abbrev>XML</abbrev>.</para>
-    </note>
     <para>Even though the embedded objects are restricted to a single expression, use an anonymous function to embed more complex logic:</para>
     <programlisting language="JavaScript">var a = &apos;foo&apos;;  
 var b = &lt;bar&gt;{function () {var c = a.toUpperCase(); var d = 5 * 5; return c + d;}()}&lt;/bar&gt;;  </programlisting>
