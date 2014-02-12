@@ -311,31 +311,31 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <parameter>close(selected)</parameter>
             </entry>
-            <entry>Closes the form. This method may be used to return a value, selected using the dialog. If the <parameter>selected</parameter> parameter is specified, it will be passed as the <literal>callback</literal> argument of the function, which is passed in turn as a parameter to the <literal>showModal(<replaceable>callback</replaceable>)</literal> method of the parent form. If the <parameter>selected</parameter> parameter has the <literal>null</literal> value, the <literal>callback</literal> function will still be called. If the <parameter>selected</parameter> parameter is not passed at all, the <literal>callback</literal> function won&apos;t be called</entry>
+            <entry>Closes the form. This method may be used to return a value, selected using the dialog. If the <parameter>selected</parameter> parameter is specified, it will be passed as the <literal>callback</literal> argument of the function, which is passed in turn as a parameter to the <literal>showModal(<replaceable>callback</replaceable>)</literal> method of the parent form. If the <parameter>selected</parameter> parameter has the <literal>null</literal> value, the <literal>callback</literal> function will still be called. If the <parameter>selected</parameter> parameter is not passed at all, the <literal>callback</literal> function won&apos;t be called.</entry>
           </row>
           <row>
             <entry>
               <parameter>minimize()</parameter>
             </entry>
-            <entry>Minimizes the form </entry>
+            <entry>Minimizes the form. </entry>
           </row>
           <row>
             <entry>
               <parameter>maximize()</parameter>
             </entry>
-            <entry>Maximizes the form </entry>
+            <entry>Maximizes the form. </entry>
           </row>
           <row>
             <entry>
               <parameter>restore()</parameter>
             </entry>
-            <entry>Restores the previous state of the form </entry>
+            <entry>Restores the previous state of the form. </entry>
           </row>
           <row>
             <entry>
               <parameter>toFront()</parameter>
             </entry>
-            <entry>Brings the form to the forefront</entry>
+            <entry>Brings the form to the forefront.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -358,7 +358,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>MouseWheelEvent</code>
             </entry>
-            <entry>Is called after rotating the mouse wheel </entry>
+            <entry>Is called after rotating the mouse wheel. </entry>
           </row>
           <row>
             <entry>
@@ -367,7 +367,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>MouseEvent</code>
             </entry>
-            <entry>Is called after the mouse is clicked</entry>
+            <entry>Is called after the mouse is clicked.</entry>
           </row>
           <row>
             <entry>
@@ -376,7 +376,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>ContainerEvent</code>
             </entry>
-            <entry>Is called after adding a component into the form</entry>
+            <entry>Is called after adding a component into the form.</entry>
           </row>
           <row>
             <entry>
@@ -385,7 +385,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>ContainerEvent</code>
             </entry>
-            <entry>Is called after hiding a component </entry>
+            <entry>Is called after hiding a component.</entry>
           </row>
           <row>
             <entry>
@@ -394,7 +394,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>ContainerEvent</code>
             </entry>
-            <entry>Is called after removing a component from the form</entry>
+            <entry>Is called after removing a component from the form.</entry>
           </row>
           <row>
             <entry>
@@ -403,7 +403,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>ContainerEvent</code>
             </entry>
-            <entry>Is called after changing the component size </entry>
+            <entry>Is called after changing the component size. </entry>
           </row>
           <row>
             <entry>
@@ -412,7 +412,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>ContainerEvent</code>
             </entry>
-            <entry>Is called after displaying the component</entry>
+            <entry>Is called after displaying the component.</entry>
           </row>
           <row>
             <entry>
@@ -421,7 +421,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>FocusEvent</code>
             </entry>
-            <entry>Is called after getting the keyboard focus</entry>
+            <entry>Is called after getting the keyboard focus.</entry>
           </row>
           <row>
             <entry>
@@ -430,7 +430,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>FocusEvent</code>
             </entry>
-            <entry>Is called after losing the keyboard focus</entry>
+            <entry>Is called after losing the keyboard focus.</entry>
           </row>
           <row>
             <entry>
@@ -439,7 +439,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>KeyEvent</code>
             </entry>
-            <entry>Is called after pressing the keyboard key </entry>
+            <entry>Is called after pressing the keyboard key. </entry>
           </row>
           <row>
             <entry>
@@ -448,7 +448,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>KeyEvent</code>
             </entry>
-            <entry>Is called after releasing the keyboard key</entry>
+            <entry>Is called after releasing the keyboard key.</entry>
           </row>
           <row>
             <entry>
@@ -457,7 +457,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>WindowEvent</code>
             </entry>
-            <entry>Is called after the window activation </entry>
+            <entry>Is called after the window activation. </entry>
           </row>
           <row>
             <entry>
@@ -466,7 +466,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>WindowEvent</code>
             </entry>
-            <entry>Is called after closing the form window </entry>
+            <entry>Is called after closing the form window. </entry>
           </row>
           <row>
             <entry>
@@ -475,7 +475,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>WindowEvent</code>
             </entry>
-            <entry>Is called before closing the form window </entry>
+            <entry>Is called before closing the form window. </entry>
           </row>
           <row>
             <entry>
@@ -484,7 +484,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>WindowEvent</code>
             </entry>
-            <entry>object Is called after deactivating the form window</entry>
+            <entry>object Is called after deactivating the form window.</entry>
           </row>
           <row>
             <entry>
@@ -493,7 +493,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>WindowEvent</code>
             </entry>
-            <entry>Is called after retrieving the form from an icon on the panel</entry>
+            <entry>Is called after retrieving the form from an icon on the panel.</entry>
           </row>
           <row>
             <entry>
@@ -502,7 +502,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>WindowEvent</code>
             </entry>
-            <entry>Is called after minimizing the form </entry>
+            <entry>Is called after minimizing the form. </entry>
           </row>
           <row>
             <entry>
@@ -511,7 +511,7 @@ Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
             <entry>
               <code>WindowEvent</code>
             </entry>
-            <entry>Is called after opening the form window</entry>
+            <entry>Is called after opening the form window.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -2494,9 +2494,65 @@ wrapper.add(pane);</programlisting>
     </section><section id="ui-containers-desktoppane">
       <title>DesktopPane</title>
       <para><code>DesktopPane</code> is used to create a multi-document interface.</para>
-      <para>Forms with a title can be displayed inside this container. Forms are added to the container by the JavaScript program. After adding, these forms can be moved, closed, minimized or expanded to the full container size.</para>
+      <para>Forms  can be displayed inside this container. Add forms to  the container in your  program. After adding, these forms can be moved, closed, minimized or expanded to the full container size.</para>
       <para>To create a component of this type by program means, use the  <classname>DesktopPane</classname> constructor:</para>
       <programlisting language="JavaScript">var pane = new DesktopPane();</programlisting>
+      <para>The list of specific methods of the component:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <code>minimizeAll()</code>
+              </entry>
+              <entry>Minimizes all frames on the pane.</entry>
+            </row>
+            <row>
+              <entry>
+                <code>restoreAll()</code>
+              </entry>
+              <entry>Restores frames original state and location.</entry>
+            </row>
+            <row>
+              <entry>
+                <code>maximizeAll()</code>
+              </entry>
+              <entry>Maximizes all frames on the pane.</entry>
+            </row>
+            <row>
+              <entry>
+                <code>closeAll()</code>
+              </entry>
+              <entry>Closes all frames on the pane.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>The  specific property of the component:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>forms</parameter>
+              </entry>
+              <entry>An array of all frames on the pane (read-only).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To add a form to a <code>DesktopPane</code>:</para>
       <itemizedlist>
         <listitem>
@@ -2508,8 +2564,7 @@ wrapper.add(pane);</programlisting>
       </itemizedlist>
       <para>Example:<programlisting language="JavaScript">var desktop = new DesktopPane();
 var myForm = new InnerForm();
-myForm.showInternalFrame(desktopPane);
-view.add(desktop);</programlisting></para>
+myForm.showInternalFrame(desktopPane);</programlisting></para>
     </section></section>
   <section id="menus">
     <title>Menus</title>
