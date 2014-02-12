@@ -373,7 +373,7 @@
             <entry>
               <parameter>headers</parameter>
             </entry>
-            <entry>Response headers in &quot;key-value&quot; form.</entry>
+            <entry>Response headers in a &quot;key-value&quot; form.</entry>
           </row>
           <row>
             <entry>

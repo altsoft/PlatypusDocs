@@ -769,6 +769,15 @@ self.view.background = Color.black;</programlisting>
           <tbody>
             <row>
               <entry>
+                <parameter>onActionPerformed</parameter>
+              </entry>
+              <entry>
+                <code>ComponentEvent</code>
+              </entry>
+              <entry>Is called when main action performed</entry>
+            </row>
+            <row>
+              <entry>
                 <parameter>onComponentAdded</parameter>
               </entry>
               <entry>
@@ -882,7 +891,7 @@ self.view.background = Color.black;</programlisting>
               <entry>
                 <code>MouseEvent</code>
               </entry>
-              <entry> Component is dragged by the mouse </entry>
+              <entry>Component is dragged by the mouse </entry>
             </row>
             <row>
               <entry>
@@ -2118,11 +2127,22 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
             </entry>
             <entry>Removes all child components </entry>
           </row>
+        </tbody>
+      </tgroup>
+    </informaltable><para>The common property  all containers: </para><informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Method </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
           <row>
             <entry>
-              <parameter>сount()</parameter>
+              <parameter>сount</parameter>
             </entry>
-            <entry>Returns the number of child components</entry>
+            <entry>The number of child components (read-only)</entry>
           </row>
         </tbody>
       </tgroup>
@@ -2391,7 +2411,7 @@ pane.add(comp);</programlisting>
       <programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>, <replaceable>text</replaceable>);
 pane.add(<replaceable>component</replaceable>, <replaceable>text</replaceable>, <replaceable>icon</replaceable>);</programlisting>
       <para>where <replaceable>component</replaceable> is a component, which is added, <replaceable>text</replaceable> is the label text, <replaceable>icon</replaceable> is the label icon.</para>
-      <para>An example of code using the <emphasis>Tabbed Pane</emphasis> container:</para>
+      <para>An example of code using the <code>TabbedPane</code>  container:</para>
       <programlisting language="JavaScript">var pane = new TabbedPane();
 var tab1 = new AnchorsPane();
 var tab2 = new AnchorsPane();
@@ -2495,14 +2515,39 @@ view.add(desktop);</programlisting></para>
     <title>Menus</title>
     <section id="menu-menubar">
       <title>MenuBar</title>
-      <para><code>MenuBar</code> component is a form&apos;s main menu bar, into which individual menus can be added. </para>
+      <para><code>MenuBar</code> component is a form&apos;s main menu bar, into which individual menus can be added. This compontent is a kind of a container and inherits it common properties and methods. </para>
       <para>After adding this component from the  palette, the menu bar contains some default menus, this menus can be changed or deleted.</para>
+      <para>To create a component of this type by in your code, use the  <classname>MenuBar</classname> constructor:</para>
+      <programlisting language="JavaScript">var menuBar = new MenuBar();
+view.add(menuBar);// add it to the root container</programlisting>
+      <para>The list of specific methods of the component:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <code>add(<replaceable>menu</replaceable>)</code>
+              </entry>
+              <entry>Adds a new menu to the menu bar, where <replaceable>menu</replaceable> is a <code>Menu</code> to add.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
     </section>
     <section id="menu-menu">
       <title>Menu</title>
-      <para>A menu can contain <code>MenuItem</code> and <code>MenuSeparator</code> components.</para>
-      <para>Add new  <guilabel>Menu</guilabel> components to the menu bar; to do this, drag their palettes onto the <guilabel>Menu Bar</guilabel> component.</para>
-      <para>Add the submenu into the other menu by selecting  <guimenuitem>Add From Palette</guimenuitem> in the context menu.</para>
+      <para><code>Menu</code> is an individual menu, it can contain <code>MenuItem</code> and <code>MenuSeparator</code> components. This compontent is a kind of a container and inherits it&apos;s common properties and methods. </para>
+      <para>Add new <code>Menu</code> components on to the <code>MenuBar</code> from the components pallete in the visual editor.</para>
+      <para>Add the submenu into a <code>Menu</code> by selecting  <guimenuitem>Add From Palette</guimenuitem> in the context menu.</para>
+      <para>To create a component of this type by in your code, use the  <classname>Menu</classname> constructor:</para>
+      <programlisting language="JavaScript">var menu = new Menu();
+menuBar.add(menu);</programlisting>
       <para>The list of specific properties of the component:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2517,7 +2562,32 @@ view.add(desktop);</programlisting></para>
               <entry>
                 <parameter>text</parameter>
               </entry>
-              <entry>Menu text</entry>
+              <entry>Menu&apos;s text label.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>parent</parameter>
+              </entry>
+              <entry>The parent container (read-only).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>The list of specific methods of the component:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <code>add(<replaceable>comp</replaceable>)</code>
+              </entry>
+              <entry>Adds an item to the menu, where <replaceable>comp</replaceable> is the <code>MenuItem</code> or <code>MenuSeparator</code> component to add.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -2525,14 +2595,40 @@ view.add(desktop);</programlisting></para>
     </section>
     <section id="menu-popupmenu">
       <title>PopupMenu</title>
-      <para>A pop-up menu is an option selection window, which can be assigned to any component. </para>
-      <para>Add the <code>PopupMenu</code> component onto the form by dragging it from the palette. After adding, this component will have no visual representation in the layout editor; it will be added into the  <guilabel>Other components</guilabel> node in the inspector component tree.</para>
+      <para><code>PopupMenu</code> is an options selection window, which can be assigned to any component. This compontent is a kind of a container and inherits it&apos;s common properties and methods. </para>
+      <para>Add the <code>PopupMenu</code> component onto the form by dragging it from the palette in visual editor. After adding, this component will have no visual representation in the form&apos;s layout, it will be avaliable under the  <guilabel>Other components</guilabel> node in the inspector component tree.</para>
       <para>Add items to the pop-up menu the same way as to the standard menu.</para>
-      <para>To assign a popup menu for a component on the form, define the <property>component PopupMenu</property> property: select the required  <emphasis>Popup Menu</emphasis> from the list.</para>
+      <para>To assign a popup menu for a component in the visual editor, define a component&apos;s <code>PopupMenu</code> property and select the required popup menu   from the list.</para>
+      <para>To create a component of this type by in your code, use the  <classname>PopupMenu</classname> constructor:</para>
+      <programlisting language="JavaScript">var popup = new PopupMenu();
+var label = new Label(&quot;Sample&quot;);
+label.componentPopupMenu = popup;</programlisting>
+      <para>The list of specific methods of the component:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <code>add(<replaceable>comp</replaceable>)</code>
+              </entry>
+              <entry>Adds an item to the menu, where <replaceable>comp</replaceable> is the <code>MenuItem</code> or <code>MenuSeparator</code> component to add.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
     </section>
     <section id="menu-menuitem">
       <title>MenuItem</title>
-      <para>Menu items are buttons organized in a list.</para>
+      <para>The default <code>MenuItem</code> object contains a simple labeled menu item.</para>
+      <para>To create a component of this type by in your program, use the  <classname>MenuItem</classname> constructor:</para>
+      <programlisting language="JavaScript">var menuItem = new MenuItem(<replaceable>text</replaceable>, <replaceable>icon</replaceable>, <replaceable>action</replaceable>);</programlisting>
+      <para>where <replaceable>text</replaceable> is the text of the component (optional), <replaceable>icon</replaceable> is the icon of the component (optional), <replaceable>actionPerformed</replaceable> the function for the action performed handler (optional).</para>
       <para>The list of specific properties of the component:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2547,15 +2643,36 @@ view.add(desktop);</programlisting></para>
               <entry>
                 <parameter>text</parameter>
               </entry>
-              <entry>Menu item text</entry>
+              <entry>Menu item&apos;s text label.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>icon</parameter>
+              </entry>
+              <entry>Menu item&apos;s <code>Icon</code>.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>parent</parameter>
+              </entry>
+              <entry>The parent container (read-only).</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
+      <para>An example of code using  <code>MenuItem</code> component:</para>
+      <programlisting language="JavaScript">var item = new MenuItem(&quot;Sample&quot;);
+item.onActionPerformed = function(evt) {
+   alert(&quot;Sample selected.&quot;)
+}
+menu.add(item);</programlisting>
     </section>
     <section id="menu-checkboxmenuitem">
-      <title>CheckBoxMenuItem</title>
-      <para>A menu item combined with a checkbox.</para>
+      <title>CheckMenuItem</title>
+      <para><code>CheckMenuItem</code> is a  menu item combined with a checkbox.</para>
+      <para>To create a component of this type by in your program, use the  <classname>CheckMenuItem</classname> constructor:</para>
+      <programlisting language="JavaScript">var checkMenuItem = new CheckMenuItem(<replaceable>text</replaceable>, <replaceable>selected</replaceable>, <replaceable>action</replaceable>);</programlisting>
+      <para>where <replaceable>text</replaceable> is the text of the component (optional), <replaceable>selected</replaceable> is <code>true</code> when the check box is selected and <code>false</code> otherwise (optional), <replaceable>actionPerformed</replaceable> the function for the action performed handler (optional).</para>
       <para>The list of specific properties of the component:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2570,58 +2687,88 @@ view.add(desktop);</programlisting></para>
               <entry>
                 <parameter>text</parameter>
               </entry>
-              <entry>Menu item text </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>buttonGroup</parameter>
-              </entry>
-              <entry>Button group</entry>
+              <entry>Menu item text. </entry>
             </row>
             <row>
               <entry>
                 <parameter>selected</parameter>
               </entry>
-              <entry>Whether a menu item is selected or not</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-      <para>A menu item of this type can has the <code>ButtonGroup</code> component assigned, which is shared by other check boxes and radio buttons, including elements which are not present in the menu.</para>
-    </section>
-    <section id="menu-radiobuttonmenu">
-      <title>RadioButtonMenuItem</title>
-      <para>A menu item combined with a radiobutton widget.</para>
-      <para>The list of specific properties of the component:</para>
-      <informaltable>
-        <tgroup cols="2">
-          <thead>
-            <row>
-              <entry align="center">Property </entry>
-              <entry align="center">Description </entry>
-            </row>
-          </thead>
-          <tbody>
-            <row>
-              <entry>
-                <parameter>text</parameter>
-              </entry>
-              <entry>Menu item text</entry>
+              <entry><code>true</code> if the menu item is selected and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
-                <parameter>selected</parameter>
+                <parameter>parent</parameter>
               </entry>
-              <entry>Whether a menu item is selected or not</entry>
+              <entry>The parent container (read-only).</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
       <para>A menu item of this type can be added to a <code>ButtonGroup</code> component, which is shared by other check boxes and radio buttons, including elements which are not present in the menu.</para>
     </section>
+    <section id="menu-radiobuttonmenu">
+      <title>RadioMenuItem</title>
+      <para><code>RadioMenuItem</code> is a  menu item combined with a radio button.</para>
+    </section>
+    <para>To create a component of this type by in your program, use the  <classname>RadioMenuItem</classname> constructor:</para>
+    <programlisting language="JavaScript">var radioMenuItem = new RadioMenuItem(<replaceable>text</replaceable>, <replaceable>selected</replaceable>, <replaceable>action</replaceable>);</programlisting>
+    <para>where <replaceable>text</replaceable> is the text of the component (optional), <replaceable>selected</replaceable> is <code>true</code> when the check box is selected and <code>false</code> otherwise (optional), <replaceable>actionPerformed</replaceable> the function for the action performed handler (optional).</para>
+    <para>The list of specific properties of the component:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Property </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>text</parameter>
+            </entry>
+            <entry>Menu item text. </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>selected</parameter>
+            </entry>
+            <entry><code>true</code> if the menu item is selected and <code>false</code> otherwise.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>parent</parameter>
+            </entry>
+            <entry>The parent container (read-only).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>A menu item of this type can be added to a <code>ButtonGroup</code> component, which is shared by other check boxes and radio buttons, including elements which are not present in the menu.</para>
     <section id="menu-separatormenuitem">
       <title>MenuSeparator</title>
-      <para><code>MenuSeparator</code> is a separator of menu items. Use this component to visually split groups of menu items. </para>
+      <para><code>MenuSeparator</code> is a separator of menu items. Use this component to visually  split the groups of menu items. </para>
+      <para>To create a component of this type by in your program, use the  <classname>MenuSeparator</classname> constructor:</para>
+      <programlisting language="JavaScript">var separator = new MenuSeparator();</programlisting>
+      <para>The list of specific properties of the component:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>parent</parameter>
+              </entry>
+              <entry>The parent container (read-only).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
     </section>
   </section>
   <section id="ui-utils-api">
@@ -3015,9 +3162,9 @@ panel.background = IVORY_COLOR;</programlisting>
               <function>alert(<replaceable>message</replaceable>, <replaceable>title</replaceable>)</function>
             </entry>
             <entry>
-              <para>Displays an info message</para>
-              <para>                  <parameter>message</parameter>  is the message text</para>
-              <para><parameter>title</parameter> is the message window </para>
+              <para>Displays an info message, where</para>
+              <para>                  <parameter>message</parameter>  is the message text,</para>
+              <para><parameter>title</parameter> is the message window. </para>
             </entry>
           </row>
           <row>
@@ -3025,9 +3172,9 @@ panel.background = IVORY_COLOR;</programlisting>
               <function>prompt(<replaceable>message</replaceable>, <replaceable>defaultvalue</replaceable>)</function>
             </entry>
             <entry>
-              <para>Displays a prompt window, returns the response string</para>
-              <para><parameter>message</parameter> is the message text</para>
-              <para><parameter>defaultvalue</parameter> is the default value</para>
+              <para>Displays a prompt window, returns the response string, where</para>
+              <para><parameter>message</parameter> is the message text,</para>
+              <para><parameter>defaultvalue</parameter> is the default value.</para>
             </entry>
           </row>
           <row>
@@ -3035,8 +3182,8 @@ panel.background = IVORY_COLOR;</programlisting>
               <function>confirm(<replaceable>message</replaceable>)</function>
             </entry>
             <entry>
-              <para>Displays a dialog with confirmation</para>
-              <para>                  <parameter>message</parameter> is the message text</para>
+              <para>Displays a dialog with confirmation, where</para>
+              <para>                  <parameter>message</parameter> is the message text.</para>
             </entry>
           </row>
           <row>
@@ -3044,9 +3191,9 @@ panel.background = IVORY_COLOR;</programlisting>
               <function>fileDialog(<replaceable>curDir</replaceable>, <replaceable>save</replaceable>)</function>
             </entry>
             <entry>
-              <para>Displays a dialog, which allows the user to select a file; returns a file object</para>
-              <para>                  <parameter>curDir</parameter> is the current directory</para>
-              <para>                 <parameter>save</parameter> is a flag, which enables the saving mode for the dialog</para>
+              <para>Displays a dialog, which allows the user to select a file; returns a file object, where</para>
+              <para>                  <parameter>curDir</parameter> is the current directory,</para>
+              <para>                 <parameter>save</parameter> is a <code>true</code> to enable the saving mode for the dialog and <code>false</code> otherwise.</para>
             </entry>
           </row>
           <row>
@@ -3054,9 +3201,9 @@ panel.background = IVORY_COLOR;</programlisting>
               <function>selectFile(<replaceable>callback(file)</replaceable>)</function>
             </entry>
             <entry>
-              <para>Displays a file selection dialog</para>
-              <para>                  <parameter>callback</parameter> is a function, which will be called after the file is selected, with a parameter  </para>
-              <para>                 <parameter>file</parameter> is the file object</para>
+              <para>Displays a file selection dialog, whrere</para>
+              <para>                  <parameter>callback</parameter> is a function, which will be called after the file is selected, with a parameter, </para>
+              <para>                 <parameter>file</parameter> is the file object.</para>
             </entry>
           </row>
         </tbody>
