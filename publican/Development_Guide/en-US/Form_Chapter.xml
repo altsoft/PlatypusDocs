@@ -753,6 +753,12 @@ self.view.background = Color.black;</programlisting>
               </entry>
               <entry><code>true</code> if the component&apos;s background is opaque and <code>false</code> otherwise</entry>
             </row>
+            <row>
+              <entry>
+                <parameter>error</parameter>
+              </entry>
+              <entry>Error message of this component. Validation procedure may set this property and subsequent focus lost event will clear it.</entry>
+            </row>
           </tbody>
         </tgroup>
       </informaltable>
@@ -966,63 +972,45 @@ self.view.background = Color.black;</programlisting>
           <tbody>
             <row>
               <entry>
-                <parameter>icon</parameter>
-              </entry>
-              <entry>Icon</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>labelFor</parameter>
-              </entry>
-              <entry>Linked component</entry>
-            </row>
-            <row>
-              <entry>
                 <parameter>text</parameter>
               </entry>
               <entry>Text</entry>
             </row>
             <row>
               <entry>
-                <parameter>horizontalAlignment</parameter>
+                <parameter>icon</parameter>
               </entry>
-              <entry>Alignment of the text by the X axis: <literal>TRAILING</literal>, <literal>RIGHT</literal>, <literal>LEFT</literal>, <literal>LEADING</literal>, <literal>CENTER</literal></entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>verticalAlignment</parameter>
-              </entry>
-              <entry>Alignment of the text by the Y axis: <literal>BOTTOM</literal>, <literal>TOP</literal>, <literal>CENTER</literal></entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>border</parameter>
-              </entry>
-              <entry>Component border</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>disabledIcon</parameter>
-              </entry>
-              <entry>Icon, which is displayed when the component is not active</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>horizontalTextPositon</parameter>
-              </entry>
-              <entry>Horizontal position of the text in relation to the icon: <literal>RIGHT</literal>, <literal>LEFT</literal>, <literal>CENTER</literal></entry>
+              <entry>Icon</entry>
             </row>
             <row>
               <entry>
                 <parameter>iconTextGap</parameter>
               </entry>
-              <entry>Gap between the text and the icon </entry>
+              <entry>Gap between the text and the icon, in pixels </entry>
             </row>
             <row>
               <entry>
-                <parameter>verticalTextPosition</parameter>
+                <parameter>horizontalTextPositon</parameter>
               </entry>
-              <entry>Vertical position of the text in relation to the icon: <literal>BOTTOM</literal>, <literal>TOP</literal>, <literal>CENTER</literal></entry>
+              <entry>Horizontal position of the text in relation to the icon, one of the following: <literal>HorizontalPosition.RIGHT</literal>, <literal>HorizontalPosition.LEFT</literal>, <literal>HorizontalPosition.CENTER</literal></entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>horizontalAlignment</parameter>
+              </entry>
+              <entry>Horizontal position of the text with the icon relative to the component&apos;s size, one of the following: <literal>HorizontalPosition.RIGHT</literal>, <literal>HorizontalPosition.LEFT</literal>, <literal>HorizontalPosition.CENTER</literal>.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>verticalTextPositon</parameter>
+              </entry>
+              <entry>Vertical position of the text relative to the icon, one of the following: <literal>VerticalPosition.TOP</literal>, <literal>VerticalPosition.BOTTOM</literal>, <literal>VerticalPosition.CENTER</literal></entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>verticalAlignment</parameter>
+              </entry>
+              <entry>Vertical position of the text with the icon relative to the component&apos;s size, one of the following: <literal>VerticalPosition.TOP</literal>, <literal>VerticalPosition.BOTTOM</literal>, <literal>VerticalPosition.CENTER</literal>.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1051,63 +1039,31 @@ view.add(label);</programlisting>
               <entry>
                 <parameter>icon</parameter>
               </entry>
-              <entry>
-                <code>Icon</code>
-              </entry>
+              <entry><code>Icon</code> attached to <code>Button</code>.</entry>
             </row>
             <row>
               <entry>
                 <parameter>text</parameter>
               </entry>
-              <entry>Text</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>verticalAlignment</parameter>
-              </entry>
-              <entry>Alignment of the text by the X axis </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>borderPainted</parameter>
-              </entry>
-              <entry>Flag, which defines whether the component border should be drawn</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>buttonGroup</parameter>
-              </entry>
-              <entry>Group of buttons/menu items, to which this component belongs </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>horizontalAlignment</parameter>
-              </entry>
-              <entry>Horizontal alignment of the icon and text: <literal>RIGHT</literal>, <literal>LEFT</literal>, <literal>CENTER</literal></entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>horizontalTextPositon</parameter>
-              </entry>
-              <entry>Horizontal position of the text in relation to the icon: <literal>RIGHT</literal>, <literal>LEFT</literal>, <literal>CENTER</literal></entry>
+              <entry>Component&apos;s text.</entry>
             </row>
             <row>
               <entry>
                 <parameter>iconTextGap</parameter>
               </entry>
-              <entry>Gap between the text and the icon</entry>
+              <entry>Gap between the text and the icon, in pixels.</entry>
             </row>
             <row>
               <entry>
-                <parameter>verticalAlignment</parameter>
+                <parameter>horizontalTextPositon</parameter>
               </entry>
-              <entry>Vertical alignment of the text in relation to the icon </entry>
+              <entry>Horizontal position of the text in relation to the icon: <literal>HorizontalPosition.RIGHT</literal>, <literal>HorizontalPosition.LEFT</literal>, <literal>HorizontalPosition.CENTER</literal></entry>
             </row>
             <row>
               <entry>
                 <parameter>verticalTextPosition</parameter>
               </entry>
-              <entry>Vertical position of the text in relation to the icon: <literal>BOTTOM</literal>, <literal>TOP</literal>, <literal>CENTER</literal></entry>
+              <entry>Vertical position of the text in relation to the icon: <literal>VerticalPosition.BOTTOM</literal>, <literal>VerticalPosition.TOP</literal>, <literal>VerticalPosition.CENTER</literal></entry>
             </row>
           </tbody>
         </tgroup>
@@ -1130,7 +1086,7 @@ view.add(label);</programlisting>
               <entry>
                 <code>ActionEvent</code>
               </entry>
-              <entry>Button clicking event</entry>
+              <entry>Button click event</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1169,7 +1125,7 @@ view.add(btn1);</programlisting>
               <entry>
                 <parameter>selected</parameter>
               </entry>
-              <entry>Whether the button is selected or not</entry>
+              <entry><code>true</code> if the button is selected and <code>false</code> otherwise</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1337,13 +1293,13 @@ bg1.add(rb2);// Add radio button 2</programlisting>
               <entry>
                 <parameter>text</parameter>
               </entry>
-              <entry>Text</entry>
+              <entry>The text.</entry>
             </row>
             <row>
               <entry>
                 <parameter>emptyText</parameter>
               </entry>
-              <entry>Text displayed when actual value is absent</entry>
+              <entry>The text displayed when the actual value is absent.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1436,7 +1392,7 @@ view.add(rb1);</programlisting>
                 <parameter>onActionPerformed</parameter>
               </entry>
               <entry>
-                <code>ActionEvent</code>
+                <code>ComponentEvent</code>
               </entry>
               <entry>Slider movement termination event</entry>
             </row>
@@ -1531,19 +1487,19 @@ view.add(pb1);</programlisting>
               <entry>
                 <parameter>format</parameter>
               </entry>
-              <entry>Text format</entry>
+              <entry>Format string, check Java<code>java.util.Formatter</code> documentation.</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Open the format setting dialog by clicking the editor calling button in the  <guilabel>format</guilabel> property field. Select a category from the following: number, date, time, percentage, currency, and mask. Select a predefined format for the selected category or specify the custom one in the <guilabel>Format</guilabel> field. Test the format: select a value to format and click the <guibutton>Test</guibutton> button. Click <guibutton>OK</guibutton> to save the format setting.</para>
+      <para>The formatted field is intended to display and enter values of a particular type. The format of displaying and editing can vary only within a given type. Therefore, when you programmatically create this widget, you should specify a value determining the type, within which this widget will work, before defining the format. After determining the value type, the format can be changed  if the new format will be suitable for displaying and editing the values of this type.</para>
+      <para>Use the format setting dialog to specify the format string in the visual editor. Click the button in the  <guilabel>format</guilabel> property field. Select a category from the following: number, date, time, percentage, currency, and mask. Select a predefined format for the selected category or specify the custom one in the <guilabel>Format</guilabel> field.</para>
       <para>The specific component events are listed in the following table:</para>
       <informaltable>
-        <tgroup cols="4">
+        <tgroup cols="3">
           <thead>
             <row>
               <entry align="center">Event </entry>
-              <entry>Cancellable </entry>
               <entry>Handler parameters</entry>
               <entry align="center">Description </entry>
             </row>
@@ -1553,11 +1509,10 @@ view.add(pb1);</programlisting>
               <entry>
                 <parameter>onActionPerformed</parameter>
               </entry>
-              <entry>no</entry>
               <entry>
-                <code>ActionEvent</code>
+                <code>ComponentEvent</code>
               </entry>
-              <entry>Value input event</entry>
+              <entry>Value input event: pressing the <keycap>Enter</keycap> key.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1567,9 +1522,7 @@ view.add(pb1);</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
       <programlisting language="JavaScript">var ff = new FormattedField();
 ff.value = new Date();
-ff.format = &quot;dd.MM.yyyy HH:mm:ss&quot;;
-view.add(ff);</programlisting>
-      <para>The formatted field is intended to display and enter values of a particular type. The format of displaying and editing can vary only within a given type. Therefore, when you programmatically create this widget, you should specify a value determining the type, within which this widget will work, before defining the format. After determining the value type, the format can be changed  if the new format will be suitable for displaying and editing the values of this type.</para>
+ff.format = &quot;dd.MM.yyyy HH:mm:ss&quot;;</programlisting>
     </section>
     <section id="widget-passwordfield">
       <title>PasswordField</title>
@@ -1617,31 +1570,64 @@ view.add(htmlArea);</programlisting>
       <title>Introduction to model widgets</title>
       <para>Model widgets are components, which can interact with the data model and respond to the model&apos;s datasets  events.</para>
       <para>You can bind a model widgets to any data model entity dataset (including &quot;parameters&quot; entity). This  dataset  will change  in response to the user actions on the widgets and its changes will lead to automatic update of data displayed on all bound  widgets.</para>
-      <para>Some model widgets represents a single dataset object and its specific field. This data object is   the object at the cursor position. Other more complex model widgets can represent multiply objects in dataset and control the cursor in this dataset. </para>
-      <para>Model widgets has the same basic properties and event  as standard widgets. It is not recommended to specify handlers of low-level events (keyboard, mouse movement events, etc.) for model widgets.</para>
       <para>Configure specific properties for binding to  data model, using properties in the <guilabel>Model binding</guilabel> category.</para>
+      <para>Scalar model widgets represents a single dataset object and its specific field. This data object is   the object at the cursor position. Other more complex model widgets as <code>ModelGrid</code> and <code>ModelMap</code> can represent multiply objects in dataset and control the cursor in this dataset.</para>
+      <para>Scalar model widgets have the following common properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>field</parameter>
+              </entry>
+              <entry>Bound model entity field.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>value</parameter>
+              </entry>
+              <entry>The current value for the component.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>Scalar model widgets common events are listed in the following table:</para>
+      <informaltable>
+        <tgroup cols="3">
+          <thead>
+            <row>
+              <entry align="center">Event </entry>
+              <entry>Handler parameter </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>onSelect</parameter>
+              </entry>
+              <entry>The <parameter>aEditor</parameter> object is the source component, is passed to the event handler as a parameter, specify the <property>value</property> of the component by setting its properties.</entry>
+              <entry>Occurs when the select button, located next to the component, is clicked. The select button is displayed only if the handler is defined.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>onRender</parameter>
+              </entry>
+              <entry>
+                <code>RenderEvent</code>
+              </entry>
+              <entry>Occurs when preparing the widget for displaying (both when it is used independently or as a <code>ModelGrid</code> widget cell). This event is cancelable: return <code>true</code> in its handler function to apply rendering and <code>false</code> otherwise.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>Any model widget can be presented as an  independent component and as a <code>ModelGrid</code>  widget cell. There is  an &quot;abstract&quot; cell in each model widget. It is available in the  <varname>onRender</varname> event handlers.</para>
-      <para>For such a cell, the following properties are defined:</para>
-      <itemizedlist>
-        <listitem>
-          <para><varname>display</varname> is the displayed text</para>
-        </listitem>
-        <listitem>
-          <para><varname>style</varname> is  the style of displaying</para>
-        </listitem>
-      </itemizedlist>
-      <para>There is a specific event handlers that you  can define  for the model widgets:</para>
-      <itemizedlist>
-        <listitem>
-          <para><code>onSelect</code>  event occurs when the select button, located next to the component, is clicked. The select button is displayed only if the handler is defined. </para>
-          <para>Define a special value selection procedure in the handler: for example, open a dialog for selecting a value, etc. The  <parameter>aEditor</parameter> object is the source component, is passed to the event handler as a parameter, specify the  <property>value</property> of the component by setting its  properties.</para>
-        </listitem>
-        <listitem>
-          <para><code>onRender</code>  event occurs when preparing the widget for displaying (both when it is used independently or as a <code>ModelGrid</code> widget cell). </para>
-          <para><code>RenderEvent</code> event object is passed to the handler.</para>
-          <para>This event is cancelable. Return <code>true</code> to apply rendering and <code>false</code> otherwise.</para>
-        </listitem>
-      </itemizedlist>
       <para><code>RenderEvent</code> object specific  propetries are listed in the following table:</para>
       <informaltable>
         <tgroup cols="2">
@@ -1654,19 +1640,29 @@ view.add(htmlArea);</programlisting>
           <tbody>
             <row>
               <entry>
-                <parameter>id</parameter>
+                <code>id</code>
               </entry>
               <entry>The primary key of the data object.</entry>
             </row>
             <row>
               <entry>
-                <parameter>cell</parameter>
+                <code>cell</code>
               </entry>
               <entry>The &quot;abstract&quot; cell.</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
+      <para>For such a <code>cell</code>, the following properties are defined:</para>
+      <itemizedlist>
+        <listitem>
+          <para><varname>display</varname> is the displayed text.</para>
+        </listitem>
+        <listitem>
+          <para><varname>style</varname> is  the <code>Style</code> of displaying.</para>
+        </listitem>
+      </itemizedlist>
+      <para>Model widgets also have the same basic properties and event  as standard widgets. It is not recommended to specify handlers of low-level events (keyboard, mouse movement events, etc.) for model widgets.</para>
       <para>The following example illustrates how to use <code>onSelect</code> event:</para>
       <programlisting language="JavaScript">/**
  * Shows custom selector dialog and sets
@@ -1681,25 +1677,24 @@ function buttonOnSelect(aEditor) {
 }</programlisting>
       <para><code>onRender</code> event usage example is as follows:</para>
       <programlisting language="JavaScript">/**
- * Categories grid docs names column onRender event handler.
- * @param evt onRender event object
- * @returns true to apply changes to the cell
+ * Renders a cell with complex data
  */
 function entityOnRender(evt) {
     var txt = &apos;&apos;;
-    categories.find(categories.schema.CAT_ID, evt.id).forEach(function(aDoc) {
-        if(txt.length &gt; 0) {
+    categories.find(categories.schema.CAT_ID, evt.id)
+        .forEach(function(aDoc) {
+           if(txt.length &gt; 0) {
             txt += &apos; &apos;;
-        }
-        txt += aCat.NAME ? aDoc.NAME : &apos;&apos;;
-    });
+           }
+          txt += aCat.NAME ? aDoc.NAME : &apos;&apos;;
+          });
     evt.cell.display = txt;
     return true;
 }</programlisting>
     </section>
     <section id="widget-modelcheck">
       <title>ModelCheck</title>
-      <para><code>ModelCheck</code> is a check box, the state of which is linked to an entity&apos;s field of a  <classname>Boolean</classname>, <classname>Number</classname>, or <classname>String</classname>  type.</para>
+      <para><code>ModelCheck</code> is a scalar model widget representing a  check box, the state of which is linked to an entity&apos;s field of a  <classname>Boolean</classname>, <classname>Number</classname>, or <classname>String</classname>  type.</para>
       <para>The data of various types is displayed as boolean data by this widget. Data types conversion rules are as follows:</para>
       <itemizedlist>
         <listitem>
@@ -1716,40 +1711,101 @@ function entityOnRender(evt) {
       <para>To create a component of this type by program means, use the  <classname>ModelCheckBox</classname> constructor:</para>
       <programlisting language="JavaScript">var modelCheck = new ModelCheckBox();</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
-      <programlisting language="JavaScript">view.add(modelCheck);</programlisting>
+      <programlisting language="JavaScript">modelCheck.field = model.entityA.schema.fieldA;
+view.add(modelCheck);</programlisting>
     </section>
     <section id="widget-modelcombo">
       <title>ModelCombo</title>
-      <para><code>ModelCombo</code> is a combo box that is bound to a model two times. As other model widgets, it holds and edits model&apos;s value and displays some other looked up value. It also allows you to select a value from a list. List items are also looked up while displaying.</para>
+      <para><code>ModelCombo</code> is a scalar model widget representing a combo box that is bound to some data model field. This widget uses  other two fields of an entity to generate visual representation and syncronise it to the value. As other model widgets, it holds and edits model&apos;s value and displays some other looked up value. It also allows you to select a value from a list. List items are also looked up while displaying.</para>
+      <para><code>ModelCombo</code> widget has the following specific properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>valueField</parameter>
+              </entry>
+              <entry>Value field of the component.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>displayField</parameter>
+              </entry>
+              <entry>Display field of the component.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>list</parameter>
+              </entry>
+              <entry><code>true</code> to allow selection from drop-down list and <code>false</code> otherwise.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To configure the widget model binding:</para>
       <itemizedlist>
         <listitem>
-          <para>Specify the entity <guilabel>field</guilabel> property for the component. Select a parameter or a data model entity field in the form for selecting a data model entity field.</para>
+          <para>Specify the  <guilabel>field</guilabel> property for the component. Select a parameter or a data model entity field.</para>
         </listitem>
         <listitem>
-          <para>Provide handlers for selecting and changing values events.</para>
+          <para>Specify the value field, i.e. the field, the values from which will be compared with the values of the list items, to do this, use the <guilabel>valueField</guilabel>  property. Select a data model parameter or some entity field. The entity for this field must be the same as for <guilabel> displayField</guilabel> property, but different from the one specified for the <code>field</code> property.</para>
         </listitem>
         <listitem>
-          <para>Set the display field, i.e. a field, the values from which will be shown to the user. Use the<guilabel> displayField</guilabel> property. Select a data model parameter or a data model entity field in the form for selecting a data model entity field.</para>
-        </listitem>
-        <listitem>
-          <para>Specify the value field, i.e. the field, the values from which will be compared with the values of the list items, to do this, use the <guilabel>valueField</guilabel>  property. Select a data model parameter or a data model entity field in the form for selecting a data model entity field.</para>
+          <para>Set the display field, i.e. a field, the values from which will be shown to the user. Use the<guilabel> displayField</guilabel> property. Select a data model parameter or a data model entity field. The entity for this field must be the same as for <guilabel> displayField</guilabel> property, but different from the one specified for the <code>field</code> property.</para>
         </listitem>
         <listitem>
           <para>To allow selection of value from the list, enable the  <guilabel>list</guilabel> property checkbox.</para>
         </listitem>
         <listitem>
-          <para>To allow other selection of value, specify <code>onSelect</code> event handler.</para>
+          <para>To allow a customized selection of the widget&apos;s value, specify <code>onSelect</code> event handler.</para>
         </listitem>
       </itemizedlist>
       <para>To create a component of this type by program means, use the <classname>ModelCombo</classname> constructor:</para>
       <programlisting language="JavaScript">var modelCombo = new ModelCombo();</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
-      <programlisting language="JavaScript">view.add(modelCombo);</programlisting>
+      <programlisting language="JavaScript">//Specify value field as a model parameter:
+modelCombo.field = model.params.schema.paramA;
+
+//Lookup fields:
+modelCombo.valueField = model.entityB.schema.id;
+modelCombo.displayField = model.entityB.schema.name;
+
+view.add(modelCombo);</programlisting>
     </section>
     <section id="widget-modeldate">
       <title>ModelDate</title>
-      <para><code>ModelDate</code> widget represent a date and  bound to some date or timestamp field in the model.</para>
+      <para><code>ModelDate</code> is a scalar model widget representing a date and  bound to some date or timestamp field in the model.</para>
+      <para><code>ModelDate</code> widget has the following specific properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>editable</parameter>
+              </entry>
+              <entry><code>true</code> if the date is editable and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>expanded</parameter>
+              </entry>
+              <entry><code>true</code> to show calndar panel and <code>false</code> otherwise.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To configure the widget model binding: </para>
       <itemizedlist>
         <listitem>
@@ -1759,13 +1815,15 @@ function entityOnRender(evt) {
           <para>Configure the date and time format by selecting from the drop-down list.</para>
         </listitem>
         <listitem>
-          <para>Enable the  <guilabel>Expanded</guilabel> flag to display the calendar in an expanded form; to ensure that the widget is displayed correctly, set  its dimensions according to its full-scale view. </para>
+          <para>Enable the  <guilabel>expanded</guilabel> flag to display the calendar in an expanded form. To ensure that the widget is displayed correctly, set  its dimensions according to its full-scale view. </para>
         </listitem>
       </itemizedlist>
       <para>To create a component of this type by program means, use the  <classname>ModelDate</classname> constructor:</para>
       <programlisting language="JavaScript">var modelDate = new ModelDate();</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
-      <programlisting language="JavaScript">view.add(modelDate);</programlisting>
+      <programlisting language="JavaScript">modelDate.field = model.entityA.schema.dateField;
+modelDate.editable = true;
+view.add(modelDate);</programlisting>
     </section>
     <section id="widget-modelgrid">
       <title>ModelGrid</title>
@@ -1973,11 +2031,35 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
     </section>
     <section id="widget-modelimage">
       <title>ModelImage</title>
-      <para><code>ModelImage</code> widget displays an image. The state of this component is linked to a  field of the data model, which contains binary data of the image in one of the following formats: GIF, JPEG, PNG.</para>
+      <para><code>ModelImage</code> is a scalar model widget what displays an image. The state of this component is linked to a  field of the data model, which contains binary data of the image in one of the following formats: GIF, JPEG, PNG. This field usually corresponds to the BLOB type in the database. </para>
       <note>
-        <para>This field usually corresponds to the BLOB type in the database. </para>
         <para>In the current Platypus Platform version, this component is supported only in the J2SE client.</para>
       </note>
+      <para><code>ModelDate</code> widget has the following specific properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>editable</parameter>
+              </entry>
+              <entry><code>true</code> if the image is editable and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>plain</parameter>
+              </entry>
+              <entry>Determines if image is displayed with real dimensions and not scaled. If true, the image is not fitted by its size and can&apos;t be scaled with the mouse wheel and <code>false</code> otherwise.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To configure the widget:</para>
       <itemizedlist>
         <listitem>
@@ -1996,11 +2078,31 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>To create a component of this type by program means, use the  <classname>ModelImage</classname> constructor:</para>
       <programlisting language="JavaScript">var modelImage = new ModelImage();</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
-      <programlisting language="JavaScript">view.add(modelImage);</programlisting>
+      <programlisting language="JavaScript">modelImage.field = model.entityA.schema.images;
+view.add(modelImage);</programlisting>
     </section>
     <section id="widget-modeltext">
       <title>ModelFormattedField</title>
-      <para><code>ModelFormattedField</code> is a widget, the state of which is linked to a  field of the data model string or number type. The widget can be used to display and enter text. You can apply specified formatting to the displayed value and impose restrictions on entered data.</para>
+      <para><code>ModelFormattedField</code> is a scalar model widget, the state of which is linked to a  field of the data model string or number type. The widget can be used to display and enter text. You can apply specified formatting to the displayed value and impose restrictions on entered data.</para>
+      <para><code>ModelFormattedField</code> widget has the following specific properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>format</parameter>
+              </entry>
+              <entry>Format string, check Java<code>java.util.Formatter</code> documentation.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To configure the widget: </para>
       <itemizedlist>
         <listitem>
@@ -2016,11 +2118,32 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>To create a component of this type by program means, use the  <classname>ModelFormattedField</classname> constructor:</para>
       <programlisting language="JavaScript">var mff = new ModelFormattedField();</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to a container:</para>
-      <programlisting language="JavaScript">view.add(mff);</programlisting>
+      <programlisting language="JavaScript">mff.field = model.entityA.schema.dateField;
+mff.format = &quot;dd.MM.yyyy HH:mm:ss&quot;;
+view.add(mff);</programlisting>
     </section>
     <section id="widget-modeltextarea">
       <title>ModelTextArea</title>
-      <para><code>ModelTextArea</code> is a widget, the state of which is linked to a field of the data model of string or number type. The widget can be used to display and enter text.</para>
+      <para><code>ModelTextArea</code> is a scalar model widget, the state of which is linked to a field of the data model of string or number type. The widget can be used to display and enter text.</para>
+      <para><code>ModelDate</code> widget has the following specific properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>editable</parameter>
+              </entry>
+              <entry><code>true</code> if the text is editable and <code>false</code> otherwise.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To configure the widget:</para>
       <itemizedlist>
         <listitem>
@@ -2033,7 +2156,8 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <para>To create a component of this type by program means, use the  <classname>ModelTextArea</classname> constructor: </para>
       <programlisting language="JavaScript">var mta = new ModelTextArea();</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
-      <programlisting language="JavaScript">view.add(mta);</programlisting>
+      <programlisting language="JavaScript">mta.field = model.entityB.schema.textField;
+view.add(mta);</programlisting>
     </section>
     <section id="widget-modelmap">
       <title>ModelMap</title>
@@ -2044,7 +2168,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       </note>
       <para>Coordinates and shapes of the displayed objects should be presented using the &quot;Geometry&quot; data type. The layer entity should contain one column of the &quot;Geometry&quot; type and an arbitrary number of columns containing additional attributes. </para>
       <para>Each layer should have an assigned entity, which contains information about objects. One entity can be linked with one or more layers. If the entity is linked with several layers, a field with information about entity instance belonging to the layer should be defined. In this case, each layer should have its own identifier for this field. A layer identifier must be a positive integer.</para>
-      <para>A map has the following specific properties:</para>
+      <para><code>ModelMap</code> widget has the following specific properties:</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
@@ -2058,7 +2182,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
               <entry>
                 <parameter>backingUrl</parameter>
               </entry>
-              <entry><acronym>URL</acronym> for tiles</entry>
+              <entry><acronym>URL</acronym> for tiles source.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -2094,12 +2218,55 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
     </section>
     <section id="widget-modelspin">
       <title>ModelSpin</title>
-      <para><code>ModelSpin</code> is a widget, the state of which is linked to a field of a data model entity of number type. One can input numbers either from the keyboard or using buttons to increase/decrease values. </para>
-      <para>To configure the widget: </para>
+      <para><code>ModelSpin</code> is a scalar model widget, the state of which is linked to a field of a data model entity of number type. One can input numbers either from the keyboard or using buttons to increase/decrease values. </para>
+      <para><code>ModelDate</code> widget has the following specific properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>editable</parameter>
+              </entry>
+              <entry><code>true</code> if the component is editable and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>min</parameter>
+              </entry>
+              <entry>Determines the lower bound of spinner&apos;s value. If it&apos;s <code>null</code>, valus is unlimited at lower bound.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>max</parameter>
+              </entry>
+              <entry>The upper bound of spinner&apos;s value. If it&apos;s <code>null</code>, valus is unlimited at upper bound.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>step</parameter>
+              </entry>
+              <entry>The spinner&apos;s value change step. Can&apos;t be <code>null</code>.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>emptyText</parameter>
+              </entry>
+              <entry>The text displayed when the actual value is absent.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To create a component of this type by program means, use the <classname>ModelSpin</classname> constructor:</para>
       <programlisting language="JavaScript">var modelSpin = new ModelSpin();</programlisting>
       <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
-      <programlisting language="JavaScript">view.add(modelSpin);</programlisting>
+      <programlisting language="JavaScript">modelSpin.field = model.entityC.schema.fieldC;
+view.add(modelSpin);</programlisting>
     </section>
   </section>
   <section id="ui-containers"><title>Containers</title><para>Containers are components, which can contain other components e.g. widgets or other containers  and control their child components size and location. </para>Containers are represented as panel component with specific layout in the visual editor.<para>The layout  of a panel can be changed using the  editor. At runtime, panel with particular layout will be replaced by the corresponding container.</para><para>Containers have a set of properties and events common for all components as well as their own specific properties and events. </para><para>The common methods for all containers: </para><informaltable>
