@@ -1051,7 +1051,9 @@ view.add(label);</programlisting>
               <entry>
                 <parameter>icon</parameter>
               </entry>
-              <entry>Icon</entry>
+              <entry>
+                <code>Icon</code>
+              </entry>
             </row>
             <row>
               <entry>
@@ -1267,7 +1269,7 @@ view.add(cb1);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>See the description of the  <emphasis>Button </emphasis>widget for the list of  <emphasis>Radio Button </emphasis>widget properties.</para>
+      <para>See the description of the <code>Button</code> widget for the list of <code> RadioButton</code> widget properties.</para>
       <informaltable>
         <tgroup cols="3">
           <thead>
@@ -2274,16 +2276,20 @@ pane.add(comp, {
       <para>Use   <classname>GridPane</classname> constructor to create this container in JavaScript code: </para>
       <programlisting language="JavaScript">var pane = new GridPane(<replaceable>rows</replaceable>, <replaceable>cols</replaceable>, <replaceable>hgap</replaceable>, <replaceable>vgap</replaceable>);</programlisting>
       <para>Where <replaceable>rows</replaceable> is the number of grid rows, <replaceable>cols</replaceable> is  the number of grid columns, <replaceable>hgap</replaceable> is the horizontal gap (optional) and  <replaceable>vgap</replaceable> vgap the vertical gap (optional).</para>
-      <para>To add child components to the container, use   <methodname>add</methodname> instance method:</para>
+      <para>To add child components to the container, use   <methodname>add</methodname> instance method, which adds a component to the next avaliable position:</para>
       <para><programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>);</programlisting></para>
       <para>where <replaceable>component</replaceable> is a component to add.</para>
       <para>Use <code>child</code> method to get an child component at the specified row and column, if the target position is empty the method will return <code>null</code>:</para>
       <para><programlisting language="JavaScript">var comp = pane.child(<replaceable>row</replaceable>, <replaceable>column</replaceable>);</programlisting></para>
       <para>where <replaceable>row</replaceable> is the row of the component and  <replaceable>column</replaceable>  is the column of the grid position.</para>
-      <para>The following example shows how to create an <code>GridPane</code> container and add to this container to the components tree: </para>
-      <programlisting language="JavaScript">var pane = new GridPane(3, 3);
-var comp = new Button(&quot;Sample&quot;);
-pane.add(comp);</programlisting>
+      <para>The following example shows how to create an <code>GridPane</code> container: </para>
+      <programlisting language="JavaScript">var pane = new GridPane(3, 1);
+var comp1 = new Button(&quot;1&quot;);
+var comp2 = new Button(&quot;2&quot;);
+var comp3 = new Button(&quot;3&quot;);
+pane.add(comp1);
+pane.add(comp2);
+pane.add(comp3);</programlisting>
     </section><section id="ui-containers-flowpane">
       <title>FlowPane</title>
       <para><code>FlowPane</code> is a lightweight container with the flow layout.</para>
@@ -2334,24 +2340,23 @@ pane.show(&quot;B&quot;);//Shows the SampleB button</programlisting>
       <title>BoxPane</title>
       <para><code>BoxPane</code> is a lightweight container with the box layout.</para>
       <para>The box layout  arranges components in the order, in which they were added to the container, one after the other, back to back.</para>
-      <para>Specify an axis, along which the Box Layout manager will arrange components:</para>
+      <para>Specify an axis, along which the Box layout manager will arrange components. For this select the  <guilabel>BoxLayout</guilabel> node in the inspector component tree and select the  <guilabel>Axis</guilabel> property value from the list on the properties panel:</para>
       <itemizedlist>
         <listitem>
-          <para><guilabel>X_AXIS</guilabel> for components are laid out horizontally from left to right.</para>
+          <para><guilabel>HORIZONTAL</guilabel> for components are laid out horizontally from left to right.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Y_AXIS</guilabel> for components are laid out vertically from top to bottom.</para>
+          <para><guilabel>VERTICAL</guilabel> for components are laid out vertically from top to bottom.</para>
         </listitem>
       </itemizedlist>
-      <para>To define an axis, select the  <guilabel>BoxLayout</guilabel> node in the inspector component tree and select the  <guilabel>Axis</guilabel> property value from the list on the properties panel.</para>
       <para>Use   <classname>BoxPane</classname> constructor to create this container in JavaScript code: </para>
       <programlisting language="JavaScript">var pane = new BoxPane(<replaceable>orientation</replaceable>);</programlisting>
-      <para>Where  <replaceable>orientation</replaceable> is a value of <code> Orientation.HORIZONTAL</code> or <code>Orientation.VERTICAL</code> constants (optional).</para>
+      <para>Where  <replaceable>orientation</replaceable> is a value of <code>Orientation.HORIZONTAL</code> or <code>Orientation.VERTICAL</code> constants (optional). By default <code>Orientation.HORIZONTAL</code> orientation is specified.</para>
       <para>To add child components to the container, use   <methodname>add</methodname> instance method:</para>
       <para><programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>);</programlisting></para>
       <para>where <replaceable>component</replaceable> is a component to add.</para>
-      <para>The following example shows how to create an <code>BoxPane</code> container and add this container: </para>
-      <programlisting language="JavaScript">var pane = new BoxPane();
+      <para>The following example shows how to create an <code>BoxPane</code> instance and add a component to this container: </para>
+      <programlisting language="JavaScript">var pane = new BoxPane(Orientation.VERTICAL);
 var comp = new Button(&quot;Sample&quot;);
 pane.add(comp);</programlisting>
     </section><section id="ui-containers-tabbedpane">
@@ -2369,15 +2374,15 @@ pane.add(comp);</programlisting>
           <tbody>
             <row>
               <entry>
-                <parameter>tabPlacement</parameter>
+                <parameter>selectedComponent</parameter>
               </entry>
-              <entry>Tabs position: <literal>BOTTOM,</literal><literal>RIGHT</literal>, <literal>TOP</literal>, <literal>LEFT</literal></entry>
+              <entry>Active tab&apos;s component</entry>
             </row>
             <row>
               <entry>
-                <parameter>selectedComponent</parameter>
+                <parameter>selectedComponentIndex</parameter>
               </entry>
-              <entry>Active tab selection</entry>
+              <entry>Active tab index</entry>
             </row>
           </tbody>
         </tgroup>
@@ -2408,9 +2413,8 @@ pane.add(comp);</programlisting>
       <para>To create a component of this type by program means, use the  <classname>TabbedPane</classname> constructor:</para>
       <programlisting language="JavaScript">var pane = new TabbedPane();</programlisting>
       <para>To add child components to the container, use the   <methodname>add</methodname> method and pass a child component as well as a tab title and an optional icon setting as parameters to this method:</para>
-      <programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>, <replaceable>text</replaceable>);
-pane.add(<replaceable>component</replaceable>, <replaceable>text</replaceable>, <replaceable>icon</replaceable>);</programlisting>
-      <para>where <replaceable>component</replaceable> is a component, which is added, <replaceable>text</replaceable> is the label text, <replaceable>icon</replaceable> is the label icon.</para>
+      <programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>, <replaceable>text</replaceable>, <replaceable>icon</replaceable>);</programlisting>
+      <para>where <replaceable>component</replaceable> is a component to  add, <replaceable>text</replaceable> is the tab&apos;s label text, <replaceable>icon</replaceable> is the tab&apos;s label icon (optional).</para>
       <para>An example of code using the <code>TabbedPane</code>  container:</para>
       <programlisting language="JavaScript">var pane = new TabbedPane();
 var tab1 = new AnchorsPane();
@@ -2423,7 +2427,7 @@ pane.add(tab2, &quot;Tab 2&quot;);</programlisting>
       <para>Split pane setup in form editor:</para>
       <itemizedlist>
         <listitem>
-          <para>Drag-and-drop a container of the  type from the palette, two components should be added.</para>
+          <para>Drag-and-drop a container of the  type from the palette, exactly two components to be added.</para>
         </listitem>
       </itemizedlist>
       <para>The specific properties of the   <code>SplitPane</code>:</para>
@@ -2440,7 +2444,31 @@ pane.add(tab2, &quot;Tab 2&quot;);</programlisting>
               <entry>
                 <parameter>orientation</parameter>
               </entry>
-              <entry>The separator orientation: <literal>VERTICAL</literal>, <literal>HORIZONTAL</literal></entry>
+              <entry>The separator&apos;s orientation: <code>Orientation.VERTICAL</code> or <code>Orientation.HORIZONTAL</code></entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>dividerLocation</parameter>
+              </entry>
+              <entry>The split pane divider&apos;s location in pixels</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>oneTouchExpandable</parameter>
+              </entry>
+              <entry><code>true</code> if the pane is one touch expandable and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>firstComponent</parameter>
+              </entry>
+              <entry>The first component of the container.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>secondComponent</parameter>
+              </entry>
+              <entry>The second component of the container.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -2448,6 +2476,9 @@ pane.add(tab2, &quot;Tab 2&quot;);</programlisting>
       <para>To create a component of this type by program means, use the  <classname>SplitPane</classname> constructor with an optional parameter for specifying orientation:</para>
       <programlisting language="JavaScript">var pane = new SplitPane(<replaceable>orientation</replaceable>);</programlisting>
       <para>where <replaceable>orientation</replaceable> is an object of the  <classname>Orientation</classname> type, which defines orientation of the panel separator (optional). The container uses the  horizontal orientation by default.</para>
+      <para>As an alternative to the <code>firstComponent</code> and <code>secondComponent</code>properties use   <methodname>add</methodname> method:</para>
+      <programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>);</programlisting>
+      <para>where <replaceable>component</replaceable> is the first and then the second component to add.</para>
       <programlisting language="JavaScript">var pane = new SplitPane(Orientation.VERTICAL);
 var comp1 = new AnchorsPane();
 var comp2 = new AnchorsPane();
@@ -2455,7 +2486,7 @@ pane.firstComponent = comp1;
 pane.secondComponent = comp2;</programlisting>
     </section><section id="ui-containers-scrollpane">
       <title>ScrollPane</title>
-      <para><code>ScrollPane</code> is a  container, which supports scrolling of its content. Usually another container is added to this one, using  <guilabel>ScrollPane</guilabel> as &quot;wrapper&quot;.</para>
+      <para><code>ScrollPane</code> is a  container, which supports scrolling of its content. Usually another container is added to this one, using <code>ScrollPane</code>   as a wrapper.</para>
       <para>Specific properties of the   container:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2486,11 +2517,23 @@ var pane = new AnchorsPane();
 wrapper.add(pane);</programlisting>
     </section><section id="ui-containers-toolbar">
       <title>ToolBar</title>
-      <para><code>ToolBar</code> is a container used to display components, which are usually responsible for the most common user actions. </para>
-      <para>Tool bars are intended to display a set of buttons (usually, it is a special type of buttons — without labels, but with tooltips and small, clearly visible icons) which trigger the launch of the most frequently used application commands. Toolbars also include the most popular components. </para>
+      <para><code>ToolBar</code> is a container used to display components, which are  responsible for the most common user actions. </para>
+      <para>Toolbars are intended to display a set of buttons (usually without labels, but with tooltips and small, clearly visible icons) which trigger  the most frequently used application actions.</para>
       <para>Components in the toolbar are stacked one-to-one according to the applied orientation.</para>
-      <para>To create a component of this type by program means, use the  <classname>ToolBar</classname> constructor, which can be called with a different number of parameters:</para>
-      <programlisting language="JavaScript">var pane = new ToolBar();</programlisting>
+      <para>To create a component of this type by program means, use the  <classname>ToolBar</classname> constructor:</para>
+      <programlisting language="JavaScript">var toolbar = new ToolBar(<replaceable>floatable</replaceable>);</programlisting>
+      <para>where <replaceable>floatable</replaceable> is <code>true</code> when  the tool bar can be moved and <code>false</code> otherwise (optional). By default set to <code>false</code>.</para>
+      <para>To add child components to the container, use the   <methodname>add</methodname> method and pass a child component as well as a tab title and an optional icon setting as parameters to this method:</para>
+      <programlisting language="JavaScript">pane.add(<replaceable>component</replaceable>);</programlisting>
+      <para>where <replaceable>component</replaceable> is the component to add.</para>
+      <para>For example:</para>
+      <programlisting language="JavaScript">var toolbar = new ToolBar();
+var b1 = new Button();
+b1.icon = Icon.load(&quot;1.png&quot;);
+pane.add(b1);
+var b2 = new Button();
+b2.icon = Icon.load(&quot;2.png&quot;);
+pane.add(b2);</programlisting>
     </section><section id="ui-containers-desktoppane">
       <title>DesktopPane</title>
       <para><code>DesktopPane</code> is used to create a multi-document interface.</para>
