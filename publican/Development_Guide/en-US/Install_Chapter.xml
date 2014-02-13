@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="install-chapter">
-  <title>Platypus Application Designer</title>
+  <title>Installation and configuration</title>
   <para>The application designer software package is included into the developer&apos;s kit and can be bundled with the Platypus Platform runtime installation.</para>
   <para>If the developer&apos;s kit is supplied as an archive, unpack its contents  to the  folder of your choice on the hard drive.</para>
   <note>

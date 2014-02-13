@@ -1417,8 +1417,8 @@ function validateEmail(email) {
 }</programlisting>
     </section>
     <section id="datamodel-entity-schema">
-      <title>Entity data schema</title>
-      <para>Module JavaScript code has access to an entity schema. It is possible to read types, names, descriptions of entity properties and parameters, and etc.</para>
+      <title>Data schema</title>
+      <para>JavaScript code has access to an entity&apos;s fields metadata. It is possible to read types, names, descriptions of entity properties and parameters, and etc.</para>
       <para>To read an entity&apos;s schema, use its  <varname>schema</varname> property:</para>
       <programlisting language="JavaScript">var entityMetadata = model.<replaceable>entityName</replaceable>.schema;</programlisting>
       <para>where <varname>

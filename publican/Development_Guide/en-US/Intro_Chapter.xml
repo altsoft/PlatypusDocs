@@ -6,7 +6,7 @@
 <chapter id="intro-chapter">
   <title>Introduction</title>
   <section id="about-platform">
-    <title>About the Platypus Platform </title>
+    <title>About the platform </title>
     <para>The Platypus Platform is a JavaScript client and server   applications platform  for rapid development of   enterprise-level information systems.</para>
     <para> The platform uses two application programming languages:</para>
     <itemizedlist>
