@@ -135,13 +135,13 @@
     <programlisting language="JavaScript">formInstance.show();</programlisting>
     <para>An application supports a registry of its shown forms. For every form a identifier can be specifyed to refer to the shown form in this registry, to do this use form&apos;s instance <code>formKey</code> property. By default a form&apos;s key set to its constructor name. </para>
     <para>Use the <code>Form.getShownForm(<replaceable>formKey</replaceable>)</code>  method, where <replaceable>formKey</replaceable> is a form&apos;s key to get the shown form by its key.</para>
-    <programlisting language="JavaScript">var form = new FormA(), 
-    form2 = new FormA();
-form.formKey = &apos;first&apos;;
-form2.formKey = &apos;second&apos;;
-form.show();
-form2.show();
-Form.getShownForm(&apos;first&apos;).visible = false;</programlisting>
+    <programlisting language="JavaScript">var formA = new FormA(); 
+var formB = new FormB();
+formA.formKey = &apos;A1&apos;;
+formB.formKey = &apos;B1&apos;;
+formA.show();
+formB.show();
+Form.getShownForm(&apos;A1&apos;).visible = false;</programlisting>
     <para>Get the array of the application&apos;s shown forms registry using   <code>Form</code> object <code>shown</code> property:</para>
     <programlisting language="JavaScript">for(var i=0;i &lt; Form.shown.length;i++) {
     Logger.info(shownForms[i].title);
