@@ -672,291 +672,288 @@ self.view.background = Color.black;</programlisting>
   </section>
   <section id="form-standart-widgets">
     <title>Standard widgets</title>
-    <section>
-      <title>Introduction to standard widgets</title>
-      <para>Standard widgets are simple components intended to organize application&apos;s user interface. </para>
-      <para>To specify  visual presentation of the widget, set its properties and event handlers in the visual editor or in JavaScript code.</para>
-      <para>Standard widgets have a set of common properties and events  as well as  specific properties and events. </para>
-      <para>The common properties for all components are listed in the following table:</para>
-      <informaltable>
-        <tgroup cols="2">
-          <thead>
-            <row>
-              <entry align="center">Property </entry>
-              <entry align="center">Description </entry>
-            </row>
-          </thead>
-          <tbody>
-            <row>
-              <entry>
-                <parameter>visible</parameter>
-              </entry>
-              <entry><code>true</code> if the component is visible and <code>false</code> otherwise </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>background</parameter>
-              </entry>
-              <entry>Background color </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>font</parameter>
-              </entry>
-              <entry>Font</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>componentPopupMenu</parameter>
-              </entry>
-              <entry>Popup menu</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>foreground</parameter>
-              </entry>
-              <entry>Color </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>toolTipText</parameter>
-              </entry>
-              <entry>Text, which is shown when hovering a cursor over the component </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>border</parameter>
-              </entry>
-              <entry>Component border </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>cursor</parameter>
-              </entry>
-              <entry>Cursor above the component</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>enabled</parameter>
-              </entry>
-              <entry><code>true</code> if the component is enabled and <code>false</code> otherwise</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>focusable</parameter>
-              </entry>
-              <entry><code>true</code> if it is allowed for the component to get keyboard focus and <code>false</code> otherwise </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>opaque</parameter>
-              </entry>
-              <entry><code>true</code> if the component&apos;s background is opaque and <code>false</code> otherwise</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>error</parameter>
-              </entry>
-              <entry>Error message of this component. Validation procedure may set this property and subsequent focus lost event will clear it.</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-      <para>Common events for all components are listed in the following table:</para>
-      <informaltable>
-        <tgroup cols="3">
-          <thead>
-            <row>
-              <entry align="center">Event </entry>
-              <entry>Handler parameters </entry>
-              <entry align="center">Description </entry>
-            </row>
-          </thead>
-          <tbody>
-            <row>
-              <entry>
-                <parameter>onActionPerformed</parameter>
-              </entry>
-              <entry>
-                <code>ComponentEvent</code>
-              </entry>
-              <entry>Is called when main action performed</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onComponentAdded</parameter>
-              </entry>
-              <entry>
-                <code>ComponentEvent</code>
-              </entry>
-              <entry>Is called after adding the component </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onComponentHidden</parameter>
-              </entry>
-              <entry>
-                <code>ComponentEvent</code>
-              </entry>
-              <entry>Is called after hiding the component </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onComponentМoved</parameter>
-              </entry>
-              <entry>
-                <code>ComponentEvent</code>
-              </entry>
-              <entry>Is called after moving the component </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onComponentRemoved</parameter>
-              </entry>
-              <entry>
-                <code>ComponentEvent</code>
-              </entry>
-              <entry>Is called after removing the component from its container </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onComponentResized</parameter>
-              </entry>
-              <entry>
-                <code>ComponentEvent</code>
-              </entry>
-              <entry>Is called after changing the component size </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onComponentShown</parameter>
-              </entry>
-              <entry>
-                <code>ComponentEvent</code>
-              </entry>
-              <entry>Is called after displaying the component </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onFocusGained</parameter>
-              </entry>
-              <entry>
-                <code>FocusEvent</code>
-              </entry>
-              <entry>Is called after getting the keyboard focus </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onFocusLost</parameter>
-              </entry>
-              <entry>
-                <code>FocusEvent</code>
-              </entry>
-              <entry>Is called after losing the keyboard focus</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onKeyPressed</parameter>
-              </entry>
-              <entry>
-                <code>KeyEvent</code>
-              </entry>
-              <entry>Is called after pressing the keyboard key</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onKeyReleased</parameter>
-              </entry>
-              <entry>
-                <code>KeyEvent</code>
-              </entry>
-              <entry>Is called after releasing the keyboard key</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onKeyTyped</parameter>
-              </entry>
-              <entry>
-                <code>KeyEvent</code>
-              </entry>
-              <entry>Is called after pressing the keyboard key</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMouseClicked</parameter>
-              </entry>
-              <entry>
-                <code>MouseEvent</code>
-              </entry>
-              <entry>Mouse key is pressed and released</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMouseDragged</parameter>
-              </entry>
-              <entry>
-                <code>MouseEvent</code>
-              </entry>
-              <entry>Component is dragged by the mouse </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMouseEntered</parameter>
-              </entry>
-              <entry>
-                <code>MouseEvent</code>
-              </entry>
-              <entry>Mouse cursor has entered the component rectangle</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMouseExited</parameter>
-              </entry>
-              <entry>
-                <code>MouseEvent</code>
-              </entry>
-              <entry>Mouse cursor has left the component rectangle</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMouseMoved</parameter>
-              </entry>
-              <entry>
-                <code>MouseEvent</code>
-              </entry>
-              <entry>Mouse cursor has changed its position</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMousePressed</parameter>
-              </entry>
-              <entry>
-                <code>MouseEvent</code>
-              </entry>
-              <entry>Mouse key is pressed</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMouseReleased</parameter>
-              </entry>
-              <entry>
-                <code>MouseEvent</code>
-              </entry>
-              <entry>Mouse key is released </entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onMouseWheelMoved</parameter>
-              </entry>
-              <entry>
-                <code>MouseWheelEvent</code>
-              </entry>
-              <entry>Mouse wheel is rotated </entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-    </section>
+    <para>Standard widgets are simple components intended to organize application&apos;s user interface. </para>
+    <para>To specify  visual presentation of the widget, set its properties and event handlers in the visual editor or in JavaScript code.</para>
+    <para>Standard widgets have a set of common properties and events  as well as  specific properties and events. </para>
+    <para>The common properties for all components are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Property </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>visible</parameter>
+            </entry>
+            <entry><code>true</code> if the component is visible and <code>false</code> otherwise </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>background</parameter>
+            </entry>
+            <entry>Background color </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>font</parameter>
+            </entry>
+            <entry>Font</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>componentPopupMenu</parameter>
+            </entry>
+            <entry>Popup menu</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>foreground</parameter>
+            </entry>
+            <entry>Color </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>toolTipText</parameter>
+            </entry>
+            <entry>Text, which is shown when hovering a cursor over the component </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>border</parameter>
+            </entry>
+            <entry>Component border </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>cursor</parameter>
+            </entry>
+            <entry>Cursor above the component</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>enabled</parameter>
+            </entry>
+            <entry><code>true</code> if the component is enabled and <code>false</code> otherwise</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>focusable</parameter>
+            </entry>
+            <entry><code>true</code> if it is allowed for the component to get keyboard focus and <code>false</code> otherwise </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>opaque</parameter>
+            </entry>
+            <entry><code>true</code> if the component&apos;s background is opaque and <code>false</code> otherwise</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>error</parameter>
+            </entry>
+            <entry>Error message of this component. Validation procedure may set this property and subsequent focus lost event will clear it.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>Common events for all components are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry align="center">Event </entry>
+            <entry>Handler parameters </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>onActionPerformed</parameter>
+            </entry>
+            <entry>
+              <code>ComponentEvent</code>
+            </entry>
+            <entry>Is called when main action performed</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onComponentAdded</parameter>
+            </entry>
+            <entry>
+              <code>ComponentEvent</code>
+            </entry>
+            <entry>Is called after adding the component </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onComponentHidden</parameter>
+            </entry>
+            <entry>
+              <code>ComponentEvent</code>
+            </entry>
+            <entry>Is called after hiding the component </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onComponentМoved</parameter>
+            </entry>
+            <entry>
+              <code>ComponentEvent</code>
+            </entry>
+            <entry>Is called after moving the component </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onComponentRemoved</parameter>
+            </entry>
+            <entry>
+              <code>ComponentEvent</code>
+            </entry>
+            <entry>Is called after removing the component from its container </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onComponentResized</parameter>
+            </entry>
+            <entry>
+              <code>ComponentEvent</code>
+            </entry>
+            <entry>Is called after changing the component size </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onComponentShown</parameter>
+            </entry>
+            <entry>
+              <code>ComponentEvent</code>
+            </entry>
+            <entry>Is called after displaying the component </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onFocusGained</parameter>
+            </entry>
+            <entry>
+              <code>FocusEvent</code>
+            </entry>
+            <entry>Is called after getting the keyboard focus </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onFocusLost</parameter>
+            </entry>
+            <entry>
+              <code>FocusEvent</code>
+            </entry>
+            <entry>Is called after losing the keyboard focus</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onKeyPressed</parameter>
+            </entry>
+            <entry>
+              <code>KeyEvent</code>
+            </entry>
+            <entry>Is called after pressing the keyboard key</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onKeyReleased</parameter>
+            </entry>
+            <entry>
+              <code>KeyEvent</code>
+            </entry>
+            <entry>Is called after releasing the keyboard key</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onKeyTyped</parameter>
+            </entry>
+            <entry>
+              <code>KeyEvent</code>
+            </entry>
+            <entry>Is called after pressing the keyboard key</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseClicked</parameter>
+            </entry>
+            <entry>
+              <code>MouseEvent</code>
+            </entry>
+            <entry>Mouse key is pressed and released</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseDragged</parameter>
+            </entry>
+            <entry>
+              <code>MouseEvent</code>
+            </entry>
+            <entry>Component is dragged by the mouse </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseEntered</parameter>
+            </entry>
+            <entry>
+              <code>MouseEvent</code>
+            </entry>
+            <entry>Mouse cursor has entered the component rectangle</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseExited</parameter>
+            </entry>
+            <entry>
+              <code>MouseEvent</code>
+            </entry>
+            <entry>Mouse cursor has left the component rectangle</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseMoved</parameter>
+            </entry>
+            <entry>
+              <code>MouseEvent</code>
+            </entry>
+            <entry>Mouse cursor has changed its position</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMousePressed</parameter>
+            </entry>
+            <entry>
+              <code>MouseEvent</code>
+            </entry>
+            <entry>Mouse key is pressed</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseReleased</parameter>
+            </entry>
+            <entry>
+              <code>MouseEvent</code>
+            </entry>
+            <entry>Mouse key is released </entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onMouseWheelMoved</parameter>
+            </entry>
+            <entry>
+              <code>MouseWheelEvent</code>
+            </entry>
+            <entry>Mouse wheel is rotated </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
     <section id="widget-label">
       <title>Label</title>
       <para><code>Label</code> is a widget with a short piece of text, images or text with an image. The label does not respond to keyboard input events and can&apos;t get the keyboard focus. </para>
@@ -1148,7 +1145,7 @@ view.add(btn1);</programlisting>
               <entry>
                 <code>ActionEvent</code>
               </entry>
-              <entry>Button state switching event</entry>
+              <entry>Button toggle event</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1216,6 +1213,12 @@ view.add(cb1);</programlisting>
             </row>
           </thead>
           <tbody>
+            <row>
+              <entry>
+                <parameter>buttonGroup</parameter>
+              </entry>
+              <entry>The button group this button belongs</entry>
+            </row>
             <row>
               <entry>
                 <parameter>icon</parameter>
@@ -1581,105 +1584,103 @@ view.add(htmlArea);</programlisting>
   </section>
   <section id="mwidgets">
     <title>Model widgets </title>
-    <section>
-      <title>Introduction to model widgets</title>
-      <para>Model widgets are components, which can interact with the data model and respond to the model&apos;s datasets  events.</para>
-      <para>You can bind a model widgets to any data model entity dataset (including &quot;parameters&quot; entity). This  dataset  will change  in response to the user actions on the widgets and its changes will lead to automatic update of data displayed on all bound  widgets.</para>
-      <para>Configure specific properties for binding to  data model, using properties in the <guilabel>Model binding</guilabel> category.</para>
-      <para>Scalar model widgets represents a single dataset object and its specific field. This data object is   the object at the cursor position. Other more complex model widgets as <code>ModelGrid</code> and <code>ModelMap</code> can represent multiply objects in dataset and control the cursor in this dataset.</para>
-      <para>Scalar model widgets have the following common properties:</para>
-      <informaltable>
-        <tgroup cols="2">
-          <thead>
-            <row>
-              <entry align="center">Property </entry>
-              <entry align="center">Description </entry>
-            </row>
-          </thead>
-          <tbody>
-            <row>
-              <entry>
-                <parameter>field</parameter>
-              </entry>
-              <entry>Bound model entity field.</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>value</parameter>
-              </entry>
-              <entry>The current value for the component.</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-      <para>Scalar model widgets common events are listed in the following table:</para>
-      <informaltable>
-        <tgroup cols="3">
-          <thead>
-            <row>
-              <entry align="center">Event </entry>
-              <entry>Handler parameter </entry>
-              <entry align="center">Description </entry>
-            </row>
-          </thead>
-          <tbody>
-            <row>
-              <entry>
-                <parameter>onSelect</parameter>
-              </entry>
-              <entry>The <parameter>aEditor</parameter> object is the source component, is passed to the event handler as a parameter, specify the <property>value</property> of the component by setting its properties.</entry>
-              <entry>Occurs when the select button, located next to the component, is clicked. The select button is displayed only if the handler is defined.</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>onRender</parameter>
-              </entry>
-              <entry>
-                <code>RenderEvent</code>
-              </entry>
-              <entry>Occurs when preparing the widget for displaying (both when it is used independently or as a <code>ModelGrid</code> widget cell). This event is cancelable: return <code>true</code> in its handler function to apply rendering and <code>false</code> otherwise.</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-      <para>Any model widget can be presented as an  independent component and as a <code>ModelGrid</code>  widget cell. There is  an &quot;abstract&quot; cell in each model widget. It is available in the  <varname>onRender</varname> event handlers.</para>
-      <para><code>RenderEvent</code> object specific  propetries are listed in the following table:</para>
-      <informaltable>
-        <tgroup cols="2">
-          <thead>
-            <row>
-              <entry align="center">Property </entry>
-              <entry align="center">Description </entry>
-            </row>
-          </thead>
-          <tbody>
-            <row>
-              <entry>
-                <code>id</code>
-              </entry>
-              <entry>The primary key of the data object.</entry>
-            </row>
-            <row>
-              <entry>
-                <code>cell</code>
-              </entry>
-              <entry>The &quot;abstract&quot; cell.</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-      <para>For such a <code>cell</code>, the following properties are defined:</para>
-      <itemizedlist>
-        <listitem>
-          <para><varname>display</varname> is the displayed text.</para>
-        </listitem>
-        <listitem>
-          <para><varname>style</varname> is  the <code>Style</code> of displaying.</para>
-        </listitem>
-      </itemizedlist>
-      <para>Model widgets also have the same basic properties and event  as standard widgets. It is not recommended to specify handlers of low-level events (keyboard, mouse movement events, etc.) for model widgets.</para>
-      <para>The following example illustrates how to use <code>onSelect</code> event:</para>
-      <programlisting language="JavaScript">/**
+    <para>Model widgets are components, which can interact with the data model and respond to the model&apos;s datasets  events.</para>
+    <para>You can bind a model widgets to any data model entity dataset (including &quot;parameters&quot; entity). This  dataset  will change  in response to the user actions on the widgets and its changes will lead to automatic update of data displayed on all bound  widgets.</para>
+    <para>Configure specific properties for binding to  data model, using properties in the <guilabel>Model binding</guilabel> category.</para>
+    <para>Scalar model widgets represents a single dataset object and its specific field. This data object is   the object at the cursor position. Other more complex model widgets as <code>ModelGrid</code> and <code>ModelMap</code> can represent multiply objects in dataset and control the cursor in this dataset.</para>
+    <para>Scalar model widgets have the following common properties:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Property </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>field</parameter>
+            </entry>
+            <entry>Bound model entity field.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>value</parameter>
+            </entry>
+            <entry>The current value for the component.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>Scalar model widgets common events are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry align="center">Event </entry>
+            <entry>Handler parameter </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <parameter>onSelect</parameter>
+            </entry>
+            <entry>The <parameter>aEditor</parameter> object is the source component, is passed to the event handler as a parameter, specify the <property>value</property> of the component by setting its properties.</entry>
+            <entry>Occurs when the select button, located next to the component, is clicked. The select button is displayed only if the handler is defined.</entry>
+          </row>
+          <row>
+            <entry>
+              <parameter>onRender</parameter>
+            </entry>
+            <entry>
+              <code>RenderEvent</code>
+            </entry>
+            <entry>Occurs when preparing the widget for displaying (both when it is used independently or as a <code>ModelGrid</code> widget cell). This event is cancelable: return <code>true</code> in its handler function to apply rendering and <code>false</code> otherwise.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>Any model widget can be presented as an  independent component and as a <code>ModelGrid</code>  widget cell. There is  an &quot;abstract&quot; cell in each model widget. It is available in the  <varname>onRender</varname> event handlers.</para>
+    <para><code>RenderEvent</code> object specific  propetries are listed in the following table:</para>
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry align="center">Property </entry>
+            <entry align="center">Description </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <code>id</code>
+            </entry>
+            <entry>The primary key of the data object.</entry>
+          </row>
+          <row>
+            <entry>
+              <code>cell</code>
+            </entry>
+            <entry>The &quot;abstract&quot; cell.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>For such a <code>cell</code>, the following properties are defined:</para>
+    <itemizedlist>
+      <listitem>
+        <para><varname>display</varname> is the displayed text.</para>
+      </listitem>
+      <listitem>
+        <para><varname>style</varname> is  the <code>Style</code> of displaying.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Model widgets also have the same basic properties and event  as standard widgets. It is not recommended to specify handlers of low-level events (keyboard, mouse movement events, etc.) for model widgets.</para>
+    <para>The following example illustrates how to use <code>onSelect</code> event:</para>
+    <programlisting language="JavaScript">/**
  * Shows custom selector dialog and sets
  * the cell&apos;s editor&apos;s value.
  *
@@ -1690,8 +1691,8 @@ function buttonOnSelect(aEditor) {
     aEditor.value = selector.pet;
   });
 }</programlisting>
-      <para><code>onRender</code> event usage example is as follows:</para>
-      <programlisting language="JavaScript">/**
+    <para><code>onRender</code> event usage example is as follows:</para>
+    <programlisting language="JavaScript">/**
  * Renders a cell with complex data
  */
 function entityOnRender(evt) {
@@ -1706,7 +1707,6 @@ function entityOnRender(evt) {
     evt.cell.display = txt;
     return true;
 }</programlisting>
-    </section>
     <section id="widget-modelcheck">
       <title>ModelCheck</title>
       <para><code>ModelCheck</code> is a scalar model widget representing a  check box, the state of which is linked to an entity&apos;s field of a  <classname>Boolean</classname>, <classname>Number</classname>, or <classname>String</classname>  type.</para>
@@ -2286,6 +2286,7 @@ view.add(modelSpin);</programlisting>
   </section>
   <section id="menus">
     <title>Menus</title>
+    <para>Menus components  provide a convinient way to let the user choose one of several options. </para>
     <section id="menu-menubar">
       <title>MenuBar</title>
       <para><code>MenuBar</code> component is a form&apos;s main menu bar, into which individual menus can be added. This compontent is a kind of a container and inherits it common properties and methods. </para>
@@ -2509,6 +2510,12 @@ menu.add(item);</programlisting>
             </row>
             <row>
               <entry>
+                <parameter>buttonGroup</parameter>
+              </entry>
+              <entry>The button group this component belongs</entry>
+            </row>
+            <row>
+              <entry>
                 <parameter>parent</parameter>
               </entry>
               <entry>The parent container (read-only).</entry>
@@ -2623,7 +2630,7 @@ var style2 = new Style(<replaceable>parent</replaceable>);</programlisting>
     </section>
     <section id="ui-utils-icon">
       <title>Icon</title>
-      <para>An icon object, a bitmap picture.</para>
+      <para><code>Icon</code> is  a bitmap picture.</para>
       <para>To create an icon object, use the factory  <methodname>load</methodname> method of the  <classname>Icon</classname> object:</para>
       <programlisting language="JavaScript">var icon = Icon.load(<replaceable>path</replaceable>);</programlisting>
       <para>where <replaceable>path</replaceable> is the name of the icon file, relative path of an application or URL.</para>
@@ -2635,7 +2642,7 @@ view.add(b);</programlisting>
     </section>
     <section id="ui-utils-fontstyle">
       <title>FontStyle</title>
-      <para>This object contains constants, which can be used to set font styles.</para>
+      <para><code>FontStyle</code> object contains constants, which can be used to set font styles.</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
@@ -2677,7 +2684,7 @@ view.add(b);</programlisting>
     </section>
     <section id="ui-utils-font">
       <title>Font</title>
-      <para>Font object.</para>
+      <para><code>Font</code> object.</para>
       <para>Object properties:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2717,7 +2724,7 @@ view.add(b);</programlisting>
     </section>
     <section id="ui-utils-color">
       <title>Color</title>
-      <para>An object representing a color.</para>
+      <para><code>Color</code> represents color an  the object.</para>
       <para>The color object contains constants of main colors: </para>
       <informaltable>
         <tgroup cols="2">
@@ -2820,7 +2827,7 @@ panel.background = IVORY_COLOR;</programlisting>
     </section>
     <section id="ui-utils-horizontalposition">
       <title>HorizontalPosition</title>
-      <para>A horizontal position object.</para>
+      <para><code>HorizontalPosition</code> is the horizontal position constants object.</para>
       <para>This object contains constants, which determine the horizontal position:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2857,7 +2864,7 @@ panel.background = IVORY_COLOR;</programlisting>
     </section>
     <section id="ui-utils-verticalpositon">
       <title>VerticalPosition</title>
-      <para>A vertical position object.</para>
+      <para><code>VerticalPosition</code> is the vertical position constants object.</para>
       <para>This object contains constants, which determine the vertical position:</para>
       <informaltable>
         <tgroup cols="2">
@@ -2894,7 +2901,7 @@ panel.background = IVORY_COLOR;</programlisting>
     </section>
     <section id="ui-utils-orientation">
       <title>Orientation</title>
-      <para>Selection of orientation — horizontal or vertical.</para>
+      <para><code>Orientation</code> is the orientation constants object.</para>
       <para>This object contains constants, which determine the orientation:</para>
       <informaltable>
         <tgroup cols="2">

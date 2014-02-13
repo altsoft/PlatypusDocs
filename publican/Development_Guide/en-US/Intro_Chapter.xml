@@ -138,40 +138,36 @@
         <para>Improved performance, as business logic is executed on the server.</para>
       </listitem>
       <listitem>
-        <para>Improved system maintainability.</para>
+        <para>Better system maintainability.</para>
       </listitem>
       <listitem>
-        <para>Target application scalability. </para>
+        <para>Application is more scalabile. </para>
       </listitem>
       <listitem>
-        <para>The ability to use HTML5 web browser as a client (using the J2EE servlet container/application server).</para>
+        <para>The ability to use HTML5 web browser as a client when using  J2EE servlet container or application server.</para>
       </listitem>
     </itemizedlist>
-    <para>In case of no-server configuration the presentation tier and logic tier operate at Java SE desktop client, and in case server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
+    <para>In case of no-server 2-tier configuration the presentation tier and logic tier operate at Java SE desktop client. In case of 3-tier server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
   </section>
   <section id="dev-workflow">
     <title>Development steps</title>
-    <para>To develop an  application use the following workflow:</para>
+    <para>To develop an  application iteratively perform the following steps:</para>
     <itemizedlist>
       <listitem>
-        <para>Determine database structure for the application knowledge domain.</para>
+        <para><link linkend="diargram-chapter">Specify</link>  this structure in the form of  relational entities in the database using the database structure diagrams  visual editor.</para>
       </listitem>
       <listitem>
-        <para>Specify  this structure in the form of  relational entities in the database using the database structure diagrams  visual editor.</para>
+        <para><link linkend="query-chapter">Write</link> the  queries and specify theirs parameters. If required, implement the queries for updating and adding data in SQL language (it is not needed in general, because data inserts/updates/deletions in most cases can be completed automatically by the data model).</para>
       </listitem>
       <listitem>
-        <para>Write the data sampling queries and specify theirs parameters; if required, implement the queries for updating and adding data in SQL language (it is not needed in general, because data inserts/updates/deletions in most cases can be completed automatically by the data model).</para>
+        <para><link linkend="module-chapter">Implement</link>  the application logic as JavaScript modules. Specify the module&apos;s data model using visual tool. Write the  JavaScript code, for example to implement the business-logic.</para>
       </listitem>
       <listitem>
-        <para>Implement  the application logic as JavaScript modules. Specify the module&apos;s data model using visual tool. Write the  JavaScript code, for example to implement the business-logic.</para>
+        <para><link linkend="gui-chapter">Implement</link> the application user interface as  forms using visual  tool. Specify the form&apos;s data model. Create  the form&apos;s layout using the visual editor. Write  JavaScript  code responsible for  the user interface.</para>
       </listitem>
       <listitem>
-        <para>Implement the application user interface as  forms using visual  tool. Specify the form&apos;s data model. Create  the form&apos;s layout using the visual editor. Write  JavaScript  code responsible for  the user interface.</para>
-      </listitem>
-      <listitem>
-        <para>Implement  reports using the reports tool. Specify the report&apos;s data model. Create the report template using the visual editor. Write  JavaScript  code if some  non-standard data  processing required.</para>
+        <para><link linkend="report-chapter">Implement</link>  reports using the reports tool. Specify the report&apos;s data model. Create the report template using the visual editor. Write  JavaScript  code if some  non-standard data  processing required.</para>
       </listitem>
     </itemizedlist>
-    <para>Repeat the steps above if required.</para>
   </section>
 </chapter>

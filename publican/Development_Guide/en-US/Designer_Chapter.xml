@@ -281,9 +281,6 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
           </menuchoice>  <guimenuitem>Start</guimenuitem> menu item.</para>
       </listitem>
     </itemizedlist>
-    <note>
-      <para>In your applications try to use  standard SQL whether possible  to enable easy transferring of an application to other <acronym>database</acronym> servers supported by the platform. </para>
-    </note>
     <para>After the  <acronym>database</acronym> server is launched and become available via the network or locally, connect to this server by selecting the  <guimenuitem>Connect to project database</guimenuitem> item in the context menu, or by clicking the <guibutton>Establish connection</guibutton> button on the  <guilabel>Application Database</guilabel> form in the project properties, or by selecting the  Connect to project database link on the stub-form of the data model editor.</para>
     <para>To disconnect, select the <guimenuitem>Disconnect from project database</guimenuitem> item in the project context menu.</para>
   </section>
@@ -296,7 +293,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
       <para>When deploying and importing an application, the destination table or the <guilabel>Application Elements</guilabel> folder is cleared before the copy process starts.</para>
     </important>
   </section>
-  <section arch="" id="db-migrations">
+  <section id="db-migrations" arch="">
     <title>Database migrations tools</title>
     <para>To store and restore database(s) schema and its bootstrap data and use the database migration tools. </para>
     <important>

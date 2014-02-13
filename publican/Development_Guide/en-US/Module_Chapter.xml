@@ -167,7 +167,7 @@ function otherFunction() {
         <para><code>new <replaceable>ReportName</replaceable>()</code></para>
         <para><code>new Report(&quot;<replaceable>ReportName</replaceable>&quot;)</code></para>
         <para><code>new ServerReport(&quot;<replaceable>ServerReportName</replaceable>&quot;)</code></para>
-        <para>where <replaceable>ModuleName</replaceable> is the name of the module, form and reports are in fact a special kind of a module. </para>
+        <para>where <replaceable>ModuleName</replaceable>, <replaceable>FormName</replaceable> and <replaceable>ReportName</replaceable> is the name of the module, form and report what are in fact a special kinds of a module. </para>
       </listitem>
       <listitem>
         <para>Application elements with the specified names are loaded or server proxies for server modules/reports are generated.</para>
@@ -1778,7 +1778,18 @@ e.executeUpdate();</programlisting>
   <section id="module-ds">
     <title>Data source module</title>
     <para>A module can be used as a data source in other modules data models just like a query. </para>
-    <para>To use a module as a data source implement the instance <code>schema</code> property as well as the following methods:  <code>fetch(<replaceable>params</replaceable>)</code>, where <replaceable>params</replaceable> is an object, with properties as defined in this module&apos;s model&apos;s parameters and <code>apply(<replaceable>log</replaceable>, <replaceable>session</replaceable>)</code>, where <replaceable>log</replaceable> is an array represents the log of changes made by clients or server side data driven code to be applied, <replaceable>session</replaceable> is a current user session identifier. </para>
+    <para>To create a data source module implement the following instance properties and methods:</para>
+    <itemizedlist>
+      <listitem>
+        <para><code>schema</code> property to represent the data source metadata information. The schema information is repesented as an array, where each array element corresponds to some entity field. For each array element the following fields must be provided: <code>name</code> is the name of the field, <code>entity</code> is the entity name to be used as a reference (optional), <code>description</code> is the field&apos;s description, type is the field&apos;s type (optional), <code>key</code> is true if the field is a primary key, <code>ref</code> is the reference to the other entity&apos;s field.</para>
+      </listitem>
+      <listitem>
+        <para><code>fetch(<replaceable>params</replaceable>)</code> method to query  data, where <replaceable>params</replaceable> is an object, with properties as defined in this module&apos;s model&apos;s parameters.</para>
+      </listitem>
+      <listitem>
+        <para><code>apply(<replaceable>log</replaceable>, <replaceable>session</replaceable>)</code> method to save the data, where <replaceable>log</replaceable> is an array represents the log of changes made by clients or server side data driven code to be applied, <replaceable>session</replaceable> is a current user session identifier. </para>
+      </listitem>
+    </itemizedlist>
     <para>Example of an datasource module usage is as the follows:</para>
     <programlisting language="JavaScript">/**
  * @module 
@@ -1811,6 +1822,7 @@ function DataSourceModule(){
   </section>
   <section id="module-server">
     <title>Server modules</title>
+    <para>This section provides information how to use special features of  JavaScript modules running on an application server.</para>
     <section label="" id="module-server-stateless">
       <title>Statefull and stateless session modules</title>
       <para>A module being created on  server is stateful by default. Such module exists in the context of the current user session. </para>
@@ -1962,145 +1974,5 @@ writeString(&apos;/home/user1/Documents/doc2.txt&apos;, str);</programlisting>
     <warning>
       <para>E4X is obsolete. Although it is still supported, its usage is discouraged in new projects. Try to avoid using it.</para>
     </warning>
-    <para>The  materials in this section  are based on the Mozilla Development Network E4X manual.</para>
-    <para>To create a new XML type variables use the following syntax: </para>
-    <programlisting language="JavaScript">// Creates empty XML element
-var element = &lt;foo/&gt;;
-
-// Creates XML element with attibute
-var element2 = &lt;foo baz=&quot;1&quot;/&gt;; 
-
-// Creates non-empty XML element
-var element3 = &lt;foo&gt;  
-                  &lt;bar/&gt;  
-                &lt;/foo&gt;;  </programlisting>
-    <para>To create an   <abbrev>XML</abbrev> object from a string, pass the string to the  XML object constructor:</para>
-    <programlisting language="JavaScript">// Creates XML element from XML string
-var element = new XML(&apos;&lt;foo/&gt;&lt;bar/&gt;&lt;/foo&gt;&apos;);  </programlisting>
-    <para>To add a child element to the  <abbrev>XML</abbrev> element, use the  <code>appendChild</code> function:</para>
-    <programlisting language="JavaScript">var element1 = &lt;foo/&gt;;  
-var element2 = &lt;bar/&gt;;  
-element1.appendChild(element2);   </programlisting>
-    <para>To integrate the JavaScript and  <abbrev>XML</abbrev> use syntax with curly brackets: <code>{}</code>:</para>
-    <programlisting language="JavaScript">var a = 2;  
-var bar = &apos;bar&apos;;  
-var foo = &lt;foo {bar}={a}&gt;hi&lt;/foo&gt;;   </programlisting>
-    <para>Even though the embedded objects are restricted to a single expression, use an anonymous function to embed more complex logic:</para>
-    <programlisting language="JavaScript">var a = &apos;foo&apos;;  
-var b = &lt;bar&gt;{function () {var c = a.toUpperCase(); var d = 5 * 5; return c + d;}()}&lt;/bar&gt;;  </programlisting>
-    <para>To serialize  <abbrev> XML</abbrev> into a string use the <code>toXMLString</code> function:</para>
-    <programlisting language="JavaScript">var element1 = &lt;foo/&gt;;  
-var element2 = &lt;bar/&gt;;  
-element1.appendChild(element2);  
-Logger.info(element1.toXMLString());  </programlisting>
-    <para>In this case, calling the  <code>toString</code> function will bring the same, but calling the <code>toString</code> function on one element will return text inside the element:</para>
-    <programlisting language="JavaScript">&lt;foo&gt;abc&lt;/foo&gt;.toString();
-//abc</programlisting>
-    <para>To access the child nodes of the  <abbrev>XML</abbrev> element, use syntax similar to the syntax for accessing JavaScript object properties:</para>
-    <programlisting language="JavaScript">var element1 = &lt;foo&gt;
-                 &lt;bar/&gt;
-               &lt;/foo&gt;;
-var element2 = &lt;baz/&gt;;
-element1.bar.appendChild(element2);
-element1[&quot;bar&quot;].appendChild(&lt;quux/&gt;);</programlisting>
-    <para>Please, note that assigning a property of a non-existent child element will cause the creation of a new child element:</para>
-    <programlisting language="JavaScript">var element1 = &lt;foo/&gt;
-element1.bar = 1;</programlisting>
-    <para>Assigning a property for an existent child element will set its value:</para>
-    <programlisting language="JavaScript">var elem = &lt;foo&gt;
-             &lt;bar&gt;1&lt;/bar&gt;
-           &lt;/foo&gt;
-elem.bar = 2;</programlisting>
-    <para>To remove a child element, use the  <literal>delete</literal> operator:</para>
-    <programlisting language="JavaScript">var elem = &lt;foo&gt;
-             &lt;bar/&gt;
-             &lt;baz/&gt;
-           &lt;/foo&gt;
-delete elem.bar;</programlisting>
-    <para>To replace an element, also use the assigning syntax:</para>
-    <programlisting language="JavaScript">var elem1 = &lt;foo&gt;
-               &lt;bar/&gt;
-             &lt;/foo&gt;;
-var elem2 = &lt;red&gt;
-               &lt;blue/&gt;
-             &lt;/red&gt;;
-elem1.bar = elem2;</programlisting>
-    <para>If an element contains multiple child elements of the same type, referring to the corresponding property returns a list of elements in the form of an array:</para>
-    <programlisting language="JavaScript">var element = &lt;foo&gt;
-                &lt;bar baz=&quot;1&quot;&gt;red&lt;/bar&gt;
-                &lt;bar baz=&quot;2&quot;&gt;blue&lt;/bar&gt;
-              &lt;/foo&gt;;
-var list = element.bar;
-list.length(); // returns 2
-list[0]; // the first bar element
-list[1]; // the second bar element</programlisting>
-    <para>Assigning a value to an array element in this case changes the value of the element</para>
-    <programlisting language="JavaScript">list[1] = &quot;green&quot;;</programlisting>
-    <para>To access some special types of nodes, use <methodname>text</methodname> and comments, and a <literal>*</literal> selector.</para>
-    <para>To access text nodes, use the <methodname>text</methodname> function:</para>
-    <programlisting language="JavaScript">var a = &lt;foo&gt; Some text &lt;bar&gt;not text&lt;/bar&gt; More text &lt;/foo&gt;;
-var list = a.text();
-list.length(); // returns 2
-list[0]; // returns &quot; Some text &quot;
-list[1]; // returns &quot; More text &quot;</programlisting>
-    <para>Similarly, to access comment nodes, use the <methodname>comments</methodname>   function:</para>
-    <programlisting language="JavaScript">XML.ignoreComments = false;
-var a = &lt;foo&gt; Some  &lt;!-- abc --&gt; text &lt;/foo&gt;;
-var comments = a.comments();
-alert(comments[0]); // Returns &lt;!-- abc --&gt;</programlisting>
-    <para><literal>*</literal> selector returns all child nodes in the form of a list:</para>
-    <programlisting language="JavaScript">var a = &lt;foo&gt;
-          &lt;bar/&gt;
-          &lt;baz/&gt;
-        &lt;/foo&gt;;
-var list = a.*;
-list.length(); // returns 2</programlisting>
-    <para>To access attributes of an element, use syntax with the <literal>@</literal> operator:</para>
-    <programlisting language="JavaScript">var element = &lt;foo bar=&quot;1&quot;/&gt;
-element.@bar = 2;</programlisting>
-    <para>Result:</para>
-    <programlisting language="JavaScript">&lt;foo bar=&quot;2&quot;/&gt;</programlisting>
-    <para>To obtain access to the descendants of an XML element at an arbitrary level, use the <literal>..</literal> operator:</para>
-    <programlisting language="JavaScript">var element = &lt;pets&gt;
-                &lt;dogs&gt;
-                  &lt;fido color=&quot;red&quot;/&gt;
-                  &lt;spike color=&quot;blue&quot;/&gt;
-                &lt;/dogs&gt;
-              &lt;/pets&gt;;
-element..fido.@color = &quot;green&quot;;
-element..spike.@color = &quot;purple&quot;;</programlisting>
-    <para>Execution of this piece of code will change values of the <literal>color</literal> attributes for two elements: <literal>fido</literal> and <literal>spike</literal>. If there are more than one element at an appropriate level, an array of these elements will be returned. </para>
-    <para>Use the  <literal>*</literal> selector to select all descendants in the form of a list.</para>
-    <para>To limit the selection of elements, which will be returned by the <literal>..</literal> or  <literal>*</literal>  operators by condition, use filters. To do this, place the filter condition in the form of expression inside brackets:</para>
-    <programlisting language="JavaScript">var element = &lt;dogs&gt;
-                &lt;fido color=&quot;brown&quot;/&gt;
-                &lt;spike color=&quot;black&quot;/&gt;
-                &lt;rocky color=&quot;brown&quot;/&gt;
-              &lt;/dogs&gt;;
-var list = element.*.(@color == &quot;brown&quot;);</programlisting>
-    <para>Initially, 3 elements were returned in the sample after the <literal>*</literal> operator. After applying the filter one element —   <literal>rocky</literal> — was left..</para>
-    <para>To define the XML namespace, use the following syntax:</para>
-    <programlisting language="JavaScript">default xml namespace = &quot;http://www.w3.org/1999/xhtml&quot;;</programlisting>
-    <para>Use several such commands to change the current namespace:</para>
-    <programlisting language="JavaScript">default xml namespace = &quot;http://www.w3.org/1999/xhtml&quot;;
-var a = &lt;p&gt;Some text&lt;/p&gt;;
-default xml namespace = &quot;http://www.mozilla.org/keymaster/gat...re.is.only.xul&quot;;
-var b = &lt;label&gt;More text&lt;/label&gt;;
-a.appendChild(b);</programlisting>
-    <para>Use the <code>name</code> function of the <abbrev>XML</abbrev> object to get the <literal>QName</literal> object , i.e. a qualified name. The obtained object contains two properties: <literal>localName</literal>, which contains the name of the element, and <code>uri</code> containing a namespace, which this element belongs to:</para>
-    <programlisting language="JavaScript">var info = a.name();
-info.localName; // returns &apos;p&apos;.
-info.uri; // returns &quot;http://www.w3.org/1999/xhtml&quot;</programlisting>
-    <para>If there&apos;s no namespace specified for the elements,  <literal>uri</literal> property returns an empty string.</para>
-    <note>
-      <para><literal>XML.prototype</literal> can&apos;t be expanded by the way, which is common for the JavaScript objects. For more detailed information, refer to the E4X documentation.</para>
-    </note>
-    <para>Use the <varname>ignoreComments</varname> property (<literal>true</literal> by default) of the XML global object to manage the comment processing mode during serializing and filtering.</para>
-    <para>Use the <varname>ignoreProcessingInstructions</varname> property (<literal>true</literal> by default) of the  <abbrev>XML</abbrev> global object to manage the processing instructions processing mode during serializing and filtering.</para>
-    <para>Use the <varname>ignoreWhitespace</varname> (<literal>true</literal> by default) of the <abbrev>XML</abbrev>  global object to enable or disable the processing of spaces as text nodes.</para>
-    <para>Use the <varname>prettyPrinting</varname> property (<literal>true</literal> by default) of the <abbrev>XML</abbrev> to enable or disable adding new strings and shifts when performing the  <methodname>toXMLString</methodname> function.</para>
-    <para>Use the <varname>prettyIndent</varname> (<literal>2</literal> by default) of the <abbrev>XML</abbrev>, global object to manage the shift size when performing the   <methodname>toXMLString</methodname> function.</para>
-    <programlisting language="JavaScript">XML.ignoreComments = false;
-XML.ignoreProcessingInstructions = false;</programlisting>
   </section>
 </chapter>

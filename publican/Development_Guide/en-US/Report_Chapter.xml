@@ -93,7 +93,7 @@
   <section id="report-template-tags">
     <title>Template tags</title>
     <para>Edit the report template in a spreadsheet application.</para>
-    <para>Place tags for linking to JavaScript objects and model entities&apos; datasets in the template cells. To access data, use the following syntax: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, where <replaceable>objectName</replaceable> is the name of a JavaScript object, JavaScript objects array or model entity, <replaceable>propertyName</replaceable>  is the object property. </para>
+    <para>Place tags for linking to JavaScript objects and model entities&apos; datasets in the template cells. To access data, use the following syntax: ${<replaceable>propertyName</replaceable>}, where   <replaceable>propertyName</replaceable>  is the module instance object&apos;s property. </para>
     <para>Example of writing the name of a documents into cells:</para>
     <programlisting language="JavaScript">${documents.name}</programlisting>
     <para>Such a template will lead to insertion of  multiple rows in a resulting spreadsheet. Each row will represent documents collection item.</para>
@@ -102,15 +102,17 @@
     <para>You can use multiple tags in a single cell, for example:</para>
     <programlisting language="JavaScript">Employee: ${employee.name} - ${employee.age} years</programlisting>
     <para>In the JavaScript code, define objects, which will be available in the template tags:</para>
-    <programlisting language="JavaScript">/**
- * @name documentReport
- */
-var library = {};
-library.documens = [
- {name:&apos;foo&apos;}, 
- {name:&apos;bar&apos;},
- {name:&apos;baz&apos;}
-];</programlisting>
+    <programlisting language="JavaScript">function reportA {
+   
+   this.docs = this.model.documents;
+
+   this.library = {};
+   library.documents = [
+    {name:&apos;foo&apos;}, 
+    {name:&apos;bar&apos;},
+    {name:&apos;baz&apos;}
+   ];
+}</programlisting>
     <para>Add entities, which will be linked to the template, to the report data model.</para>
     <para>When outputting collections, a new row is added for each collection element and the style of a cell, which contains tag, is set for the cells of this row.</para>
     <para>If you know the size of the collection beforehand, you can use the template rows instead of adding new rows for each element. To do this, set  <literal>true</literal> for the <property>

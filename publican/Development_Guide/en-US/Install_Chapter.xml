@@ -35,7 +35,7 @@
       </itemizedlist>
   </para>
   </section>
-  <section arch="" id="installation-guide">
+  <section id="installation-guide" arch="">
     <title>Installation guide</title>
     <para>
 To install the developer&apos;s kit, perform the following actions:<orderedlist>
@@ -78,7 +78,7 @@ To remove  Platypus Application Designer from you computer, perform the followin
       </orderedlist>
   </para>
   </section>
-  <section arch="" id="conf-tips">
+  <section id="conf-tips" arch="">
     <title>Configuration tips</title>
     <para><application>Platypus Application Designer</application> supports  localization of  menus, messages texts, etc. Currently,  the following languages are supported:</para>
     <itemizedlist>
@@ -114,7 +114,7 @@ To remove  Platypus Application Designer from you computer, perform the followin
   <section id="runtime-setup">
     <title>Runtime environment setup</title>
     <para>The Platypus Platform runtime is required  to start, debug and deploy it&apos;s applications. You must specify the path to the runtime directory for the Platypus Application Designer to be able to run and debug your applications.</para>
-    <para>Specify the location of the Platypus Platform runtime directory in the computer&apos;s file system:</para>
+    <para>Specify the location of the platform runtime directory in the computer&apos;s file system:</para>
     <itemizedlist>
       <listitem>
         <para>Select   <menuchoice>
