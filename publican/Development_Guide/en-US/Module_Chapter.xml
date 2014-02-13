@@ -72,7 +72,7 @@
     </itemizedlist>
     <para>To configure auto completion modes, go to the  <guilabel>Code Completion</guilabel> tab and enable or disable corresponding options.</para>
   </section>
-  <section>
+  <section id="module-constr">
     <title>Module constructor</title>
     <para>Using modules allows you to manage the complexity  according to the object-oriented programming principles.</para>
     <para>Module is an equivalent of a class in other programming languages, such as in Java or С++.</para>
@@ -319,7 +319,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>Regular entity  is created using a  module implements special datasouce interface methods or  a query application element.</para>
         </listitem>
         <listitem>
-          <para>Table entity  is a special query entity, which selects all data from the table. It  is  created automatically by runtime. A table entity can be used on the application server or in the <application>desktop client</application> only with direct  connection to a database.</para>
+          <para>Table entity  is a special query entity, which selects all data from the table. It  is  created automatically by runtime. A table entity can be used on  two-tier configurations with direct  connection to a database.</para>
         </listitem>
       </itemizedlist>
       <para>Each entity can have parameters and contains a dataset  with predefined fields according to the data schema defined by the module or query, on the basis of which the entity is created.</para>
@@ -1030,15 +1030,8 @@ model.save();</programlisting>
       <programlisting language="JavaScript">// Removes all elements
 model.documents.deleteAll();
 model.save();</programlisting>
-      <para>By default, calling the save function results in saving changes and commiting the transaction. However, in some cases it is necessary to delay the transaction commit. This behavior can be used when changing data by several modules, such as modules, which are called from each other. In this case the transaction confirmation should be performed upon completion of data changing operations in a whole group of modules.</para>
-      <para>To manage the model transaction mode, use the  <varname>commitable</varname>property of the  <varname>model</varname> object:</para>
-      <programlisting language="JavaScript">model.commitable = false;</programlisting>
-      <para>In this mode, when calling the  <methodname>save</methodname> function changes are accumulated, but the transaction is not confirmed.</para>
-      <para>Assign the  <literal>true</literal> value to this property in order to enable the transaction confirmation and call the <methodname>save</methodname>  function to confirm the transaction:</para>
-      <programlisting language="JavaScript">model.commitable = true;
-model.save();// Commit all changes</programlisting>
-      <para>It might be cases when some module is the &quot;main&quot; and it is responsible for transactions commitment. In such case it&apos;s there is no need to manipulate <literal>model.commitable</literal> property. Module&apos;s model is commitabel by default. When it&apos;s model.save method will be called all changes from the whole group of modules with uncommitable models will go in a single transaction.</para>
-      <para>Calling the  <methodname>save</methodname> function may lead to an exception, for example, if saved data are inconsistent with the <acronym>database</acronym> schema. In this case data are not saved to the  <acronym>database</acronym>. To handle this exception, use the  <code>try-catch-finally</code> statement:</para>
+      <para>Calling  <code>save</code> function results in saving changes and commiting the transaction. </para>
+      <para>Calling   <methodname>save</methodname> function may lead to an exception, for example, if saved data are inconsistent with the <acronym>database</acronym> schema. In this case data are not saved to the  <acronym>database</acronym>. To handle this exception, use the  <code>try-catch-finally</code> statement:</para>
       <programlisting language="JavaScript">try {
   model.save();
 } catch (e) {

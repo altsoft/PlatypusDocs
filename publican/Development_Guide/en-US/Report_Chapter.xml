@@ -5,33 +5,33 @@
 ]>
 <chapter id="report-chapter">
   <title>Report</title>
-  <para>The  reporting tools is intended to provide data in the form of a report — as a <application>Microsoft Excel</application> file. You can open a generated report in a spreadsheet application, sent it to print or save it to disk.</para>
-  <para>The  report application element includes the following:</para>
-  <itemizedlist>
-    <listitem>
-      <para>a report template (a file in the <application>Microsoft Excel</application> format with the <filename>.xlsx</filename> extension,</para>
-    </listitem>
-    <listitem>
-      <para>JavaScript software code,</para>
-    </listitem>
-    <listitem>
-      <para>a data model.</para>
-    </listitem>
-  </itemizedlist>
-  <para>The Report application element is a descendant of the Module application element, that&apos;s why the description of the module software code, access constraints and data model applies also to the Report. The report identifier is defined in the JavaScript file using the <literal>@name</literal> annotation.</para>
-  <para>Reports in Platypus are based on the jXLS library, which in turn uses the Apache POI library. Markup and formatting of the report are defined in the template file, and linking to data is performed using tags, the syntax of which matches the syntax of jXLS library tags.</para>
-  <para>In the process of report generation, template tags are linked to model entity fields as well as to JavaScript objects.</para>
-  <figure>
-    <title>Transformations when generating a report</title>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="images/reportsFlow.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-  <note>
-    <para>For more detailed information about tags, which are used in the report template, see documentation for the jXLS library at: <ulink url="http://jxls.sourceforge.net">http://jxls.sourceforge.net</ulink></para>
-  </note>
+  <section>
+    <title>Introduction to reports</title>
+    <para>The  reporting tools allows a developer to generate reports as a <application>Microsoft Excel</application> files. You can open a generated report in a spreadsheet application, print or save it to disk.</para>
+    <para><code>Report</code> is a regular  JavaScript module with a report template.  The report constructor is defined in the JavaScript file by first function or using the <literal>@module</literal> annotation.</para>
+    <para>The  report application element includes the following:</para>
+    <itemizedlist>
+      <listitem>
+        <para>a report template (a file in the <application>Microsoft Excel</application> format with the <filename>.xlsx</filename> extension,</para>
+      </listitem>
+      <listitem>
+        <para>JavaScript code,</para>
+      </listitem>
+      <listitem>
+        <para>a data model.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Reports  are based on the jXLS library, which in turn uses the Apache POI library. Markup and formatting of the report are defined in the template file. Binding to data is performed using jXLS library tags placed in spreadsheet cells.</para>
+    <para>In the process of report generation, template tags are linked to model entity&apos;s dataset   as well as to JavaScript objects.</para>
+    <figure>
+      <title>Data transformations while generating a report</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/reportsFlow.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
   <section id="new-report">
     <title>New report creation</title>
     <para>To create a  report, perform the following actions:
@@ -77,10 +77,10 @@
         <para>Specify the report formatting, add tags of linking to data to the template, save the report template in the template editor application.</para>
       </listitem>
       <listitem>
-        <para>On the  <guilabel>Datamodel</guilabel> and  <guilabel>Source</guilabel> tabs configure the data model and write the JavaScript software code. </para>
+        <para>On the  <guilabel>Datamodel</guilabel> and  <guilabel>Source</guilabel> tabs configure the data model and write the JavaScript  code. </para>
       </listitem>
       <listitem>
-        <para>Define report event handlers, write the event handlers code in the JavaScript editor.</para>
+        <para>Implement report <code>onBeforeRender</code> event handler in the JavaScript editor.</para>
       </listitem>
       <listitem>
         <para>Save the application element by clicking <guibutton>Save All</guibutton> on the <application>Platypus Application Designer</application> toolbar or by clicking the<keycombo>
@@ -93,14 +93,15 @@
   <section id="report-template-tags">
     <title>Template tags</title>
     <para>Edit the report template in a spreadsheet application.</para>
-    <para>Place tags for linking to JavaScript objects and model entities in the template cells. To access data, use the following syntax: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, where <replaceable>objectName</replaceable> is the name of a JavaScript object, JavaScript objects array or model entity, <replaceable>propertyName</replaceable>  is the object property. </para>
-    <para>Example of outputting the name of a document into cells:</para>
-    <programlisting language="JavaScript">${document.name}</programlisting>
-    <para>Similarly, you can gain access to a complex object:</para>
+    <para>Place tags for linking to JavaScript objects and model entities&apos; datasets in the template cells. To access data, use the following syntax: ${<replaceable>objectName</replaceable>.<replaceable>propertyName</replaceable>}, where <replaceable>objectName</replaceable> is the name of a JavaScript object, JavaScript objects array or model entity, <replaceable>propertyName</replaceable>  is the object property. </para>
+    <para>Example of writing the name of a documents into cells:</para>
+    <programlisting language="JavaScript">${documents.name}</programlisting>
+    <para>Such a template will lead to insertion of  multiple rows in a resulting spreadsheet. Each row will represent documents collection item.</para>
+    <para>Similarly, you can use a complex object:</para>
     <programlisting language="JavaScript">${library.documents.name}</programlisting>
     <para>You can use multiple tags in a single cell, for example:</para>
     <programlisting language="JavaScript">Employee: ${employee.name} - ${employee.age} years</programlisting>
-    <para>In the software code, define objects, which will be available in the template tags:</para>
+    <para>In the JavaScript code, define objects, which will be available in the template tags:</para>
     <programlisting language="JavaScript">/**
  * @name documentReport
  */
@@ -112,7 +113,9 @@ library.documens = [
 ];</programlisting>
     <para>Add entities, which will be linked to the template, to the report data model.</para>
     <para>When outputting collections, a new row is added for each collection element and the style of a cell, which contains tag, is set for the cells of this row.</para>
-    <para>If you know the size of the collection beforehand, you can use the template rows instead of adding new rows for each element. To do this, set  <literal>true</literal> for the <property>fixed</property> special property of the collection.</para>
+    <para>If you know the size of the collection beforehand, you can use the template rows instead of adding new rows for each element. To do this, set  <literal>true</literal> for the <property>
+        <code>fixed</code>
+      </property> special property of the collection.</para>
     <para>If necessary, specify dynamic styles for cells. These styles will vary depending on the contents of the cell. To do this:</para>
     <itemizedlist>
       <listitem>
@@ -168,48 +171,44 @@ Chief Name: ${department.chief.name}
     <para>Use the report object:</para>
     <itemizedlist>
       <listitem>
-        <para>Create an report instance using either <code>Report</code> or <code>ServerReport</code> constuctors, <code>ServerReport</code> is for a report generated on the server side.</para>
+        <para>Create an report instance using either <code>Report</code> or <code>ServerReport</code> constuctors. Use <code>ServerReport</code> constructor for a report generated on the server side.</para>
       </listitem>
       <listitem>
-        <para>Display a report by calling the <methodname>show</methodname> method, the report will be downloaded and a command to open it in the spreadsheet application will be issued.</para>
+        <para>Display a report by calling the <methodname>show</methodname> method. The report will be downloaded and a command to open it will be executed.</para>
       </listitem>
       <listitem>
         <para> Send the report to print by calling the <methodname>print</methodname> method.</para>
       </listitem>
       <listitem>
-        <para> Save the report file to disk by calling the <methodname>save</methodname> method; pass the path of the file, to which the report showld be saved, as a parameter.</para>
+        <para> Save the report file to disk by calling the <methodname>save</methodname> method; pass the path of the file, to which the report should be saved, as a parameters.</para>
       </listitem>
     </itemizedlist>
     <note>
-      <para>When executing the report in the HTML5 browser client, calling the <methodname>show()</methodname>, <methodname>print()</methodname>, and <methodname>save(reportPath)</methodname> methods leads to the same results — the report file will be loaded in browser.</para>
+      <para>When executing the report in the HTML5 browser client, calling the <methodname>show()</methodname>, <methodname>print()</methodname>, and <methodname>save(reportPath)</methodname> methods leads to the same results — the report file will be downloaded by your browser.</para>
     </note>
-    <para>In the example below, the report is generated on a desktop client:</para>
+    <para>In the example below, the report is generated on  client side by desktop appliction:</para>
     <programlisting language="JavaScript">var r = new Report(&apos;DocumentReport&apos;);
 r.params.documentCategory = &apos;business&apos;; // update the model
 r.show(); // show report</programlisting>
-    <para>To execute the report on the server side from a HTML5 browser client:</para>
+    <para>To execute the report on the server side (from a HTML5 browser or a desktop client):</para>
     <programlisting language="JavaScript">var r = new ServerReport(&apos;DocumentReport&apos;);
 r.params.documentCategory = &apos;business&apos;; // update the model
 r.show();</programlisting>
     <para>Report&apos;s JavaScript code prepares data for displaying, calculating new data, etc. </para>
     <itemizedlist>
       <listitem>
-        <para>Write code in the report&apos;s constructor to perform initialization activities.</para>
+        <para>Write code in the report&apos;s constructor to perform initialization.</para>
       </listitem>
       <listitem>
-        <para>Add code in the <literal>beforeRender</literal> event hanler function, which will be invoked before starting the generation of report, when client calls the <methodname>show</methodname>,  <methodname>print</methodname>, or <methodname>save</methodname> methods.</para>
-      </listitem>
-      <listitem>
-        <para>Add handler functions for the standard events of refreshing model datasets.</para>
+        <para>Add code in the <literal>onBeforeRender</literal> event hanler function, which will be invoked before starting the generation of report, when client calls the <methodname>show</methodname>,  <methodname>print</methodname>, or <methodname>save</methodname> methods.</para>
       </listitem>
     </itemizedlist>
     <para>The report events:</para>
     <informaltable>
-      <tgroup cols="4">
+      <tgroup cols="3">
         <thead>
           <row>
             <entry align="center">Event</entry>
-            <entry>Cancellable</entry>
             <entry>Handler parameters</entry>
             <entry align="center">Description </entry>
           </row>
@@ -219,7 +218,6 @@ r.show();</programlisting>
             <entry>
               <parameter>onBeforeRender</parameter>
             </entry>
-            <entry>no</entry>
             <entry><parameter>evt</parameter> — an event object</entry>
             <entry>Is called before starting the generation of the report</entry>
           </row>

@@ -7,12 +7,12 @@
   <title>HTTP</title>
   <section id="web-http">
     <title>HTTP interface</title>
-    <para>Server JavaScript modules instance methods can be remotely invoked over  network using simple  GET or POST HTTP requests.</para>
+    <para>Server modules instance methods can be remotely invoked over  network using simple  GET or POST HTTP requests.</para>
     <para>To make the module instance methods  available for external requests, mark it with the <code>@public</code> annotation. </para>
     <para>To invoke a server method, send a request by the URL formed using the base URL of the Servlet and the <filename>/api</filename> suffix for accessing HTTP API. </para>
     <para>Specify the request type, the module name, the method name and parameters of method calling in the URL parameters or in the body of the POST request in the <classname>application/x-www-form-urlencoded</classname> format. The request body will contain a value, which was returned in the executed method. </para>
-    <para>If the JavaScript object is returned, it will be serialized as JSON; if the object of the <classname>String</classname> or XML type is returned, it will be returned as a string, it is also possible to specify the response content type explicitly.</para>
-    <para>Parameters of the module method execution request:</para>
+    <para>If the JavaScript object is returned from an instance method, it will be serialized as JSON and string will be sent to a client as a response. If the object of the <classname>String</classname> or XML type is returned, string response will be sent to a client. It is also possible to specify the response content type explicitly.</para>
+    <para>Parameters of the server module method inocation request:</para>
     <informaltable>
       <tgroup cols="2">
         <thead>
@@ -63,13 +63,16 @@
   <section id="web-req-resp">
     <title>HTTP request and response API</title>
     <para>To access HTTP request and response in the JavaScript server code, use the <code>http</code> property, which is available, if the method is called by the external HTTP request.</para>
-    <programlisting language="JavaScript">function ModuleConstructor() {
+    <programlisting language="JavaScript">/**
+ * @public
+ */
+function ModuleConstructor() {
    var http = this.http;
    
-   /**
-   * @public
+  /**
+   * @rolesAllowed tester admin
    */
-   this.doSomething() {
+   this.doSomething = function(paramA, paramB) {
        //..
    }
 }</programlisting>

@@ -5,7 +5,6 @@
 ]>
 <chapter id="intro-chapter">
   <title>Introduction</title>
-  <para>This section provides general information about the Platypus Platform.</para>
   <section id="about-platform">
     <title>About the Platypus Platform </title>
     <para>The Platypus Platform is a JavaScript client and server   applications platform  for rapid development of   enterprise-level information systems.</para>
@@ -149,22 +148,6 @@
       </listitem>
     </itemizedlist>
     <para>In case of no-server configuration the presentation tier and logic tier operate at Java SE desktop client, and in case server configuration the presentation tier operates in the client, either at Java SE desktop client  or HTML5 browser and the logic tier runs on  application server.</para>
-  </section>
-  <section arch="data-flow">
-    <title>Data flow</title>
-    <para>The figure below shows a simplified diagram of components interaction and data flow. </para>
-    <figure>
-      <title>The data flow</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/dataflow.png"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-    <para>JavaScript code and the data model compatible user interface widgets can use the data model to read and write database data.</para>
-    <para>Data flow components can operate on a client as well as on a server. In case of no-server configuration the data flow components work on the client. In case of configuration with an application server, data flow components work on the client as well as on the server, particularly on different computers, while providing a transparent data exchange.</para>
-    <para>The unique feature of the  platform is its Object-Relational Mapping  <acronym>(ORM)</acronym> implementation. In runtime  its generates JavaScript objects datasets matching the database relations. To enable this process it uses schema information from the database and the SQL query texts. </para>
-    <para>The usage of data model simplifies many data processing operations, since it provides  entities&apos; data loading, automatic saving of changes, simplified support of transactions, centralized management of resources, etc.</para>
   </section>
   <section id="dev-workflow">
     <title>Development steps</title>
