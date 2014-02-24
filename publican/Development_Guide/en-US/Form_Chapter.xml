@@ -2553,7 +2553,7 @@ menu.add(item);</programlisting>
   </section>
   <section id="ui-utils-api">
     <title>UI utilities API</title>
-    <section>
+    <section id="ui-utils-style">
       <title>Style</title>
       <para><code>Style</code> object, which can inherit the property values from the parent style.</para>
       <para><code>Style</code> properites list:</para>

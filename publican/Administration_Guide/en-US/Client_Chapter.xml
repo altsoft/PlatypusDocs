@@ -41,8 +41,8 @@
       </listitem>
       <listitem>
         <para><guilabel>Connection URL</guilabel> is  the string of connection to the server. For working on the 2-tier scheme, the connection URL should be in the JDBC URL format, for example, <literal>jdbc:oracle:thin:@dbhost:1521:adb</literal>.</para>
-        <para>For working on the 3-tier scheme over the Platypus Protocol, use URL of the <literal>platypus://<replaceable>host</replaceable><replaceable>:port</replaceable></literal> format, for example,  <literal>platypus://serverhost:8500</literal>,  port 8500 is the default port for the Platypus protocol and in this case it can be omitted.</para>
-        <para>For working on the 3-tier scheme over the HTTP protocol, use URL of the <literal>http://<replaceable>host</replaceable><replaceable>:port/platypus_servlet/application</replaceable></literal>  format, for example, <literal>http://localhost/myapp/application</literal>.</para>
+        <para>For working on the 3-tier configuration over the Platypus Protocol, use URL of the <literal>platypus://<replaceable>host</replaceable><replaceable>:port</replaceable></literal> format, for example,  <literal>platypus://serverhost:8500</literal>,  port 8500 is the default port for the Platypus protocol and in this case it can be omitted.</para>
+        <para>For working on the 3-tier confirguration over the HTTP protocol, use URL of the <literal>http://<replaceable>host</replaceable><replaceable>:port/platypus_servlet/application</replaceable></literal>  format, for example, <literal>http://localhost/myapp/application</literal>.</para>
       </listitem>
       <listitem>
         <para><guilabel>Scheme</guilabel> is  the default database scheme, for example, <literal>myschema</literal> (not used in case of the 3-tier configuration).</para>

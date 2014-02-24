@@ -31,7 +31,7 @@
             <para>Select the default database—click the  <guibutton>Default</guibutton> button or a connection to the external database—click the  <guibutton>Specific</guibutton> button and select a specific database connection.</para>
           </listitem>
           <listitem>
-            <para>Select a schema in the database in the  <guilabel>Schema</guilabel> drop-down list; click the <guibutton>Default button to select the default schema</guibutton>.</para>
+            <para>Select a schema in the database in the  <guilabel>Schema</guilabel> drop-down list; click the <guibutton>Default</guibutton> button to select a  default schema.</para>
           </listitem>
           <listitem>
             <para>Click the <guibutton>Next</guibutton> button.</para>

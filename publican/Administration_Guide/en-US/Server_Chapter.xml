@@ -60,18 +60,6 @@
           </row>
           <row>
             <entry>
-              <parameter>-loglevel LOG_LEVEL</parameter>
-            </entry>
-            <entry>Logging level. This parameter specifies the minimum level, which will be shown in the log. For the description of logging levels, see Appendix A.</entry>
-          </row>
-          <row>
-            <entry>
-              <parameter>-log LOG_FILE_PATH</parameter>
-            </entry>
-            <entry>Name and path of the log file.</entry>
-          </row>
-          <row>
-            <entry>
               <parameter>-tasks </parameter>
               <replaceable>MODULES_NAME</replaceable>
             </entry>

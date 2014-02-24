@@ -1781,13 +1781,13 @@ e.executeUpdate();</programlisting>
     <para>To create a data source module implement the following instance properties and methods:</para>
     <itemizedlist>
       <listitem>
-        <para><code>schema</code> property to represent the data source metadata information. The schema information is repesented as an array, where each array element corresponds to some entity field. For each array element the following fields must be provided: <code>name</code> is the name of the field, <code>entity</code> is the entity name to be used as a reference (optional), <code>description</code> is the field&apos;s description, type is the field&apos;s type (optional), <code>key</code> is true if the field is a primary key, <code>ref</code> is the reference to the other entity&apos;s field.</para>
+        <para><code>schema</code> property to represent the data source metadata information. The schema information is repesented as an array of fields elements. For each array element contains the following: <code>name</code> is the name of the field, <code>entity</code> is the entity name to be used as a reference (optional), <code>description</code> is the field&apos;s description, type is the field&apos;s type (optional), <code>key</code> is true if the field is a primary key, <code>ref</code> is the reference to the other entity&apos;s field.</para>
       </listitem>
       <listitem>
         <para><code>fetch(<replaceable>params</replaceable>)</code> method to query  data, where <replaceable>params</replaceable> is an object, with properties as defined in this module&apos;s model&apos;s parameters.</para>
       </listitem>
       <listitem>
-        <para><code>apply(<replaceable>log</replaceable>, <replaceable>session</replaceable>)</code> method to save the data, where <replaceable>log</replaceable> is an array represents the log of changes made by clients or server side data driven code to be applied, <replaceable>session</replaceable> is a current user session identifier. </para>
+        <para><code>apply(<replaceable>log</replaceable>, <replaceable>session</replaceable>)</code> method to save the data, where <replaceable>log</replaceable> is an array represents the log of changes made by clients or server side data driven code to be applied, <replaceable>session</replaceable> is a current user session identifier. For every element of the <code>log</code> array use <code>consume</code> method to consume this change log record.</para>
       </listitem>
     </itemizedlist>
     <para>Example of an datasource module usage is as the follows:</para>
@@ -1798,23 +1798,38 @@ function DataSourceModule(){
     var self = this, model = this.model;
     
     this.schema = [
-        {name: &quot;property1Name&quot;, entity: &quot;optionalEntityName&quot;, description: &quot;Some property1 description&quot;, type: String, key: true},
-        {name: &quot;property2Name&quot;, entity: &quot;optionalEntityName&quot;, description: &quot;Some property2 description&quot;, type: String, ref: {property: &quot;referencedPropertyName&quot;, entity: &quot;referencedEntityName&quot;}},
-        {name: &quot;property3Name&quot;, entity: &quot;optionalEntityName&quot;, description: &quot;Some property3 description&quot;, type: Number, required: true},
+        {name: &quot;p1&quot;,
+         entity: &quot;entity&quot;,
+         description: &quot;p1 desc&quot;,
+         type: String,
+         key: true},
+        {name: &quot;p2&quot;,
+         entity: &quot;entity&quot;,
+         description: &quot;p2 desc&quot;,
+         type: String,
+         ref: {property: &quot;referencedPropertyName&quot;,
+               entity: &quot;referencedEntityName&quot;}},
+        {name: &quot;property3Name&quot;,
+         entity: &quot;optionalEntityName&quot;,
+         description: &quot;p3 desc&quot;,
+         type: Number,
+         required: true},
     ];
 
     this.fetch = function(aParams) {
         return [
-            {property1Name: &quot;object 1 name&quot;, property2Name: &quot;object 1 description&quot;, property3Name: 2},
-            {property1Name: &quot;object 2 name&quot;, property2Name: &quot;object 2 description&quot;, property3Name: 20},
-            {property1Name: &quot;object 3 name&quot;, property2Name: &quot;object 3 description&quot;, property3Name: 12},
-            {property1Name: &quot;object 4 name&quot;, property2Name: &quot;object 4 description&quot;, property3Name: 85},
-            {property1Name: &quot;object 5 name&quot;, property2Name: &quot;object 5 description&quot;, property3Name: 20},
+            {p1: &quot;nameA&quot;,
+             p2: &quot;descriptionA&quot;,
+             p3: 2},
+            {p1: &quot;nameB&quot;,
+             p2: &quot;descriptionB&quot;,
+             p3: 20}
         ];
     };
 
     this.apply = function(aLog, aSession) {
-        Logger.info(&quot;${appElementName}. aLog.length: &quot; + aLog.length + &quot;; aSession: &quot; + aSession);
+        Logger.info(&quot;Log length: &quot; + aLog.length 
+                    + &quot; Session: &quot; + aSession);
         aLog.forEach(function(aChange) {
             aChange.consume();
         });
@@ -1823,7 +1838,7 @@ function DataSourceModule(){
   <section id="module-server">
     <title>Server modules</title>
     <para>This section provides information how to use special features of  JavaScript modules running on an application server.</para>
-    <section label="" id="module-server-stateless">
+    <section id="module-server-stateless">
       <title>Statefull and stateless session modules</title>
       <para>A module being created on  server is stateful by default. Such module exists in the context of the current user session. </para>
       <para>Mark a module with  <code>@stateless</code> annotation if you want to make the  module stateless. A new instance of stateless module is created every time the module is called via a network.</para>
@@ -1834,7 +1849,7 @@ function DataSourceModule(){
     </section>
     <section id="module-server-validator">
       <title>Data validators</title>
-      <para>Use annotation <code>@validator <replaceable>DATA_SOURCE</replaceable>, <replaceable>DATA_SOURCE2</replaceable> ...</code>, where <replaceable>DATA_SOURCE</replaceable> is a data source name to enable server side validation. Implement validation logic in the instance metheod <code>validate(<replaceable>log</replaceable>, <replaceable>datasource</replaceable>, <replaceable>session</replaceable>)</code>, where <replaceable>log</replaceable> is an array of changes representing the log of changes made by clients or server side data driven code to be applied, <code>
+      <para>Use annotation <code>@validator <replaceable>DATA_SOURCE</replaceable>, <replaceable>DATA_SOURCE2</replaceable> ...</code>, where <replaceable>DATA_SOURCEN</replaceable> is a data source name to enable server side validation. Implement validation logic in the instance metheod <code>validate(<replaceable>log</replaceable>, <replaceable>datasource</replaceable>, <replaceable>session</replaceable>)</code>, where <replaceable>log</replaceable> is an array of changes representing the log of changes made by clients or server side data driven code to be applied, <code>
           <replaceable>datasource</replaceable>
         </code> is a datasource name mentioned in <code>@validator</code> annotation (relational datasource or script datasource module name), <replaceable>session</replaceable> is current user session identifier, the method returns <literal>false</literal> to stop validating process (e.g. break validators chain), nothing or true otherwise or throws an exception if validation fails.</para>
       <para>A module with no data sources in <code>@validatior</code> annotation is invoked for default application datasource.</para>
@@ -1891,14 +1906,12 @@ bFile.delete();</programlisting>
 
 var aFile = new File(&quot;/home/user/afile.txt&quot;);
 aFile.delete();</programlisting>
-    <warning>
-      <para>To avoid potential name conflicts, do not use the  <literal>java</literal> name for your objects and variables.</para>
-      <para><classname>java.lang.*</classname> packages are imported in Java by default, but this is not true for JavaScript, because JavaScript has its own  <classname>Boolean</classname>, <classname>Math</classname>, <classname>Number</classname>, <classname>Object</classname>, and  <classname>String</classname> objects. That&apos;s why import of the <classname>java.lang</classname> package is not recommended.</para>
-    </warning>
+    <para>To avoid potential name conflicts, do not use the  <literal>java</literal> name for your objects and variables.</para>
+    <para><classname>java.lang.*</classname> packages are imported in Java by default, but this is not true for JavaScript, because JavaScript has its own  <classname>Boolean</classname>, <classname>Math</classname>, <classname>Number</classname>, <classname>Object</classname>, and  <classname>String</classname> objects. That&apos;s why import of the <classname>java.lang</classname> package is not recommended.</para>
     <para>External Java libraries are also available in JavaScript code. To use them:</para>
     <itemizedlist>
       <listitem>
-        <para>Make  <filename>.jar</filename> or <filename>.class</filename> files of external libraries available for the class loader; when using the <application>Platypus Client</application> application they should be moved to the  <filename>ext</filename> folder; when deploying the application into the <abbrev>J2EE</abbrev> container, they should be usually placed into the <filename>WEB-INF/lib</filename> folder.</para>
+        <para>Make  <filename>.jar</filename> or <filename>.class</filename> files of external libraries available for the class loader; when using the desktop client they should be placed in the  <filename>ext</filename> folder; when deploying the application into the <abbrev>J2EE</abbrev> container, they should be usually placed into the <filename>WEB-INF/lib</filename> folder.</para>
       </listitem>
     </itemizedlist>
     <itemizedlist>

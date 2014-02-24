@@ -5,7 +5,7 @@
 ]>
 <chapter id="report-chapter">
   <title>Report</title>
-  <section>
+  <section id="intro-report">
     <title>Introduction to reports</title>
     <para>The  reporting tools allows a developer to generate reports as a <application>Microsoft Excel</application> files. You can open a generated report in a spreadsheet application, print or save it to disk.</para>
     <para><code>Report</code> is a regular  JavaScript module with a report template.  The report constructor is defined in the JavaScript file by first function or using the <literal>@module</literal> annotation.</para>
@@ -53,7 +53,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section>
+  <section id="report-editor">
     <title>Reports editor</title>
     <para>To open reports editor, double-click the application element in the project tree. </para>
     <para>Edit the report template in the spreadsheet application. The following applications are used by default for different operating systems:</para>

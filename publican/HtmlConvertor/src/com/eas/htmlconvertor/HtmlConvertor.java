@@ -157,7 +157,7 @@ public class HtmlConvertor {
             throw new IllegalStateException("Title element not found.");
         }
     }
-    
+
     private Document getIndexDocument() throws IOException {
         File indexHmlFile = new File(sourceDir, INDEX_FILE_NAME);
         String indexHtml = FileUtils.readString(indexHmlFile, UNICODE_ENCODING);
@@ -168,14 +168,19 @@ public class HtmlConvertor {
         Element toc = indexDocument.select("div.toc").get(0);//NOI18N
         StringBuilder sb = new StringBuilder();
         //insert +/-
+        Element dlRoot = toc.children().first();
         Elements dts = toc.getElementsByTag("dt");
         for (Element dt : dts) {
+            if (dt.parent() != dlRoot) {
+                dt.attr("style", "margin-left:12px");
+            }
             Elements span = dt.getElementsByTag("span");
             if (span != null && span.size() > 0) {
                 if (dt.nextElementSibling() != null && dt.nextElementSibling().tagName().equals("dd")) {
-                    span.before("<span class='disclosure closed'>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+                    span.before("<div style='position:relative;display:inline-block;width:12px' class='disclosure closed'>&nbsp;</div>");
                 } else {
-                    span.before("<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+
+                    //span.before("<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
                 }
             }
         }

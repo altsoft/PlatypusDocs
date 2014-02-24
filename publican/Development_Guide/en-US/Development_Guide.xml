@@ -16,5 +16,5 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Report_Chapter.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Webapi_Chapter.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Revision_History.xml"/>
-  <index/>
+  <index id="doc-index"/>
 </book>
