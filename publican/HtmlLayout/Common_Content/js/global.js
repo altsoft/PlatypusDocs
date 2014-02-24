@@ -30,7 +30,7 @@ tocLinks.click(function() {
 	$(this).addClass('selected');
 });
 
-$('span.disclosure').click(function() {
+$('div.disclosure').click(function() {
 	$(this).toggleClass("open");
 	$(this).toggleClass("closed");
 	$(this).parent().next("dd").toggleClass("hidden");
@@ -47,6 +47,6 @@ acitveLink.addClass('selected');
 acitveLink.parent().parent().next("dd").removeClass("hidden");
 acitveLink.parents("dd").removeClass("hidden");
 
-acitveLink.parent().parent().find("span.disclosure").removeClass("closed").addClass("open");
-acitveLink.parents("dd").prev("dt").find("span.disclosure").removeClass("closed").addClass("open");
+acitveLink.parent().parent().find("div.disclosure").removeClass("closed").addClass("open");
+acitveLink.parents("dd").prev("dt").find("div.disclosure").removeClass("closed").addClass("open");
 });
