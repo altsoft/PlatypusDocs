@@ -3,10 +3,10 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Administration_Guide-Server_Chapter">
+<chapter id="server_chapter">
   <title>Platypus Application Server</title>
   <para>The main purpose of use of  the Platypus Application Server is to provide support for  various binary communication protocols. </para>
-  <section id="sect-Administration_Guide-Server_Chapter-Test_Section_2">
+  <section id="server_run">
     <title>Running server</title>
     <para>To start the server application, you  run the startup script for the server, located in the
     <filename>/run</filename> folder:    </para>
@@ -20,7 +20,7 @@
     </itemizedlist>
     <para>For running the server in production environment, it is recommended to configure it as an operating system service.</para>
   </section>
-  <section>
+  <section id="server_command">
     <title>Command line options</title>
     <para>The command for running the server is as follows:</para>
     <programlisting>java <replaceable>JVM_OPTIONS</replaceable> -cp Server.jar;<replaceable>EXT_CLASSPATH</replaceable> com.eas.server.ServerMain <replaceable>OPTIONS</replaceable></programlisting>

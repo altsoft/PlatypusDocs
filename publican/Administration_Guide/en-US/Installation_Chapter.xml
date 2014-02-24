@@ -3,13 +3,13 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Administration_Guide-Installation_Chapter">
+<chapter id="chapter_installation">
   <title>Platform&apos;s installation</title>
   <para>If the Platypus Platform runtime is delivered as a ZIP file, unpack its contents to a location according to your preference on your hard drive.</para>
   <note>
     <para>Instructions for installing the <application>Platypus Application Designer</application> developer tool are available in the Development Guide.</para>
   </note>
-  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_1">
+  <section id="install-requirements">
     <title>System requirements</title>
     <para>
 Below you can see prerequisites for launching the platform components on your computer:
@@ -76,7 +76,7 @@ Below you can see prerequisites for launching the platform components on your co
     </itemizedlist>
     <para>For information on installing and configuring the servlet container or J2EE server, refer to the relevant installation and administration manuals, provided by their manufacturers.</para>
   </section>
-  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_3">
+  <section id="install-guide">
     <title>Installation guide</title>
     <para> To install the platform components, perform the following actions:<orderedlist>
         <listitem>
@@ -140,7 +140,7 @@ Below you can see prerequisites for launching the platform components on your co
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-Administration_Guide-Installation_Chapter-Test_Section_4">
+  <section id="install-uninstall">
     <title>Uninstallation guide</title>
     <para>
 To delete the platform components from your computer, perform the following actions:

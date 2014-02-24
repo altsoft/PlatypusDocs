@@ -3,11 +3,11 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Administration_Guide-Client_Chapter">
+<chapter id="desktop-chapter">
   <title>Desktop client</title>
   <para>The desktop client is a Java SE desktop application  to provide  user interface and/or execute the application logic on the end user&apos;s computer. The desktop client loads required application elements from the application server,  from the database or  directly from a disk, according to its configuration.  </para>
   <para>The desktop client supports automatic  updates via network.</para>
-  <section id="sect-Administration_Guide-Client_Chapter-Test_Section_2">
+  <section id="desktop_run">
     <title>Running desktop client</title>
     <para>Startup scripts and Platypus client loader are located in the
     <filename>/run</filename> folder:</para>
@@ -57,7 +57,7 @@
     <para>To remove a preconfigured connection, select the connection from the list and click the  <guibutton>Delete</guibutton> button on the preconfigured connections panel. The connection is deleted when the user clicks <guibutton>OK</guibutton>  in the removal confirmation dialog.</para>
     <para>To run the client using the selected connection, click <guibutton>OK</guibutton>. To close the connection selection dialog, click <guibutton>Cancel</guibutton>. </para>
   </section>
-  <section>
+  <section id="desktop_command">
     <title>Command line options</title>
     <para>To configure starting of the desktop client, edit the contents of the launch script files. </para>
     <para>The deskop client is a Java SE Swing application. To customize it, specify the startup JVM options and the applications parameters. </para>

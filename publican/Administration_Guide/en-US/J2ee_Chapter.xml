@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Administration_Guide-J2ee_Chapter">
+<chapter id="j2ee_chapter">
   <title>Java EE server</title>
   <para>The plaftorm&apos;s server components can run in a J2EE server or a servlet container. </para>
   <para>This configuration has the following features:</para>
@@ -27,7 +27,7 @@
   <note>
     <para>Use Platypus Application Designer to create web application. For detailed information, refer to the Development Guide.</para>
   </note>
-  <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_2">
+  <section id="j2ee_configure">
     <title>Configuring J2EE server</title>
     <para>To run the plafrom&apos;s application in a J2EE servlet container or on the application server, perform the following actions:</para>
     <itemizedlist>
@@ -57,7 +57,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-Administration_Guide-J2ee_Chapter-Test_Section_3">
+  <section id="j2ee_dd">
     <title>Configuring the deployment descriptor</title>
     <para>To configure a web-application, edit the XML file of the  <filename>WEB-INF/web.xml</filename>  deployment descriptor. </para>
     <itemizedlist>
@@ -130,8 +130,8 @@ com.eas.server.httpservlet.PlatypusHttpServlet
     </itemizedlist>
     <para>After completing configuring, deploy the web-application as a folder or WAR archive in a servlet container or on the J2EE server.</para>
   </section>
-  <section>
-    <title>Authentication configuration on a J2EE container</title>
+  <section id="j2ee_aut">
+    <title id="j2ee_auth">Authentication configuration on a J2EE container</title>
     <para>When an application works in a J2EE container, the platform runtime uses an authentication mechanism and roles provided by the container. To enable activation of the role access in this case, the user should pass the security constraint and get a role. To do this, configure a URL security constraint as a page containing Platypus forms, for which the access control based on roles should be provided. The following example shows the enabled security constraint for the  <filename>applicationStart.html</filename> page; to get access to this page the user should be assigned any role:</para>
     <programlisting>...
 &lt;security-constraint&gt;
@@ -192,7 +192,7 @@ com.eas.server.httpservlet.PlatypusHttpServlet
 &lt;/security-constraint&gt;
 ...</programlisting>
   </section>
-  <section>
+  <section id="j2ee_glassfish">
     <title>J2EE Glassfish 3 configuration</title>
     <para>Data source setup:</para>
     <orderedlist>
@@ -366,7 +366,7 @@ com.eas.server.httpservlet.PlatypusHttpServlet
       </listitem>
     </itemizedlist>
   </section>
-  <section>
+  <section id="j2ee_tomcat">
     <title>Apache Tomcat 7 configuration</title>
     <para>Data source setup:</para>
     <itemizedlist>

@@ -12,5 +12,5 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Server_Chapter.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="J2ee_Chapter.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Revision_History.xml"/>
-  <index/>
+  <index id="doc_index"/>
 </book>

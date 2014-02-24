@@ -3,9 +3,9 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Administration_Guide-Security_Chapter">
+<chapter id="app_chapter">
   <title>Application management</title>
-  <section id="sect-Administration_Guide-Deployment_Chapter-Test_Section_2">
+  <section id="app_structure">
     <title>Application structure and system tables</title>
     <para>If an  application is delivered as an archive file, unpack its contents to a  your hard disk drive.</para>
     <para>After unpacking, the directory will have the following structure:</para>
@@ -79,7 +79,7 @@
       </tgroup>
     </table>
   </section>
-  <section id="sect-Administration_Guide-Deployment_Chapter-Test_Section_3">
+  <section id="app-database">
     <title>Application database deployment and import</title>
     <para>Database deployment is the process allows you to  application to the database table <literal>MTD_ENTITIES</literal>.</para>
     <para>To deploy or undeploy an application to/from a database use the database management utility command line with the one of the  following options:</para>
@@ -129,7 +129,7 @@
     <para>Example of the command for importing an application from the database:</para>
     <programlisting>java -jar PlatypusDeploy.jar -import -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema</programlisting>
   </section>
-  <section>
+  <section id="app_dbmigrations">
     <title>Database migrations</title>
     <para>Application database schema and initial data can be stored in as a consecutive  migrations. Database migrations can be applied consistently to ensure the correct state  of the application&apos;s database(s) schema and its initial data. </para>
     <para>Each migration of the database schema or  data is represented as a migration file with a name corresponding to the migration version, starting from 1. The next file name for each new migration is created by incrementing the current application version number stored in the <literal>MTD_VERSION</literal> table. </para>
@@ -222,7 +222,7 @@
     <para>The following example illustrates  how to apply migrations to the database:</para>
     <programlisting>java -jar PlatypusDeploy.jar -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema -apply -migrations ~/apps/testMigrations</programlisting>
   </section>
-  <section id="sect-Administration_Guide-Security_Chapter-Test_Section_2">
+  <section id="app_security">
     <title>Security</title>
     <para>Platypus platform is equipped with  security mechanisms and provides restricted access to system resources based on roles. Roles are introduced on  application level.</para>
     <para>As for authentication, Platypus may use various security domains. The security domain may be internal or external and contain information about users and their group membership. The following security domain options are avaliable:</para>

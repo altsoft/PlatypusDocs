@@ -154,7 +154,7 @@
     <para>To develop an  application iteratively perform the following steps:</para>
     <itemizedlist>
       <listitem>
-        <para><link linkend="diargram-chapter">Specify</link>  this structure in the form of  relational entities in the database using the database structure diagrams  visual editor.</para>
+        <para><link linkend="diargram-chapter">Specify</link> datatbase structure using the database structure diagrams  visual editor.</para>
       </listitem>
       <listitem>
         <para><link linkend="query-chapter">Write</link> the  queries and specify theirs parameters. If required, implement the queries for updating and adding data in SQL language (it is not needed in general, because data inserts/updates/deletions in most cases can be completed automatically by the data model).</para>

@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Administration_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<appendix id="appe-Administration_Guide-Revision_History">
+<appendix id="app_rev_history">
   <title> History</title>
   <simpara>
     <revhistory>
