@@ -1885,6 +1885,38 @@ function AuthorizerA(){
   }
 }</programlisting>
     </section>
+    <section id="module-server-auth_1">
+      <title>Tips and tricks</title>
+      <para>Plain javascript <literal>Date</literal> object is serialized as ISO formatted string  in client/server communication while using browser as a client and J2EE server as a server. So you should realize that on the client side it may be JavaScript <literal>Date</literal> object, but on the server side it will be just string. May be transferring of timestamp value instead of <literal>Date</literal> object will be a good choice. </para>
+      <para>For example:</para>
+      <programlisting language="JavaScript">// On the server side
+/**
+ * @module
+ * @public
+ */ 
+function DateChecker(){
+    var self = this, model = this.model;
+    
+    self.check = function(aPoint, aTimeStamp) {
+       return new Date(aTimeStamp) &gt; 0;
+    }
+
+}
+
+// And on the client side...
+/**
+ * @module
+ */
+function PeriodCalculatorClient(){
+    var self = this;
+    self.go = function(){
+        var calc = new ServerModule(&quot;DateChecker&quot;);
+        calc.check((new Date()).getTime(), function(aResult){
+            Logger.info(&quot;Legal date: &quot; + aResult);
+        });
+    }
+}</programlisting>
+    </section>
   </section>
   <section id="module-java">
     <title>Scripting Java</title>
