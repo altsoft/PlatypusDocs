@@ -173,7 +173,7 @@ Chief Name: ${department.chief.name}
     <para>Use the report object:</para>
     <itemizedlist>
       <listitem>
-        <para>Create an report instance using either <code>Report</code> or <code>ServerReport</code> constuctors. Use <code>ServerReport</code> constructor for a report generated on the server side.</para>
+        <para>Create an report instance using either <code>Report</code> or server report proxy by <code>ServerReport</code> constuctors. Use <code>ServerReport</code> constructor for a report generated on the server side.</para>
       </listitem>
       <listitem>
         <para>Display a report by calling the <methodname>show</methodname> method. The report will be downloaded and a command to open it will be executed.</para>
@@ -186,15 +186,29 @@ Chief Name: ${department.chief.name}
       </listitem>
     </itemizedlist>
     <note>
-      <para>When executing the report in the HTML5 browser client, calling the <methodname>show()</methodname>, <methodname>print()</methodname>, and <methodname>save(reportPath)</methodname> methods leads to the same results — the report file will be downloaded by your browser.</para>
+      <para>When executing the report in the HTML5 browser client, calling the <methodname>show()</methodname>, <methodname>print()</methodname>, and <methodname>save(reportPath)</methodname> methods lead to the same results — the report file will be downloaded by your browser.</para>
     </note>
     <para>In the example below, the report is generated on  client side by desktop appliction:</para>
     <programlisting language="JavaScript">var r = new Report(&apos;DocumentReport&apos;);
 r.params.documentCategory = &apos;business&apos;; // update the model
 r.show(); // show report</programlisting>
     <para>To execute the report on the server side (from a HTML5 browser or a desktop client):</para>
-    <programlisting language="JavaScript">var r = new ServerReport(&apos;DocumentReport&apos;);
-r.params.documentCategory = &apos;business&apos;; // update the model
+    <programlisting language="JavaScript">/*
+ * @module 
+ * @public
+ */
+function DocumentReport(){
+    var self = this, model = self.model;
+    // take parameter&apos;s value from self property.
+    model.params.documentCategory = self.documentCategory;
+    // ...
+}
+
+var r = new ServerReport(&apos;DocumentReport&apos;);
+// provide some property to be taken as a model parameter
+// by the report at the server side
+r.documentCategory = &apos;business&apos;; 
+// Transfer the report&apos;s properties and download a report
 r.show();</programlisting>
     <para>Report&apos;s JavaScript code prepares data for displaying, calculating new data, etc. </para>
     <itemizedlist>
@@ -203,6 +217,9 @@ r.show();</programlisting>
       </listitem>
       <listitem>
         <para>Add code in the <literal>onBeforeRender</literal> event hanler function, which will be invoked before starting the generation of report, when client calls the <methodname>show</methodname>,  <methodname>print</methodname>, or <methodname>save</methodname> methods.</para>
+      </listitem>
+      <listitem>
+        <para>For server-side reports think about what data should be transferred to the server side and provide properties of report proxy before calling <code>show()</code> method.</para>
       </listitem>
     </itemizedlist>
     <para>The report events:</para>
