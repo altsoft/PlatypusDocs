@@ -1868,16 +1868,125 @@ view.add(modelDate);</programlisting>
         </listitem>
       </itemizedlist>
       <para>Fixed columns are the columns, which are intended for displaying the specific fields of the dataset in the fixed position on the grid. You can also configure any number of veer columns, each of which may include dynamic child columns. </para>
+      <para><code>ModelGrid</code> widget has the following specific properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>fixedColumns</parameter>
+              </entry>
+              <entry>The number of the fixed grid columns.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>fixedRows</parameter>
+              </entry>
+              <entry>The number of the fixed grid rows.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>gridColor</parameter>
+              </entry>
+              <entry>The <code>Color</code> of the grid. </entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>oddRowsColor</parameter>
+              </entry>
+              <entry>The <code>Color</code> of the grid&apos;s odd rows.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>rowsHeaderType</parameter>
+              </entry>
+              <entry>The service column&apos;s type.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>rowsHeight</parameter>
+              </entry>
+              <entry>The height of the grid&apos;s rows.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>showHorizontalLines</parameter>
+              </entry>
+              <entry><code>true</code> to show horizontal lines and <code>false</code> otherwise. </entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>showVerticalLines</parameter>
+              </entry>
+              <entry><code>true</code> to show vertical lines and <code>false</code> otherwise. </entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>showOddRowsInOtherColor</parameter>
+              </entry>
+              <entry><code>true</code> to show odd rows in the different color and <code>false</code> otherwise. </entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>deletable</parameter>
+              </entry>
+              <entry><code>true</code> to enable rows delete operation for the grid and <code>false</code> otherwise. </entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>editable</parameter>
+              </entry>
+              <entry><code>true</code> to enable cells edit operation for the grid and <code>false</code> otherwise. </entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>insertable</parameter>
+              </entry>
+              <entry><code>true</code> to enable rows insert operation for the grid and <code>false</code> otherwise. </entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>entity</parameter>
+              </entry>
+              <entry>The bounded model entity for the grid.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>param2GetChildren</parameter>
+              </entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>
+                <parameter>paramSourceField</parameter>
+              </entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>
+                <parameter>unaryLinkField</parameter>
+              </entry>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To configure the widget properties: </para>
       <itemizedlist>
         <listitem>
-          <para>Select the model entity for the component. To do this, use the  <guilabel>entity</guilabel> property. Datasource binding will be created. To delete the binding, click the clear button. </para>
+          <para>Select the model entity for the component. To do this, use the  <guilabel>entity</guilabel> property under the <guilabel>Model binding</guilabel> propetries group. To delete the binding,  clear the <guilabel>entity</guilabel> field. </para>
         </listitem>
         <listitem>
-          <para>If necessary, freeze the required number of columns on the left and/or rows on the top of the grid — these columns and rows won&apos;t be scrolled with other columns and rows. To do this, set the number of fixed columns using the  <guilabel>fixedColumns</guilabel> and <guilabel>fixedRows</guilabel> properties.</para>
+          <para>If necessary, freeze the required number of columns on the left and/or rows on the top of the grid, these columns and rows won&apos;t be scrolled with other columns and rows. To do this, set the number of fixed columns using the  <guilabel>fixedColumns</guilabel> and <guilabel>fixedRows</guilabel> properties in the <guilabel>Apperance</guilabel> properties group.</para>
         </listitem>
         <listitem>
-          <para>Choose the appearance of the service column — a service column appears to the left of other columns and is used to display the cursor icon and select rows; select one of the following options: <guilabel>None</guilabel> — the service column is not displayed, <guilabel>Usual</guilabel> — a normal view with the cursor icon, <guilabel>Check box</guilabel> — a cursor icon and widget, which allows you to select multiple rows, <guilabel>Radio button</guilabel> — a cursor icon and widget, which allows you to select only one row of the grid. </para>
+          <para>Choose the appearance of the rows header — a service column appears to the left of other columns and is used to display the cursor  and select rows. Select one of the following options for the <guilabel>rowsHeaderType</guilabel> properyt: <guilabel>None</guilabel> for the service column  not to be displayed, <guilabel>Usual</guilabel> for a normal view with the cursor icon, <guilabel>Check box</guilabel> for a cursor icon and a check box control, which allows you to select multiple rows and <guilabel>Radio button</guilabel> to show a cursor icon and radio button control, which allows you to select only one row of the grid. </para>
         </listitem>
         <listitem>
           <para>Define the  <property>
@@ -1885,10 +1994,71 @@ view.add(modelDate);</programlisting>
             </property> event handler, which will be called for the data grid cells, if a similar handler was not defined for their columns.</para>
         </listitem>
       </itemizedlist>
+      <para><code>ModelDate</code> column has the following  properties:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>enabled</parameter>
+              </entry>
+              <entry><code>true</code> if the column is enabled and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>fixed</parameter>
+              </entry>
+              <entry><code>true</code> if the column is fixed and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>readonly</parameter>
+              </entry>
+              <entry><code>true</code> the column is in a read-only mode and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>selectOnly</parameter>
+              </entry>
+              <entry><code>true</code> the column is in a select-only mode and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>title</parameter>
+              </entry>
+              <entry>The column&apos;s title string.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>veer</parameter>
+              </entry>
+              <entry><code>true</code> the column is in a veer mode and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>visible</parameter>
+              </entry>
+              <entry><code>true</code> the column is visible and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>width</parameter>
+              </entry>
+              <entry>The column&apos;s width.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>To add, remove and configure  grid columns: </para>
       <itemizedlist>
         <listitem>
-          <para>Use the form inspector — the inspector displays the structure of the data grid columns and allows you to edit it; columns can be embedded into each other.</para>
+          <para>Use the form inspector: the inspector displays the structure of the data grid columns and allows you to edit it; columns can be embedded into each other.</para>
         </listitem>
         <listitem>
           <para>Enter the column title using the  <guilabel>title</guilabel> property.</para>
@@ -1993,14 +2163,14 @@ view.add(modelDate);</programlisting>
       <para>A tree structure in the grid can function in two modes: </para>
       <itemizedlist>
         <listitem>
-          <para>A simple mode, in which all tree levels are loaded by a single query.</para>
+          <para>The &quot;simple&quot; mode, in which all tree levels are loaded by a single query.</para>
         </listitem>
         <listitem>
-          <para>A &quot;lazy&quot; mode, in which each level is loaded as the nodes are expanded.</para>
+          <para>The &quot;lazy&quot; mode, in which each level is loaded as the nodes are expanded.</para>
         </listitem>
       </itemizedlist>
       <note>
-        <para>The simple tree operation mode is acceptable only for small sets of data, since in this mode all tree elements are requested simultaneously and it can lead to problems with the performance and responsiveness of the user interface. For large data sets, use the &quot;lazy&quot; tree operation mode. </para>
+        <para>The &quot;simple&quot; tree operation mode is acceptable only for small sets of data, since in this mode all tree elements are requested simultaneously and it can lead to problems with the performance and responsiveness of the user interface. For large data sets, use the &quot;lazy&quot; tree operation mode. </para>
       </note>
       <para>To configure a tree in the simple mode: </para>
       <itemizedlist>

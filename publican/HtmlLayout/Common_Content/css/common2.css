@@ -10,8 +10,8 @@ body, h1, h2, h3, h4, h5, h6, pre, li, div {
 body {
 	background-color: white;
 	margin:0 auto;
-	font-family: "liberation sans", "Myriad ", "Bitstream Vera Sans", "Lucida Grande", "Luxi Sans", "Trebuchet MS", helvetica, verdana, arial, sans-serif;
-	font-size:12px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size:14px;
 	color:black;
 }
 

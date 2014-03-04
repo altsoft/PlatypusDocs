@@ -248,7 +248,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
     <para>Select the  <guimenuitem>Clean and Run</guimenuitem> menu item in the project context menu, if it is necessary to update the libraries in the <filename>web</filename> directory. The libraries will be removed, and at the next application launch these libraries will be copied from the platform&apos;s runtime directory.</para>
   </section>
   <section id="conn-management">
-    <title>Database connections management</title>
+    <title>Database connections</title>
     <para>Define an application project&apos;s database connections and the  default connection of the application. The default connection  to be  used when a connection is not explicitly referenced in  application elements. </para>
     <para>Add a new database connection:</para>
     <itemizedlist>

@@ -178,7 +178,7 @@ public class HtmlConvertor {
                 if (dt.nextElementSibling() != null && dt.nextElementSibling().tagName().equals("dd")) {
                     span.before("<div style='position:relative;display:inline-block;width:12px' class='disclosure closed'>&nbsp;</div>");
                 } else {
-
+                    span.attr("style", "margin-left:12px; display:block");
                     //span.before("<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
                 }
             }
