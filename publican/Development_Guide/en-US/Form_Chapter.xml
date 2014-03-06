@@ -1842,164 +1842,234 @@ view.add(modelDate);</programlisting>
     </section>
     <section id="widget-modelgrid">
       <title>ModelGrid</title>
-      <para><code>ModelGrid</code> model widget is a powerful widget intended to display and enter data, which is presented in a tabular form  and as a tree. <code>ModelGrid</code> widget  is the most powerful UI component. </para>
-      <para>The component has the following features: </para>
+      <para><code>ModelGrid</code> model widget is a powerful widget  to display and enter data, which is presented in a tabular form  and as a tree. <code>ModelGrid</code> widget  is the most powerful UI component. </para>
+      <note>
+        <para>At the current version of the platfom you can  create and setup an instance of <code>ModelGrid</code> only using  visual editor.</para>
+      </note>
+      <para><code>ModelGrid</code> component has the following features: </para>
       <itemizedlist>
         <listitem>
-          <para>Tree grid view of data.</para>
+          <para>Entity&apos;s data representation as  a columns and rows.</para>
         </listitem>
         <listitem>
-          <para>Frozen &quot;non-scrollable&quot; rows and/or columns areas.</para>
+          <para>Data cells editing,  inserting new and deleting rows.</para>
         </listitem>
         <listitem>
-          <para>Multilevel header. To use this feature, one have to define nested columns structure. </para>
+          <para>Fixed non-scrollable rows and/or columns.</para>
         </listitem>
         <listitem>
-          <para>Entity&apos;s data array scrolling (cursor reposition).</para>
+          <para>Service column with the cursor pointer.</para>
         </listitem>
         <listitem>
-          <para>Data editing.</para>
+          <para>Entity&apos;s data  scrolling and cursor positioning.</para>
         </listitem>
         <listitem>
-          <para>Dynamic columns with another dataset as a columns source.</para>
+          <para>Expandable dynamic columns.</para>
         </listitem>
         <listitem>
-          <para>Fixed, resiable and draggable columns.</para>
+          <para>Tree view of hierarchical data.</para>
         </listitem>
       </itemizedlist>
-      <para>Fixed columns are the columns, which are intended for displaying the specific fields of the dataset in the fixed position on the grid. You can also configure any number of veer columns, each of which may include dynamic child columns. </para>
-      <para><code>ModelGrid</code> widget has the following specific properties:</para>
+      <para><code>ModelGrid</code> widget has the following specific  properties:</para>
       <informaltable>
-        <tgroup cols="2">
+        <tgroup cols="4">
           <thead>
             <row>
               <entry align="center">Property </entry>
+              <entry align="center">Layout </entry>
+              <entry align="center">JS </entry>
               <entry align="center">Description </entry>
             </row>
           </thead>
           <tbody>
             <row>
               <entry>
+                <parameter>border</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>The component&apos;s border.</entry>
+            </row>
+            <row>
+              <entry>
                 <parameter>fixedColumns</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry>The number of the fixed grid columns.</entry>
             </row>
             <row>
               <entry>
                 <parameter>fixedRows</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry>The number of the fixed grid rows.</entry>
             </row>
             <row>
               <entry>
                 <parameter>gridColor</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry>The <code>Color</code> of the grid. </entry>
             </row>
             <row>
               <entry>
                 <parameter>oddRowsColor</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry>The <code>Color</code> of the grid&apos;s odd rows.</entry>
             </row>
             <row>
               <entry>
                 <parameter>rowsHeaderType</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry>The service column&apos;s type.</entry>
             </row>
             <row>
               <entry>
                 <parameter>rowsHeight</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry>The height of the grid&apos;s rows.</entry>
             </row>
             <row>
               <entry>
                 <parameter>showHorizontalLines</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> to show horizontal lines and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>showVerticalLines</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> to show vertical lines and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>showOddRowsInOtherColor</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> to show odd rows in the different color and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>deletable</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> to enable rows delete operation for the grid and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>editable</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> to enable cells edit operation for the grid and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>insertable</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> to enable rows insert operation for the grid and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>entity</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
               <entry>The bounded model entity for the grid.</entry>
             </row>
             <row>
               <entry>
                 <parameter>param2GetChildren</parameter>
               </entry>
-              <entry/>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See tree option.</entry>
             </row>
             <row>
               <entry>
                 <parameter>paramSourceField</parameter>
               </entry>
-              <entry/>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See tree option.</entry>
             </row>
             <row>
               <entry>
                 <parameter>unaryLinkField</parameter>
               </entry>
-              <entry/>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See tree option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cells</parameter>
+              </entry>
+              <entry align="center"/>
+              <entry align="center">⚫</entry>
+              <entry>All grid cells as an array.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>selectedCells</parameter>
+              </entry>
+              <entry align="center"/>
+              <entry align="center">⚫</entry>
+              <entry>All selected grid cells as an array.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>columns</parameter>
+              </entry>
+              <entry align="center"/>
+              <entry align="center">⚫</entry>
+              <entry>Grid columns as an array.</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>To configure the widget properties: </para>
+      <para>To configure <code>ModelGrid</code> properties: </para>
       <itemizedlist>
         <listitem>
-          <para>Select the model entity for the component. To do this, use the  <guilabel>entity</guilabel> property under the <guilabel>Model binding</guilabel> propetries group. To delete the binding,  clear the <guilabel>entity</guilabel> field. </para>
+          <para>To select the model entity for the component use the  <guilabel>entity</guilabel> property under the <guilabel>Model binding</guilabel> propetries group. To delete the binding,  clear the <guilabel>entity</guilabel> field. </para>
         </listitem>
         <listitem>
-          <para>If necessary, freeze the required number of columns on the left and/or rows on the top of the grid, these columns and rows won&apos;t be scrolled with other columns and rows. To do this, set the number of fixed columns using the  <guilabel>fixedColumns</guilabel> and <guilabel>fixedRows</guilabel> properties in the <guilabel>Apperance</guilabel> properties group.</para>
+          <para>Use the  <guilabel>fixedColumns</guilabel> and <guilabel>fixedRows</guilabel> properties in the <guilabel>Apperance</guilabel> properties group to freeze the required number of columns on the left and/or rows on the top of the grid.</para>
         </listitem>
         <listitem>
-          <para>Choose the appearance of the rows header — a service column appears to the left of other columns and is used to display the cursor  and select rows. Select one of the following options for the <guilabel>rowsHeaderType</guilabel> properyt: <guilabel>None</guilabel> for the service column  not to be displayed, <guilabel>Usual</guilabel> for a normal view with the cursor icon, <guilabel>Check box</guilabel> for a cursor icon and a check box control, which allows you to select multiple rows and <guilabel>Radio button</guilabel> to show a cursor icon and radio button control, which allows you to select only one row of the grid. </para>
+          <para>Configure the <guilabel>rowsHeaderType</guilabel> property to define  appearance of the rows header. It has the following options: <guilabel>None</guilabel> — the service column is not displayed, <guilabel>Usual</guilabel> —   the service column is displayed with the cursor icon, <guilabel>Check box</guilabel> —  a check box control, which allows you to select multiple rows, <guilabel>Radio button</guilabel> — to show a  radio button control, which allows you to select only one row of the grid. </para>
         </listitem>
         <listitem>
-          <para>Define the  <property>
+          <para>Use the  <property>
               <code>onRender</code>
-            </property> event handler, which will be called for the data grid cells, if a similar handler was not defined for their columns.</para>
+            </property> event handler, which will be called for each data grid cell, if a similar handler was not defined for their columns.</para>
         </listitem>
       </itemizedlist>
-      <para><code>ModelDate</code> column has the following  properties:</para>
+      <para><code>ModelGridColumn</code> has the following  properties:</para>
       <informaltable>
-        <tgroup cols="2">
+        <tgroup cols="4">
           <thead>
             <row>
               <entry align="center">Property </entry>
+              <entry align="center">Layout</entry>
+              <entry align="center">JS </entry>
               <entry align="center">Description </entry>
             </row>
           </thead>
@@ -2008,150 +2078,272 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>enabled</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
               <entry><code>true</code> if the column is enabled and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
                 <parameter>fixed</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
               <entry><code>true</code> if the column is fixed and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
                 <parameter>readonly</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> the column is in a read-only mode and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
                 <parameter>selectOnly</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
               <entry><code>true</code> the column is in a select-only mode and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
                 <parameter>title</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry>The column&apos;s title string.</entry>
             </row>
             <row>
               <entry>
-                <parameter>veer</parameter>
+                <parameter>expandable</parameter>
               </entry>
-              <entry><code>true</code> the column is in a veer mode and <code>false</code> otherwise.</entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
             </row>
             <row>
               <entry>
                 <parameter>visible</parameter>
               </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
               <entry><code>true</code> the column is visible and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
                 <parameter>width</parameter>
               </entry>
-              <entry>The column&apos;s width.</entry>
+              <entry align="center">⚫</entry>
+              <entry align="center">⚫</entry>
+              <entry>The column&apos;s width in pixels.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>background</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>The header style background color.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>font</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>The header style font.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>field</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>Model entity&apos;s field bound to this column.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellValueField</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellsEntity</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>columnsEntity</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>columnsDisplayField</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>columnsKeyField</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>rowsKeyField</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>substitute</parameter>
+              </entry>
+              <entry align="center">⚫</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
+      <para>Refer to <link linkend="mwidgets">Model Widgets</link> section to read about column view events.</para>
+      <para>Use the form inspector: the inspector displays the grid&apos;s columns node as children of <code>ModelGrid</code> component node and allows you to edit them.</para>
       <para>To add, remove and configure  grid columns: </para>
       <itemizedlist>
         <listitem>
-          <para>Use the form inspector: the inspector displays the structure of the data grid columns and allows you to edit it; columns can be embedded into each other.</para>
+          <para>To  fill all <code>ModelGrid</code> columns corresponding to the fields of the linked data model entity, select <guilabel>Fill columns</guilabel> — in this case, link to the entity fields will be performed automatically.  </para>
         </listitem>
         <listitem>
-          <para>Enter the column title using the  <guilabel>title</guilabel> property.</para>
+          <para>To manually add a  column to <code>ModelGrid</code>  drag it from the components palette or add it using <menuchoice>
+              <guimenu>Add from palette</guimenu>
+               <guimenuitem>Model-aware controls</guimenuitem>
+               <guimenuitem>Model grid column </guimenuitem>
+            </menuchoice>context menu item in form inspector.</para>
         </listitem>
         <listitem>
-          <para>Move the selected columns up and down using the  <guimenuitem>Move up</guimenuitem> and <guimenuitem>Move down</guimenuitem> context menu items. </para>
+          <para>To  add a  column as a child to another column use parent column&apos;s node <menuchoice>
+              <guimenu>Add from palette</guimenu>
+               <guimenuitem>Model-aware controls</guimenuitem>
+               <guimenuitem>Model grid column</guimenuitem>
+            </menuchoice> context menu item in form inspector.</para>
         </listitem>
         <listitem>
-          <para>To add columns corresponding to the fields of the linked data model entity, select <guilabel>Fill columns</guilabel> — in this case, link to the entity fields will be performed automatically.  </para>
+          <para>Move the selected columns up and down using the  <guimenuitem>Move up</guimenuitem>, <guimenuitem>Move down</guimenuitem> or <guimenuitem>Change Order</guimenuitem> context menu items or by draggining it by mouse. </para>
         </listitem>
       </itemizedlist>
-      <para>To configure the column properties: </para>
+      <para>In standart mode a column represents  entity&apos;s field data. To configure the column in standard mode:</para>
       <itemizedlist>
         <listitem>
-          <para>Select a column in the form inspector.</para>
+          <para>Specify the bound entity&apos;s field, to which the column should be linked. To do this, use the  <guilabel>field</guilabel> property and select a field from the bound entity.</para>
         </listitem>
         <listitem>
-          <para>Specify an identifier for the column using the  <guilabel>name</guilabel> property, by this identifier this column can be accessed from  JavaScript code.</para>
-        </listitem>
-        <listitem>
-          <para>Set the column title font using the <guilabel>font</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Set the width of the column using the  <guilabel>width</guilabel> property. The column width is specified in pixels. If the width of the grid is smaller than (in this case scroll bars appear) or equal to the sum of all columns width, such width will be actual column&apos;s width. If the grid width exceeds this value, the width of each column is proportionally increased.  </para>
-        </listitem>
-        <listitem>
-          <para>Set the &quot;read only&quot; mode for the column by checking the <guilabel>readOnly</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Enable or disable the visual representation of the column by checking the  <guilabel>visible</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define a handler of the selection event for the  <property>onSelect</property> column cells using the  <guilabel>Events</guilabel> tab on the properties panel; the select button appears in cells only if the handler is defined; if necessary, define a special value selection procedure in the handler: for example, open a special value selection dialog, etc.</para>
-        </listitem>
-        <listitem>
-          <para>Define the  <property>onRender</property> event handler using the  <guilabel>Events</guilabel> tab on the properties panel. </para>
-        </listitem>
-        <listitem>
-          <para>Enable or disable the operation mode for the column — standard or dynamically expanded — by checking the <guilabel>veer</guilabel> property.</para>
+          <para>Define a widget, which will be used for displaying in the column cells. Select its type from the  <guilabel>view</guilabel> context menu of the column&apos;s node in the inpector. The choices will be compatible with the type of the linked entity field. Set the properties of the corresponding widget (see the corresponding sections for the description of the  model widget setting procedure).</para>
         </listitem>
       </itemizedlist>
-      <para>To configure the column in standard mode:</para>
-      <itemizedlist>
-        <listitem>
-          <para>Specify the entity field, to which the column should be linked. To do this, use the  <guilabel>field</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define a widget, which will be used for displaying in the column cells. Select its type from the  <guilabel>View</guilabel> context menu. The choices will be compatible with the type of the linked entity field. Set properties of the corresponding widget (see the corresponding sections for the description of the  model widget setting procedure).</para>
-        </listitem>
-      </itemizedlist>
-      <para>In the expanded mode, a column can contain an arbitrary number of child columns. Their combination can be changed dynamically during the application execution. The combination of the child columns is determined by a special (column) entity in the data model. Values for the child column cells are determined by another (cell) entity, the objects of which also contain references to objects in the main  entity (grid&apos;s rows source) and to the column entity objects.</para>
+      <para>In  expanded mode, a column can contain an arbitrary number of child columns. Their combination can be changed dynamically in runtime.</para>
       <figure>
-        <title>Expanded columns datasets</title>
+        <title>Expandable columns data tables</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/expandableTables.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <figure>
+        <title>Expandable column result grid</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/expandableResult.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para>The combination of dynamic children columns is determined by a special column entity in the data model. Values for the child column cells are determined by another cell entity, the objects of which also contain references to objects in the main  entity (grid&apos;s rows source) and to the column entity objects.</para>
+      <figure>
+        <title>Expandable column entities</title>
         <mediaobject>
           <imageobject>
             <imagedata fileref="images/gridFilpColumnsDatasource.png"/>
           </imageobject>
         </mediaobject>
       </figure>
-      <para>To configure the column in expanded mode:</para>
-      <itemizedlist>
-        <listitem>
-          <para>Check the  <guilabel>veer</guilabel> property.</para>
-        </listitem>
-      </itemizedlist>
-      <itemizedlist>
-        <listitem>
-          <para>Define an entity, which contains a list of columns (a  <literal>Properties</literal>entity on the example figure); to do this, set a value for the <guilabel>columnsEntity</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define an entity field, which contains names of dynamic columns (a  <literal>Properties.Name</literal> field on the example figure); to do this, set a value for the <guilabel>columnsDisplayField</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define an entity, which contains cell values (a  <literal>Values</literal> entity on the example figure); to do this, set a value for the  <guilabel>cellsEntity</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define an entity field, which contains references to the main entity (a  <literal>Values.MainID</literal> field on the example figure); to do this, set a value for the <guilabel>rowsKeyField</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define an entity field, which contains references to the column list entity (a  <literal>Values.PropID</literal> field on the example figure); to do this, set a value for the  <guilabel>columnsKeyField</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define an entity field, which contains cell values (a  <literal>Values.Value</literal> field on the example figure); to do this, set a value for the <guilabel>cellValueField</guilabel> property.</para>
-        </listitem>
-        <listitem>
-          <para>Define a widget to be used as a representation of cells; to do this, select its type in the context menu of the form inspector column: the choices will be compatible with the type of the linked entity field; set properties of the corresponding widget (see the corresponding sections for the description of the  <emphasis>Model Controls</emphasis> setting procedure).</para>
-        </listitem>
-        <listitem>
-          <para>Check the  <guilabel>substitute</guilabel> property to hide the parent column; in this case, dynamic columns will be displayed the same way as fixed columns of the parent level. </para>
-        </listitem>
-      </itemizedlist>
-      <para>The widget can be configured to display a tree structure in the first column on the left — elements of the tree visual representation (expand/collapse icons for nodes) are added to this column. Other columns are displayed as usual. </para>
-      <para>For the tree structure to work, we need an entity, which contains a field referring to the instances of the same entity, thus  forming a hierarchical data structure.</para>
+      <para>Use the following <code>ModelGridColumn</code> propeties to configure an expandable column:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Property </entry>
+              <entry align="center">Description </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <parameter>expandable</parameter>
+              </entry>
+              <entry><code>true</code> if the column is in a expanded mode and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>substitute</parameter>
+              </entry>
+              <entry><code>true</code> to hide the parent column and <code>false</code> otherwise.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>columnsEntity</parameter>
+              </entry>
+              <entry>Columns entity representing data to form columns.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>columnsDisplayField</parameter>
+              </entry>
+              <entry>The field in Columns entity for dynamic columns titles.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellsEntity</parameter>
+              </entry>
+              <entry>Cells entity.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellValueField</parameter>
+              </entry>
+              <entry>The value field in Cells entity.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellColumnKeyField</parameter>
+              </entry>
+              <entry>The field in Cells entity refering to the primary key in Columns entity.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellRowKeyField</parameter>
+              </entry>
+              <entry>The field in Cells entity refering to the primary key in Main entity.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>The widget can be configured to display a tree structure in the first column on the left (next to the service column). Other columns in this grid are displayed as usual. </para>
+      <para>To show a tree we need an entity, which contains a field referring to some other field, thus  forming a hierarchical data structure.</para>
       <figure>
         <title> Hierarchical data dataset</title>
         <mediaobject>
@@ -2163,56 +2355,43 @@ view.add(modelDate);</programlisting>
       <para>A tree structure in the grid can function in two modes: </para>
       <itemizedlist>
         <listitem>
-          <para>The &quot;simple&quot; mode, in which all tree levels are loaded by a single query.</para>
+          <para>The simple mode, in which all tree levels are loaded by a single query.</para>
         </listitem>
         <listitem>
-          <para>The &quot;lazy&quot; mode, in which each level is loaded as the nodes are expanded.</para>
+          <para>The lazy mode, in which each level is loaded as the nodes are expanded.</para>
         </listitem>
       </itemizedlist>
       <note>
-        <para>The &quot;simple&quot; tree operation mode is acceptable only for small sets of data, since in this mode all tree elements are requested simultaneously and it can lead to problems with the performance and responsiveness of the user interface. For large data sets, use the &quot;lazy&quot; tree operation mode. </para>
+        <para>The simple tree operation mode is acceptable only for small sets of data, since in this mode all tree elements are requested simultaneously and it can lead to the performance problems and slow  user interface. For large data sets, use the lazy tree operation mode. </para>
       </note>
       <para>To configure a tree in the simple mode: </para>
       <itemizedlist>
         <listitem>
-          <para>Select a column on the left panel; activate the  <guilabel>Tree</guilabel> tab.</para>
-        </listitem>
-        <listitem>
-          <para>Select the  <guilabel>All levels from single query</guilabel> item.</para>
-        </listitem>
-        <listitem>
-          <para>Define a data set linking field; to do this, click the select button next to the  <guilabel>Select unary link field for tree building</guilabel> field; in the form, that opens, select a data set field, which is responsible for hierarchical relationships; in order to remove the selection, click the clear button.</para>
+          <para>Specify a value for the <code>unaryLinkField</code> property. For this property select the link source field, which is responsible for hierarchical relationships, in the example figure above it is the <code>ParentID</code> field. To remove the selection, clear the property.</para>
         </listitem>
       </itemizedlist>
       <important>
-        <para>The linking field should be in the same data set, which is configured as the grid rows source. </para>
+        <para>The link source field should be in the same data set as configured as the grid&apos;s  source. </para>
       </important>
-      <para>To arrange a lazy tree, you should create an entity based on a  query, which returns child elements by the parent record identifier passed as a parameter, for example:</para>
+      <para>To use a lazy tree grid, create an entity based on a  query, which returns child elements by the parent  identifier passed as a parameter, for example:</para>
       <programlisting language="JavaScript">/**
  * @name LazyTree
  */
 SELECT * FROM tree_table t
 WHERE t.PARENT_ID = :parentId
 OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
-      <para>To configure a &quot;lazy&quot; tree:</para>
+      <para>To configure  lazy tree for <code>ModelGrid</code>:</para>
       <itemizedlist>
         <listitem>
-          <para>Select a column on the left panel; activate the <guilabel>Tree</guilabel> tab.</para>
+          <para>Specify  <code>unaryLinkField</code> property. For this property select the link source field, which is responsible for hierarchical relationships, in the example figure above it is the <code>ParentID</code> field.</para>
         </listitem>
         <listitem>
-          <para>Select the  <guilabel>Deeper level with new query</guilabel> item.</para>
+          <para>Set <code>param2GetChildren</code> property. Select the entity&apos;s parameter that is responsible for requering child records. In the code snippet above this corresponds to  <code>:parentId</code>parameter.</para>
         </listitem>
         <listitem>
-          <para>Define the parent record identifier parameter for the data set; to do this, select a parameter from the drop-down list to the left of the <guilabel>=</guilabel> symbol. To remove the parameter selection, click the clear button. </para>
-        </listitem>
-        <listitem>
-          <para>Define the records identifier field: to do this, click the select button to the right of the  <guilabel>=</guilabel> symbol; in the form, that opens, select a data set field — the record identifier. To remove the identifier field selection, click the clear button.</para>
+          <para>Set <code>paramSourceField</code> property. Select the field that will be used as a source for the parameter to get child records. The field&apos;s value will provided to the parameter specified by <code>param2GetChildren</code> property. In the example above this property should be set to <code>ID</code> primary key field.</para>
         </listitem>
       </itemizedlist>
-      <para>To create a component of this type by program means, use the  <classname>ModelGrid</classname> constructor:</para>
-      <programlisting language="JavaScript">var modelGrid = new ModelGrid();</programlisting>
-      <para>After creating, if necessary, set the properties and component event handlers and add the component to the container:</para>
-      <programlisting language="JavaScript">view.add(modelGrid);</programlisting>
     </section>
     <section id="widget-modelimage">
       <title>ModelImage</title>
