@@ -2008,7 +2008,7 @@ Logger.severe(&quot;severe error&quot;);</programlisting>
   <section id="module-io">
     <title>Filesystem I/O</title>
     <para>To read and write files, use  Java API from the <code>java.io.*</code> and other dedicated packages. </para>
-    <para>To read and write strings, use  <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code>, and <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code> global functions, where <parameter>path</parameter> &gt; is a path to the file, <parameter>text</parameter> is a string, <parameter>encoding</parameter> is the name of encoding. The  <parameter>encoding</parameter> parameter in both functions is optional and by default is set for the UTF-8 encoding. </para>
+    <para>To read and write strings, use  <code>readString(<parameter>path</parameter>, <parameter>encoding</parameter>)</code>, and <code>writeString(<parameter>path</parameter>, <parameter>text</parameter>, <parameter>encoding</parameter>)</code> global functions, where <parameter>path</parameter>  is a path to the file, <parameter>text</parameter> is a string, <parameter>encoding</parameter> is the name of encoding. The  <parameter>encoding</parameter> parameter in both functions is optional and by default is set for the UTF-8 encoding. </para>
     <para>Example of using functions for reading and writing strings to a file:</para>
     <programlisting language="JavaScript">//Read from one text file and write to another
 var str = readString(&apos;/home/user1/Documents/doc1.txt&apos;);

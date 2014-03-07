@@ -1309,7 +1309,7 @@ rbB.buttonGroup = buttonGroup;</programlisting>
               <entry>
                 <parameter>text</parameter>
               </entry>
-              <entry>The text.</entry>
+              <entry>The text for the widget.</entry>
             </row>
             <row>
               <entry>
