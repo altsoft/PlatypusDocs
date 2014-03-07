@@ -1032,10 +1032,11 @@ model.save();</programlisting>
       <programlisting language="JavaScript">try {
   model.save();
 } catch (e) {
+  model.revert();
   Logger.error(&apos;Save data error: &apos; + e);
 }</programlisting>
       <para>After handling the error, you can try to correct the cause of the problem and re-call the  <methodname>save</methodname> function.</para>
-      <para>Use model&apos;s <code>revert</code> method to revert model data changes. After this method call, no data changes are avaliable for <code>save()</code> method, but the model still attempts to commit. Call <code>save()</code> on commitable and unchanged model nevertheless leads to a commit.</para>
+      <para>Use model&apos;s <code>revert</code> method to revert model data changes. After this method call, no data changes are avaliable for <code>save()</code> method, but the model still attempts to commit. Calling <code>save()</code> on  unchanged model nevertheless leads to a commit.</para>
     </section>
     <section id="datamodel-search">
       <title>Search API</title>

@@ -46,13 +46,13 @@
             <entry>
               <parameter>__param</parameter>
             </entry>
-            <entry>Method calling parameter — a single value, a string, a number or a serialized JavaScript object in the JSON format.</entry>
+            <entry>Method&apos;s single parameter. A single value, a string, a number or a serialized JavaScript object in the JSON format.</entry>
           </row>
           <row>
             <entry>
               <parameter>__param[]</parameter>
             </entry>
-            <entry>Method calling parameter — several values, a string, a number or a serialized JavaScript object in the JSON format.</entry>
+            <entry>Method&apos;s multiply parameters. Several values, value can be a string, a <code>Number</code> or a serialized JavaScript objects in JSON format.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -67,13 +67,13 @@
  * @public
  */
 function ModuleConstructor() {
-   var http = this.http;
+   var self = this;
    
   /**
    * @rolesAllowed tester admin
    */
    this.doSomething = function(paramA, paramB) {
-       //..
+      // Use self.http property
    }
 }</programlisting>
     <para>The  <code>http</code> property contains the following objects:</para>
@@ -90,7 +90,7 @@ function ModuleConstructor() {
             <entry>
               <parameter>request</parameter>
             </entry>
-            <entry>An object, which contains HTTP request data.</entry>
+            <entry>HTTP request object.</entry>
           </row>
           <row>
             <entry>
@@ -171,14 +171,14 @@ function ModuleConstructor() {
             <entry>
               <parameter>cookies</parameter>
             </entry>
-            <entry>Cookies which were sent by the client in the request in the &quot;key-value&quot; form.</entry>
+            <entry>Cookies which were sent by the client in the request in key-value form.</entry>
           </row>
           <row>
             <entry>
               <parameter>headers</parameter>
             </entry>
             <entry>
-              <para>Request headers in the &quot;key-value&quot; form.</para>
+              <para>Request headers in key-value form.</para>
             </entry>
           </row>
           <row>
@@ -218,7 +218,7 @@ function ModuleConstructor() {
               <parameter>params</parameter>
             </entry>
             <entry>
-              <para>Request parameters in the &quot;key-value&quot; form. If several parameters have the same name, their values will be presented as an array.</para>
+              <para>Request parameters in key-value form. If several parameters have the same name, their values will be presented as an array.</para>
             </entry>
           </row>
           <row>
@@ -376,7 +376,7 @@ function ModuleConstructor() {
             <entry>
               <parameter>headers</parameter>
             </entry>
-            <entry>Response headers in a &quot;key-value&quot; form.</entry>
+            <entry>Response headers in key-value form.</entry>
           </row>
           <row>
             <entry>
@@ -419,14 +419,14 @@ function ModuleConstructor() {
             <entry>
               <parameter>name</parameter>
             </entry>
-            <entry>The cookie name — a mandatory field.</entry>
+            <entry>The cookie name (required).</entry>
           </row>
           <row>
             <entry>
               <parameter>value</parameter>
             </entry>
             <entry>
-              <para>The current cookie value — a mandatory field.</para>
+              <para>The current cookie value  (required).</para>
             </entry>
           </row>
           <row>

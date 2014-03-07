@@ -1223,9 +1223,7 @@ view.add(cb1);</programlisting>
               <entry>
                 <parameter>icon</parameter>
               </entry>
-              <entry>
-                <code>Icon</code>
-              </entry>
+              <entry>The <code>Icon</code> for the widget</entry>
             </row>
             <row>
               <entry>
@@ -2399,7 +2397,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
       <note>
         <para>In the current Platypus Platform version, this component is supported only in the J2SE client.</para>
       </note>
-      <para><code>ModelDate</code> widget has the following specific properties:</para>
+      <para><code>ModelImage</code> widget has the following specific properties:</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
@@ -2489,7 +2487,7 @@ view.add(mff);</programlisting>
     <section id="widget-modeltextarea">
       <title>ModelTextArea</title>
       <para><code>ModelTextArea</code> is a scalar model widget, the state of which is linked to a field of the data model of string or number type. The widget can be used to display and enter text.</para>
-      <para><code>ModelDate</code> widget has the following specific properties:</para>
+      <para><code>ModelTextArea</code> widget has the following specific properties:</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
