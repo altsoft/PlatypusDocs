@@ -193,8 +193,8 @@ Chief Name: ${department.chief.name}
 r.params.documentCategory = &apos;business&apos;; // update the model
 r.show(); // show report</programlisting>
     <para>To execute the report on the server side (from a HTML5 browser or a desktop client):</para>
-    <programlisting language="JavaScript">/*
- * @module 
+    <programlisting language="JavaScript">/*
+ * @module
  * @public
  */
 function DocumentReport(){

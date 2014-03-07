@@ -1886,7 +1886,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>border</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>The component&apos;s border.</entry>
             </row>
@@ -1894,103 +1894,103 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>fixedColumns</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The number of the fixed grid columns.</entry>
             </row>
             <row>
               <entry>
                 <parameter>fixedRows</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The number of the fixed grid rows.</entry>
             </row>
             <row>
               <entry>
                 <parameter>gridColor</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The <code>Color</code> of the grid. </entry>
             </row>
             <row>
               <entry>
                 <parameter>oddRowsColor</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The <code>Color</code> of the grid&apos;s odd rows.</entry>
             </row>
             <row>
               <entry>
                 <parameter>rowsHeaderType</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The service column&apos;s type.</entry>
             </row>
             <row>
               <entry>
                 <parameter>rowsHeight</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The height of the grid&apos;s rows.</entry>
             </row>
             <row>
               <entry>
                 <parameter>showHorizontalLines</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> to show horizontal lines and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>showVerticalLines</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> to show vertical lines and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>showOddRowsInOtherColor</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> to show odd rows in the different color and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>deletable</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> to enable rows delete operation for the grid and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>editable</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> to enable cells edit operation for the grid and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>insertable</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> to enable rows insert operation for the grid and <code>false</code> otherwise. </entry>
             </row>
             <row>
               <entry>
                 <parameter>entity</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>The bounded model entity for the grid.</entry>
             </row>
@@ -1998,7 +1998,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>param2GetChildren</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See tree option.</entry>
             </row>
@@ -2006,7 +2006,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>paramSourceField</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See tree option.</entry>
             </row>
@@ -2014,7 +2014,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>unaryLinkField</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See tree option.</entry>
             </row>
@@ -2023,7 +2023,7 @@ view.add(modelDate);</programlisting>
                 <parameter>cells</parameter>
               </entry>
               <entry align="center"/>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry>All grid cells as an array.</entry>
             </row>
             <row>
@@ -2031,7 +2031,7 @@ view.add(modelDate);</programlisting>
                 <parameter>selectedCells</parameter>
               </entry>
               <entry align="center"/>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry>All selected grid cells as an array.</entry>
             </row>
             <row>
@@ -2039,7 +2039,7 @@ view.add(modelDate);</programlisting>
                 <parameter>columns</parameter>
               </entry>
               <entry align="center"/>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry>Grid columns as an array.</entry>
             </row>
           </tbody>
@@ -2078,7 +2078,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>enabled</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry><code>true</code> if the column is enabled and <code>false</code> otherwise.</entry>
             </row>
@@ -2086,7 +2086,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>fixed</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry><code>true</code> if the column is fixed and <code>false</code> otherwise.</entry>
             </row>
@@ -2094,15 +2094,15 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>readonly</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> the column is in a read-only mode and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
                 <parameter>selectOnly</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry><code>true</code> the column is in a select-only mode and <code>false</code> otherwise.</entry>
             </row>
@@ -2110,15 +2110,15 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>title</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The column&apos;s title string.</entry>
             </row>
             <row>
               <entry>
                 <parameter>expandable</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See expandable option.</entry>
             </row>
@@ -2126,23 +2126,23 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>visible</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry><code>true</code> the column is visible and <code>false</code> otherwise.</entry>
             </row>
             <row>
               <entry>
                 <parameter>width</parameter>
               </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center">•</entry>
               <entry>The column&apos;s width in pixels.</entry>
             </row>
             <row>
               <entry>
                 <parameter>background</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>The header style background color.</entry>
             </row>
@@ -2150,7 +2150,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>font</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>The header style font.</entry>
             </row>
@@ -2158,31 +2158,15 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>field</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>Model entity&apos;s field bound to this column.</entry>
             </row>
             <row>
               <entry>
-                <parameter>cellValueField</parameter>
-              </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center"/>
-              <entry>See expandable option.</entry>
-            </row>
-            <row>
-              <entry>
-                <parameter>cellsEntity</parameter>
-              </entry>
-              <entry align="center">⚫</entry>
-              <entry align="center"/>
-              <entry>See expandable option.</entry>
-            </row>
-            <row>
-              <entry>
                 <parameter>columnsEntity</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See expandable option.</entry>
             </row>
@@ -2190,15 +2174,31 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>columnsDisplayField</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See expandable option.</entry>
             </row>
             <row>
               <entry>
-                <parameter>columnsKeyField</parameter>
+                <parameter>cellsEntity</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellsValueField</parameter>
+              </entry>
+              <entry align="center">•</entry>
+              <entry align="center"/>
+              <entry>See expandable option.</entry>
+            </row>
+            <row>
+              <entry>
+                <parameter>cellsColumnKeyField</parameter>
+              </entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See expandable option.</entry>
             </row>
@@ -2206,7 +2206,7 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>rowsKeyField</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See expandable option.</entry>
             </row>
@@ -2214,14 +2214,14 @@ view.add(modelDate);</programlisting>
               <entry>
                 <parameter>substitute</parameter>
               </entry>
-              <entry align="center">⚫</entry>
+              <entry align="center">•</entry>
               <entry align="center"/>
               <entry>See expandable option.</entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>Refer to <link linkend="mwidgets">Model Widgets</link> section to read about column view events.</para>
+      <para><code>ModelGrid</code> has ability to change it&apos;s cells&apos; display style and to select values using custom editors while editing cells. In order to use these features, define <code>onRender</code> and <code>onSelect</code> event handlers in particular columns. If <code>onRender</code> event handler is defined on a column, it will be ivoked rather than similar event handler, defined on <code>ModelGrid</code>. Refer to <link linkend="mwidgets">Model Widgets</link>  section to read about how to deal with <code>onRender</code> and <code>onSelect</code> event handlers.  </para>
       <para>Use the form inspector: the inspector displays the grid&apos;s columns node as children of <code>ModelGrid</code> component node and allows you to edit them.</para>
       <para>To add, remove and configure  grid columns: </para>
       <itemizedlist>
@@ -2246,7 +2246,7 @@ view.add(modelDate);</programlisting>
           <para>Move the selected columns up and down using the  <guimenuitem>Move up</guimenuitem>, <guimenuitem>Move down</guimenuitem> or <guimenuitem>Change Order</guimenuitem> context menu items or by draggining it by mouse. </para>
         </listitem>
       </itemizedlist>
-      <para>In standart mode a column represents  entity&apos;s field data. To configure the column in standard mode:</para>
+      <para>In standard mode a column represents  entity&apos;s field data. To configure the column in standard mode:</para>
       <itemizedlist>
         <listitem>
           <para>Specify the bound entity&apos;s field, to which the column should be linked. To do this, use the  <guilabel>field</guilabel> property and select a field from the bound entity.</para>
@@ -2255,7 +2255,7 @@ view.add(modelDate);</programlisting>
           <para>Define a widget, which will be used for displaying in the column cells. Select its type from the  <guilabel>view</guilabel> context menu of the column&apos;s node in the inpector. The choices will be compatible with the type of the linked entity field. Set the properties of the corresponding widget (see the corresponding sections for the description of the  model widget setting procedure).</para>
         </listitem>
       </itemizedlist>
-      <para>In  expanded mode, a column can contain an arbitrary number of child columns. Their combination can be changed dynamically in runtime.</para>
+      <para>In  expanded mode, a column can contain an arbitrary number of child columns. Their combination can be changed dynamically at runtime.</para>
       <figure>
         <title>Expandable columns data tables</title>
         <mediaobject>
@@ -2371,10 +2371,10 @@ view.add(modelDate);</programlisting>
         </listitem>
       </itemizedlist>
       <important>
-        <para>The link source field should be in the same data set as configured as the grid&apos;s  source. </para>
+        <para>The link source field should be in the same data set as configured as the grid&apos;s rows  source. </para>
       </important>
       <para>To use a lazy tree grid, create an entity based on a  query, which returns child elements by the parent  identifier passed as a parameter, for example:</para>
-      <programlisting language="JavaScript">/**
+      <programlisting language="SQL">/**
  * @name LazyTree
  */
 SELECT * FROM tree_table t
@@ -2386,7 +2386,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
           <para>Specify  <code>unaryLinkField</code> property. For this property select the link source field, which is responsible for hierarchical relationships, in the example figure above it is the <code>ParentID</code> field.</para>
         </listitem>
         <listitem>
-          <para>Set <code>param2GetChildren</code> property. Select the entity&apos;s parameter that is responsible for requering child records. In the code snippet above this corresponds to  <code>:parentId</code>parameter.</para>
+          <para>Set <code>param2GetChildren</code> property. Select the entity&apos;s parameter that is responsible for fetching child records. In the code snippet above this corresponds to  <code>:parentId</code> parameter.</para>
         </listitem>
         <listitem>
           <para>Set <code>paramSourceField</code> property. Select the field that will be used as a source for the parameter to get child records. The field&apos;s value will provided to the parameter specified by <code>param2GetChildren</code> property. In the example above this property should be set to <code>ID</code> primary key field.</para>
@@ -2395,7 +2395,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
     </section>
     <section id="widget-modelimage">
       <title>ModelImage</title>
-      <para><code>ModelImage</code> is a scalar model widget what displays an image. The state of this component is linked to a  field of the data model, which contains binary data of the image in one of the following formats: GIF, JPEG, PNG. This field usually corresponds to the BLOB type in the database. </para>
+      <para><code>ModelImage</code> is a scalar model widget to display an image. The state of this component is linked to a  field of the data model, which contains binary data of the image in one of the following formats: GIF, JPEG, PNG. This field usually corresponds to the BLOB type in the database. </para>
       <note>
         <para>In the current Platypus Platform version, this component is supported only in the J2SE client.</para>
       </note>
@@ -2525,7 +2525,7 @@ view.add(mta);</programlisting>
     </section>
     <section id="widget-modelmap">
       <title>ModelMap</title>
-      <para>A widget is used to display a map and objects on it; it displays the map mount by loading bitmap tiles from the network using a given <acronym>URL</acronym>. An arbitrary number of layers are imposed upon the map to display objects. </para>
+      <para><code>ModelMap</code> widget is used to display a map and objects on it. This widget displays a  map  by loading bitmap tiles from the network using a given <acronym>URL</acronym>. An arbitrary number of layers are imposed upon the map to display objects. </para>
       <para>The map component allows you to position the map, change its scale, turn layers on and off, select objects, etc. </para>
       <note>
         <para>In the current Platypus Platform version, this widget is supported only in the J2SE desktop client.</para>
@@ -2583,7 +2583,7 @@ view.add(mta);</programlisting>
     <section id="widget-modelspin">
       <title>ModelSpin</title>
       <para><code>ModelSpin</code> is a scalar model widget, the state of which is linked to a field of a data model entity of number type. One can input numbers either from the keyboard or using buttons to increase/decrease values. </para>
-      <para><code>ModelDate</code> widget has the following specific properties:</para>
+      <para><code>ModelSpin</code> widget has the following specific properties:</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
