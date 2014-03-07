@@ -570,25 +570,25 @@ Logger.info(Resource.applicationPath);</programlisting>
       <para>Data model parameters have the following properties:</para>
       <itemizedlist>
         <listitem>
-          <para><guilabel>Name</guilabel> — is the name of the parameter.</para>
+          <para><guilabel>Name</guilabel>  is the name of the parameter.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Description</guilabel> — is the description of the parameter.</para>
+          <para><guilabel>Description</guilabel>  is the description of the parameter.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Type</guilabel> — is the type of the parameter; select the type of the parameter from the drop-down list.</para>
+          <para><guilabel>Type</guilabel>  is the type of the parameter; select the type of the parameter from the drop-down list.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Type Name</guilabel> — is the name of the data structure type, the field is available for input if the Structure field type is selected.</para>
+          <para><guilabel>Type Name</guilabel>  is the name of the data structure type, the field is available for input if the Structure field type is selected.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Size</guilabel> — is the length or accuracy of the field.</para>
+          <para><guilabel>Size</guilabel>  is the length or accuracy of the field.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Scale</guilabel> — is the scale of the field.</para>
+          <para><guilabel>Scale</guilabel>  is the scale of the field.</para>
         </listitem>
         <listitem>
-          <para><guilabel>Nullable</guilabel> — select, weather the  <literal>NULL</literal> value is available for the field.</para>
+          <para><guilabel>Nullable</guilabel> property selects, weather the  <literal>NULL</literal> value is available for the field.</para>
         </listitem>
       </itemizedlist>
       <para>To edit the data model parameter properties, perform the following actions:</para>
@@ -628,7 +628,7 @@ Logger.info(Resource.applicationPath);</programlisting>
       <para>To add a query or a filter link between two entites:</para>
       <itemizedlist>
         <listitem>
-          <para>Move the parameter to the field of an entity, with which you want to connect this parameter — visually the connection will be displayed as a line with an arrow between fields or parameters of the entity.</para>
+          <para>Move the parameter to the field of an entity, with which you want to connect this parameter. The connection will be displayed as a line with an arrow between fields or parameters of the entity.</para>
         </listitem>
         <listitem>
           <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the  main toolbar or by using the  <keycombo>
@@ -668,7 +668,7 @@ Logger.info(Resource.applicationPath);</programlisting>
           <para>Select <guimenuitem>Scalar and collection properties</guimenuitem> menu item from the foreign key link context menu.</para>
         </listitem>
         <listitem>
-          <para>In the dialog specify the <guilabel>Scalar property name</guilabel> and <guilabel>Collection property name</guilabel> fields.</para>
+          <para>In the dialog specify  <guilabel>Scalar property name</guilabel> and <guilabel>Collection property name</guilabel> fields.</para>
         </listitem>
         <listitem>
           <para>Save the application element by clicking  <guibutton>Save All</guibutton> on the   main toolbar or by using the  <keycombo>
@@ -815,7 +815,7 @@ for (var i = 0; i &lt; documents.length; i++) {
         </varname> is a corresponding entity, <varname>
           <replaceable>propName</replaceable>
         </varname>  is a property of interest.</para>
-      <para>The cursor is defined by position in the entity data array. In addition to pointing to some object, the cursor can point to the position  <emphasis>before the first object</emphasis> and <emphasis>after the last object</emphasis>. In this case cursor property is null.</para>
+      <para>The cursor is defined by  position in the entity data array. In addition to pointing to some object, the cursor can point to the position  <emphasis>before the first object</emphasis> and <emphasis>after the last object</emphasis>. In this case cursor property is null.</para>
       <para>After loading or filtering dataset the cursor is placed on the first object of the entity&apos;s data array. </para>
       <para>To move the cursor over the data array, use the  <methodname>beforeFirst</methodname>, <methodname>afterLast</methodname>, <methodname>first</methodname>, <methodname>next</methodname>, <methodname>prev</methodname>, <methodname>last</methodname>, and <methodname>pos</methodname> entity&apos;s methods. </para>
       <informaltable>
@@ -867,13 +867,13 @@ for (var i = 0; i &lt; documents.length; i++) {
               <entry>
                 <parameter>pos(index)</parameter>
               </entry>
-              <entry>Sets the cursor to the specified position.</entry>
+              <entry>Sets the cursor to the specified position, where <replaceable>index</replaceable> is the row index <code>Number</code> starting form 1.</entry>
             </row>
             <row>
               <entry>
                 <parameter>scrollTo(obj)</parameter>
               </entry>
-              <entry>Sets the cursor on the specified object.</entry>
+              <entry>Sets the cursor on the specified object, where <replaceable>obj</replaceable> is a row object.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1360,7 +1360,7 @@ model.entity1.sort(sorter);</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
-      <para><code>InserteEvent</code> object specific  propetries are listed in the following table:</para>
+      <para><code>InsertEvent</code> object specific  propetries are listed in the following table:</para>
       <informaltable>
         <tgroup cols="2">
           <thead>
@@ -1845,7 +1845,7 @@ function DataSourceModule(){
     </section>
     <section id="module-server-resident">
       <title>Resident module</title>
-      <para>Use <code>@resident</code> annotation to make a server module resident. A resident modules are loaded and instanciated during the server  startup. Resident modules are resides in the system session. They are can&apos;t be stateless.</para>
+      <para>Use <code>@resident</code> annotation to make a server module resident. A resident modules are loaded and instanciated during  server  startup. Resident modules are resides in the system session. They are can&apos;t be stateless.</para>
     </section>
     <section id="module-server-validator">
       <title>Data validators</title>
@@ -1887,7 +1887,7 @@ function AuthorizerA(){
     </section>
     <section id="module-server-auth_1">
       <title>Tips and tricks</title>
-      <para>Plain javascript <literal>Date</literal> object is serialized as ISO formatted string  in client/server communication while using browser as a client and J2EE server as a server. So you should realize that on the client side it may be JavaScript <literal>Date</literal> object, but on the server side it will be just string. May be transferring of timestamp value instead of <literal>Date</literal> object will be a good choice. </para>
+      <para>Plain JavaScript <literal>Date</literal> object is serialized as ISO formatted string  in client/server communication while using browser as a client and J2EE server as a server. So you should realize that on the client side it may be JavaScript <literal>Date</literal> object, but on the server side it will be just string. May be transferring of timestamp value instead of <literal>Date</literal> object will be a good choice. </para>
       <para>For example:</para>
       <programlisting language="JavaScript">// On the server side
 /**

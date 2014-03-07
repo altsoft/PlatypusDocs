@@ -24,7 +24,7 @@
   </section>
   <section id="new-form">
     <title>New form creation</title>
-    <para>To create a new form, perform the following actions:   
+    <para>To create a new form layout and JavaScript code in the IDE, perform the following actions:   
   </para>
     <itemizedlist>
       <listitem>
@@ -50,7 +50,7 @@
         <para>Open the  <guilabel>Design</guilabel> tab of the module editor.</para>
       </listitem>
       <listitem>
-        <para>Drag a widget, a container or a menu from the components palette onto the form.</para>
+        <para>Drag a widget, a container or a menu from the components palette onto the form surface.</para>
       </listitem>
       <listitem>
         <para>Arrange the components on the form.</para>
@@ -2231,15 +2231,15 @@ view.add(modelDate);</programlisting>
         <listitem>
           <para>To manually add a  column to <code>ModelGrid</code>  drag it from the components palette or add it using <menuchoice>
               <guimenu>Add from palette</guimenu>
-               <guimenuitem>Model-aware controls</guimenuitem>
-               <guimenuitem>Model grid column </guimenuitem>
+              <guimenuitem>Model-aware controls</guimenuitem>
+              <guimenuitem>Model grid column </guimenuitem>
             </menuchoice>context menu item in form inspector.</para>
         </listitem>
         <listitem>
           <para>To  add a  column as a child to another column use parent column&apos;s node <menuchoice>
               <guimenu>Add from palette</guimenu>
-               <guimenuitem>Model-aware controls</guimenuitem>
-               <guimenuitem>Model grid column</guimenuitem>
+              <guimenuitem>Model-aware controls</guimenuitem>
+              <guimenuitem>Model grid column</guimenuitem>
             </menuchoice> context menu item in form inspector.</para>
         </listitem>
         <listitem>
@@ -2419,7 +2419,7 @@ OR (:parentId IS NULL AND t.PARENT_ID IS NULL)</programlisting>
               <entry>
                 <parameter>plain</parameter>
               </entry>
-              <entry>Determines if image is displayed with real dimensions and not scaled. If true, the image is not fitted by its size and can&apos;t be scaled with the mouse wheel and <code>false</code> otherwise.</entry>
+              <entry><code>true</code> if image is displayed with real dimensions and not scaled. If true, the image is not fitted by its size and can&apos;t be scaled with the mouse wheel and <code>false</code> otherwise.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -2528,7 +2528,7 @@ view.add(mta);</programlisting>
       <para>A widget is used to display a map and objects on it; it displays the map mount by loading bitmap tiles from the network using a given <acronym>URL</acronym>. An arbitrary number of layers are imposed upon the map to display objects. </para>
       <para>The map component allows you to position the map, change its scale, turn layers on and off, select objects, etc. </para>
       <note>
-        <para>In the current Platypus Platform version, this widget is supported only in the  <application>J2SE client</application>.</para>
+        <para>In the current Platypus Platform version, this widget is supported only in the J2SE desktop client.</para>
       </note>
       <para>Coordinates and shapes of the displayed objects should be presented using the &quot;Geometry&quot; data type. The layer entity should contain one column of the &quot;Geometry&quot; type and an arbitrary number of columns containing additional attributes. </para>
       <para>Each layer should have an assigned entity, which contains information about objects. One entity can be linked with one or more layers. If the entity is linked with several layers, a field with information about entity instance belonging to the layer should be defined. In this case, each layer should have its own identifier for this field. A layer identifier must be a positive integer.</para>
