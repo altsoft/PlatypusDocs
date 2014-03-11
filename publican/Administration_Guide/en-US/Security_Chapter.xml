@@ -11,19 +11,22 @@
     <para>After unpacking, the directory will have the following structure:</para>
     <itemizedlist>
       <listitem>
-        <para><filename>appDirectory/</filename></para>
+        <para><filename>projectDirectory/</filename></para>
         <itemizedlist>
           <listitem>
-            <para><filename>src/</filename></para>
+            <para><filename>app/</filename></para>
           </listitem>
           <listitem>
-            <para><filename>platypus.xml</filename></para>
+            <para><filename>project.properties</filename></para>
+          </listitem>
+          <listitem>
+            <para><filename>private.properties</filename></para>
           </listitem>
         </itemizedlist>
       </listitem>
     </itemizedlist>
-    <para>The  application directory corresponds to the application project, which is ready for deployment and execution, as well as for modification in  <application>Platypus Application Designer</application>.</para>
-    <para>The application directory includes the  <filename>platypus.xml</filename> configuration file, the <filename>src</filename>  directory, containing application elements, <filename>db</filename> directory, containing database migrations, and  <filename>project.properties</filename> and <filename>private.properties</filename> designer configuration files.</para>
+    <para>The project directory corresponds to the application project, which is ready for deployment and execution, as well as for modification in  <application>Platypus Application Designer</application>.</para>
+    <para>The <filename>app</filename>  directory, contains application elements directories and files.  <filename>project.properties</filename> and <filename>private.properties</filename> are a project&apos;s configuration files.</para>
     <para>An application resides in a  directory on  hard disk and it can be runned from there. You can also deploy the application to the database <literal>MTD_ENTITIES</literal> table.</para>
     <para>The database, in which the application is deployed, includes system tables and any number of worksheets. When deploying, system tables are created automatically.</para>
     <para>System tables includes the following:</para>
