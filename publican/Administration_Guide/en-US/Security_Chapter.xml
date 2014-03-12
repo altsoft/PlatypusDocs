@@ -25,14 +25,14 @@
         </itemizedlist>
       </listitem>
     </itemizedlist>
-    <para>The project directory corresponds to the application project, which is ready for deployment and execution, as well as for modification in  <application>Platypus Application Designer</application>.</para>
-    <para>The <filename>app</filename>  directory, contains application elements directories and files.  <filename>project.properties</filename> and <filename>private.properties</filename> are a project&apos;s configuration files.</para>
-    <para>An application resides in a  directory on  hard disk and it can be runned from there. You can also deploy the application to the database <literal>MTD_ENTITIES</literal> table.</para>
-    <para>The database, in which the application is deployed, includes system tables and any number of worksheets. When deploying, system tables are created automatically.</para>
+    <para>The project directory corresponds to the application project, which is ready for deployment and execution, as well as for modification in  the IDE.</para>
+    <para>The <filename>app</filename>  directory contains application elements directories and files. </para>
+    <para>The  <filename>project.properties</filename> and <filename>private.properties</filename>  are  project&apos;s configuration files used by the IDE.</para>
+    <para>It is possible to  deploy the application to the database <literal>MTD_ENTITIES</literal> table and run it from there.</para>
     <para>System tables includes the following:</para>
     <itemizedlist>
       <listitem>
-        <para><literal>MTD_ENTITIES</literal> — this table stores the executable application in the form of a tree. </para>
+        <para><literal>MTD_ENTITIES</literal> — this table stores an executable application in the form of a tree. </para>
       </listitem>
       <listitem>
         <para><literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> — tables of users and their groups when working with built-in user space; for additional information, see the &quot;Security&quot; section.</para>
