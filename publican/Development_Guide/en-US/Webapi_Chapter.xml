@@ -320,7 +320,7 @@ function ModuleConstructor() {
               <parameter>secure</parameter>
             </entry>
             <entry>
-              <para>Flag which shows that the request was sent via the secured channel, for example HTTPS.</para>
+              <para><code>true</code> when  the request was sent via the secured channel, for example HTTPS and <code>false</code> otherwise.</para>
             </entry>
           </row>
         </tbody>

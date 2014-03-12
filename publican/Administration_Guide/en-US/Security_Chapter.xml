@@ -35,7 +35,7 @@
         <para><literal>MTD_ENTITIES</literal> — this table stores an executable application in the form of a tree. </para>
       </listitem>
       <listitem>
-        <para><literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> — tables of users and their groups when working with built-in user space; for additional information, see the &quot;Security&quot; section.</para>
+        <para><literal>MTD_USERS</literal> и <literal>MTD_GROUPS</literal> — tables of users and their groups when working with built-in users&apos;  space. For additional information, see the &quot;Security&quot; section.</para>
       </listitem>
       <listitem>
         <para><literal>MTD_VERSION</literal>  — this table stores information about the current version of the application data repository.</para>

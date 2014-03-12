@@ -106,7 +106,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>On the <guilabel>J2EE Server</guilabel> tab, in the <guilabel>Context</guilabel> field specify the name of the web-application in the J2EE server.</para>
       </listitem>
       <listitem>
-        <para>On the <guilabel>J2EE Server</guilabel> tab, check the <guilabel>Enable security</guilabel> option to enable the security; the  mechanism of authentication with forms will be used for the web-application.</para>
+        <para>On the <guilabel>J2EE Server</guilabel> tab, check the <guilabel>Enable security</guilabel> option to enable the security; in this case FORMS authentication  will be used for the web application.</para>
       </listitem>
     </itemizedlist>
     <para>Set the debugging parameters:</para>
@@ -118,10 +118,10 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>Set the application server debugging port.</para>
       </listitem>
     </itemizedlist>
-    <para>Specify the applicaton&apos;s default  connection to the database:</para>
+    <para>Specify the applicaton&apos;s default datasource:</para>
     <itemizedlist>
       <listitem>
-        <para>Select  the default database connecton from the list.</para>
+        <para>Select  the  database connecton from the list.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -259,7 +259,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>Select the  <guimenuitem>New Connection</guimenuitem> menu item of the <guilabel>Databases</guilabel> node.</para>
       </listitem>
       <listitem>
-        <para> In the <guilabel>New Connection</guilabel> dialog select the JDBC driver and provide a JDBC URL, database credentials and the connection name. This name will be used as an string identifier to refer to the connection JNDI resource in the application.</para>
+        <para> In the <guilabel>New Connection</guilabel> dialog select the JDBC driver and provide the  JDBC URL, database credentials, scheme and  connection name. This name will be used as an string identifier to refer to the connection JNDI resource in the application.</para>
       </listitem>
     </itemizedlist>
     <para>A JDBC URL example for the H2 database server with a database located in the user&apos;s home directory <filename>db</filename>  subdirectory: <literal>jdbc:h2:tcp://localhost:9092/~/db</literal>.</para>
