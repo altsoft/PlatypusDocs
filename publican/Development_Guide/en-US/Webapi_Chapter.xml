@@ -465,7 +465,7 @@ function ModuleConstructor() {
             <entry>
               <parameter>secure</parameter>
             </entry>
-            <entry>Flag which notifies the browser that this cookie should only be sent over a secure protocol</entry>
+            <entry><code>true</code> set to notify the browser that this cookie should only be sent over a secure protocol and <code>false</code> otherwise.</entry>
           </row>
           <row>
             <entry>

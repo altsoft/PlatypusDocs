@@ -216,16 +216,18 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
           </keycombo> shortcut.</para>
       </listitem>
     </itemizedlist>
-    <para>To launch an application:</para>
+  </section>
+  <section id="project-run-debug">
+    <title>Running and debugging</title>
+    <para>To run an application:</para>
     <itemizedlist>
       <listitem>
-        <para>Select the application element in the projects application elements tree.</para>
+        <para>Click the <guibutton>Run project</guibutton> button on the main toolbar  to start a project&apos;s default application element or select  <guimenuitem>Run</guimenuitem>  context menu in an application element&apos;s such as a form, module or an JavaScript file.</para>
       </listitem>
       <listitem>
-        <para>Click the <guibutton>Run project</guibutton> button on the main toolbar or select  <guimenuitem>Run</guimenuitem> in the application element context menu.</para>
+        <para>Select  <guimenuitem>Run</guimenuitem>  context menu in an application element&apos;s such as a form, module or an JavaScript file.</para>
       </listitem>
     </itemizedlist>
-    <para>If the application launching element is not explicitly selected as the starting element, the application starting element will be set by default according to the project settings.</para>
     <para>To debug an application:</para>
     <itemizedlist>
       <listitem>
@@ -235,7 +237,7 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
         <para>Select the application element in the projects application elements tree.</para>
       </listitem>
       <listitem>
-        <para>Click the <guibutton>Debug project</guibutton> button on the main toolbar or select the <guimenuitem>Debug</guimenuitem> item in the application element context menu.</para>
+        <para>Click the <guibutton>Debug project</guibutton> button on the main toolbar or select the <guimenuitem>Debug</guimenuitem> item in an application element&apos;s context menu. The application will start and the debugger will be attached.</para>
       </listitem>
       <listitem>
         <para>After the debugger halts at the breakpoint, see the values of  variables and the call stack. To continue the program running, click the <guibutton>Continue</guibutton> button on the main toolbar. Use the Step over button or the  <keycap>F8</keycap> key, Step into or the  <keycap>F7</keycap> key, Step out or the <keycombo>
@@ -244,6 +246,8 @@ Opened project will be added to the <guilabel>Projects</guilabel> panel. </para>
           </keycombo> shortcut for step-by-step execution of the program.</para>
       </listitem>
     </itemizedlist>
+    <para>If the default application run element is not explicitly specified in the project&apos;s settings the selection dialog will be displayed.</para>
+    <para>To debug an application running in an J2EE server or servlet container, e.g. Apache Tomcat provide the JMX configuration parameters as the server&apos;s start Java virtual machine options: <literal>-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=<replaceable>port</replaceable></literal> where <replaceable>port</replaceable> is the port to attach the debugger. For Apache Tomcat enter these options in the VM Options field on the  Platform tab of the server&apos;s configuration parameters on the <guilabel>Services</guilabel> panel. After the server starts use <guilabel>Attach Debugger</guilabel> menu item on the <guilabel>Debug Project</guilabel> button on the main toolbar and specify the debugging port.</para>
     <para>When launching the application in a J2EE server, <application>Platypus Application Designer</application> uses the  <filename>web</filename> sub-directory, which is created automatically in the project directory. When initializing this sub-directory, its initial structure is created and  libraries are copied. After initializing  the directory,  files responsible for the configuration (<filename>WEB-INF/web.xml</filename>, server specific configuration file, and JavaScript file responsible for the application  launching on the HTML page) are modified, but the  libraries are not copied again. </para>
     <para>Select the  <guimenuitem>Clean and Run</guimenuitem> menu item in the project context menu, if it is necessary to update the libraries in the <filename>web</filename> directory. The libraries will be removed, and at the next application launch these libraries will be copied from the platform&apos;s runtime directory.</para>
   </section>
