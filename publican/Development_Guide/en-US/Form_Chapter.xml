@@ -2631,7 +2631,7 @@ view.add(mta);</programlisting>
 view.add(modelSpin);</programlisting>
     </section>
   </section>
-  <section id="ui-containers"><title>Containers</title><para>Containers are components, which can contain other components e.g. widgets or other containers  and control their child components size and location. </para>Containers are represented as panel component with specific layout in the visual editor.<para>The layout  of a panel can be changed using the  editor. At runtime, panel with particular layout will be replaced by the corresponding container.</para><para>Containers have a set of properties and events common for all components as well as their own specific properties and events. </para><para>The common methods for all containers: </para><informaltable>
+  <section id="ui-containers"><title>Containers</title><para>Containers are components, which can contain other components e.g. widgets or other containers  and control their child components size and location. </para><para>Containers are represented as panel component with specific layout in the visual editor.</para><para>The layout  of a panel can be changed using the  editor. At runtime, panel with particular layout will be replaced by the corresponding container.</para><para>Containers have a set of properties and events common for all components as well as their own specific properties and events. </para><para>The common methods for all containers: </para><informaltable>
       <tgroup cols="2">
         <thead>
           <row>
