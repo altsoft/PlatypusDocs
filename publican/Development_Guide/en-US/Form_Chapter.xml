@@ -2631,7 +2631,14 @@ view.add(mta);</programlisting>
 view.add(modelSpin);</programlisting>
     </section>
   </section>
-  <section id="ui-containers"><title>Containers</title><para>Containers are components, which can contain other components e.g. widgets or other containers  and control their child components size and location. </para><para>Containers are represented as panel component with specific layout in the visual editor.</para><para>The layout  of a panel can be changed using the  editor. At runtime, panel with particular layout will be replaced by the corresponding container.</para><para>Containers have a set of properties and events common for all components as well as their own specific properties and events. </para><para>The common methods for all containers: </para><informaltable>
+  <section id="ui-containers">
+    <title>Containers</title>
+    <para>Containers are components, which can contain other components e.g. widgets or other containers  and control their child components size and location. </para>
+    <para>Containers are represented as panel component with specific layout in the visual editor.</para>
+    <para>The layout  of a panel can be changed using the  editor. At runtime, panel with particular layout will be replaced by the corresponding container.</para>
+    <para>Containers have a set of properties and events common for all components as well as their own specific properties and events. </para>
+    <para>The common methods for all containers: </para>
+    <informaltable>
       <tgroup cols="2">
         <thead>
           <row>
@@ -2660,11 +2667,13 @@ view.add(modelSpin);</programlisting>
           </row>
         </tbody>
       </tgroup>
-    </informaltable><para>The common property  all containers: </para><informaltable>
+    </informaltable>
+    <para>The common property  all containers: </para>
+    <informaltable>
       <tgroup cols="2">
         <thead>
           <row>
-            <entry align="center">Method </entry>
+            <entry align="center">Property </entry>
             <entry align="center">Description </entry>
           </row>
         </thead>
@@ -2677,7 +2686,8 @@ view.add(modelSpin);</programlisting>
           </row>
         </tbody>
       </tgroup>
-    </informaltable><section id="ui-containers-anchorspane">
+    </informaltable>
+    <section id="ui-containers-anchorspane">
       <title>AnchorsPane</title>
       <para><code>AnchorsPane</code> is a lightweight container with the anchors layout.</para>
       <para>Anchors layout  provides a simple, flexible yet powerful layout algorithm, which allows you to build complex user interfaces.</para>
@@ -2736,7 +2746,8 @@ pane.add(comp,
     top : 22,
     bottom : 24
 });</programlisting>
-    </section><section id="ui-containers-borderpane">
+    </section>
+    <section id="ui-containers-borderpane">
       <title>BorderPane</title>
       <para><code>BorderPane</code> is a lightweight container with the border layout.</para>
       <para>Border layout is a simple way of arranging components, when a container changes the position and dimensions of its components to  the fit five regions: northern, southern, western, eastern and center. Each area can contain only one component, which is determined by one of the following constants: <guilabel>North</guilabel>, <guilabel>South</guilabel>, <guilabel>East</guilabel>, <guilabel>West</guilabel>, <guilabel>Center</guilabel>.</para>
@@ -2761,7 +2772,8 @@ var topComp = new Button(&quot;Top&quot;);
 pane.add(topComp, VerticalPosition.TOP);
 var bottomComp = new Button(&quot;Bottom&quot;);
 pane.add(bottomComp, VerticalalPosition.BOTTOM);</programlisting>
-    </section><section id="ui-containers-absolutepane">
+    </section>
+    <section id="ui-containers-absolutepane">
       <title>AsolutePane</title>
       <para><code>AbsolutePane</code> is a lightweight container with the absolute positioning, e.g. without layout rules.</para>
       <para>The absolute layout positons child components using its explicit position and dimensions.  </para>
@@ -2788,7 +2800,8 @@ pane.add(comp, {
     width : 32,
     height : 32
 });</programlisting>
-    </section><section id="ui-containers-gridpane">
+    </section>
+    <section id="ui-containers-gridpane">
       <title>GridPane</title>
       <para><code>GridPane</code> is a lightweight container with the grid layout. It is intended for static UI designs.</para>
       <para><code>GridPane</code> lays components out by the grid, all columns must have the same width and all rows must have the same height. </para>
@@ -2819,7 +2832,8 @@ var comp3 = new Button(&quot;3&quot;);
 pane.add(comp1);
 pane.add(comp2);
 pane.add(comp3);</programlisting>
-    </section><section id="ui-containers-flowpane">
+    </section>
+    <section id="ui-containers-flowpane">
       <title>FlowPane</title>
       <para><code>FlowPane</code> is a lightweight container with the flow layout.</para>
       <para>Flow layout aligns components into a row/line. Dimensions of the components are calculated according to their content (component preferences). If the component doesn&apos;t fit into a row, it is transferred to the next line.</para>
@@ -2841,7 +2855,8 @@ pane.add(comp3);</programlisting>
       <programlisting language="JavaScript">var pane = new FlowPane();
 var comp = new Button(&quot;Sample&quot;);
 pane.add(comp);</programlisting>
-    </section><section id="ui-containers-cardpane" lang="">
+    </section>
+    <section id="ui-containers-cardpane" lang="">
       <title>CardPane</title>
       <para><code>CardPane</code> is a lightweight container with the card layout.</para>
       <para>Card layout  allows you to arrange components as a stack of cards, one above the other; only the top component is visible. This layout manager is usually used to create a step-by-step wizard.</para>
@@ -2865,7 +2880,8 @@ var compC = new Button(&quot;SampleC&quot;);
 pane.add(comp, &quot;C&quot;);
 
 pane.show(&quot;B&quot;);//Shows the SampleB button</programlisting>
-    </section><section id="ui-containers-boxpane">
+    </section>
+    <section id="ui-containers-boxpane">
       <title>BoxPane</title>
       <para><code>BoxPane</code> is a lightweight container with the box layout.</para>
       <para>The box layout  arranges components in the order, in which they were added to the container, one after the other, back to back.</para>
@@ -2888,7 +2904,8 @@ pane.show(&quot;B&quot;);//Shows the SampleB button</programlisting>
       <programlisting language="JavaScript">var pane = new BoxPane(Orientation.VERTICAL);
 var comp = new Button(&quot;Sample&quot;);
 pane.add(comp);</programlisting>
-    </section><section id="ui-containers-tabbedpane">
+    </section>
+    <section id="ui-containers-tabbedpane">
       <title>TabbedPane</title>
       <para><code>TabbedPane</code> component allows the user to switch between a group of components by clicking tabs with titles and icons.</para>
       <para>Component&apos;s specific properties:</para>
@@ -2950,7 +2967,8 @@ var tab1 = new AnchorsPane();
 var tab2 = new AnchorsPane();
 pane.add(tab1, &quot;Tab 1&quot;);
 pane.add(tab2, &quot;Tab 2&quot;);</programlisting>
-    </section><section id="ui-containers-splitpane">
+    </section>
+    <section id="ui-containers-splitpane">
       <title>SplitPane</title>
       <para><code>SplitPane</code> container is used to display two (and only two) splitted components; the user can change their size by moving the separator. </para>
       <para>Split pane setup in form editor:</para>
@@ -3013,7 +3031,8 @@ var comp1 = new AnchorsPane();
 var comp2 = new AnchorsPane();
 pane.firstComponent = comp1;
 pane.secondComponent = comp2;</programlisting>
-    </section><section id="ui-containers-scrollpane">
+    </section>
+    <section id="ui-containers-scrollpane">
       <title>ScrollPane</title>
       <para><code>ScrollPane</code> is a  container, which supports scrolling of its content. Usually another container is added to this one, using <code>ScrollPane</code>   as a wrapper.</para>
       <para>Specific properties of the   container:</para>
@@ -3044,7 +3063,8 @@ pane.secondComponent = comp2;</programlisting>
       <programlisting language="JavaScript">var wrapper = new ScrollPane();
 var pane = new AnchorsPane();
 wrapper.add(pane);</programlisting>
-    </section><section id="ui-containers-toolbar">
+    </section>
+    <section id="ui-containers-toolbar">
       <title>ToolBar</title>
       <para><code>ToolBar</code> is a container used to display components, which are  responsible for the most common user actions. </para>
       <para>Toolbars are intended to display a set of buttons (usually without labels, but with tooltips and small, clearly visible icons) which trigger  the most frequently used application actions.</para>
@@ -3063,7 +3083,8 @@ pane.add(b1);
 var b2 = new Button();
 b2.icon = Icon.load(&quot;2.png&quot;);
 pane.add(b2);</programlisting>
-    </section><section id="ui-containers-desktoppane">
+    </section>
+    <section id="ui-containers-desktoppane">
       <title>DesktopPane</title>
       <para><code>DesktopPane</code> is used to create a multi-document interface.</para>
       <para>Forms  can be displayed inside this container. Add forms to  the container in your  program. After adding, these forms can be moved, closed, minimized or expanded to the full container size.</para>
@@ -3137,7 +3158,8 @@ pane.add(b2);</programlisting>
       <para>Example:<programlisting language="JavaScript">var desktop = new DesktopPane();
 var myForm = new InnerForm();
 myForm.showInternalFrame(desktopPane);</programlisting></para>
-    </section></section>
+    </section>
+  </section>
   <section id="menus">
     <title>Menus</title>
     <para>Menus components  provide a convinient way to let the user choose one of several options. </para>
