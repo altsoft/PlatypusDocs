@@ -18,11 +18,11 @@
       <para>Apache Tomcat 7 to enable the web client</para>
     </listitem>
   </itemizedlist>
-  <para>Please refer the Platpus.js Development and Administration guides for more details.</para>
+  <para>Please refer to the  Development guide and Administration guide for more details.</para>
   <section>
     <title>Platypus.js installation</title>
     <para>Download and install Java Runtime and JDK 7. </para>
-    <para>Install the Platypus.js IDE:</para>
+    <para>Install the Platypus.js IDE and the runtime components:</para>
     <itemizedlist>
       <listitem>
         <para>Download the Platypus.js installer bundle from the project&apos;s website for your operation system.</para>
@@ -37,7 +37,7 @@
   </section>
   <section id="sect-Installation_Guide-Test_Chapter-Test_Section_1">
     <title>Tha sample application requirements</title>
-    <para>The Pet Hotel  is a business simple application for accounting of guests of a hotel for cats and dogs. The hotel&apos;s administrator is the only single user role defined for this application.</para>
+    <para>The Pet Hotel  is a simple business  application for  of  cats and dogs hotel   accounting. The hotel&apos;s administrator is the only  user role defined for this application.</para>
     <para>An adminstrator can perform the following actions:</para>
     <itemizedlist>
       <listitem>
@@ -105,7 +105,7 @@
         <para>Set <literal>pet_hotel</literal> as a connection name.</para>
       </listitem>
     </itemizedlist>
-    <para>Create a new project for Pet Hotel application and provide the project&apos;s name and home directory. In the project&apos;s properties select the <literal>pet_hotel</literal> datasource as a default datasource.</para>
+    <para>Create a new project for Pet Hotel application and provide the project&apos;s name and home directory. In the project&apos;s properties select the <literal>pet_hotel</literal> from the list as a default <guilabel>Datasource</guilabel>.</para>
   </section>
   <section id="sect-Installation_Guide-Test_Chapter-Test_Section_3">
     <title>Defining the datatase structure</title>
@@ -118,7 +118,7 @@
     <title>Owners list form</title>
     <para>We are going to build the user inteface allowing to display the owners list.</para>
     <para>Create a new <guilabel>Form</guilabel> application element named <literal>OwnersView</literal>, check that the JavaScript constructor for this form is also set to <literal>OwnersView</literal>. This form will display the owners list.</para>
-    <para>Also create a  new <guilabel>Form</guilabel> application element named <literal>OwnerView</literal>, check that the JavaScript constructor for this form is also set to <literal>OwnerView</literal>. The owners detais will be shown on this form.</para>
+    <para>Also create a  new <guilabel>Form</guilabel> application element named <literal>OwnerView</literal> , check that the constructor  is also set to <literal>OwnerView</literal>. The owners detais will be shown on this form. Save this form but for this moment leave it blank.</para>
     <para>Now lets edit the <literal>OwnersView</literal> form.</para>
     <figure>
       <title>Owners list form layout</title>
@@ -128,182 +128,191 @@
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Форма <filename>Owners view</filename> будет содержать панель  с кнопками для добавления и удаления новых записей о владельцах и сетку данных для вывода списка владельцев. </para>
-    <para>Добавьте с палитры компонентов контейнер панели, в нее добавьте три кнопки и поле для ввода. В инспекторе компонентов задайте осмысленные имена для всех добавленных компонентов. Задайте текст для кнопок. Под панель инструментов добавьте модельный виджет типа <classname>Model Grid</classname>.</para>
-    <para>Далее мы переходим к конфигурированию модели данных нашей формы. В Platypus Platform сущности модели данных, отображающие реляционные данные, формируются на основе SQL-запросов. Создайте новый элемент приложения типа <guilabel>Query</guilabel>, который будет возвращать все записи таблицы <classname>Owner</classname>:</para>
+    <para><filename>OwnersView</filename> form will contain:</para>
+    <itemizedlist>
+      <listitem>
+        <para>On the top of the form:  the panel with the <guilabel>Add</guilabel> and <guilabel>Delete</guilabel> buttons as well as the search text field and the <guilabel>Search</guilabel> button.</para>
+      </listitem>
+      <listitem>
+        <para>The <code>ModelGrid</code> widget to display the owners list.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Add the header panel from the containers pallete on the form, put the buttons and the text field from the standard components palette on the panel. Provide meaningful names for the added components. Set texts to the added buttons. Drag-and-drop a <code>ModelGrid</code> from the model widgets palette on the form below the header panel and also provide a name for it.</para>
+    <para>Next lets configure the data model for our <code>OwnersView</code> form. Data model allows persistent data to be read and written from/to the database. In Playpus.js data model entities are created on the basis of data sourses. To access relational data create data sources from SQL queries.</para>
+    <para>Create a new <guilabel>Query</guilabel> application element named <code>OwnersQuery</code> with SQL to get filtered records from the <code>Owner</code> table:</para>
     <programlisting language="SQL">/**
  * Gets all owners.
  * @public
  * @name OwnersQuery
  */ 
-Select t1.OWNERS_ID, (t1.FIRSTNAME || &apos; &apos; || t1.LASTNAME) As fullName, t1.ADDRESS, t1.CITY, t1.TELEPHONE 
-From OWNERS t1
- Where t1.LASTNAME Like :lastNamePattern
+Select t1.owners_id, (t1.firstname || &apos; &apos; || t1.lastname) As fullName, t1.address, t1.city, t1.telephone 
+From Owners t1
+ Where t1.lastname Like :lastNamePattern
 </programlisting>
-    <para>В нашей сетке данных мы будем выводить полное имя владельца, поэтому в SQL запросе мы возвращаем полное имя владельца путем конкатенации полей <literal>FirstName</literal> и <literal>LastName</literal>.
-</para>
-    <para>В этом запросе мы используем параметр <parameter>lastNamePattern</parameter>, в котором будет задваться шаблон по которому будет осуществляться поиск.</para>
-    <para>Обратите внимание, что для всех запросов, к которым будет осуществляться доступ по сети из модели, работающей на клиенте, в заголовочном комментарии запроса должна быть указана аннотация <literal>@public</literal>.</para>
+    <para>In this SQL query we are concatenating the <code>firstname</code> and <code>lastname</code> fields to return an owner&apos;s full name. Use the <code>:lastNamePattern</code> to provide a search pattern for the owner&apos;s last name.</para>
+    <para>Add <literal>@public</literal> anntotation to the query&apos;s header to enable access via network from a remote data model running on a client and save the query.</para>
+    <para>Drag-and-drop it to the <code>OwnersView</code> data model. Go to the new entity&apos;s properties and provide its name as <code>owners</code>.</para>
+    <para>Add the new data model parameter named <code>lastNamePattern</code> and connect it to the corrsespondent parameter of the entity. We&apos;ll use this parameter to perform search on the <code>Owner</code> database table.</para>
     <figure>
-      <title>Модель данных списка владельцев</title>
+      <title>OwnersView form data model</title>
       <mediaobject>
         <imageobject>
           <imagedata align="center" fileref="images/ownersListDataModel.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Сохраните запрос и добавьте его в модель данных формы <filename>Owners view</filename>, например, путем перетаскивания запроса из дерева проекта на панель модели данных формы. В свойствах добавленной сущности задайте имя этой сущности как <literal>owners</literal>. Добавьте новый параметр модели данных с именем <literal>lastNamePattern</literal> и свяжите его с соответствующим параметром сущности <literal>owners</literal> этот параметр будет использован позже для поиска информации о владельцах в базе данных.</para>
-    <para>Теперь необходимо связать компонент сетки с этой сущностью, для этого в свойствах сетки задайте параметр <menuchoice>
+    <para>Next, bind the <code>ModelGrid</code> widget to the <code>owners</code> entity. Select the <menuchoice>
         <guimenuitem>Model binding</guimenuitem>
         <guimenuitem>entity</guimenuitem>
-      </menuchoice> и далее выберете сущность, которую необходимо связать с компонентом. Добавьте столбцы в сетку данных, используя пункт контекстного меню <guilabel>Fill columns</guilabel>, после этого исправьте имена столбцов сетки и их заголовки.</para>
-    <para>Компонент сетки позволяет редактировать свои ячейки и связанные с ними поля модели данных, а также вставлять и удалять записи. Для нашей сетки, отображающей список владельцев, мы отключим эти возможности, так как будем редактировать поля на отдельной форме — для этого снимите флажки <guilabel>deletable</guilabel>, <guilabel>insertable</guilabel> и <guilabel>editable</guilabel> в свойствах этого компонента.</para>
-    <para>Теперь напишем необходимый JavaScript код нашей формы.</para>
-    <para>Дважды кликните мышкой на кнопке <guilabel>Add</guilabel> и добавьте код для отображения формы редактирования свойств владельца:</para>
+      </menuchoice> parameter and select the entiy to bind. Create the grid&apos;s columns using <guilabel>Fill columns</guilabel> context menu item. After that provide the meaningful columns names and correct the columns captions.</para>
+    <para><code>ModelGrid</code> widget enables rows insertions and deletions as well as editing of its its cells. The chandes will be made in the binded data model entity. This way we can create a simple CRUD functionality even without any coding. For our grid we disable this feature, because we are going to use a separate form to edit  a single owner&apos;s record — disable  <guilabel>deletable</guilabel>, <guilabel>insertable</guilabel> and <guilabel>editable</guilabel> properties of the grid.</para>
+    <para>Lets write some JavaScript code for our form.</para>
+    <para>Double click on the <guilabel>Add</guilabel> button and enter the code responsible for showing the <code>OwnerView</code> form:</para>
     <programlisting language="JavaScript">/**
  * Add button&apos;s click event handler.
  * @param evt Event object
  */
-function btnAddActionPerformed(evt) {
+form.addButton.onActionPerformed = function(evt) {
     var ownerView = new OwnerView();
     ownerView.showModal(refresh);
 } </programlisting>
-    <para>В данной функции мы создадим новый экземпляр формы <classname>OwnerView</classname> и покажем его в виде модального окна, передав в качестве параметра функцию, обеспечивающую обновление модели данных, и в частности,  списка владельцев при закрытии этого окна:</para>
+    <para>In this event handler we create a new instance of the owner&apos;s details form and show it as a modal window. We provide the <code>refresh</code> function as a parameter to enable data model requiery when closing the owner&apos;s details form:</para>
     <programlisting language="JavaScript">function refresh() {
     model.requery();
 } </programlisting>
-    <para>Дважды кликните мышкой на кнопке <guilabel>Delete</guilabel> и добавьте код для удаления записи о владельце:</para>
+    <para>Double click on the <guilabel>Delete</guilabel> button and provide the code fragment responsible for an owner&apos;s record deletion:</para>
     <programlisting language="JavaScript">/**
  * Delete button&apos;s click event handler.
  * @param evt Event object
  */
-function btnDeleteActionPerformed(evt) {
+form.deleteButton.onActionPerformed = function(evt) {
     if (confirm(&quot;Delete owner?&quot;)) {
         ownersQuery.deleteRow();
         model.save();
     }
 }</programlisting>
-    <para>При нажатии этой кнопки будет отображен диалог подтверждения и при подтверждении будет удалена запись в сущности <literal>ownersQuery</literal>, на которой в данный момент находится курсор. После этого изменения будут сохранены в базе данных.</para>
-    <para>Выберите компонент сетки в инспекторе элементов визуального интерфейса и в окне свойств перейдите к событиям сетки. Определите функцию для обработки события <literal>onMouseClicked</literal> и напишите код обработчика:</para>
+    <para>On <guilabel>Delete</guilabel> button click we are showng a confirmation dialogue and if the action is confirmed the current row in the owners query will be deleted. Then all changes will be saved to the database.</para>
+    <para>Provide a handler for the <literal>onMouseClicked</literal> event of the grid widget:</para>
     <programlisting language="JavaScript">/**
  * Grid click event handler.
  * @param evt Event object
  */
-function grdOwnersMouseClicked(evt) {
+form.ownersGrid.onMouseClicked = function(evt) {
     if (evt.clickCount &gt; 1) {
         editOwner();
     }
 }</programlisting>
-    <para>Tеперь при двойном клике на какой-либо ряд в сетке будет вызываться функция <literal>editOwner</literal>:</para>
+    <para>Write the <literal>editOwner</literal> function:</para>
     <programlisting language="JavaScript">function editOwner() {
     var ownerView = new OwnerView();
-    ownerView.ownerID = ownersQuery.OWNERS_ID;
+    ownerView.ownerID = owners.cursor.owners_id;
     ownerView.showModal(refresh);
 }</programlisting>
-    <para>Логика в данной функции аналогична той, которая содержится в обработчике добавления новой записи о владельце за исключением того, что  параметр <literal>ownerID</literal> формы принимает значение равное идентификатору владельца на который в данный момент указывает курсор.</para>
-    <para>Дважды кликните мышкой на кнопке <guilabel>Search</guilabel> и добавьте код для поиска владельцев по фамилии:</para>
+    <para>The code is seems familiar except the handling of the <literal>ownerID</literal> parameter containing the grid&apos;s current owner&apos;s record identifier.</para>
+    <para>Double click on the <guilabel>Search</guilabel> button to provide the search by a last name action logic:</para>
     <programlisting language="JavaScript">/**
  * Search button click event handler.
  * @param evt Event object
  */
-function btnSearchActionPerformed(evt) {
-     lastNamePattern = &apos;%&apos; + txtSearch.text + &apos;%&apos;;
+form.searchButton.onActionPerformed = function(evt) {
+     model.params.lastNamePattern = 
+           &apos;%&apos; + txtSearch.text + &apos;%&apos;;
 }</programlisting>
-    <para>При присвоении параметру модели данных нового значения автоматически происходит обновление данных всех связаных с ним сущностей модели.</para>
-    <para>На данном этапе можно  запустить и произвести отладку приложения, тестовые данные в базу данных можно добавить запуская запросы по таблицам в диаграмме базы данных — в окне результатов можно не только просматривать результаты выборки, но и добавлять, изменять и удалять записи в БД.</para>
+    <para>When a new value is assigned to a model&apos;s parameter the model&apos;s data linked to this parameter is automaically required according to the new value.</para>
+    <para>At this point we are ready to run and debug our application. Some test data can be added to the database tables using our SQL query. When a query is run the result are shown in a separate results window. You can also insert, delete and update database records using this window.</para>
   </section>
   <section id="sect-Installation_Guide-Test_Chapter-Test_Section_5">
-    <title>Редактирование формы данных владельца, его питомцев и визитов в отель</title>
-    <para>Теперь приступим к созданию пользовательского интерфейса для редактирования информации о владельце, его питомцах и сроках пребывания питомцев в отеле.</para>
+    <title>Owners detalis, pets and visits form</title>
+    <para>Open the OwnerDetails form we&apos;ve created earlier. This form will contain the user interface related to a conrete owner, her/his pets and  hotel visits.</para>
     <figure>
-      <title>Форма редактирования данных владельца и информации о его питомцах</title>
+      <title>OwnerDetails form layout</title>
       <mediaobject>
         <imageobject>
           <imagedata align="center" fileref="images/owner.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Отредактируйте визуальное представление для этой формы добавив, компоненты для редактирования имени, фамилии, адреса, города и телефона владельца. Для этого добавьте виджеты типа <classname>Label</classname> и модельный виджет <classname>Model Text Field</classname> с палитры компонентов для  имени, фамилии, адреса, города и телефона владельца соответственно. Дайте каждому добавленному компоненту осмысленное имя вместо сгенерированного имени по умолчанию. Для каждой метки задайте ее текст.</para>
-    <para>Добавьте на форму контейнер типа <classname>SplitPane</classname>, и выберите для него вертикальную  ориентацию разделителя.</para>
-    <para>Добавьте на левую и правую части панели с разделителем контейнеры-панели, на которых будут размещены компоненты отвечающие за отображение питомцев и их визитов в отель.
-Добавьте панели инструментов и кнопки <guilabel>Add</guilabel> и <guilabel>Delete</guilabel> в эти панели для панелей питомцев и визитов. Добавьте модельные виджеты сетки, на которых будут показываться списки для животных и визитов конкретного питомца.</para>
-    <para>В нижней части формы разместите кнопки <guilabel>OK</guilabel> и <guilabel>Cancel</guilabel>, для того чтобы сохранять все изменения данных владельца, его питомцев и визитов или отменять их.</para>
-    <para>Итак, заготовка для пользовательского интерфейса создана и мы переходим к конфигурированию модели данных нашей формы. На этом этапе необходимо будет написать SQL-запросы, которые будут выбирать нужные нам данные, и добавить сущности на базе этих запросов в модель данных формы. После этого мы свяжем модельные виджеты с моделью данных и напишем JavaScript код.</para>
-    <para>Добавьте запрос, возвращающий информацию о конкретном владельце  по его идентификатору:</para>
+    <para>Add the <guilabel>Name</guilabel>, <guilabel>Last Name</guilabel>, <guilabel>Address</guilabel>, <guilabel>City</guilabel> and <guilabel>Phone</guilabel>  model <code>TextField</code> widgets for an owner&apos;s fields. Align this components to the right. Add  <code>Label</code> components to the left of the correspondent input text field. Provide meaningful  names for all components and set the labels texts.</para>
+    <para>Drag-and-drop a <code>SplitPane</code> container from the containers palette and set its separator orientation to vertical.</para>
+    <para>Add a panel container on the left and right sides of the <code>SplitPane</code>. The left panel is for an owner&apos;s pets and the right side is for the pet&apos;s visit to the hotel. </para>
+    <para>Place the <guilabel>Add</guilabel> and <guilabel>Delete</guilabel> buttons on top of the pets and the visits panels.</para>
+    <para>Add  <code>ModelGrid</code> widgets on the left and the right panels to display pets and the concrete pet&apos;s visits list.</para>
+    <para>At the bottom of the form add Ok and Cancel buttons to save an owner&apos;s data, as well as the pets and the pet&apos;s visits data.</para>
+    <para>At this moment we have our owner&apos;s details form mock layout. Next configure the form&apos;s data model based on the SQL queries and write some JavaScript code.</para>
+    <para>Add a new application element for a SQL query selecting data for the conrete owner by her/his identifier:</para>
     <programlisting language="SQL">/**
- * Gets the owner by its Id.
+ * Gets the owner by its ID.
  * @public
  * @name OwnerQuery
  */ 
 Select * 
-From OWNERS t1
- Where :ownerID = t1.OWNERS_ID</programlisting>
-    <para>Добавьте запрос возвращающий список питомцев для конкретного владельца:</para>
+From Owners t1
+ Where :ownerID = t1.owner_id</programlisting>
+    <para>Add a query for the pets list for the concrete owner:</para>
     <programlisting language="SQL">/**
  * Gets the pets for concrete owner.
  * @public 
  * @name PetsQuery
  */ 
 Select * 
-From PETS t1
- Where :ownerID = t1.OWNER</programlisting>
-    <para>Запрос, возвращающий все визиты в отель для всех питомцев конкретного владельца:</para>
+From Pets t1
+ Where :ownerID = t1.owner</programlisting>
+    <para>Next, add a query for getting all the hotel visits for the all pets of the concrete owner:</para>
     <programlisting language="SQL">/**
  * Gets all visits for concrete owner.
  * @public
  * @name VisitsQuery
  */ 
-Select t1.VISIT_ID, t1.PET, t1.FROMDATE
-, t1.TODATE, t1.DESCRIPTION 
-From VISIT t1
- Inner Join PetsQuery q on t1.PET = q.PETS_ID</programlisting>
-    <para>Добавьте в запрос параметр <literal>ownerID</literal> и свяжите его с параметром <literal>ownerID</literal> подзапроса <classname>PetsQuery</classname>.</para>
-    <para>Простейший запрос, возвращающий все типы питомцев:</para>
+Select t1.visit_id, t1.pet, t1.fromdate,
+ t1.todate, t1.description 
+From Visit t1
+ Inner Join PetsQuery t2 on t1.pet = t2.pet_id</programlisting>
+    <para>Add a simple query for selecting all pets types:</para>
     <programlisting language="SQL">/**
  * Gets all types for pets.
  * @public 
  * @name PetTypesQuery
  */ 
-Select * 
-From PETTYPES t1</programlisting>
+Select * From PetType</programlisting>
     <figure>
-      <title>Модель данных формы информации о владельце и его питомцах</title>
+      <title>OwnerView form data model</title>
       <mediaobject>
         <imageobject>
           <imagedata align="center" fileref="images/ownerViewDataModel.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Добавьте в параметры модели формы новый параметр <literal>ownerId</literal> типа <classname>Decimal</classname>. Добавьте в модель запросы <classname>OwnerQuery</classname>, <classname>PetsQuery</classname>, <classname>VisitsQuery</classname>, <classname>PetTypesQuery</classname> и задайте для новых сущностей имена <literal>owner</literal>, <literal>pets</literal>, <literal>visits</literal> и <literal>petTypes</literal> соответсвенно.</para>
-    <para>Свяжите параметр модели данных формы <literal>ownerID</literal> с одноименным параметром сущности <literal>owner</literal>.  Во время исполнения в эту сущность будут загружены данные, выбранные в соответствии с значением этого параметра. Обратите внимание на то, что в этой сущности всегда будет только одна запись. Также свяжите входные параметры сущностей <literal>pets</literal>, <literal>visits</literal> со полем соответствующим идентификатору владельца, данные которого отображаются на этой форме.</para>
-    <para>В сущности <literal>visits</literal> будут находится все визиты для всех питомцев владельца, однако мы хотим, чтобы в правой сетке отображались визиты в отель для  питомца, который выбран в данный момент на левой сетке. Для этого добавьте фильтрующую связь между полем <literal>PETS_ID</literal> сущности <literal>pets</literal> и полем <literal>PET</literal> сущности <literal>visits</literal>. Обратите внимание, что фильтрация происходит на клиенте и не вызывает новых запросов в БД.</para>
-    <para>После того, как модель данных формы настроена, к ней можно привязать модельные виджеты формы.</para>
-    <para>Задайте свойство <menuchoice>
+    <para>Add a data model parameter <code>ownerId</code> and set its type to <code>Decimal</code>. Add new entities based on the  <classname>OwnerQuery</classname>, <classname>PetsQuery</classname>, <classname>VisitsQuery</classname>, <classname>PetTypesQuery</classname> queries and set the correspondent entites names to  <literal>owner</literal>, <literal>pets</literal>, <literal>visits</literal> и <literal>petTypes</literal>.</para>
+    <para>Connect the <literal>ownerID</literal> data model parameter to the <literal>ownerID</literal> parameter of the <literal>owner</literal> entity. In runtime  this entity will contain the owner&apos;s data selected according to the parameter value. Notice that this entity will contain only one row.</para>
+    <para>Connect the input parameters of the  <literal>pets</literal> and <literal>visits</literal> entities to the current owner&apos;s identifier.</para>
+    <para>The  <literal>visits</literal> entity will hold all the visits for the all pets of the concrete owner, but we want to show on the right grid only the visits for the currently selected pet. For this, add a filtering link between the <literal>pet_id</literal> field of the <literal>pets</literal> entity and the <literal>pet</literal> field of the <literal>visits</literal> entity. Notice that filtering take place on a client and does not spawn any new database requests. </para>
+    <para>As the form&apos;s data model configuration is completed, bind the form&apos;s model widget to the model.</para>
+    <para>Set the  <menuchoice>
         <guimenuitem>Model binding</guimenuitem>
         <guimenuitem>field</guimenuitem>
-      </menuchoice> для компонентов <classname>Model Text</classname> для имени, фамилии, адреса, города и телефона владельца, связав их с соответствующими полями сущности <literal>owner</literal>.</para>
-    <para>Создайте столбцы для виджета сетки питомцев и визитов, связав их с соответствующими полями сущностей <literal>pets</literal> и <literal>visits</literal>. Задайте текст для заголовков столбцов сеток данных.</para>
-    <para>В отличии от сетки на форме, отображающей список владельцев, виджеты-сетки питомцев и визитов будут позволять редактировать данные непосредственно в своих ячейках.</para>
-    <para>Для столбца типа питомца задайте компонент управляющий отображением и редактированием в ячейке добавив в столбец виджет <classname>Model Combo</classname>. Настройте для этого виджета свойства <literal>displayField</literal> и <literal>valueField</literal>, связав их полями <literal>NAME</literal> и <literal>PETTYPES</literal> сущности модели данных <literal>petTypes</literal>.</para>
-    <para>Перейдем к написанию JavaScript кода для нашей формы <classname>OwnerView</classname>.</para>
-    <para>Дважды кликните мышкой на кнопке <guilabel>OK</guilabel> и добавьте код для сохранения всех данных владельца:</para>
+      </menuchoice> property for the <classname>ModelText</classname> widgets on the form and bind them to the name, last name, city and telephone fields of the <code>owner</code> entity.</para>
+    <para>Create new columns for the <code>pets</code> and <code>visits</code> grids and bind this columns to the correspondent fields of the <code>pets</code> and <code>visits</code> entities. Provide the correct text for the columns headers.</para>
+    <para>Ulike the owners list grid the pets and visits grids will allow edit their cell data.</para>
+    <para>Provide the  <classname>ModelCombo</classname> widget as a cell component for the pet type column on the pets grid. For this component specify the  <literal>displayField</literal> и <literal>valueField</literal> by connecting them to the  <literal>name</literal> и <literal>pettype</literal> fiels of the <literal>petTypes</literal> entity.</para>
+    <para>At the next step we&apos;ll write some  JavaScript code for the <classname>OwnerView</classname> form.</para>
+    <para>Double click on the <guilabel>OK</guilabel> button and insert the handler code to save the owner&apos;s data:</para>
     <programlisting language="JavaScript">/**
  * Save button&apos;s click event handler.
  * @param evt Event object
  */
-function btnSaveActionPerformed(evt) {
+form.okButton.onActionPerformed = function(evt) {
     if (model.modified) {
         var message = validate();
         if (!message) {
             model.save(function() {
-                close(owner.OWNERS_ID);
+                close(owner.owner_id);
             });
         } else {
             alert(message, title);
         }
     }
 }</programlisting>
-    <para>В данном методе сначала вызывается функция валидации, а затем, если валидация прошла успешно, вызывается сохранение модели данных. В случае если валидация не прошла успешно сообщение будет выведено во всплывающем окне.  Напишите заготовку для функции <literal>validate</literal>, позже мы напишем код и для нее:</para>
+    <para>In the handler code snippet above validation function is invoked and if successfull then changes are saved to the database. Write the <code>validate</code> function stub we&apos;ll return to its code later. </para>
     <programlisting language="JavaScript">/**
  * Validates the view.
  * @return Validation error message or falsy value if form is valid
@@ -311,63 +320,66 @@ function btnSaveActionPerformed(evt) {
 function validate() {
     return null;
 }</programlisting>
-    <para>Дважды кликните мышкой на кнопке <guilabel>Cancel</guilabel> и добавьте код для закрытия формы без сохранения данных:</para>
+    <para>Double click on the <guilabel>Cancel</guilabel> button and insert JavaScript code to perform the form close action:</para>
     <programlisting language="JavaScript">/**
  * Cancel button&apos;s click event handler.
  * @param evt Event object
  */
-function btnCancelActionPerformed(evt) {
-    close();
+form.cancelButton.onActionPerformed = function(evt) {
+    form.close();
 }</programlisting>
-    <para>Добавьте обработчик события <guilabel>onRequeried</guilabel> для сущности <literal>owner</literal>, который будет содержать код для вставки новой записи о владельце в случае, если параметр <literal>ownerID</literal> не задан:</para>
+    <para>To ensure that a new owner row is inserted add the  <guilabel>onRequeried</guilabel> event hanlder for the <code>owner</code> entity:</para>
     <programlisting language="JavaScript">/**
  * Data model&apos;s OnRequired event handler.
  * @param evt Event object
  */
-function owner_OnRequeried(evt) {
-    if (!ownerId) {
+model.owner.onRequeried = function(evt) {
+    if (!model.params.ownerId) {
         owner.insert();
     }
 }</programlisting>
-    <para>Далее мы добавим код для управления созданием и удалением записей о питомцах и их визитах.</para>
-    <para>Дважды кликните мышкой на кнопке <guilabel>Add</guilabel> на панели питомцев и добавьте код для добавления питомца:</para>
+    <para>The event handler above will be invoked on form initialization.</para>
+    <para>Now it is time to add the code for the pets and their  visits management.</para>
+    <para>Insert  pets <guilabel>Add</guilabel> button <code>onActionPerformed</code> event handler to add a new pet:</para>
     <programlisting language="JavaScript">/**
- * Add pet button&apos;s click event handler.
+ * The add pet button&apos;s click event handler.
  * @param evt Event object
  */
-function btnAddPetActionPerformed(evt) {
-    pets.insert();
-    pets.OWNER = owner.OWNERS_ID;
+form.addPetButton.onActionPerformed = function(evt) {
+    model.pets.insert();
+    model.pets.cursor.owner = model.params.owner_id;
 }</programlisting>
-    <para>Дважды кликните мышкой на кнопке <guilabel>Delete</guilabel> на панели питомцев и добавьте код для удаления записи о питомце:</para>
+    <para>Insert  pets <guilabel>Delete</guilabel> button <code>onActionPerformed</code> event handler to delete a pet:</para>
     <programlisting language="JavaScript">/**
- * Delete pet button&apos;s click event handler. Deletes the selected pet.
+ * Delete pet button&apos;s click event handler. 
+ * Deletes the selected pet.
  * @param evt Event object
  */
-function btnDeletePetActionPerformed(evt) {
+form.deletePetButton.onActionPerformed = function(evt) {
     if (confirm(&apos;Delete pet?&apos;, title)) {
-        pets.deleteRow();
+        model.pets.deleteRow();
     }
 }</programlisting>
-    <para>Дважды кликните мышкой на кнопке <guilabel>Add</guilabel> на панели визитов  и добавьте код для добавления нового визита в отель:</para>
+    <para>Insert visits <guilabel>Add</guilabel> button <code>onActionPerformed</code> event handler to add a new visit to the hotel:</para>
     <programlisting language="JavaScript">/**
  * Add visit button&apos;s click event handler.
  * @param evt Event object
  */
-function btnAddVisitActionPerformed(evt) {
-    visits.insert();
+form.addVisitButton.onActionPerformed = function(evt) {
+    model.visits.insert();
 } </programlisting>
     <para>Дважды кликните мышкой на кнопке <guilabel>Delete</guilabel> на панели визитов и добавьте код для удаления визита:</para>
+    <para>Insert visits <guilabel>Delete</guilabel> button <code>onActionPerformed</code> event handler to delete a pet&apos;s visit:</para>
     <programlisting language="JavaScript">/**
  * Delete visit button&apos;s click event handler.
  * @param evt Event object
  */
-function btnDeleteVisitActionPerformed(evt) {
+form.deleteVisitButton.onActionPerformed = function(evt) {
     if (confirm(&apos;Delete visit?&apos;, title)) {
-        visits.deleteRow();
+        model.visits.deleteRow();
     }
 }</programlisting>
-    <para>Теперь добавим логику обеспечивающую валидацию данных модели. Отредактируйте метод <literal>validate</literal>, который вызывает вспомогательные функции валидации полей владельца, его питомцев и визитов питомцев в отель:</para>
+    <para>Next we will provide the logic for the form validation. Edit the <code>validate</code> function and implement it as follows to perform the owner&apos;s and the pets and visits validation:</para>
     <programlisting language="JavaScript">/**
  * Validates the view.
  * @return Validation error message or empty String if form is valid
@@ -378,31 +390,31 @@ function validate() {
     message += validateVisits();
     return message;
 }</programlisting>
-    <para>Добавьте код функций валидации данных владельца:</para>
+    <para>Add  owner&apos;s fields validation code: </para>
     <programlisting language="JavaScript">/**
  * Validates owner&apos;s properties.
  * @return Validation error message or empty String if form is valid
  */
 function validateOwner() {
     var message = &quot;&quot;;
-    if (!owner.FIRSTNAME) {
+    if (!owner.firstname) {
         message += &quot;First name is required.\n&quot;;
     }
-    if (!owner.LASTNAME) {
+    if (!owner.lastname) {
         message += &quot;Last name is required.\n&quot;;
     }
-    if (!owner.ADDRESS) {
+    if (!owner.address) {
         message += &quot;Address is required.\n&quot;;
     }
-    if (!owner.CITY) {
+    if (!owner.city) {
         message += &quot;City is required.\n&quot;;
     }
-    if (!owner.TELEPHONE) {
+    if (!owner.telephone) {
         message += &quot;Phone number is required.\n&quot;;
     }
     return message;
 }</programlisting>
-    <para>Добавьте код функции валидации данных питомцев:</para>
+    <para>The pets validation code is as follows:</para>
     <programlisting language="JavaScript">/**
  * Validates pets entity.
  * @return Validation error message or empty String if form is valid
@@ -410,19 +422,19 @@ function validateOwner() {
 function validatePets() {
     var message = &quot;&quot;;
     pets.forEach(function(pet) {
-        if (!pet.NAME) {
+        if (!pet.name) {
             message += &quot;Pet&apos;s name is required.\n&quot;;
         }
-        if (!pet.BIRTHDATE) {
+        if (!pet.birthdate) {
             message += &quot;Pet&apos;s birthdate is required.\n&quot;;
         }
-        if (!pet.TYPE) {
+        if (!pet.type) {
             message += &quot;Pet&apos;s type is required.\n&quot;;
         }
     });
     return message;
 }</programlisting>
-    <para>Добавьте код функции валидации данных о  визитах выбранного питомца:</para>
+    <para>Insert the visits validation code for the currently selected pet:</para>
     <programlisting language="JavaScript">/**
  * Validates visits entity.
  * @return Validation error message or empty String if form is valid
@@ -430,24 +442,24 @@ function validatePets() {
 function validateVisits() {
     var message = &quot;&quot;;
     visits.forEach(function(visit) {
-        if (!visit.FROMDATE) {
+        if (!visit.fromdate) {
             message += &quot;Visit from date is required.\n&quot;;
         }
-        if (!visit.TODATE) {
+        if (!visit.todate) {
             message += &quot;Visit to date is required.\n&quot;;
         }
-        if (visit.FROMDATE &gt;= visit.TODATE) {
+        if (visit.fromdate &gt;= visit.todate) {
             message += &quot;Visit &apos;from&apos; date must be before &apos;to&apos; date.\n&quot;;
         }
     });
     return message;
 }</programlisting>
-    <para>Валидацию визитов питомца необходимо запускать не только перед сохранением всей модели, но и при перемещении курсора на сетке питомцев. Для этого задайте обработчик события, предшествующего перемещению курсора <literal>willScroll</literal> сущности <literal>pets</literal>:</para>
+    <para>Please notice that the pet&apos;s visits validation must be invoked not only before the model save action, but also on any pets grid cursor movement. To do that, implement the  <literal>willScroll</literal> event of the  <literal>pets</literal> entity:</para>
     <programlisting language="JavaScript">/**
  * Pet&apos;s entity cursor movement event handler.
  * @param evt Event object
  */
-function petsWillScroll(evt) {
+model.pets.onWillScroll = function(evt) {
     Logger.info(&apos;Pets scroll event.&apos;);
     var message = validateVisits();
     if (message) {
@@ -456,12 +468,13 @@ function petsWillScroll(evt) {
     }
     return true;
 }</programlisting>
-    <para>В случае, если этот обработчик вернет значение <literal>false</literal> — перемещения курсора не произойдет.</para>
-    <para>После написания основного кода необходимо провести тестирование приложения. Для этого запустите приложение в 2-х звенном режиме с использванием Platypus Client и проверьте правильность работы всех компонентов. При необходимости протестируйте JavaScript код в режиме отладки.</para>
-    <para>При логинации в приложении используйте имя пользователя и пароль по умолчанию: имя пользователя <literal>admin</literal> и пароль <literal>masterkey</literal>. </para>
+    <para>The cursor will not move if the <code>onWillScroll</code> event handle will return <literal>false</literal> value.</para>
+    <para>At this stage you need to run and test your application. To do that, run the application with desktop client and direct connection to the database. Use step-by-step code debugging to make sure your JavaSctipt works correctly. </para>
+    <para>By default the anonymous mode is enabled, but you can activate a user&apos;s login dialogue. For this set the correspondent checkbox in the application project properties. The user name  <literal>admin</literal> with  <literal>masterkey</literal> password are the default credentials you can use to login.</para>
   </section>
   <section>
-    <title>Добавление столбца с именами питомцев на форму списка владельцев</title>
+    <title>Improving the owners list form</title>
+    <para>In this section we are going to add a new column on the owners grid list to display pets names.</para>
     <para>Добавим в сетку данных списка владельцев столбец, в котором будут выводиться разделенные пробелом имена питомцев  владельца.</para>
     <para>Откройте в редакторе форму <classname>Owners view</classname> и перетащите с палитры компонентов виджет <guilabel>Model Grid Column</guilabel>  на сетку данных списка владельцев. Задайте для этогого столбца имя  <guilabel>pets</guilabel> и его заголовок. Не связывайте этот столбец ни с каким полем сущности.</para>
     <para>Имена питомцев будут запрашиваться из базы данных отдельным запросом  и выводиться в новый столбец JavaScript-кодом, который мы напишем чуть позже.</para>
@@ -515,7 +528,7 @@ function petsOnRender(evt) {
     <para>В данном коде, вызываемом для каждого элемента списка владельцев, мы фильтруем данные по питомцам этого владельца, формируем строку и выводим ее в ячейке сетки. Для тех владельецев, у которых нет питомцев, выводим пустую строку.</para>
   </section>
   <section id="sect-Installation_Guide-Test_Chapter-Test_Section_6">
-    <title>Создание отчета о владельцах</title>
+    <title>Owners report</title>
     <para>Сформируем простой отчет о выбранных владельцах. Для этого создайте новый элемент приложения типа <guilabel>Report</guilabel>, задайте его имя-идентификатор <classname>OwnersReport</classname>.</para>
     <para>Сконфигурируйте модель данных отчета точно так же, как и для формы со списком владельцев, добавив параметр <literal>lastNamePattern</literal> и сущность <literal>owners</literal> на базе запроса <classname>OwnersQuery</classname>. Свяжите одноименные параметры модели данных и сущности.</para>
     <para>Отредактируйте шаблон отчета в программе электронных таблиц, задав заголовок  отчета, заголовок таблицы, в которую будет выводиться список владельцев и следующие столбцы:</para>
@@ -568,7 +581,7 @@ function btnReportActionPerformed(evt) {
     <para>В этой функции мы создаем новый экземпляр отчета, задаем его параметру такое же значение, как в аналогичном параметре формы и отображаем отчет.</para>
   </section>
   <section id="sect-Installation_Guide-Test_Chapter-Test_Section_7">
-    <title>Создание миграций БД</title>
+    <title>Database migrations</title>
     <para>В Platypus Platform встроен механизм миграций БД, который  обеспечивает совместную работу над приложением разными разработчиками, а также развертывание приложения для эксплуатации и поддерживает обновления.</para>
     <para>Создайте новую миграцию типа «Миграция метаданных» — при этом в нее будет записан мгновенный снимок структур таблиц, ограничений, индексов для текущей БД. Данная миграция потом может быть применена в другой базе данных в результате чего будет восстановлена  исходная структура схемы приложения.</para>
     <para>Данные справочников поддерживаются при помощи SQL-миграций. Создайте пустую SQL-миграцию и заполните ее командами вставки записей о типах питомцев:</para>
