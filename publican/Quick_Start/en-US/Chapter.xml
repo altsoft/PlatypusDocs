@@ -6,23 +6,11 @@
 <chapter id="chapter_sample_app">
   <title>Pet Hotel sample application</title>
   <para>In this tutorial you&apos;ll learn how to create a simple business application in JavaScript using Platypus.js. The sample  source code is avaliable for download from the Platypus.js project&apos;s website. </para>
-  <para>As a prerequisites the following software must be installed:</para>
-  <itemizedlist>
-    <listitem>
-      <para>Platypus.js IDE</para>
-    </listitem>
-    <listitem>
-      <para>Platypus.js runtime</para>
-    </listitem>
-    <listitem>
-      <para>Apache Tomcat 7 to enable the web client</para>
-    </listitem>
-  </itemizedlist>
-  <para>Please refer to the  Development guide and Administration guide for more details.</para>
-  <section>
-    <title id="platform-install">Platypus.js installation</title>
-    <para>Download and install Java Runtime and JDK 7. </para>
-    <para>Install the Platypus.js IDE and the runtime components:</para>
+  <para>Please refer to the  Development Guide and the Administration Guide for more details about Platypus.js.</para>
+  <section id="platform-install">
+    <title>Platypus.js installation</title>
+    <para>Java Runtime and JDK 7 are required for Platypus.js applications development. </para>
+    <para>Install the Platypus.js IDE, the Platyps.js runtime components and Apache Tomcat 7 to enable running a web client:</para>
     <itemizedlist>
       <listitem>
         <para>Download the Platypus.js installer bundle from the project&apos;s website for your operation system.</para>
@@ -37,7 +25,8 @@
   </section>
   <section id="app-requirements">
     <title>Tha sample application requirements</title>
-    <para>The Pet Hotel  is a simple business  application for  of  cats and dogs hotel   accounting. The hotel&apos;s administrator is the only  user role defined for this application.</para>
+    <para>The Pet Hotel  is a simple business  application for  of  cats and dogs hotel   accounting. </para>
+    <para>The hotel&apos;s administrator role is the only  user role defined for this application.</para>
     <para>An adminstrator can perform the following actions:</para>
     <itemizedlist>
       <listitem>
