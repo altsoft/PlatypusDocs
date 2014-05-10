@@ -11,18 +11,18 @@
         <revnumber>0-0</revnumber>
         <date>8.08.2013</date>
         <author>
-          <firstname>Вадим</firstname>
-          <surname>Вашкевич</surname>
+          <firstname>Vadim</firstname>
+          <surname>Vashkevich</surname>
           <email>vv@altsoft.biz</email>
         </author>
         <author>
-          <firstname>Максим</firstname>
-          <surname>Липнин</surname>
+          <firstname>Maxim</firstname>
+          <surname>Lipnin</surname>
           <email>ml@altsoft.biz</email>
         </author>
         <revdescription>
           <simplelist>
-            <member>Первоначальна редакция</member>
+            <member>Initial revision</member>
           </simplelist>
         </revdescription>
       </revision>
