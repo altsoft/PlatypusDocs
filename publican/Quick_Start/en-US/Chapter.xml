@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Installation_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-Installation_Guide-Test_Chapter">
+<chapter id="chapter_sample_app">
   <title>Pet Hotel sample application</title>
   <para>In this tutorial you&apos;ll learn how to create a simple business application in JavaScript using Platypus.js. The sample  source code is avaliable for download from the Platypus.js project&apos;s website. </para>
   <para>As a prerequisites the following software must be installed:</para>
@@ -20,7 +20,7 @@
   </itemizedlist>
   <para>Please refer to the  Development guide and Administration guide for more details.</para>
   <section>
-    <title>Platypus.js installation</title>
+    <title id="platform-install">Platypus.js installation</title>
     <para>Download and install Java Runtime and JDK 7. </para>
     <para>Install the Platypus.js IDE and the runtime components:</para>
     <itemizedlist>
@@ -35,7 +35,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_1">
+  <section id="app-requirements">
     <title>Tha sample application requirements</title>
     <para>The Pet Hotel  is a simple business  application for  of  cats and dogs hotel   accounting. The hotel&apos;s administrator is the only  user role defined for this application.</para>
     <para>An adminstrator can perform the following actions:</para>
@@ -77,7 +77,7 @@
       </mediaobject>
     </figure>
   </section>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_2">
+  <section id="project-setup">
     <title>The sample project creation and setup</title>
     <para>During the installation process the Platypus.js IDE is configured for the correct path to the runtime directory, Tomcat and a default database connection. Check the platform&apos;s runtime directory on <menuchoice>
         <guimenu>Tools</guimenu>
@@ -107,14 +107,14 @@
     </itemizedlist>
     <para>Create a new project for Pet Hotel application and provide the project&apos;s name and home directory. In the project&apos;s properties select the <literal>pet_hotel</literal> from the list as a default <guilabel>Datasource</guilabel>.</para>
   </section>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_3">
+  <section id="database-structure">
     <title>Defining the datatase structure</title>
     <para>One way to begin building your application is to start from creating its database structure. When using Platypus.js,  you need to create a database structure diagram.</para>
     <para>Add a new <guilabel>Database structure diagram</guilabel> application element.</para>
     <para>On the diagram create new database tables named <literal>Owner</literal>, <literal>Pet</literal>, <literal>PetType</literal> and <literal>Visit</literal> according to the knowledge domain model. A numeric primary key is automatically created for each new table. Add all the required fields for the tables.</para>
     <para>Create the foriegn key links by connecting  foreign key fields with thie correspondent primary keys fiels. Please note that the connected fields must have the same data type.</para>
   </section>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_4">
+  <section id="owners-form">
     <title>Owners list form</title>
     <para>We are going to build the user inteface allowing to display the owners list.</para>
     <para>Create a new <guilabel>Form</guilabel> application element named <literal>OwnersView</literal>, check that the JavaScript constructor for this form is also set to <literal>OwnersView</literal>. This form will display the owners list.</para>
@@ -221,7 +221,7 @@ form.searchButton.onActionPerformed = function(evt) {
     <para>When a new value is assigned to a model&apos;s parameter the model&apos;s data linked to this parameter is automaically required according to the new value.</para>
     <para>At this point we are ready to run and debug our application. Some test data can be added to the database tables using our SQL query. When a query is run the result are shown in a separate results window. You can also insert, delete and update database records using this window.</para>
   </section>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_5">
+  <section id="owner-details-form">
     <title>Owners detalis, pets and visits form</title>
     <para>Open the OwnerDetails form we&apos;ve created earlier. This form will contain the user interface related to a conrete owner, her/his pets and  hotel visits.</para>
     <figure>
@@ -472,7 +472,7 @@ model.pets.onWillScroll = function(evt) {
     <para>At this stage you need to run and test your application. To do that, run the application with desktop client and direct connection to the database. Use step-by-step code debugging to make sure your JavaSctipt works correctly. </para>
     <para>By default the anonymous mode is enabled, but you can activate a user&apos;s login dialogue. For this set the correspondent checkbox in the application project properties. The user name  <literal>admin</literal> with  <literal>masterkey</literal> password are the default credentials you can use to login.</para>
   </section>
-  <section>
+  <section id="pets-column">
     <title>Improving the owners list form</title>
     <para>In this section we are going to add a new column on the owners grid list to display pets names.</para>
     <para>Open for edit the <code>OwnersView</code> form layout and drag-and-drop a new <guilabel>Model Grid Column</guilabel> widget on the owners list grid component. Set the column name and its header text. Do not connect this column with any of the entities fields. For this column we are going to use a separate SQL query to retrieve the pets list  and output it using the specific JavaScript code.</para>
@@ -529,7 +529,7 @@ form.ownersGrid.onRender = function(evt) {
 }</programlisting>
     <para>The function above is invoked for every element of the owners list. We get the owner&apos;s pet, create the string representation and render it in the grid cell.</para>
   </section>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_6">
+  <section id="owners-report">
     <title>Owners report</title>
     <para>In this section we are going to create a simple report about the owners.</para>
     <para>Create a new Report application element with the <code>OwnersReport</code> name. Add a string parameter named <code>lastNamePattern</code> and the owners entity based on the <code>OwnersQuery</code>. Bind the model&apos;s and the entity&apos;s parameters.</para>
