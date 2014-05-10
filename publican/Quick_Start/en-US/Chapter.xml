@@ -583,19 +583,4 @@ form.reportButton.onActionPerformed = function(evt) {
 }</programlisting>
     <para>Here we create a new report instance, set its parameter to the similar parameter of the<code>OwnersView</code> form and display the report.</para>
   </section>
-  <section id="sect-Installation_Guide-Test_Chapter-Test_Section_7">
-    <title>Database migrations</title>
-    <para>В Platypus Platform встроен механизм миграций БД, который  обеспечивает совместную работу над приложением разными разработчиками, а также развертывание приложения для эксплуатации и поддерживает обновления.</para>
-    <para>Создайте новую миграцию типа «Миграция метаданных» — при этом в нее будет записан мгновенный снимок структур таблиц, ограничений, индексов для текущей БД. Данная миграция потом может быть применена в другой базе данных в результате чего будет восстановлена  исходная структура схемы приложения.</para>
-    <para>Данные справочников поддерживаются при помощи SQL-миграций. Создайте пустую SQL-миграцию и заполните ее командами вставки записей о типах питомцев:</para>
-    <programlisting language="SQL">INSERT INTO petTypes (PETTYPES_ID, NAME) VALUES (1, &apos;cat&apos;)
-#GO
-INSERT INTO petTypes (PETTYPES_ID, NAME) VALUES (2, &apos;dog&apos;)
-#GO
-INSERT INTO petTypes (PETTYPES_ID, NAME) VALUES (3, &apos;hamster&apos;)
-#GO
-INSERT INTO petTypes (PETTYPES_ID, NAME) VALUES (4, &apos;lizard&apos;)
-#GO</programlisting>
-    <para>Для того, чтобы применить эту миграцию на свою БД, убедитесь, что текущий номер версии БД меньше чем номер этой миграции. После применения этой миграции удалите тестовые записи из  справочника типов животных.</para>
-  </section>
 </chapter>
