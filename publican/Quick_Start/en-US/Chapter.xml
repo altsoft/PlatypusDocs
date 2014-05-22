@@ -13,18 +13,18 @@
     <para>Install the Platypus.js IDE, the Platyps.js runtime components and Apache Tomcat 7 to enable running a web client:</para>
     <itemizedlist>
       <listitem>
-        <para>Download the Platypus.js installer bundle from the project&apos;s website for your operation system.</para>
+        <para>Download the Platypus.js installer bundle from the project&apos;s website for your operating system.</para>
       </listitem>
       <listitem>
         <para>Run the installer.</para>
       </listitem>
       <listitem>
-        <para>Follow the master&apos;s steps and install  the required components.</para>
+        <para>Follow the wizard&apos;s steps and install  the required components.</para>
       </listitem>
     </itemizedlist>
   </section>
   <section id="app-requirements">
-    <title>Tha sample application requirements</title>
+    <title>The sample application requirements</title>
     <para>The Pet Hotel  is a simple business  application for  of  cats and dogs hotel   accounting. </para>
     <para>The hotel&apos;s administrator role is the only  user role defined for this application.</para>
     <para>An adminstrator can perform the following actions:</para>
@@ -228,7 +228,7 @@ form.searchButton.onActionPerformed = function(evt) {
     <para>Add  <code>ModelGrid</code> widgets on the left and the right panels to display pets and the concrete pet&apos;s visits list.</para>
     <para>At the bottom of the form add Ok and Cancel buttons to save an owner&apos;s data, as well as the pets and the pet&apos;s visits data.</para>
     <para>At this moment we have our owner&apos;s details form mock layout. Next configure the form&apos;s data model based on the SQL queries and write some JavaScript code.</para>
-    <para>Add a new application element for a SQL query selecting data for the conrete owner by her/his identifier:</para>
+    <para>Add a new application element for a SQL query selecting data for the specific owner by her/his identifier:</para>
     <programlisting language="SQL">/**
  * Gets the owner by its ID.
  * @public
@@ -237,7 +237,7 @@ form.searchButton.onActionPerformed = function(evt) {
 Select * 
 From Owners t1
  Where :ownerID = t1.owner_id</programlisting>
-    <para>Add a query for the pets list for the concrete owner:</para>
+    <para>Add a query for the pets list for the specific owner:</para>
     <programlisting language="SQL">/**
  * Gets the pets for concrete owner.
  * @public 
@@ -246,7 +246,7 @@ From Owners t1
 Select * 
 From Pets t1
  Where :ownerID = t1.owner</programlisting>
-    <para>Next, add a query for getting all the hotel visits for the all pets of the concrete owner:</para>
+    <para>Next, add a query for getting all the hotel visits for the all pets of the specific owner:</para>
     <programlisting language="SQL">/**
  * Gets all visits for concrete owner.
  * @public
