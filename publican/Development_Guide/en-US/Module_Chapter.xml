@@ -924,63 +924,38 @@ while (!model.documents.eof) {
       <para>The  <varname>empty</varname> property is  <literal>true</literal> if the entity data array is empty, and  <literal>false</literal> otherwise. For example, the following snippet outputs a message into the log, if the  <literal>documents</literal> entity data array is empty:</para>
       <programlisting language="JavaScript">model.documents.empty &amp;&amp; Logger.info(&apos;Documents is empty.&apos;);</programlisting>
     </section>
-    <section id="datamodel-save">
-      <title>Saving data</title>
-      <para>Module&apos;s data model provides automatic tracking of data changes. Data changes can be saved only as a part of entire model.</para>
-      <para>To edit, insert, or delete data, perform the following actions:</para>
-      <itemizedlist>
+    <section id="datamodel-save"><title>Saving data</title><para>Module&apos;s data model provides automatic tracking of data changes. Data changes can be saved only as a part of entire model.</para><para>To edit, insert, or delete data, perform the following actions:</para><itemizedlist>
         <listitem>
           <para>Edit, insert, or delete an object from the entity data.</para>
         </listitem>
         <listitem>
           <para>Call the  <methodname>save</methodname> method of the model.</para>
         </listitem>
-      </itemizedlist>
-      <para>To obtain access to the entity arbitrary objects, use the syntax of referring to an array element: </para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
-      <para>where <varname>
+      </itemizedlist><para>To obtain access to the entity arbitrary objects, use the syntax of referring to an array element: </para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting><para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity, <replaceable>entityName</replaceable>[<replaceable>i</replaceable>].<replaceable>propName</replaceable> is an object property with the specified index in the entity data.  <literal>
           <replaceable>newValue</replaceable>
-        </literal> is an expression for the new value.</para>
-      <para>To change the appropriate property of the entity&apos;s cursor, use the following way:</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable><replaceable>.cursor.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting>
-      <para>where <varname>
+        </literal> is an expression for the new value.</para><para>To change the appropriate property of the entity&apos;s cursor, use the following way:</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable><replaceable>.cursor.propName</replaceable> = <replaceable>newValue</replaceable>;</programlisting><para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity,  <varname>
           <replaceable>entityName</replaceable>
           <replaceable>.cursor.propName</replaceable>
         </varname>  is a  property in the current cursor position in the entity data, <literal>
           <replaceable>newValue</replaceable>
-        </literal> is an expression for the new value.</para>
-      <para>To save changes the data model changes, use its   <methodname>save</methodname> method:</para>
-      <programlisting language="JavaScript">model.save();</programlisting>
-      <para>To insert a new object to a dataset:</para>
-      <itemizedlist>
+        </literal> is an expression for the new value.</para><para>To save changes the data model changes, use its   <methodname>save</methodname> method:</para><programlisting language="JavaScript">model.save(onSuccess, onFailure);</programlisting>where <code>onSuccess</code> is the handler function for an event of successfull saving of data (optional) and <code>onFailure</code> is the handler function for a save data on failure event (optional).<para>To insert a new object to a dataset:</para><itemizedlist>
         <listitem>
           <para>Add a new object to entity dataset.</para>
         </listitem>
         <listitem>
           <para>Call the <methodname>save</methodname> method of the data model.</para>
         </listitem>
-      </itemizedlist>
-      <para>To insert a new object into a dataset, use the <methodname>insert</methodname> or <methodname>push</methodname> entity functions.</para>
-      <para>Call the  <methodname>insert</methodname> function to insert a new object into the entity data. If necessary, pass &quot;key-value&quot; pairs as parameters to this function. Here, a key is the  <code><replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable></code>  entity property, and a value is the value of this property:</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.insert();</programlisting>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.insert(
+      </itemizedlist><para>To insert a new object into a dataset, use the <methodname>insert</methodname> or <methodname>push</methodname> entity functions.</para><para>Call the  <methodname>insert</methodname> function to insert a new object into the entity data. If necessary, pass &quot;key-value&quot; pairs as parameters to this function. Here, a key is the  <code><replaceable>entityName</replaceable>.schema.<replaceable>propName</replaceable></code>  entity property, and a value is the value of this property:</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.insert();</programlisting><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.insert(
   model.<replaceable>entityName</replaceable>.schema.<replaceable>propName1</replaceable>, <replaceable>propValue1</replaceable>,
   model.<replaceable>entityName</replaceable>.schema.<replaceable>propName2</replaceable>, <replaceable>propValue2</replaceable>
   //...
-);</programlisting>
-      <para>Call the push function to insert a new object in the entity data — this function is a standard method of inserting a new element into the JavaScript array:</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.push();</programlisting>
-      <para>If necessary, pass the JavaScript object, the property names of which match the names of properties in the entity objects, as a parameter to the function. Their values will be set as values of the new object properties:</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.push( {
+);</programlisting><para>Call the push function to insert a new object in the entity data — this function is a standard method of inserting a new element into the JavaScript array:</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.push();</programlisting><para>If necessary, pass the JavaScript object, the property names of which match the names of properties in the entity objects, as a parameter to the function. Their values will be set as values of the new object properties:</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.push( {
   <replaceable>propName1</replaceable>: <replaceable>propValue1</replaceable>,
-  <replaceable>propName2</replaceable>: <replaceable>propValue2 </replaceable>});</programlisting>
-      <para>When using the  <methodname>insert</methodname> function, as well as when using the  <methodname>push</methodname> function, the cursor will point to a new object. </para>
-      <para>After inserting, the new object will have the following properties:</para>
-      <itemizedlist>
+  <replaceable>propName2</replaceable>: <replaceable>propValue2 </replaceable>});</programlisting><para>When using the  <methodname>insert</methodname> function, as well as when using the  <methodname>push</methodname> function, the cursor will point to a new object. </para><para>After inserting, the new object will have the following properties:</para><itemizedlist>
         <listitem>
           <para>An identifying property gets the generated value, if a value was not explicitly assigned to this property when inserting. </para>
         </listitem>
@@ -993,51 +968,25 @@ while (!model.documents.eof) {
         <listitem>
           <para>Other properties will be set to  <literal>null</literal>.</para>
         </listitem>
-      </itemizedlist>
-      <para>Example of code for inserting a new object into the  <literal>documents</literal> entity:</para>
-      <programlisting language="JavaScript">model.documens.push({ ID:101, NAME:&apos;New document name&apos;});
-model.save();</programlisting>
-      <para>To delete an object, use the  <methodname>deleteRow</methodname> or <methodname>splice</methodname> entity functions.</para>
-      <para>Call the  <methodname>deleteRow</methodname> function without parameters to delete the current object, i.e. the object, which the cursor is pointing to.</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow();</programlisting>
-      <para>Pass an index of the object, which you want to delete, as a parameter to the  <methodname>deleteRow</methodname> method:</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow(<replaceable>rowIndex</replaceable>);</programlisting>
-      <para>where <literal>
+      </itemizedlist><para>Example of code for inserting a new object into the  <literal>documents</literal> entity:</para><programlisting language="JavaScript">model.documens.push({ ID:101, NAME:&apos;New document name&apos;});
+model.save();</programlisting><para>To delete an object, use the  <methodname>deleteRow</methodname> or <methodname>splice</methodname> entity functions.</para><para>Call the  <methodname>deleteRow</methodname> function without parameters to delete the current object, i.e. the object, which the cursor is pointing to.</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow();</programlisting><para>Pass an index of the object, which you want to delete, as a parameter to the  <methodname>deleteRow</methodname> method:</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow(<replaceable>rowIndex</replaceable>);</programlisting><para>where <literal>
           <replaceable>rowIndex</replaceable>
-        </literal> can take on  <code>1..<replaceable>entityName</replaceable>.length</code> values.</para>
-      <para>Alternatively, pass the object to delete as  the parameter of  <methodname>deleteRow</methodname> method: </para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow(<replaceable>obj</replaceable>);</programlisting>
-      <para>where <literal>
+        </literal> can take on  <code>1..<replaceable>entityName</replaceable>.length</code> values.</para><para>Alternatively, pass the object to delete as  the parameter of  <methodname>deleteRow</methodname> method: </para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteRow(<replaceable>obj</replaceable>);</programlisting><para>where <literal>
           <replaceable>obj</replaceable>
-        </literal>    is the one of the dataset row items.</para>
-      <para>Use the  <methodname>splice</methodname> function to delete an object from the entity data by passing an index and a number of elements to be deleted as arguments:</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.splice(<replaceable>index</replaceable>, <replaceable>howMany</replaceable>);</programlisting>
-      <para>where <varname>
+        </literal>    is the one of the dataset row items.</para><para>Use the  <methodname>splice</methodname> function to delete an object from the entity data by passing an index and a number of elements to be deleted as arguments:</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.splice(<replaceable>index</replaceable>, <replaceable>howMany</replaceable>);</programlisting><para>where <varname>
           <replaceable>entityName</replaceable>
         </varname> is an entity, <literal>index</literal>  is an index of the entity data array element. <literal>index</literal> can take on a value within the  <code>0..<replaceable>entityName</replaceable>.length-1</code> range, <literal>
           <replaceable>howMany</replaceable>
-        </literal> is a number of elements to be deleted.</para>
-      <para>Example of deleting the current object from the <literal>documents</literal> entity and from the <acronym>database</acronym>:</para>
-      <programlisting language="JavaScript">// Removes first element
+        </literal> is a number of elements to be deleted.</para><para>Example of deleting the current object from the <literal>documents</literal> entity and from the <acronym>database</acronym>:</para><programlisting language="JavaScript">// Removes first element
 model.documents.splice(0, 1);
-model.save();</programlisting>
-      <para>To remove all objects from the entity data, use the  <methodname>deleteAll</methodname> entity function:</para>
-      <programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteAll();</programlisting>
-      <para>Example of deleting all objects from the  <literal>documents</literal> entity and from the <acronym>database</acronym>:</para>
-      <programlisting language="JavaScript">// Removes all elements
+model.save();</programlisting><para>To remove all objects from the entity data, use the  <methodname>deleteAll</methodname> entity function:</para><programlisting language="JavaScript">model.<replaceable>entityName</replaceable>.deleteAll();</programlisting><para>Example of deleting all objects from the  <literal>documents</literal> entity and from the <acronym>database</acronym>:</para><programlisting language="JavaScript">// Removes all elements
 model.documents.deleteAll();
-model.save();</programlisting>
-      <para>Calling  <code>save</code> function results in saving changes and commiting the transaction. </para>
-      <para>Calling   <methodname>save</methodname> function may lead to an exception, for example, if saved data are inconsistent with the <acronym>database</acronym> schema. In this case data are not saved to the  <acronym>database</acronym>. To handle this exception, use the  <code>try-catch-finally</code> statement:</para>
-      <programlisting language="JavaScript">try {
+model.save();</programlisting><para>Calling  <code>save</code> function results in saving changes and commiting the transaction. </para><para>Calling   <methodname>save</methodname> function may lead to an exception, for example, if saved data are inconsistent with the <acronym>database</acronym> schema. In this case data are not saved to the  <acronym>database</acronym>. To handle this exception, use the  <code>try-catch-finally</code> statement:</para><programlisting language="JavaScript">try {
   model.save();
 } catch (e) {
   model.revert();
   Logger.error(&apos;Save data error: &apos; + e);
-}</programlisting>
-      <para>After handling the error, you can try to correct the cause of the problem and re-call the  <methodname>save</methodname> function.</para>
-      <para>Use model&apos;s <code>revert</code> method to revert model data changes. After this method call, no data changes are avaliable for <code>save()</code> method, but the model still attempts to commit. Calling <code>save()</code> on  unchanged model nevertheless leads to a commit.</para>
-    </section>
+}</programlisting><para>After handling the error, you can try to correct the cause of the problem and re-call the  <methodname>save</methodname> function.</para><para>Use model&apos;s <code>revert</code> method to revert model data changes. After this method call, no data changes are avaliable for <code>save()</code> method, but the model still attempts to commit. Calling <code>save()</code> on  unchanged model nevertheless leads to a commit.</para></section>
     <section id="datamodel-search">
       <title>Search API</title>
       <para>Search operations can be performed after the data model loads its entities&apos; data. </para>

@@ -299,7 +299,7 @@ Form.getShownForm(&apos;A1&apos;).visible = false;</programlisting>
             <entry>
               <parameter>showModal(callback)</parameter>
             </entry>
-            <entry>Displays the form as a confirmation dialog. If the user confirms the selection, then a function, which is passed through the <parameter>callback</parameter> parameter is called.</entry>
+            <entry>Displays the form as a confirmation dialog. If <code>form.close(param)</code> method is used to close the dialog form, then <code>callback</code> function is invoked with a <code>param</code> passed as an argument.</entry>
           </row>
           <row>
             <entry>
@@ -531,7 +531,7 @@ self.onWindowClosing = function() {
 }</programlisting>
     <para>To get access to the top-level container, use the  <varname>view</varname> property:</para>
     <programlisting language="JavaScript">//Sets the form&apos;s background
-self.view.background = Color.black;</programlisting>
+self.view.background = Color.BLACK;</programlisting>
     <para>In the above example the form title is set programmatically, and also an alternative way to specify a form event handler is provided.</para>
     <note>
       <para>For the top-level container, the layout  should be set by the designer and can&apos;t be changed by program means.</para>
