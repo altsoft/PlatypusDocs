@@ -942,7 +942,7 @@ while (!model.documents.eof) {
           <replaceable>.cursor.propName</replaceable>
         </varname>  is a  property in the current cursor position in the entity data, <literal>
           <replaceable>newValue</replaceable>
-        </literal> is an expression for the new value.</para><para>To save changes the data model changes, use its   <methodname>save</methodname> method:</para><programlisting language="JavaScript">model.save(onSuccess, onFailure);</programlisting>where <code>onSuccess</code> is the handler function for an event of successfull saving of data (optional) and <code>onFailure</code> is the handler function for a save data on failure event (optional).<para>To insert a new object to a dataset:</para><itemizedlist>
+        </literal> is an expression for the new value.</para><para>To save changes the data model changes, use its   <methodname>save</methodname> method:</para><programlisting language="JavaScript">model.save(onSuccess, onFailure);where onSuccess is the handler function for an event of successfull saving of data (optional) and onFailure is the handler function for a save data on failure event (optional).</programlisting><para>To insert a new object to a dataset:</para><itemizedlist>
         <listitem>
           <para>Add a new object to entity dataset.</para>
         </listitem>
