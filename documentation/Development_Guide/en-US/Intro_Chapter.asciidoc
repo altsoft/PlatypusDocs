@@ -1,0 +1,140 @@
+[[introduction]]
+Introduction
+------------
+
+[[about-the-platform]]
+About the platform
+------------------
+
+The Platypus Platform is a JavaScript client and server applications
+platform for rapid development of enterprise-level information systems.
+
+The platform uses two application programming languages:
+
+* JavaScript (compatible with the ECMA-262-3 standard) is used to write
+program logic.
+* SQL is used to access data.
+
+Application creation and editing, deployment, debugging and maintenance
+are performed using the Platypus Application Designer IDE based on the
+NetBeans Platform. However, individual files, for example, JavaScript
+modules, can be edited in any text editor.
+
+The IDE includes following development tools:
+
+* Application database structure visual editor.
+* SQL queries visual editor.
+* JavaScript code editor.
+* User interface forms visual editor.
+
+The platform offers a set of features, making development process
+extremely productive:
+
+* JavaScript modules automatic dependencies resolving, manual resolving
+is also avaliable.
+* SQL queries with named parameters and SQL clauses re-use.
+* Data model and ORM (Object-Relation Mapping) for JavaScript.
+* Desktop cross-platform as well as HTML5 web-browser user interface
+presentation sharing the same code and the GUI layout.
+* The GUI widgets which directly interact with the data model, allowing
+implementation of a CRUD (Create-Read-Update-Delete) user interface with
+visual configuration and without or just a little coding.
+* Built-in security support, including users authentication and
+authorization, constraints of access to application resources.
+* Application database schema structure and initial applicaton data
+migrations tools.
+
+[[application-structure]]
+Application structure
+---------------------
+
+Application has a tree structure which contains directories and files.
+Some files or file groups, called application elements, have a special
+meaning to the platform.
+
+The types of application elements are:
+
+* link:#query-chapter[Query] is a data source based on SQL query.
+* link:#module-chapter[Module] is a structural unit of the JavaScript
+code.
+* link:#form-intro[Form] is a module with UI layout.
+* link:#report-chapter[Report] is a module with a template.
+* link:#diargram-chapter[Database diagram] is a visual representation of
+the database structure.
+
+During development process, the application tree is stored on disk in
+the project's directory `src` subfolder. For production operation
+application can be deployed into the database `MTD_ENTITIES` table.
+
+[[runtime-configurations]]
+Runtime configurations
+----------------------
+
+In general, the platform works on three-tier archeticture including
+presentation, logic and data storage tiers. The presentation and the
+logic tier can be combined in some configurations.
+
+image:images/tiers.png[Applicaton tiers]
+
+The platform's applications can work in the following configurations:
+
+* 2-tier solution is the Java SE desktop client connects directly to the
+database server. This scheme is recommended for relatively simple
+applications, which do not require any application server.
++
+image:images/2-tiers.png[2-tier solution]
+* The 3-tier solution with deskop client and Platypus Application Server
+(PAS). This server is a lightweight non-J2EE Java application server.
+The custom binary protocol is used to transmit data. The application
+server, in turn, interacts with a database server.
++
+image:images/3-tiers.png[3-tier solution using PAS]
+* The 3-tier solution with a Java EE compatible server to host the
+platfroms server components. The deskotp client or HTML5 browser
+connects to the servlet container or J2EE server using HTTP/HTTPS
+protocol. In this case, an application's data source resources are
+managed by the Java EE container.
++
+image:images/3-tiers-j2ee.png[3-tier configuration on Java EE]
+
+3-tier configuration has a number of advantages as compared with 2-tier
+one:
+
+* Improved security, as the client has no direct access to the database
+and database request text is not transmitted via network.
+* Improved performance, as business logic is executed on the server.
+* Better system maintainability.
+* Application is more scalabile.
+* The ability to use HTML5 web browser as a client when using J2EE
+servlet container or application server.
+
+In case of no-server 2-tier configuration the presentation tier and
+logic tier operate at Java SE desktop client. In case of 3-tier server
+configuration the presentation tier operates in the client, either at
+Java SE desktop client or HTML5 browser and the logic tier runs on
+application server.
+
+[[development-steps]]
+Development steps
+-----------------
+
+To develop an application iteratively perform the following steps:
+
+* link:#diargram-chapter[Specify] datatbase structure using the database
+structure diagrams visual editor.
+* link:#query-chapter[Write] the queries and specify theirs parameters.
+If required, implement the queries for updating and adding data in SQL
+language (it is not needed in general, because data
+inserts/updates/deletions in most cases can be completed automatically
+by the data model).
+* link:#module-chapter[Implement] the application logic as JavaScript
+modules. Specify the module's data model using visual tool. Write the
+JavaScript code, for example to implement the business-logic.
+* link:#gui-chapter[Implement] the application user interface as forms
+using visual tool. Specify the form's data model. Create the form's
+layout using the visual editor. Write JavaScript code responsible for
+the user interface.
+* link:#report-chapter[Implement] reports using the reports tool.
+Specify the report's data model. Create the report template using the
+visual editor. Write JavaScript code if some non-standard data
+processing required.

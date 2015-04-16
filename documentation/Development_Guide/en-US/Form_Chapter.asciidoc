@@ -1,0 +1,3262 @@
+[[user-interface-guide]]
+User interface guide
+--------------------
+
+[[form]]
+Form
+----
+
+`Form` is a user interface building block wich can be represented as a
+top-level window with a title and a border or can be build-in on a panel
+or on another form.
+
+A form is a regular JavaScript module with visual components. Any form
+can be displayed both in desktop client as well in HTML5 web-browser.
+
+`Form` includes a top-level container, which holds widgets and other
+containers and accessible under `view` property.
+
+A widget is a component, which has a visual representation. A container
+is a component, which holds widgets and other containers.
+
+Each component, as well as the form itself, has a set of properties,
+which defines the component appearance and behavior, and a set of events
+(e.g. user actions, for which you can define handlers).
+
+image:images/form.png[Form's components layout]
+
+In the desktop client, forms are displayed in separate windows, can be
+minimized or expanded to the full screen, displayed in other forms as
+built-in elements (frames) and as internal windows in the DesktopPane
+component. In the HTML5 browser client, forms are displayed in the same
+way, but within a browser page.
+
+[[new-form-creation]]
+New form creation
+-----------------
+
+To create a new form layout and JavaScript code in the IDE, perform the
+following actions:
+
+* Select New in the parent directory context menu, or select the parent
+directory and click New File in the main menu, or click New File on the
+main toolbar, or use a corresponding keyboard shortcut.
+* Select Form type of the Platypus application element in the context
+menu, or select Choose file type Platypus application elements on the
+wizard first step and click Next.
+* Enter the name for the new application element in the Name field and
+click Finish to create it, or click Cancel to cancel.
+
+[[visual-ui-editor]]
+Visual UI editor
+----------------
+
+Edit form components layout using the visual form editor. To open the
+editor double-click the application element in the project tree.
+
+To edit the form:
+
+* Open the Design tab of the module editor.
+* Drag a widget, a container or a menu from the components palette onto
+the form surface.
+* Arrange the components on the form.
+* Set the general properties of the form and properties of each
+component on the Properties panel, e.g. text font, foreground and
+background colors.
+* Specify handlers functions of the form and components on the
+Properties/Events, write the event handlers code in the JavaScript
+editor.
+* Configure the form's data model and write code responsible for data
+manipulations.
+* Save the form by clicking Save All on the Platypus Application
+Designer tool bar or by pressing Ctrl S shortcut.
+
+______________________________________________________________________________________________________________________________
+*Note*
+
+A form should contain JavaScript code, responsible for user interface.
+Business logic should be implemented in server modules.
+______________________________________________________________________________________________________________________________
+
+Form's structure is presented as a tree in the form inspector panel. Use
+the inspector to select a widget, a container or a menu, to move a
+component from one container to another, and to select the container
+layout.
+
+Drag components up or down in the inspector tree or activate the Move
+Up, Move Down, and Change Order context menu items to set the order
+along the Z axis.
+
+To run a quick preview of the form, click Preview design on the visual
+editor tool bar. The preview window opens, showing a visual
+representation of the form, which is identical to its look in runtime.
+
+The anchors layout is enabled for all form's containers by default. To
+choose some other layout for the specific container, select the layout
+menu item in the Set Layout submenu from the container's context menu in
+the inspector component tree.
+
+Add a component from the pallete using the visual editor, anchors are
+attached for the nearest container's sides and width and height values
+are automatically set.
+
+Change dimensions of the component and its location by using the mouse
+or arrows keys. When you move a component using arrows keys, the
+position of the component is tied to the grid. Hold down the Ctrl to
+move the component smoothly. Hold down the Shift key to expand the
+widget.
+
+____________________________________________________________________________________________________________
+*Note*
+
+To define form's editor settings, use the properties setting
+dialog:Tools Options Miscellaneous GUI Builder.
+____________________________________________________________________________________________________________
+
+To enable or disable an anchor, use anchors buttons on the form editor
+toolbar.
+
+As an alternative way to specify the layout anchors, use widget node
+menu in the inspector: enable the corresponding anchor in the Anchor
+submenu. Thus, if there's one anchor enabled for one coordinate, then
+this anchor and the appropriate dimension will be used. If there are two
+anchors enabled, then they will be used, and the dimension will be
+extended.
+
+Specify values for anchors and dimensions explicitly, changing the
+values of the component's properties panel in the Layout properties
+group: Left, Top, Right, Bottom, Left, Width, and Height.
+
+Anchors properties values are specified as a strings together with the
+indication of measurement units: pixels or percentages. If measurement
+units are not specified, pixels are used. If a value is defined as a
+percentage, this anchor and dimension will be changed while maintaining
+the defined value when changing dimensions of the container, for example
+: `60px`, `30%`, `40`.
+
+Use the component alignment control buttons on the form editor tool bar
+to align widgets in relation to each other. Alignment buttons become
+active when you select multiple widgets. To select multiple widgets,
+click them while holding down the Ctrl key.
+
+Specify a component's the properties and event handlers:
+
+* Click a form area, which is free from other components, or select a
+form node in the component inspector.
+* Change properties of the form on the Properties panel.
+* Specify the event handlers on the Properties/Events panel.
+* Write code of the handlers in the JavaScript editor.
+* To remove an event handler, delete the name of the handler from the
+corresponding event field; as a result, the <none> name is assigned to
+the handler and the handler function will be removed from the code.
+
+[[form-api]]
+Form API
+--------
+
+Create a module instance in client JavaScript as follows:
+
+* Create an instance of a form with the help of the `new` keyword, using
+a module constructor, for example:
++
+code,JavaScript-------------------------- code,JavaScript
+var formInstance = new ();
+--------------------------
++
+where `
++
+--------------------------------
+      ` is a form's constructor.
+--------------------------------
+* Create an instance of the module with the help of the `new` keyword
+using special `Form` constructor, for example:
++
+code,JavaScript------------------------------ code,JavaScript
+var formInstance = new Form();
+------------------------------
++
+where `
++
+-----------------------------------------------------------
+      ` is the module constructor name string, for example,
+-----------------------------------------------------------
++
+`"MainForm"`;
+
+To make a form visible use the `show` method:
+
+code,JavaScript-------------------- code,JavaScript
+formInstance.show();
+--------------------
+
+An application supports a registry of its shown forms. For every form a
+identifier can be specifyed to refer to the shown form in this registry,
+to do this use form's instance `formKey` property. By default a form's
+key set to its constructor name.
+
+Use the `Form.getShownForm()` method, where formKey is a form's key to
+get the shown form by its key.
+
+code,JavaScript---------------------------------------- code,JavaScript
+var formA = new FormA(); 
+var formB = new FormB();
+formA.formKey = 'A1';
+formB.formKey = 'B1';
+formA.show();
+formB.show();
+Form.getShownForm('A1').visible = false;
+----------------------------------------
+
+Get the array of the application's shown forms registry using `Form`
+object `shown` property:
+
+code,JavaScript---------------------------------------- code,JavaScript
+for(var i=0;i < Form.shown.length;i++) {
+    Logger.info(shownForms[i].title);
+}
+----------------------------------------
+
+Explicitly provide form keys before using `Form.shown` because the shown
+forms registry uses this keys as identifiers.
+
+Add a handler function to the shown form's registry change event. Use
+the `Form` object `onChange` property:
+
+code,JavaScript---------------------------------- code,JavaScript
+Form.onChange = function(e) {
+    Logger.info(e.source.formKey);
+    Logger.info(e.source.visible);
+};
+----------------------------------
+
+The form properties are listed in the following table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`title` |Form's title text.
+
+|`top` |The distance from the parent container top side.
+
+|`left` |The distance from the parent container left side.
+
+|`width` |The form's width.
+
+|`height` |The form's height.
+
+|`allwaysOnTop` |`true` if the form should be displayed on top of all
+other windows and `false` otherwise.
+
+|`formKey` |The form's identifier in the open forms registry.
+
+|`icon` |The form's `Icon`.
+
+|`locationByPlatform` |`true` if form should appear at the default
+location for the native windowing system or at the current location and
+`false` otherwise.
+
+|`opacity` |Opacity of the form, Number in the range of 0..1: 0 when it
+is completely transparent, 1 when form is completely opaque.
+
+|`resizable` |`true` if it is allowed changing of the form dimensions
+and `false` otherwise.
+
+|`undecorated` |`true` to enable displaying of the system borders and
+form buttons and `false` otherwise.
+
+|`minimizable` |`true` if the form is minimizable, and `false`
+otherwise.
+
+|`maximizable` |`true` if the form is maximizable, and `false`
+otherwise.
+
+|`minimized` |`true` if the form is minimized, and `false` otherwise
+(read-only).
+
+|`maximized` |`true` if the form is maximized, and `false` otherwise
+(read-only).
+
+|`visible` |`true` if the form is visible and `false` otherwise.
+
+|`view` |The top-level container of the form.
+|=======================================================================
+
+The form methods are listed in the following table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Method |Description
+|`show()` |Displays the form.
+
+|`showInternalFrame(desktopPane)` |Displays the form within the
+`DesktopPane` container provided as a `desktopPane` parameter.
+
+|`showModal(callback)` |Displays the form as a confirmation dialog. If
+`form.close(param)` method is used to close the dialog form, then
+`callback` function is invoked with a `param` passed as an argument.
+
+|`showOnPanel(parent)` |Displays the form on the container panel,
+`parent` is an object of the panel, on which the form should be shown.
+
+|`close(selected)` |Closes the form. This method may be used to return a
+value, selected using the dialog. If the `selected` parameter is
+specified, it will be passed as the `callback` argument of the function,
+which is passed in turn as a parameter to the `showModal()` method of
+the parent form. If the `selected` parameter has the `null` value, the
+`callback` function will still be called. If the `selected` parameter is
+not passed at all, the `callback` function won't be called.
+
+|`minimize()` |Minimizes the form.
+
+|`maximize()` |Maximizes the form.
+
+|`restore()` |Restores the previous state of the form.
+
+|`toFront()` |Brings the form to the forefront.
+|=======================================================================
+
+`Form` events are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Event type |Description
+|`onMouseWheelMoved` |`MouseWheelEvent` |Is called after rotating the
+mouse wheel.
+
+|`onMouseClicked` |`MouseEvent` |Is called after the mouse is clicked.
+
+|`onComponentAdded` |`ContainerEvent` |Is called after adding a
+component into the form.
+
+|`onComponentHidden` |`ContainerEvent` |Is called after hiding a
+component.
+
+|`onComponentRemoved` |`ContainerEvent` |Is called after removing a
+component from the form.
+
+|`onComponentResized` |`ContainerEvent` |Is called after changing the
+component size.
+
+|`onComponentShown` |`ContainerEvent` |Is called after displaying the
+component.
+
+|`onFocusGained` |`FocusEvent` |Is called after getting the keyboard
+focus.
+
+|`onFocusLost` |`FocusEvent` |Is called after losing the keyboard focus.
+
+|`onKeyPressed` |`KeyEvent` |Is called after pressing the keyboard key.
+
+|`onKeyReleased` |`KeyEvent` |Is called after releasing the keyboard
+key.
+
+|`onWindowActivated` |`WindowEvent` |Is called after the window
+activation.
+
+|`onWindowClosed` |`WindowEvent` |Is called after closing the form
+window.
+
+|`onWindowClosing` |`WindowEvent` |Is called before closing the form
+window.
+
+|`onWindowDeactivated` |`WindowEvent` |object Is called after
+deactivating the form window.
+
+|`onWindowDeiconified` |`WindowEvent` |Is called after retrieving the
+form from an icon on the panel.
+
+|`onWindowMinimized` |`WindowEvent` |Is called after minimizing the
+form.
+
+|`onWindowOpened` |`WindowEvent` |Is called after opening the form
+window.
+|=======================================================================
+
+The `windowClosing` event is cancelable. This event is useful for
+invoking a dialog to confirm the window closing: if the handler returns
+`false`, the form won't be closed:
+
+code,JavaScript-------------------------------------- code,JavaScript
+//Handles windowClosing event
+function formWindowClosing(evt) {
+  return confirm("Close the window?");
+}
+--------------------------------------
+
+To get access to the properties and events of the form from JavaScript
+code, use the corresponding property:
+
+code,JavaScript-------------------------------------- code,JavaScript
+//Sets form's title
+self.title = "Document form";
+
+//Handles onWindowClosing event
+self.onWindowClosing = function() {
+  return confirm("Close the window?");
+}
+--------------------------------------
+
+To get access to the top-level container, use the `view` property:
+
+code,JavaScript----------------------------------- code,JavaScript
+//Sets the form's background
+self.view.background = Color.BLACK;
+-----------------------------------
+
+In the above example the form title is set programmatically, and also an
+alternative way to specify a form event handler is provided.
+
+____________________________________________________________________________________________________________
+*Note*
+
+For the top-level container, the layout should be set by the designer
+and can't be changed by program means.
+____________________________________________________________________________________________________________
+
+[[components-events]]
+Components events
+-----------------
+
+Component events are not propogated to the its parent. A container's
+event is generated only if it has not been generated for its child
+components. Thus, the form will recieve the mouse event only if it has
+occurred over an area, which is free from its children.
+
+The base `ComponentEvent` object contains `source` property that
+contains the event's source component.
+
+Use an event handler function as follows:
+
+code,JavaScript--------------------------------------- code,JavaScript
+function onEventHandler(evt) {
+   evt.source.background = Color.WHITE;
+}
+---------------------------------------
+
+The specific event objects also contain `source` property, as well as
+their own specific properties. The following types of specific events
+are defined: `ContainerEvent`, `KeyboardEvent` and `MouseEvent`.
+
+`ContainerEvent` event object represents an event what is called when
+something happens with the container, e.g. an component added or
+removed, its specific propetries are listed in the following table:
+
+[cols="<,<",options="header",]
+|=============================================================
+|Property |Description
+|`child` |Child component container operation is performed on.
+|=============================================================
+
+`KeyEvent` event object contains information about a keyboard event,
+e.g. a key pressed or released, its specific propetries are listed in
+the following table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`key` |Key code associated with this event.
+
+|`altDown` |`true` if Alt key is down on this event and `false`
+otherwise.
+
+|`controlDown` |`true` if Ctrl key is down on this event and `false`
+otherwise.
+
+|`shiftDown` |`true` if Shift key is down on this event and `false`
+otherwise.
+
+|`metaDown` |`true` if Meta key is down on this event and `false`
+otherwise.
+|=======================================================================
+
+`MouseEvent` event object contains information about a mouse event, e.g.
+a mouse moved or a mouse key is clicked, its specific propetries are
+listed in the following table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`x` |Key code associated with this event.
+
+|`y` |`true` if Alt key is down on this event and `false` otherwise.
+
+|`button` |`true` if Ctrl key is down on this event and `false`
+otherwise.One of the following `Number` values: 0 for no button, 1 for
+the button 1, 2 for the button 2 and 3 for the button 3.
+
+|`clickCount` |The number of mouse clicks associated with this event.
+
+|`altDown` |`true` if Alt key is down on this event and `false`
+otherwise.
+
+|`controlDown` |`true` if Ctrl key is down on this event and `false`
+otherwise.
+
+|`shiftDown` |`true` if Shift key is down on this event and `false`
+otherwise.
+
+|`metaDown` |`true` if Meta key is down on this event and `false`
+otherwise.
+|=======================================================================
+
+[[standard-widgets]]
+Standard widgets
+----------------
+
+Standard widgets are simple components intended to organize
+application's user interface.
+
+To specify visual presentation of the widget, set its properties and
+event handlers in the visual editor or in JavaScript code.
+
+Standard widgets have a set of common properties and events as well as
+specific properties and events.
+
+The common properties for all components are listed in the following
+table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`visible` |`true` if the component is visible and `false` otherwise
+
+|`background` |Background color
+
+|`font` |Font
+
+|`componentPopupMenu` |Popup menu
+
+|`foreground` |Color
+
+|`toolTipText` |Text, which is shown when hovering a cursor over the
+component
+
+|`border` |Component border
+
+|`cursor` |Cursor above the component
+
+|`enabled` |`true` if the component is enabled and `false` otherwise
+
+|`focusable` |`true` if it is allowed for the component to get keyboard
+focus and `false` otherwise
+
+|`opaque` |`true` if the component's background is opaque and `false`
+otherwise
+
+|`error` |Error message of this component. Validation procedure may set
+this property and subsequent focus lost event will clear it.
+|=======================================================================
+
+Common events for all components are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ComponentEvent` |Is called when main action
+performed
+
+|`onComponentAdded` |`ComponentEvent` |Is called after adding the
+component
+
+|`onComponentHidden` |`ComponentEvent` |Is called after hiding the
+component
+
+|`onComponentМoved` |`ComponentEvent` |Is called after moving the
+component
+
+|`onComponentRemoved` |`ComponentEvent` |Is called after removing the
+component from its container
+
+|`onComponentResized` |`ComponentEvent` |Is called after changing the
+component size
+
+|`onComponentShown` |`ComponentEvent` |Is called after displaying the
+component
+
+|`onFocusGained` |`FocusEvent` |Is called after getting the keyboard
+focus
+
+|`onFocusLost` |`FocusEvent` |Is called after losing the keyboard focus
+
+|`onKeyPressed` |`KeyEvent` |Is called after pressing the keyboard key
+
+|`onKeyReleased` |`KeyEvent` |Is called after releasing the keyboard key
+
+|`onKeyTyped` |`KeyEvent` |Is called after pressing the keyboard key
+
+|`onMouseClicked` |`MouseEvent` |Mouse key is pressed and released
+
+|`onMouseDragged` |`MouseEvent` |Component is dragged by the mouse
+
+|`onMouseEntered` |`MouseEvent` |Mouse cursor has entered the component
+rectangle
+
+|`onMouseExited` |`MouseEvent` |Mouse cursor has left the component
+rectangle
+
+|`onMouseMoved` |`MouseEvent` |Mouse cursor has changed its position
+
+|`onMousePressed` |`MouseEvent` |Mouse key is pressed
+
+|`onMouseReleased` |`MouseEvent` |Mouse key is released
+
+|`onMouseWheelMoved` |`MouseWheelEvent` |Mouse wheel is rotated
+|=======================================================================
+
+[[label]]
+Label
+~~~~~
+
+`Label` is a widget with a short piece of text, images or text with an
+image. The label does not respond to keyboard input events and can't get
+the keyboard focus.
+
+The specific properties of this component are listed in the following
+table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`text` |Text
+
+|`icon` |Icon
+
+|`iconTextGap` |Gap between the text and the icon, in pixels
+
+|`horizontalTextPositon` |Horizontal position of the text in relation to
+the icon, one of the following: `HorizontalPosition.RIGHT`,
+`HorizontalPosition.LEFT`, `HorizontalPosition.CENTER`
+
+|`horizontalAlignment` |Horizontal position of the text with the icon
+relative to the component's size, one of the following:
+`HorizontalPosition.RIGHT`, `HorizontalPosition.LEFT`,
+`HorizontalPosition.CENTER`.
+
+|`verticalTextPositon` |Vertical position of the text relative to the
+icon, one of the following: `VerticalPosition.TOP`,
+`VerticalPosition.BOTTOM`, `VerticalPosition.CENTER`
+
+|`verticalAlignment` |Vertical position of the text with the icon
+relative to the component's size, one of the following:
+`VerticalPosition.TOP`, `VerticalPosition.BOTTOM`,
+`VerticalPosition.CENTER`.
+|=======================================================================
+
+To create a component of this type by program means, use the Label
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript---------------------------- code,JavaScript
+var label = new Label(, , );
+----------------------------
+
+where text is the text (optional), icon is an icon (optional),
+iconTextGap is a gap between the icon and text (optional).
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript---------------------------- code,JavaScript
+label.text = "Message text";
+view.add(label);
+----------------------------
+
+[[button]]
+Button
+~~~~~~
+
+`Button` is a simple button, which responds to the click action.
+
+The properties of this component are listed in the following table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`icon` |`Icon` attached to `Button`.
+
+|`text` |Component's text.
+
+|`iconTextGap` |Gap between the text and the icon, in pixels.
+
+|`horizontalTextPositon` |Horizontal position of the text in relation to
+the icon: `HorizontalPosition.RIGHT`, `HorizontalPosition.LEFT`,
+`HorizontalPosition.CENTER`
+
+|`verticalTextPosition` |Vertical position of the text in relation to
+the icon: `VerticalPosition.BOTTOM`, `VerticalPosition.TOP`,
+`VerticalPosition.CENTER`
+|=======================================================================
+
+The specific component events are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|======================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ActionEvent` |Button click event
+|======================================================
+
+To create a component of this type by program means, use the Button,
+which can be called with a different number of parameters:
+
+code,JavaScript------------------------------ code,JavaScript
+var btn5 = new Button(, , , );
+------------------------------
+
+where text is text (optional), icon is an icon (optional), iconTextGap
+is a gap between the icon and text (optional), actionPerformed is a
+handler of the button clicking event (optional).
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript------------------------------------- code,JavaScript
+btn1.text = "Click me";
+btn1.onActionPerformed = function() {
+  alert("Clicked!");
+}
+view.add(btn1);
+-------------------------------------
+
+[[togglebutton]]
+ToggleButton
+~~~~~~~~~~~~
+
+`ToggleButton` is a button with two states: selected and not selected.
+
+This component looks like a standard button, but after a click action it
+and it will stay in a toggled state. You can use this widget, for
+example, when it is necessary to choose from the two options, but flags
+or switches are not suitable.
+
+The list of `ToggleButton` widget properties is identical to the
+`Button` widget properties, with the the following specific properties:
+
+[cols="<,<",options="header",]
+|==================================================================
+|Property |Description
+|`buttonGroup` |The button group this button belongs
+|`selected` |`true` if the button is selected and `false` otherwise
+|==================================================================
+
+The specific component events:
+
+[cols="<,<,<",options="header",]
+|=======================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ActionEvent` |Button toggle event
+|=======================================================
+
+To create a component of this type by program means, use the
+ToggleButton constructor, which can be called with a different number of
+parameters:
+
+code,JavaScript---------------------------------------------
+code,JavaScript
+var btn = new ToggleButton(, , , selected, );
+---------------------------------------------
+
+where text is text, icon is an icon (optional), iconTextGap is a gap
+between the icon and text, selected is set to `true`, if the button is
+selected and `false` otherwise (optional), actionPerformed is a handler
+function of the button clicking event (optional).
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript------------------------------------- code,JavaScript
+btn1.text = "Turn me on!";
+btn1.onActionPerformed = function() {
+    if(btn.selected)
+        btn1.text = "Turn me off.";
+    else
+        btn1.text = "Turn me on!";
+}
+view.add(btn1);
+-------------------------------------
+
+[[checkbox]]
+CheckBox
+~~~~~~~~
+
+`CheckBox` is a component with two states: selected/not selected.
+
+The specific component events are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ActionEvent` |The components state changing event
+|=======================================================================
+
+To create a component of this type by program means, use the CheckBox
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript---------------------------- code,JavaScript
+var cb = new CheckBox(, , );
+----------------------------
+
+where text is text (optional), icon is an icon (optional), selected is
+set to `true`, when the check box is selected and `false` otherwise
+(optional), actionPerformed is a handler function of the check box
+switching event (optional).
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript-------------------------------------------------
+code,JavaScript
+cb1.text = "Check box 1";
+cb1.selected = true;
+cb1.onActionPerformed = function() {
+  cb1.selected && alert("Check box 1 selected!");
+}
+view.add(cb1);
+-------------------------------------------------
+
+[[radiobutton]]
+RadioButton
+~~~~~~~~~~~
+
+`RadioButton` is a component with two states: selected/not selected.
+Widgets of this type can be joined into groups. Only one widget of this
+type can be selected in one group.
+
+The list of `RadioButton` widget properties is identical to the `Button`
+widget properties, but it includes the following specific properties:
+
+[cols="<,<",options="header",]
+|==================================================================
+|Property |Description
+|`buttonGroup` |The button group this button belongs
+|`icon` |The `Icon` for the widget
+|`selected` |`true` if the button is selected and `false` otherwise
+|==================================================================
+
+See the description of the `Button` widget for the list of `RadioButton`
+widget properties.
+
+[cols="<,<,<",options="header",]
+|======================================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ActionEvent` |Radio button state switching event
+|======================================================================
+
+To create a component of this type by program means, use the RadioButton
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript-------------------------------- code,JavaScript
+var rb4 = new RadioButton(, , );
+--------------------------------
+
+where `
+
+--------------------------------------------------------------------
+    ` is text (optional), `
+      
+    ` is set to `true` when the radio button is selected and `false`
+--------------------------------------------------------------------
+
+otherwise (optional), `
+
+----------------------------------------------------------
+    ` is the button switching handler function (optional).
+----------------------------------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript--------------------------------------------------
+code,JavaScript
+rb1.text = "Radio button 1";
+rb1.selected = true;
+rb1.onActionPerformed = function(evt) {
+rb1.selected && alert("Radio button 1 selected!");
+}
+view.add(rb1);
+--------------------------------------------------
+
+[[buttongroup]]
+ButtonGroup
+~~~~~~~~~~~
+
+`ButtonGroup` is a special kind of a component without its own visual
+representation. After adding to the form, the button group component
+will be added to the Other components tree node on the inspector panel.
+
+The group of buttons enables the simultaneous selection of only one of
+widgets belonging to the `ToggleButton`, `RadioButton`, and
+`RadioMenuItem` types, for which the same button group is assigned. When
+you select one of the widgets in the group, the other widgets will be
+reset.
+
+Set the `buttonGroup` property for the supported components types. To do
+this, select the appropriate button group from the property field list
+on the properties panel.
+
+Use ButtonGroup constructor in your program:
+
+code,JavaScript------------------------------------ code,JavaScript
+var buttonGroup = new ButtonGroup();
+------------------------------------
+
+To specify a `ButtonGroup` for a exclusive buttons, use component's
+buttonGroup property:
+
+code,JavaScript-------------------------------------- code,JavaScript
+radioButton.buttonGroup = buttonGroup;
+--------------------------------------
+
+As an alternative method to add child buttons to the `ButtonGroup`, use
+the add method:
+
+code,JavaScript------------------ code,JavaScript
+buttonGroup.add();
+------------------
+
+where component is a button widget to add.
+
+After creating, add button widgets to the group:
+
+code,JavaScript-------------------------------------- code,JavaScript
+var rbA = new RadioButton("A", true);
+var rbB = new RadioButton("B", false);
+rbA.buttonGroup = buttonGroup;
+rbB.buttonGroup = buttonGroup;
+--------------------------------------
+
+[[textfield]]
+TextField
+~~~~~~~~~
+
+`TextField` is a simple component, which allows you to edit single line
+of text.
+
+The properties of this component are listed in the following table:
+
+[cols="<,<",options="header",]
+|================================================================
+|Property |Description
+|`text` |The text for the widget.
+|`emptyText` |The text displayed when the actual value is absent.
+|================================================================
+
+The specific component events are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ActionEvent` |Text input event: pressing the
+Enter key
+|=======================================================================
+
+To create a component of this type by program means, use the TextField
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript-------------------------- code,JavaScript
+var tf2 = new TextField();
+--------------------------
+
+where `
+
+-----------------------------------
+    ` is the field text (optional).
+-----------------------------------
+
+After creating, if necessary, set the properties and event handlers and
+add the component to the container:
+
+code,JavaScript------------------------------------ code,JavaScript
+tf.emptyText = "Enter your name...";
+view.add(rb1);
+------------------------------------
+
+[[slider]]
+Slider
+~~~~~~
+
+`Slider` is a component, which allows you to visually select a value by
+moving the slider lever within the specified interval.
+
+The properties of this component are listed in the following table:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`maximum` |Maximum value
+
+|`minimum` |Minimum value
+
+|`orientation` |Horizontal or vertical orientation of the component:
+`HORIZONTAL`, `VERTICAL`
+
+|`value` |Value
+|=======================================================================
+
+The specific component events are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ComponentEvent` |Slider movement termination
+event
+|=======================================================================
+
+To create a component of this type by program means, use the Slider
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript---------------------------- code,JavaScript
+var sl = new Slider(, , , );
+----------------------------
+
+where `
+
+------------------------------------------------------------------
+    ` is the slider orientation, an object of the Orientation type
+------------------------------------------------------------------
+
+(optional), min is a minimum value (optional), max is a maximum value
+(optional), value is the current value (optional).
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript---------------------------------------------
+code,JavaScript
+var sl1 = new Slider(Orientation.HORIZONTAL);
+sl1.minimum = 0;
+sl1.maximum = 100;
+sl1.value = 50;
+s1l.onActionPerformed = function(evt) {
+  Logger.info("Slider moved.");
+}
+view.add(sl1);
+---------------------------------------------
+
+[[progressbar]]
+ProgressBar
+~~~~~~~~~~~
+
+`ProgressBar` is a component, which visually shows the progress of some
+task.
+
+For example, during the execution of a task the percentage of its
+completion may be displayed. In this case, set the minimum property
+value to 0, maximum set the maximum property value to 100 and specify
+the value when receiving new data on the progress of this task.
+
+If you have no information about the current task progress or such data
+can't be obtained, use the uncertainty mode, in which the indicator will
+show that the task was started but is not completed yet instead of its
+progress.
+
+The specific properties of this component are listed in the following
+table:
+
+[cols="<,<",options="header",]
+|============================================
+|Property |Description
+|`maximum` |Maximum value
+|`minimum` |Minimum value
+|`value` |Value of progress
+|`text` |Text displayed inside a progress bar
+|============================================
+
+To create a component of this type, use the ProgressBar constructor,
+which can be called with a different number of parameters:
+
+code,JavaScript----------------------------- code,JavaScript
+var pb = new ProgressBar(, );
+-----------------------------
+
+where `
+
+--------------------------------------
+    ` is a minimum value (optional), `
+      
+    ` is a maximum value (optional).
+--------------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript---------------------------- code,JavaScript
+var pb1 = new ProgressBar();
+pb1.minimum = 0;
+pb1.maximum = 100;
+view.add(pb1);
+----------------------------
+
+[[formattedfield]]
+FormattedField
+~~~~~~~~~~~~~~
+
+`FormattedField` is a component, which allows you to edit value of some
+specific type as the text. So, a user sees just text and a program sees
+a value of specific type e.g. date, number, boolean, string and etc.
+Specify the set of characters, which will be considered acceptable to
+enter in this field. Provide the value's format and the widget's value.
+The value is converted into the required format before displaying.
+
+For example, you can configure the widget to enter some date some
+predefined formats, and also set the custom format to enter strings.
+
+The `FormattedField` properties is identical to the `TextField` widget
+properties, but it includes the following specific properties:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`format` |Format string, check Java`java.util.Formatter` documentation.
+|=======================================================================
+
+The formatted field is intended to display and enter values of a
+particular type. The format of displaying and editing can vary only
+within a given type. Therefore, when you programmatically create this
+widget, you should specify a value determining the type, within which
+this widget will work, before defining the format. After determining the
+value type, the format can be changed if the new format will be suitable
+for displaying and editing the values of this type.
+
+Use the format setting dialog to specify the format string in the visual
+editor. Click the button in the format property field. Select a category
+from the following: number, date, time, percentage, currency, and mask.
+Select a predefined format for the selected category or specify the
+custom one in the Format field.
+
+The specific component events are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameters |Description
+|`onActionPerformed` |`ComponentEvent` |Value input event: pressing the
+Enter key.
+|=======================================================================
+
+To create a component of this type by program means, use the
+FormattedField constructor, which can be called with a different number
+of parameters:
+
+code,JavaScript------------------------------ code,JavaScript
+var ff = new FormattedField();
+------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript---------------------------------- code,JavaScript
+var ff = new FormattedField();
+ff.value = new Date();
+ff.format = "dd.MM.yyyy HH:mm:ss";
+----------------------------------
+
+[[passwordfield]]
+PasswordField
+~~~~~~~~~~~~~
+
+`PasswordField` is a simple input component, which allows you to edit
+single line of text. It displays placeholders instead of actual
+characters.
+
+The properties and events of `PasswordField` are identical to the
+`TextField` widget.
+
+To create a component of this type in JavaScript code, use PasswordField
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript----------------------------- code,JavaScript
+var pf = new PasswordField();
+-----------------------------
+
+where `
+
+-------------------------
+    ` is text (optional).
+-------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript----------------------------- code,JavaScript
+var pf = new PasswordField();
+view.add(pf, ...);
+-----------------------------
+
+[[textarea]]
+TextArea
+~~~~~~~~
+
+`TextArea` is the text component for editing and displaying multistring
+text.
+
+The properties and events of `TextArea` are identical to the `TextField`
+widget.
+
+To create a component of this type in JavaScript code, use TextArea
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript------------------------------ code,JavaScript
+var textArea = new TextArea();
+------------------------------
+
+where `
+
+-------------------------
+    ` is text (optional).
+-------------------------
+
+code,JavaScript------------------------------ code,JavaScript
+var textArea = new TextArea();
+view.add(textArea);
+------------------------------
+
+[[htmlarea]]
+HtmlArea
+~~~~~~~~
+
+`HtmlArea` is a component for editing and displaying HTML documents.
+
+When showing a form in web-browser, the editor area is displayed as HTML
+WYSIWYG editor.
+
+The properties and events of `HtmlArea` are identical to the `TextField`
+widget.
+
+To create a component of this type in JavaScript code, use HtmlArea
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript------------------------------ code,JavaScript
+var textArea = new HtmlArea();
+------------------------------
+
+where `
+
+-------------------------
+    ` is text (optional).
+-------------------------
+
+code,JavaScript------------------------------------- code,JavaScript
+var htmlArea = new HtmlArea();
+htmlArea.text = "<p>Sample text</p>";
+view.add(htmlArea);
+-------------------------------------
+
+[[model-widgets]]
+Model widgets
+-------------
+
+Model widgets are components, which can interact with the data model and
+respond to the model's datasets events.
+
+You can bind a model widgets to any data model entity dataset (including
+"parameters" entity). This dataset will change in response to the user
+actions on the widgets and its changes will lead to automatic update of
+data displayed on all bound widgets.
+
+Configure specific properties for binding to data model, using
+properties in the Model binding category.
+
+Scalar model widgets represents a single dataset object and its specific
+field. This data object is the object at the cursor position. Other more
+complex model widgets as `ModelGrid` and `ModelMap` can represent
+multiply objects in dataset and control the cursor in this dataset.
+
+Scalar model widgets have the following common properties:
+
+[cols="<,<",options="header",]
+|=============================================
+|Property |Description
+|`field` |Bound model entity field.
+|`value` |The current value for the component.
+|=============================================
+
+Scalar model widgets common events are listed in the following table:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameter |Description
+|`onSelect` |The `aEditor` object is the source component, is passed to
+the event handler as a parameter, specify the value of the component by
+setting its properties. |Occurs when the select button, located next to
+the component, is clicked. The select button is displayed only if the
+handler is defined.
+
+|`onRender` |`RenderEvent` |Occurs when preparing the widget for
+displaying (both when it is used independently or as a `ModelGrid`
+widget cell). This event is cancelable: return `true` in its handler
+function to apply rendering and `false` otherwise.
+|=======================================================================
+
+Any model widget can be presented as an independent component and as a
+`ModelGrid` widget cell. There is an "abstract" cell in each model
+widget. It is available in the `onRender` event handlers.
+
+`RenderEvent` object specific propetries are listed in the following
+table:
+
+[cols="<,<",options="header",]
+|=========================================
+|Property |Description
+|`id` |The primary key of the data object.
+|`cell` |The "abstract" cell.
+|=========================================
+
+For such a `cell`, the following properties are defined:
+
+* `display` is the displayed text.
+* `style` is the `Style` of displaying.
+
+Model widgets also have the same basic properties and event as standard
+widgets. It is not recommended to specify handlers of low-level events
+(keyboard, mouse movement events, etc.) for model widgets.
+
+The following example illustrates how to use `onSelect` event:
+
+code,JavaScript---------------------------------------- code,JavaScript
+/**
+ * Shows custom selector dialog and sets
+ * the cell's editor's value.
+ *
+ */
+function buttonOnSelect(aEditor) {
+  var selector = new PetSelector();
+  selector.showModal(function(){
+    aEditor.value = selector.pet;
+  });
+}
+----------------------------------------
+
+`onRender` event usage example is as follows:
+
+code,JavaScript-----------------------------------------------------
+code,JavaScript
+/**
+ * Renders a cell with complex data
+ */
+function entityOnRender(evt) {
+    var txt = '';
+    categories.find(categories.schema.CAT_ID, evt.id)
+        .forEach(function(aDoc) {
+           if(txt.length > 0) {
+            txt += ' ';
+           }
+          txt += aCat.NAME ? aDoc.NAME : '';
+          });
+    evt.cell.display = txt;
+    return true;
+}
+-----------------------------------------------------
+
+[[modelcheck]]
+ModelCheck
+~~~~~~~~~~
+
+`ModelCheck` is a scalar model widget representing a check box, the
+state of which is linked to an entity's field of a Boolean, Number, or
+String type.
+
+The data of various types is displayed as boolean data by this widget.
+Data types conversion rules are as follows:
+
+* Widget's value is displayed as `true` when actual data is the
+following values: Boolean type: `true`, Number type: any number other
+than `0` or `null`, String type: any string other than empty and `null`.
+* Widget's `true` value is converted to various types as follows:
+Boolean: `true`, Number type: `1`, String type: `'true'`.
+* Widget's `false` value is converted to various types as follows:
+Boolean type: `false`, Number type: 0, String type: an empty string.
+
+To configure the widget model binding specifiy the field property for
+the component, select a parameter or a data model entity's field in the
+data model field selection form.
+
+To create a component of this type by program means, use the
+ModelCheckBox constructor:
+
+code,JavaScript------------------------------------- code,JavaScript
+var modelCheck = new ModelCheckBox();
+-------------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript-----------------------------------------------
+code,JavaScript
+modelCheck.field = model.entityA.schema.fieldA;
+view.add(modelCheck);
+-----------------------------------------------
+
+[[modelcombo]]
+ModelCombo
+~~~~~~~~~~
+
+`ModelCombo` is a scalar model widget representing a combo box that is
+bound to some data model field. This widget uses other two fields of an
+entity to generate visual representation and syncronise it to the value.
+As other model widgets, it holds and edits model's value and displays
+some other looked up value. It also allows you to select a value from a
+list. List items are also looked up while displaying.
+
+`ModelCombo` widget has the following specific properties:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`valueField` |Value field of the component.
+
+|`displayField` |Display field of the component.
+
+|`list` |`true` to allow selection from drop-down list and `false`
+otherwise.
+|=======================================================================
+
+To configure the widget model binding:
+
+* Specify the field property for the component. Select a parameter or a
+data model entity field.
+* Specify the value field, i.e. the field, the values from which will be
+compared with the values of the list items, to do this, use the
+valueField property. Select a data model parameter or some entity field.
+The entity for this field must be the same as for displayField property,
+but different from the one specified for the `field` property.
+* Set the display field, i.e. a field, the values from which will be
+shown to the user. Use thedisplayField property. Select a data model
+parameter or a data model entity field. The entity for this field must
+be the same as for displayField property, but different from the one
+specified for the `field` property.
+* To allow selection of value from the list, enable the list property
+checkbox.
+* To allow a customized selection of the widget's value, specify
+`onSelect` event handler.
+
+To create a component of this type by program means, use the ModelCombo
+constructor:
+
+code,JavaScript---------------------------------- code,JavaScript
+var modelCombo = new ModelCombo();
+----------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+//Specify value field as a model parameter:
+modelCombo.field = model.params.schema.paramA;
+
+//Lookup fields:
+modelCombo.valueField = model.entityB.schema.id;
+modelCombo.displayField = model.entityB.schema.name;
+
+view.add(modelCombo);
+----------------------------------------------------
+
+[[modeldate]]
+ModelDate
+~~~~~~~~~
+
+`ModelDate` is a scalar model widget representing a date and bound to
+some date or timestamp field in the model.
+
+`ModelDate` widget has the following specific properties:
+
+[cols="<,<",options="header",]
+|=================================================================
+|Property |Description
+|`editable` |`true` if the date is editable and `false` otherwise.
+|`expanded` |`true` to show calndar panel and `false` otherwise.
+|=================================================================
+
+To configure the widget model binding:
+
+* Specify the field property. Select a parameter or a data model entity
+field in the form for selecting a data model entity field.
+* Configure the date and time format by selecting from the drop-down
+list.
+* Enable the expanded flag to display the calendar in an expanded form.
+To ensure that the widget is displayed correctly, set its dimensions
+according to its full-scale view.
+
+To create a component of this type by program means, use the ModelDate
+constructor:
+
+code,JavaScript-------------------------------- code,JavaScript
+var modelDate = new ModelDate();
+--------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript-------------------------------------------------
+code,JavaScript
+modelDate.field = model.entityA.schema.dateField;
+modelDate.editable = true;
+view.add(modelDate);
+-------------------------------------------------
+
+[[modelgrid]]
+ModelGrid
+~~~~~~~~~
+
+`ModelGrid` model widget is a powerful widget to display and enter data,
+which is presented in a tabular form and as a tree. `ModelGrid` widget
+is the most powerful UI component.
+
+___________________________________________________________________________________________________________________
+*Note*
+
+At the current version of the platfom you can create and setup an
+instance of `ModelGrid` only using visual editor.
+___________________________________________________________________________________________________________________
+
+`ModelGrid` component has the following features:
+
+* Entity's data representation as a columns and rows.
+* Data cells editing, inserting new and deleting rows.
+* Fixed non-scrollable rows and/or columns.
+* Service column with the cursor pointer.
+* Entity's data scrolling and cursor positioning.
+* Expandable dynamic columns.
+* Tree view of hierarchical data.
+
+`ModelGrid` widget has the following specific properties:
+
+[cols="<,<,<,<",options="header",]
+|=======================================================================
+|Property |Layout |JS |Description
+|`border` |• |[multiblock cell omitted] |The component's border.
+
+|`fixedColumns` |• |• |The number of the fixed grid columns.
+
+|`fixedRows` |• |• |The number of the fixed grid rows.
+
+|`gridColor` |• |• |The `Color` of the grid.
+
+|`oddRowsColor` |• |• |The `Color` of the grid's odd rows.
+
+|`rowsHeaderType` |• |• |The service column's type.
+
+|`rowsHeight` |• |• |The height of the grid's rows.
+
+|`showHorizontalLines` |• |• |`true` to show horizontal lines and
+`false` otherwise.
+
+|`showVerticalLines` |• |• |`true` to show vertical lines and `false`
+otherwise.
+
+|`showOddRowsInOtherColor` |• |• |`true` to show odd rows in the
+different color and `false` otherwise.
+
+|`deletable` |• |• |`true` to enable rows delete operation for the grid
+and `false` otherwise.
+
+|`editable` |• |• |`true` to enable cells edit operation for the grid
+and `false` otherwise.
+
+|`insertable` |• |• |`true` to enable rows insert operation for the grid
+and `false` otherwise.
+
+|`entity` |• |[multiblock cell omitted] |The bounded model entity for
+the grid.
+
+|`param2GetChildren` |• |[multiblock cell omitted] |See tree option.
+
+|`paramSourceField` |• |[multiblock cell omitted] |See tree option.
+
+|`unaryLinkField` |• |[multiblock cell omitted] |See tree option.
+
+|`cells` |[multiblock cell omitted] |• |All grid cells as an array.
+
+|`selectedCells` |[multiblock cell omitted] |• |All selected grid cells
+as an array.
+
+|`columns` |[multiblock cell omitted] |• |Grid columns as an array.
+|=======================================================================
+
+To configure `ModelGrid` properties:
+
+* To select the model entity for the component use the entity property
+under the Model binding propetries group. To delete the binding, clear
+the entity field.
+* Use the fixedColumns and fixedRows properties in the Apperance
+properties group to freeze the required number of columns on the left
+and/or rows on the top of the grid.
+* Configure the rowsHeaderType property to define appearance of the rows
+header. It has the following options: None — the service column is not
+displayed, Usual — the service column is displayed with the cursor icon,
+Check box — a check box control, which allows you to select multiple
+rows, Radio button — to show a radio button control, which allows you to
+select only one row of the grid.
+* Use the `onRender` event handler, which will be called for each data
+grid cell, if a similar handler was not defined for their columns.
+
+`ModelGridColumn` has the following properties:
+
+[cols="<,<,<,<",options="header",]
+|=======================================================================
+|Property |Layout |JS |Description
+|`enabled` |• |[multiblock cell omitted] |`true` if the column is
+enabled and `false` otherwise.
+
+|`fixed` |• |[multiblock cell omitted] |`true` if the column is fixed
+and `false` otherwise.
+
+|`readonly` |• |• |`true` the column is in a read-only mode and `false`
+otherwise.
+
+|`selectOnly` |• |[multiblock cell omitted] |`true` the column is in a
+select-only mode and `false` otherwise.
+
+|`title` |• |• |The column's title string.
+
+|`expandable` |• |[multiblock cell omitted] |See expandable option.
+
+|`visible` |• |• |`true` the column is visible and `false` otherwise.
+
+|`width` |• |• |The column's width in pixels.
+
+|`background` |• |[multiblock cell omitted] |The header style background
+color.
+
+|`font` |• |[multiblock cell omitted] |The header style font.
+
+|`field` |• |[multiblock cell omitted] |Model entity's field bound to
+this column.
+
+|`columnsEntity` |• |[multiblock cell omitted] |See expandable option.
+
+|`columnsDisplayField` |• |[multiblock cell omitted] |See expandable
+option.
+
+|`cellsEntity` |• |[multiblock cell omitted] |See expandable option.
+
+|`cellsValueField` |• |[multiblock cell omitted] |See expandable option.
+
+|`cellsColumnKeyField` |• |[multiblock cell omitted] |See expandable
+option.
+
+|`rowsKeyField` |• |[multiblock cell omitted] |See expandable option.
+
+|`substitute` |• |[multiblock cell omitted] |See expandable option.
+|=======================================================================
+
+`ModelGrid` has ability to change it's cells' display style and to
+select values using custom editors while editing cells. In order to use
+these features, define `onRender` and `onSelect` event handlers in
+particular columns. If `onRender` event handler is defined on a column,
+it will be ivoked rather than similar event handler, defined on
+`ModelGrid`. Refer to link:#mwidgets[Model Widgets] section to read
+about how to deal with `onRender` and `onSelect` event handlers.
+
+Use the form inspector: the inspector displays the grid's columns node
+as children of `ModelGrid` component node and allows you to edit them.
+
+To add, remove and configure grid columns:
+
+* To fill all `ModelGrid` columns corresponding to the fields of the
+linked data model entity, select Fill columns — in this case, link to
+the entity fields will be performed automatically.
+* To manually add a column to `ModelGrid` drag it from the components
+palette or add it using Add from palette Model-aware controls Model grid
+columncontext menu item in form inspector.
+* To add a column as a child to another column use parent column's node
+Add from palette Model-aware controls Model grid column context menu
+item in form inspector.
+* Move the selected columns up and down using the Move up, Move down or
+Change Order context menu items or by draggining it by mouse.
+
+In standard mode a column represents entity's field data. To configure
+the column in standard mode:
+
+* Specify the bound entity's field, to which the column should be
+linked. To do this, use the field property and select a field from the
+bound entity.
+* Define a widget, which will be used for displaying in the column
+cells. Select its type from the view context menu of the column's node
+in the inpector. The choices will be compatible with the type of the
+linked entity field. Set the properties of the corresponding widget (see
+the corresponding sections for the description of the model widget
+setting procedure).
+
+In expanded mode, a column can contain an arbitrary number of child
+columns. Their combination can be changed dynamically at runtime.
+
+image:images/expandableTables.png[Expandable columns data tables]
+
+image:images/expandableResult.png[Expandable column result grid]
+
+The combination of dynamic children columns is determined by a special
+column entity in the data model. Values for the child column cells are
+determined by another cell entity, the objects of which also contain
+references to objects in the main entity (grid's rows source) and to the
+column entity objects.
+
+image:images/gridFilpColumnsDatasource.png[Expandable column entities]
+
+Use the following `ModelGridColumn` propeties to configure an expandable
+column:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`expandable` |`true` if the column is in a expanded mode and `false`
+otherwise.
+
+|`substitute` |`true` to hide the parent column and `false` otherwise.
+
+|`columnsEntity` |Columns entity representing data to form columns.
+
+|`columnsDisplayField` |The field in Columns entity for dynamic columns
+titles.
+
+|`cellsEntity` |Cells entity.
+
+|`cellValueField` |The value field in Cells entity.
+
+|`cellColumnKeyField` |The field in Cells entity refering to the primary
+key in Columns entity.
+
+|`cellRowKeyField` |The field in Cells entity refering to the primary
+key in Main entity.
+|=======================================================================
+
+The widget can be configured to display a tree structure in the first
+column on the left (next to the service column). Other columns in this
+grid are displayed as usual.
+
+To show a tree we need an entity, which contains a field referring to
+some other field, thus forming a hierarchical data structure.
+
+image:images/gridTree.png[Hierarchical data dataset]
+
+A tree structure in the grid can function in two modes:
+
+* The simple mode, in which all tree levels are loaded by a single
+query.
+* The lazy mode, in which each level is loaded as the nodes are
+expanded.
+
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+The simple tree operation mode is acceptable only for small sets of
+data, since in this mode all tree elements are requested simultaneously
+and it can lead to the performance problems and slow user interface. For
+large data sets, use the lazy tree operation mode.
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+To configure a tree in the simple mode:
+
+* Specify a value for the `unaryLinkField` property. For this property
+select the link source field, which is responsible for hierarchical
+relationships, in the example figure above it is the `ParentID` field.
+To remove the selection, clear the property.
+
+_____________________________________________________________________________________________
+*Important*
+
+The link source field should be in the same data set as configured as
+the grid's rows source.
+_____________________________________________________________________________________________
+
+To use a lazy tree grid, create an entity based on a query, which
+returns child elements by the parent identifier passed as a parameter,
+for example:
+
+code,SQL---------------------------------------------- code,SQL
+/**
+ * @name LazyTree
+ */
+SELECT * FROM tree_table t
+WHERE t.PARENT_ID = :parentId
+OR (:parentId IS NULL AND t.PARENT_ID IS NULL)
+----------------------------------------------
+
+To configure lazy tree for `ModelGrid`:
+
+* Specify `unaryLinkField` property. For this property select the link
+source field, which is responsible for hierarchical relationships, in
+the example figure above it is the `ParentID` field.
+* Set `param2GetChildren` property. Select the entity's parameter that
+is responsible for fetching child records. In the code snippet above
+this corresponds to `:parentId` parameter.
+* Set `paramSourceField` property. Select the field that will be used as
+a source for the parameter to get child records. The field's value will
+provided to the parameter specified by `param2GetChildren` property. In
+the example above this property should be set to `ID` primary key field.
+
+[[modelimage]]
+ModelImage
+~~~~~~~~~~
+
+`ModelImage` is a scalar model widget to display an image. The state of
+this component is linked to a field of the data model, which contains
+binary data of the image in one of the following formats: GIF, JPEG,
+PNG. This field usually corresponds to the BLOB type in the database.
+
+______________________________________________________________________________________________
+*Note*
+
+In the current Platypus Platform version, this component is supported
+only in the J2SE client.
+______________________________________________________________________________________________
+
+`ModelImage` widget has the following specific properties:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`editable` |`true` if the image is editable and `false` otherwise.
+
+|`plain` |`true` if image is displayed with real dimensions and not
+scaled. If true, the image is not fitted by its size and can't be scaled
+with the mouse wheel and `false` otherwise.
+|=======================================================================
+
+To configure the widget:
+
+* Set the entity property for the component, using the field property on
+the properties panel; select the data model parameter or data model
+entity property in the dialog.
+* Set the `plain` property to prevent image scaling.
+
+To upload an image or other binary file into the database, open the file
+selection dialog in the component selection event handler. In the
+handler, assign a file byte array to the `value` property of the
+ModelImage control. Then the contents of the file be added to the
+control and the corresponding entity field will be changed. If you later
+request saving of the `model.save()` model, the file contents will by
+saved by the model in usual way.
+
+code,JavaScript---------------------------------------- code,JavaScript
+modelImage.onSelect = function(aEditor){
+    selectFile(functon (file) {
+      aEditor.value = readFile(file);
+    });
+}
+----------------------------------------
+
+To create a component of this type by program means, use the ModelImage
+constructor:
+
+code,JavaScript---------------------------------- code,JavaScript
+var modelImage = new ModelImage();
+----------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript-----------------------------------------------
+code,JavaScript
+modelImage.field = model.entityA.schema.images;
+view.add(modelImage);
+-----------------------------------------------
+
+[[modelformattedfield]]
+ModelFormattedField
+~~~~~~~~~~~~~~~~~~~
+
+`ModelFormattedField` is a scalar model widget, the state of which is
+linked to a field of the data model string or number type. The widget
+can be used to display and enter text. You can apply specified
+formatting to the displayed value and impose restrictions on entered
+data.
+
+`ModelFormattedField` widget has the following specific properties:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`format` |Format string, check Java`java.util.Formatter` documentation.
+|=======================================================================
+
+To configure the widget:
+
+* Set the entity property for the component, using the field property on
+the properties panel; select the data model parameter or data model
+entity property in the dialog.
+* If necessary, set handlers for selection and data changing events.
+* Configure the format of displaying by setting a value for the format
+property; see the section dedicated to the FormattedField widget for
+information on using this property.
+
+To create a component of this type by program means, use the
+ModelFormattedField constructor:
+
+code,JavaScript------------------------------------ code,JavaScript
+var mff = new ModelFormattedField();
+------------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to a container:
+
+code,JavaScript-------------------------------------------
+code,JavaScript
+mff.field = model.entityA.schema.dateField;
+mff.format = "dd.MM.yyyy HH:mm:ss";
+view.add(mff);
+-------------------------------------------
+
+[[modeltextarea]]
+ModelTextArea
+~~~~~~~~~~~~~
+
+`ModelTextArea` is a scalar model widget, the state of which is linked
+to a field of the data model of string or number type. The widget can be
+used to display and enter text.
+
+`ModelTextArea` widget has the following specific properties:
+
+[cols="<,<",options="header",]
+|=================================================================
+|Property |Description
+|`editable` |`true` if the text is editable and `false` otherwise.
+|=================================================================
+
+To configure the widget:
+
+* Set the entity property for the component, using the field property on
+the properties panel; select the data model parameter or data model
+entity property in the dialog.
+* If necessary, set handlers for selection and data changing events.
+
+To create a component of this type by program means, use the
+ModelTextArea constructor:
+
+code,JavaScript------------------------------ code,JavaScript
+var mta = new ModelTextArea();
+------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript-------------------------------------------
+code,JavaScript
+mta.field = model.entityB.schema.textField;
+view.add(mta);
+-------------------------------------------
+
+[[modelmap]]
+ModelMap
+~~~~~~~~
+
+`ModelMap` widget is used to display a map and objects on it. This
+widget displays a map by loading bitmap tiles from the network using a
+given URL. An arbitrary number of layers are imposed upon the map to
+display objects.
+
+The map component allows you to position the map, change its scale, turn
+layers on and off, select objects, etc.
+
+___________________________________________________________________________________________________
+*Note*
+
+In the current Platypus Platform version, this widget is supported only
+in the J2SE desktop client.
+___________________________________________________________________________________________________
+
+Coordinates and shapes of the displayed objects should be presented
+using the "Geometry" data type. The layer entity should contain one
+column of the "Geometry" type and an arbitrary number of columns
+containing additional attributes.
+
+Each layer should have an assigned entity, which contains information
+about objects. One entity can be linked with one or more layers. If the
+entity is linked with several layers, a field with information about
+entity instance belonging to the layer should be defined. In this case,
+each layer should have its own identifier for this field. A layer
+identifier must be a positive integer.
+
+`ModelMap` widget has the following specific properties:
+
+[cols="<,<",options="header",]
+|===================================
+|Property |Description
+|`backingUrl` |URL for tiles source.
+|===================================
+
+To configure the map:
+
+* Specify the map title by filling out the Title field.
+* Link the data model parameter to the map scale: to do this, click the
+select button next to the Zoom factor parameter field, on the form for
+selecting a data model field choose the data model parameter; to remove
+the parameter link, click the clear button.
+* Provide a description of the coordinate system used by the map in the
+well known text format (WKT). To do this, fill out the Geographic CRS
+WKT field. This text should also contain projected `CRS` definition.
+* Specify the map event handler by filling out the Map event listener
+field — an event handler will be created.
+
+The backingURL and Geographic CRS WKT values are specific for map tiles
+providers, such as Open Street Map:
+
+* An example of value for
+backingURL:`http://%s.tile.openstreetmap.org/%d/%d/%d.png`
+* An example of value for Geographic CRS WKT:
+`PROJCS["WGS 84 / World Mercator",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.01745329251994328,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],UNIT["metre",1,AUTHORITY["EPSG","9001"]],PROJECTION["Mercator_1SP"],PARAMETER["central_meridian",0],PARAMETER["scale_factor",1],PARAMETER["false_easting",0],PARAMETER["false_northing",0],AUTHORITY["EPSG","3395"],AXIS["X",EAST],AXIS["Y",SOUTH]]`
+
+To create a component of this type by program means, use the ModelMap
+constructor:
+
+code,JavaScript------------------------------ code,JavaScript
+var modelMap = new ModelMap();
+------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript------------------- code,JavaScript
+view.add(modelMap);
+-------------------
+
+[[modelspin]]
+ModelSpin
+~~~~~~~~~
+
+`ModelSpin` is a scalar model widget, the state of which is linked to a
+field of a data model entity of number type. One can input numbers
+either from the keyboard or using buttons to increase/decrease values.
+
+`ModelSpin` widget has the following specific properties:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`editable` |`true` if the component is editable and `false` otherwise.
+
+|`min` |Determines the lower bound of spinner's value. If it's `null`,
+valus is unlimited at lower bound.
+
+|`max` |The upper bound of spinner's value. If it's `null`, valus is
+unlimited at upper bound.
+
+|`step` |The spinner's value change step. Can't be `null`.
+
+|`emptyText` |The text displayed when the actual value is absent.
+|=======================================================================
+
+To create a component of this type by program means, use the ModelSpin
+constructor:
+
+code,JavaScript-------------------------------- code,JavaScript
+var modelSpin = new ModelSpin();
+--------------------------------
+
+After creating, if necessary, set the properties and component event
+handlers and add the component to the container:
+
+code,JavaScript----------------------------------------------
+code,JavaScript
+modelSpin.field = model.entityC.schema.fieldC;
+view.add(modelSpin);
+----------------------------------------------
+
+[[containers]]
+Containers
+----------
+
+Containers are components, which can contain other components e.g.
+widgets or other containers and control their child components size and
+location.
+
+Containers are represented as panel component with specific layout in
+the visual editor.
+
+The layout of a panel can be changed using the editor. At runtime, panel
+with particular layout will be replaced by the corresponding container.
+
+Containers have a set of properties and events common for all components
+as well as their own specific properties and events.
+
+The common methods for all containers:
+
+[cols="<,<",options="header",]
+|==============================================================
+|Method |Description
+|`remove(сomponent)` |Removes a child component
+|`child(index)` |Returns a child component by its numeric index
+|`clear()` |Removes all child components
+|==============================================================
+
+The common property all containers:
+
+[cols="<,<",options="header",]
+|===================================================
+|Property |Description
+|`сount` |The number of child components (read-only)
+|===================================================
+
+[[anchorspane]]
+AnchorsPane
+~~~~~~~~~~~
+
+`AnchorsPane` is a lightweight container with the anchors layout.
+
+Anchors layout provides a simple, flexible yet powerful layout
+algorithm, which allows you to build complex user interfaces.
+
+image:images/anchorLayout.png[Anchor layout: anchors and component's
+width and height dimensions]
+
+Configure the position and behavior of a widget in the container by
+defining Left, Top, Right, Bottom anchors and Width and Height settings
+of the component. You can specify two of the three properties by the
+horizontal and vertical axis.
+
+Аt the same time can be set two anchors or one anchor and one dimension
+values. The set properties are fixed and maintained when changing
+dimensions of the container. If the property is not defined, it is
+stretched along with the dimensions of the container.
+
+Use AnchorsPane constructor in form's JavaScript code:
+
+code,JavaScript----------------------------- code,JavaScript
+var pane = new AnchorsPane();
+-----------------------------
+
+To add child components to the container, use the add method and pass a
+child component and object of the Anchors type as parameters to this
+method.
+
+code,JavaScript------------- code,JavaScript
+pane.add(, );
+-------------
+
+where component is a component to add, anchors is an object of the
+Anchors type.
+
+code,JavaScript--------------------------------------------------------
+code,JavaScript
+var pane = new AnchorsPane();
+var comp = new Button("Sample");
+pane.add(comp, new Anchors(12, null, 14, 22, null, 24));
+--------------------------------------------------------
+
+In the above example a button with the specified Left, Right, Top, and
+Bottom anchors is added to the anchor pane.
+
+`Anchors` object defines component's binding anchors in a container with
+anchors layout.
+
+To create an `Anchors` object, use its constructor by passing values for
+the corresponding anchor as parameters:
+
+code,JavaScript------------------------------- code,JavaScript
+var anchors = new Anchors(, , ,
+            , , );
+-------------------------------
+
+where left is a left anchor, width is width, right is a right anchor,
+top is a top anchor, height is height, bottom is a bottom anchor.
+
+Each anchor can be specified in pixels; to do this, define an anchor
+using a number or string with the " `px`" symbols added, for example:
+`100`, "`100px`". To specify an anchor in percents, define an anchor
+using a string with the "`%`" symbol added, for example: "`30%`".
+
+According to the rules of anchor layout, you can define two anchor
+values per coordinate.
+
+If the anchor value is not set, pass the `null` value to the
+corresponding parameter, for example:
+
+code,JavaScript----------------------------------------- code,JavaScript
+var anchors = new Anchors(100, 200, null,
+            100, 100, null);
+var panel = new AnchorsPane();
+panel.add(new Label("Test"), anchors);
+-----------------------------------------
+
+There's also alternative syntax for adding a child component: pass the
+JavaScript object with the left, width, right, top, height, bottom
+properties as a second parameter to the add method. An example of code
+with the same execution results:
+
+code,JavaScript-------------------------------- code,JavaScript
+var pane = new AnchorsPane();
+var comp = new Button("Sample");
+pane.add(comp, 
+  {
+    left : 12,
+    right : 14,
+    top : 22,
+    bottom : 24
+});
+--------------------------------
+
+[[borderpane]]
+BorderPane
+~~~~~~~~~~
+
+`BorderPane` is a lightweight container with the border layout.
+
+Border layout is a simple way of arranging components, when a container
+changes the position and dimensions of its components to the fit five
+regions: northern, southern, western, eastern and center. Each area can
+contain only one component, which is determined by one of the following
+constants: North, South, East, West, Center.
+
+image:images/borderLayout.png[Border layout]
+
+Explicitly set the value of the property, which controls the position of
+the component in the container. To do this, change widget Direction
+property fields at the Layout property group, by selecting one of the
+values from the drop-down list.
+
+Use BorderPane constructor to create this container in JavaScript code:
+
+code,JavaScript-------------------------------------- code,JavaScript
+var pane = new BorderPane(hgap, vgap);
+--------------------------------------
+
+where `hgap` is the horizontal gap (optional) and `vgap` is the vertical
+gap (optional).
+
+To add child components to the container, use add instance method:
+
+code,JavaScript--------------- code,JavaScript
+pane.add(, , );
+---------------
+
+where component is a component to add, place is an instance of a
+`HorizontalPosition` or `VerticalPosition` constants, determining the
+region (optional) and size is the size of the component by the provided
+place direction (optional).
+
+The following example shows how to create a `BorderPane` container and
+add to this container two child components:
+
+code,JavaScript------------------------------------------------
+code,JavaScript
+var pane = new BorderPane();
+var topComp = new Button("Top");
+pane.add(topComp, VerticalPosition.TOP);
+var bottomComp = new Button("Bottom");
+pane.add(bottomComp, VerticalalPosition.BOTTOM);
+------------------------------------------------
+
+[[asolutepane]]
+AsolutePane
+~~~~~~~~~~~
+
+`AbsolutePane` is a lightweight container with the absolute positioning,
+e.g. without layout rules.
+
+The absolute layout positons child components using its explicit
+position and dimensions.
+
+It is generally not recommended to use this layout, because when
+changing the dimensions of the container, the position of its components
+is not changed or you'll have to recalculate positions and sizes by your
+program. However, in some cases, using this layout makes sense, for
+example, when creating a simple animation.
+
+Set X, Y, width and height parameters for each component in the
+container. To do this, select a component and set values for the X, Y,
+Width and Height fields on the properties panel in the Layout properties
+group. The Preferred value allows you to set the automatic calculation
+of width and height of the components according to their content.
+
+Use AbsolutePane constructor to create this container in JavaScript
+code:
+
+code,JavaScript------------------------------ code,JavaScript
+var pane = new AbsolutePane();
+------------------------------
+
+To add child components to the container, use add instance method:
+
+code,JavaScript------------- code,JavaScript
+pane.add(, );
+-------------
+
+where component is a component to add and pos is an JavaScript object
+with the `left`, `width`, `top`, `height` properties.
+
+The following example shows how to create an `AbosolutePane` container
+and add to this container to the components tree:
+
+code,JavaScript-------------------------------- code,JavaScript
+var pane = new AboslutePane();
+var comp = new Button("Sample");
+pane.add(comp, {
+    left : 100,
+    right : 150,
+    width : 32,
+    height : 32
+});
+--------------------------------
+
+[[gridpane]]
+GridPane
+~~~~~~~~
+
+`GridPane` is a lightweight container with the grid layout. It is
+intended for static UI designs.
+
+`GridPane` lays components out by the grid, all columns must have the
+same width and all rows must have the same height.
+
+image:images/gridLayout.png[Grid Layout — arranging by a grid]
+
+To set the number of columns and rows and the vertical and horizontal
+interval between cells, select the GridLayout node in the component tree
+of the inspector and change the corresponding values on the properties
+panel.
+
+If you set a value other than zero for the number of columns and rows,
+column number setting is ignored. Instead of this, the number of columns
+is determined by the number of rows and the total number of components
+in the container.
+
+Use GridPane constructor to create this container in JavaScript code:
+
+code,JavaScript-------------------------------- code,JavaScript
+var pane = new GridPane(, , , );
+--------------------------------
+
+Where rows is the number of grid rows, cols is the number of grid
+columns, hgap is the horizontal gap (optional) and vgap vgap the
+vertical gap (optional).
+
+To add child components to the container, use add instance method, which
+adds a component to the next avaliable position:
+
+code,JavaScript----------- code,JavaScript
+pane.add();
+-----------
+
+where component is a component to add.
+
+Use `child` method to get an child component at the specified row and
+column, if the target position is empty the method will return `null`:
+
+code,JavaScript-------------------------- code,JavaScript
+var comp = pane.child(, );
+--------------------------
+
+where row is the row of the component and column is the column of the
+grid position.
+
+The following example shows how to create an `GridPane` container:
+
+code,JavaScript------------------------------ code,JavaScript
+var pane = new GridPane(3, 1);
+var comp1 = new Button("1");
+var comp2 = new Button("2");
+var comp3 = new Button("3");
+pane.add(comp1);
+pane.add(comp2);
+pane.add(comp3);
+------------------------------
+
+[[flowpane]]
+FlowPane
+~~~~~~~~
+
+`FlowPane` is a lightweight container with the flow layout.
+
+Flow layout aligns components into a row/line. Dimensions of the
+components are calculated according to their content (component
+preferences). If the component doesn't fit into a row, it is transferred
+to the next line.
+
+image:images/flowLayout.png[Flow Layout — arranging into a line]
+
+Use FlowPane constructor to create this container in JavaScript code:
+
+code,JavaScript---------------------------- code,JavaScript
+var pane = new FlowPane(, );
+----------------------------
+
+Where hgap is the horizontal gap (optional) and vgap vgap the vertical
+gap (optional).
+
+To add child components to the container, use add instance method:
+
+code,JavaScript----------- code,JavaScript
+pane.add();
+-----------
+
+where component is a component to add.
+
+The following example shows how to create an `FlowPane` container and
+add this container to its parent container:
+
+code,JavaScript-------------------------------- code,JavaScript
+var pane = new FlowPane();
+var comp = new Button("Sample");
+pane.add(comp);
+--------------------------------
+
+[[cardpane]]
+CardPane
+~~~~~~~~
+
+`CardPane` is a lightweight container with the card layout.
+
+Card layout allows you to arrange components as a stack of cards, one
+above the other; only the top component is visible. This layout manager
+is usually used to create a step-by-step wizard.
+
+Each component has an assigned card name, which can be set on the
+component properties panel in the Card Name field of the Layout
+properties group. This name can be used later to select a visible
+component.
+
+To select a visible component, use show(cardName) method, where `
+
+-----------------------
+    ` is the card name.
+-----------------------
+
+Use CardPane constructor to create this container in JavaScript code:
+
+code,JavaScript---------------------------- code,JavaScript
+var pane = new CardPane(, );
+----------------------------
+
+Where hgap is the horizontal gap (optional) and vgap vgap the vertical
+gap (optional).
+
+To add child components to the container, use add instance method:
+
+code,JavaScript------------- code,JavaScript
+pane.add(, );
+-------------
+
+where component is a component to add and cardName is the name of the
+card.
+
+The following example shows how to create an `FlowPane` container and
+add this container to the components tree:
+
+code,JavaScript----------------------------------------- code,JavaScript
+var pane = new CardPane();
+var compA = new Button("SampleA");
+pane.add(comp, "A");
+var compB = new Button("SampleB");
+pane.add(comp, "B");
+var compC = new Button("SampleC");
+pane.add(comp, "C");
+
+pane.show("B");//Shows the SampleB button
+-----------------------------------------
+
+[[boxpane]]
+BoxPane
+~~~~~~~
+
+`BoxPane` is a lightweight container with the box layout.
+
+The box layout arranges components in the order, in which they were
+added to the container, one after the other, back to back.
+
+Specify an axis, along which the Box layout manager will arrange
+components. For this select the BoxLayout node in the inspector
+component tree and select the Axis property value from the list on the
+properties panel:
+
+* HORIZONTAL for components are laid out horizontally from left to
+right.
+* VERTICAL for components are laid out vertically from top to bottom.
+
+Use BoxPane constructor to create this container in JavaScript code:
+
+code,JavaScript------------------------- code,JavaScript
+var pane = new BoxPane();
+-------------------------
+
+Where orientation is a value of `Orientation.HORIZONTAL` or
+`Orientation.VERTICAL` constants (optional). By default
+`Orientation.HORIZONTAL` orientation is specified.
+
+To add child components to the container, use add instance method:
+
+code,JavaScript----------- code,JavaScript
+pane.add();
+-----------
+
+where component is a component to add.
+
+The following example shows how to create an `BoxPane` instance and add
+a component to this container:
+
+code,JavaScript---------------------------------------------
+code,JavaScript
+var pane = new BoxPane(Orientation.VERTICAL);
+var comp = new Button("Sample");
+pane.add(comp);
+---------------------------------------------
+
+[[tabbedpane]]
+TabbedPane
+~~~~~~~~~~
+
+`TabbedPane` component allows the user to switch between a group of
+components by clicking tabs with titles and icons.
+
+Component's specific properties:
+
+[cols="<,<",options="header",]
+|===========================================
+|Property |Description
+|`selectedComponent` |Active tab's component
+|`selectedComponentIndex` |Active tab index
+|===========================================
+
+Component's specific events:
+
+[cols="<,<,<",options="header",]
+|=======================================================
+|Event |Event type |Description
+|`onStateChanged` |`ComponentEvent` |Tab switching event
+|=======================================================
+
+To create a component of this type by program means, use the TabbedPane
+constructor:
+
+code,JavaScript---------------------------- code,JavaScript
+var pane = new TabbedPane();
+----------------------------
+
+To add child components to the container, use the add method and pass a
+child component as well as a tab title and an optional icon setting as
+parameters to this method:
+
+code,JavaScript--------------- code,JavaScript
+pane.add(, , );
+---------------
+
+where component is a component to add, text is the tab's label text,
+icon is the tab's label icon (optional).
+
+An example of code using the `TabbedPane` container:
+
+code,JavaScript----------------------------- code,JavaScript
+var pane = new TabbedPane();
+var tab1 = new AnchorsPane();
+var tab2 = new AnchorsPane();
+pane.add(tab1, "Tab 1");
+pane.add(tab2, "Tab 2");
+-----------------------------
+
+[[splitpane]]
+SplitPane
+~~~~~~~~~
+
+`SplitPane` container is used to display two (and only two) splitted
+components; the user can change their size by moving the separator.
+
+Split pane setup in form editor:
+
+* Drag-and-drop a container of the type from the palette, exactly two
+components to be added.
+
+The specific properties of the `SplitPane`:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`orientation` |The separator's orientation: `Orientation.VERTICAL` or
+`Orientation.HORIZONTAL`
+
+|`dividerLocation` |The split pane divider's location in pixels
+
+|`oneTouchExpandable` |`true` if the pane is one touch expandable and
+`false` otherwise.
+
+|`firstComponent` |The first component of the container.
+
+|`secondComponent` |The second component of the container.
+|=======================================================================
+
+To create a component of this type by program means, use the SplitPane
+constructor with an optional parameter for specifying orientation:
+
+code,JavaScript--------------------------- code,JavaScript
+var pane = new SplitPane();
+---------------------------
+
+where orientation is an object of the Orientation type, which defines
+orientation of the panel separator (optional). The container uses the
+horizontal orientation by default.
+
+As an alternative to the `firstComponent` and
+`secondComponent`properties use add method:
+
+code,JavaScript----------- code,JavaScript
+pane.add();
+-----------
+
+where component is the first and then the second component to add.
+
+code,JavaScript-----------------------------------------------
+code,JavaScript
+var pane = new SplitPane(Orientation.VERTICAL);
+var comp1 = new AnchorsPane();
+var comp2 = new AnchorsPane();
+pane.firstComponent = comp1;
+pane.secondComponent = comp2;
+-----------------------------------------------
+
+[[scrollpane]]
+ScrollPane
+~~~~~~~~~~
+
+`ScrollPane` is a container, which supports scrolling of its content.
+Usually another container is added to this one, using `ScrollPane` as a
+wrapper.
+
+Specific properties of the container:
+
+[cols="<,<",options="header",]
+|============================
+|Property |Description
+|`view` |A wrapped component.
+|============================
+
+To create a component of this type by program means, use the ScrollPane
+constructor, which can be called with a different number of parameters:
+
+code,JavaScript------------------------ code,JavaScript
+var pane = ScrollPane();
+------------------------
+
+where component is a component, which is added inside the scroll panel
+(optional).
+
+You also can use the view property, for example:
+
+code,JavaScript------------- code,JavaScript
+pane.view = ;
+-------------
+
+Alternatively you can add one child component to the container using the
+add method, for example:
+
+code,JavaScript------------------------------- code,JavaScript
+var wrapper = new ScrollPane();
+var pane = new AnchorsPane();
+wrapper.add(pane);
+-------------------------------
+
+[[toolbar]]
+ToolBar
+~~~~~~~
+
+`ToolBar` is a container used to display components, which are
+responsible for the most common user actions.
+
+Toolbars are intended to display a set of buttons (usually without
+labels, but with tooltips and small, clearly visible icons) which
+trigger the most frequently used application actions.
+
+Components in the toolbar are stacked one-to-one according to the
+applied orientation.
+
+To create a component of this type by program means, use the ToolBar
+constructor:
+
+code,JavaScript---------------------------- code,JavaScript
+var toolbar = new ToolBar();
+----------------------------
+
+where floatable is `true` when the tool bar can be moved and `false`
+otherwise (optional). By default set to `false`.
+
+To add child components to the container, use the add method and pass a
+child component as well as a tab title and an optional icon setting as
+parameters to this method:
+
+code,JavaScript----------- code,JavaScript
+pane.add();
+-----------
+
+where component is the component to add.
+
+For example:
+
+code,JavaScript----------------------------- code,JavaScript
+var toolbar = new ToolBar();
+var b1 = new Button();
+b1.icon = Icon.load("1.png");
+pane.add(b1);
+var b2 = new Button();
+b2.icon = Icon.load("2.png");
+pane.add(b2);
+-----------------------------
+
+[[desktoppane]]
+DesktopPane
+~~~~~~~~~~~
+
+`DesktopPane` is used to create a multi-document interface.
+
+Forms can be displayed inside this container. Add forms to the container
+in your program. After adding, these forms can be moved, closed,
+minimized or expanded to the full container size.
+
+To create a component of this type by program means, use the DesktopPane
+constructor:
+
+code,JavaScript----------------------------- code,JavaScript
+var pane = new DesktopPane();
+-----------------------------
+
+The list of specific methods of the component:
+
+[cols="<,<",options="header",]
+|============================================================
+|Property |Description
+|`minimizeAll()` |Minimizes all frames on the pane.
+|`restoreAll()` |Restores frames original state and location.
+|`maximizeAll()` |Maximizes all frames on the pane.
+|`closeAll()` |Closes all frames on the pane.
+|============================================================
+
+The specific property of the component:
+
+[cols="<,<",options="header",]
+|========================================================
+|Property |Description
+|`forms` |An array of all frames on the pane (read-only).
+|========================================================
+
+To add a form to a `DesktopPane`:
+
+* Create a new form instance.
+* Add this new form to the desktop by calling the
+showInternalFrame(desktopPane) method where desktopPane is a
+`DesktopPane` object instance.
+
+Example:
+
+code,JavaScript-------------------------------------- code,JavaScript
+var desktop = new DesktopPane();
+var myForm = new InnerForm();
+myForm.showInternalFrame(desktopPane);
+--------------------------------------
+
+[[menus]]
+Menus
+-----
+
+Menus components provide a convinient way to let the user choose one of
+several options.
+
+[[menubar]]
+MenuBar
+~~~~~~~
+
+`MenuBar` component is a form's main menu bar, into which individual
+menus can be added. This compontent is a kind of a container and
+inherits it common properties and methods.
+
+After adding this component from the palette, the menu bar contains some
+default menus, this menus can be changed or deleted.
+
+To create a component of this type by in your code, use the MenuBar
+constructor:
+
+code,JavaScript-------------------------------------------------
+code,JavaScript
+var menuBar = new MenuBar();
+view.add(menuBar);// add it to the root container
+-------------------------------------------------
+
+The list of specific methods of the component:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`add()` |Adds a new menu to the menu bar, where menu is a `Menu` to
+add.
+|=======================================================================
+
+[[menu]]
+Menu
+~~~~
+
+`Menu` is an individual menu, it can contain `MenuItem` and
+`MenuSeparator` components. This compontent is a kind of a container and
+inherits it's common properties and methods.
+
+Add new `Menu` components on to the `MenuBar` from the components
+pallete in the visual editor.
+
+Add the submenu into a `Menu` by selecting Add From Palette in the
+context menu.
+
+To create a component of this type by in your code, use the Menu
+constructor:
+
+code,JavaScript---------------------- code,JavaScript
+var menu = new Menu();
+menuBar.add(menu);
+----------------------
+
+The list of specific properties of the component:
+
+[cols="<,<",options="header",]
+|===========================================
+|Property |Description
+|`text` |Menu's text label.
+|`parent` |The parent container (read-only).
+|===========================================
+
+The list of specific methods of the component:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`add()` |Adds an item to the menu, where comp is the `MenuItem` or
+`MenuSeparator` component to add.
+|=======================================================================
+
+[[popupmenu]]
+PopupMenu
+~~~~~~~~~
+
+`PopupMenu` is an options selection window, which can be assigned to any
+component. This compontent is a kind of a container and inherits it's
+common properties and methods.
+
+Add the `PopupMenu` component onto the form by dragging it from the
+palette in visual editor. After adding, this component will have no
+visual representation in the form's layout, it will be avaliable under
+the Other components node in the inspector component tree.
+
+Add items to the pop-up menu the same way as to the standard menu.
+
+To assign a popup menu for a component in the visual editor, define a
+component's `PopupMenu` property and select the required popup menu from
+the list.
+
+To create a component of this type by in your code, use the PopupMenu
+constructor:
+
+code,JavaScript--------------------------------- code,JavaScript
+var popup = new PopupMenu();
+var label = new Label("Sample");
+label.componentPopupMenu = popup;
+---------------------------------
+
+The list of specific methods of the component:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`add()` |Adds an item to the menu, where comp is the `MenuItem` or
+`MenuSeparator` component to add.
+|=======================================================================
+
+[[menuitem]]
+MenuItem
+~~~~~~~~
+
+The default `MenuItem` object contains a simple labeled menu item.
+
+To create a component of this type by in your program, use the MenuItem
+constructor:
+
+code,JavaScript---------------------------------- code,JavaScript
+var menuItem = new MenuItem(, , );
+----------------------------------
+
+where text is the text of the component (optional), icon is the icon of
+the component (optional), actionPerformed the function for the action
+performed handler (optional).
+
+The list of specific properties of the component:
+
+[cols="<,<",options="header",]
+|===========================================
+|Property |Description
+|`text` |Menu item's text label.
+|`icon` |Menu item's `Icon`.
+|`parent` |The parent container (read-only).
+|===========================================
+
+An example of code using `MenuItem` component:
+
+code,JavaScript---------------------------------------- code,JavaScript
+var item = new MenuItem("Sample");
+item.onActionPerformed = function(evt) {
+   alert("Sample selected.")
+}
+menu.add(item);
+----------------------------------------
+
+[[checkmenuitem]]
+CheckMenuItem
+~~~~~~~~~~~~~
+
+`CheckMenuItem` is a menu item combined with a checkbox.
+
+To create a component of this type by in your program, use the
+CheckMenuItem constructor:
+
+code,JavaScript--------------------------------------------
+code,JavaScript
+var checkMenuItem = new CheckMenuItem(, , );
+--------------------------------------------
+
+where text is the text of the component (optional), selected is `true`
+when the check box is selected and `false` otherwise (optional),
+actionPerformed the function for the action performed handler
+(optional).
+
+The list of specific properties of the component:
+
+[cols="<,<",options="header",]
+|======================================================================
+|Property |Description
+|`text` |Menu item text.
+|`selected` |`true` if the menu item is selected and `false` otherwise.
+|`parent` |The parent container (read-only).
+|======================================================================
+
+A menu item of this type can be added to a `ButtonGroup` component,
+which is shared by other check boxes and radio buttons, including
+elements which are not present in the menu.
+
+[[radiomenuitem]]
+RadioMenuItem
+~~~~~~~~~~~~~
+
+`RadioMenuItem` is a menu item combined with a radio button.
+
+To create a component of this type by in your program, use the
+RadioMenuItem constructor:
+
+code,JavaScript--------------------------------------------
+code,JavaScript
+var radioMenuItem = new RadioMenuItem(, , );
+--------------------------------------------
+
+where text is the text of the component (optional), selected is `true`
+when the check box is selected and `false` otherwise (optional),
+actionPerformed the function for the action performed handler
+(optional).
+
+The list of specific properties of the component:
+
+[cols="<,<",options="header",]
+|======================================================================
+|Property |Description
+|`text` |Menu item text.
+|`selected` |`true` if the menu item is selected and `false` otherwise.
+|`buttonGroup` |The button group this component belongs
+|`parent` |The parent container (read-only).
+|======================================================================
+
+A menu item of this type can be added to a `ButtonGroup` component,
+which is shared by other check boxes and radio buttons, including
+elements which are not present in the menu.
+
+[[menuseparator]]
+MenuSeparator
+~~~~~~~~~~~~~
+
+`MenuSeparator` is a separator of menu items. Use this component to
+visually split the groups of menu items.
+
+To create a component of this type by in your program, use the
+MenuSeparator constructor:
+
+code,JavaScript------------------------------------ code,JavaScript
+var separator = new MenuSeparator();
+------------------------------------
+
+The list of specific properties of the component:
+
+[cols="<,<",options="header",]
+|===========================================
+|Property |Description
+|`parent` |The parent container (read-only).
+|===========================================
+
+[[ui-utilities-api]]
+UI utilities API
+----------------
+
+[[style]]
+Style
+~~~~~
+
+`Style` object, which can inherit the property values from the parent
+style.
+
+`Style` properites list:
+
+[cols="<,<",options="header",]
+|==============================================================
+|Property |Description
+|`align` |Alignment: `TOP`, `RIGHT`, `BOTTOM`, `LEFT`, `CENTER`
+|`background` |Background color
+|`folderIcon` |Folder node icon
+|`font` |Font
+|`foreground` |Color
+|`icon` |Icon
+|`leafIcon` |Leaf node icon
+|`openFolderIcon` |Open folder node icon
+|`parent` |Parent style object
+|==============================================================
+
+To create a style object by program means, use a constructor, which can
+accept the parent style object as a parameter:
+
+code,JavaScript------------------------- code,JavaScript
+var style1 = new Style();
+
+var style2 = new Style();
+-------------------------
+
+[[icon]]
+Icon
+~~~~
+
+`Icon` is a bitmap picture.
+
+To create an icon object, use the factory load method of the Icon
+object:
+
+code,JavaScript----------------------- code,JavaScript
+var icon = Icon.load();
+-----------------------
+
+where path is the name of the icon file, relative path of an application
+or URL.
+
+The icon file name will be used for accessing the built-in collection of
+icons.
+
+An example of using an icon to create a button:
+
+code,JavaScript----------------------------------- code,JavaScript
+var carIcon = Icon.load("car.png");
+var b = new Button("Car", carIcon);
+view.add(b);
+-----------------------------------
+
+[[fontstyle]]
+FontStyle
+~~~~~~~~~
+
+`FontStyle` object contains constants, which can be used to set font
+styles.
+
+[cols="<,<",options="header",]
+|===========================
+|Property |Description
+|`NORMAL` |Standard font
+|`BOLD` |Bold
+|`ITALIC` |Italics
+|`BOLD_ITALIC` |Bold italics
+|===========================
+
+Example of usage:
+
+code,JavaScript--------------------------------------- code,JavaScript
+var italicFontStyle = FontStyle.ITALIC;
+---------------------------------------
+
+[[font]]
+Font
+~~~~
+
+`Font` object.
+
+Object properties:
+
+[cols="<,<",options="header",]
+|=================================
+|Property |Description
+|`family` |Name of the font family
+|`style` |Style
+|`size` |Size
+|=================================
+
+To create a font object, use the Font constructor:
+
+code,JavaScript------------------------- code,JavaScript
+var font = new Font(, , )
+-------------------------
+
+where family is a string of the font family name; fontStyle is a font
+style of the FontStyle type, size is a font size.
+
+Example:
+
+code,JavaScript---------------------------------------------------
+code,JavaScript
+var font = new Font("Verdana", FontStyle.BOLD, 14);
+---------------------------------------------------
+
+[[color]]
+Color
+~~~~~
+
+`Color` represents color an the object.
+
+The color object contains constants of main colors:
+
+[cols="<,<",options="header",]
+|========================
+|Property |Description
+|`WHITE` |White
+|`LIGHT_GRAY` |Light gray
+|`GRAY` |Gray
+|`DARK_GRAY` |Dark gray
+|`BLACK` |Black
+|`RED` |Red
+|`PINK` |Pink
+|`ORANGE` |Orange
+|`YELLOW` |Yellow
+|`MAGENTA` |Magenta
+|`CYAN` |Cyan
+|`GREEN` |Green
+|`BLUE` |Blue
+|========================
+
+To create an object of an arbitrary color, use the Color constructor by
+passing it three RGB integers as parameters:
+
+code,JavaScript---------------------------- code,JavaScript
+var color = new Color(, , );
+----------------------------
+
+where R, G, B are red, green and blue constituents in the form of
+integers.
+
+Example of usage:
+
+code,JavaScript-------------------------------------------
+code,JavaScript
+button.foreground = Color.BLUE;
+
+var IVORY_COLOR = new Color(255, 255, 240);
+panel.background = IVORY_COLOR;
+-------------------------------------------
+
+[[horizontalposition]]
+HorizontalPosition
+~~~~~~~~~~~~~~~~~~
+
+`HorizontalPosition` is the horizontal position constants object.
+
+This object contains constants, which determine the horizontal position:
+
+[cols="<,<",options="header",]
+|=====================
+|Property |Description
+|`LEFT` |To the left
+|`CENTER` |Center
+|`RIGHT` |To the right
+|=====================
+
+Example of usage:
+
+code,JavaScript---------------------------------------------------
+code,JavaScript
+var horizontalPosition = HorizontalPosition.CENTER;
+---------------------------------------------------
+
+[[verticalposition]]
+VerticalPosition
+~~~~~~~~~~~~~~~~
+
+`VerticalPosition` is the vertical position constants object.
+
+This object contains constants, which determine the vertical position:
+
+[cols="<,<",options="header",]
+|=======================
+|Property |Description
+|`TOP` |To the top
+|`CENTER` |Center
+|`BOTTOM` |To the bottom
+|=======================
+
+Example of usage:
+
+code,JavaScript-----------------------------------------------
+code,JavaScript
+var verticalPosition = VerticalPosition.CENTER;
+-----------------------------------------------
+
+[[orientation]]
+Orientation
+~~~~~~~~~~~
+
+`Orientation` is the orientation constants object.
+
+This object contains constants, which determine the orientation:
+
+[cols="<,<",options="header",]
+|==========================
+|Property |Description
+|`HORIZONTAL` |Horizontally
+|`VERTICAL` |Vertically
+|==========================
+
+Example of usage:
+
+code,JavaScript----------------------------------------- code,JavaScript
+var orientation = Orientation.HORIZONTAL;
+-----------------------------------------
+
+[[dialogs-api]]
+Dialogs API
+-----------
+
+Use this global functions to display custom dialogs:
+
+[width="98%",cols="<17%,<83%",options="header",]
+|=======================================================================
+|Function |Description
+|`alert(, )` |Displays an info message, where
+
+|[multiblock cell omitted] |`message` is the message text,
+
+|[multiblock cell omitted] |`title` is the message window.
+
+|`prompt(, )` |Displays a prompt window, returns the response string,
+where
+
+|[multiblock cell omitted] |`message` is the message text,
+
+|[multiblock cell omitted] |`defaultvalue` is the default value.
+
+|`confirm()` |Displays a dialog with confirmation, where
+
+|[multiblock cell omitted] |`message` is the message text.
+
+|`fileDialog(, )` |Displays a dialog, which allows the user to select a
+file; returns a file object, where
+
+|[multiblock cell omitted] |`curDir` is the current directory,
+
+|[multiblock cell omitted] |`save` is a `true` to enable the saving mode
+for the dialog and `false` otherwise.
+
+|`selectFile()` |Displays a file selection dialog, whrere
+
+|[multiblock cell omitted] |`callback` is a function, which will be
+called after the file is selected, with a parameter,
+
+|[multiblock cell omitted] |`file` is the file object.
+|=======================================================================
+
+Code examples:
+
+code,JavaScript---------------------------------------------------------
+code,JavaScript
+alert("Message title", "Message");
+
+var txt = prompt("Enter text here", "Some default text");
+
+if (confirm("Confirm?")) {
+  // Do something here...
+}
+---------------------------------------------------------

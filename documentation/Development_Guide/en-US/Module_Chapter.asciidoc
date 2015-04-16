@@ -1,0 +1,2600 @@
+[[javascript-module]]
+JavaScript module
+-----------------
+
+Module is a JavaScript file containing the constructor function. Modules
+contain data model responsible for data access.
+
+Modules can be executed both under JVM in a client and server on Mozilla
+Rhino engine or in a browser.
+
+[[new-module-creation]]
+New module creation
+-------------------
+
+To create a new module, perform the following actions:
+
+* Select New in the parent directory context menu, or select the parent
+directory and click New Filе in the main menu, or click New File on the
+toolbar, or use a corresponding shortcut.
+* Select Module type in the context menu, or select Choose file type
+Platypus application elements Module on the wizard first step and click
+Next.
+* Enter the name of a new application element in the Name field and
+click Finish to create it, or click Cancel to cancel.
+
+[[javascript-code-editor]]
+JavaScript code editor
+----------------------
+
+You can edit the module code in the JavaScript code editor. To open the
+application element editor, double-click an application element in the
+project tree.
+
+To edit the JavaScript code:
+
+* Open the Source tab of the module editor.
+* Change text in the JavaScript code editor.
+* Use the code completion for field names and functions of objects and
+modules.
+* Use automatic transition to declarations of variables, functions, and
+to the functions of other modules; to do this, click a module ID or
+function while holding down the Ctrl key.
+* Use context menus and shortcuts to use built-in editor functions.
+* Save the application element by clicking Save All on the Platypus
+Application Designer toolbar or by using the Ctrl S keyboard shortcut.
+
+___________________________________________________________________________________________
+*Note*
+
+Use the editor's context menu Format menu item to format the JavaScript
+code automatically.
+___________________________________________________________________________________________
+
+If necessary, configure the code editor parameters; to do this:
+
+* Select the following main menu items: Tools Options.
+* In the Options properties dialog, select the Editor tab.
+
+To configure auto completion modes, go to the Code Completion tab and
+enable or disable corresponding options.
+
+[[module-constructor]]
+Module constructor
+------------------
+
+Using modules allows you to manage the complexity according to the
+object-oriented programming principles.
+
+Module is an equivalent of a class in other programming languages, such
+as in Java or С++.
+
+Every module contains a constructor function. This function is used for
+module's instanses creation.
+
+Constructor function can have a header, which is represented as a
+comment in the JsDoc format and is located at the top of the module
+text.
+
+Example of a module with a header:
+
+code,JavaScript------------------------------- code,JavaScript
+/**
+ * Module description goes here
+ *
+ * @module
+ * @rolesAllowed admin
+ *
+ */
+
+function ModuleConstructor(p) {
+  ...
+}
+
+function otherFunction() {
+  ...
+}
+-------------------------------
+
+If a JavaScript file contains exactly one top-level fucntion, this
+fuction is considered as a module constructor, otherwise the module
+constructor must be marked with the `@module` annotation.
+
+In addition to the `@module` annotation, a header may contain the module
+description, annotations for defining security constraints and other
+JsDoc annotations.
+
+Specify module instance methods:
+
+code,JavaScript----------------------------------------------------------
+code,JavaScript
+function ModuleA() {
+   
+   this.somePublicMethod = fucntion(p) { //instance method
+      ...
+   }
+}
+----------------------------------------------------------
+
+Module instance methods are available for the client code.
+
+Add module scope methods and fields:
+
+code,JavaScript----------------------------------------------------------
+code,JavaScript
+function ModuleB() {
+   var a, b, c;//private fields
+
+   this.somePublicMethod = function(p) { //instance method
+      ...
+   }
+
+   function somePrivateMethod() { //scope function
+      ...
+   }
+}
+----------------------------------------------------------
+
+Create or get a module instance by the following ways:
+
+* Create an instance of the module with the help of the `new` keyword,
+using a module constructor, for example:
++
+code,JavaScript---------------------------- code,JavaScript
+var moduleInstance = new ();
+----------------------------
++
+where `
++
+--------------------------------
+      ` is a module constructor.
+--------------------------------
+* Create an instance of the module with the help of the `new` keyword
+using special `Module` constructor, for example:
++
+code,JavaScript---------------------------------- code,JavaScript
+var moduleInstance = new Module();
+----------------------------------
++
+where `
++
+-----------------------------------------------------------
+      ` is the module constructor name string, for example,
+-----------------------------------------------------------
++
+`"WebModule"`;
+* Get a module instance from the modules pool using `Modules` object:
++
+code,JavaScript----------------------------------- code,JavaScript
+var moduleInstance = Modules.get();
+-----------------------------------
++
+where `
++
+----------------------------------------------
+      ` is the module constructor name string.
+----------------------------------------------
+* Create a proxy stub for the server module, to invoke the server code
+on the application server:
++
+code,JavaScript---------------------------------------- code,JavaScript
+var moduleInstance = new ServerModule();
+----------------------------------------
++
+where `
++
+----------------------------------------------------------------
+      ` is the module constructor name string, the server module
+----------------------------------------------------------------
++
+should be marked with the `@public` annotation to enable access from the
+external client code.
+
+To call the module's instance method, use the following structure, for
+example:
+
+code,JavaScript------------------------------------------
+code,JavaScript
+var result = moduleInstance.getResult(10);
+------------------------------------------
+
+[[dependencies-resolving]]
+Dependencies resolving
+----------------------
+
+When executing the code on a application server or on a desktop client,
+all application modules and other elements are loaded on demand.
+
+In a web browser, all application elements, on which initial application
+element depends, are loaded during the process of automatic dependencies
+resolution.
+
+Automatic dependencies resolving works as follows:
+
+* The source code is analyzed and expressions of the following types are
+searched for the following expressions:
++
+`new ()`
++
+`new Module("")`
++
+`Modules.get("")`
++
+`new ServerModule("")`
++
+`new ()`
++
+`new Form("")`
++
+`new ()`
++
+`new Report("")`
++
+`new ServerReport("")`
++
+where ModuleName, FormName and ReportName is the name of the module,
+form and report what are in fact a special kinds of a module.
+* Application elements with the specified names are loaded or server
+proxies for server modules/reports are generated.
+* The process continues recursevly for the loaded modules, except for
+the server proxies.
+
+If it is not necessary or not possible to resolve the dependency
+automatically, for example, if you want to determine the called module
+in a dynamic manner, you can use the manual dependencies resolving with
+`require`.
+
+Use `require([], )` global function, where param is the module
+constructor name, or the relative path to the JavaScript file in the
+application, or an array of these elements, callback is a function,
+which will be called when all the specified modules are downloaded and
+executed.
+
+____________________________________________________________________________________________________________________________________
+*Note*
+
+Don't use manual dependencies resolving against a server modules. It
+will lead to attempt to download the module body on the client.
+____________________________________________________________________________________________________________________________________
+
+Example of using manual dependencies resolving is as follows:
+
+code,JavaScript------------------------------------------------
+code,JavaScript
+var moduleName1 = "Module1",
+    moduleName2 = "Module2";
+require([moduleName1, moduleName2], function() {
+  var m1 = new Module(moduleName1);
+  m1.bar();
+  var m2 = new Module(moduleName2);
+  m2.foo();
+});
+------------------------------------------------
+
+The following example shows how to use the `require` function for
+loading the module by its constructor name as well as the plain
+JavaScript file by specifing its path:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+require(["Module1",
+ "localLib.js"], function() {
+  
+  //Platypus module
+  var m1 = new Module("Module1");
+  m1.bar();
+  
+  // Constructor LibObject is defined in localLib.js
+  var o1 = new LibObject();
+});
+----------------------------------------------------
+
+Relative paths are counted off from the `src` directory of the Platypus
+application. If the JavaScript file path matches the Platypus module
+identifier name, the Platypus module will be loaded.
+
+The `require` function also has a synchronous variant, which can be used
+in the server code. In this case, if you don't need to maintain
+compatibility with the client's code, the second parameter is optional:
+
+code,JavaScript-------------------------------------- code,JavaScript
+require("localLib.js");
+// LibObject is defined in localLib.js
+var obj = new LibObject();
+--------------------------------------
+
+You should pay attention to the combination of automatic and manual
+dependencies resolution. For example, in the following snippet it is not
+necessary to call the `require` function:
+
+------------------------------------------------
+var moduleName1 = "SampleModule1",
+    moduleName2 = "SampleModule2";
+require([moduleName1, moduleName2], function() {
+  var m1 = new SampleModule1();
+  m1.bar();
+  var m2 = new SampleModule2();
+  m2.foo();
+});
+------------------------------------------------
+
+This code leads to the automatic dependencies resolution regarding to
+the SampleModule1 и SampleModule2, as calls of their constructors are
+present in the code in explicit form.
+
+On the other hand, creating modules in the `var m = new SampleModule1()`
+form is preferred. In order to avoid automatic resolving of
+dependencies, explicitly specify module constructor names in the form of
+string literals the `require` function parameter:
+
+--------------------------------------------------------
+require(["SampleModule1", "SampleModule2"], function() {
+  var m1 = new SampleModule1();
+  m1.bar();
+  var m2 = new SampleModule2();
+  m2.foo();
+});
+--------------------------------------------------------
+
+This method of calling the `require` function excludes these explicitly
+specified constructor names in the first parameter from the automatic
+dependencies resolution. So, SampleModule1 and SampleModule2 will be
+loaded only when calling the `require`, rather than before starting the
+application.
+
+[[security]]
+Security
+--------
+
+The executable module code is a resource, access to which can be
+restricted on the basis of the roles. When a user, who has no rights to
+execute some code, tries to call it, a security exception is thrown.
+
+In order to restrict access to the entire module code, add the
+`@rolesAllowed`... annotation to the module header. Specify roles,
+allowed to access the module code execution, in the `@rolesAllowed`
+annotation, dividing them by spaces. If the annotation is omitted,
+access to the module is granted to all users.
+
+You can restrict access to the module code on the level of an individual
+function. To do this, add the `@rolesAllowed` annotation to the
+function's JsDoc. The restrictions on the function level have a higher
+priority than the module level restrictions. For example, only a user
+with the `role2` role from the following example will have access to the
+`f2`:
+
+code,JavaScript---------------------------- code,JavaScript
+/**
+ * @module
+ * @rolesAllowed role1 role2
+ *
+ */
+function ModuleC {
+
+   var self = this;
+
+   /**
+    * @rolesAllowed role2
+    */
+   this.f2 = function() {
+      //...
+   }
+}
+----------------------------
+
+Use `principal` property to get access to the information about the
+current user in the executable code. The `principal` property is
+read-only. The object of information about the user contains the `name`
+property, i.e. the name of the current user, and the `hasRole()`method,
+which allows you to check if this user has any role:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+Logger.info('Current user: ' + self.principal.name);
+
+if (self.principal.hasRole('Manager')) {
+  // Some operations allowed only to managers ...
+}
+----------------------------------------------------
+
+Use `logout()` global function, where `
+
+------------------------------------------------------------
+  ` is a function, which will be called after the session is
+------------------------------------------------------------
+
+terminated. Open forms will be closed and the user will see the login
+and password entering form.
+
+[[resources-loading]]
+Resources loading
+-----------------
+
+The platfrom runtime enables loading of resources in the form of binary
+data and text. Resources may be loaded using their relative paths or
+URLs. Relative paths are counted off from the `src` root directory of
+the application. Use the Resource object methods for resource loading.
+
+To download a binary resource, use the `Resource.load(, )` method, where
+`path` is a relative path or URL, `callback(obj)` is a function, which
+will be called after the resource is loaded, `obj` is an array of bytes
+of the downloaded resource for the server code and Platypus Client or an
+object of the ArrayBuffer type for the HTML5 browser:
+
+code,JavaScript---------------------------------------------
+code,JavaScript
+//Loads binary resource
+Resource.load("res/pict.bin", function(obj) {
+  ...
+})
+---------------------------------------------
+
+You can use a synchronous version of this method with a single parameter
+in the server code or in the code, which is executed in the Platypus
+Client. In this case, the method itself will return an array of bytes of
+the downloaded resource:
+
+code,JavaScript---------------------------------------- code,JavaScript
+//Loads binary resource synchronously
+var obj = Resource.load("res/pict.bin");
+...
+----------------------------------------
+
+To download text, use the `Resource.loadText(, , ))` method, where
+`path` is a relative path or URL, `encoding` is the name of the text
+encoding, `callback(txt)` is a function, which will be called after the
+resource is loaded, `txt` is the downloaded text:
+
+code,JavaScript---------------------------------------------------------
+code,JavaScript
+//Loads text
+Resource.loadText("res/res.txt", "UTF-8", function(txt) {
+  Logger.info(txt);
+})
+---------------------------------------------------------
+
+You can use a synchronous version of this method with one or two
+parameters in the server code or in the Platypus Client code. In this
+case, the method itself will return an object of a downloaded resource
+string:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+//Loads text synchronously
+var txt = Resource.loadText("res/res.txt", "UTF-8");
+Logger.info(txt);
+----------------------------------------------------
+
+__________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+`Resource.loadText("resourceUrl", function(){})` loads text without an
+encoding specified. When resource is loaded via http, encoding comes
+from http headers and it is `utf-8` otherwise.
+__________________________________________________________________________________________________________________________________________________________________________________________
+
+To get the absolute path to the application directory, use the
+`Resource.applicationPath` read-only property. If an application is
+deployed into database, this property returns `null`:
+
+code,JavaScript-------------------------------------- code,JavaScript
+//Reads the application's path
+Logger.info(Resource.applicationPath);
+--------------------------------------
+
+[[data-model]]
+Data model
+----------
+
+Data model is a module's persistence manager. It provides access to the
+data obtained from a relational database or any other data source. Data
+model allows you to perform the following tasks:
+
+* Fetch data from the data source(s) to the entities datasets.
+* Automatically requery/filter data, according to the inter-entities
+links.
+* Save changes made to the entities data (insert, update and delete).
+* Entities data change events handling with JavaScript.
+
+Data model consists of entities and links and is configured using the
+visual editor.
+
+image:images/dataModel.png[Data model structure]
+
+Data is stored in the form of JavaScript objects within an etnity's
+array.
+
+The following types of entities can be used in the data model:
+
+* Regular entity is created using a module implements special datasouce
+interface methods or a query application element.
+* Table entity is a special query entity, which selects all data from
+the table. It is created automatically by runtime. A table entity can be
+used on two-tier configurations with direct connection to a database.
+
+Each entity can have parameters and contains a dataset with predefined
+fields according to the data schema defined by the module or query, on
+the basis of which the entity is created.
+
+The parameters of the data model are contained in the special entity
+named Parameters, which is present in each data model and does not have
+a full-featured dataset.
+
+In general, a dataset is an array of objects, each of which corresponds
+to a tuple in the query results.
+
+There is a cursor for each dataset. The cursor can point to some row in
+the dataset and determines the current item of this set. Also the
+dataset cursor can point to the positions "before the first row" and
+"after the last row". The entity cursor position can affect to the
+linked entities data.
+
+Entity fields and parameters may be connected by links. The following
+link types are used in a data model:
+
+* Query link—if the target field of connection is an entity parameter
+field.
+* Filter link—if the target filed of connection is a entity data field.
+* Link defined by the database table external keys.
+
+Query link requeries the target entity's dataset according to the
+parameter value change. The new parameter value is determined according
+to the source point of the link. Both dataset field's current value or a
+parameter value can be used. When the value at the link source changes,
+new data is requested from the database and reoladed in the target
+entity.
+
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+When a module runs in browser, data comes asynchronously from the
+network. When a module runs on desktop client and on application server,
+data comes synchronously. It is recommended to build the client side of
+applications as if data were obtained asynchronously in all cases. It
+will allow to avoid compatibility issues when transferring the client
+side of applications to the browser.
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+Filter link provides the restricted rows view of the target entity
+dataset according to the new filter value. The new filter value is
+determined according to the source point of the link. A dataset field's
+current value or a parameter value can be used. When the value at the
+link source changes, no data is fetched from the database.
+
+Foreign key link is defined by a database table foreign keys. This kind
+of link is created automatically, if a dataset contains fields included
+to such foreign key. This type of link does not affect the content of
+the datasets and is used to generate inter-instance connections between
+instances of entities. This is done via new properties, wich are created
+while data fetching. The link of this type is visually shown as a dashed
+line on the data model diagram.
+
+___________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+To get inter-instance connections work, primary and foreign keys are
+required. Such keys may come from database structure definitions or from
+schema definitions in a JavaScript datasource module.
+___________________________________________________________________________________________________________________________________________________________________________________________________
+
+image:images/dataModelLinks.png[Query and filtration types links]
+
+The figure shows an example of operation of filter and query links for
+the three entities in the data model. In the `Persons` entity, a cursor
+is pointing to a string corresponding to a person named `Mike`.
+
+When initializing a module, data corresponding to the input parameter
+values is loaded into the model by default, then every change of input
+parameters leads to a cascade update of all datasets, which are directly
+or inderectly associated with the modified parameter.
+
+For any dataset you can determine any number of incoming and outgoing
+links of both types. When building connections you should consider the
+following restrictions:
+
+* Links must not create circular references.
+* Links fields and parameters of the souce and the target entities must
+match by its type: the types of connected fields and parameters must
+allow the mutual conversion of values. For example, it is possible to
+connect field if there's a number specified for the connection on the
+source, and a string specified the connection on the target, it is quite
+possible, since there is a possibility of an unambiguous conversion of a
+number to a string, but not vice versa.
+
+Batch change of the model input parameters is also possible, in this
+case, data is updated only after changing all the required parameters.
+
+Added, deleted and changed datasets of these entities objects are saved
+to the database or sent to the application server for subsequent saving
+when calling the save function of the data model object.
+
+The data model object is represented in the module constructor by the
+`this.model` object.
+
+Create an alias variable for the data model object, in the following
+code snippets we will use this model alias object:
+
+code,JavaScript-------------------------- code,JavaScript
+function ModuleD() {
+   var model = this.model;
+   //...
+}
+--------------------------
+
+* Set the data model parameters to update the data of the linked
+entities.
+* Get access to data for data processing, analysis, and so on.
+* Use inter-instances connections to process the data in ORM manner.
+* Use the cursor to move through the data rows.
+* Specify entity event handler functions and write their JavaScript
+code.
+* Alter, remove or add objects in the entity and allow the data model to
+save the changes.
+* Read entity fields metadata for special needs.
+
+To force updating of all data model entities, call the requery function
+of the `model` object:
+
+code,JavaScript----------------------------------- code,JavaScript
+model.requery(onSuccess, onFailure)
+-----------------------------------
+
+where `onSuccess` is the handler function for refresh data on success
+event (optional), `onFailure` is the handler function for refresh data
+on failure event (optional).
+
+[[data-model-editor]]
+Data model editor
+~~~~~~~~~~~~~~~~~
+
+Data model is configured using the visual editor.
+
+For navigating to a data model elements, it is convenient to use a data
+model inspector panel. In the data model inspector, entity and model
+parameters are presented in the form of a tree structure. You can select
+an entity or a connection both in the visual editor and in the data
+model inspector. Mutual positioning of the model data inspector and its
+diagram is possible.
+
+To add a table entity to the data model, perform the following steps:
+
+* Select the Datamodel tab of the module's editor.
+* Select the Add query / Add table Add table menu item on the editor
+toolbar, or use the Ctrl Shift Insert shortcut.
+* Select the table from the list in the table selection dialog, if
+necessary select a schema from the drop-down Schema list; the Default
+button sets the default schema for the application; use the search
+option by clicking Find, if necessary.
+* Click OK add the table or click Cancel to cancel.
+* If necessary, move the table on the model diagram to the right place.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+To add an entity based on an existing query to the data model, perform
+the following actions:
+
+* Select Add query / Add table Add query on the editor toolbar.
+* Select an application element of the Query type in the dialog.
+* Click OK to add the query or click Cancel to cancel.
+* If necessary, move the query on the visual editor diagram to the right
+place.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+_____________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+Drag an existing query or a module from the application elements tree on
+the project panel to the visual editor diagram of the data model to
+include it into the editable data model.
+_____________________________________________________________________________________________________________________________________________________________________________________
+
+An entity object and its data is available from module's JavaScript
+code. When you add a new entity, its name will be specified by default,
+according to the query, or module consturctor name or a table name in
+the database. To change the name of the entity, perform the following
+steps:
+
+* Go to the Datamodel tab.
+* Select the corresponding entity on the data model diagram or in the
+data model inspector.
+* In the Properties editing window specify the name value in the name
+field; entity name is case-sensitive and must meet the requirements for
+the JavaScript identifiers.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+To add entity dataset events handlers, perform the following actions:
+
+* Go to the Datamodel tab.
+* Select the corresponding entity on the data model diagram or in the
+data model inspector.
+* On the Properties panel select the Events tab and specify the name of
+the handler for the corresponding event.
+* Go to the Source editor tab and write the JavaScript code for the
+event handler.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+After adding the event handler function, a protected code section will
+be added to the code editor:
+
+code,JavaScript-------------------------------------- code,JavaScript
+function rowDeleted() {
+   //TODO add your handling code here:
+}
+--------------------------------------
+
+To remove an entity event handler:
+
+* Go to the Datamodel tab.
+* Select an entity in the data model inspector or on the diagram.
+* On the properties panel select the Events tab for the event and delete
+the event handler name.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+_________________________________________________________________________________________________________________________________________________
+*Note*
+
+If the Properties panel is not displayed, enable this panel. To do this,
+select Window Properties in the Platypus Application Designer main menu.
+_________________________________________________________________________________________________________________________________________________
+
+To delete an entity from the data model, perform the following actions:
+
+* Select an entity in the data model inspector or on the diagram.
+* Click Delete on the editor toolbar.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+To add data model parameters:
+
+* Click Create new field/parameter on the fields editing tab toolbar to
+add a parameter or press the Insert key.
+* Change the parameter properties in the Properties editor window.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+Data model parameters have the following properties:
+
+* Name is the name of the parameter.
+* Description is the description of the parameter.
+* Type is the type of the parameter; select the type of the parameter
+from the drop-down list.
+* Type Name is the name of the data structure type, the field is
+available for input if the Structure field type is selected.
+* Size is the length or accuracy of the field.
+* Scale is the scale of the field.
+* Nullable property selects, weather the `NULL` value is available for
+the field.
+
+To edit the data model parameter properties, perform the following
+actions:
+
+* Select a parameter on the diagram or in the data model inspector.
+* Edit the properties of the parameter in the Properties window.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+To delete a data model parameter, perform the following actions:
+
+* Select a parameter on the data model diagram.
+* Click Delete on the parameter editing tab toolbar or press the Delete
+shortcut.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+To add a query or a filter link between two entites:
+
+* Move the parameter to the field of an entity, with which you want to
+connect this parameter. The connection will be displayed as a line with
+an arrow between fields or parameters of the entity.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+_______________________________________________________________________________________________________________________________________________
+*Note*
+
+Query link type in the visual editor is highlighted by purple. Filter
+link is highlighted by black. The link target field is shown by an
+arrow.
+_______________________________________________________________________________________________________________________________________________
+
+To delete a link, perform the following actions:
+
+* Select the link to remove.
+* Click Delete or use the Delete key.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+To edit a foreign key link properties, perform the following actions:
+
+* Select a dashed link.
+* Select Scalar and collection properties menu item from the foreign key
+link context menu.
+* In the dialog specify Scalar property name and Collection property
+name fields.
+* Save the application element by clicking Save All on the main toolbar
+or by using the Ctrl Shift S keyboard shortcut.
+
+To zoom-in or zoom-out the data model visual presentation:
+
+* Click Zoom In to scale up the data model presentation in the editor;
+click Zoom out to scale it down.
+
+To use the search function on the data model diagram:
+
+* Click Find to open the search dialog in the data model editor.
+* Enter the search line, select fields to be used for searching:
+Datasets, Fields, Params, and also check the necessary options: use the
+Whole words option to search for the whole words. Use the Match case
+option to perform the case-sensitive search.
+* Click Next and Previous to go to the next or previous search result.
+* Click Close to close the search dialog.
+
+[[data-model-parameters]]
+Data model parameters
+~~~~~~~~~~~~~~~~~~~~~
+
+Use the data model parameters to fetch specific data to the data model.
+
+Data model parameters object is in the `model.params` property. To set a
+new value to the data model parameter:
+
+code,JavaScript------------------------- code,JavaScript
+model.params. = newValue;
+-------------------------
+
+where `
+
+------------------------------------------------------------------
+    ` is the corresponding parameter name, and `newValue` is a new
+------------------------------------------------------------------
+
+value of the parameter (literal, variable, or expression).
+
+Below you can see a piece of code, the execution of which will result in
+loading the new model entity data by assigning a new value to the
+`documentID` parameter:
+
+code,JavaScript------------------------------------------------------------
+code,JavaScript
+model.params.documentID = 1; // Changes data model parameter
+------------------------------------------------------------
+
+Each change of any data model parameter leads to the automatic update of
+data of the model entities, which are directly or indirectly connected
+with it.
+
+_________________________________________________________________________________________________________________________________________________
+*Note*
+
+Datasets in the model are updated only if the value of the model
+parameter was changed. To force updating of entity data, use the requery
+method.
+_________________________________________________________________________________________________________________________________________________
+
+It is often necessary to change some parameters before updating data. To
+do this, use the beginUpdate and endUpdate methods of the `params`
+object:
+
+code,JavaScript----------------------------- code,JavaScript
+model.params.beginUpdate();
+try {
+  // Update parameters here, 
+  // for example:
+  // params.documentID = 1;
+  // params.language = 'en';
+} finally {
+  params.endUpdate();
+}
+-----------------------------
+
+[[entities]]
+Entities
+~~~~~~~~
+
+Data model entities are available as the data model object's properties:
+`model.`, where `
+
+----------------------------------------------
+    ` is the script presentation of an entity.
+----------------------------------------------
+
+Entities may have its own parameters and can be updated independently
+from the other model entities.
+
+To access entity parameters, use the `params` entity property:
+
+code,JavaScript-------------------------- code,JavaScript
+var entityParams = .params
+--------------------------
+
+where `
+
+-----------------------------------------------
+    ` is an object of the corresponding entity.
+-----------------------------------------------
+
+To access the specific parameters, use properties of the `model..params`
+object with names, which match the entity parameter names:
+
+code,JavaScript-------------------------------- code,JavaScript
+var entityParam = model..params.
+--------------------------------
+
+where `
+
+-----------------------------------------------------
+    ` is an entity object,`
+      
+    ` is the property of the corresponding parameter.
+-----------------------------------------------------
+
+To set the parameter value, assign a new value to it:
+
+code,JavaScript-------------------------- code,JavaScript
+model..params. = newValue;
+--------------------------
+
+where `newValue` is a new value of the parameter.
+
+Setting a new value for a entity parameter doesn't result in automatic
+update of the dataset.
+
+To update entity data and related entities, use the execute, function.
+New data will be loaded only if the entity parameter values were
+changed:
+
+code,JavaScript------------------------------- code,JavaScript
+.execute(onSuccess, onFailure);
+-------------------------------
+
+where `
+
+------------------------------------------------------------------
+    ` is an entity object, `onSuccess` is the handler function for
+------------------------------------------------------------------
+
+refresh data on success event (optional) and `onFailure` is the handler
+function for refresh data on failure event (optional).
+
+To force the update of entity data and related entities, use the requery
+function:
+
+code,JavaScript------------------------------- code,JavaScript
+.requery(onSuccess, onFailure);
+-------------------------------
+
+where `
+
+------------------------------------------------------------------
+    ` is an entity object, `onSuccess` is the handler function for
+------------------------------------------------------------------
+
+refresh data on success event (optional), `onFailure` is the handler
+function for refresh data on failure event (optional). Callback
+functions are called when the database request is executed and its
+results come to the client over the network.
+
+Handler of the `onRequeried` entity event will be called in any case,
+regardless of the method of calling the `requery` function.
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+Update of entity data does not cancel the data changes made in the
+entity dataset earlier, so after saving the model these changes will be
+applied to the database. Data changes are reset only after saving the
+entire model.
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+To access to the entity's data, refer to the entity dataset as a regular
+JavaScript array:
+
+code,JavaScript------------------- code,JavaScript
+var item = model.[]
+-------------------
+
+where `
+
+------------------------------------------------------------------
+    ` is an entity, `
+      
+    ` is an index of the array element within the `0...length - 1`
+------------------------------------------------------------------
+
+range.
+
+An array element is an data row instance, which was obtained as a result
+of executing the query in the database. To access row's fields, refer to
+them by name:
+
+code,JavaScript------------------- code,JavaScript
+var propValue = [].
+-------------------
+
+where `
+
+------------------------------------------------------------------
+    ` is an object of the corresponding entity, `
+      
+    ` is an index of the array element within the `0...length - 1`
+------------------------------------------------------------------
+
+range, `
+
+--------------------------------------------------------------------
+    ` is a property of the entity object having the same name as the
+--------------------------------------------------------------------
+
+rowset field.
+
+The following example shows the process of enumerating document rows in
+the `documents` entity:
+
+code,JavaScript--------------------------------------------
+code,JavaScript
+var documents = model.documents;
+
+// Logs all documents names
+for (var i = 0; i < documents.length; i++) {
+  logger.info(documents[i].NAME);
+}
+--------------------------------------------
+
+If an external key link is established between two entities, you can get
+access to the data of the connected entity by using data instance
+property having the same name as the connected entity. This properties
+are generated during ORM resolution. If the entity's underlying database
+table contains an foreign key reference, the corresponding property
+represents the connected entity.
+
+code,JavaScript-------------------------- code,JavaScript
+var propValue = model.[]..
+--------------------------
+
+where `
+
+---------------------------------------------------------------
+    ` is the name of an entity, which contains the external key
+---------------------------------------------------------------
+
+reference, `
+
+------------------------------------------------------------------
+    ` is an index of the array element within the `0...length - 1`
+------------------------------------------------------------------
+
+range, entityName2 is an entity containing the field, which is
+referenced by the external key, `
+
+--------------------------------------------------------------------
+    ` is a property of the entity object having the same name as the
+--------------------------------------------------------------------
+
+query results field.
+
+If the entity contains a field, which is referenced by the external key,
+the property contains an array of the connected entity objects:
+
+code,JavaScript-------------------------- code,JavaScript
+var propValue = model.[]..
+--------------------------
+
+where `
+
+-------------------------------------------------------------------
+    ` is an entity, which contains the external key reference, `
+      
+    ` is an index of the array element within the `0...length - 1`,
+-------------------------------------------------------------------
+
+range entityName2 is an entity containing the field, which is referenced
+by the external key, `
+
+--------------------------------------------------------------------
+    ` is an index of the connected object array element, `
+      
+    ` is a property of the entity object having the same name as the
+--------------------------------------------------------------------
+
+query results field.
+
+Change for a foregn key link scalar and collection properties if
+required. The changed values will be used as a properties names in the
+correspondent entities.
+
+[[cursor-api]]
+Cursor API
+~~~~~~~~~~
+
+To get access to the dataset row pointed out by the entity cursor use
+the `model..cursor` property, for example:
+
+code,JavaScript-------------------------------- code,JavaScript
+var currentValue = model..cursor
+--------------------------------
+
+where `
+
+----------------------------------
+    ` is a corresponding entity, `
+      
+    ` is a property of interest.
+----------------------------------
+
+The cursor is defined by position in the entity data array. In addition
+to pointing to some object, the cursor can point to the position _before
+the first object_ and _after the last object_. In this case cursor
+property is null.
+
+After loading or filtering dataset the cursor is placed on the first
+object of the entity's data array.
+
+To move the cursor over the data array, use the beforeFirst, afterLast,
+first, next, prev, last, and pos entity's methods.
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Function |Description
+|`beforeFirst()` |Sets the cursor to the position _before the first_
+object.
+
+|`afterLast()` |Sets the cursor to the position _after the last_ object.
+
+|`first()` |Sets the cursor on the first object.
+
+|`last()` |Sets the cursor on the last object.
+
+|`next()` |Sets the cursor on the next object.
+
+|`prev()` |Sets the cursor on the previous object.
+
+|`pos(index)` |Sets the cursor to the specified position, where index is
+the row index `Number` starting form 1.
+
+|`scrollTo(obj)` |Sets the cursor on the specified object, where obj is
+a row object.
+|=======================================================================
+
+To get information about the cursor position, use the bof, eof methods
+and the `rowIndex` entity property.
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Function/property |Type |Returned value
+|`bof()` |Boolean |true, if the cursor points to the position _before
+the first object_.
+
+|`eof()` |Boolean |true, if the cursor points to the position _after the
+last object_.
+
+|`rowIndex` |Number |The current position of the cursor.
+|=======================================================================
+
+Use the `rowIndex` property to move the cursor to the specified
+position.
+
+The following example uses cursor moving control functions to enumerate
+`documents` entity objects and output document names:
+
+code,JavaScript---------------------------------------------------------
+code,JavaScript
+model.documents.requery();//Cursor is on the first object
+while (!model.documents.eof) { 
+  Logger.info(model.documents.cursor.NAME);
+  model.documents.next();
+}
+---------------------------------------------------------
+
+To check for instances of data in the entity data array, use its `empty`
+property: `model..empty`.
+
+The `empty` property is `true` if the entity data array is empty, and
+`false` otherwise. For example, the following snippet outputs a message
+into the log, if the `documents` entity data array is empty:
+
+code,JavaScript------------------------------------------------------------
+code,JavaScript
+model.documents.empty && Logger.info('Documents is empty.');
+------------------------------------------------------------
+
+[[saving-data]]
+Saving data
+~~~~~~~~~~~
+
+Module's data model provides automatic tracking of data changes. Data
+changes can be saved only as a part of entire model.
+
+To edit, insert, or delete data, perform the following actions:
+
+* Edit, insert, or delete an object from the entity data.
+* Call the save method of the model.
+
+To obtain access to the entity arbitrary objects, use the syntax of
+referring to an array element:
+
+code,JavaScript------------- code,JavaScript
+model.[]. = ;
+-------------
+
+where `
+
+----------------------------------------------------------------
+    ` is an entity, entityName[i].propName is an object property
+----------------------------------------------------------------
+
+with the specified index in the entity data. `
+
+-----------------------------------------
+    ` is an expression for the new value.
+-----------------------------------------
+
+To change the appropriate property of the entity's cursor, use the
+following way:
+
+code,JavaScript---------- code,JavaScript
+model. = ;
+----------
+
+where `
+
+----------------------------------------------------------------
+    ` is an entity, `
+      
+      
+    ` is a property in the current cursor position in the entity
+----------------------------------------------------------------
+
+data, `
+
+-----------------------------------------
+    ` is an expression for the new value.
+-----------------------------------------
+
+To save changes the data model changes, use its save method:
+
+code,JavaScript-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+code,JavaScript
+model.save(onSuccess, onFailure);where onSuccess is the handler function for an event of successfull saving of data (optional) and onFailure is the handler function for a save data on failure event (optional).
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+To insert a new object to a dataset:
+
+* Add a new object to entity dataset.
+* Call the save method of the data model.
+
+To insert a new object into a dataset, use the insert or push entity
+functions.
+
+Call the insert function to insert a new object into the entity data. If
+necessary, pass "key-value" pairs as parameters to this function. Here,
+a key is the `.schema.` entity property, and a value is the value of
+this property:
+
+code,JavaScript---------------- code,JavaScript
+model..insert();
+----------------
+
+code,JavaScript------------------- code,JavaScript
+model..insert(
+  model..schema., ,
+  model..schema., 
+  //...
+);
+-------------------
+
+Call the push function to insert a new object in the entity data — this
+function is a standard method of inserting a new element into the
+JavaScript array:
+
+code,JavaScript-------------- code,JavaScript
+model..push();
+--------------
+
+If necessary, pass the JavaScript object, the property names of which
+match the names of properties in the entity objects, as a parameter to
+the function. Their values will be set as values of the new object
+properties:
+
+code,JavaScript-------------- code,JavaScript
+model..push( {
+  : ,
+  : });
+--------------
+
+When using the insert function, as well as when using the push function,
+the cursor will point to a new object.
+
+After inserting, the new object will have the following properties:
+
+* An identifying property gets the generated value, if a value was not
+explicitly assigned to this property when inserting.
+* Properties, which form a part of the filter (if any), get values of
+the corresponding filtration keys; a filter can be applied by the model
+filtering connections or by the custom code.
+* Properties belonging to the "key-value" get the transferred values.
+* Other properties will be set to `null`.
+
+Example of code for inserting a new object into the `documents` entity:
+
+code,JavaScript---------------------------------------------------------
+code,JavaScript
+model.documens.push({ ID:101, NAME:'New document name'});
+model.save();
+---------------------------------------------------------
+
+To delete an object, use the deleteRow or splice entity functions.
+
+Call the deleteRow function without parameters to delete the current
+object, i.e. the object, which the cursor is pointing to.
+
+code,JavaScript------------------- code,JavaScript
+model..deleteRow();
+-------------------
+
+Pass an index of the object, which you want to delete, as a parameter to
+the deleteRow method:
+
+code,JavaScript------------------- code,JavaScript
+model..deleteRow();
+-------------------
+
+where `
+
+--------------------------------------
+    ` can take on `1...length` values.
+--------------------------------------
+
+Alternatively, pass the object to delete as the parameter of deleteRow
+method:
+
+code,JavaScript------------------- code,JavaScript
+model..deleteRow();
+-------------------
+
+where `
+
+------------------------------------------
+    ` is the one of the dataset row items.
+------------------------------------------
+
+Use the splice function to delete an object from the entity data by
+passing an index and a number of elements to be deleted as arguments:
+
+code,JavaScript------------------ code,JavaScript
+model..splice(, );
+------------------
+
+where `
+
+----------------------------------------------------------------
+    ` is an entity, `index` is an index of the entity data array
+----------------------------------------------------------------
+
+element. `index` can take on a value within the `0...length-1` range, `
+
+--------------------------------------------
+    ` is a number of elements to be deleted.
+--------------------------------------------
+
+Example of deleting the current object from the `documents` entity and
+from the database:
+
+code,JavaScript----------------------------- code,JavaScript
+// Removes first element
+model.documents.splice(0, 1);
+model.save();
+-----------------------------
+
+To remove all objects from the entity data, use the deleteAll entity
+function:
+
+code,JavaScript------------------- code,JavaScript
+model..deleteAll();
+-------------------
+
+Example of deleting all objects from the `documents` entity and from the
+database:
+
+code,JavaScript---------------------------- code,JavaScript
+// Removes all elements
+model.documents.deleteAll();
+model.save();
+----------------------------
+
+Calling `save` function results in saving changes and commiting the
+transaction.
+
+Calling save function may lead to an exception, for example, if saved
+data are inconsistent with the database schema. In this case data are
+not saved to the database. To handle this exception, use the
+`try-catch-finally` statement:
+
+code,JavaScript---------------------------------------- code,JavaScript
+try {
+  model.save();
+} catch (e) {
+  model.revert();
+  Logger.error('Save data error: ' + e);
+}
+----------------------------------------
+
+After handling the error, you can try to correct the cause of the
+problem and re-call the save function.
+
+Use model's `revert` method to revert model data changes. After this
+method call, no data changes are avaliable for `save()` method, but the
+model still attempts to commit. Calling `save()` on unchanged model
+nevertheless leads to a commit.
+
+[[search-api]]
+Search API
+~~~~~~~~~~
+
+Search operations can be performed after the data model loads its
+entities' data.
+
+Search is performed in the model and doesn't send new requests to the
+database neither changes the data.
+
+To find an object by its identifier, use the findById entity method by
+passing a key value to it:
+
+code,JavaScript----------------------------- code,JavaScript
+var item = model..findById();
+-----------------------------
+
+where `
+
+------------------------------------------
+    ` is an entity, `
+      
+    ` is an expression for the search key.
+------------------------------------------
+
+If nothing is found, the findById function returns the `null` value.
+
+Example of code for searching for a document by its identifier and
+displaying its name in the log:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+var documentId = 101;
+var document = model.documents.findById(documentId);
+if (document) {
+  Logger.info('Document name is ' + document.NAME);
+}
+----------------------------------------------------
+
+To perform search by arbitrary properties of objects, use the find
+entity's function. Pass the "key-value" pairs corresponding to the
+property and search value as parameters of the find function. The search
+is performed by checking the equality of the entity object property
+values and values to search for.
+
+code,JavaScript------------------------ code,JavaScript
+var items = model..find(
+  prop1, propValue1,
+  prop2, propValue2
+  //...
+  //propN, propValueN
+);
+------------------------
+
+where `
+
+----------------------------------------------------------
+    ` is an entity, `
+      
+    ` — is an entity property in the form of `.schema.`; `
+      
+    ` — is a value to search for.
+----------------------------------------------------------
+
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+findById и find functions are searching for objects using prepared hash
+table by corresponding properties and don't enumerate the row objects.
+Therefore, it is recommended to logically separate the code for
+searching and changing data, as after any change of data prepared hashes
+are marked as obsolete, and are rebuilded when you attempt to perform
+the search next time.
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+To get an object-property of the entity, use entity metadata:
+
+code,JavaScript--------------------------- code,JavaScript
+var field = model..schema.;
+---------------------------
+
+where `
+
+------------------------------------------------
+    ` is an entity, `
+      
+    ` is the name of the corresponding property.
+------------------------------------------------
+
+Search operation returns an array of found objects or an empty array if
+nothing was found.
+
+This code snippet illustrates search documents by their names and by the
+set flag:
+
+code,JavaScript--------------------------------------------
+code,JavaScript
+var documentName = 'Document 1';
+var isChecked = true;
+var documents = model.documents;
+var foundDocuments = documents.find(
+  documents.schema.NAME, documentName,
+  documents.schema.CHECKED, isChecked,
+);
+for(var i=0; i<foundDocuments.size(); i++) {
+  var foundDocument = foundDocuments[i];
+  Logger.info(foundDocument.DESC);
+}
+--------------------------------------------
+
+[[filter-api]]
+Filter API
+~~~~~~~~~~
+
+Filtering operations can be performed after the data model loads its
+entities data.
+
+Data filtering is performed in the model and do not cause sending new
+requests to the database neither changes the data model data.
+
+You can specify filtering rules for any entity. Filtering rules will be
+applied every time the data is loaded. Data rows, which failed to pass
+the filtration condition, are not lost, but becomes invisible to the
+application code.
+
+To create a filter, use the createFiter entity function and pass entity
+schema properties, by which the filtration to be performed, as
+parameters:
+
+code,JavaScript--------------------------------- code,JavaScript
+var filter = model..createFilter(
+  model..schema.,
+  model..schema.,
+  //...
+  model..shema.);
+---------------------------------
+
+where `
+
+----------------------------------------------------------------
+    ` is an entity,` model..schema.` is an entity field metadata
+----------------------------------------------------------------
+
+property.
+
+To apply a filter to data, use the apply function and pass filters
+values in the same order, in which filtered fields were specified:
+
+code,JavaScript---------------- code,JavaScript
+filter.apply(
+  filterValue1,
+  filterValue2,
+  //...
+  filterValueN);
+----------------
+
+where `filterValueN` is a value, by which the corresponding property
+will be filtered.
+
+To cancel the filter, call the cancel filter function:
+
+code,JavaScript---------------- code,JavaScript
+filter.cancel();
+----------------
+
+_________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+You can specify only one filter for each entity at a time. When you
+apply a filter to the already filtered dataset, the previous filter is
+replaced by a new one.
+_________________________________________________________________________________________________________________________________________________________________
+
+Example of using data filtrating and enumeration of results:
+
+code,JavaScript------------------------------------ code,JavaScript
+//Set filter values
+var status = 1;
+var checked = true;
+var documents = model.documents;
+//Create and apply filter
+var filter = documents.createFilter(
+  entity1.schema.STATUS,
+  entity1.schema.CHECKED);
+filter.apply(status, checked);
+
+// List filtered data
+documents.beforeFirst();
+while(documents.next()) {
+  Logger.info(documents.NAME);
+}
+// Cancel filter
+filter.cancel();
+------------------------------------
+
+[[sort-api]]
+Sort API
+~~~~~~~~
+
+To sort datasets objects according to some criteria use entity sorting
+operations. Sorting can be performed after entity data is loaded.
+
+Data sorting is performed in the model and do not spawn new requests to
+the database neither changes the data model data.
+
+Entity data can be sorted by several fields using the sorting rules.
+
+To specify the rules, create the sorting objects. To do this, use
+createSorting entity's function. Pass pairs defining the sorting order
+and a property, by which sorting should be performed, as the parameters
+to this function:
+
+code,JavaScript----------------------------------- code,JavaScript
+var sorting = model..createSorting(
+  model..schema., ,
+  model..schema., ,
+  //...
+  model..schema., );
+-----------------------------------
+
+where `
+
+-----------------------------------------------------------------
+    ` is an entity, `.schema.` is a property, by which sorting of
+-----------------------------------------------------------------
+
+data of the entity, the createSorting function of which is called, will
+be performed; `ascDescN` is the boolean ascending sorting order
+attribute wich is equals `true` or for the descending sorting order is
+equals to `false`.
+
+To sort data, use the sort entity function passing a sorting object as a
+parameter to this function:
+
+code,JavaScript-------------- code,JavaScript
+model..sort();
+--------------
+
+where `
+
+--------------------------
+    ` is a sorting object.
+--------------------------
+
+Example of sorting entity data by name and reverse sorting by flag:
+
+code,JavaScript------------------------------------- code,JavaScript
+var documents = model.documents;
+//Create sorter
+var sorter = documents.createSorting(
+  documents.schema.NAME, true,
+  documents.schema.CHECKED, false);
+
+//Sort objects
+model.entity1.sort(sorter);
+-------------------------------------
+
+To define the specific comparison logic, use an alternative version of
+the sort function. To do this, pass a function, which implements the
+comparison of two elements, as a parameter:
+
+code,JavaScript----------------------------- code,JavaScript
+model..sort(sortingFunction);
+-----------------------------
+
+where `
+
+------------------------------------------------------------------
+    ` is an entity, sortingFunction is a function, which takes two
+------------------------------------------------------------------
+
+objects as parameters and compares them. The comparison function returns
+a negative integer, if the first object is smaller than the second one,
+returns 0, if they are equal, and returns a positive integer, if the
+first object is greater than the second one.
+
+The following example shows the process of sorting entity data using an
+anonymous comparison function. Sorting is performed by the length of the
+document name:
+
+code,JavaScript---------------------------------------------------------
+code,JavaScript
+module.documents.sort(function(doc1, doc2) {
+  var length1 = doc1.NAME != null ? doc1.NAME.length : 0;
+  var length2 = doc2.NAME != null ? doc2.NAME.length : 0;
+  return length1 - length2;
+});
+---------------------------------------------------------
+
+[[entity-events]]
+Entity events
+~~~~~~~~~~~~~
+
+To implement some logic to react to the data events specify entity
+events handlers functions. To create these handler functions assign
+functions to entities' properties or use data model editor.
+
+Use an event handler function as follows:
+
+code,JavaScript------------------------------------ code,JavaScript
+function EntityOnEventHandler(evt) {
+   //..code to handle this event
+}
+------------------------------------
+
+Entity data events list is given in the table below:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Event type |Description
+|`onChanged` |`ChangeEvent` |Is called after changing the dataset object
+
+|`onDeleted` |`DeleteEvent` |Is called after removing an object from the
+dataset
+
+|`onInserted` |`InsertEvent` |Is called after inserting a new object
+into the entity dataset
+
+|`onFiltered` |`EntityEvent` |Is called after filtering the entity
+dataset
+
+|`onRequeried` |`EntityEvent` |Is called after re-requesting the dataset
+data, including the first request during the module's startup
+
+|`onScrolled` |`CursorChangeEvent` |Is called after changing the cursor
+position in the entity dataset array
+
+|`willChange` |`ChangeEvent` |Is called before changing the rowset
+object
+
+|`willDelete` |`DeleteEvent` |Is called before removing an object from
+the dataset
+
+|`willInsert` |`InsertEvent` |Is called before inserting an object into
+the dataset
+
+|`willScroll` |`CursorChangeEvent` |Is called before moving the cursor
+over the entity dataset
+|=======================================================================
+
+The events that are invoked before some action are cancelable from the
+handler function by returning the `false` value. That way you can cancel
+the following events: `willChange`, `willDelete`, `willInsert` and
+`willScroll`.
+
+`EntityEvent` is a generic entity object and contains the following
+property:
+
+[cols="<,<",options="header",]
+|==============================
+|Property |Description
+|`source` |Event source object.
+|==============================
+
+Other entity events contain `source` property as in `EntityEvent`, as
+well as their own specific properties.
+
+`ChangeEvent` object specific propetries are listed in the following
+table:
+
+[cols="<,<",options="header",]
+|======================================
+|Property |Description
+|`propertyName` |Changed property name.
+|`oldValue` |The value before change.
+|`newValue` |The value after change.
+|======================================
+
+`DeleteEvent` object specific propetries are listed in the following
+table:
+
+[cols="<,<",options="header",]
+|==============================
+|Property |Description
+|`deleted` |The deleted object.
+|==============================
+
+`InsertEvent` object specific propetries are listed in the following
+table:
+
+[cols="<,<",options="header",]
+|================================
+|Property |Description
+|`inserted` |The inserted object.
+|================================
+
+`CursorChangeEvent` object specific propetries are listed in the
+following table:
+
+[cols="<,<",options="header",]
+|=============================================================
+|Property |Description
+|`oldIndex` |The cursor position index before position change.
+|`newIndex` |The cursor position index after position change.
+|=============================================================
+
+Example of using an event handler function for validation:
+
+code,JavaScript------------------------------------- code,JavaScript
+//Handles willChange event
+function usersWillChange(evt) {
+  return validateEmail(evt.newValue);
+}
+
+//Simple e-mail validation
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+-------------------------------------
+
+[[data-schema]]
+Data schema
+~~~~~~~~~~~
+
+JavaScript code has access to an entity's fields metadata. It is
+possible to read types, names, descriptions of entity properties and
+parameters, and etc.
+
+To read an entity's schema, use its `schema` property:
+
+code,JavaScript----------------------------------- code,JavaScript
+var entityMetadata = model..schema;
+-----------------------------------
+
+where `
+
+-------------------------------------------------------
+    ` is an entity, which schema you are interested in.
+-------------------------------------------------------
+
+The same data can be obtained using the object-instance of this entity:
+
+code,JavaScript------------------------------------- code,JavaScript
+var item = model.[];// Gets some item
+var entityMetadata = item.schema;
+-------------------------------------
+
+where `
+
+---------------------------
+    ` is an entity, `
+      
+    ` is an object's index.
+---------------------------
+
+To get access to the an entitiy's property metadata:
+
+code,JavaScript---------------------------------- code,JavaScript
+var propMetadata = model..schema.;
+----------------------------------
+
+where `
+
+------------------------------------------------
+    ` is an entity, `
+      
+    ` is the name of the corresponding property.
+------------------------------------------------
+
+Example of code, which checks if the `id` property of the documents
+entity is an object's key.
+
+code,JavaScript------------------------------------------------
+code,JavaScript
+if (model.documents.schema.id.pk) {
+  Logger.info('id is key attribute of entity.');
+}
+------------------------------------------------
+
+The schema composed of the following properties:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Property |Type |Description
+|`pk` |Boolean |`true`, if the property is an ID key
+
+|`fk` |Boolean |`true`, if the property is a reference to another entity
+instance
+
+|`name` |String |Property name
+
+|`description` |String |Property description
+
+|`readonly` |Boolean |`true`, if the property is read-only
+
+|`size` |Number |Size of the property value
+
+|`scale` |Number |Scale
+
+|`precision` |Number |Accuracy
+
+|`signed` |Boolean |`true`, if the property has a Number type and can
+take on negative values
+
+|`nullable` |Boolean |`true`, if the property can take on the `NULL`
+value
+|=======================================================================
+
+To get the number of properties in the entity, use the `length` property
+in the entity schema object:
+
+code,JavaScript-------------------- code,JavaScript
+model..schema.length
+--------------------
+
+You can read the property's metadata by index as an array element:
+
+code,JavaScript--------------- code,JavaScript
+model..schema[]
+---------------
+
+where `
+
+----------------------------------------------------------------
+    ` is an entity, and `
+      
+    ` is within the range from `0` to `entityMetadata.length-1`.
+----------------------------------------------------------------
+
+Below you can find an example of output all properties of the documents
+entity into the log:
+
+code,JavaScript---------------------------------------------------------
+code,JavaScript
+for (var i = 0; i < model.documents.schema.length; i++) {
+  Logger.info(documents.md[i]);
+}
+---------------------------------------------------------
+
+To read the entity parameter metadata, use the `schema` property of the
+`params` object of a data model or entity:
+
+code,JavaScript----------------------------------------- code,JavaScript
+var paramsMetadata = model.params.schema;
+-----------------------------------------
+
+code,JavaScript------------------------------------------
+code,JavaScript
+var paramsMetadata = model..params.schema;
+------------------------------------------
+
+To get access to the metadata of a specific parameter:
+
+code,JavaScript------------------------------------ code,JavaScript
+var paramMetadata = paramsMetadata.;
+------------------------------------
+
+where `
+
+---------------------------------
+    ` is a name of the parameter.
+---------------------------------
+
+Example of code, which checks if the `documentID` parameter of the data
+model was changed:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+if (model.params.schema.documentID.modified) {
+  Logger.info('Parameter documentID was modified.');
+}
+----------------------------------------------------
+
+You can read metadata composed of the following for the parameter:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Property |Type |Description
+|`mode` |Number |Parameter operation mode
+
+|`defaultValue` |Object |Default parameter value
+
+|`modified` |Boolean |`true`, if the parameter was changed and `false`
+otherwise
+
+|`pk` |Boolean |`true`, if the parameter is a primary key and `false`
+otherwise
+
+|`fk` |Boolean |`true`, if the field is an foreign key referring to
+another entity and `false` otherwise
+
+|`name` |String |Name of the parameter
+
+|`description` |String |Description of the parameter
+
+|`readonly` |Boolean |`true`, if the parameter is read-only and `false`
+otherwise
+
+|`size` |Number |Size of the property value
+
+|`scale` |Number |Scale
+
+|`precision` |Number |Accuracy
+
+|`signed` |Boolean |`true`, if the parameter has a Number type and can
+take on negative values and `false` otherwise
+
+|`nullable` |Boolean |`true`, if the parameter is not mandatory and
+`false` otherwise
+|=======================================================================
+
+To get the number of model parameters, use the `length` property of the
+model parameter schema object:
+
+code,JavaScript-------------------------- code,JavaScript
+model.params.schema.length
+--------------------------
+
+or just the `length` property of the model parameters:
+
+code,JavaScript------------------- code,JavaScript
+model.params.length
+-------------------
+
+To get the number of the entity parameters:
+
+code,JavaScript--------------------------- code,JavaScript
+model..params.schema.length
+---------------------------
+
+or:
+
+code,JavaScript-------------------- code,JavaScript
+model..params.length
+--------------------
+
+where `
+
+-------------------
+    ` is an entity.
+-------------------
+
+To access parameter metadata by index, call it as an array element:
+
+code,JavaScript--------------------- code,JavaScript
+model.params.schema[]
+---------------------
+
+where `
+
+-------------------------------------------------------------
+    ` is within the range from 0 to `params.schema.length-1`.
+-------------------------------------------------------------
+
+Below you can see an example of outputting all model data parameters
+into the log:
+
+code,JavaScript------------------------------------------------------
+code,JavaScript
+for (var i = 0; i < model.params.schema.length; i++) {
+  Logger.info(params.md[i]);
+}
+------------------------------------------------------
+
+[[dynamic-entities]]
+Dynamic entities
+~~~~~~~~~~~~~~~~
+
+Use model's loadEntity(queryName)method, where queryName is the name of
+the query to dynamically create an entity in the data model. The
+generated entity can be used to read, insert or modify objects:
+
+code,JavaScript---------------------------------------------------
+code,JavaScript
+var docEntity = model.loadEntity("Documents");
+docEntity.requery();
+
+//Print all documents names
+docEntity.foreach(function(doc) {
+  Logger.info(doc.NAME);
+});
+
+//Change first document's name
+docEntity[0] && docEntity[0].NAME = "New document";
+model.save();
+---------------------------------------------------
+
+[[executing-arbitary-sql]]
+Executing arbitary SQL
+~~~~~~~~~~~~~~~~~~~~~~
+
+In addition to using entities based on a query, data model allows to
+execute arbitrary SQL code. Using entities based on a query instance
+have a number of advantages, such as security management or ability to
+work with the client code. However, if necessary, you can execute
+arbitrary SQL.
+
+SQL execution is available on a server or on a desktop client wich has a
+direct connection to a database.
+
+Use the following methods of `model`:
+
+* createEntity to dynamically create a new entity.
+* executeSql to execute SQL without any preprocessing.
+
+Use model.createEntity(sqlQuery, dataSourceName) method, where `
+
+--------------------------------------------------------------
+    ` is the query text, dataSourceName is the datasource name
+--------------------------------------------------------------
+
+(optional) to dynamically create a new entity, which can be used for
+executing the SQL code. The generated entity can be used to read, insert
+or modify objects:
+
+code,JavaScript-------------------------------------------------------------
+code,JavaScript
+var docEntity = model.createEntity("SELECT * FROM Document");
+docEntity.requery();
+
+//Print all documents names
+docEntity.foreach(function(doc) {
+  Logger.info(doc.NAME);
+});
+
+//Change first document's name
+docEntity[0] && docEntity[0].NAME = "New document";
+model.save();
+-------------------------------------------------------------
+
+Use executeUpdate entity method to execute the SQL code, which contains
+the `INSERT`, `UPDATE`, `DELETE` or DDL commands:
+
+code,JavaScript----------------------------------------------------------------------------
+code,JavaScript
+var e = model.createEntity("DELETE * FROM Document d WHERE d.DOC_TYPE = 1");
+e.executeUpdate();
+----------------------------------------------------------------------------
+
+Use executeSql(sqlQuery) model's method to execute the SQL code, which
+contains the `INSERT`, `UPDATE`, `DELETE` commands, where `
+
+------------------------
+    ` is the query text:
+------------------------
+
+code,JavaScript---------------------------------------- code,JavaScript
+model.executeSql("DROP TABLE Document");
+----------------------------------------
+
+[[data-source-module]]
+Data source module
+------------------
+
+A module can be used as a data source in other modules data models just
+like a query.
+
+To create a data source module implement the following instance
+properties and methods:
+
+* `schema` property to represent the data source metadata information.
+The schema information is repesented as an array of fields elements. For
+each array element contains the following: `name` is the name of the
+field, `entity` is the entity name to be used as a reference (optional),
+`description` is the field's description, type is the field's type
+(optional), `key` is true if the field is a primary key, `ref` is the
+reference to the other entity's field.
+* `fetch()` method to query data, where params is an object, with
+properties as defined in this module's model's parameters.
+* `apply(, )` method to save the data, where log is an array represents
+the log of changes made by clients or server side data driven code to be
+applied, session is a current user session identifier. For every element
+of the `log` array use `consume` method to consume this change log
+record.
+
+Example of an datasource module usage is as the follows:
+
+code,JavaScript--------------------------------------------------
+code,JavaScript
+/**
+ * @module 
+ */
+function DataSourceModule(){
+    var self = this, model = this.model;
+    
+    this.schema = [
+        {name: "p1",
+         entity: "entity",
+         description: "p1 desc",
+         type: String,
+         key: true},
+        {name: "p2",
+         entity: "entity",
+         description: "p2 desc",
+         type: String,
+         ref: {property: "referencedPropertyName",
+               entity: "referencedEntityName"}},
+        {name: "property3Name",
+         entity: "optionalEntityName",
+         description: "p3 desc",
+         type: Number,
+         required: true},
+    ];
+
+    this.fetch = function(aParams) {
+        return [
+            {p1: "nameA",
+             p2: "descriptionA",
+             p3: 2},
+            {p1: "nameB",
+             p2: "descriptionB",
+             p3: 20}
+        ];
+    };
+
+    this.apply = function(aLog, aSession) {
+        Logger.info("Log length: " + aLog.length 
+                    + " Session: " + aSession);
+        aLog.forEach(function(aChange) {
+            aChange.consume();
+        });
+    };
+--------------------------------------------------
+
+[[server-modules]]
+Server modules
+--------------
+
+This section provides information how to use special features of
+JavaScript modules running on an application server.
+
+[[statefull-and-stateless-session-modules]]
+Statefull and stateless session modules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A module being created on server is stateful by default. Such module
+exists in the context of the current user session.
+
+Mark a module with `@stateless` annotation if you want to make the
+module stateless. A new instance of stateless module is created every
+time the module is called via a network.
+
+[[resident-module]]
+Resident module
+~~~~~~~~~~~~~~~
+
+Use `@resident` annotation to make a server module resident. A resident
+modules are loaded and instanciated during server startup. Resident
+modules are resides in the system session. They are can't be stateless.
+
+[[data-validators]]
+Data validators
+~~~~~~~~~~~~~~~
+
+Use annotation `@validator ,  ...`, where DATA_SOURCEN is a data source
+name to enable server side validation. Implement validation logic in the
+instance metheod `validate(, , )`, where log is an array of changes
+representing the log of changes made by clients or server side data
+driven code to be applied, `
+
+---------------------------------------------------------------
+    ` is a datasource name mentioned in `@validator` annotation
+---------------------------------------------------------------
+
+(relational datasource or script datasource module name), session is
+current user session identifier, the method returns `false` to stop
+validating process (e.g. break validators chain), nothing or true
+otherwise or throws an exception if validation fails.
+
+A module with no data sources in `@validatior` annotation is invoked for
+default application datasource.
+
+Server-side validator example is as follows:
+
+code,JavaScript-----------------------------------------------------------
+code,JavaScript
+/**
+ * @module
+ * @validator DataSource1
+ */ 
+function ValidatorA(){
+    var self = this, model = this.model;
+    this.validate = function(aLog, aDatasource, aSession) {
+        return false;
+    };
+}
+-----------------------------------------------------------
+
+[[authorizers-and-dynamic-roles]]
+Authorizers and dynamic roles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use `@authorizer` annotation to implement dynamic roles assignment for
+an arbitary user. The runtime checks all module authorizers as well as
+checks the system and if any of them approves the user's role this role
+is considered authorized.
+
+For example:
+
+code,JavaScript------------------------------------------------------
+code,JavaScript
+/**
+ * @module
+ * @authorizer
+ */ 
+function AuthorizerA(){
+    var self = this, model = this.model;
+    
+    self.isUserInRole = function(aUser, aRole) {
+       return "manager" === aRole && isManager(aUser);
+  }
+
+  function isManager(aUser) {
+     //Check and return true if a user is a manager..
+  }
+}
+------------------------------------------------------
+
+[[tips-and-tricks]]
+Tips and tricks
+~~~~~~~~~~~~~~~
+
+Plain JavaScript `Date` object is serialized as ISO formatted string in
+client/server communication while using browser as a client and J2EE
+server as a server. So you should realize that on the client side it may
+be JavaScript `Date` object, but on the server side it will be just
+string. May be transferring of timestamp value instead of `Date` object
+will be a good choice.
+
+For example:
+
+code,JavaScript-------------------------------------------------------------
+code,JavaScript
+// On the server side
+/**
+ * @module
+ * @public
+ */ 
+function DateChecker(){
+    var self = this, model = this.model;
+    
+    self.check = function(aPoint, aTimeStamp) {
+       return new Date(aTimeStamp) > 0;
+    }
+
+}
+
+// And on the client side...
+/**
+ * @module
+ */
+function PeriodCalculatorClient(){
+    var self = this;
+    self.go = function(){
+        var calc = new ServerModule("DateChecker");
+        calc.check((new Date()).getTime(), function(aResult){
+            Logger.info("Legal date: " + aResult);
+        });
+    }
+}
+-------------------------------------------------------------
+
+[[scripting-java]]
+Scripting Java
+--------------
+
+Calling Java classes from JavaScript code is possible for applications,
+which are executed in the Platypus client or on the application server
+in any configuration.
+
+To access the Java packages and classes, use the Java global object. For
+example, to get access to the File class, use the java.io.File object.
+
+code,JavaScript-----------------------------------------------------
+code,JavaScript
+//Deletes file
+var aFile = new java.io.File("/home/user/afile.txt");
+aFile.delete();
+-----------------------------------------------------
+
+For convenience, you can assign an object, corresponding to a Java
+package or class, to some variable:
+
+code,JavaScript---------------------------------------------
+code,JavaScript
+var File = java.io.File;
+
+//Delete two files
+var aFile = new File("/home/user/afile.txt");
+aFile.delete();
+var bFile = new File("/home/user/bfile.txt");
+bFile.delete();
+---------------------------------------------
+
+Another approach to facilitate working with Java packages is using
+`importPackage` global function, which serves the same purpose as the
+`import` declaration in Java.
+
+code,JavaScript---------------------------------------------
+code,JavaScript
+importPackage(java.io);
+
+var aFile = new File("/home/user/afile.txt");
+aFile.delete();
+---------------------------------------------
+
+To avoid potential name conflicts, do not use the `java` name for your
+objects and variables.
+
+java.lang.* packages are imported in Java by default, but this is not
+true for JavaScript, because JavaScript has its own Boolean, Math,
+Number, Object, and String objects. That's why import of the java.lang
+package is not recommended.
+
+External Java libraries are also available in JavaScript code. To use
+them:
+
+* Make `.jar` or `.class` files of external libraries available for the
+class loader; when using the desktop client they should be placed in the
+`ext` folder; when deploying the application into the J2EE container,
+they should be usually placed into the `WEB-INF/lib` folder.
+* Use `Packages` object to access to external packages. Check the
+following examples:
+
+code,JavaScript----------------------------------------------------------
+code,JavaScript
+var sensor = new Packages.biz.altsoft.sensors.NavSensor();
+//Gets navigation data
+var navData = sensor.getData();
+----------------------------------------------------------
+
+code,JavaScript--------------------------------------------
+code,JavaScript
+importPackage(Packages.biz.altsoft.sensors);
+var sensor = new NavSensor();
+//Gets navigation data
+var navData = sensor.getData();
+--------------------------------------------
+
+Use the `importClass` global function to import only a single class:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+importClass(Packages.biz.altsoft.sensors.NavSensor);
+var sensor = new NavSensor();
+//Gets navigation data
+var navData = sensor.getData();
+----------------------------------------------------
+
+[[multithreading]]
+Multithreading
+--------------
+
+Use multithreading in JavaScript for code, which is executed in the
+desktop client as well on the server code.
+
+To run a function in a separate thread, call the invokeBackground on the
+function's object, providing it with the necessary arguments:
+
+code,JavaScript---------------------------- code,JavaScript
+function process(p) {
+  // lengthy operation here
+}
+
+//Run it in background
+process.invokeBackground(0);
+----------------------------
+
+Example of code to execute an anonymous function in a separate thread:
+
+code,JavaScript----------------------------------------------------------
+code,JavaScript
+(function () { /* some huge work */ }).invokeBackground();
+----------------------------------------------------------
+
+Functions, which are run by the invokeBackground, are executed in the
+thread pool, for which the maximum number of simultaneous threads is set
+(10 be default). You can read and changed it using the getThreadPoolSize
+and setThreadPoolSize global methods:
+
+code,JavaScript-------------------------------------------------
+code,JavaScript
+Logger.info(getThreadPoolSize());// 10 by default
+setThreadPoolSize(16);
+Logger.info(getThreadPoolSize());// 16
+-------------------------------------------------
+
+Variables and properties of JavaScript objects ensure security of
+reading and writing when accessing them from multiple threads.
+
+If it is necessary to implement the synchronization mechanism
+independently, use the `Lock`, object, which is a JavaScript wrapper for
+the java.util.concurrent.locks.ReentrantLock Java class. Refer to Java
+documentation for more information.
+
+________________________________________________________________________________________________________________________________________________________________________
+*Warning*
+
+Multithreaded programming is rather complex. Incorrectly implemented
+thread synchronization scheme can lead to hardly detectable errors and
+unexpected program behavior.
+________________________________________________________________________________________________________________________________________________________________________
+
+To update the user interface items in the desktop client, create a
+thread, which is not a GUI thread (a thread of events processing), call
+the invokeLater function of the function object, which accesses the user
+interface items, for example:
+
+code,JavaScript--------------------------------------------------------
+code,JavaScript
+(function() {
+  var text = complexComputation();
+  
+  // Update GUI:
+  (funcion() { resultLabel.text = text }).invokeLater();
+
+}).invokeBackground();
+--------------------------------------------------------
+
+[[logging]]
+Logging
+-------
+
+The logging subsystem is built on the base of the Java Logging
+infrastructure.
+
+To write into the log, use the `Logger` object, which is a shell for the
+java.util.logging.Logger class. The `Logger` object is also available in
+the HTML5 web browser client.
+
+Example of using the `Logger` object:
+
+code,JavaScript------------------------------- code,JavaScript
+Logger.info("info text");
+Logger.warning("warning text");
+Logger.severe("severe error");
+-------------------------------
+
+Check the Administration Guide and Java documentation for information
+about configuring logging in runtime.
+
+[[filesystem-io]]
+Filesystem I/O
+--------------
+
+To read and write files, use Java API from the `java.io.*` and other
+dedicated packages.
+
+To read and write strings, use `readString(, )`, and `writeString(, , )`
+global functions, where `path` is a path to the file, `text` is a
+string, `encoding` is the name of encoding. The `encoding` parameter in
+both functions is optional and by default is set for the UTF-8 encoding.
+
+Example of using functions for reading and writing strings to a file:
+
+code,JavaScript-------------------------------------------------------
+code,JavaScript
+//Read from one text file and write to another
+var str = readString('/home/user1/Documents/doc1.txt');
+writeString('/home/user1/Documents/doc2.txt', str);
+-------------------------------------------------------
+
+[[working-with-xml]]
+Working with XML
+----------------
+
+To work with data in the XML format, use the script syntax in accordance
+with the E4X specification (EcmaScript for XML). The E4X technology can
+be used by the code, which is executed on Rhino runtime engine. For more
+information refer to the E4X documentation.
+
+_________________________________________________________________________________________________________________
+*Warning*
+
+E4X is obsolete. Although it is still supported, its usage is
+discouraged in new projects. Try to avoid using it.
+_________________________________________________________________________________________________________________

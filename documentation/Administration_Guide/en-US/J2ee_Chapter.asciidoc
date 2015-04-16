@@ -1,0 +1,391 @@
+[[java-ee-server]]
+Java EE server
+--------------
+
+The plaftorm's server components can run in a J2EE server or a servlet
+container.
+
+This configuration has the following features:
+
+* Server components are deployed in the J2EE container/on the server as
+a web-application as a WAR-archive or a folder. Special sevlet provides
+interaction with the clients.
+* Desktop client and HTML5 browser are supported as clients.
+* It is possible to use an external user authentication service, such as
+Microsoft Active Directory service; it allows you to integrate the
+platform target application in existing enterprise user space.
+* Database connecions are configrued as a JNDI resources.
+* Application sever modules methods are avaliable via HTTP protocol.
+
+______________________________________________________________________________________________________________________
+*Note*
+
+Use Platypus Application Designer to create web application. For
+detailed information, refer to the Development Guide.
+______________________________________________________________________________________________________________________
+
+[[configuring-j2ee-server]]
+Configuring J2EE server
+-----------------------
+
+To run the plafrom's application in a J2EE servlet container or on the
+application server, perform the following actions:
+
+* Create a new directory with a standard structure for a web-application
+in J2EE, including the `WEB-INF/web.xml` deployment descriptor.
+* Create HTML pages, which will contain the Platypus application.
+Configure JavaScript code, necessary for the initial startup code.
+* Copy libraries, necessary for the application functioning, to the
+web-application `WEB-INF/lib` directory from the `bin` sub-directory of
+the platform runtime directory.
+* Copy the `pwc` directory of the JavaScript HTML5 client from the `bin`
+sub-directory of the platform runtime directory.
+* Configure the JDBC data source as a JNDI resource, specify its name,
+for example `jdbc/main`. Configure the connection pool and JNDI
+resource. Copy the JAR file copy of the corresponding database driver to
+the directory available for the class loader.
+* Configure the security domain (Realm) for working with built-in
+storage or external authentication service. For working with built-in
+storage, configure the JDBC security domain for working with `MTD_USERS`
+and `MTD_GROUPS` tables — see Security section.
+* Configure the parameters of the web-application deployment in the
+`WEB-INF/web.xml` file. If necessary, configure settings in the
+configuration files specific for this application server.
+* Deploy the web-application in the J2EE container/on the application
+server as a WAR archive or as a directory.
+
+[[configuring-the-deployment-descriptor]]
+Configuring the deployment descriptor
+-------------------------------------
+
+To configure a web-application, edit the XML file of the
+`WEB-INF/web.xml` deployment descriptor.
+
+* Set the initialization parameter and specify `url` as its name and
+path to Platypus application folder as its value; the path may be
+absolute or relative within the web-application; when the
+web-application is packed into a war file, the relative path will work
+if the server unpacks this archive when deploying the application; if
+this option is not specified, the application will be loaded from the
+database. In the following example, an absolute path is specified
++
+--------------------------------------------------------
+...
+<context-param>
+    <param-name>url</param-name>
+    <param-value>file:///home/Platypus/app</param-value>
+ </context-param>
+...
+--------------------------------------------------------
+* Set the initialization parameter and specify `default-datasource` as
+its name and the name of the JNDI resource of the JDBC data source as
+its value, for example:
++
+-----------------------------------------------
+...
+<context-param>
+    <param-name>default-datasource</param-name>
+    <param-value>jdbc/main</param-value>
+ </context-param>
+...
+-----------------------------------------------
+* Add the session event handler:
++
+-------------------------------------------------------
+...
+<listener>       
+    <listener-class>
+com.eas.server.httpservlet.PlatypusSessionsSynchronizer
+    </listener-class>
+</listener>
+...
+-------------------------------------------------------
+* Add a reference to the data source resource:
++
+-------------------------------------------------------
+...
+<resource-ref>
+    <description>Main database connection</description>
+    <res-ref-name>jdbc/main</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+...
+-------------------------------------------------------
+* Add Platypus servlet configuration; in the `multipart/location`
+element specify the path to the folder for storing the downloaded files:
++
+--------------------------------------------------------
+...
+<servlet>
+    <servlet-name>PlatypusServlet</servlet-name>
+    <servlet-class>
+com.eas.server.httpservlet.PlatypusHttpServlet
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+    <multipart-config>  
+      <location>
+          /home/user1/pub
+      </location>
+      <max-file-size>2097152</max-file-size>
+      <max-request-size>2165824</max-request-size>
+      <file-size-threshold>1048576</file-size-threshold>
+    </multipart-config>
+  </servlet>
+<servlet-mapping>
+    <servlet-name>PlatypusServlet</servlet-name>
+    <url-pattern>/application/*</url-pattern>
+</servlet-mapping>
+...
+--------------------------------------------------------
+* Configure the access and security constraints; for information on the
+security domain configuration, see the "Security" section.
+
+After completing configuring, deploy the web-application as a folder or
+WAR archive in a servlet container or on the J2EE server.
+
+[[authentication-configuration-on-a-j2ee-container]]
+Authentication configuration on a J2EE container
+------------------------------------------------
+
+When an application works in a J2EE container, the platform runtime uses
+an authentication mechanism and roles provided by the container. To
+enable activation of the role access in this case, the user should pass
+the security constraint and get a role. To do this, configure a URL
+security constraint as a page containing Platypus forms, for which the
+access control based on roles should be provided. The following example
+shows the enabled security constraint for the `applicationStart.html`
+page; to get access to this page the user should be assigned any role:
+
+-----------------------------------------------------------
+...
+<security-constraint>
+  <web-resource-collection>
+      <url-pattern>/application-start.html</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>*</role-name>
+    </auth-constraint>
+</security-constraint>
+<login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/login.html</form-login-page>
+      <form-error-page>/login-failed.html</form-error-page>
+    </form-login-config>
+</login-config>
+<security-role>
+    <role-name>*</role-name>
+</security-role>
+...
+-----------------------------------------------------------
+
+Specify the type of authentication, for example, `FORM` for
+authentication using HTML forms or `BASIC` for basic authentication
+according to RFC 2617.
+
+Platypus Client supports `BASIC` authentication, so to its ensure
+correct operation, that particular type of authentication must be
+configured.
+
+Configure the repository of information about users and J2EE container
+for using this repository. More detailed information on these settings
+is provided below.
+
+When an application works in the J2EE container, you should use built-in
+web-server tools in addition to Platypus platform security constraints:
+
+* Restrict access to application files over HTTP.
+* Restrict access to application files for Platypus resources loader,
+which works over URL of the following type:
++
+application/resource/
++
+where resourcePath is the path to the resource in the Platypus
+application.
+
+Configure access constraints in the `WEB-INF/web.xml` descriptor file.
+
+The following example shows a portion of the `WEB-INF/web.xml` file. It
+contains constraints of access to files of the Platypus application,
+located in the `app` directory, except `public` sub-directory:
+
+--------------------------------------------------------
+...
+<security-constraint>
+  <web-resource-collection>
+      <!-- whitelist -->
+      <web-resource-name />
+      <url-pattern>/app/public/*</url-pattern>
+      <url-pattern>/application/resource/public/*
+      </url-pattern>
+   </web-resource-collection>
+   <!-- No auth constraint here for whitelist -->
+</security-constraint>
+
+<security-constraint>
+  <web-resource-collection>
+      <!-- everything other is restricted -->
+      <web-resource-name />
+      <url-pattern>/app/*</url-pattern>
+      <url-pattern>/application/resource/*</url-pattern>
+  </web-resource-collection>
+  <auth-constraint />
+</security-constraint>
+...
+--------------------------------------------------------
+
+[[j2ee-glassfish-3-configuration]]
+J2EE Glassfish 3 configuration
+------------------------------
+
+Data source setup:
+
+1.  Copy the JAR file of the JDBC driver to the directory accessible to
+the class loader: `glassfish/domains/mydomain/lib`
+2.  Run the GlassFish administration console. To do this, start the
+server, for example, by using the asadmin utility. Then navigate to
+`http://hostname:4848` in browser, where hostname is the address of the
+Glassfish application server, for example: `http://localhost:4848`.
+3.  Create the JDBC connection pool: Resources -> JDBC -> JDBC
+Connection Pools -> New, `javax.sql.ConnectionPoolDataSource` resource
+type, and also specify the database connection parameters: `url`,
+`username`, `password`.
+4.  Check the pool settings by clicking Ping.
+5.  Create the JNDI resource for the connection pool: Resources -> JDBC
+Resources-> New. Specify the name of the resource, for
+example`jdbc/main`, and specify the JDBC connection pool.
+
+To configure Platypus for working with internal storage of user data or
+external authentication service:
+
+* Configure J2EE Glassfish server for working with the security domain
+(Realm) in the external LDAP service.
+* Configure user accounts.
+
+To configure the Glassfish server:
+
+* Add the security domain for Glassfish — to do this, change the server
+configuration (Configurations -> Server-config -> Security -> Realms
+->New).
++
+Specify the name of the security domain, select the class name from the
+list or specify your own class:
+** To use the built-in Platypus storage, specify the
+com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm class name.
+Configure properties, which are specific for this class:
++
+.JDBCRealm security domain properties
+[cols="<,<",]
+|=======================================================================
+|`JAAS Context` |Identifier of the login module, JDBCRealm
+
+|`User Table` |ame of the user tables in the database, MTD_USERS
+
+|`User Name Column` |Name of the column in the user table for storing
+user names, USR_NAME
+
+|`Password Column` |Name of the column in the user table for storing
+password hashes, USR_PASSWD
+
+|`Group Table` |Name of the user group table, USR_GROUPS
+
+|`Group Name Column` |Name of the group name column in the user group
+table, GROUP_NAME
+
+|`Digest Algorithm` |Password hashing algorithm, MD5
+|=======================================================================
+** To use the external LDAP service (Active Directory, OpenLDAP, etc.)
+specify the com.sun.enterprise.security.auth.realm.ldap.LDAPReam class
+name; configure properties which are specific for this class.
++
+.Basic and additional properties of the LDAPReam security domain
+[cols="<,<",]
+|=========================================================
+|`JAAS Context` |Identifier of the login module, ldapRealm
+|`Directory` |ldap://server:389
+|`Base DN` |DC=ithit,DC=com
+|`Assign Groups` |platypus_default_role
+|`search-filter` |(&(objectClass=user)(sAMAccountName=%s))
+|`search-bind-password` |LDAP service password
+|`group-search-filter` |(&(objectClass=group)(member=%d))
+|`search-bind-dn` |ithit\user
+|=========================================================
++
+_____________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+Set values of properties in accordance with the configuration of your
+LDAP server. `Assign Groups` property value, platypus_default_role group
+will be assigned to all users.
+_____________________________________________________________________________________________________________________________________________________________________________
++
+Configure JVM: Configurations -> server-config -> JVM Settings -> Add
+JVM Option - by adding the following option:
+Djava.naming.referral=follow
+* In the `WEB-INF/glassfish-web.xml` file link roles to the security
+groups:
++
+------------------------------------------------
+<glassfish-web-app error-url="">
+...
+  <context-root>/platypus</context-root>
+  <security-role-mapping>
+    <role-name>platypus_default_role</role-name>
+    <group-name>default</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>role1</role-name>
+    <group-name>role1</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>role2</role-name>
+    <group-name>role2</group-name>
+  </security-role-mapping>
+..
+</glassfish-web-app>
+------------------------------------------------
+
+[[apache-tomcat-7-configuration]]
+Apache Tomcat 7 configuration
+-----------------------------
+
+Data source setup:
+
+* Copy the corresponding JAR file of the JDBC driver to the directory
+accessible to the class loader: `/lib`, where CATALINA_HOME is a Apache
+Tomcat;
+* Create the JNDI resource of the JDBC data source. Edit the
+`META-INF/context.xml` file of the web application by adding the data
+source resource:
++
+-----------------------------------------------------------------------------------------------------------------------------------
+...
+<Resource name="jdbc/main" auth="Container" type="javax.sql.DataSource"
+       maxActive="100" maxIdle="30" maxWait="10000"
+       username="sa" password="te$tPwd" driverClassName="org.h2.Driver"     url="jdbc:h2:tcp://localhost/~/h2db/test;schema=test"/>
+...
+-----------------------------------------------------------------------------------------------------------------------------------
++
+If necessary, configure the connection pool by specifying parameters for
+removing and cleaning unused connections.
+* Configure the security domain. Edit the `META-INF/context.xml` file of
+the web application by adding the security domain. The example below
+shows configuring of the security domain for working with the built-in
+repository of user information:
++
+--------------------------------------------------------------------------
+...
+<Realm  className="org.apache.catalina.realm.DataSourceRealm"
+   dataSourceName="jdbc/TestDB"
+   userTable="MTD_USERS" userNameCol="USR_NAME"   userCredCol="USR_PASSWD"
+   userRoleTable="MTD_GROUPS" roleNameCol="GROUP_NAME" digest="MD5"/>
+...
+--------------------------------------------------------------------------
++
+For the DataSourceRealm security domain, specify names of tables,
+columns and hashing algorithm for working with `MTD_USERS` и
+`MTD_GROUPS` tables.
++
+If you want to use another authentication data repository, such as an
+external LDAP server, configure the appropriate type of security domain.

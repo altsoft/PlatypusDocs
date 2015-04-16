@@ -1,0 +1,60 @@
+[[external-connection]]
+External connection
+-------------------
+
+Platypus Platform application has a default connection to the database.
+This connection configuration is set when creating an application
+project. Besides, the application can use connections to any number of
+external databases.
+
+To define a connection to external databases, application elements of
+the _Connection to external database_ type are used.
+
+[[new-connection-creation]]
+New connection creation
+-----------------------
+
+To create a new connection to the external database, perform the
+following actions:
+
+* Select the New item in the parent directory context menu, or select
+the parent directory and click New File in the main menu, or click the
+New File button on the toolbar, or use the hotkey.
+* Select the External database connection type in the context menu or
+select Choose file type Platypus application elements External database
+connection on the wizard first step and click Next.
+* Specify the name of the new application element in the Name field, and
+click Finish to create it, or click Cancel to cancel.
+
+[[database-connection-editor]]
+Database connection editor
+--------------------------
+
+Use the special editor for modification the External database connection
+application element. To open the application element editor,
+double-click an application element in the project tree.
+
+To modify the settings of the connection to the external database,
+perform the following actions:
+
+* Fill in the Name field — specify the ID of the external database
+connection application element; ID is subject to the requirements of the
+Platypus application elements names.
+* Fill in the JDBC Url field — specify URL of the connection to the
+external database in the JDBC format.
+* Fill in the Database User field — specify the database user name.
+* Fill in the Password field — specify the database user password.
+* Select the default schema of this connection from the dropdown list in
+the Default schema field.
+* Test the connection to the database by clicking the Test connection
+button.
+* Save the application element by clicking Save All on the Platypus
+Application Designer toolbar, or by using the Ctrl Shift S shortcut.
+
+When the application is running in the J2EE server environment or
+servlet container, the connection to the database is provided by the
+external environment, where the Platypus application is running. Set up
+the connection to the database as the JNDI resource and specify the name
+of this resource in the JDBCURL field. In this case, do not fill in the
+Database User, Password, and Default schema fields. The procedure is
+performed without testing the connection.

@@ -1,0 +1,509 @@
+[[sql-query]]
+SQL query
+---------
+
+Query is an application element which defines the SQL expression to be
+executed in database. A query's SQL text is preprocessed before
+execution.
+
+Queries can solve several tasks:
+
+* Requesting data from the database (`SELECT` queries).
+* Definintion of metadata for enabling implicit data modifications
+commands generation (`SELECT` queries).
+* Performing explicit data manupulations (`INSERT`, `DELETE`, and
+`UPDATE` queries).
+
+_________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+In most cases, data adding and updating tasks are carried out by the
+data model automatically when saving changes. To do that, you can just
+specify a query of the `SELECT` type.
+_________________________________________________________________________________________________________________________________________________________________________________
+
+Queries have the following characteristics:
+
+* Queries support named and typed parameters.
+* SQL clauses are re-used to enable inclusion of some queries into other
+queries without any duplication.
+* You can edit queries in the visual tool and as SQL text form
+simultaneously.
+* Query results are translated into entities which can be processed by
+JavaScript code in ORM style.
+* Query allows you to define the pattern for processing data changes
+made while the application is running. It is possible to define a list
+of tables where the changes will be stored.
+
+[[new-query-creation]]
+New query creation
+------------------
+
+To create a new query, perform the following actions:
+
+* Select the New item in the parent directory context menu, or select
+the parent directory and select the New File item in the main menu, or
+click New File on the toolbar, or use the hotkey.
+* Select the Query type in the context menu, or select Choose file type
+Platypus application elements Query on the wizard first step and click
+Next.
+* Select the connections to the database and the schema:
+** Select the default database — click the Default button or a
+connection to the external database — click the Specific button; select
+the Db Connection application element using the application element
+selection dialog.
+** Click Next.
+* Specify the name of the new query in the Name field, and click Finish
+button to create the new application element, or click Cancel to cancel.
+
+After the query creation wizard completes the steps, a new empty query
+is created.
+
+[[query-editor]]
+Query editor
+------------
+
+The special editor is used to edit a query SQL and its support
+configuration files. This editor allows you to perform visual editing of
+the query and direct modicatation of the SQL source text.
+
+Full-featured editing using the visual editor is possible if the
+connection to the database is established. If there is no connection to
+the database, only the SQL source modification is possible.
+
+To determine the general properties, use the query properties panel or
+add the relevant annotation to the query header manually:
+
+* Select the root node in the query inspector.
+* Edit the query properties on the Properties panel (if necessary,
+enable the panel in the Windows Properties global menu).
+** Check the public option to make the query accessible to remote
+invocation, e.g. on the server and using from the Platypus Client or
+browser data model.
+** Check the procedure option, if the query will be used to call the
+stored procedure.
+** Check the manual option, if you want to avoid automatic execution of
+the query, when it works as a part of the module, report, or form data
+model, for example, if the query contains the call of the stored
+procedure, `INSERT` or `UPDATE` expressions.
+** Check the readonly option, if you don't want to save changes.
+** Select the specific connection to a database if you want the query to
+be executed againts this database. To assign a query to the default
+database connection, clear this field.
+
+For navigation through the queries, it is convenient to use the query
+inspector panel. In the query inspector, parameters, tables, and
+sub-queries are represented as a tree nodes. Parameters and data fields
+are the leaves.
+
+A table or sub-query can be selected both in the visual editor and in
+the query inspector.
+
+You can start editing the SQL query from setting the query parameters
+(if necessary) or from using the visual editor.
+
+To add a database table to the query, perform the following actions:
+
+* Select the SQL designer tab in the query editor.
+* Select the Add table/Add query Add table item on the editor toolbar,
+or use the Ctrl Shift Insert shortcut.
+* Select the table from the list in the table selection dialog; if
+necessary, select the schema in the Schema drop-down list. The Default
+button sets the default schema for the application, if necessary, use
+the search function by clicking the Find button.
+* Click OK to add the table, or click Cancel to cancel.
+* If necessary, drag the table to the desired location in the query
+diagram.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+To include the existing query as a sub-query into the query being
+edited, perform the following actions:
+
+* Select the Add table/Add query Add query item in the menu on the
+editor toolbar.
+* Select the Query application element type in the selection dialog.
+* Click OK to add the query, or click Cancel to cancel.
+* If necessary, drag the query to the desired location in the visual
+editor diagram.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+Drag the existing query from the application elements tree of the
+Projects panel onto the visual editor diagram in order to include it
+into the query being edited without opening the application elements
+selection dialog.
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+To assign the table or sub-query alias, just type it in the text editor
+or the query or perform the following actions:
+
+* Select the table or sub-query in the query diagram.
+* On the Properties panel, specify the value in the alias field.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+To remove the table or sub-query from the query visual editor diagram,
+perform the following actions:
+
+* Select the table or sub-query in the diagram or in the query
+inspector.
+* Click the Delete button on the query editor toolbar to remove the
+table or sub-query from the diagram.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+__________________________________________________________________________________________________________________________________________________________
+*Note*
+
+If the Properties panel is not displayed, enable this panel; to do that,
+select the Window Properties item in the Platypus Application Designer
+main menu.
+__________________________________________________________________________________________________________________________________________________________
+
+To add the query parameters, perform the following actions:
+
+* Click the New field/parameter button on the fields editing tab toolbar
+to add a field.
+* Modify the new parameter properties; to do that, select its node among
+the query parameters nodes in the inspector and edit the parameter
+properties in the Properties window.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+Parameter field properties:
+
+* Name is the parameter name.
+* Description is the parameter description.
+* Type is the parameter type, select in the drop-down list.
+* Type Name is the data structure type name, this field is accessible
+when the Structure field type is selected.
+* Size is the field length or precision.
+* Mode defines this parameter mode, in the case the parameter will be
+used as the stored procedure parameter.
+
+Stored procedure parameter modes:
+
+[cols="<,<",options="header",]
+|==============================================
+|Value |Description
+|`in` |`IN` operation mode
+|`in/out` |`IN/OUT` operation mode
+|`out` |`OUT` operation mode
+|`unknown` |Parameter operation mode is unknown
+|==============================================
+
+To edit the query parameter, perform the following actions:
+
+* Select the parameter node from the parameters nodes in the inspector.
+* Edit the parameters; to do that, follow the same steps as when
+creating a parameter.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using theCtrl Shift S
+shortcut.
+
+To remove the parameter, perform the following action:
+
+* Select the parameter on the parameters panel.
+* Click the Delete button on the parameters editing tab toolbar, or use
+the Delete shortcut.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+The query parameter can be linked to a table or sub-query field, or to a
+sub-query parameter.
+
+When linked to field, the parameter will be included into the SQL source
+— visually, the link will be displayed as a black arrow.
+
+When the parameter is linked to a sub-query parameter, the parameters
+will be mapped in the query model, visually, this link will be displayed
+as a magenta arrow.
+
+To add a link between the parameter and a field or sub-query parameter,
+perform the following actions:
+
+* Using the mouse, drag the parameter to the table field or sub-query
+parameter to which the parameter should be linked; visually, the link
+will be displayed as an arrow between tables and sub-queries fields.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+To remove a link, perform the following actions:
+
+* Select the link between a parameter and a table field or sub-query
+parameter.
+* Click the Delete button or use the Delete shortcut.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using theCtrl Shift S
+shortcut.
+
+Modifications of the SQL query made in the visual editor are displayed
+in the source text on the SQL Source panel, and vice versa.
+
+Modify the SQL source text in the editor, for example, in order to add
+custom conditions, or write the SQL source text from scratch. Use the
+query inspector to drag the table fields and parameters from the
+inspector tree right into the query source text. For the tables fields
+names, use the SQL code auto-completion function.
+
+If necessary, database specific SQL clause can be provided for the
+query.
+
+__________________________________________________________________________________________________________________________________________________________
+*Note*
+
+Use the database specific SQL only when it is really necessary, and only
+if there is no need to enable portability of applications to different
+databases.
+__________________________________________________________________________________________________________________________________________________________
+
+Query execution output fields are determined automatically as a result
+of the SQL source text processing. Check this output field in the
+inspector's Output Fields node.
+
+It is possible to change the output field type, as well as its
+description. To do that, perform the following actions:
+
+* Select the output field among the Output Fields node children in the
+inspector, and edit its properties in the Properties editing window.
+* Specify the output field type in the Type property by selecting it in
+the drop-down list.
+* Specify the output field description in the Description property.
+
+To execute a database SQL query in the database, perform the following
+actions:
+
+* Select the application element and select the Execute item in the
+query context menu or in the SQL Source editor context menu; execution
+results will be displayed in the application designer output window.
+* If the query has parameters, specify them in the query execution
+dialog. If necessary, modify the query source in the same dialog.
+* Click OK to execute the query, or click Cancel to cancel.
+
+To change the size of the query visual representation, perform the
+following actions:
+
+* Press the Zoom In button to scale up, and press the Zoom out button to
+scale down the query diagram.
+
+To use the search function for searching through the query diagram,
+perform the following actions:
+
+* Click the Find button to open the search dialog for searching through
+the query diagram.
+* Specify the search string, select fields to be searched through:
+Datasets, Fields, Params, and check (uncheck) the following options:
+Whole words — search for whole words, Match case — perform
+case-sensitive search.
+* Click Next and Previous buttons to go to the next search result.
+* Click Close to close the search dialog.
+
+[[sql-source]]
+SQL source
+----------
+
+Edit the query's SQL source on the SQL Source tab. SQL syntax must
+comply with the SQL-92 standard.
+
+The SQL source text must begin with a special header, in a form of
+multiline SQL comment.
+
+It is required to define a query name within the application in
+accordance with the requirements applicable to JavaScript identifiers.
+On creating a new query in Platypus Application Designer, its name will
+be generated according to the created files name, spaces will be
+replaced by underscores.
+
+Specify the query name, for this use the `@name` annotation in the query
+header:
+
+code,SQL----------------------- code,SQL
+/**
+ * Query header example
+ * @name AllDocuments
+ **/
+SELECT * 
+FROM Document
+-----------------------
+
+`@public` annotation enables using this query in a remote client's data
+model, which fetches and writes data over network.
+
+`@procedure` annotation enables using this query with database stored
+procedure.
+
+SQL `SELECT` query can contain sampling of all fields using `*` symbol
+or only the required ones using explicit fields definition. If the first
+type of sampling is used, the names of the properties that will be
+accessible in the JavaScript code are defined by the table columns
+names, and can be uppercased or lowercased. To create the code
+compatible with various databases, it is recommended to use the second
+option with explicit indication of the query output fields, for example
+`SELECT a, b, c FROM table`.
+
+Platypus queries can contain named parameters. Every parameter must
+begin with `':'` prefix: `:`, where paramName is the name of the
+parameter.
+
+Example of a SQL query source with the named parameters:
+
+code,SQL---------------------------------------- code,SQL
+/**
+ * Device log for period of time
+ * @name Timelog
+ **/
+SELECT * 
+FROM TR_TRACKINGDEVICE_LOG trackingLog
+WHERE trackingLog.DEVICE_ID = :deviceId 
+AND trackingLog.TIME >= :timeFrom 
+AND trackingLog.TIME <= :timeTo
+ORDER BY trackingLog.TIME ASC
+----------------------------------------
+
+Queries can be used again in other queries. To use a query as the
+sub-query, include its name in the SQL source with '`#'` prefix: `#`,
+where SubQuery is the name of the query to be used as a sub-query.
+
+For example:
+
+code,SQL---------------------------------- code,SQL
+/**
+ * Time log priority filter
+ * @name Filter
+ **/
+SELECT * 
+FROM #Timelog timeLog
+WHERE timeLog.PRIORITY > :priority
+----------------------------------
+
+In the snippet above, a query named `Timelog` is used as the sub-query
+in the `Filter` query.
+
+If the sub-query contains parameters, it is necessary to associate them
+with the parameters of the query into which it was embedded.
+
+`SELECT` query type returns a dataset which is loaded to the some data
+model and can be processed using the JavaScript code. Concrete data
+values of these dataset can be changed while the application is running.
+When enabled, this data changes can be automatically converted into the
+set of SQL `INSERT` and `UPDATE` commands when saving to the database.
+To make this mechanism work, the dataset returned by the `SELECT` query
+must contain the primary keys of all relevant tables. This enables the
+ORM implementation to determine to which database table row write the
+changed data.
+
+In order to specify, which tables mentioned in the query can be modified
+using this mechanism, use the following annotations: `@writable` ... For
+this annotation, provide the list of tables, using spaces to delimit
+them.
+
+If there is no `@writable` annotation, all tables mentioned in the query
+will become writable.
+
+To disable writing to all tables mentioned in the query, add the
+`@readonly` annotation to the query header.
+
+In the example below only the `Document` table is writable:
+
+code,SQL------------------------------- code,SQL
+/**
+ * @name docsCategories
+ * @writable Document
+ **/
+SELECT * 
+FROM Document d
+INNER JOIN Category c
+ON d.CategoryID = c.CATEGORY_ID
+-------------------------------
+
+[[sql-dialect-source]]
+SQL dialect source
+------------------
+
+Enter database specific SQL source text at the SQL dialect source tab.
+
+It is necessary to enter the correspondent source text in the SQL source
+field. This source text will be used for determination of the metadata
+for processing the query results.
+
+If the specific SQL source text is provided, it will be used during the
+query execution, and the main SQL source text will be used to extract
+the metadata.
+
+______________________________________________________________________________________________________________________________________________________________
+*Note*
+
+Use the database specific SQL only when it is really necessary, and only
+if there is no need to enable portability of applications to the
+different databases.
+______________________________________________________________________________________________________________________________________________________________
+
+An example of an Oracle database specific hierarchical query:
+
+code,SQL---------------------------------------------------- code,SQL
+SELECT LEVEL, ename "employee", empno, mgr "manager"
+ FROM emp START WITH mgr IS NULL
+ CONNECT BY PRIOR empno = mgr;
+----------------------------------------------------
+
+For the dialect query snippet above the main SQL source can be:
+
+code,SQL------------------------------ code,SQL
+/**
+ * Hierarchial employees query
+ * @name Employees
+ **/
+SELECT * FROM emp
+------------------------------
+
+[[security]]
+Security
+--------
+
+Generally, access to data in the database must be differentiated for
+various user groups. In Platypus there is an embedded security mechanism
+which implements the constraints of access to the resources based on the
+roles of the logged in user who is performing the current operation.
+
+To limit the access to the query for certain roles, add the
+`@rolesAllowed` ... annotation into the query header. For the added
+annotation, specify the list of roles delimiting them by spaces.
+
+The roles listed in the `@rolesAllowed` annotation are granted with
+rights both for reading and writing data to the database. If more
+detailed definition of the data access policy is required, use the
+`@rolesAllowedRead` and `@rolesAllowedWrite` annotations.
+
+Specify the list of roles, for which only data reading is allowed, in
+the `@rolesAllowedRead` annotation.
+
+Specify the list of roles, for which only data writing is allowed, in
+the `@rolesAllowedWrite` annotation.
+
+If none of the `@rolesAllowed`, `@rolesAllowedRead`, or
+`@rolesAllowedWrite` annotations are specified for the query, the
+database data manipulated by the query are readable and writable for any
+user.
+
+An example of the query where reading and writing rights are granted to
+the `admin` role only:
+
+code,SQL---------------------- code,SQL
+/**
+ * @name AllCategories
+ * @rolesAllowed admin
+ **/
+SELECT * 
+FROM Category
+----------------------

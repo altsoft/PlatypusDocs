@@ -1,0 +1,4 @@
+Copyright <trademark class="copyright"></trademark> &YEAR; &HOLDER;
+
+SETUP: Enter the blurb for your license here. Often a short description
+of the license with a URL linking to the full text.

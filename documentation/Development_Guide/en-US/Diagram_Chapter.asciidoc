@@ -1,0 +1,259 @@
+[[database-diagram]]
+Database diagram
+----------------
+
+Database diagram is an application element responsible for
+representation of the database structure. For example, the diagram can
+specify some part of the knowledge domain. Generally, the project
+contains several database structure diagrams at the developer
+convenience.
+
+A database structure diagram is a visual representation of the database
+structure, and it does not directly affect the application
+functionality.
+
+The structure of the relational database is determined by the tables and
+links between them. Links between two tables are implemented through the
+foreign keys.
+
+[[new-diagram-creation]]
+New diagram creation
+--------------------
+
+To create a new database diagram, perform the following actions:
+
+* Select the New item in the parent directory context menu, or select
+the parent directory and click New File in the main menu, or click the
+New File button on the toolbar, or use the hotkey.
+* Select the Database structure diagram type in the context menu or
+select Choose file type Platypus application elements Database diagram
+on the wizard first step and click Next.
+* Select the connection to database and database schema:
+** Select the default database—click the Default button or a connection
+to the external database—click the Specific button and select a specific
+database connection.
+** Select a schema in the database in the Schema drop-down list; click
+the Default button to select a default schema.
+** Click the Next button.
+* Specify the name of the new database structure diagram in the Name
+field, and click the Finish button to create a new application element,
+or click Cancel to abort.
+
+After creating the database structure diagram, fill it with the database
+tables structures. To do that, define the tables, its fields and their
+descriptions. After determination of the table structure define foreign
+key links between the tables.
+
+[[diagram-visual-editor]]
+Diagram visual editor
+---------------------
+
+Diagram is a representation of some tables in the database, as well as
+the links between them. In general, one includes a part of the database
+overall structure, which is, for example, related to the certain segment
+of application functionality.
+
+Visual editor tool is used for editing database structure diagrams.
+
+Visual editor allows you to modify the database structure e.g. add or
+delete tables, links between tables, and indexes. The same table can be
+represented in several diagrams.
+
+For navigation through a diagram, it is convenient to use the diagram
+inspector panel. In the inspector, tables and their fields are
+represented in the tree structure. When selecting a table or a field in
+the inspector, the same selection takes place in the diagram editor.
+
+For mutual positioning of a node in the inspector and an object in the
+diagram:
+
+* Select the Show in diagram menu item in the inspector's table node
+context menu.
+
+To add an existing table to the diagram, perform the following actions:
+
+* Select the Add table menu item on the editor toolbar, or use the Ctrl
+Shift Insert shortcut.
+* Select a table in the table selection dialog; if necessary, use the
+search function. To access it, click Find.
+* Click OK to add the table, or click Cancel to cancel.
+* If necessary, drag the table in the diagram to the desired location.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by pressing the Ctrl Shift S
+shortcut.
+
+To create a new table and to add it to the diagram, perform the
+following actions:
+
+* Select the Add table Create new table item in the menu on the editor
+toolbar.
+* Specify the name of the new table in the dialog.
+* Click OK to add the table, or click Cancel to cancel.
+* If necessary, drag the table in the diagram to the desired location.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by pressing the Ctrl Shift S
+shortcut.
+
+__________________________________________________________________________
+*Note*
+
+A numeric primary key field will be automatically created for a new
+table.
+__________________________________________________________________________
+
+To remove a table from the diagram, perform the following actions:
+
+* Select a table in the diagram.
+* Click the Delete button on the editor toolbar.
+* In the confirmation dialog, click the Delete from diagram button to
+remove the table from the diagram (from the diagram only, not from the
+database). Click the Drop table button to remove the table from the
+database (physical destruction of the table), or click Cancel to cancel
+the process.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by pressing the Ctrl Shift S
+shortcut.
+
+To add the table fields, perform the following actions:
+
+* Select the table in the diagram.
+* Click the Create new field/parameter button on the toolbar of the
+table fields editor tab. The new field dialog appears. Provide the new
+table field properties and click OK button to create the new field or
+Cancel to cancel the process.
+
+Table field properties:
+
+* name is the field's name in the table
+* description is the field's description
+* type is the field's data type
+* type name is the data structure type name, this field is enabled if
+the `STRUCT` data type is selected
+* size is the field length
+* scale is the field scale or precision
+* nullable determines if `NULL` values are allowed for the field.
+
+[cols="<,<",options="header",]
+|===========================================
+|Type name |Description
+|`NUMERIC` |Number
+|`DECIMAL` |Decimal number
+|`VARCHAR` |String with limited length
+|`TIMESTAMP` |Date and time
+|`DATE` |Date
+|`STRUCT` |Structure
+|`BLOB` |Binary object with unlimited length
+|`CLOB` |String with unlimited length
+|===========================================
+
+To edit the field, perform the following actions:
+
+* Select the field node among the table daughter nodes in the data model
+inspector.
+* Edit the field parameters in the Properties editor window.
+
+To remove the field, perform the following actions:
+
+* Select the table field in the diagram.
+* Click Delete on the fields editor toolbar, or use the Ctrl Delete
+shortcut.
+
+To edit the table indexes, use the inspector: open the node of the
+relevant table, and use the Indexes node.
+
+To add a new table index, perform the following actions:
+
+* Select the Add index item in the Indexes node context menu of the
+corresponding database table.
+* In the table columns selection dialog, select necessary fields and
+click OK to add the table index, or click Cancel to cancel.
+* If necessary, remove the field from the index using the Delete item
+from the index column context menu.
+* If necessary, modify the order of the fields in the index using the
+Move up and Move down items from the index column context menu.
+* If necessary, change the status of the Ascending checkbox on the
+properties panel for the index column, setting the ascending or
+descending sorting order.
+* Set the index name in the Index name field on the index node
+properties panel.
+* If necessary, check the Unique option on the index node properties
+panel to make the index unique or non-unique.
+* If necessary, check the Clustered option on the index node properties
+panel to create a clustered index.
+* If necessary, check the Hashed option on the index node properties
+panel to enable or disable hashing for this index.
+
+To modify an table index, perform the following actions:
+
+* Select the index in the table indexes list.
+* Edit the index; to do that, follow the same steps as when adding a new
+index.
+
+To delete an index, perform the following actions:
+
+* Select the index among other child nodes of the relevant table in the
+inspector.
+* Select the Delete item in the index node context menu.
+
+To add a foreign key for the table, perform the following actions:
+
+* Using the mouse, drag the field of one table to the primary key field
+of the other table.
++
+After that, a foreign key will be created in the database; visually, the
+link will be represented by the arrow between the tables fields.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+____________________________________________________________________________
+*Important*
+
+Data types of the fields connected by the foreign key link must be the
+same.
+____________________________________________________________________________
+
+To build a hierarchical table structure (unary link), drag the table
+field to the primary key field of the same table using the mouse.
+
+To remove the table foreign key, perform the following actions:
+
+* Select the foreign key link using the mouse.
+* Click the Delete button or use the Ctrl Delete shortcut.
+* Save the application element by clicking the Save All button on the
+Platypus Application Designer toolbar, or by using the Ctrl Shift S
+shortcut.
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+When working in a developers team, after modification of the database
+structure, it is recommended to create a migration — a database metadata
+snapshot, and make it available for all participants of the development
+process in order to apply the modifications to the rest of the database
+copies engaged in the development process.
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+To query the data from the table, perform the following actions:
+
+* Select the table in the diagram.
+* Click the Query Table Data button on the local toolbar — the data will
+be requested from the table, and the results will be displayed in the
+editor's output area.
+
+To modify the size of the database structure diagram visual
+representation, perform the following actions:
+
+* Click the Zoom In button to scale up, or Zoom out button to scale down
+the representation of the database structure in the editor.
+
+To search through the diagram, perform the following actions:
+
+* Click Find to open the diagram search dialog.
+* Specify the search string.
+* Select fields to be searched through: Datasets, Fields, Params, and
+check (uncheck) the following options: use the option Whole words to
+search for whole words and the Match case to perform a case-sensitive
+search.
+* Click Next and Previous buttons to go to the next found entity.
+* Click Close to close the search dialog.

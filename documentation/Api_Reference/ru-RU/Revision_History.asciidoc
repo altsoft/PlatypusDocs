@@ -1,0 +1,5 @@
+[[revision-history]]
+Revision History
+----------------
+
+0-0 16.05.2012 Вадим Вашкевич vv@altsoft.biz Первоначальна редакция

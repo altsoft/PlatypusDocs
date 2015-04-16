@@ -1,0 +1,35 @@
+[[logging-level-parameter-values]]
+Logging level parameter values
+------------------------------
+
+.Logging levels (-loglevel)
+[cols="<,<",]
+|=======================================================================
+|`OFF` |Logging is disabled
+
+|`SEVERE` |Only messages related to serious problems, which prevent the
+application from normal starting, are displayed. This logging mode is
+useful for developers. Minimum level.
+
+|`WARNING` |Messages about possible problems are displayed. This logging
+mode will be useful for developers and system administrators.
+
+|`INFO` |Information messages are displayed. In this logging mode,
+messages, which are considerably significant and important for end users
+and system administrators, are displayed.
+
+|`CONFIG` |Messages about system configuration are displayed. This mode
+allows you to debug problems, which are associated with the basic PC
+configuration. For example, information about the processor, color
+depth, connected modules, etc. is shown.
+
+|`FINE` |Debugging information is displayed. This level will be
+interesting for software developers.
+
+|`FINER` |The deeper level of refining.
+
+|`FINEST` |The most detailed output of debugging information. Maximum
+level.
+
+|`ALL` |All messages are displayed.
+|=======================================================================

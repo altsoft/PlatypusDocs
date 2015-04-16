@@ -1,0 +1,117 @@
+[[j2ee-glassfish-3-configuration]]
+J2EE Glassfish 3 configuration
+------------------------------
+
+_________________________________________________________________________________________________________
+*Note*
+
+For more detailed information on Glassfish setup, refer to the
+documentation for this application server.
+_________________________________________________________________________________________________________
+
+Data source setup:
+
+1.  Copy the JAR file of the JDBC driver to the directory accessible to
+the class loader: `glassfish/domains/mydomain/lib`
+2.  Run the GlassFish administration console. To do this, start the
+server, for example, by using the asadmin utility. Then navigate to
+`http://hostname:4848` in browser, where hostname is the address of the
+Glassfish application server, for example: `http://localhost:4848`.
+3.  Create the JDBC connection pool: Resources -> JDBC -> JDBC
+Connection Pools -> New, `javax.sql.ConnectionPoolDataSource` resource
+type, and also specify the database connection parameters: `url`,
+`username`, `password`.
+4.  Check the pool settings by clicking Ping.
+5.  Create the JNDI resource for the connection pool: Resources -> JDBC
+Resources-> New. Specify the name of the resource, for
+example`jdbc/main`, and specify the JDBC connection pool.
+
+To configure Platypus for working with internal storage of user data or
+external authentication service:
+
+* Configure J2EE Glassfish server for working with the security domain
+(Realm) in the external LDAP service.
+* Configure user accounts.
+
+To configure the Glassfish server:
+
+* Add the security domain for Glassfish — to do this, change the server
+configuration (Configurations -> Server-config -> Security -> Realms
+->New).
++
+Specify the name of the security domain, select the class name from the
+list or specify your own class:
+** To use the built-in Platypus storage, specify the
+com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm class name.
+Configure properties, which are specific for this class:
++
+.JDBCRealm security domain properties
+[cols="<,<",]
+|=======================================================================
+|`JAAS Context` |Identifier of the login module, JDBCRealm
+
+|`User Table` |ame of the user tables in the database, MTD_USERS
+
+|`User Name Column` |Name of the column in the user table for storing
+user names, USR_NAME
+
+|`Password Column` |Name of the column in the user table for storing
+password hashes, USR_PASSWD
+
+|`Group Table` |Name of the user group table, USR_GROUPS
+
+|`Group Name Column` |Name of the group name column in the user group
+table, GROUP_NAME
+
+|`Digest Algorithm` |Password hashing algorithm, MD5
+|=======================================================================
+** To use the external LDAP service (Active Directory, OpenLDAP, etc.)
+specify the com.sun.enterprise.security.auth.realm.ldap.LDAPReam class
+name; configure properties which are specific for this class.
++
+.Basic and additional properties of the LDAPReam security domain
+[cols="<,<",]
+|=========================================================
+|`JAAS Context` |Identifier of the login module, ldapRealm
+|`Directory` |ldap://server:389
+|`Base DN` |DC=ithit,DC=com
+|`Assign Groups` |platypus_default_role
+|`search-filter` |(&(objectClass=user)(sAMAccountName=%s))
+|`search-bind-password` |LDAP service password
+|`group-search-filter` |(&(objectClass=group)(member=%d))
+|`search-bind-dn` |ithit\user
+|=========================================================
++
+_____________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+Set values of properties in accordance with the configuration of your
+LDAP server. `Assign Groups` property value, platypus_default_role group
+will be assigned to all users.
+_____________________________________________________________________________________________________________________________________________________________________________
++
+Configure JVM: Configurations -> server-config -> JVM Settings -> Add
+JVM Option - by adding the following option:
+Djava.naming.referral=follow
+* In the `WEB-INF/glassfish-web.xml` file link roles to the security
+groups:
++
+------------------------------------------------
+<glassfish-web-app error-url="">
+...
+  <context-root>/platypus</context-root>
+  <security-role-mapping>
+    <role-name>platypus_default_role</role-name>
+    <group-name>default</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>role1</role-name>
+    <group-name>role1</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>role2</role-name>
+    <group-name>role2</group-name>
+  </security-role-mapping>
+..
+</glassfish-web-app>
+------------------------------------------------

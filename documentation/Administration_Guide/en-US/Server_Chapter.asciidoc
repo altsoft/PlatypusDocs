@@ -1,0 +1,82 @@
+[[platypus-application-server]]
+Platypus Application Server
+---------------------------
+
+The main purpose of use of the Platypus Application Server is to provide
+support for various binary communication protocols.
+
+[[running-server]]
+Running server
+--------------
+
+To start the server application, you run the startup script for the
+server, located in the `/run` folder:
+
+* `server.bat` is the script file to start the server in Windows.
+* `server.sh` is the script file to start the server in Linux.
+
+For running the server in production environment, it is recommended to
+configure it as an operating system service.
+
+[[command-line-options]]
+Command line options
+--------------------
+
+The command for running the server is as follows:
+
+------------------------------------------------
+java  -cp Server.jar; com.eas.server.ServerMain 
+------------------------------------------------
+
+where JVM_OPTIONS is Java Virtual Machine options, EXT_CLASSPATH are
+paths to be added to the Java class loader search path, OPTIONS are
+server application running parameters.
+
+.Command line options
+[cols="<,<",options="header",]
+|=======================================================================
+|Parameter |Description
+|`-iface`ADRESS:PORT,ADRESS:PORT |Network interfaces and listening ports
+for the server.
+
+|`-url URL` |URL to the applicaion. Can be one of the follow: `file://`
+to specify to a directory or `jndi://` to specify to a datasource.
+
+|`-appelement APP_ELEMENT` |Module or form element's name to run.
+
+|`-protocols` PORT:PROTOCOL,PORT:PROTOCOL |Network protocols for
+listening ports.
+
+|`-tasks` MODULES_NAME |The list of server modules (separated by comma
+without spaces) for processing incoming data and background tasks. The
+received(data)function should be defined for the incoming data
+processing module. The incoming data processing modules can have the
+`@stateless` annotation, or be without it. Background tasks modules
+should not have the `@stateless` annotation. When starting server,
+modules with this annotation will be skipped.
+
+|`-default-datasource DEFAULT_DS` |Name of the application's default
+datasource.
+
+|`-datasource DS` |Datasource name.
+
+|`-dburl DB_URL` |JDBC URL database connection.
+
+|`-dbuser DB_USER` |Username for authorization in the database.
+
+|`-dbpassword DB_PASSWORD` |Password for authorization in the database.
+
+|`-dbschema DB_SCHEMA` |Database scheme (optional).
+|=======================================================================
+
+Define zero or more datasources for a single application. A datasource
+is represented in a group of the following parameters: `-datasource`,
+`-dburl`, `-dbuser,` `-dbpassword` and optional `-dbschema` provided
+jointly. One of the datasource can be specified as a default using the
+`-default-datasource` parameter.
+
+The example of the application server running command:
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+java -cp Server.jar com.eas.server.ServerMain -iface 0.0.0.0:8500 -protocols 8500:platypus -url jndi://ds -default-datasource ds -datasource ds dburl jdbc:h2:tcp://localhost:9092/testServer -dbuser sa -dbpassword sa
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

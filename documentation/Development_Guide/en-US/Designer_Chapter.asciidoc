@@ -1,0 +1,365 @@
+[[application-project]]
+Application project
+-------------------
+
+In the course of development and further during the application life
+cycle, the application is represented by the application project.
+
+[[new-project-creation]]
+New project creation
+--------------------
+
+To create a project, perform the following actions:
+
+* Launch the application designer (if not launched yet). To do that, use
+the Platypus Application Designer shortcut on the desktop or the
+corresponding item in the installed applications menu.
+* Select File New Project or click the New Project button on the
+toolbar.
+* Select the project type as the Platypus Application Project and click
+Next.
+* Specify the project name and location:
+** Specify the project directory name in the Project Folder Name field.
+** Select the parent directory, in which the Platypus application
+project will be created, in the Project Location field.
+** Specify the project title in the Project Title field.
+** Click Next to proceed to the next step.
+* Click Finish to finish the Platypus project creation.
+
+New project will be added to the Projects panel.
+
+[[opening-an-existing-project]]
+Opening an existing project
+---------------------------
+
+To open an existing project, perform the following actions:
+
+* Select File Open Project or click the Open Project button on the
+toolbar.
+* Select the project parent directory using the selection dialog, select
+the project folder, and click the Open Project button.
+
+Opened project will be added to the Projects panel.
+
+[[project-properties]]
+Project properties
+------------------
+
+To change the project properties, select the Properties item in the
+project root node context menu.
+
+Set the application launching parameters:
+
+* Select the Run category.
+* Set the default application starting element; if necessary, use the
+application element selection dialog.
+* Set the type of the client application to be launched: Platypus Client
+or HTML5 browser.
+* Set the type of the server to be launched: No, Platypus Application
+Server, J2EE Server.
+* Check the Database application option to use an application, which is
+deployed in the database, when launching.
+* Check the Don't start application server option to launch the client
+only.
+* On the Client tab, in the Url field specify the URL of the application
+server which will be used by the Platypus Client application when
+launching, if the Don't start application server option is enabled.
+* On the Client tab, in the Login and Password fields specify login and
+password for the Platypus Client application.
+* On the Client tab, in the Options field specify additional parameters
+of the Platypus Client application launching, for example, LaF (Look and
+Feel).
+* On the Platypus Application Server tab, in the Port field specify a
+port for the development application server.
+* On the Platypus Application Server tab, in the Options field set
+additional parameters of the Platypus application server launching.
+* On the J2EE Server tab, in the Server field select the server instance
+to be used for the application launching from the list of the installed
+J2EE servers.
+* On the J2EE Server tab, in the Context field specify the name of the
+web-application in the J2EE server.
+* On the J2EE Server tab, check the Enable security option to enable the
+security; in this case FORMS authentication will be used for the web
+application.
+
+Set the debugging parameters:
+
+* Set the Platypus Client debugging port.
+* Set the application server debugging port.
+
+Specify the applicaton's default datasource:
+
+* Select the database connecton from the list.
+
+[[project-structure]]
+Project structure
+-----------------
+
+A Platypus Platform project has the following structure:
+
+* The project configuration files.
+* The Application Elements node is the root directory, which contains
+the application elements tree.
+
+You can perform the following operations on the application elements and
+directories:
+
+* Create a new element using the `New` command.
+* Rename an application element—click the selected application element
+or directory name, and press the F2 key.
+* Copy and Paste an application element from the buffer to the specified
+project location using the `Paste` command.
+* Copy and Move the directory or the application elements to the
+specified project location. To copy, hold the Ctrl key while dragging a
+node.
+* Delete an application element using the `Delete` command.
+* Search for an element in the project using the `Find` command.
+
+These operations also avaliable by the element context menu, Edit menu
+in the main menu, or the keyboard hotkeys. Some application elements
+nodes supports some specific operations, e.g. running or debugging.
+Specific operations are described in detail in the sections dedicated to
+the certain types of application elements.
+
+To create a subdirectory in the applicaton tree:
+
+* Select the New item in the parent directory context menu or select the
+parent directory and click New File in the main menu, or click the New
+File button on the toolbar, or use the hotkey.
+* Select the Folder type in the context menu or select Choose file type
+Platypus application elements Folder on the wizard first step and click
+Next.
+* Specify the name of the directory in the Name field and click Finish
+to create a directory, or click Cancel to cancel.
+
+To navigate to the application element, if its identifier is known:
+
+* Select File Go to application element, or use the Ctrl Shift G
+shortcut.
+* In the dialog, specify the identifier of the application element in
+the Provide application element id field of the dialog.
+* Click OK to navigate to the application element, or click Cancel to
+cancel.
+
+To open an application element, select Open in the application element
+context menu, or double-click this element. The application element
+editor opens as a window in the Platypus Application Designer editors
+area.
+
+To find out the identifier of an application element:
+
+* Select an application element in the projects application elements
+tree.
+* Select File Application element info menu item, or use the Ctrl Shift
+I shortcut.
+
+[[running-and-debugging]]
+Running and debugging
+---------------------
+
+To run an application:
+
+* Click the Run project button on the main toolbar to start a project's
+default application element or select Run context menu in an application
+element's such as a form, module or an JavaScript file.
+* Select Run context menu in an application element's such as a form,
+module or an JavaScript file.
+
+To debug an application:
+
+* Set breakpoints in the JavaScript program.
+* Click the Debug project button on the main toolbar or select the Debug
+item in an application element's context menu. The application will
+start and the debugger will be attached.
+* After the debugger halts at the breakpoint, see the values of
+variables and the call stack. To continue the program running, click the
+Continue button on the main toolbar. Use the Step over button or the F8
+key, Step into or the F7 key, Step out or the Ctrl F7 shortcut for
+step-by-step execution of the program.
+
+If the default application run element is not explicitly specified in
+the project's settings the selection dialog will be displayed.
+
+To debug an application running in an J2EE server or servlet container,
+e.g. Apache Tomcat provide the JMX configuration parameters as the
+server's start Java virtual machine options:
+`-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=`
+where port is the port to attach the debugger. For Apache Tomcat enter
+these options in the VM Options field on the Platform tab of the
+server's configuration parameters on the Services panel. After the
+server starts use Attach Debugger menu item on the Debug Project button
+on the main toolbar and specify the debugging port.
+
+When launching the application in a J2EE server, Platypus Application
+Designer uses the `web` sub-directory, which is created automatically in
+the project directory. When initializing this sub-directory, its initial
+structure is created and libraries are copied. After initializing the
+directory, files responsible for the configuration (`WEB-INF/web.xml`,
+server specific configuration file, and JavaScript file responsible for
+the application launching on the HTML page) are modified, but the
+libraries are not copied again.
+
+Select the Clean and Run menu item in the project context menu, if it is
+necessary to update the libraries in the `web` directory. The libraries
+will be removed, and at the next application launch these libraries will
+be copied from the platform's runtime directory.
+
+[[database-connections]]
+Database connections
+--------------------
+
+Define an application project's database connections and the default
+connection of the application. The default connection to be used when a
+connection is not explicitly referenced in application elements.
+
+Add a new database connection:
+
+* Open the Services panel.
+* Select the New Connection menu item of the Databases node.
+* In the New Connection dialog select the JDBC driver and provide the
+JDBC URL, database credentials, scheme and connection name. This name
+will be used as an string identifier to refer to the connection JNDI
+resource in the application.
+
+A JDBC URL example for the H2 database server with a database located in
+the user's home directory `db` subdirectory:
+`jdbc:h2:tcp://localhost:9092/~/db`.
+
+Specify the project's default database connection: go to the project's
+Properties and to the Running panel. Select the default connection from
+the Datasource combobox.
+
+When opening the project, the application designer tries to connect to
+the database, in case of failure it switches to the limited
+functionality mode, and some editor tools are disabled.
+
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+We recommend that a developer in the team working on the project creates
+and uses his/her own copy of the database for debugging and testing
+purposes. Additionally, a common reference database is created, and all
+modifications, which have passed the debugging stage at the developers'
+individual databases, are applied to this common one.
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+Use the developer's local database on the H2 database server, supplied
+with the platform.
+
+To launch the built-in H2 database server:
+
+* Open the Services panel.
+* Select the Databases H2 node and enable the Start menu item.
+
+After the database server is launched and become available via the
+network or locally, connect to this server by selecting the Connect to
+project database item in the context menu, or by clicking the Establish
+connection button on the Application Database form in the project
+properties, or by selecting the Connect to project database link on the
+stub-form of the data model editor.
+
+To disconnect, select the Disconnect from project database item in the
+project context menu.
+
+[[application-in-the-database]]
+Application in the database
+---------------------------
+
+An application can be deployed in the special database table. After
+deployment, the application elements can be hosted in the database.
+
+To deploy an application in the database: use Deploy item in the
+project's root node context menu. When deploying, the application
+elements from the Application Elements folder are copied to the table
+`MTD_ENTITIES`. When copying, the tree structure of the application
+directories is preserved.
+
+Importing of an application from a database to a files is a process
+which is reverse to deployment. To import an application from the
+database: select the Import item in the project context menu. When
+importing, the application elements are copied from the `MTD_ENTITIES`
+table to the project's Application Elements folder.
+
+________________________________________________________________________________________________________________________________________________
+*Important*
+
+When deploying and importing an application, the destination table or
+the Application Elements folder is cleared before the copy process
+starts.
+________________________________________________________________________________________________________________________________________________
+
+[[database-migrations-tools]]
+Database migrations tools
+-------------------------
+
+To store and restore database(s) schema and its bootstrap data and use
+the database migration tools.
+
+________________________________________________
+*Important*
+
+Backup you databases before applying migrations.
+________________________________________________
+
+Bootstrap data includes basic references, bootstrap data, etc., the
+information required to start the application.
+
+Database structure and initial application data are represented in the
+form of migrations files. Each migration has a number expressed as a
+positive integer, which is used as the file name. In the course of
+development and further during the application life cycle, when changing
+the database structure or in case of data modification, a migration is
+created. Later on, this migration can be applied to other databases. In
+the application database, information about the current database version
+is maintained in the `MTD_VERSION` table.
+
+Migrations with the number greater than the current database version are
+sequentially applied to the database during synchronization process.
+After the migration is applied successfully, the database number becomes
+equals to the number of this migration.
+
+Migrations types:
+
+* Database structure snapshot is a `.xdm` file containing database
+metadata presentation in the XML format.
+* SQL commands batch is a `.batch` file containing the SQL commands
+delimited by `#GO` separators tag.
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+In the batch SQL file, it is recommended to use DML (`INSERT`, `UPDATE`
+and `DELETE`) commands; although it is technically permissible to use
+DDL commands there as well. However, it is not recommended to use
+commands which modify the database structure in the batch SQL file,
+since it can reduce the application portability.
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+Refer to the Administration Guide for more information about using
+database migration tools.
+
+[[version-control]]
+Version control
+---------------
+
+During application development and further during the application life
+cycle, it is recommended to use a version control system to manage the
+source project files.
+
+The application designer has built-in support of the following version
+control systems:
+
+* Subversion
+* Git
+* Mercurial
+
+To access options of these version control systems, use the Team item
+from the global menu and/or Versioning sub-menu of the project context
+menu.
+
+______________________________________________________________________________________________________
+*Note*
+
+Refer to the documentation of the relevant version control system for
+details about this system usage.
+______________________________________________________________________________________________________

@@ -1,0 +1,326 @@
+[[report]]
+Report
+------
+
+[[introduction-to-reports]]
+Introduction to reports
+-----------------------
+
+The reporting tools allows a developer to generate reports as a
+Microsoft Excel files. You can open a generated report in a spreadsheet
+application, print or save it to disk.
+
+`Report` is a regular JavaScript module with a report template. The
+report constructor is defined in the JavaScript file by first function
+or using the `@module` annotation.
+
+The report application element includes the following:
+
+* a report template (a file in the Microsoft Excel format with the
+`.xlsx` extension,
+* JavaScript code,
+* a data model.
+
+Reports are based on the jXLS library, which in turn uses the Apache POI
+library. Markup and formatting of the report are defined in the template
+file. Binding to data is performed using jXLS library tags placed in
+spreadsheet cells.
+
+In the process of report generation, template tags are linked to model
+entity's dataset as well as to JavaScript objects.
+
+image:images/reportsFlow.png[Data transformations while generating a
+report]
+
+[[new-report-creation]]
+New report creation
+-------------------
+
+To create a report, perform the following actions:
+
+* Select a New item in the parent directory context menu, or select the
+parent directory and click New Filе in the main menu, or click New File
+on the toolbar, or use a corresponding shortcut.
+* Select a Reporttype in the context menu, or select Choose file type
+Platypus application elements Report on the wizard first step and click
+Next.
+* Enter the name of a new application element in the Name field and
+click Finish to create it, or click Cancel to cancel.
+
+[[reports-editor]]
+Reports editor
+--------------
+
+To open reports editor, double-click the application element in the
+project tree.
+
+Edit the report template in the spreadsheet application. The following
+applications are used by default for different operating systems:
+
+* Windows: Microsoft Excel.
+* Linux: Open/Libre Office Calc.
+* Mac OS: Microsoft Excel.
+
+To edit a report:
+
+* Open the Layout tab of the report editor, run the template editor by
+clicking Edit report template.
+* Specify the report formatting, add tags of linking to data to the
+template, save the report template in the template editor application.
+* On the Datamodel and Source tabs configure the data model and write
+the JavaScript code.
+* Implement report `onBeforeRender` event handler in the JavaScript
+editor.
+* Save the application element by clicking Save All on the Platypus
+Application Designer toolbar or by clicking theCtrl S shortcut.
+
+[[template-tags]]
+Template tags
+-------------
+
+Edit the report template in a spreadsheet application.
+
+Place tags for linking to JavaScript objects and model entities'
+datasets in the template cells. To access data, use the following
+syntax: $\{propertyName}, where propertyName is the module instance
+object's property.
+
+Example of writing the name of a documents into cells:
+
+code,JavaScript----------------- code,JavaScript
+${documents.name}
+-----------------
+
+Such a template will lead to insertion of multiple rows in a resulting
+spreadsheet. Each row will represent documents collection item.
+
+Similarly, you can use a complex object:
+
+code,JavaScript------------------------- code,JavaScript
+${library.documents.name}
+-------------------------
+
+You can use multiple tags in a single cell, for example:
+
+code,JavaScript--------------------------------------------------
+code,JavaScript
+Employee: ${employee.name} - ${employee.age} years
+--------------------------------------------------
+
+In the JavaScript code, define objects, which will be available in the
+template tags:
+
+code,JavaScript------------------------------------ code,JavaScript
+function reportA {
+   
+   this.docs = this.model.documents;
+
+   this.library = {};
+   library.documents = [
+    {name:'foo'}, 
+    {name:'bar'},
+    {name:'baz'}
+   ];
+}
+------------------------------------
+
+Add entities, which will be linked to the template, to the report data
+model.
+
+When outputting collections, a new row is added for each collection
+element and the style of a cell, which contains tag, is set for the
+cells of this row.
+
+If you know the size of the collection beforehand, you can use the
+template rows instead of adding new rows for each element. To do this,
+set `true` for the `fixed` special property of the collection.
+
+If necessary, specify dynamic styles for cells. These styles will vary
+depending on the contents of the cell. To do this:
+
+* Define the style, which should be applied dynamically to the
+collection element cell, for the special template cell, define a label
+for this cell, for example, `$[0]customRow`; this cell can be placed on
+a hidden template cell.
+* Set a special cellTemplateLabel property for the collection element by
+inserting a link to the style cell into it, for example
+`cellTemplateLabel='customRow'`.
+
+Use special tags in the template in order to predetermine the
+transformation of data when generating the report.
+
+To display collections, use the `jx:forEach` tag:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+<jx:forEach items="${departments}" var="department">
+  ${department.name} | ${department.chief}
+</jx:forEach>
+----------------------------------------------------
+
+The `jx` tags may be embedded into each other. If you place opening and
+closing tags on the same row, columns in this row will be duplicated.
+Place the `jx:forEach` and `jx:forEach` tags on different rows to enable
+duplication of rows between these tags. Other cells in rows, which
+contain opening and closing tags, will be ignored.
+
+The `jx:forEach` tag allows grouping of collection data by one of the
+properties. To arrange grouping, use the groupBy and groupOrder,
+attributes, which determine the property to be used for grouping data
+and the order of outputting groups, for example:
+
+code,JavaScript----------------------------------------------------
+code,JavaScript
+<jx:forEach items="${employees}" groupBy="age">
+  Age: ${group.item.age}
+  <jx:forEach items="${group.items}" var="employee">
+    ${employee.name} |
+    ${employee.payment} |
+    ${employee.bonus}
+  </jx:forEach>
+</jx:forEach>
+----------------------------------------------------
+
+In this example, we group employees by age. When grouping, a new group
+object is created in the context of the cycle. This object contains two
+properties: item, which is the current group, and items, which is the
+collection of all objects in the group.
+
+By default, if the groupOrder attribute is not present when grouping,
+the original order of items in the collection is maintained. Use the
+groupOrder attribute and assign `asc` and `desc` values for forward and
+reverse sorting to this attribute.
+
+If the groupBy attribute is used in the `jx:forEach` tag, the var
+attribute is ignored.
+
+Use the select attribute to determine elements of the collection which
+should be included into the report. In the example below, we include
+only employees with salary greater than 2000 into the report:
+
+code,JavaScript------------------------------------------------------------------------------------
+code,JavaScript
+<jx:forEach items="${employees}" var="employee" select="${employee.payment > 2000}">
+ ${employee.name} | ${employee.payment} | ${employee.bonus}
+</jx:forEach>
+------------------------------------------------------------------------------------
+
+To get access to the index of the current collection element, use the
+varStatus, attribute and set the name of the object, to which the status
+object will be assigned, for this attribute. The status object have only
+an index property, for example:
+
+code,JavaScript-------------------------------------------------------------------
+code,JavaScript
+<jx:forEach items="${employees}" var="employee" varStatus="status">
+ | ${status.index} 
+ | ${employee.name} 
+ | ${employee.payment} 
+ | ${employee.bonus}
+</jx:forEach>
+-------------------------------------------------------------------
+
+Use the `jx:if` tag to control output depending on the condition:
+
+code,JavaScript---------------------------------------------------
+code,JavaScript
+<jx:if test="${department.chief.payment > 2000.0}">
+Chief Name: ${department.chief.name}
+</jx:if>
+---------------------------------------------------
+
+You can use the `jx:if` tag to show or hide columns; to do this, place
+opening and closing tags in the same row — when exporting data, columns
+contained in the body of the tag will be displayed or hidden.
+
+Use the `jx:outline` tag to group rows:
+
+code,JavaScript------------------------- code,JavaScript
+<jx:outline>
+   //any rows can go here
+</jx:outline>
+-------------------------
+
+The `jx:outline` tag has an optional detail attribute, which determines
+the state of the row group. By default, it is set to `false`, which
+means that the row group will be hidden.
+
+[[report-api]]
+Report API
+----------
+
+To generate a report, create a report object by passing the required
+report identifier to the constructor name.
+
+Use the report object:
+
+* Create an report instance using either `Report` or server report proxy
+by `ServerReport` constuctors. Use `ServerReport` constructor for a
+report generated on the server side.
+* Display a report by calling the show method. The report will be
+downloaded and a command to open it will be executed.
+* Send the report to print by calling the print method.
+* Save the report file to disk by calling the save method; pass the path
+of the file, to which the report should be saved, as a parameters.
+
+_______________________________________________________________________________________________________________________________________________________________________________________________
+*Note*
+
+When executing the report in the HTML5 browser client, calling the
+show(), print(), and save(reportPath) methods lead to the same results —
+the report file will be downloaded by your browser.
+_______________________________________________________________________________________________________________________________________________________________________________________________
+
+In the example below, the report is generated on client side by desktop
+appliction:
+
+code,JavaScript-----------------------------------------------------------
+code,JavaScript
+var r = new Report('DocumentReport');
+r.params.documentCategory = 'business'; // update the model
+r.show(); // show report
+-----------------------------------------------------------
+
+To execute the report on the server side (from a HTML5 browser or a
+desktop client):
+
+code,JavaScript----------------------------------------------------------
+code,JavaScript
+/*
+ * @module
+ * @public
+ */
+function DocumentReport(){
+    var self = this, model = self.model;
+    // take parameter's value from self property.
+    model.params.documentCategory = self.documentCategory;
+    // ...
+}
+
+var r = new ServerReport('DocumentReport');
+// provide some property to be taken as a model parameter
+// by the report at the server side
+r.documentCategory = 'business'; 
+// Transfer the report's properties and download a report
+r.show();
+----------------------------------------------------------
+
+Report's JavaScript code prepares data for displaying, calculating new
+data, etc.
+
+* Write code in the report's constructor to perform initialization.
+* Add code in the `onBeforeRender` event hanler function, which will be
+invoked before starting the generation of report, when client calls the
+show, print, or save methods.
+* For server-side reports think about what data should be transferred to
+the server side and provide properties of report proxy before calling
+`show()` method.
+
+The report events:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameters |Description
+|`onBeforeRender` |`evt` — an event object |Is called before starting
+the generation of the report
+|=======================================================================

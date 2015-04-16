@@ -1,0 +1,224 @@
+[[http]]
+HTTP
+----
+
+[[http-interface]]
+HTTP interface
+--------------
+
+Server modules instance methods can be remotely invoked over network
+using simple GET or POST HTTP requests.
+
+To make the module instance methods available for external requests,
+mark it with the `@public` annotation.
+
+To invoke a server method, send a request by the URL formed using the
+base URL of the Servlet and the `/api` suffix for accessing HTTP API.
+
+Specify the request type, the module name, the method name and
+parameters of method calling in the URL parameters or in the body of the
+POST request in the application/x-www-form-urlencoded format. The
+request body will contain a value, which was returned in the executed
+method.
+
+If the JavaScript object is returned from an instance method, it will be
+serialized as JSON and string will be sent to a client as a response. If
+the object of the String or XML type is returned, string response will
+be sent to a client. It is also possible to specify the response content
+type explicitly.
+
+Parameters of the server module method inocation request:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Parameter |Description
+|`__type` |Request type. To execute the server module method, this
+parameter should be set to `14`.
+
+|`__moduleName` |Module identifier.
+
+|`__methodName` |Name of the called module method.
+
+|`__param` |Method's single parameter. A single value, a string, a
+number or a serialized JavaScript object in the JSON format.
+
+|`__param[]` |Method's multiply parameters. Several values, value can be
+a string, a `Number` or a serialized JavaScript objects in JSON format.
+|=======================================================================
+
+Example of URL for calling a server module method (URL is not encoded):
+
+http://server/platypus/application/api?__type=14&__moduleName=TestModule&__methodName=say&__param[]=Hello%20Platypus&__param[]=1[http://server/platypus/application/api?__type=14&__moduleName=TestModule&__methodName=say&__param[]=Hello
+Platypus&__param[]=1]
+
+[[http-request-and-response-api]]
+HTTP request and response API
+-----------------------------
+
+To access HTTP request and response in the JavaScript server code, use
+the `http` property, which is available, if the method is called by the
+external HTTP request.
+
+code,JavaScript------------------------------------------------
+code,JavaScript
+/**
+ * @public
+ */
+function ModuleConstructor() {
+   var self = this;
+   
+  /**
+   * @rolesAllowed tester admin
+   */
+   this.doSomething = function(paramA, paramB) {
+      // Use self.http property
+   }
+}
+------------------------------------------------
+
+The `http` property contains the following objects:
+
+[cols="<,<",options="header",]
+|=================================
+|Property |Description
+|`request` |HTTP request object.
+|`response` |HTTP response object.
+|=================================
+
+The `request` object contains the following properties:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`authType` |Authentication scheme name.
+
+|`characterEncoding` |Character encoding name.
+
+|`contentLength` |Request body length in bytes or -1, if the length is
+unknown.
+
+|`contentType` |MIME type of the request body or `null` if the type is
+unknown.
+
+|`body` |Request body as a string.
+
+|`bodyBuffer` |Request body as a bytes array.
+
+|`contextPath` |Part of URL, the request context.
+
+|`cookies` |Cookies which were sent by the client in the request in
+key-value form.
+
+|`headers` |Request headers in key-value form.
+
+|`localAddr` |IP address, on which the request was received.
+
+|`localName` |Иame of the host, on which the request was received.
+
+|`localPort` |Port, on which the request was received.
+
+|`method` |Request method HTTP name, for example `GET`, `POST`.
+
+|`params` |Request parameters in key-value form. If several parameters
+have the same name, their values will be presented as an array.
+
+|`pathInfo` |Additional information about the path in the request URL.
+
+|`pathTranslated` |Additional information about the path in the request
+URL, worked out to the real path.
+
+|`protocol` |Request protocol name and version in the form of
+protocol/majorVersion.minorVersion, for example, `HTTP/1.1`.
+
+|`queryString` |URL request string.
+
+|`remoteAddr` |IP address of the client or last proxy.
+
+|`remoteHost` |Fully qualified name of the client or last proxy.
+
+|`remotePort` |Port of the client or last proxy.
+
+|`requestURI` |A part of the URL request from the protocol name to the
+request string.
+
+|`requestURL` |URL of the request.
+
+|`scheme` |Request pattern, for example `http`, `https`, or `ftp`.
+
+|`serverName` |Name of the host, to which the request was sent.
+
+|`serverPort` |Port, to which the request was sent.
+
+|`secure` |`true` when the request was sent via the secured channel, for
+example HTTPS and `false` otherwise.
+|=======================================================================
+
+In the example below, all request headers are output into the log:
+
+code,JavaScript------------------------------------------------------
+code,JavaScript
+for (var c in http.response.headers) {
+    Logger.info(c + ' - ' + http.response.headers[c]);
+}
+------------------------------------------------------
+
+The `response` object contains the following properties and methods:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property/method |Description
+|`status` |Current status of the response.
+
+|`contentType` |MIME type of the response body.
+
+|`body` |The text body sent in this response. The body must be set after
+content type. Note that content length is set automatically.
+
+|`bodyBuffer` |The binary body sent in this response, as a bytes array.
+The body must be set after content type. Note that content length is set
+automatically.
+
+|`headers` |Response headers in key-value form.
+
+|`addHeader(name, value)` |Adds a new header with the specified name and
+value to the response.
+
+|`setHeader(name, value)` |Defines a new value for the response header.
+
+|`addCookie(cookie)` |Adds new cookies to the response.
+|=======================================================================
+
+The `cookie` object contains the following properties:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property |Description
+|`name` |The cookie name (required).
+
+|`value` |The current cookie value (required).
+
+|`comment` |Comment, which describes the purpose of the cookie.
+
+|`domain` |Cookie domain name.
+
+|`maxAge` |Cookie lifetime in seconds.
+
+|`path` |Path on the server for which the browser returns this cookie.
+
+|`secure` |`true` set to notify the browser that this cookie should only
+be sent over a secure protocol and `false` otherwise.
+
+|`version` |Cookie protocol version.
+|=======================================================================
+
+In the example below, new cookie will be added to the HTTP response:
+
+code,JavaScript-------------------------- code,JavaScript
+http.response.addCookie({ 
+    name : 'platypus',
+    value : 'test',
+    maxAge : 60*60
+});
+--------------------------
+
+To delete cookie from your browser, set `0` for its `maxAge` property.

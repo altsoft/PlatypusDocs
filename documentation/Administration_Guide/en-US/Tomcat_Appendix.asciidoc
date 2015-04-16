@@ -1,0 +1,50 @@
+[[apache-tomcat-7-configuration]]
+Apache Tomcat 7 configuration
+-----------------------------
+
+_________________________________________________________________________________________________
+*Note*
+
+For more detailed information on Apache Tomcat 7 setup, refer to the
+corresponding documentation.
+_________________________________________________________________________________________________
+
+Data source setup:
+
+* Copy the corresponding JAR file of the JDBC driver to the directory
+accessible to the class loader: `/lib`, where CATALINA_HOME is a Apache
+Tomcat;
+* Create the JNDI resource of the JDBC data source. Edit the
+`META-INF/context.xml` file of the web application by adding the data
+source resource:
++
+-----------------------------------------------------------------------------------------------------------------------------------
+...
+<Resource name="jdbc/main" auth="Container" type="javax.sql.DataSource"
+       maxActive="100" maxIdle="30" maxWait="10000"
+       username="sa" password="te$tPwd" driverClassName="org.h2.Driver"     url="jdbc:h2:tcp://localhost/~/h2db/test;schema=test"/>
+...
+-----------------------------------------------------------------------------------------------------------------------------------
++
+If necessary, configure the connection pool by specifying parameters for
+removing and cleaning unused connections.
+* Configure the security domain. Edit the `META-INF/context.xml` file of
+the web application by adding the security domain. The example below
+shows configuring of the security domain for working with the built-in
+repository of user information:
++
+--------------------------------------------------------------------------
+...
+<Realm  className="org.apache.catalina.realm.DataSourceRealm"
+   dataSourceName="jdbc/TestDB"
+   userTable="MTD_USERS" userNameCol="USR_NAME"   userCredCol="USR_PASSWD"
+   userRoleTable="MTD_GROUPS" roleNameCol="GROUP_NAME" digest="MD5"/>
+...
+--------------------------------------------------------------------------
++
+For the DataSourceRealm security domain, specify names of tables,
+columns and hashing algorithm for working with `MTD_USERS` и
+`MTD_GROUPS` tables.
++
+If you want to use another authentication data repository, such as an
+external LDAP server, configure the appropriate type of security domain.
