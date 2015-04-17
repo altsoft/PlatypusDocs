@@ -107,27 +107,31 @@ JavaScript-массива объектов или сущности модели,
 
 Пример вывода в ячейки названия документа:
 
-code,JavaScript---------------- code,JavaScript
+[source,Javascript]
+---------------- 
 ${document.name}
 ----------------
 
 Похожим образом можно получить доступ и к сложному объекту:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 ${library.documents.name}
 -------------------------
 
 Допускается использование нескольких тэгов в одной ячейке, например:
 
-code,JavaScript--------------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------------
+
 Employee: ${employee.name} - ${employee.age} years
 --------------------------------------------------
 
 В программном коде отчета задайте объекты, которые будут доступны в
 тэгах шаблона:
 
-code,JavaScript----------------------- code,JavaScript
+[source,Javascript]
+----------------------- 
 /**
  * @name documentReport
  */
@@ -170,8 +174,9 @@ library.documens = [
 
 Для вывода коллекций используйте тэг `jx:forEach`:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 <jx:forEach items="${departments}" var="department">
   ${department.name} | ${department.chief}
 </jx:forEach>
@@ -190,8 +195,9 @@ groupBy и groupOrder, которые определяют какое свойс
 использовано для группировки данных и в каком порядке группы должны быть
 выведены, например:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 <jx:forEach items="${employees}" groupBy="age">
   Age: ${group.item.age}
   <jx:forEach items="${group.items}" var="employee">
@@ -218,8 +224,9 @@ item - текущая группа и items - коллекция всех объ
 коллекции должны быть включены в отчет. В приведенном ниже примере мы
 включаем только сотрудников с зарплатой больше 2000:
 
-code,JavaScript------------------------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------------------------------------
+
 <jx:forEach items="${employees}" var="employee" select="${employee.payment > 2000}">
  ${employee.name} | ${employee.payment} | ${employee.bonus}
 </jx:forEach>
@@ -230,8 +237,9 @@ code,JavaScript
 присвоен объект статуса. У объекта статуса есть единственное свойство
 index, например:
 
-code,JavaScript-------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------------------------
+
 <jx:forEach items="${employees}" var="employee" varStatus="status">
  | ${status.index} 
  | ${employee.name} 
@@ -243,8 +251,9 @@ code,JavaScript
 Используйте тэг `jx:if`, для того, чтобы управлять выводом в зависимости
 от условия:
 
-code,JavaScript---------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------
+
 <jx:if test="${department.chief.payment > 2000.0}">
 Chief Name: ${department.chief.name}
 </jx:if>
@@ -257,7 +266,8 @@ Chief Name: ${department.chief.name}
 
 Используйте тэг `jx:outline` для того, чтобы сгруппировать ряды:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 <jx:outline>
    //any rows can go here
 </jx:outline>
@@ -319,8 +329,9 @@ ________________________________________________________________________________
 В приведенном ниже примере отчет формируется при нажатии на кнопку
 формы:
 
-code,JavaScript----------------------------------------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------------------------------------------------
+
 /**
  * Form generates report
  * @name reportForm

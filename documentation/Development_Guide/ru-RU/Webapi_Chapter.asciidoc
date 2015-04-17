@@ -122,8 +122,9 @@ Platypus в параметре `url`.
 библиотекy, поставляемую вместе с Platypus Platform: `pwa.js`. Для
 работы Platypus Web API необходимо подключить библиотеку jQuery.
 
-code,JavaScript-----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------------
+
 <html>
  <head>
      <script type="text/javascript" src="js/jquery.min.js">
@@ -138,8 +139,9 @@ code,JavaScript
 Задайте базовый URL, на котором работает сервер приложений Platypus, при
 помощи функции platypus.api.setServerUrl(url):
 
-code,JavaScript------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------
+
 $(function() {
   platypus.api.setServerUrl('/platypus/application/');
   ...
@@ -151,8 +153,9 @@ $(function() {
 `Platypus` и возвращаемым объектом, свойство prop1 которого будет
 выведено в консоль:
 
-code,JavaScript------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------
+
 $(function() {
   platypus.api.setServerUrl('/platypus/application/');
   platypus.api.executeServerModuleMethod(
@@ -167,7 +170,8 @@ $(function() {
 
 Пример кода соответствующего серверного модуля:
 
-code,JavaScript----------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------- 
 /**
  * @public
  * @name WebModule
@@ -185,7 +189,8 @@ FORMS аутентификацией. Для того, чтобы прекрат
 работы с сервером приложений Platypus, используйте метод
 platypus.api.logout:
 
-code,JavaScript---------------------- code,JavaScript
+[source,Javascript]
+---------------------- 
 platypus.api.logout();
 ----------------------
 
@@ -219,8 +224,9 @@ platypus.server.module.get, в качестве первого параметр�
 `Platypus` и возвращаемым объектом, свойство prop1 которого будет
 выведено в консоль:
 
-code,JavaScript----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------
+
 $(function() {
  platypus.api.setServerUrl('/platypus/application/');
  platypus.server.Module.get("WebModule", testModuleReady);
@@ -315,8 +321,9 @@ protocol/majorVersion.minorVersion, например, `HTTP/1.1`.
 
 В приведенном ниже примере в журнал выводятся все заголовки запроса:
 
-code,JavaScript------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------
+
 for (var c in http.response.headers) {
     Logger.info(c + ' - ' + http.response.headers[c]);
 }
@@ -367,7 +374,8 @@ for (var c in http.response.headers) {
 
 В приведенном ниже примере в HTTP ответ будет добавлен новые куки:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 http.response.addCookie({ 
     name : 'platypus',
     value : 'test',

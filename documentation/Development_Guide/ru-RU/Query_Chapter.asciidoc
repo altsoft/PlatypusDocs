@@ -358,7 +358,8 @@ SQL-текст запроса к базе данных
 Для того, чтобы задать имя-идентификатор запроса используйте аннотацию
 `@name` в заголовочном блоке запроса:
 
-code,SQL----------------------- code,SQL
+[source,Sql]
+----------------------- 
 /**
  * Query header example
  * @name AllDocuments
@@ -394,7 +395,8 @@ JavaScript определяются базой данных по именам к
 
 Пример текста SQL запроса, содержащего именованные параметры:
 
-code,SQL---------------------------------------- code,SQL
+[source,Sql]
+---------------------------------------- 
 /**
  * Device log for period of time
  * @name Timelog
@@ -411,7 +413,8 @@ ORDER BY trackingLog.TIME ASC
 Для того, чтобы использовать _Запрос_ в качесве подзапроса, включите в
 SQL текст его имя:
 
-code,SQL---------------------------------- code,SQL
+[source,Sql]
+---------------------------------- 
 /**
  * Time log priority filter
  * @name Filter
@@ -456,7 +459,8 @@ JavaScript ORM-у сориентироваться, какие свойства 
 
 В примере приведенном ниже для записи доступна лишь таблица Document:
 
-code,SQL------------------------------- code,SQL
+[source,Sql]
+------------------------------- 
 /**
  * @name docsCategories
  * @writable Document
@@ -499,7 +503,8 @@ ON d.CategoryID = c.CATEGORY_ID
 Пример запроса, для которого права как на чтение, так и на запись
 ограничены ролью `admin`:
 
-code,SQL---------------------- code,SQL
+[source,Sql]
+---------------------- 
 /**
  * @name AllCategories
  * @rolesAllowed admin
