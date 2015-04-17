@@ -140,8 +140,9 @@ To access relational data create data sources from SQL queries.
 Create a new Query application element named `OwnersQuery` with SQL to
 get filtered records from the `Owner` table:
 
-code,SQL---------------------------------------------------------------------------------------------------------
-code,SQL
+[source,Sql]
+---------------------------------------------------------------------------------------------------------
+
 /**
  * Gets all owners.
  * @public
@@ -185,8 +186,9 @@ Lets write some JavaScript code for our form.
 Double click on the Add button and enter the code responsible for
 showing the `OwnerView` form:
 
-code,JavaScript--------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+--------------------------------------------------
+
 /**
  * Add button's click event handler.
  * @param evt Event object
@@ -202,7 +204,8 @@ form and show it as a modal window. We provide the `refresh` function as
 a parameter to enable data model requiery when closing the owner's
 details form:
 
-code,JavaScript-------------------- code,JavaScript
+[source,JavaScript]
+-------------------- 
 function refresh() {
     model.requery();
 } 
@@ -211,8 +214,9 @@ function refresh() {
 Double click on the Delete button and provide the code fragment
 responsible for an owner's record deletion:
 
-code,JavaScript-----------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+-----------------------------------------------------
+
 /**
  * Delete button's click event handler.
  * @param evt Event object
@@ -231,8 +235,9 @@ Then all changes will be saved to the database.
 
 Provide a handler for the `onMouseClicked` event of the grid widget:
 
-code,JavaScript------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+------------------------------------------------
+
 /**
  * Grid click event handler.
  * @param evt Event object
@@ -246,8 +251,9 @@ form.ownersGrid.onMouseClicked = function(evt) {
 
 Write the `editOwner` function:
 
-code,JavaScript------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+------------------------------------------------
+
 function editOwner() {
     var ownerView = new OwnerView();
     ownerView.ownerID = owners.cursor.owners_id;
@@ -261,8 +267,9 @@ parameter containing the grid's current owner's record identifier.
 Double click on the Search button to provide the search by a last name
 action logic:
 
-code,JavaScript-----------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+-----------------------------------------------------
+
 /**
  * Search button click event handler.
  * @param evt Event object
@@ -320,7 +327,8 @@ JavaScript code.
 Add a new application element for a SQL query selecting data for the
 specific owner by her/his identifier:
 
-code,SQL----------------------------- code,SQL
+[source,Sql]
+----------------------------- 
 /**
  * Gets the owner by its ID.
  * @public
@@ -333,7 +341,8 @@ From Owners t1
 
 Add a query for the pets list for the specific owner:
 
-code,SQL------------------------------------ code,SQL
+[source,Sql]
+------------------------------------ 
 /**
  * Gets the pets for concrete owner.
  * @public 
@@ -347,7 +356,8 @@ From Pets t1
 Next, add a query for getting all the hotel visits for the all pets of
 the specific owner:
 
-code,SQL---------------------------------------------- code,SQL
+[source,Sql]
+---------------------------------------------- 
 /**
  * Gets all visits for concrete owner.
  * @public
@@ -361,7 +371,8 @@ From Visit t1
 
 Add a simple query for selecting all pets types:
 
-code,SQL--------------------------- code,SQL
+[source,Sql]
+--------------------------- 
 /**
  * Gets all types for pets.
  * @public 
@@ -417,8 +428,9 @@ form.
 Double click on the OK button and insert the handler code to save the
 owner's data:
 
-code,JavaScript-------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+-------------------------------------------------
+
 /**
  * Save button's click event handler.
  * @param evt Event object
@@ -441,8 +453,9 @@ In the handler code snippet above validation function is invoked and if
 successfull then changes are saved to the database. Write the `validate`
 function stub we'll return to its code later.
 
-code,JavaScript-------------------------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+-------------------------------------------------------------------
+
 /**
  * Validates the view.
  * @return Validation error message or falsy value if form is valid
@@ -455,8 +468,9 @@ function validate() {
 Double click on the Cancel button and insert JavaScript code to perform
 the form close action:
 
-code,JavaScript-----------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+-----------------------------------------------------
+
 /**
  * Cancel button's click event handler.
  * @param evt Event object
@@ -469,7 +483,8 @@ form.cancelButton.onActionPerformed = function(evt) {
 To ensure that a new owner row is inserted add the onRequeried event
 hanlder for the `owner` entity:
 
-code,JavaScript----------------------------------------- code,JavaScript
+[source,JavaScript]
+----------------------------------------- 
 /**
  * Data model's OnRequired event handler.
  * @param evt Event object
@@ -488,8 +503,9 @@ Now it is time to add the code for the pets and their visits management.
 Insert pets Add button `onActionPerformed` event handler to add a new
 pet:
 
-code,JavaScript-----------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+-----------------------------------------------------
+
 /**
  * The add pet button's click event handler.
  * @param evt Event object
@@ -503,8 +519,9 @@ form.addPetButton.onActionPerformed = function(evt) {
 Insert pets Delete button `onActionPerformed` event handler to delete a
 pet:
 
-code,JavaScript--------------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+--------------------------------------------------------
+
 /**
  * Delete pet button's click event handler. 
  * Deletes the selected pet.
@@ -520,8 +537,9 @@ form.deletePetButton.onActionPerformed = function(evt) {
 Insert visits Add button `onActionPerformed` event handler to add a new
 visit to the hotel:
 
-code,JavaScript-------------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+-------------------------------------------------------
+
 /**
  * Add visit button's click event handler.
  * @param evt Event object
@@ -537,8 +555,9 @@ form.addVisitButton.onActionPerformed = function(evt) {
 Insert visits Delete button `onActionPerformed` event handler to delete
 a pet's visit:
 
-code,JavaScript----------------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+----------------------------------------------------------
+
 /**
  * Delete visit button's click event handler.
  * @param evt Event object
@@ -554,8 +573,9 @@ Next we will provide the logic for the form validation. Edit the
 `validate` function and implement it as follows to perform the owner's
 and the pets and visits validation:
 
-code,JavaScript--------------------------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+--------------------------------------------------------------------
+
 /**
  * Validates the view.
  * @return Validation error message or empty String if form is valid
@@ -570,8 +590,9 @@ function validate() {
 
 Add owner's fields validation code:
 
-code,JavaScript--------------------------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+--------------------------------------------------------------------
+
 /**
  * Validates owner's properties.
  * @return Validation error message or empty String if form is valid
@@ -599,8 +620,9 @@ function validateOwner() {
 
 The pets validation code is as follows:
 
-code,JavaScript--------------------------------------------------------------------
-code,JavaScript
+[source,JavaScript]
+--------------------------------------------------------------------
+
 /**
  * Validates pets entity.
  * @return Validation error message or empty String if form is valid
@@ -624,8 +646,8 @@ function validatePets() {
 
 Insert the visits validation code for the currently selected pet:
 
-code,JavaScript-----------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------
 /**
  * Validates visits entity.
  * @return Validation error message or empty String if form is valid
@@ -651,8 +673,8 @@ Please notice that the pet's visits validation must be invoked not only
 before the model save action, but also on any pets grid cursor movement.
 To do that, implement the `willScroll` event of the `pets` entity:
 
-code,JavaScript----------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------
 /**
  * Pet's entity cursor movement event handler.
  * @param evt Event object
@@ -701,7 +723,8 @@ query we use the `OwnersQuery` subquery. Add the `OwnersQuery` and the
 `Pets` table and connect the keys fields with a link. The result SQL is
 to be like the follows:
 
-code,SQL------------------------------------------------ code,SQL
+[source,Sql]
+------------------------------------------------ 
 /**
  * Gets the owners and their pets.
  * @public
@@ -736,8 +759,8 @@ entity.
 Add the `onRequired` event handler for the `ownersPets` and insert some
 code to its body:
 
-code,JavaScript------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------
 /**
  * Called then data is ready in ownersPets entity.
  * @param evt Event object
@@ -756,8 +779,8 @@ actual pets data because the correspondent query already have executed.
 Provide the `onRender` event handler to the owners `ModelGrid` widget to
 perform the specific rendering for the new `pets` column:
 
-code,JavaScript---------------------------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------
 /**
  * Pet's column onRender handler.
  * @param evt onRender event object
@@ -806,8 +829,8 @@ owners tables columns headers and the columns tags as it shown below:
 Go to the `OwnersView` form and add the Report button. Change the button
 name, the capion text and provide its press event handler code:
 
-code,JavaScript-----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------
 /**
  * Report button click event handler.
  * @param evt Event object
@@ -819,6 +842,5 @@ form.reportButton.onActionPerformed = function(evt) {
     ownersReport.show();
 }
 -----------------------------------------------------
-
 Here we create a new report instance, set its parameter to the similar
 parameter of the`OwnersView` form and display the report.

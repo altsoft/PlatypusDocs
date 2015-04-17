@@ -1,1 +1,9 @@
+Combined Title
+===============================
+:leveloffset: 1
 
+include::Author_Group.asciidoc[]
+include::Book_Info.asciidoc[]
+include::Chapter.asciidoc[]
+include::Preface.asciidoc[]
+include::Revision_History.asciidoc[]
