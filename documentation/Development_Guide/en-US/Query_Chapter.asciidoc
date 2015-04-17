@@ -328,7 +328,8 @@ replaced by underscores.
 Specify the query name, for this use the `@name` annotation in the query
 header:
 
-code,SQL----------------------- code,SQL
+[source,Sql]
+----------------------- 
 /**
  * Query header example
  * @name AllDocuments
@@ -358,7 +359,8 @@ parameter.
 
 Example of a SQL query source with the named parameters:
 
-code,SQL---------------------------------------- code,SQL
+[source,Sql]
+---------------------------------------- 
 /**
  * Device log for period of time
  * @name Timelog
@@ -377,7 +379,8 @@ where SubQuery is the name of the query to be used as a sub-query.
 
 For example:
 
-code,SQL---------------------------------- code,SQL
+[source,Sql]
+---------------------------------- 
 /**
  * Time log priority filter
  * @name Filter
@@ -416,7 +419,8 @@ To disable writing to all tables mentioned in the query, add the
 
 In the example below only the `Document` table is writable:
 
-code,SQL------------------------------- code,SQL
+[source,Sql]
+------------------------------- 
 /**
  * @name docsCategories
  * @writable Document
@@ -451,7 +455,8 @@ ________________________________________________________________________________
 
 An example of an Oracle database specific hierarchical query:
 
-code,SQL---------------------------------------------------- code,SQL
+[source,Sql]
+---------------------------------------------------- 
 SELECT LEVEL, ename "employee", empno, mgr "manager"
  FROM emp START WITH mgr IS NULL
  CONNECT BY PRIOR empno = mgr;
@@ -459,7 +464,8 @@ SELECT LEVEL, ename "employee", empno, mgr "manager"
 
 For the dialect query snippet above the main SQL source can be:
 
-code,SQL------------------------------ code,SQL
+[source,Sql]
+------------------------------ 
 /**
  * Hierarchial employees query
  * @name Employees
@@ -499,7 +505,8 @@ user.
 An example of the query where reading and writing rights are granted to
 the `admin` role only:
 
-code,SQL---------------------- code,SQL
+[source,Sql]
+---------------------- 
 /**
  * @name AllCategories
  * @rolesAllowed admin

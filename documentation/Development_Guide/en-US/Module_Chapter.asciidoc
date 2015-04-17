@@ -78,7 +78,8 @@ text.
 
 Example of a module with a header:
 
-code,JavaScript------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------- 
 /**
  * Module description goes here
  *
@@ -106,8 +107,9 @@ JsDoc annotations.
 
 Specify module instance methods:
 
-code,JavaScript----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------
+
 function ModuleA() {
    
    this.somePublicMethod = fucntion(p) { //instance method
@@ -120,8 +122,9 @@ Module instance methods are available for the client code.
 
 Add module scope methods and fields:
 
-code,JavaScript----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------
+
 function ModuleB() {
    var a, b, c;//private fields
 
@@ -140,7 +143,8 @@ Create or get a module instance by the following ways:
 * Create an instance of the module with the help of the `new` keyword,
 using a module constructor, for example:
 +
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var moduleInstance = new ();
 ----------------------------
 +
@@ -152,7 +156,8 @@ where `
 * Create an instance of the module with the help of the `new` keyword
 using special `Module` constructor, for example:
 +
-code,JavaScript---------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------- 
 var moduleInstance = new Module();
 ----------------------------------
 +
@@ -165,7 +170,8 @@ where `
 `"WebModule"`;
 * Get a module instance from the modules pool using `Modules` object:
 +
-code,JavaScript----------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------- 
 var moduleInstance = Modules.get();
 -----------------------------------
 +
@@ -177,7 +183,8 @@ where `
 * Create a proxy stub for the server module, to invoke the server code
 on the application server:
 +
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 var moduleInstance = new ServerModule();
 ----------------------------------------
 +
@@ -193,8 +200,9 @@ external client code.
 To call the module's instance method, use the following structure, for
 example:
 
-code,JavaScript------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------
+
 var result = moduleInstance.getResult(10);
 ------------------------------------------
 
@@ -259,8 +267,9 @@ ________________________________________________________________________________
 
 Example of using manual dependencies resolving is as follows:
 
-code,JavaScript------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------
+
 var moduleName1 = "Module1",
     moduleName2 = "Module2";
 require([moduleName1, moduleName2], function() {
@@ -275,8 +284,9 @@ The following example shows how to use the `require` function for
 loading the module by its constructor name as well as the plain
 JavaScript file by specifing its path:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 require(["Module1",
  "localLib.js"], function() {
   
@@ -297,7 +307,8 @@ The `require` function also has a synchronous variant, which can be used
 in the server code. In this case, if you don't need to maintain
 compatibility with the client's code, the second parameter is optional:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 require("localLib.js");
 // LibObject is defined in localLib.js
 var obj = new LibObject();
@@ -363,7 +374,8 @@ priority than the module level restrictions. For example, only a user
 with the `role2` role from the following example will have access to the
 `f2`:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 /**
  * @module
  * @rolesAllowed role1 role2
@@ -388,8 +400,9 @@ read-only. The object of information about the user contains the `name`
 property, i.e. the name of the current user, and the `hasRole()`method,
 which allows you to check if this user has any role:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 Logger.info('Current user: ' + self.principal.name);
 
 if (self.principal.hasRole('Manager')) {
@@ -421,8 +434,9 @@ will be called after the resource is loaded, `obj` is an array of bytes
 of the downloaded resource for the server code and Platypus Client or an
 object of the ArrayBuffer type for the HTML5 browser:
 
-code,JavaScript---------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------
+
 //Loads binary resource
 Resource.load("res/pict.bin", function(obj) {
   ...
@@ -434,7 +448,8 @@ in the server code or in the code, which is executed in the Platypus
 Client. In this case, the method itself will return an array of bytes of
 the downloaded resource:
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 //Loads binary resource synchronously
 var obj = Resource.load("res/pict.bin");
 ...
@@ -445,8 +460,9 @@ To download text, use the `Resource.loadText(, , ))` method, where
 encoding, `callback(txt)` is a function, which will be called after the
 resource is loaded, `txt` is the downloaded text:
 
-code,JavaScript---------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------------
+
 //Loads text
 Resource.loadText("res/res.txt", "UTF-8", function(txt) {
   Logger.info(txt);
@@ -458,8 +474,9 @@ parameters in the server code or in the Platypus Client code. In this
 case, the method itself will return an object of a downloaded resource
 string:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 //Loads text synchronously
 var txt = Resource.loadText("res/res.txt", "UTF-8");
 Logger.info(txt);
@@ -477,7 +494,8 @@ To get the absolute path to the application directory, use the
 `Resource.applicationPath` read-only property. If an application is
 deployed into database, this property returns `null`:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 //Reads the application's path
 Logger.info(Resource.applicationPath);
 --------------------------------------
@@ -614,7 +632,8 @@ The data model object is represented in the module constructor by the
 Create an alias variable for the data model object, in the following
 code snippets we will use this model alias object:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 function ModuleD() {
    var model = this.model;
    //...
@@ -635,7 +654,8 @@ save the changes.
 To force updating of all data model entities, call the requery function
 of the `model` object:
 
-code,JavaScript----------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------- 
 model.requery(onSuccess, onFailure)
 -----------------------------------
 
@@ -719,7 +739,8 @@ or by using the Ctrl Shift S keyboard shortcut.
 After adding the event handler function, a protected code section will
 be added to the code editor:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 function rowDeleted() {
    //TODO add your handling code here:
 }
@@ -842,7 +863,8 @@ Use the data model parameters to fetch specific data to the data model.
 Data model parameters object is in the `model.params` property. To set a
 new value to the data model parameter:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 model.params. = newValue;
 -------------------------
 
@@ -858,8 +880,9 @@ Below you can see a piece of code, the execution of which will result in
 loading the new model entity data by assigning a new value to the
 `documentID` parameter:
 
-code,JavaScript------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------------
+
 model.params.documentID = 1; // Changes data model parameter
 ------------------------------------------------------------
 
@@ -879,7 +902,8 @@ It is often necessary to change some parameters before updating data. To
 do this, use the beginUpdate and endUpdate methods of the `params`
 object:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 model.params.beginUpdate();
 try {
   // Update parameters here, 
@@ -907,7 +931,8 @@ from the other model entities.
 
 To access entity parameters, use the `params` entity property:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 var entityParams = .params
 --------------------------
 
@@ -920,7 +945,8 @@ where `
 To access the specific parameters, use properties of the `model..params`
 object with names, which match the entity parameter names:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var entityParam = model..params.
 --------------------------------
 
@@ -934,7 +960,8 @@ where `
 
 To set the parameter value, assign a new value to it:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 model..params. = newValue;
 --------------------------
 
@@ -947,7 +974,8 @@ To update entity data and related entities, use the execute, function.
 New data will be loaded only if the entity parameter values were
 changed:
 
-code,JavaScript------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------- 
 .execute(onSuccess, onFailure);
 -------------------------------
 
@@ -963,7 +991,8 @@ function for refresh data on failure event (optional).
 To force the update of entity data and related entities, use the requery
 function:
 
-code,JavaScript------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------- 
 .requery(onSuccess, onFailure);
 -------------------------------
 
@@ -993,7 +1022,8 @@ ________________________________________________________________________________
 To access to the entity's data, refer to the entity dataset as a regular
 JavaScript array:
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 var item = model.[]
 -------------------
 
@@ -1011,7 +1041,8 @@ An array element is an data row instance, which was obtained as a result
 of executing the query in the database. To access row's fields, refer to
 them by name:
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 var propValue = [].
 -------------------
 
@@ -1034,8 +1065,9 @@ rowset field.
 The following example shows the process of enumerating document rows in
 the `documents` entity:
 
-code,JavaScript--------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------
+
 var documents = model.documents;
 
 // Logs all documents names
@@ -1051,7 +1083,8 @@ are generated during ORM resolution. If the entity's underlying database
 table contains an foreign key reference, the corresponding property
 represents the connected entity.
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 var propValue = model.[]..
 --------------------------
 
@@ -1079,7 +1112,8 @@ query results field.
 If the entity contains a field, which is referenced by the external key,
 the property contains an array of the connected entity objects:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 var propValue = model.[]..
 --------------------------
 
@@ -1113,7 +1147,8 @@ Cursor API
 To get access to the dataset row pointed out by the entity cursor use
 the `model..cursor` property, for example:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var currentValue = model..cursor
 --------------------------------
 
@@ -1180,8 +1215,9 @@ position.
 The following example uses cursor moving control functions to enumerate
 `documents` entity objects and output document names:
 
-code,JavaScript---------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------------
+
 model.documents.requery();//Cursor is on the first object
 while (!model.documents.eof) { 
   Logger.info(model.documents.cursor.NAME);
@@ -1196,8 +1232,9 @@ The `empty` property is `true` if the entity data array is empty, and
 `false` otherwise. For example, the following snippet outputs a message
 into the log, if the `documents` entity data array is empty:
 
-code,JavaScript------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------------
+
 model.documents.empty && Logger.info('Documents is empty.');
 ------------------------------------------------------------
 
@@ -1216,7 +1253,8 @@ To edit, insert, or delete data, perform the following actions:
 To obtain access to the entity arbitrary objects, use the syntax of
 referring to an array element:
 
-code,JavaScript------------- code,JavaScript
+[source,Javascript]
+------------- 
 model.[]. = ;
 -------------
 
@@ -1235,7 +1273,8 @@ with the specified index in the entity data. `
 To change the appropriate property of the entity's cursor, use the
 following way:
 
-code,JavaScript---------- code,JavaScript
+[source,Javascript]
+---------- 
 model. = ;
 ----------
 
@@ -1256,8 +1295,9 @@ data, `
 
 To save changes the data model changes, use its save method:
 
-code,JavaScript-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 model.save(onSuccess, onFailure);where onSuccess is the handler function for an event of successfull saving of data (optional) and onFailure is the handler function for a save data on failure event (optional).
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1274,11 +1314,13 @@ necessary, pass "key-value" pairs as parameters to this function. Here,
 a key is the `.schema.` entity property, and a value is the value of
 this property:
 
-code,JavaScript---------------- code,JavaScript
+[source,Javascript]
+---------------- 
 model..insert();
 ----------------
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 model..insert(
   model..schema., ,
   model..schema., 
@@ -1290,7 +1332,8 @@ Call the push function to insert a new object in the entity data — this
 function is a standard method of inserting a new element into the
 JavaScript array:
 
-code,JavaScript-------------- code,JavaScript
+[source,Javascript]
+-------------- 
 model..push();
 --------------
 
@@ -1299,7 +1342,8 @@ match the names of properties in the entity objects, as a parameter to
 the function. Their values will be set as values of the new object
 properties:
 
-code,JavaScript-------------- code,JavaScript
+[source,Javascript]
+-------------- 
 model..push( {
   : ,
   : });
@@ -1320,8 +1364,9 @@ filtering connections or by the custom code.
 
 Example of code for inserting a new object into the `documents` entity:
 
-code,JavaScript---------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------------
+
 model.documens.push({ ID:101, NAME:'New document name'});
 model.save();
 ---------------------------------------------------------
@@ -1331,14 +1376,16 @@ To delete an object, use the deleteRow or splice entity functions.
 Call the deleteRow function without parameters to delete the current
 object, i.e. the object, which the cursor is pointing to.
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 model..deleteRow();
 -------------------
 
 Pass an index of the object, which you want to delete, as a parameter to
 the deleteRow method:
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 model..deleteRow();
 -------------------
 
@@ -1351,7 +1398,8 @@ where `
 Alternatively, pass the object to delete as the parameter of deleteRow
 method:
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 model..deleteRow();
 -------------------
 
@@ -1364,7 +1412,8 @@ where `
 Use the splice function to delete an object from the entity data by
 passing an index and a number of elements to be deleted as arguments:
 
-code,JavaScript------------------ code,JavaScript
+[source,Javascript]
+------------------ 
 model..splice(, );
 ------------------
 
@@ -1383,7 +1432,8 @@ element. `index` can take on a value within the `0...length-1` range, `
 Example of deleting the current object from the `documents` entity and
 from the database:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 // Removes first element
 model.documents.splice(0, 1);
 model.save();
@@ -1392,14 +1442,16 @@ model.save();
 To remove all objects from the entity data, use the deleteAll entity
 function:
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 model..deleteAll();
 -------------------
 
 Example of deleting all objects from the `documents` entity and from the
 database:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 // Removes all elements
 model.documents.deleteAll();
 model.save();
@@ -1413,7 +1465,8 @@ data are inconsistent with the database schema. In this case data are
 not saved to the database. To handle this exception, use the
 `try-catch-finally` statement:
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 try {
   model.save();
 } catch (e) {
@@ -1443,7 +1496,8 @@ database neither changes the data.
 To find an object by its identifier, use the findById entity method by
 passing a key value to it:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var item = model..findById();
 -----------------------------
 
@@ -1460,8 +1514,9 @@ If nothing is found, the findById function returns the `null` value.
 Example of code for searching for a document by its identifier and
 displaying its name in the log:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 var documentId = 101;
 var document = model.documents.findById(documentId);
 if (document) {
@@ -1475,7 +1530,8 @@ property and search value as parameters of the find function. The search
 is performed by checking the equality of the entity object property
 values and values to search for.
 
-code,JavaScript------------------------ code,JavaScript
+[source,Javascript]
+------------------------ 
 var items = model..find(
   prop1, propValue1,
   prop2, propValue2
@@ -1507,7 +1563,8 @@ ________________________________________________________________________________
 
 To get an object-property of the entity, use entity metadata:
 
-code,JavaScript--------------------------- code,JavaScript
+[source,Javascript]
+--------------------------- 
 var field = model..schema.;
 ---------------------------
 
@@ -1525,8 +1582,9 @@ nothing was found.
 This code snippet illustrates search documents by their names and by the
 set flag:
 
-code,JavaScript--------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------
+
 var documentName = 'Document 1';
 var isChecked = true;
 var documents = model.documents;
@@ -1559,7 +1617,8 @@ To create a filter, use the createFiter entity function and pass entity
 schema properties, by which the filtration to be performed, as
 parameters:
 
-code,JavaScript--------------------------------- code,JavaScript
+[source,Javascript]
+--------------------------------- 
 var filter = model..createFilter(
   model..schema.,
   model..schema.,
@@ -1578,7 +1637,8 @@ property.
 To apply a filter to data, use the apply function and pass filters
 values in the same order, in which filtered fields were specified:
 
-code,JavaScript---------------- code,JavaScript
+[source,Javascript]
+---------------- 
 filter.apply(
   filterValue1,
   filterValue2,
@@ -1591,7 +1651,8 @@ will be filtered.
 
 To cancel the filter, call the cancel filter function:
 
-code,JavaScript---------------- code,JavaScript
+[source,Javascript]
+---------------- 
 filter.cancel();
 ----------------
 
@@ -1605,7 +1666,8 @@ ________________________________________________________________________________
 
 Example of using data filtrating and enumeration of results:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 //Set filter values
 var status = 1;
 var checked = true;
@@ -1642,7 +1704,8 @@ createSorting entity's function. Pass pairs defining the sorting order
 and a property, by which sorting should be performed, as the parameters
 to this function:
 
-code,JavaScript----------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------- 
 var sorting = model..createSorting(
   model..schema., ,
   model..schema., ,
@@ -1664,7 +1727,8 @@ equals to `false`.
 To sort data, use the sort entity function passing a sorting object as a
 parameter to this function:
 
-code,JavaScript-------------- code,JavaScript
+[source,Javascript]
+-------------- 
 model..sort();
 --------------
 
@@ -1676,7 +1740,8 @@ where `
 
 Example of sorting entity data by name and reverse sorting by flag:
 
-code,JavaScript------------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------------- 
 var documents = model.documents;
 //Create sorter
 var sorter = documents.createSorting(
@@ -1691,7 +1756,8 @@ To define the specific comparison logic, use an alternative version of
 the sort function. To do this, pass a function, which implements the
 comparison of two elements, as a parameter:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 model..sort(sortingFunction);
 -----------------------------
 
@@ -1710,8 +1776,9 @@ The following example shows the process of sorting entity data using an
 anonymous comparison function. Sorting is performed by the length of the
 document name:
 
-code,JavaScript---------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------------
+
 module.documents.sort(function(doc1, doc2) {
   var length1 = doc1.NAME != null ? doc1.NAME.length : 0;
   var length2 = doc2.NAME != null ? doc2.NAME.length : 0;
@@ -1729,7 +1796,8 @@ functions to entities' properties or use data model editor.
 
 Use an event handler function as follows:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 function EntityOnEventHandler(evt) {
    //..code to handle this event
 }
@@ -1828,7 +1896,8 @@ following table:
 
 Example of using an event handler function for validation:
 
-code,JavaScript------------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------------- 
 //Handles willChange event
 function usersWillChange(evt) {
   return validateEmail(evt.newValue);
@@ -1851,7 +1920,8 @@ parameters, and etc.
 
 To read an entity's schema, use its `schema` property:
 
-code,JavaScript----------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------- 
 var entityMetadata = model..schema;
 -----------------------------------
 
@@ -1863,7 +1933,8 @@ where `
 
 The same data can be obtained using the object-instance of this entity:
 
-code,JavaScript------------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------------- 
 var item = model.[];// Gets some item
 var entityMetadata = item.schema;
 -------------------------------------
@@ -1878,7 +1949,8 @@ where `
 
 To get access to the an entitiy's property metadata:
 
-code,JavaScript---------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------- 
 var propMetadata = model..schema.;
 ----------------------------------
 
@@ -1893,8 +1965,9 @@ where `
 Example of code, which checks if the `id` property of the documents
 entity is an object's key.
 
-code,JavaScript------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------
+
 if (model.documents.schema.id.pk) {
   Logger.info('id is key attribute of entity.');
 }
@@ -1932,13 +2005,15 @@ value
 To get the number of properties in the entity, use the `length` property
 in the entity schema object:
 
-code,JavaScript-------------------- code,JavaScript
+[source,Javascript]
+-------------------- 
 model..schema.length
 --------------------
 
 You can read the property's metadata by index as an array element:
 
-code,JavaScript--------------- code,JavaScript
+[source,Javascript]
+--------------- 
 model..schema[]
 ---------------
 
@@ -1953,8 +2028,9 @@ where `
 Below you can find an example of output all properties of the documents
 entity into the log:
 
-code,JavaScript---------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------------
+
 for (var i = 0; i < model.documents.schema.length; i++) {
   Logger.info(documents.md[i]);
 }
@@ -1963,18 +2039,21 @@ for (var i = 0; i < model.documents.schema.length; i++) {
 To read the entity parameter metadata, use the `schema` property of the
 `params` object of a data model or entity:
 
-code,JavaScript----------------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------------- 
 var paramsMetadata = model.params.schema;
 -----------------------------------------
 
-code,JavaScript------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------
+
 var paramsMetadata = model..params.schema;
 ------------------------------------------
 
 To get access to the metadata of a specific parameter:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 var paramMetadata = paramsMetadata.;
 ------------------------------------
 
@@ -1987,8 +2066,9 @@ where `
 Example of code, which checks if the `documentID` parameter of the data
 model was changed:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 if (model.params.schema.documentID.modified) {
   Logger.info('Parameter documentID was modified.');
 }
@@ -2035,25 +2115,29 @@ take on negative values and `false` otherwise
 To get the number of model parameters, use the `length` property of the
 model parameter schema object:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 model.params.schema.length
 --------------------------
 
 or just the `length` property of the model parameters:
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 model.params.length
 -------------------
 
 To get the number of the entity parameters:
 
-code,JavaScript--------------------------- code,JavaScript
+[source,Javascript]
+--------------------------- 
 model..params.schema.length
 ---------------------------
 
 or:
 
-code,JavaScript-------------------- code,JavaScript
+[source,Javascript]
+-------------------- 
 model..params.length
 --------------------
 
@@ -2065,7 +2149,8 @@ where `
 
 To access parameter metadata by index, call it as an array element:
 
-code,JavaScript--------------------- code,JavaScript
+[source,Javascript]
+--------------------- 
 model.params.schema[]
 ---------------------
 
@@ -2078,8 +2163,9 @@ where `
 Below you can see an example of outputting all model data parameters
 into the log:
 
-code,JavaScript------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------
+
 for (var i = 0; i < model.params.schema.length; i++) {
   Logger.info(params.md[i]);
 }
@@ -2093,8 +2179,9 @@ Use model's loadEntity(queryName)method, where queryName is the name of
 the query to dynamically create an entity in the data model. The
 generated entity can be used to read, insert or modify objects:
 
-code,JavaScript---------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------
+
 var docEntity = model.loadEntity("Documents");
 docEntity.requery();
 
@@ -2136,8 +2223,9 @@ Use model.createEntity(sqlQuery, dataSourceName) method, where `
 executing the SQL code. The generated entity can be used to read, insert
 or modify objects:
 
-code,JavaScript-------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------------------
+
 var docEntity = model.createEntity("SELECT * FROM Document");
 docEntity.requery();
 
@@ -2154,8 +2242,9 @@ model.save();
 Use executeUpdate entity method to execute the SQL code, which contains
 the `INSERT`, `UPDATE`, `DELETE` or DDL commands:
 
-code,JavaScript----------------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------------------------
+
 var e = model.createEntity("DELETE * FROM Document d WHERE d.DOC_TYPE = 1");
 e.executeUpdate();
 ----------------------------------------------------------------------------
@@ -2167,7 +2256,8 @@ contains the `INSERT`, `UPDATE`, `DELETE` commands, where `
     ` is the query text:
 ------------------------
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 model.executeSql("DROP TABLE Document");
 ----------------------------------------
 
@@ -2198,8 +2288,9 @@ record.
 
 Example of an datasource module usage is as the follows:
 
-code,JavaScript--------------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------------
+
 /**
  * @module 
  */
@@ -2295,8 +2386,9 @@ default application datasource.
 
 Server-side validator example is as follows:
 
-code,JavaScript-----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------------
+
 /**
  * @module
  * @validator DataSource1
@@ -2320,8 +2412,9 @@ is considered authorized.
 
 For example:
 
-code,JavaScript------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------
+
 /**
  * @module
  * @authorizer
@@ -2352,8 +2445,9 @@ will be a good choice.
 
 For example:
 
-code,JavaScript-------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------------------
+
 // On the server side
 /**
  * @module
@@ -2394,8 +2488,9 @@ in any configuration.
 To access the Java packages and classes, use the Java global object. For
 example, to get access to the File class, use the java.io.File object.
 
-code,JavaScript-----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------
+
 //Deletes file
 var aFile = new java.io.File("/home/user/afile.txt");
 aFile.delete();
@@ -2404,8 +2499,9 @@ aFile.delete();
 For convenience, you can assign an object, corresponding to a Java
 package or class, to some variable:
 
-code,JavaScript---------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------
+
 var File = java.io.File;
 
 //Delete two files
@@ -2419,8 +2515,9 @@ Another approach to facilitate working with Java packages is using
 `importPackage` global function, which serves the same purpose as the
 `import` declaration in Java.
 
-code,JavaScript---------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------
+
 importPackage(java.io);
 
 var aFile = new File("/home/user/afile.txt");
@@ -2445,15 +2542,17 @@ they should be usually placed into the `WEB-INF/lib` folder.
 * Use `Packages` object to access to external packages. Check the
 following examples:
 
-code,JavaScript----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------
+
 var sensor = new Packages.biz.altsoft.sensors.NavSensor();
 //Gets navigation data
 var navData = sensor.getData();
 ----------------------------------------------------------
 
-code,JavaScript--------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------
+
 importPackage(Packages.biz.altsoft.sensors);
 var sensor = new NavSensor();
 //Gets navigation data
@@ -2462,8 +2561,9 @@ var navData = sensor.getData();
 
 Use the `importClass` global function to import only a single class:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 importClass(Packages.biz.altsoft.sensors.NavSensor);
 var sensor = new NavSensor();
 //Gets navigation data
@@ -2480,7 +2580,8 @@ desktop client as well on the server code.
 To run a function in a separate thread, call the invokeBackground on the
 function's object, providing it with the necessary arguments:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 function process(p) {
   // lengthy operation here
 }
@@ -2491,8 +2592,9 @@ process.invokeBackground(0);
 
 Example of code to execute an anonymous function in a separate thread:
 
-code,JavaScript----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------
+
 (function () { /* some huge work */ }).invokeBackground();
 ----------------------------------------------------------
 
@@ -2501,8 +2603,9 @@ thread pool, for which the maximum number of simultaneous threads is set
 (10 be default). You can read and changed it using the getThreadPoolSize
 and setThreadPoolSize global methods:
 
-code,JavaScript-------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------
+
 Logger.info(getThreadPoolSize());// 10 by default
 setThreadPoolSize(16);
 Logger.info(getThreadPoolSize());// 16
@@ -2529,8 +2632,9 @@ thread, which is not a GUI thread (a thread of events processing), call
 the invokeLater function of the function object, which accesses the user
 interface items, for example:
 
-code,JavaScript--------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------------------
+
 (function() {
   var text = complexComputation();
   
@@ -2553,7 +2657,8 @@ the HTML5 web browser client.
 
 Example of using the `Logger` object:
 
-code,JavaScript------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------- 
 Logger.info("info text");
 Logger.warning("warning text");
 Logger.severe("severe error");
@@ -2576,8 +2681,9 @@ both functions is optional and by default is set for the UTF-8 encoding.
 
 Example of using functions for reading and writing strings to a file:
 
-code,JavaScript-------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------------
+
 //Read from one text file and write to another
 var str = readString('/home/user1/Documents/doc1.txt');
 writeString('/home/user1/Documents/doc2.txt', str);

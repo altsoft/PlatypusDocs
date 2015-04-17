@@ -87,7 +87,8 @@ object's property.
 
 Example of writing the name of a documents into cells:
 
-code,JavaScript----------------- code,JavaScript
+[source,Javascript]
+----------------- 
 ${documents.name}
 -----------------
 
@@ -96,21 +97,24 @@ spreadsheet. Each row will represent documents collection item.
 
 Similarly, you can use a complex object:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 ${library.documents.name}
 -------------------------
 
 You can use multiple tags in a single cell, for example:
 
-code,JavaScript--------------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------------
+
 Employee: ${employee.name} - ${employee.age} years
 --------------------------------------------------
 
 In the JavaScript code, define objects, which will be available in the
 template tags:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 function reportA {
    
    this.docs = this.model.documents;
@@ -151,8 +155,9 @@ transformation of data when generating the report.
 
 To display collections, use the `jx:forEach` tag:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 <jx:forEach items="${departments}" var="department">
   ${department.name} | ${department.chief}
 </jx:forEach>
@@ -169,8 +174,9 @@ properties. To arrange grouping, use the groupBy and groupOrder,
 attributes, which determine the property to be used for grouping data
 and the order of outputting groups, for example:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 <jx:forEach items="${employees}" groupBy="age">
   Age: ${group.item.age}
   <jx:forEach items="${group.items}" var="employee">
@@ -198,8 +204,9 @@ Use the select attribute to determine elements of the collection which
 should be included into the report. In the example below, we include
 only employees with salary greater than 2000 into the report:
 
-code,JavaScript------------------------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------------------------------------
+
 <jx:forEach items="${employees}" var="employee" select="${employee.payment > 2000}">
  ${employee.name} | ${employee.payment} | ${employee.bonus}
 </jx:forEach>
@@ -210,8 +217,9 @@ varStatus, attribute and set the name of the object, to which the status
 object will be assigned, for this attribute. The status object have only
 an index property, for example:
 
-code,JavaScript-------------------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------------------------
+
 <jx:forEach items="${employees}" var="employee" varStatus="status">
  | ${status.index} 
  | ${employee.name} 
@@ -222,8 +230,9 @@ code,JavaScript
 
 Use the `jx:if` tag to control output depending on the condition:
 
-code,JavaScript---------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------
+
 <jx:if test="${department.chief.payment > 2000.0}">
 Chief Name: ${department.chief.name}
 </jx:if>
@@ -235,7 +244,8 @@ contained in the body of the tag will be displayed or hidden.
 
 Use the `jx:outline` tag to group rows:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 <jx:outline>
    //any rows can go here
 </jx:outline>
@@ -274,8 +284,9 @@ ________________________________________________________________________________
 In the example below, the report is generated on client side by desktop
 appliction:
 
-code,JavaScript-----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------------
+
 var r = new Report('DocumentReport');
 r.params.documentCategory = 'business'; // update the model
 r.show(); // show report
@@ -284,8 +295,9 @@ r.show(); // show report
 To execute the report on the server side (from a HTML5 browser or a
 desktop client):
 
-code,JavaScript----------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------------
+
 /*
  * @module
  * @public

@@ -1,1 +1,20 @@
 
+Combined Title
+===============================
+:leveloffset: 1
+
+
+include::Author_Group.asciidoc[]
+include::Book_Info.asciidoc[]
+include::Designer_Chapter.asciidoc[]
+include::Diagram_Chapter.asciidoc[]
+include::Extdb_Chapter.asciidoc[]
+include::Form_Chapter.asciidoc[]
+include::Install_Chapter.asciidoc[]
+include::Intro_Chapter.asciidoc[]
+include::Module_Chapter.asciidoc[]
+include::Preface.asciidoc[]
+include::Query_Chapter.asciidoc[]
+include::Report_Chapter.asciidoc[]
+include::Revision_History.asciidoc[]
+include::Webapi_Chapter.asciidoc[]

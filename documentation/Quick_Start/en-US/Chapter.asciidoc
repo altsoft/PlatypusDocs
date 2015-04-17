@@ -188,7 +188,6 @@ showing the `OwnerView` form:
 
 [source,JavaScript]
 --------------------------------------------------
-
 /**
  * Add button's click event handler.
  * @param evt Event object
@@ -216,7 +215,6 @@ responsible for an owner's record deletion:
 
 [source,JavaScript]
 -----------------------------------------------------
-
 /**
  * Delete button's click event handler.
  * @param evt Event object
@@ -237,7 +235,6 @@ Provide a handler for the `onMouseClicked` event of the grid widget:
 
 [source,JavaScript]
 ------------------------------------------------
-
 /**
  * Grid click event handler.
  * @param evt Event object
@@ -253,7 +250,6 @@ Write the `editOwner` function:
 
 [source,JavaScript]
 ------------------------------------------------
-
 function editOwner() {
     var ownerView = new OwnerView();
     ownerView.ownerID = owners.cursor.owners_id;
@@ -269,7 +265,6 @@ action logic:
 
 [source,JavaScript]
 -----------------------------------------------------
-
 /**
  * Search button click event handler.
  * @param evt Event object
@@ -430,7 +425,6 @@ owner's data:
 
 [source,JavaScript]
 -------------------------------------------------
-
 /**
  * Save button's click event handler.
  * @param evt Event object
@@ -455,7 +449,6 @@ function stub we'll return to its code later.
 
 [source,JavaScript]
 -------------------------------------------------------------------
-
 /**
  * Validates the view.
  * @return Validation error message or falsy value if form is valid
@@ -470,7 +463,6 @@ the form close action:
 
 [source,JavaScript]
 -----------------------------------------------------
-
 /**
  * Cancel button's click event handler.
  * @param evt Event object
@@ -505,7 +497,6 @@ pet:
 
 [source,JavaScript]
 -----------------------------------------------------
-
 /**
  * The add pet button's click event handler.
  * @param evt Event object
@@ -521,7 +512,6 @@ pet:
 
 [source,JavaScript]
 --------------------------------------------------------
-
 /**
  * Delete pet button's click event handler. 
  * Deletes the selected pet.
@@ -539,7 +529,6 @@ visit to the hotel:
 
 [source,JavaScript]
 -------------------------------------------------------
-
 /**
  * Add visit button's click event handler.
  * @param evt Event object
@@ -549,15 +538,11 @@ form.addVisitButton.onActionPerformed = function(evt) {
 } 
 -------------------------------------------------------
 
-Дважды кликните мышкой на кнопке Delete на панели визитов и добавьте код
-для удаления визита:
-
 Insert visits Delete button `onActionPerformed` event handler to delete
 a pet's visit:
 
 [source,JavaScript]
 ----------------------------------------------------------
-
 /**
  * Delete visit button's click event handler.
  * @param evt Event object
@@ -575,7 +560,6 @@ and the pets and visits validation:
 
 [source,JavaScript]
 --------------------------------------------------------------------
-
 /**
  * Validates the view.
  * @return Validation error message or empty String if form is valid
@@ -592,7 +576,6 @@ Add owner's fields validation code:
 
 [source,JavaScript]
 --------------------------------------------------------------------
-
 /**
  * Validates owner's properties.
  * @return Validation error message or empty String if form is valid
@@ -622,7 +605,6 @@ The pets validation code is as follows:
 
 [source,JavaScript]
 --------------------------------------------------------------------
-
 /**
  * Validates pets entity.
  * @return Validation error message or empty String if form is valid

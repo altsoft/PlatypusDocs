@@ -159,7 +159,8 @@ Create a module instance in client JavaScript as follows:
 * Create an instance of a form with the help of the `new` keyword, using
 a module constructor, for example:
 +
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 var formInstance = new ();
 --------------------------
 +
@@ -171,7 +172,8 @@ where `
 * Create an instance of the module with the help of the `new` keyword
 using special `Form` constructor, for example:
 +
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var formInstance = new Form();
 ------------------------------
 +
@@ -185,7 +187,8 @@ where `
 
 To make a form visible use the `show` method:
 
-code,JavaScript-------------------- code,JavaScript
+[source,Javascript]
+-------------------- 
 formInstance.show();
 --------------------
 
@@ -197,7 +200,8 @@ key set to its constructor name.
 Use the `Form.getShownForm()` method, where formKey is a form's key to
 get the shown form by its key.
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 var formA = new FormA(); 
 var formB = new FormB();
 formA.formKey = 'A1';
@@ -210,7 +214,8 @@ Form.getShownForm('A1').visible = false;
 Get the array of the application's shown forms registry using `Form`
 object `shown` property:
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 for(var i=0;i < Form.shown.length;i++) {
     Logger.info(shownForms[i].title);
 }
@@ -222,7 +227,8 @@ forms registry uses this keys as identifiers.
 Add a handler function to the shown form's registry change event. Use
 the `Form` object `onChange` property:
 
-code,JavaScript---------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------- 
 Form.onChange = function(e) {
     Logger.info(e.source.formKey);
     Logger.info(e.source.visible);
@@ -376,7 +382,8 @@ The `windowClosing` event is cancelable. This event is useful for
 invoking a dialog to confirm the window closing: if the handler returns
 `false`, the form won't be closed:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 //Handles windowClosing event
 function formWindowClosing(evt) {
   return confirm("Close the window?");
@@ -386,7 +393,8 @@ function formWindowClosing(evt) {
 To get access to the properties and events of the form from JavaScript
 code, use the corresponding property:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 //Sets form's title
 self.title = "Document form";
 
@@ -398,7 +406,8 @@ self.onWindowClosing = function() {
 
 To get access to the top-level container, use the `view` property:
 
-code,JavaScript----------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------- 
 //Sets the form's background
 self.view.background = Color.BLACK;
 -----------------------------------
@@ -427,7 +436,8 @@ contains the event's source component.
 
 Use an event handler function as follows:
 
-code,JavaScript--------------------------------------- code,JavaScript
+[source,Javascript]
+--------------------------------------- 
 function onEventHandler(evt) {
    evt.source.background = Color.WHITE;
 }
@@ -645,7 +655,8 @@ relative to the component's size, one of the following:
 To create a component of this type by program means, use the Label
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var label = new Label(, , );
 ----------------------------
 
@@ -655,7 +666,8 @@ iconTextGap is a gap between the icon and text (optional).
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 label.text = "Message text";
 view.add(label);
 ----------------------------
@@ -697,7 +709,8 @@ The specific component events are listed in the following table:
 To create a component of this type by program means, use the Button,
 which can be called with a different number of parameters:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var btn5 = new Button(, , , );
 ------------------------------
 
@@ -708,7 +721,8 @@ handler of the button clicking event (optional).
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript------------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------------- 
 btn1.text = "Click me";
 btn1.onActionPerformed = function() {
   alert("Clicked!");
@@ -749,8 +763,9 @@ To create a component of this type by program means, use the
 ToggleButton constructor, which can be called with a different number of
 parameters:
 
-code,JavaScript---------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------
+
 var btn = new ToggleButton(, , , selected, );
 ---------------------------------------------
 
@@ -762,7 +777,8 @@ function of the button clicking event (optional).
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript------------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------------- 
 btn1.text = "Turn me on!";
 btn1.onActionPerformed = function() {
     if(btn.selected)
@@ -790,7 +806,8 @@ The specific component events are listed in the following table:
 To create a component of this type by program means, use the CheckBox
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var cb = new CheckBox(, , );
 ----------------------------
 
@@ -802,8 +819,9 @@ switching event (optional).
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript-------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------
+
 cb1.text = "Check box 1";
 cb1.selected = true;
 cb1.onActionPerformed = function() {
@@ -843,7 +861,8 @@ widget properties.
 To create a component of this type by program means, use the RadioButton
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var rb4 = new RadioButton(, , );
 --------------------------------
 
@@ -864,8 +883,9 @@ otherwise (optional), `
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript--------------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------------
+
 rb1.text = "Radio button 1";
 rb1.selected = true;
 rb1.onActionPerformed = function(evt) {
@@ -894,21 +914,24 @@ on the properties panel.
 
 Use ButtonGroup constructor in your program:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 var buttonGroup = new ButtonGroup();
 ------------------------------------
 
 To specify a `ButtonGroup` for a exclusive buttons, use component's
 buttonGroup property:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 radioButton.buttonGroup = buttonGroup;
 --------------------------------------
 
 As an alternative method to add child buttons to the `ButtonGroup`, use
 the add method:
 
-code,JavaScript------------------ code,JavaScript
+[source,Javascript]
+------------------ 
 buttonGroup.add();
 ------------------
 
@@ -916,7 +939,8 @@ where component is a button widget to add.
 
 After creating, add button widgets to the group:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 var rbA = new RadioButton("A", true);
 var rbB = new RadioButton("B", false);
 rbA.buttonGroup = buttonGroup;
@@ -951,7 +975,8 @@ Enter key
 To create a component of this type by program means, use the TextField
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 var tf2 = new TextField();
 --------------------------
 
@@ -964,7 +989,8 @@ where `
 After creating, if necessary, set the properties and event handlers and
 add the component to the container:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 tf.emptyText = "Enter your name...";
 view.add(rb1);
 ------------------------------------
@@ -1003,7 +1029,8 @@ event
 To create a component of this type by program means, use the Slider
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var sl = new Slider(, , , );
 ----------------------------
 
@@ -1019,8 +1046,9 @@ where `
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript---------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------
+
 var sl1 = new Slider(Orientation.HORIZONTAL);
 sl1.minimum = 0;
 sl1.maximum = 100;
@@ -1063,7 +1091,8 @@ table:
 To create a component of this type, use the ProgressBar constructor,
 which can be called with a different number of parameters:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var pb = new ProgressBar(, );
 -----------------------------
 
@@ -1078,7 +1107,8 @@ where `
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var pb1 = new ProgressBar();
 pb1.minimum = 0;
 pb1.maximum = 100;
@@ -1135,14 +1165,16 @@ To create a component of this type by program means, use the
 FormattedField constructor, which can be called with a different number
 of parameters:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var ff = new FormattedField();
 ------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript---------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------- 
 var ff = new FormattedField();
 ff.value = new Date();
 ff.format = "dd.MM.yyyy HH:mm:ss";
@@ -1162,7 +1194,8 @@ The properties and events of `PasswordField` are identical to the
 To create a component of this type in JavaScript code, use PasswordField
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var pf = new PasswordField();
 -----------------------------
 
@@ -1175,7 +1208,8 @@ where `
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var pf = new PasswordField();
 view.add(pf, ...);
 -----------------------------
@@ -1193,7 +1227,8 @@ widget.
 To create a component of this type in JavaScript code, use TextArea
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var textArea = new TextArea();
 ------------------------------
 
@@ -1203,7 +1238,8 @@ where `
     ` is text (optional).
 -------------------------
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var textArea = new TextArea();
 view.add(textArea);
 ------------------------------
@@ -1223,7 +1259,8 @@ widget.
 To create a component of this type in JavaScript code, use HtmlArea
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var textArea = new HtmlArea();
 ------------------------------
 
@@ -1233,7 +1270,8 @@ where `
     ` is text (optional).
 -------------------------
 
-code,JavaScript------------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------------- 
 var htmlArea = new HtmlArea();
 htmlArea.text = "<p>Sample text</p>";
 view.add(htmlArea);
@@ -1310,7 +1348,8 @@ widgets. It is not recommended to specify handlers of low-level events
 
 The following example illustrates how to use `onSelect` event:
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 /**
  * Shows custom selector dialog and sets
  * the cell's editor's value.
@@ -1326,8 +1365,9 @@ function buttonOnSelect(aEditor) {
 
 `onRender` event usage example is as follows:
 
-code,JavaScript-----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------------
+
 /**
  * Renders a cell with complex data
  */
@@ -1371,15 +1411,17 @@ data model field selection form.
 To create a component of this type by program means, use the
 ModelCheckBox constructor:
 
-code,JavaScript------------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------------- 
 var modelCheck = new ModelCheckBox();
 -------------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript-----------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------
+
 modelCheck.field = model.entityA.schema.fieldA;
 view.add(modelCheck);
 -----------------------------------------------
@@ -1430,15 +1472,17 @@ checkbox.
 To create a component of this type by program means, use the ModelCombo
 constructor:
 
-code,JavaScript---------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------- 
 var modelCombo = new ModelCombo();
 ----------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript----------------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------------
+
 //Specify value field as a model parameter:
 modelCombo.field = model.params.schema.paramA;
 
@@ -1478,15 +1522,17 @@ according to its full-scale view.
 To create a component of this type by program means, use the ModelDate
 constructor:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var modelDate = new ModelDate();
 --------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript-------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------
+
 modelDate.field = model.entityA.schema.dateField;
 modelDate.editable = true;
 view.add(modelDate);
@@ -1761,7 +1807,8 @@ To use a lazy tree grid, create an entity based on a query, which
 returns child elements by the parent identifier passed as a parameter,
 for example:
 
-code,SQL---------------------------------------------- code,SQL
+[source,Sql]
+---------------------------------------------- 
 /**
  * @name LazyTree
  */
@@ -1826,7 +1873,8 @@ control and the corresponding entity field will be changed. If you later
 request saving of the `model.save()` model, the file contents will by
 saved by the model in usual way.
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 modelImage.onSelect = function(aEditor){
     selectFile(functon (file) {
       aEditor.value = readFile(file);
@@ -1837,15 +1885,17 @@ modelImage.onSelect = function(aEditor){
 To create a component of this type by program means, use the ModelImage
 constructor:
 
-code,JavaScript---------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------- 
 var modelImage = new ModelImage();
 ----------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript-----------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------
+
 modelImage.field = model.entityA.schema.images;
 view.add(modelImage);
 -----------------------------------------------
@@ -1881,15 +1931,17 @@ information on using this property.
 To create a component of this type by program means, use the
 ModelFormattedField constructor:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 var mff = new ModelFormattedField();
 ------------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to a container:
 
-code,JavaScript-------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------
+
 mff.field = model.entityA.schema.dateField;
 mff.format = "dd.MM.yyyy HH:mm:ss";
 view.add(mff);
@@ -1921,15 +1973,17 @@ entity property in the dialog.
 To create a component of this type by program means, use the
 ModelTextArea constructor:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var mta = new ModelTextArea();
 ------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript-------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------
+
 mta.field = model.entityB.schema.textField;
 view.add(mta);
 -------------------------------------------
@@ -1997,14 +2051,16 @@ backingURL:`http://%s.tile.openstreetmap.org/%d/%d/%d.png`
 To create a component of this type by program means, use the ModelMap
 constructor:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var modelMap = new ModelMap();
 ------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript------------------- code,JavaScript
+[source,Javascript]
+------------------- 
 view.add(modelMap);
 -------------------
 
@@ -2037,15 +2093,17 @@ unlimited at upper bound.
 To create a component of this type by program means, use the ModelSpin
 constructor:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var modelSpin = new ModelSpin();
 --------------------------------
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
-code,JavaScript----------------------------------------------
-code,JavaScript
+[source,Javascript]
+----------------------------------------------
+
 modelSpin.field = model.entityC.schema.fieldC;
 view.add(modelSpin);
 ----------------------------------------------
@@ -2109,7 +2167,8 @@ stretched along with the dimensions of the container.
 
 Use AnchorsPane constructor in form's JavaScript code:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var pane = new AnchorsPane();
 -----------------------------
 
@@ -2117,15 +2176,17 @@ To add child components to the container, use the add method and pass a
 child component and object of the Anchors type as parameters to this
 method.
 
-code,JavaScript------------- code,JavaScript
+[source,Javascript]
+------------- 
 pane.add(, );
 -------------
 
 where component is a component to add, anchors is an object of the
 Anchors type.
 
-code,JavaScript--------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------------------
+
 var pane = new AnchorsPane();
 var comp = new Button("Sample");
 pane.add(comp, new Anchors(12, null, 14, 22, null, 24));
@@ -2140,7 +2201,8 @@ anchors layout.
 To create an `Anchors` object, use its constructor by passing values for
 the corresponding anchor as parameters:
 
-code,JavaScript------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------- 
 var anchors = new Anchors(, , ,
             , , );
 -------------------------------
@@ -2159,7 +2221,8 @@ values per coordinate.
 If the anchor value is not set, pass the `null` value to the
 corresponding parameter, for example:
 
-code,JavaScript----------------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------------- 
 var anchors = new Anchors(100, 200, null,
             100, 100, null);
 var panel = new AnchorsPane();
@@ -2171,7 +2234,8 @@ JavaScript object with the left, width, right, top, height, bottom
 properties as a second parameter to the add method. An example of code
 with the same execution results:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var pane = new AnchorsPane();
 var comp = new Button("Sample");
 pane.add(comp, 
@@ -2204,7 +2268,8 @@ values from the drop-down list.
 
 Use BorderPane constructor to create this container in JavaScript code:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 var pane = new BorderPane(hgap, vgap);
 --------------------------------------
 
@@ -2213,7 +2278,8 @@ gap (optional).
 
 To add child components to the container, use add instance method:
 
-code,JavaScript--------------- code,JavaScript
+[source,Javascript]
+--------------- 
 pane.add(, , );
 ---------------
 
@@ -2225,8 +2291,9 @@ place direction (optional).
 The following example shows how to create a `BorderPane` container and
 add to this container two child components:
 
-code,JavaScript------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------
+
 var pane = new BorderPane();
 var topComp = new Button("Top");
 pane.add(topComp, VerticalPosition.TOP);
@@ -2259,13 +2326,15 @@ of width and height of the components according to their content.
 Use AbsolutePane constructor to create this container in JavaScript
 code:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var pane = new AbsolutePane();
 ------------------------------
 
 To add child components to the container, use add instance method:
 
-code,JavaScript------------- code,JavaScript
+[source,Javascript]
+------------- 
 pane.add(, );
 -------------
 
@@ -2275,7 +2344,8 @@ with the `left`, `width`, `top`, `height` properties.
 The following example shows how to create an `AbosolutePane` container
 and add to this container to the components tree:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var pane = new AboslutePane();
 var comp = new Button("Sample");
 pane.add(comp, {
@@ -2310,7 +2380,8 @@ in the container.
 
 Use GridPane constructor to create this container in JavaScript code:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var pane = new GridPane(, , , );
 --------------------------------
 
@@ -2321,7 +2392,8 @@ vertical gap (optional).
 To add child components to the container, use add instance method, which
 adds a component to the next avaliable position:
 
-code,JavaScript----------- code,JavaScript
+[source,Javascript]
+----------- 
 pane.add();
 -----------
 
@@ -2330,7 +2402,8 @@ where component is a component to add.
 Use `child` method to get an child component at the specified row and
 column, if the target position is empty the method will return `null`:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 var comp = pane.child(, );
 --------------------------
 
@@ -2339,7 +2412,8 @@ grid position.
 
 The following example shows how to create an `GridPane` container:
 
-code,JavaScript------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------ 
 var pane = new GridPane(3, 1);
 var comp1 = new Button("1");
 var comp2 = new Button("2");
@@ -2364,7 +2438,8 @@ image:images/flowLayout.png[Flow Layout — arranging into a line]
 
 Use FlowPane constructor to create this container in JavaScript code:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var pane = new FlowPane(, );
 ----------------------------
 
@@ -2373,7 +2448,8 @@ gap (optional).
 
 To add child components to the container, use add instance method:
 
-code,JavaScript----------- code,JavaScript
+[source,Javascript]
+----------- 
 pane.add();
 -----------
 
@@ -2382,7 +2458,8 @@ where component is a component to add.
 The following example shows how to create an `FlowPane` container and
 add this container to its parent container:
 
-code,JavaScript-------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------- 
 var pane = new FlowPane();
 var comp = new Button("Sample");
 pane.add(comp);
@@ -2411,7 +2488,8 @@ To select a visible component, use show(cardName) method, where `
 
 Use CardPane constructor to create this container in JavaScript code:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var pane = new CardPane(, );
 ----------------------------
 
@@ -2420,7 +2498,8 @@ gap (optional).
 
 To add child components to the container, use add instance method:
 
-code,JavaScript------------- code,JavaScript
+[source,Javascript]
+------------- 
 pane.add(, );
 -------------
 
@@ -2430,7 +2509,8 @@ card.
 The following example shows how to create an `FlowPane` container and
 add this container to the components tree:
 
-code,JavaScript----------------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------------- 
 var pane = new CardPane();
 var compA = new Button("SampleA");
 pane.add(comp, "A");
@@ -2462,7 +2542,8 @@ right.
 
 Use BoxPane constructor to create this container in JavaScript code:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 var pane = new BoxPane();
 -------------------------
 
@@ -2472,7 +2553,8 @@ Where orientation is a value of `Orientation.HORIZONTAL` or
 
 To add child components to the container, use add instance method:
 
-code,JavaScript----------- code,JavaScript
+[source,Javascript]
+----------- 
 pane.add();
 -----------
 
@@ -2481,8 +2563,9 @@ where component is a component to add.
 The following example shows how to create an `BoxPane` instance and add
 a component to this container:
 
-code,JavaScript---------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------
+
 var pane = new BoxPane(Orientation.VERTICAL);
 var comp = new Button("Sample");
 pane.add(comp);
@@ -2515,7 +2598,8 @@ Component's specific events:
 To create a component of this type by program means, use the TabbedPane
 constructor:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var pane = new TabbedPane();
 ----------------------------
 
@@ -2523,7 +2607,8 @@ To add child components to the container, use the add method and pass a
 child component as well as a tab title and an optional icon setting as
 parameters to this method:
 
-code,JavaScript--------------- code,JavaScript
+[source,Javascript]
+--------------- 
 pane.add(, , );
 ---------------
 
@@ -2532,7 +2617,8 @@ icon is the tab's label icon (optional).
 
 An example of code using the `TabbedPane` container:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var pane = new TabbedPane();
 var tab1 = new AnchorsPane();
 var tab2 = new AnchorsPane();
@@ -2573,7 +2659,8 @@ The specific properties of the `SplitPane`:
 To create a component of this type by program means, use the SplitPane
 constructor with an optional parameter for specifying orientation:
 
-code,JavaScript--------------------------- code,JavaScript
+[source,Javascript]
+--------------------------- 
 var pane = new SplitPane();
 ---------------------------
 
@@ -2584,14 +2671,16 @@ horizontal orientation by default.
 As an alternative to the `firstComponent` and
 `secondComponent`properties use add method:
 
-code,JavaScript----------- code,JavaScript
+[source,Javascript]
+----------- 
 pane.add();
 -----------
 
 where component is the first and then the second component to add.
 
-code,JavaScript-----------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------
+
 var pane = new SplitPane(Orientation.VERTICAL);
 var comp1 = new AnchorsPane();
 var comp2 = new AnchorsPane();
@@ -2618,7 +2707,8 @@ Specific properties of the container:
 To create a component of this type by program means, use the ScrollPane
 constructor, which can be called with a different number of parameters:
 
-code,JavaScript------------------------ code,JavaScript
+[source,Javascript]
+------------------------ 
 var pane = ScrollPane();
 ------------------------
 
@@ -2627,14 +2717,16 @@ where component is a component, which is added inside the scroll panel
 
 You also can use the view property, for example:
 
-code,JavaScript------------- code,JavaScript
+[source,Javascript]
+------------- 
 pane.view = ;
 -------------
 
 Alternatively you can add one child component to the container using the
 add method, for example:
 
-code,JavaScript------------------------------- code,JavaScript
+[source,Javascript]
+------------------------------- 
 var wrapper = new ScrollPane();
 var pane = new AnchorsPane();
 wrapper.add(pane);
@@ -2657,7 +2749,8 @@ applied orientation.
 To create a component of this type by program means, use the ToolBar
 constructor:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var toolbar = new ToolBar();
 ----------------------------
 
@@ -2668,7 +2761,8 @@ To add child components to the container, use the add method and pass a
 child component as well as a tab title and an optional icon setting as
 parameters to this method:
 
-code,JavaScript----------- code,JavaScript
+[source,Javascript]
+----------- 
 pane.add();
 -----------
 
@@ -2676,7 +2770,8 @@ where component is the component to add.
 
 For example:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var toolbar = new ToolBar();
 var b1 = new Button();
 b1.icon = Icon.load("1.png");
@@ -2699,7 +2794,8 @@ minimized or expanded to the full container size.
 To create a component of this type by program means, use the DesktopPane
 constructor:
 
-code,JavaScript----------------------------- code,JavaScript
+[source,Javascript]
+----------------------------- 
 var pane = new DesktopPane();
 -----------------------------
 
@@ -2731,7 +2827,8 @@ showInternalFrame(desktopPane) method where desktopPane is a
 
 Example:
 
-code,JavaScript-------------------------------------- code,JavaScript
+[source,Javascript]
+-------------------------------------- 
 var desktop = new DesktopPane();
 var myForm = new InnerForm();
 myForm.showInternalFrame(desktopPane);
@@ -2758,8 +2855,9 @@ default menus, this menus can be changed or deleted.
 To create a component of this type by in your code, use the MenuBar
 constructor:
 
-code,JavaScript-------------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------------
+
 var menuBar = new MenuBar();
 view.add(menuBar);// add it to the root container
 -------------------------------------------------
@@ -2790,7 +2888,8 @@ context menu.
 To create a component of this type by in your code, use the Menu
 constructor:
 
-code,JavaScript---------------------- code,JavaScript
+[source,Javascript]
+---------------------- 
 var menu = new Menu();
 menuBar.add(menu);
 ----------------------
@@ -2835,7 +2934,8 @@ the list.
 To create a component of this type by in your code, use the PopupMenu
 constructor:
 
-code,JavaScript--------------------------------- code,JavaScript
+[source,Javascript]
+--------------------------------- 
 var popup = new PopupMenu();
 var label = new Label("Sample");
 label.componentPopupMenu = popup;
@@ -2859,7 +2959,8 @@ The default `MenuItem` object contains a simple labeled menu item.
 To create a component of this type by in your program, use the MenuItem
 constructor:
 
-code,JavaScript---------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------- 
 var menuItem = new MenuItem(, , );
 ----------------------------------
 
@@ -2879,7 +2980,8 @@ The list of specific properties of the component:
 
 An example of code using `MenuItem` component:
 
-code,JavaScript---------------------------------------- code,JavaScript
+[source,Javascript]
+---------------------------------------- 
 var item = new MenuItem("Sample");
 item.onActionPerformed = function(evt) {
    alert("Sample selected.")
@@ -2896,8 +2998,9 @@ CheckMenuItem
 To create a component of this type by in your program, use the
 CheckMenuItem constructor:
 
-code,JavaScript--------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------
+
 var checkMenuItem = new CheckMenuItem(, , );
 --------------------------------------------
 
@@ -2929,8 +3032,9 @@ RadioMenuItem
 To create a component of this type by in your program, use the
 RadioMenuItem constructor:
 
-code,JavaScript--------------------------------------------
-code,JavaScript
+[source,Javascript]
+--------------------------------------------
+
 var radioMenuItem = new RadioMenuItem(, , );
 --------------------------------------------
 
@@ -2964,7 +3068,8 @@ visually split the groups of menu items.
 To create a component of this type by in your program, use the
 MenuSeparator constructor:
 
-code,JavaScript------------------------------------ code,JavaScript
+[source,Javascript]
+------------------------------------ 
 var separator = new MenuSeparator();
 ------------------------------------
 
@@ -3006,7 +3111,8 @@ style.
 To create a style object by program means, use a constructor, which can
 accept the parent style object as a parameter:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 var style1 = new Style();
 
 var style2 = new Style();
@@ -3021,7 +3127,8 @@ Icon
 To create an icon object, use the factory load method of the Icon
 object:
 
-code,JavaScript----------------------- code,JavaScript
+[source,Javascript]
+----------------------- 
 var icon = Icon.load();
 -----------------------
 
@@ -3033,7 +3140,8 @@ icons.
 
 An example of using an icon to create a button:
 
-code,JavaScript----------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------- 
 var carIcon = Icon.load("car.png");
 var b = new Button("Car", carIcon);
 view.add(b);
@@ -3057,7 +3165,8 @@ styles.
 
 Example of usage:
 
-code,JavaScript--------------------------------------- code,JavaScript
+[source,Javascript]
+--------------------------------------- 
 var italicFontStyle = FontStyle.ITALIC;
 ---------------------------------------
 
@@ -3079,7 +3188,8 @@ Object properties:
 
 To create a font object, use the Font constructor:
 
-code,JavaScript------------------------- code,JavaScript
+[source,Javascript]
+------------------------- 
 var font = new Font(, , )
 -------------------------
 
@@ -3088,8 +3198,9 @@ style of the FontStyle type, size is a font size.
 
 Example:
 
-code,JavaScript---------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------
+
 var font = new Font("Verdana", FontStyle.BOLD, 14);
 ---------------------------------------------------
 
@@ -3122,7 +3233,8 @@ The color object contains constants of main colors:
 To create an object of an arbitrary color, use the Color constructor by
 passing it three RGB integers as parameters:
 
-code,JavaScript---------------------------- code,JavaScript
+[source,Javascript]
+---------------------------- 
 var color = new Color(, , );
 ----------------------------
 
@@ -3131,8 +3243,9 @@ integers.
 
 Example of usage:
 
-code,JavaScript-------------------------------------------
-code,JavaScript
+[source,Javascript]
+-------------------------------------------
+
 button.foreground = Color.BLUE;
 
 var IVORY_COLOR = new Color(255, 255, 240);
@@ -3157,8 +3270,9 @@ This object contains constants, which determine the horizontal position:
 
 Example of usage:
 
-code,JavaScript---------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------
+
 var horizontalPosition = HorizontalPosition.CENTER;
 ---------------------------------------------------
 
@@ -3180,8 +3294,9 @@ This object contains constants, which determine the vertical position:
 
 Example of usage:
 
-code,JavaScript-----------------------------------------------
-code,JavaScript
+[source,Javascript]
+-----------------------------------------------
+
 var verticalPosition = VerticalPosition.CENTER;
 -----------------------------------------------
 
@@ -3202,7 +3317,8 @@ This object contains constants, which determine the orientation:
 
 Example of usage:
 
-code,JavaScript----------------------------------------- code,JavaScript
+[source,Javascript]
+----------------------------------------- 
 var orientation = Orientation.HORIZONTAL;
 -----------------------------------------
 
@@ -3250,8 +3366,9 @@ called after the file is selected, with a parameter,
 
 Code examples:
 
-code,JavaScript---------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+---------------------------------------------------------
+
 alert("Message title", "Message");
 
 var txt = prompt("Enter text here", "Some default text");

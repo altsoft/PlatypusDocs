@@ -59,8 +59,9 @@ To access HTTP request and response in the JavaScript server code, use
 the `http` property, which is available, if the method is called by the
 external HTTP request.
 
-code,JavaScript------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------
+
 /**
  * @public
  */
@@ -155,8 +156,9 @@ example HTTPS and `false` otherwise.
 
 In the example below, all request headers are output into the log:
 
-code,JavaScript------------------------------------------------------
-code,JavaScript
+[source,Javascript]
+------------------------------------------------------
+
 for (var c in http.response.headers) {
     Logger.info(c + ' - ' + http.response.headers[c]);
 }
@@ -213,7 +215,8 @@ be sent over a secure protocol and `false` otherwise.
 
 In the example below, new cookie will be added to the HTTP response:
 
-code,JavaScript-------------------------- code,JavaScript
+[source,Javascript]
+-------------------------- 
 http.response.addCookie({ 
     name : 'platypus',
     value : 'test',
