@@ -2,6 +2,26 @@
 Pet Hotel sample application
 ----------------------------
 
+
+image:images/firstScreen.png[First screen]
+image:images/projectCreation.png[Project creation]
+image:images/projectName.png[Choose project name]
+image:images/eeServer.png[Select project properties]
+image:images/serverType.png[Server type]
+image:images/apacheCreation.png[Tomcat folder selection]
+image:images/tomcatProperties.png[Created server properties]
+image:images/serverCreation.png[Choose server type]
+
+image:images/db/dbStructure.png[Choose server type]
+
+image:images/db/dbTypeCreation.png[Choose server type]
+
+image:images/db/h2ConnectionProperties.png[Choose server type]
+
+image:images/db/schemaType.png[Choose server type]
+
+image:images/db/connectionName.png[Choose server type]
+
 In this tutorial you'll learn how to create a simple business
 application in JavaScript using Platypus.js. The sample source code is
 avaliable for download from the Platypus.js project's website.
