@@ -1,0 +1,1289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title></title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="paragraph"><p>Combined Title</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph"><p>Вадим Вашкевич Альтернатива-Софт altsoft.biz <a href="mailto:vv@altsoft.biz">vv@altsoft.biz</a>@altsoft.biz
+Quick Start Tutorial: Platypus.js applications development</p></div>
+</div></div>
+<div class="sect2">
+<h3 id="pet-hotel-sample-application">Pet Hotel sample application</h3>
+<div class="paragraph"><p><span class="image">
+<img src="images/firstScreen.png" alt="First screen" />
+</span>
+<span class="image">
+<img src="images/projectCreation.png" alt="Project creation" />
+</span>
+<span class="image">
+<img src="images/projectName.png" alt="Choose project name" />
+</span>
+<span class="image">
+<img src="images/eeServer.png" alt="Select project properties" />
+</span>
+<span class="image">
+<img src="images/serverType.png" alt="Server type" />
+</span>
+<span class="image">
+<img src="images/apacheCreation.png" alt="Tomcat folder selection" />
+</span>
+<span class="image">
+<img src="images/tomcatProperties.png" alt="Created server properties" />
+</span>
+<span class="image">
+<img src="images/serverCreation.png" alt="Choose server type" />
+</span></p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/db/dbStructure.png" alt="Choose server type" />
+</span></p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/db/dbTypeCreation.png" alt="Choose server type" />
+</span></p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/db/h2ConnectionProperties.png" alt="Choose server type" />
+</span></p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/db/schemaType.png" alt="Choose server type" />
+</span></p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/db/connectionName.png" alt="Choose server type" />
+</span></p></div>
+<div class="paragraph"><p>In this tutorial you&#8217;ll learn how to create a simple business
+application in JavaScript using Platypus.js. The sample source code is
+avaliable for download from the Platypus.js project&#8217;s website.</p></div>
+<div class="paragraph"><p>Please refer to the Development Guide and the Administration Guide for
+more details about Platypus.js.</p></div>
+</div>
+<div class="sect2">
+<h3 id="platypus.js-installation">Platypus.js installation</h3>
+<div class="paragraph"><p>Java Runtime and JDK 7 are required for Platypus.js applications
+development.</p></div>
+<div class="paragraph"><p>Install the Platypus.js IDE, the Platyps.js runtime components and
+Apache Tomcat 7 to enable running a web client:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Download the Platypus.js installer bundle from the project&#8217;s website
+for your operating system.
+</p>
+</li>
+<li>
+<p>
+Run the installer.
+</p>
+</li>
+<li>
+<p>
+Follow the wizard&#8217;s steps and install the required components.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="the-sample-application-requirements">The sample application requirements</h3>
+<div class="paragraph"><p>The Pet Hotel is a simple business application for of cats and dogs
+hotel accounting.</p></div>
+<div class="paragraph"><p>The hotel&#8217;s administrator role is the only user role defined for this
+application.</p></div>
+<div class="paragraph"><p>An adminstrator can perform the following actions:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Search for the pet owners by her/his name and display the owners list.
+</p>
+</li>
+<li>
+<p>
+Add, delete and update owner&#8217;s data.
+</p>
+</li>
+<li>
+<p>
+Display an owner&#8217;s pets as a list.
+</p>
+</li>
+<li>
+<p>
+Add, delete and update an owner&#8217;s pets records.
+</p>
+</li>
+<li>
+<p>
+Add, delete and update the hotel attendance data for a pet.
+</p>
+</li>
+<li>
+<p>
+Display and print the owners report.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The entered data must be validated according to the following rules:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+All owner&#8217;s and pet&#8217;s data fields are mandatory.
+</p>
+</li>
+<li>
+<p>
+The check-in date must preceed the check-out date.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/appDomain.png" alt="Pet Hotel knowledge domain model diagram" />
+</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="the-sample-project-creation-and-setup">The sample project creation and setup</h3>
+<div class="paragraph"><p>During the installation process the Platypus.js IDE is configured for
+the correct path to the runtime directory, Tomcat and a default database
+connection. Check the platform&#8217;s runtime directory on Tools Platypus
+Platform menu item in the global menu.</p></div>
+<div class="paragraph"><p>Create a new database connection for the Pet Hotel applicaton. You can
+use any of the databases supported by the platform. The easiest way is
+to use H2 database, wich is supplied with the platform and does not
+require any additional configuration or administration.</p></div>
+<div class="paragraph"><p>Use the instructions below to create the H2 datasource connection:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Go to the Services panel.
+</p>
+</li>
+<li>
+<p>
+Select the New Connection&#8230; menu item from the Databases node context
+menu.
+</p>
+</li>
+<li>
+<p>
+Select the H2 JDBC driver, provide a user name, a password and a JDBC
+URL in the following format:
+</p>
+</li>
+<li>
+<p>
+Click Next button. H2 database will be started and <code>pet_hotel</code>
+database will be created in the user&#8217;s directory if it is not exist yet.
+</p>
+</li>
+<li>
+<p>
+Select <code>PUBLIC</code> as the connection&#8217;s default schema.
+</p>
+</li>
+<li>
+<p>
+Set <code>pet_hotel</code> as a connection name.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Create a new project for Pet Hotel application and provide the project&#8217;s
+name and home directory. In the project&#8217;s properties select the
+<code>pet_hotel</code> from the list as a default Datasource.</p></div>
+</div>
+<div class="sect2">
+<h3 id="defining-the-datatase-structure">Defining the datatase structure</h3>
+<div class="paragraph"><p>One way to begin building your application is to start from creating its
+database structure. When using Platypus.js, you need to create a
+database structure diagram.</p></div>
+<div class="paragraph"><p>Add a new Database structure diagram application element.</p></div>
+<div class="paragraph"><p>On the diagram create new database tables named <code>Owner</code>, <code>Pet</code>,
+<code>PetType</code> and <code>Visit</code> according to the knowledge domain model. A numeric
+primary key is automatically created for each new table. Add all the
+required fields for the tables.</p></div>
+<div class="paragraph"><p>Create the foriegn key links by connecting foreign key fields with thie
+correspondent primary keys fiels. Please note that the connected fields
+must have the same data type.</p></div>
+</div>
+<div class="sect2">
+<h3 id="owners-list-form">Owners list form</h3>
+<div class="paragraph"><p>We are going to build the user inteface allowing to display the owners
+list.</p></div>
+<div class="paragraph"><p>Create a new Form application element named <code>OwnersView</code>, check that the
+JavaScript constructor for this form is also set to <code>OwnersView</code>. This
+form will display the owners list.</p></div>
+<div class="paragraph"><p>Also create a new Form application element named <code>OwnerView</code> , check
+that the constructor is also set to <code>OwnerView</code>. The owners detais will
+be shown on this form. Save this form but for this moment leave it
+blank.</p></div>
+<div class="paragraph"><p>Now lets edit the <code>OwnersView</code> form.</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/ownersList.png" alt="Owners list form layout" />
+</span></p></div>
+<div class="paragraph"><p><code>OwnersView</code> form will contain:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+On the top of the form: the panel with the Add and Delete buttons as
+well as the search text field and the Search button.
+</p>
+</li>
+<li>
+<p>
+The <code>ModelGrid</code> widget to display the owners list.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Add the header panel from the containers pallete on the form, put the
+buttons and the text field from the standard components palette on the
+panel. Provide meaningful names for the added components. Set texts to
+the added buttons. Drag-and-drop a <code>ModelGrid</code> from the model widgets
+palette on the form below the header panel and also provide a name for
+it.</p></div>
+<div class="paragraph"><p>Next lets configure the data model for our <code>OwnersView</code> form. Data model
+allows persistent data to be read and written from/to the database. In
+Playpus.js data model entities are created on the basis of data sourses.
+To access relational data create data sources from SQL queries.</p></div>
+<div class="paragraph"><p>Create a new Query application element named <code>OwnersQuery</code> with SQL to
+get filtered records from the <code>Owner</code> table:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>In this SQL query we are concatenating the <code>firstname</code> and <code>lastname</code>
+fields to return an owner&#8217;s full name. Use the <code>:lastNamePattern</code> to
+provide a search pattern for the owner&#8217;s last name.</p></div>
+<div class="paragraph"><p>Add <code>@public</code> anntotation to the query&#8217;s header to enable access via
+network from a remote data model running on a client and save the query.</p></div>
+<div class="paragraph"><p>Drag-and-drop it to the <code>OwnersView</code> data model. Go to the new entity&#8217;s
+properties and provide its name as <code>owners</code>.</p></div>
+<div class="paragraph"><p>Add the new data model parameter named <code>lastNamePattern</code> and connect it
+to the corrsespondent parameter of the entity. We&#8217;ll use this parameter
+to perform search on the <code>Owner</code> database table.</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/ownersListDataModel.png" alt="OwnersView form data model" />
+</span></p></div>
+<div class="paragraph"><p>Next, bind the <code>ModelGrid</code> widget to the <code>owners</code> entity. Select the
+Model binding entity parameter and select the entiy to bind. Create the
+grid&#8217;s columns using Fill columns context menu item. After that provide
+the meaningful columns names and correct the columns captions.</p></div>
+<div class="paragraph"><p><code>ModelGrid</code> widget enables rows insertions and deletions as well as
+editing of its its cells. The chandes will be made in the binded data
+model entity. This way we can create a simple CRUD functionality even
+without any coding. For our grid we disable this feature, because we are
+going to use a separate form to edit a single owner&#8217;s record — disable
+deletable, insertable and editable properties of the grid.</p></div>
+<div class="paragraph"><p>Lets write some JavaScript code for our form.</p></div>
+<div class="paragraph"><p>Double click on the Add button and enter the code responsible for
+showing the <code>OwnerView</code> form:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>In this event handler we create a new instance of the owner&#8217;s details
+form and show it as a modal window. We provide the <code>refresh</code> function as
+a parameter to enable data model requiery when closing the owner&#8217;s
+details form:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Double click on the Delete button and provide the code fragment
+responsible for an owner&#8217;s record deletion:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>On Delete button click we are showng a confirmation dialogue and if the
+action is confirmed the current row in the owners query will be deleted.
+Then all changes will be saved to the database.</p></div>
+<div class="paragraph"><p>Provide a handler for the <code>onMouseClicked</code> event of the grid widget:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Write the <code>editOwner</code> function:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>The code is seems familiar except the handling of the <code>ownerID</code>
+parameter containing the grid&#8217;s current owner&#8217;s record identifier.</p></div>
+<div class="paragraph"><p>Double click on the Search button to provide the search by a last name
+action logic:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>When a new value is assigned to a model&#8217;s parameter the model&#8217;s data
+linked to this parameter is automaically required according to the new
+value.</p></div>
+<div class="paragraph"><p>At this point we are ready to run and debug our application. Some test
+data can be added to the database tables using our SQL query. When a
+query is run the result are shown in a separate results window. You can
+also insert, delete and update database records using this window.</p></div>
+</div>
+<div class="sect2">
+<h3 id="owners-detalis-pets-and-visits-form">Owners detalis, pets and visits form</h3>
+<div class="paragraph"><p>Open the OwnerDetails form we&#8217;ve created earlier. This form will contain
+the user interface related to a conrete owner, her/his pets and hotel
+visits.</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/owner.png" alt="OwnerDetails form layout" />
+</span></p></div>
+<div class="paragraph"><p>Add the Name, Last Name, Address, City and Phone model <code>TextField</code>
+widgets for an owner&#8217;s fields. Align this components to the right. Add
+<code>Label</code> components to the left of the correspondent input text field.
+Provide meaningful names for all components and set the labels texts.</p></div>
+<div class="paragraph"><p>Drag-and-drop a <code>SplitPane</code> container from the containers palette and
+set its separator orientation to vertical.</p></div>
+<div class="paragraph"><p>Add a panel container on the left and right sides of the <code>SplitPane</code>.
+The left panel is for an owner&#8217;s pets and the right side is for the
+pet&#8217;s visit to the hotel.</p></div>
+<div class="paragraph"><p>Place the Add and Delete buttons on top of the pets and the visits
+panels.</p></div>
+<div class="paragraph"><p>Add <code>ModelGrid</code> widgets on the left and the right panels to display pets
+and the concrete pet&#8217;s visits list.</p></div>
+<div class="paragraph"><p>At the bottom of the form add Ok and Cancel buttons to save an owner&#8217;s
+data, as well as the pets and the pet&#8217;s visits data.</p></div>
+<div class="paragraph"><p>At this moment we have our owner&#8217;s details form mock layout. Next
+configure the form&#8217;s data model based on the SQL queries and write some
+JavaScript code.</p></div>
+<div class="paragraph"><p>Add a new application element for a SQL query selecting data for the
+specific owner by her/his identifier:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Add a query for the pets list for the specific owner:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Next, add a query for getting all the hotel visits for the all pets of
+the specific owner:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Add a simple query for selecting all pets types:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/ownerViewDataModel.png" alt="OwnerView form data model" />
+</span></p></div>
+<div class="paragraph"><p>Add a data model parameter <code>ownerId</code> and set its type to <code>Decimal</code>. Add
+new entities based on the OwnerQuery, PetsQuery, VisitsQuery,
+PetTypesQuery queries and set the correspondent entites names to
+<code>owner</code>, <code>pets</code>, <code>visits</code> и <code>petTypes</code>.</p></div>
+<div class="paragraph"><p>Connect the <code>ownerID</code> data model parameter to the <code>ownerID</code> parameter of
+the <code>owner</code> entity. In runtime this entity will contain the owner&#8217;s data
+selected according to the parameter value. Notice that this entity will
+contain only one row.</p></div>
+<div class="paragraph"><p>Connect the input parameters of the <code>pets</code> and <code>visits</code> entities to the
+current owner&#8217;s identifier.</p></div>
+<div class="paragraph"><p>The <code>visits</code> entity will hold all the visits for the all pets of the
+concrete owner, but we want to show on the right grid only the visits
+for the currently selected pet. For this, add a filtering link between
+the <code>pet_id</code> field of the <code>pets</code> entity and the <code>pet</code> field of the
+<code>visits</code> entity. Notice that filtering take place on a client and does
+not spawn any new database requests.</p></div>
+<div class="paragraph"><p>As the form&#8217;s data model configuration is completed, bind the form&#8217;s
+model widget to the model.</p></div>
+<div class="paragraph"><p>Set the Model binding field property for the ModelText widgets on the
+form and bind them to the name, last name, city and telephone fields of
+the <code>owner</code> entity.</p></div>
+<div class="paragraph"><p>Create new columns for the <code>pets</code> and <code>visits</code> grids and bind this
+columns to the correspondent fields of the <code>pets</code> and <code>visits</code> entities.
+Provide the correct text for the columns headers.</p></div>
+<div class="paragraph"><p>Ulike the owners list grid the pets and visits grids will allow edit
+their cell data.</p></div>
+<div class="paragraph"><p>Provide the ModelCombo widget as a cell component for the pet type
+column on the pets grid. For this component specify the <code>displayField</code> и
+<code>valueField</code> by connecting them to the <code>name</code> и <code>pettype</code> fiels of the
+<code>petTypes</code> entity.</p></div>
+<div class="paragraph"><p>At the next step we&#8217;ll write some JavaScript code for the OwnerView
+form.</p></div>
+<div class="paragraph"><p>Double click on the OK button and insert the handler code to save the
+owner&#8217;s data:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>In the handler code snippet above validation function is invoked and if
+successfull then changes are saved to the database. Write the <code>validate</code>
+function stub we&#8217;ll return to its code later.</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Double click on the Cancel button and insert JavaScript code to perform
+the form close action:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>To ensure that a new owner row is inserted add the onRequeried event
+hanlder for the <code>owner</code> entity:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>The event handler above will be invoked on form initialization.</p></div>
+<div class="paragraph"><p>Now it is time to add the code for the pets and their visits management.</p></div>
+<div class="paragraph"><p>Insert pets Add button <code>onActionPerformed</code> event handler to add a new
+pet:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Insert pets Delete button <code>onActionPerformed</code> event handler to delete a
+pet:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Insert visits Add button <code>onActionPerformed</code> event handler to add a new
+visit to the hotel:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Insert visits Delete button <code>onActionPerformed</code> event handler to delete
+a pet&#8217;s visit:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Next we will provide the logic for the form validation. Edit the
+<code>validate</code> function and implement it as follows to perform the owner&#8217;s
+and the pets and visits validation:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Add owner&#8217;s fields validation code:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>The pets validation code is as follows:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Insert the visits validation code for the currently selected pet:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Please notice that the pet&#8217;s visits validation must be invoked not only
+before the model save action, but also on any pets grid cursor movement.
+To do that, implement the <code>willScroll</code> event of the <code>pets</code> entity:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>The cursor will not move if the <code>onWillScroll</code> event handle will return
+<code>false</code> value.</p></div>
+<div class="paragraph"><p>At this stage you need to run and test your application. To do that, run
+the application with desktop client and direct connection to the
+database. Use step-by-step code debugging to make sure your JavaSctipt
+works correctly.</p></div>
+<div class="paragraph"><p>By default the anonymous mode is enabled, but you can activate a user&#8217;s
+login dialogue. For this set the correspondent checkbox in the
+application project properties. The user name <code>admin</code> with <code>masterkey</code>
+password are the default credentials you can use to login.</p></div>
+</div>
+<div class="sect2">
+<h3 id="improving-the-owners-list-form">Improving the owners list form</h3>
+<div class="paragraph"><p>In this section we are going to add a new column on the owners grid list
+to display pets names.</p></div>
+<div class="paragraph"><p>Open for edit the <code>OwnersView</code> form layout and drag-and-drop a new Model
+Grid Column widget on the owners list grid component. Set the column
+name and its header text. Do not connect this column with any of the
+entities fields. For this column we are going to use a separate SQL
+query to retrieve the pets list and output it using the specific
+JavaScript code.</p></div>
+<div class="paragraph"><p>Create a new query named <code>OwnersPets</code> to select the owners and their
+pets. Configure this query using the visual editor. Notice that in this
+query we use the <code>OwnersQuery</code> subquery. Add the <code>OwnersQuery</code> and the
+<code>Pets</code> table and connect the keys fields with a link. The result SQL is
+to be like the follows:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Add the <code>lastNamePattern</code> parameter to the query and bind the parameter
+to the <code>OwnersQuery</code> subquery.</p></div>
+<div class="paragraph"><p>Please notice that a client&#8217;s data model has asynchronous nature. Thus
+the queries execution results are delivered to the client
+asynchronously. In the case when we need to display the combined data on
+a single widget (a column cell in our application) we have to take care
+about it.</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/ownersListDataModel2.png" alt="OwnersView form data model" />
+</span></p></div>
+<div class="paragraph"><p>Add the <code>OwnersPet</code> query to the <code>OwnersView</code> and set the new entity&#8217;s
+name to <code>ownersPets</code>. Delete the existing link between the <code>owners</code>
+entity and the <code>lastNamePattern</code> parameter and bind this parameter to
+the correspondent parameter of the <code>ownersPets</code> entity. This way the
+parameter change will refresh the pets entity, not the <code>owners</code> entity.</p></div>
+<div class="paragraph"><p>The <code>owners</code> entity will be requiered by the code logic. This code will
+be invoked on the event of the getting new data in the <code>ownersPets</code>
+entity.</p></div>
+<div class="paragraph"><p>Add the <code>onRequired</code> event handler for the <code>ownersPets</code> and insert some
+code to its body:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>The owner&#8217;s list data grid will be repained after the fresh data will
+come to the binded <code>owners</code> entity. At that moment we&#8217;ll have for sure
+actual pets data because the correspondent query already have executed.</p></div>
+<div class="paragraph"><p>Provide the <code>onRender</code> event handler to the owners <code>ModelGrid</code> widget to
+perform the specific rendering for the new <code>pets</code> column:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>The function above is invoked for every element of the owners list. We
+get the owner&#8217;s pet, create the string representation and render it in
+the grid cell.</p></div>
+</div>
+<div class="sect2">
+<h3 id="owners-report">Owners report</h3>
+<div class="paragraph"><p>In this section we are going to create a simple report about the owners.</p></div>
+<div class="paragraph"><p>Create a new Report application element with the <code>OwnersReport</code> name.
+Add a string parameter named <code>lastNamePattern</code> and the owners entity
+based on the <code>OwnersQuery</code>. Bind the model&#8217;s and the entity&#8217;s
+parameters.</p></div>
+<div class="paragraph"><p>Start Excel to edit the report template. Provide the report&#8217;s header,
+owners tables columns headers and the columns tags as it shown below:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="left" valign="top"><code>Name</code> </th>
+<th align="left" valign="top"><code>Address</code> </th>
+<th align="left" valign="top"><code>City</code> </th>
+<th align="left" valign="top"><code>Phone</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>${owners.fullname}</code></p></td>
+<td align="left" valign="top"><p class="table"><code>${owners.address}</code></p></td>
+<td align="left" valign="top"><p class="table"><code>${owners.city}</code></p></td>
+<td align="left" valign="top"><p class="table"><code>${owners.telephone}</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>Go to the <code>OwnersView</code> form and add the Report button. Change the button
+name, the capion text and provide its press event handler code:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Here we create a new report instance, set its parameter to the similar
+parameter of the`OwnersView` form and display the report.</p></div>
+</div>
+<div class="sect2">
+<h3 id="preface">Preface</h3>
+</div>
+<div class="sect2">
+<h3 id="revision-history">Revision History</h3>
+<div class="paragraph"><p>0-0 8.08.2013 Vadim Vashkevich <a href="mailto:vv@altsoft.biz">vv@altsoft.biz</a> Maxim Lipnin
+<a href="mailto:ml@altsoft.biz">ml@altsoft.biz</a> Initial revision</p></div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2015-04-21 10:51:32 MSK
+</div>
+</div>
+</body>
+</html>
