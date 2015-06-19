@@ -2,29 +2,9 @@
 Pet Hotel sample application
 ----------------------------
 
-
-image:images/firstScreen.png[First screen]
-image:images/projectCreation.png[Project creation]
-image:images/projectName.png[Choose project name]
-image:images/eeServer.png[Select project properties]
-image:images/serverType.png[Server type]
-image:images/apacheCreation.png[Tomcat folder selection]
-image:images/tomcatProperties.png[Created server properties]
-image:images/serverCreation.png[Choose server type]
-
-image:images/db/dbStructure.png[Choose server type]
-
-image:images/db/dbTypeCreation.png[Choose server type]
-
-image:images/db/h2ConnectionProperties.png[Choose server type]
-
-image:images/db/schemaType.png[Choose server type]
-
-image:images/db/connectionName.png[Choose server type]
-
 In this tutorial you'll learn how to create a simple business
 application in JavaScript using Platypus.js. The sample source code is
-avaliable for download from the Platypus.js project's website.
+available for download from the Platypus.js project's https://github.com/altsoft/pethotel[repository] on github.
 
 Please refer to the Development Guide and the Administration Guide for
 more details about Platypus.js.
@@ -33,13 +13,13 @@ more details about Platypus.js.
 Platypus.js installation
 ------------------------
 
-Java Runtime and JDK 7 are required for Platypus.js applications
+Java Runtime and JDK 8 update 40 or higher are required for Platypus.js applications
 development.
 
-Install the Platypus.js IDE, the Platyps.js runtime components and
-Apache Tomcat 7 to enable running a web client:
+Install the Platypus.js IDE, the Platypus.js runtime components and
+Apache Tomcat 8 to enable running a web client:
 
-* Download the Platypus.js installer bundle from the project's website
+* http://platypus-platform.org/download.html[Download] the Platypus.js installer bundle from the project's website
 for your operating system.
 * Run the installer.
 * Follow the wizard's steps and install the required components.
@@ -48,13 +28,12 @@ for your operating system.
 The sample application requirements
 -----------------------------------
 
-The Pet Hotel is a simple business application for of cats and dogs
-hotel accounting.
+The Pet Hotel is a simple business application for cats and dogs hotel accounting.
 
 The hotel's administrator role is the only user role defined for this
 application.
 
-An adminstrator can perform the following actions:
+An administrator can perform the following actions:
 
 * Search for the pet owners by her/his name and display the owners list.
 * Add, delete and update owner's data.
@@ -66,9 +45,12 @@ An adminstrator can perform the following actions:
 The entered data must be validated according to the following rules:
 
 * All owner's and pet's data fields are mandatory.
-* The check-in date must preceed the check-out date.
+* The check-in date must precede the check-out date.
+Database structure is shown on following diagram (Fig.<<appDomain,model diagram>>).
 
-image:images/appDomain.png[Pet Hotel knowledge domain model diagram]
+[[appDomain]]
+.Pet Hotel knowledge domain model diagram
+image::images/appDomain.png[Pet Hotel knowledge domain model diagram]
 
 [[the-sample-project-creation-and-setup]]
 The sample project creation and setup
@@ -79,73 +61,155 @@ the correct path to the runtime directory, Tomcat and a default database
 connection. Check the platform's runtime directory on Tools Platypus
 Platform menu item in the global menu.
 
-Create a new database connection for the Pet Hotel applicaton. You can
+After first launch of Platypus designer you will get window as it shown on Fig. <<start_screen,start screen>>.
+[[start_screen]]
+.Platypus designer interface
+image::images/firstScreen.png[First screen]
+
+To create Platypus project you should select menu item 'File -> New Project' (Fig. <<project_creation, project creation>>).
+
+[[project_creation]]
+.Project creation
+image::images/projectCreation.png[Project creation]
+
+Next, you should set project's name and it's location (Fig. <<project_name,project name>>).
+
+[[project_name]]
+.Choose project name
+image::images/projectName.png[Choose project name]
+
+After project was created, we will set it's properties so he could be started as HTML5 application. Perform right mouse button click and in menu choose 'Properties'. 
+In modal window,shown on Fig. <<project_properties, project properties>>. Select 'Client -> HTML5 web browser' and 'Application server -> J2EE Server'. 
+
+[[project_properties]]
+.Setting project properties
+image::images/eeServer.png[Select project properties]
+
+In most cases Apache Tomcat application server is already installed and configured to work with Platypus, so you can skip following steps and check J2EE Server settings tab 
+(Fig. <<project_server, project server>>). In other cases you should add J2EE server manually. To do this, you should go to Services tab and perform right click on 'Servers' item. 
+In context menu choose 'Add Server', on screen you will see following window (Fig. <<selecting_server, add server>>).
+
+[[selecting_server]]
+.Selecting Java EE server type
+image::images/serverType.png[Server type]
+
+After you have selected server, click the 'Next' button. We will show how to set 'Apache Tomcat' server.  Using next menu (Fig. <<tomcat, adding Tomcat>>), browse server folder location and set 
+Username and password for user manager role.
+
+[[tomcat]]
+.Adding Apache Tomcat server folder
+image::images/apacheCreation.png[Tomcat folder selection]
+
+Fine adjustment of Tomcat such as server port, could be performed on Fig. <<tomcat_properties, tomcat properties>>.
+
+[[tomcat_properties]]
+.Tomcat properties
+image::images/tomcatProperties.png[Created server properties]
+
+Finally you should set J2EE Server settings for project properties (Fig. <<project_server,project server>>).
+
+[[project_server]]
+.Choosing project's Java EE server
+image::images/serverCreation.png[Choose server type]
+
+Create a new database connection for the Pet Hotel application. You can
 use any of the databases supported by the platform. The easiest way is
-to use H2 database, wich is supplied with the platform and does not
+to use H2 database, which is supplied with the platform and does not
 require any additional configuration or administration.
 
 Use the instructions below to create the H2 datasource connection:
 
-* Go to the Services panel.
-* Select the New Connection... menu item from the Databases node context
+Go to the Services panel.
+Select the 'New Connection...' menu item from the Databases node context
 menu.
-* Select the H2 JDBC driver, provide a user name, a password and a JDBC
+
+[[db_Type_Creation]]
+.Database type
+image::images/db/dbTypeCreation.png[db Type creation]
+
+Select the H2 JDBC driver, provide a user name, a password and a JDBC
 URL in the following format:
-* Click Next button. H2 database will be started and `pet_hotel`
+
+[[connection_properties]]
+.Connection properties
+image::images/db/h2ConnectionProperties.png[connection properties]
+
+Select `PUBLIC` as the connection's default schema.
+
+[[schema_type]]
+.Schema type
+image::images/db/schemaType.png[Schema type]
+
+Click Next button. H2 database will be started and `pet_hotel`
 database will be created in the user's directory if it is not exist yet.
-* Select `PUBLIC` as the connection's default schema.
-* Set `pet_hotel` as a connection name.
+
+CAUTION: Connection name should be named by the JavaScript variables rules.
+
+Set `pet_hotel` as a connection name.
+
+[[connection_name]]
+.Connection name
+image::images/db/connectionName.png[Connection name]
 
 Create a new project for Pet Hotel application and provide the project's
 name and home directory. In the project's properties select the
 `pet_hotel` from the list as a default Datasource.
 
-[[defining-the-datatase-structure]]
-Defining the datatase structure
+
+[[defining-the-database-structure]]
+Defining the database structure
 -------------------------------
 
 One way to begin building your application is to start from creating its
 database structure. When using Platypus.js, you need to create a
 database structure diagram.
 
-Add a new Database structure diagram application element.
+Add a new Database structure diagram application element. 'File -> New File -> Database structure diagram'.
 
 On the diagram create new database tables named `Owner`, `Pet`,
 `PetType` and `Visit` according to the knowledge domain model. A numeric
 primary key is automatically created for each new table. Add all the
 required fields for the tables.
 
-Create the foriegn key links by connecting foreign key fields with thie
-correspondent primary keys fiels. Please note that the connected fields
+Create the foreign key links by connecting foreign key fields with the
+correspondent primary keys files. Please note that the connected fields
 must have the same data type.
+
+[[database_structure]]
+.Database structure
+image::images/db/dbStructure.png[Pet Hotel knowledge domain model diagram]
+
 
 [[owners-list-form]]
 Owners list form
 ----------------
 
-We are going to build the user inteface allowing to display the owners
-list.
+We are going to build the user interface allowing to display the owners list.
 
 Create a new Form application element named `OwnersView`, check that the
 JavaScript constructor for this form is also set to `OwnersView`. This
 form will display the owners list.
 
 Also create a new Form application element named `OwnerView` , check
-that the constructor is also set to `OwnerView`. The owners detais will
+that the constructor is also set to `OwnerView`. The owners details will
 be shown on this form. Save this form but for this moment leave it
 blank.
 
 Now lets edit the `OwnersView` form.
-
-image:images/ownersList.png[Owners list form layout]
-
-`OwnersView` form will contain:
+`OwnersView` form will contain (Fig. <<ownersView, owners view>>):
 
 * On the top of the form: the panel with the Add and Delete buttons as
 well as the search text field and the Search button.
 * The `ModelGrid` widget to display the owners list.
 
-Add the header panel from the containers pallete on the form, put the
+//image:images/ownersList.png[Owners list form layout]
+
+[[OwneresView]]
+.Owners view 
+image::images/ui/ownersView.png[Owners view] 
+
+
+Using 'Palette' tool add elements to panel by drag-drop. Add the header panel from the containers palette on the form, put the
 buttons and the text field from the standard components palette on the
 panel. Provide meaningful names for the added components. Set texts to
 the added buttons. Drag-and-drop a `ModelGrid` from the model widgets
@@ -154,7 +218,7 @@ it.
 
 Next lets configure the data model for our `OwnersView` form. Data model
 allows persistent data to be read and written from/to the database. In
-Playpus.js data model entities are created on the basis of data sourses.
+Platypus.js data model entities are created on the basis of data sources.
 To access relational data create data sources from SQL queries.
 
 Create a new Query application element named `OwnersQuery` with SQL to
@@ -162,46 +226,74 @@ get filtered records from the `Owner` table:
 
 [source,Sql]
 ---------------------------------------------------------------------------------------------------------
-
 /**
- * Gets all owners.
- * @public
  * @name OwnersQuery
- */ 
-Select t1.owners_id, (t1.firstname || ' ' || t1.lastname) As fullName, t1.address, t1.city, t1.telephone 
-From Owners t1
- Where t1.lastname Like :lastNamePattern
+ * @public
+ */
+Select t1.OWNERS_ID, (t1.FIRSTNAME || ' ' || t1.LASTNAME) AS fullName, t1.ADDRESS AS address
+, t1.CITY AS city, t1.TELEPHONE AS phone, t1.email AS email
+From OWNERS t1
+ Where t1.LASTNAME Like :lastNamePattern
 ---------------------------------------------------------------------------------------------------------
 
 In this SQL query we are concatenating the `firstname` and `lastname`
 fields to return an owner's full name. Use the `:lastNamePattern` to
-provide a search pattern for the owner's last name.
+provide a search pattern for the owner's last name. Adding alias to the fields
+allows us to use ORM (Object Relation Mapper) on any database in future.
 
-Add `@public` anntotation to the query's header to enable access via
+Add `@public` annotation to the query's header to enable access via
 network from a remote data model running on a client and save the query.
 
-Drag-and-drop it to the `OwnersView` data model. Go to the new entity's
-properties and provide its name as `owners`.
+Drag-and-drop it to the `OwnersView` data model. You may also go to the new entity's
+properties and provide its name, for example `owners`.
 
-Add the new data model parameter named `lastNamePattern` and connect it
-to the corrsespondent parameter of the entity. We'll use this parameter
-to perform search on the `Owner` database table.
+[[connection_name]]
+.Connection name
+image::images/query/ownersQuery.png[OwnersView form data model]
 
-image:images/ownersListDataModel.png[OwnersView form data model]
 
-Next, bind the `ModelGrid` widget to the `owners` entity. Select the
-Model binding entity parameter and select the entiy to bind. Create the
-grid's columns using Fill columns context menu item. After that provide
-the meaningful columns names and correct the columns captions.
+Next, bind the `ModelGrid` widget to the `owners` entity as it shown in figure <<bindGrid,grid binding>>. Select the
+Model binding data parameter and select the model entity to bind. Create the
+grid's columns using 'Fill columns' context menu item. After that provide
+the meaningful columns names and correct the columns captions (Fig. <<inspector, Columns settings>>).
+
+[[bindGrid]]
+.Binding data model to grid
+image::images/settings/bindModel.png[Binding data model to grid]
+
+[[inspector]]
+.Setting grid columns
+image::images/settings/inspector.png[Setting grid columns]
 
 `ModelGrid` widget enables rows insertions and deletions as well as
-editing of its its cells. The chandes will be made in the binded data
+editing of its its cells. The changes will be made in the bounded data
 model entity. This way we can create a simple CRUD functionality even
 without any coding. For our grid we disable this feature, because we are
 going to use a separate form to edit a single owner's record — disable
-deletable, insertable and editable properties of the grid.
+deletable, insertable and editable properties of the grid in it's properties menu.
 
 Lets write some JavaScript code for our form.
+
+By default after creation form's code looks like this:
+
+[source,JavaScript]
+--------------------------------------------------
+function OwnersView() {
+    var self = this
+            , model = P.loadModel(this.constructor.name)
+            , form = P.loadForm(this.constructor.name, model);
+    
+    self.show = function () {
+        form.show();
+    };
+    
+    // TODO : place your code here
+    
+    model.requery(function () {
+        // TODO : place your code here
+    });
+}
+--------------------------------------------------
 
 Double click on the Add button and enter the code responsible for
 showing the `OwnerView` form:
@@ -210,17 +302,17 @@ showing the `OwnerView` form:
 --------------------------------------------------
 /**
  * Add button's click event handler.
- * @param evt Event object
+ * @param event Event object
  */
-form.addButton.onActionPerformed = function(evt) {
-    var ownerView = new OwnerView();
-    ownerView.showModal(refresh);
-} 
+form.btnAdd.onActionPerformed = function (event) {
+   var ownerView = new OwnerView();
+   ownerView.showModal(refresh);
+};
 --------------------------------------------------
 
 In this event handler we create a new instance of the owner's details
-form and show it as a modal window. We provide the `refresh` function as
-a parameter to enable data model requiery when closing the owner's
+form and show it as a modal window. We will create showModal method in detailed OvnerView later. We provide the `refresh` function as
+a parameter to enable data model requery when closing the owner's
 details form:
 
 [source,JavaScript]
@@ -237,19 +329,22 @@ responsible for an owner's record deletion:
 -----------------------------------------------------
 /**
  * Delete button's click event handler.
- * @param evt Event object
+ * @param event Event object
  */
-form.deleteButton.onActionPerformed = function(evt) {
-    if (confirm("Delete owner?")) {
-        ownersQuery.deleteRow();
-        model.save();
-    }
-}
+form.btnDelete.onActionPerformed = function (event) {
+        if (confirm("Delete owner?")) {
+            for (var i in form.modelGrid.selected) {
+                model.owners.splice(model.owners.indexOf(form.modelGrid.selected[i]), 1);
+            }
+       model.save();
+   }
+};
 -----------------------------------------------------
 
-On Delete button click we are showng a confirmation dialogue and if the
+On Delete button click we are showing a confirmation dialogue and if the
 action is confirmed the current row in the owners query will be deleted.
 Then all changes will be saved to the database.
+Data model is JavaScript array, so we use method 'splice' to delete selected rows. Information about selected rows we get from modeGrid.
 
 Provide a handler for the `onMouseClicked` event of the grid widget:
 
@@ -257,24 +352,14 @@ Provide a handler for the `onMouseClicked` event of the grid widget:
 ------------------------------------------------
 /**
  * Grid click event handler.
- * @param evt Event object
+ * @param event Event object
  */
-form.ownersGrid.onMouseClicked = function(evt) {
-    if (evt.clickCount > 1) {
-        editOwner();
-    }
-}
-------------------------------------------------
-
-Write the `editOwner` function:
-
-[source,JavaScript]
-------------------------------------------------
-function editOwner() {
-    var ownerView = new OwnerView();
-    ownerView.ownerID = owners.cursor.owners_id;
-    ownerView.showModal(refresh);
-}
+form.modelGrid.onMouseClicked = function (event) {
+        if (event.clickCount > 1) {
+	    var ownerView = new OwnerView();
+            ownerView.showModal(refresh, model.owners.cursor.OWNERS_ID);
+        }
+    };
 ------------------------------------------------
 
 The code is seems familiar except the handling of the `ownerID`
@@ -287,16 +372,17 @@ action logic:
 -----------------------------------------------------
 /**
  * Search button click event handler.
- * @param evt Event object
+ * @param event Event object
  */
-form.searchButton.onActionPerformed = function(evt) {
-     model.params.lastNamePattern = 
-           '%' + txtSearch.text + '%';
-}
+form.btnSearch.onActionPerformed = function (event) {
+    var searchText = "%" + form.txtSearch.text + "%";
+    model.owners.params.lastNamePattern = searchText;
+    model.owners.requery();
+};
 -----------------------------------------------------
 
 When a new value is assigned to a model's parameter the model's data
-linked to this parameter is automaically required according to the new
+linked to this parameter is automatically required according to the new
 value.
 
 At this point we are ready to run and debug our application. Some test
@@ -304,17 +390,31 @@ data can be added to the database tables using our SQL query. When a
 query is run the result are shown in a separate results window. You can
 also insert, delete and update database records using this window.
 
-[[owners-detalis-pets-and-visits-form]]
-Owners detalis, pets and visits form
+To obtain all data on form load we will add following code to method 'show':
+
+[source,JavaScript]
+-----------------------------------------------------
+self.show = function () {
+       form.show();
+       var searchText = "%%";
+       model.owners.params.lastNamePattern = searchText;
+       model.owners.requery();
+   };
+-----------------------------------------------------
+
+[[owners-details-pets-and-visits-form]]
+Owners details, pets and visits form
 ------------------------------------
 
 Open the OwnerDetails form we've created earlier. This form will contain
-the user interface related to a conrete owner, her/his pets and hotel
+the user interface related to a concrete owner, her/his pets and hotel
 visits.
 
-image:images/owner.png[OwnerDetails form layout]
+[[ownerDetail]]
+.Owner detail
+image::images/ui/оwnerDetail.png[OwnerDetails form layout]
 
-Add the Name, Last Name, Address, City and Phone model `TextField`
+Add the Name, Last Name, Address, City, Phone and Email model `TextField`
 widgets for an owner's fields. Align this components to the right. Add
 `Label` components to the left of the correspondent input text field.
 Provide meaningful names for all components and set the labels texts.
@@ -335,7 +435,7 @@ and the concrete pet's visits list.
 At the bottom of the form add Ok and Cancel buttons to save an owner's
 data, as well as the pets and the pet's visits data.
 
-At this moment we have our owner's details form mock layout. Next
+At this moment we have our owner's details form mock layout. Next we will
 configure the form's data model based on the SQL queries and write some
 JavaScript code.
 
@@ -396,85 +496,133 @@ Add a simple query for selecting all pets types:
 Select * From PetType
 ---------------------------
 
-image:images/ownerViewDataModel.png[OwnerView form data model]
+//[[ownerView]]
+//.Owner view data model
+//image::images/ownerViewDataModel.png[OwnerView form data model]
 
-Add a data model parameter `ownerId` and set its type to `Decimal`. Add
-new entities based on the OwnerQuery, PetsQuery, VisitsQuery,
-PetTypesQuery queries and set the correspondent entites names to
-`owner`, `pets`, `visits` и `petTypes`.
+In data model of 'ownerView' form, add this four queries so that our model will looks like shown in fig. <<ownerView_model, owner view data model>>
 
-Connect the `ownerID` data model parameter to the `ownerID` parameter of
-the `owner` entity. In runtime this entity will contain the owner's data
-selected according to the parameter value. Notice that this entity will
-contain only one row.
+[[ownerView_model]]
+.Created datamodel
+image::images/db/ovModel.png[Owner model]
 
-Connect the input parameters of the `pets` and `visits` entities to the
-current owner's identifier.
+
+
+//Connect the input parameters of the `pets` and `visits` entities to the
+//current owner's identifier.
+
+[[Scalar_and_collection_properties]]
+Scalar and collection properties
+--------------------------------
+
+We need to create some scalar and collection properties for our 'OwnerView' datamodel. You should select link between 'petsQuery' and 'petTypesQuery' and perform right mouse button click. In properties window (Fig. <<petsCollection, pets Collection>> set name for Scalar property name and Collection property name. Perform same task on connection between 'petsQuery' and 'visitsQuery' (Fig. <<visitsCollection, visits collection>>).
+
+[[petsCollection]]
+.Pets collection
+image::images/db/petsCollection.png[Pets collection]
+
+[[visitsCollection]]
+.Visits collection
+image::images/db/visitsCollection.png[Visits collection]
+
+
+As the form's data model configuration is completed, bind the form's model widget to the model.
+Set the Model binding field property for the ModelText widgets on the
+form and bind them to the name, last name, city and telephone fields of
+the `ownerQuery` entity and set field's property as corresponding data field;
+
+[[fieldBinding]]
+.Field binding
+image::images/db/fieldBinding.png[field binding]
 
 The `visits` entity will hold all the visits for the all pets of the
 concrete owner, but we want to show on the right grid only the visits
-for the currently selected pet. For this, add a filtering link between
-the `pet_id` field of the `pets` entity and the `pet` field of the
-`visits` entity. Notice that filtering take place on a client and does
-not spawn any new database requests.
+for the currently selected pet. To solve this issue we will use our collections, and create master-detail view.
 
-As the form's data model configuration is completed, bind the form's
-model widget to the model.
+In Pet's grid bind data to corresponding query ('petsQuery') and use 'Fill columns' context menu to create columns. 
+Using inspector (as it was shown earlier in Fig. <<inspector, Inspector>>) delete unnecessary columns with id's and delete service column. Provide the correct text for the columns headers. Add Check grid column, so the user could select multiple pets.
+Unlike the owners list grid the pets and visits grids will allow edit their cell data.
 
-Set the Model binding field property for the ModelText widgets on the
-form and bind them to the name, last name, city and telephone fields of
-the `owner` entity.
+Provide the ModelCombo widget as a cell component for the 'petType' column on the pets grid (Fig. <<combo_view, Combo View>>). Set scalar property name, that we have defined earlier (<<petsCollection, pets collection>>) 'type' to this column. For 'ModelCombo' set 'displayField' property to 'name' and 'displayList' to 'petTypesQuery' (Fig. <<combo_view_properties, combo properties>>).
 
-Create new columns for the `pets` and `visits` grids and bind this
-columns to the correspondent fields of the `pets` and `visits` entities.
-Provide the correct text for the columns headers.
+[[combo_view]]
+.Combo view
+image::images/settings/comboView.png[combo view]
 
-Ulike the owners list grid the pets and visits grids will allow edit
-their cell data.
+[[combo_view_properties]]
+.Combo view properties
+image::images/settings/modelViewProperties.png[combo view properties]
 
-Provide the ModelCombo widget as a cell component for the pet type
-column on the pets grid. For this component specify the `displayField` и
-`valueField` by connecting them to the `name` и `pettype` fiels of the
-`petTypes` entity.
+
+Master-detail view is creating by using two model grids, on same form. Master - is our pets, detail - pet's visit. We should set grid properties for visits. Set data field - 'petsQuery', but field must be set as 'cursor.visits'. This collection we have also defined earlier (<<visitsCollection, visits collection>>) ORM of 'Platypus.JS' will automatically return certain collection for certain pet (Fig. <<visitGridProperties,visit grid properties>> ).
+
+[[visitGridProperties]]
+.Visit grid properties
+image::images/settings/visitGridProperties.png[combo view properties]
+
+Add model grid columns and set they field's as corresponding names of 'visitsQuery' fields. Set presentation type in inspector as it shown in Fig. <<visitGrid, visit grid column properties>>.
+
+[[visitGrid]]
+.Visit grid columns view
+image::images/settings/visitGrid.png[combo view properties]
 
 At the next step we'll write some JavaScript code for the OwnerView
 form.
+
+[source,JavaScript]
+-------------------------------------------------
+self.showModal = function (aCallback, aID) {
+    callback = aCallback;
+    if (aID) {
+	model.ownerQuery.params.ownerID = aID;
+	model.requery();
+    } else {
+	model.ownerQuery.push({});
+    }
+    form.showModal();
+};
+-------------------------------------------------
 
 Double click on the OK button and insert the handler code to save the
 owner's data:
 
 [source,JavaScript]
 -------------------------------------------------
-/**
- * Save button's click event handler.
- * @param evt Event object
- */
-form.okButton.onActionPerformed = function(evt) {
-    if (model.modified) {
-        var message = validate();
-        if (!message) {
-            model.save(function() {
-                close(owner.owner_id);
-            });
+form.btnSave.onActionPerformed = function (event) {
+        if (model.modified) {
+            var message = validate();
+            if (!message) {
+                model.save(function () {
+                    callback();
+                }, function () {
+                    P.Logger.Info("Failed on save");
+                });
+                form.close();
+            } else {
+                alert(message);
+            }
         } else {
-            alert(message, title);
+            form.close();
         }
-    }
+    };
 }
 -------------------------------------------------
 
 In the handler code snippet above validation function is invoked and if
-successfull then changes are saved to the database. Write the `validate`
+successful then changes are saved to the database. Write the `validate`
 function stub we'll return to its code later.
 
 [source,JavaScript]
 -------------------------------------------------------------------
 /**
  * Validates the view.
- * @return Validation error message or falsy value if form is valid
+ * @return Validation error message or false value if form is valid
  */
 function validate() {
-    return null;
+    var message = validateOwner();
+    message += validatePets();
+    message += validateVisits();
+    return message;
 }
 -------------------------------------------------------------------
 
@@ -485,28 +633,13 @@ the form close action:
 -----------------------------------------------------
 /**
  * Cancel button's click event handler.
- * @param evt Event object
+ * @param event Event object
  */
-form.cancelButton.onActionPerformed = function(evt) {
+form.cancelButton.onActionPerformed = function(event) {
     form.close();
 }
 -----------------------------------------------------
 
-To ensure that a new owner row is inserted add the onRequeried event
-hanlder for the `owner` entity:
-
-[source,JavaScript]
------------------------------------------ 
-/**
- * Data model's OnRequired event handler.
- * @param evt Event object
- */
-model.owner.onRequeried = function(evt) {
-    if (!model.params.ownerId) {
-        owner.insert();
-    }
-}
------------------------------------------
 
 The event handler above will be invoked on form initialization.
 
@@ -521,10 +654,9 @@ pet:
  * The add pet button's click event handler.
  * @param evt Event object
  */
-form.addPetButton.onActionPerformed = function(evt) {
-    model.pets.insert();
-    model.pets.cursor.owner = model.params.owner_id;
-}
+form.btnAddPet.onActionPerformed = function (event) {
+    model.petsQuery.push({});
+};
 -----------------------------------------------------
 
 Insert pets Delete button `onActionPerformed` event handler to delete a
@@ -534,14 +666,17 @@ pet:
 --------------------------------------------------------
 /**
  * Delete pet button's click event handler. 
- * Deletes the selected pet.
+ * Deletes the selected pets.
  * @param evt Event object
  */
-form.deletePetButton.onActionPerformed = function(evt) {
-    if (confirm('Delete pet?', title)) {
-        model.pets.deleteRow();
+form.btnDeletePet.onActionPerformed = function (event) {
+    if (confirm("Delete selected pets?")) {
+	for (var i in form.grdPets.selected) {
+	    model.petsQuery.splice(model.petsQuery.indexOf(form.grdPets.selected[i]), 1);
+	}
+	model.save();
     }
-}
+};
 --------------------------------------------------------
 
 Insert visits Add button `onActionPerformed` event handler to add a new
@@ -553,9 +688,10 @@ visit to the hotel:
  * Add visit button's click event handler.
  * @param evt Event object
  */
-form.addVisitButton.onActionPerformed = function(evt) {
-    model.visits.insert();
-} 
+form.btnAddVisit.onActionPerformed = function (event) {
+    model.visitsQuery.push({});
+    model.visitsQuery.cursor.FROMDATE = new Date();
+};
 -------------------------------------------------------
 
 Insert visits Delete button `onActionPerformed` event handler to delete
@@ -567,11 +703,14 @@ a pet's visit:
  * Delete visit button's click event handler.
  * @param evt Event object
  */
-form.deleteVisitButton.onActionPerformed = function(evt) {
-    if (confirm('Delete visit?', title)) {
-        model.visits.deleteRow();
+form.btnDeleteVisit.onActionPerformed = function (event) {
+    if (confirm("Delete selected visits?")) {
+	for (var i in form.grdVisits.selected) {
+	    model.visitsQuery.splice(model.visitsQuery.indexOf(form.grdVisits.selected[i]), 1);
+	}
+	model.save();
     }
-}
+};
 ----------------------------------------------------------
 
 Next we will provide the logic for the form validation. Edit the
@@ -602,20 +741,23 @@ Add owner's fields validation code:
  */
 function validateOwner() {
     var message = "";
-    if (!owner.firstname) {
-        message += "First name is required.\n";
+    if (!form.edFirstName.value) {
+	message += "First name is required.\n";
     }
-    if (!owner.lastname) {
-        message += "Last name is required.\n";
+    if (!form.edLastName.value) {
+	message += "Last name is required.\n";
     }
-    if (!owner.address) {
-        message += "Address is required.\n";
+    if (!form.edAddress.value) {
+	message += "Address is required.\n";
     }
-    if (!owner.city) {
-        message += "City is required.\n";
+    if (!form.edCity.value) {
+	message += "City is required.\n";
     }
-    if (!owner.telephone) {
-        message += "Phone number is required.\n";
+    if (!form.edPhone.value) {
+	message += "Phone number is required.\n";
+    }
+    if (!form.edEmale.value) {
+	message += "E-Mail is required.\n";
     }
     return message;
 }
@@ -656,156 +798,30 @@ Insert the visits validation code for the currently selected pet:
  */
 function validateVisits() {
     var message = "";
-    visits.forEach(function(visit) {
-        if (!visit.fromdate) {
-            message += "Visit from date is required.\n";
-        }
-        if (!visit.todate) {
-            message += "Visit to date is required.\n";
-        }
-        if (visit.fromdate >= visit.todate) {
-            message += "Visit 'from' date must be before 'to' date.\n";
-        }
+    form.grdVisits.data.forEach(function (visit) {
+	if (!visit.fromdate) {
+	    message += "Visit from date is required.\n";
+	}
+	if (!visit.todate) {
+	    message += "Visit to date is required.\n";
+	}
+	if (visit.fromdate >= visit.todate) {
+	    message += "Visit 'from' date must be before 'to' date.\n";
+	}
     });
     return message;
 }
 -----------------------------------------------------------------------
 
-Please notice that the pet's visits validation must be invoked not only
-before the model save action, but also on any pets grid cursor movement.
-To do that, implement the `willScroll` event of the `pets` entity:
-
-[source,Javascript]
------------------------------------------------------
-/**
- * Pet's entity cursor movement event handler.
- * @param evt Event object
- */
-model.pets.onWillScroll = function(evt) {
-    Logger.info('Pets scroll event.');
-    var message = validateVisits();
-    if (message) {
-        alert(message);
-        return false;
-    }
-    return true;
-}
-----------------------------------------------
-
-The cursor will not move if the `onWillScroll` event handle will return
-`false` value.
-
 At this stage you need to run and test your application. To do that, run
 the application with desktop client and direct connection to the
-database. Use step-by-step code debugging to make sure your JavaSctipt
+database. Use step-by-step code debugging to make sure your JavaScript
 works correctly.
 
-By default the anonymous mode is enabled, but you can activate a user's
-login dialogue. For this set the correspondent checkbox in the
-application project properties. The user name `admin` with `masterkey`
-password are the default credentials you can use to login.
-
-[[improving-the-owners-list-form]]
-Improving the owners list form
-------------------------------
-
-In this section we are going to add a new column on the owners grid list
-to display pets names.
-
-Open for edit the `OwnersView` form layout and drag-and-drop a new Model
-Grid Column widget on the owners list grid component. Set the column
-name and its header text. Do not connect this column with any of the
-entities fields. For this column we are going to use a separate SQL
-query to retrieve the pets list and output it using the specific
-JavaScript code.
-
-Create a new query named `OwnersPets` to select the owners and their
-pets. Configure this query using the visual editor. Notice that in this
-query we use the `OwnersQuery` subquery. Add the `OwnersQuery` and the
-`Pets` table and connect the keys fields with a link. The result SQL is
-to be like the follows:
-
-[source,Sql]
------------------------------------------------- 
-/**
- * Gets the owners and their pets.
- * @public
- * @name OwnersPets
- */ 
-Select q1.owner_id, t.name
-From OwnersQuery q1
- Left Outer Join Pets t on t.owner = q1.owner_id
-------------------------------------------------
-
-Add the `lastNamePattern` parameter to the query and bind the parameter
-to the `OwnersQuery` subquery.
-
-Please notice that a client's data model has asynchronous nature. Thus
-the queries execution results are delivered to the client
-asynchronously. In the case when we need to display the combined data on
-a single widget (a column cell in our application) we have to take care
-about it.
-
-image:images/ownersListDataModel2.png[OwnersView form data model]
-
-Add the `OwnersPet` query to the `OwnersView` and set the new entity's
-name to `ownersPets`. Delete the existing link between the `owners`
-entity and the `lastNamePattern` parameter and bind this parameter to
-the correspondent parameter of the `ownersPets` entity. This way the
-parameter change will refresh the pets entity, not the `owners` entity.
-
-The `owners` entity will be requiered by the code logic. This code will
-be invoked on the event of the getting new data in the `ownersPets`
-entity.
-
-Add the `onRequired` event handler for the `ownersPets` and insert some
-code to its body:
-
-[source,Javascript]
------------------------------------------------------
-/**
- * Called then data is ready in ownersPets entity.
- * @param evt Event object
- */
-model.ownersPet.onRequeried = function(evt) {         
-    model.owners.params.lastNamePattern =
-           model.ownersPets.params.lastNamePattern;
-    owners.requery();
-}
-------------------------------------------------------
-
-The owner's list data grid will be repained after the fresh data will
-come to the binded `owners` entity. At that moment we'll have for sure
-actual pets data because the correspondent query already have executed.
-
-Provide the `onRender` event handler to the owners `ModelGrid` widget to
-perform the specific rendering for the new `pets` column:
-
-[source,Javascript]
------------------------------------------------------
-/**
- * Pet's column onRender handler.
- * @param evt onRender event object
- * @returns true to apply changes to the cell
- */
-form.ownersGrid.onRender = function(evt) { 
-    var pets = model.ownersPets.find(
-                  model.ownersPets.schema.owner_id,                            evt.id);
-    var txt = '';    
-    pets.forEach(function(aPet) {
-       if(txt.length > 0) {
-           txt += ' ';
-       }
-       txt += aPet.name ? aPet.name : '';
-    });
-    evt.cell.display = txt;
-    return true;
-}
----------------------------------------------------------------------------------------
-
-The function above is invoked for every element of the owners list. We
-get the owner's pet, create the string representation and render it in
-the grid cell.
+//By default the anonymous mode is enabled, but you can activate a user's
+//login dialogue. For this set the correspondent checkbox in the
+//application project properties. The user name `admin` with `masterkey`
+//password are the default credentials you can use to login.
 
 [[owners-report]]
 Owners report
@@ -814,35 +830,97 @@ Owners report
 In this section we are going to create a simple report about the owners.
 
 Create a new Report application element with the `OwnersReport` name.
-Add a string parameter named `lastNamePattern` and the owners entity
-based on the `OwnersQuery`. Bind the model's and the entity's
-parameters.
+Add `OwnersQuery` to data model.
 
-Start Excel to edit the report template. Provide the report's header,
+[source,Javascript]
+-----------------------------------------------------
+self.execute = function (onSuccess, onFailure) {
+    model.ownersQuery.params.lastNamePattern = "%%";
+    model.requery(function () {
+	var report = template.generateReport();
+	report.show(); //| report.print(); | var savedTo = report.save(saveTo ?);
+//            onSuccess(report);
+    }, onFailure);
+
+};
+-----------------------------------------------------
+
+On layout tab click on 'edit report template' to edit the report template. Provide the report's header,
 owners tables columns headers and the columns tags as it shown below:
 
-[cols="<,<,<,<",options="header",]
+[cols="<,<,<,<,<",options="header",]
 |=======================================================================
-|`Name` |`Address` |`City` |`Phone`
-|`${owners.fullname}` |`${owners.address}` |`${owners.city}`
-|`${owners.telephone}`
+|`Full Name` |`Address` |`City` |`Phone` |`E-mail`
+|${model.ownersQuery.fullName}|${model.ownersQuery.address}|${model.ownersQuery.city}|${model.ownersQuery.phone}|${model.ownersQuery.email}
 |=======================================================================
 
 Go to the `OwnersView` form and add the Report button. Change the button
-name, the capion text and provide its press event handler code:
+name, the caption text and provide its press event handler code:
 
 [source,Javascript]
 -----------------------------------------------------
 /**
  * Report button click event handler.
  * @param evt Event object
- */
-form.reportButton.onActionPerformed = function(evt) {
-    var ownersReport = new OwnersReport();
-    ownersReport.params.lastNamePattern = 
-        form.params.lastNamePattern;
-    ownersReport.show();
+ */  
+form.btnReport.onActionPerformed = function (event) {
+      var oReport = new OwnersReport();
+      oReport.execute();
+  };
+-----------------------------------------------------
+Here we can create a new report instance, set its parameter to the similar
+parameter of the`OwnersView` form and display the report.
+
+But this will work only in SE client. To make this work on HTML5 application, we should create new server module, and place code as shown below:
+
+[source,Javascript]
+-----------------------------------------------------
+/**
+ * 
+ * @constructor
+ * @public
+ */ 
+function serverModule() {
+    var self = this, model = P.loadModel(this.constructor.name);
+    
+    self.execute = function (reportSuccessCallback) {
+        var oReport = new OwnersReport();
+        oReport.execute(reportSuccessCallback);
+    };   
 }
 -----------------------------------------------------
-Here we create a new report instance, set its parameter to the similar
-parameter of the`OwnersView` form and display the report.
+
+Because we are going to call our server module over network, we should add annotation @public (like in queries).
+
+
+On the next step we need to modify report generation code, where we will return generated report to callback.
+
+[source,Javascript]
+-----------------------------------------------------
+self.execute = function (onSuccess, onFailure) {
+    model.ownersQuery.params.lastNamePattern = "%%";
+    model.requery(function () {
+	var report = template.generateReport();
+	//report.show(); | report.print(); | var savedTo = report.save(saveTo ?);
+	onSuccess(report);
+    }, onFailure);
+};
+-----------------------------------------------------
+
+We also should rewrite code in Report button:
+
+[source,Javascript]
+-----------------------------------------------------
+var reportCallback = function (report) {
+    report.show();
+};
+
+form.btnReport.onActionPerformed = function (event) {
+    var srvModule = new P.ServerModule("serverModule");
+    srvModule.execute(reportCallback);
+};
+-----------------------------------------------------
+
+After report has been generated, it will be returned to client. If you are launching your's application as HTML5 client, then report will be downloaded by browser when it's method 'show' is called, otherwise it will launch assosiated application (Excel for example).
+
+Thanks for you attention.

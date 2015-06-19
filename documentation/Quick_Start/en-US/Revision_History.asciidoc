@@ -2,5 +2,6 @@
 Revision History
 ----------------
 
-0-0 8.08.2013 Vadim Vashkevich vv@altsoft.biz Maxim Lipnin
-ml@altsoft.biz Initial revision
+0-0 8.08.2013 Vadim Vashkevich vv@altsoft.biz Maxim Lipnin ml@altsoft.biz Initial revision
+
+0-0 29.04.2015 Eugeny Konstantinov jskonst@altsoft.biz Marat Gainullin mg@altsoft.biz Update doc to platypus version 5.0

@@ -1,9 +1,9 @@
-Combined Title
-===============================
-:leveloffset: 1
+Quick start guide
+=================
 
-include::Author_Group.asciidoc[]
-include::Book_Info.asciidoc[]
 include::Chapter.asciidoc[]
-include::Preface.asciidoc[]
 include::Revision_History.asciidoc[]
+
+//include::Preface.asciidoc[]
+//include::Book_Info.asciidoc[]
+//include::Author_Group.asciidoc[]
