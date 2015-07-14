@@ -29,20 +29,19 @@ New File button on the toolbar, or use the hotkey.
 select Choose file type Platypus application elements Database diagram
 on the wizard first step and click Next.
 * Select the connection to database and database schema:
-** Select the default database—click the Default button or a connection
-to the external database—click the Specific button and select a specific
+** Select the default database; click the Default button or a connection
+to the external database; click the Specific button and select a specific
 database connection.
 ** Select a schema in the database in the Schema drop-down list; click
-the Default button to select a default schema.
+the Default button to select a default databse user's schema.
 ** Click the Next button.
 * Specify the name of the new database structure diagram in the Name
 field, and click the Finish button to create a new application element,
 or click Cancel to abort.
 
 After creating the database structure diagram, fill it with the database
-tables structures. To do that, define the tables, its fields and their
-descriptions. After determination of the table structure define foreign
-key links between the tables.
+tables. To do that, define the tables, theirs fields and theirs
+descriptions. After that define foreign key links between the tables.
 
 [[diagram-visual-editor]]
 Diagram visual editor
@@ -63,12 +62,6 @@ For navigation through a diagram, it is convenient to use the diagram
 inspector panel. In the inspector, tables and their fields are
 represented in the tree structure. When selecting a table or a field in
 the inspector, the same selection takes place in the diagram editor.
-
-For mutual positioning of a node in the inspector and an object in the
-diagram:
-
-* Select the Show in diagram menu item in the inspector's table node
-context menu.
 
 To add an existing table to the diagram, perform the following actions:
 
@@ -108,8 +101,7 @@ To remove a table from the diagram, perform the following actions:
 * In the confirmation dialog, click the Delete from diagram button to
 remove the table from the diagram (from the diagram only, not from the
 database). Click the Drop table button to remove the table from the
-database (physical destruction of the table), or click Cancel to cancel
-the process.
+database (physical destruction of the table), or click Cancel to cancel.
 * Save the application element by clicking the Save All button on the
 Platypus Application Designer toolbar, or by pressing the Ctrl Shift S
 shortcut.
@@ -201,7 +193,7 @@ To add a foreign key for the table, perform the following actions:
 of the other table.
 +
 After that, a foreign key will be created in the database; visually, the
-link will be represented by the arrow between the tables fields.
+link will be represented by the line with arrow between the tables fields.
 * Save the application element by clicking the Save All button on the
 Platypus Application Designer toolbar, or by using the Ctrl Shift S
 shortcut.
@@ -224,20 +216,10 @@ To remove the table foreign key, perform the following actions:
 Platypus Application Designer toolbar, or by using the Ctrl Shift S
 shortcut.
 
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-*Note*
-
-When working in a developers team, after modification of the database
-structure, it is recommended to create a migration — a database metadata
-snapshot, and make it available for all participants of the development
-process in order to apply the modifications to the rest of the database
-copies engaged in the development process.
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-
 To query the data from the table, perform the following actions:
 
 * Select the table in the diagram.
-* Click the Query Table Data button on the local toolbar — the data will
+* Click the Query Table Data button on the local toolbar. The data will
 be requested from the table, and the results will be displayed in the
 editor's output area.
 

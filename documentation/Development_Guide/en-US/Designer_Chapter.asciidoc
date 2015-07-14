@@ -55,10 +55,8 @@ Set the application launching parameters:
 application element selection dialog.
 * Set the type of the client application to be launched: Platypus Client
 or HTML5 browser.
-* Set the type of the server to be launched: No, Platypus Application
-Server, J2EE Server.
-* Check the Database application option to use an application, which is
-deployed in the database, when launching.
+* Set the type of the server to be launched: None, Platypus Application
+Server or J2EE Server.
 * Check the Don't start application server option to launch the client
 only.
 * On the Client tab, in the Url field specify the URL of the application
@@ -79,7 +77,7 @@ J2EE servers.
 * On the J2EE Server tab, in the Context field specify the name of the
 web-application in the J2EE server.
 * On the J2EE Server tab, check the Enable security option to enable the
-security; in this case FORMS authentication will be used for the web
+security; in this case FORM authentication will be used for the web
 application.
 
 Set the debugging parameters:
@@ -105,7 +103,7 @@ You can perform the following operations on the application elements and
 directories:
 
 * Create a new element using the `New` command.
-* Rename an application element—click the selected application element
+* Rename an application element. click the selected application element
 or directory name, and press the F2 key.
 * Copy and Paste an application element from the buffer to the specified
 project location using the `Paste` command.
@@ -180,27 +178,22 @@ step-by-step execution of the program.
 If the default application run element is not explicitly specified in
 the project's settings the selection dialog will be displayed.
 
-To debug an application running in an J2EE server or servlet container,
-e.g. Apache Tomcat provide the JMX configuration parameters as the
-server's start Java virtual machine options:
-`-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=`
-where port is the port to attach the debugger. For Apache Tomcat enter
-these options in the VM Options field on the Platform tab of the
-server's configuration parameters on the Services panel. After the
+To debug an application running in Apache Tomcat, you should stop server
+instance if it is already launched and then start it in debug mode. After the
 server starts use Attach Debugger menu item on the Debug Project button
 on the main toolbar and specify the debugging port.
 
 When launching the application in a J2EE server, Platypus Application
-Designer uses the `web` sub-directory, which is created automatically in
-the project directory. When initializing this sub-directory, its initial
+Designer uses the `web`, `WEB-INF` and `META-INF` sub-directories, which
+are created automatically in the project directory. When launching web application theirs initial
 structure is created and libraries are copied. After initializing the
-directory, files responsible for the configuration (`WEB-INF/web.xml`,
-server specific configuration file, and JavaScript file responsible for
+directories, files responsible for the configuration (`WEB-INF/web.xml`,
+server specific configuration file `META-INF/context.xml`, and JavaScript file responsible for
 the application launching on the HTML page) are modified, but the
 libraries are not copied again.
 
-Select the Clean and Run menu item in the project context menu, if it is
-necessary to update the libraries in the `web` directory. The libraries
+Select the Clean directories `web`, `WEB-INF` and Run menu item in the project context menu, if it is
+necessary to update the libraries in the `web` and WEB-INF directories. The libraries
 will be removed, and at the next application launch these libraries will
 be copied from the platform's runtime directory.
 
@@ -239,7 +232,7 @@ ________________________________________________________________________________
 We recommend that a developer in the team working on the project creates
 and uses his/her own copy of the database for debugging and testing
 purposes. Additionally, a common reference database is created, and all
-modifications, which have passed the debugging stage at the developers'
+modifications, which have passed the debugging stage at the developer's
 individual databases, are applied to this common one.
 __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -251,92 +244,11 @@ To launch the built-in H2 database server:
 * Open the Services panel.
 * Select the Databases H2 node and enable the Start menu item.
 
-After the database server is launched and become available via the
+After the database server is launched and becomes available via the
 network or locally, connect to this server by selecting the Connect to
-project database item in the context menu, or by clicking the Establish
-connection button on the Application Database form in the project
-properties, or by selecting the Connect to project database link on the
-stub-form of the data model editor.
+database item in the context menu of Databases node child node on the Services tab.
 
-To disconnect, select the Disconnect from project database item in the
-project context menu.
-
-[[application-in-the-database]]
-Application in the database
----------------------------
-
-An application can be deployed in the special database table. After
-deployment, the application elements can be hosted in the database.
-
-To deploy an application in the database: use Deploy item in the
-project's root node context menu. When deploying, the application
-elements from the Application Elements folder are copied to the table
-`MTD_ENTITIES`. When copying, the tree structure of the application
-directories is preserved.
-
-Importing of an application from a database to a files is a process
-which is reverse to deployment. To import an application from the
-database: select the Import item in the project context menu. When
-importing, the application elements are copied from the `MTD_ENTITIES`
-table to the project's Application Elements folder.
-
-________________________________________________________________________________________________________________________________________________
-*Important*
-
-When deploying and importing an application, the destination table or
-the Application Elements folder is cleared before the copy process
-starts.
-________________________________________________________________________________________________________________________________________________
-
-[[database-migrations-tools]]
-Database migrations tools
--------------------------
-
-To store and restore database(s) schema and its bootstrap data and use
-the database migration tools.
-
-________________________________________________
-*Important*
-
-Backup you databases before applying migrations.
-________________________________________________
-
-Bootstrap data includes basic references, bootstrap data, etc., the
-information required to start the application.
-
-Database structure and initial application data are represented in the
-form of migrations files. Each migration has a number expressed as a
-positive integer, which is used as the file name. In the course of
-development and further during the application life cycle, when changing
-the database structure or in case of data modification, a migration is
-created. Later on, this migration can be applied to other databases. In
-the application database, information about the current database version
-is maintained in the `MTD_VERSION` table.
-
-Migrations with the number greater than the current database version are
-sequentially applied to the database during synchronization process.
-After the migration is applied successfully, the database number becomes
-equals to the number of this migration.
-
-Migrations types:
-
-* Database structure snapshot is a `.xdm` file containing database
-metadata presentation in the XML format.
-* SQL commands batch is a `.batch` file containing the SQL commands
-delimited by `#GO` separators tag.
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-*Note*
-
-In the batch SQL file, it is recommended to use DML (`INSERT`, `UPDATE`
-and `DELETE`) commands; although it is technically permissible to use
-DDL commands there as well. However, it is not recommended to use
-commands which modify the database structure in the batch SQL file,
-since it can reduce the application portability.
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-
-Refer to the Administration Guide for more information about using
-database migration tools.
+To disconnect, select the Disconnect from the same child node of Databases node on the Services tab.
 
 [[version-control]]
 Version control

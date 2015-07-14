@@ -7,14 +7,14 @@ Form
 ----
 
 `Form` is a user interface building block wich can be represented as a
-top-level window with a title and a border or can be build-in on a panel
+top-level window with a title and a decorations or can be build-in on a panel
 or on another form.
 
 A form is a regular JavaScript module with visual components. Any form
-can be displayed both in desktop client as well in HTML5 web-browser.
+can be displayed both in J2SE client as well in HTML5 web-browser.
 
-`Form` includes a top-level container, which holds widgets and other
-containers and accessible under `view` property.
+`Form` by default includes a top-level container, which holds widgets and other
+containers and usually has `view` name.
 
 A widget is a component, which has a visual representation. A container
 is a component, which holds widgets and other containers.
@@ -25,7 +25,7 @@ which defines the component appearance and behavior, and a set of events
 
 image:images/form.png[Form's components layout]
 
-In the desktop client, forms are displayed in separate windows, can be
+In the J2SE client, forms are displayed in separate windows, can be
 minimized or expanded to the full screen, displayed in other forms as
 built-in elements (frames) and as internal windows in the DesktopPane
 component. In the HTML5 browser client, forms are displayed in the same
@@ -61,11 +61,10 @@ To edit the form:
 the form surface.
 * Arrange the components on the form.
 * Set the general properties of the form and properties of each
-component on the Properties panel, e.g. text font, foreground and
+component on the Properties panel, e.g. text, font, foreground and
 background colors.
-* Specify handlers functions of the form and components on the
-Properties/Events, write the event handlers code in the JavaScript
-editor.
+* Specify handlers functions of the form and components. To do that
+write the event handlers code in the JavaScript editor.
 * Configure the form's data model and write code responsible for data
 manipulations.
 * Save the form by clicking Save All on the Platypus Application
@@ -116,13 +115,6 @@ ________________________________________________________________________________
 To enable or disable an anchor, use anchors buttons on the form editor
 toolbar.
 
-As an alternative way to specify the layout anchors, use widget node
-menu in the inspector: enable the corresponding anchor in the Anchor
-submenu. Thus, if there's one anchor enabled for one coordinate, then
-this anchor and the appropriate dimension will be used. If there are two
-anchors enabled, then they will be used, and the dimension will be
-extended.
-
 Specify values for anchors and dimensions explicitly, changing the
 values of the component's properties panel in the Layout properties
 group: Left, Top, Right, Bottom, Left, Width, and Height.
@@ -144,11 +136,7 @@ Specify a component's the properties and event handlers:
 * Click a form area, which is free from other components, or select a
 form node in the component inspector.
 * Change properties of the form on the Properties panel.
-* Specify the event handlers on the Properties/Events panel.
 * Write code of the handlers in the JavaScript editor.
-* To remove an event handler, delete the name of the handler from the
-corresponding event field; as a result, the <none> name is assigned to
-the handler and the handler function will be removed from the code.
 
 [[form-api]]
 Form API
@@ -156,54 +144,30 @@ Form API
 
 Create a module instance in client JavaScript as follows:
 
-* Create an instance of a form with the help of the `new` keyword, using
-a module constructor, for example:
-+
 [source,Javascript]
 -------------------------- 
-var formInstance = new ();
+var form = P.loadForm('MainView');
 --------------------------
-+
-where `
-+
---------------------------------
-      ` is a form's constructor.
---------------------------------
-* Create an instance of the module with the help of the `new` keyword
-using special `Form` constructor, for example:
-+
-[source,Javascript]
------------------------------- 
-var formInstance = new Form();
-------------------------------
-+
-where `
-+
------------------------------------------------------------
-      ` is the module constructor name string, for example,
------------------------------------------------------------
-+
-`"MainForm"`;
 
 To make a form visible use the `show` method:
 
 [source,Javascript]
 -------------------- 
-formInstance.show();
+form.show();
 --------------------
 
-An application supports a registry of its shown forms. For every form a
-identifier can be specifyed to refer to the shown form in this registry,
+An application supports a registry of its shown forms. For every form an
+identifier can be specified to refer to the shown form in this registry,
 to do this use form's instance `formKey` property. By default a form's
-key set to its constructor name.
+key set to its module's name.
 
 Use the `Form.getShownForm()` method, where formKey is a form's key to
 get the shown form by its key.
 
 [source,Javascript]
 ---------------------------------------- 
-var formA = new FormA(); 
-var formB = new FormB();
+var formA = P.loadForm('FormA'); 
+var formB = P.loadForm('FormB');
 formA.formKey = 'A1';
 formB.formKey = 'B1';
 formA.show();
@@ -250,9 +214,6 @@ The form properties are listed in the following table:
 
 |`height` |The form's height.
 
-|`allwaysOnTop` |`true` if the form should be displayed on top of all
-other windows and `false` otherwise.
-
 |`formKey` |The form's identifier in the open forms registry.
 
 |`icon` |The form's `Icon`.
@@ -282,9 +243,6 @@ otherwise.
 |`maximized` |`true` if the form is maximized, and `false` otherwise
 (read-only).
 
-|`visible` |`true` if the form is visible and `false` otherwise.
-
-|`view` |The top-level container of the form.
 |=======================================================================
 
 The form methods are listed in the following table:
@@ -300,9 +258,6 @@ The form methods are listed in the following table:
 |`showModal(callback)` |Displays the form as a confirmation dialog. If
 `form.close(param)` method is used to close the dialog form, then
 `callback` function is invoked with a `param` passed as an argument.
-
-|`showOnPanel(parent)` |Displays the form on the container panel,
-`parent` is an object of the panel, on which the form should be shown.
 
 |`close(selected)` |Closes the form. This method may be used to return a
 value, selected using the dialog. If the `selected` parameter is
@@ -326,37 +281,10 @@ not passed at all, the `callback` function won't be called.
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Event type |Description
-|`onMouseWheelMoved` |`MouseWheelEvent` |Is called after rotating the
-mouse wheel.
-
-|`onMouseClicked` |`MouseEvent` |Is called after the mouse is clicked.
-
-|`onComponentAdded` |`ContainerEvent` |Is called after adding a
-component into the form.
-
-|`onComponentHidden` |`ContainerEvent` |Is called after hiding a
-component.
-
-|`onComponentRemoved` |`ContainerEvent` |Is called after removing a
-component from the form.
-
-|`onComponentResized` |`ContainerEvent` |Is called after changing the
-component size.
-
-|`onComponentShown` |`ContainerEvent` |Is called after displaying the
-component.
-
-|`onFocusGained` |`FocusEvent` |Is called after getting the keyboard
-focus.
-
-|`onFocusLost` |`FocusEvent` |Is called after losing the keyboard focus.
-
-|`onKeyPressed` |`KeyEvent` |Is called after pressing the keyboard key.
-
-|`onKeyReleased` |`KeyEvent` |Is called after releasing the keyboard
-key.
-
 |`onWindowActivated` |`WindowEvent` |Is called after the window
+activation.
+
+|`onWindowDeactivated` |`WindowEvent` |Is called after another window
 activation.
 
 |`onWindowClosed` |`WindowEvent` |Is called after closing the form
@@ -365,13 +293,13 @@ window.
 |`onWindowClosing` |`WindowEvent` |Is called before closing the form
 window.
 
-|`onWindowDeactivated` |`WindowEvent` |object Is called after
+|`onWindowRestored` |`WindowEvent` |Is called after
 deactivating the form window.
 
-|`onWindowDeiconified` |`WindowEvent` |Is called after retrieving the
-form from an icon on the panel.
-
 |`onWindowMinimized` |`WindowEvent` |Is called after minimizing the
+form.
+
+|`onWindowMaximized` |`WindowEvent` |Is called after maximizing the
 form.
 
 |`onWindowOpened` |`WindowEvent` |Is called after opening the form
@@ -379,13 +307,13 @@ window.
 |=======================================================================
 
 The `windowClosing` event is cancelable. This event is useful for
-invoking a dialog to confirm the window closing: if the handler returns
+invoking a dialog to confirm the window closing. If the handler returns
 `false`, the form won't be closed:
 
 [source,Javascript]
 -------------------------------------- 
 //Handles windowClosing event
-function formWindowClosing(evt) {
+form.onWindowClosing = function(evt) {
   return confirm("Close the window?");
 }
 --------------------------------------
@@ -396,40 +324,27 @@ code, use the corresponding property:
 [source,Javascript]
 -------------------------------------- 
 //Sets form's title
-self.title = "Document form";
+form.title = "Document form";
 
 //Handles onWindowClosing event
-self.onWindowClosing = function() {
+form.onWindowClosing = function() {
   return confirm("Close the window?");
 }
 --------------------------------------
 
-To get access to the top-level container, use the `view` property:
+Typically the top-level container has the `view` name and form has same property:
 
 [source,Javascript]
 ----------------------------------- 
-//Sets the form's background
-self.view.background = Color.BLACK;
+//Sets the veiw's background
+form.view.background = P.Color.BLACK;
 -----------------------------------
-
-In the above example the form title is set programmatically, and also an
-alternative way to specify a form event handler is provided.
-
-____________________________________________________________________________________________________________
-*Note*
-
-For the top-level container, the layout should be set by the designer
-and can't be changed by program means.
-____________________________________________________________________________________________________________
 
 [[components-events]]
 Components events
 -----------------
 
-Component events are not propogated to the its parent. A container's
-event is generated only if it has not been generated for its child
-components. Thus, the form will recieve the mouse event only if it has
-occurred over an area, which is free from its children.
+NOTE: Component events are not propagated to the its parent in J2SE client.
 
 The base `ComponentEvent` object contains `source` property that
 contains the event's source component.
@@ -438,7 +353,7 @@ Use an event handler function as follows:
 
 [source,Javascript]
 --------------------------------------- 
-function onEventHandler(evt) {
+form.btnConnect.onEventHandler = function(evt) {
    evt.source.background = Color.WHITE;
 }
 ---------------------------------------
@@ -447,8 +362,8 @@ The specific event objects also contain `source` property, as well as
 their own specific properties. The following types of specific events
 are defined: `ContainerEvent`, `KeyboardEvent` and `MouseEvent`.
 
-`ContainerEvent` event object represents an event what is called when
-something happens with the container, e.g. an component added or
+`ContainerEvent` event object represents an event that is called when
+something happens with the container, e.g. a component added or
 removed, its specific propetries are listed in the following table:
 
 [cols="<,<",options="header",]
@@ -486,9 +401,9 @@ listed in the following table:
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
-|`x` |Key code associated with this event.
+|`x` |The x coordinate of mouse pointer in evt.source space.
 
-|`y` |`true` if Alt key is down on this event and `false` otherwise.
+|`y` |The y coordinate of mouse pointer in evt.source space.
 
 |`button` |`true` if Ctrl key is down on this event and `false`
 otherwise.One of the following `Number` values: 0 for no button, 1 for
@@ -541,8 +456,6 @@ table:
 |`toolTipText` |Text, which is shown when hovering a cursor over the
 component
 
-|`border` |Component border
-
 |`cursor` |Cursor above the component
 
 |`enabled` |`true` if the component is enabled and `false` otherwise
@@ -571,7 +484,7 @@ component
 |`onComponentHidden` |`ComponentEvent` |Is called after hiding the
 component
 
-|`onComponentМoved` |`ComponentEvent` |Is called after moving the
+|`onComponentMoved` |`ComponentEvent` |Is called after moving the
 component
 
 |`onComponentRemoved` |`ComponentEvent` |Is called after removing the
@@ -617,7 +530,7 @@ rectangle
 Label
 ~~~~~
 
-`Label` is a widget with a short piece of text, images or text with an
+`Label` is a widget with a short piece of text, image or text with an
 image. The label does not respond to keyboard input events and can't get
 the keyboard focus.
 
@@ -657,7 +570,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ---------------------------- 
-var label = new Label(, , );
+var label = new P.Label(text, icon, iconTextGap);
 ----------------------------
 
 where text is the text (optional), icon is an icon (optional),
@@ -669,8 +582,14 @@ handlers and add the component to the container:
 [source,Javascript]
 ---------------------------- 
 label.text = "Message text";
-view.add(label);
+view.add(label, ...);
 ----------------------------
+
+[NOTE]
+It is useful, to manipulate with property `opaque` of Label widget.
+If `opaque` property is set to true, than background of the widget
+is filled and it is not filled otherwise. So you may use the `opaque`
+property as a switcher of label's background.
 
 [[button]]
 Button
@@ -711,7 +630,7 @@ which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var btn5 = new Button(, , , );
+var btn5 = new Button(text, icon, iconTextGap, actionPerformed);
 ------------------------------
 
 where text is text (optional), icon is an icon (optional), iconTextGap
@@ -723,11 +642,11 @@ handlers and add the component to the container:
 
 [source,Javascript]
 ------------------------------------- 
-btn1.text = "Click me";
-btn1.onActionPerformed = function() {
+btn5.text = "Click me";
+btn5.onActionPerformed = function() {
   alert("Clicked!");
 }
-view.add(btn1);
+form.view.add(btn1, ...);
 -------------------------------------
 
 [[togglebutton]]
@@ -756,7 +675,8 @@ The specific component events:
 [cols="<,<,<",options="header",]
 |=======================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ActionEvent` |Button toggle event
+|`onActionPerformed` |`ActionEvent` |The component user interaction event
+|`onValueChange` |`ValueChangeEvent` |ToggleButton value change event
 |=======================================================
 
 To create a component of this type by program means, use the
@@ -766,13 +686,12 @@ parameters:
 [source,Javascript]
 ---------------------------------------------
 
-var btn = new ToggleButton(, , , selected, );
+var btn1 = new P.ToggleButton(text, icon, selected, iconTextGap, actionPerformed);
 ---------------------------------------------
 
-where text is text, icon is an icon (optional), iconTextGap is a gap
-between the icon and text, selected is set to `true`, if the button is
-selected and `false` otherwise (optional), actionPerformed is a handler
-function of the button clicking event (optional).
+where text is text, icon is an icon (optional), selected is set to `true` if the button is
+selected and `false` otherwise (optional), iconTextGap is a gap between the icon and text,
+actionPerformed is a handler function of the button clicking event (optional).
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
@@ -780,13 +699,13 @@ handlers and add the component to the container:
 [source,Javascript]
 ------------------------------------- 
 btn1.text = "Turn me on!";
-btn1.onActionPerformed = function() {
+btn1.onActionPerformed = function(evt) {
     if(btn.selected)
         btn1.text = "Turn me off.";
     else
         btn1.text = "Turn me on!";
 }
-view.add(btn1);
+form.view.add(btn1, ...);
 -------------------------------------
 
 [[checkbox]]
@@ -800,7 +719,8 @@ The specific component events are listed in the following table:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ActionEvent` |The components state changing event
+|`onActionPerformed` |`ActionEvent` |The component user interaction event
+|`onValueChange` |`ValueChangeEvent` |CheckBox value change event
 |=======================================================================
 
 To create a component of this type by program means, use the CheckBox
@@ -808,13 +728,13 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ---------------------------- 
-var cb = new CheckBox(, , );
+var cb = new P.CheckBox(text, selected, actionPerformed);
 ----------------------------
 
-where text is text (optional), icon is an icon (optional), selected is
-set to `true`, when the check box is selected and `false` otherwise
-(optional), actionPerformed is a handler function of the check box
-switching event (optional).
+where text is text (optional), selected is set to `true`, when the
+check box is selected and `false` otherwise (optional),
+actionPerformed is a handler function of the check box switching
+event (optional).
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
@@ -824,10 +744,10 @@ handlers and add the component to the container:
 
 cb1.text = "Check box 1";
 cb1.selected = true;
-cb1.onActionPerformed = function() {
-  cb1.selected && alert("Check box 1 selected!");
+cb1.onValueChange = function(evt) {
+  alert("Value of check box 1 changed!");
 }
-view.add(cb1);
+form.view.add(cb1, ...);
 -------------------------------------------------
 
 [[radiobutton]]
@@ -855,7 +775,8 @@ widget properties.
 [cols="<,<,<",options="header",]
 |======================================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ActionEvent` |Radio button state switching event
+|`onActionPerformed` |`ActionEvent` |The component user interaction event
+|`onValueChange` |`ValueChangeEvent` |Radio button value change event
 |======================================================================
 
 To create a component of this type by program means, use the RadioButton
@@ -863,22 +784,12 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 -------------------------------- 
-var rb4 = new RadioButton(, , );
+var rb1 = new P.RadioButton(text, selected, actionPerformed);
 --------------------------------
 
-where `
-
---------------------------------------------------------------------
-    ` is text (optional), `
-      
-    ` is set to `true` when the radio button is selected and `false`
---------------------------------------------------------------------
-
-otherwise (optional), `
-
-----------------------------------------------------------
-    ` is the button switching handler function (optional).
-----------------------------------------------------------
+where `text` is text (optional), `selected` is set to `true` when the
+radio button is selected and `false` otherwise (optional),
+`actionPerformed` is the user interaction handler function (optional).
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
@@ -889,9 +800,9 @@ handlers and add the component to the container:
 rb1.text = "Radio button 1";
 rb1.selected = true;
 rb1.onActionPerformed = function(evt) {
-rb1.selected && alert("Radio button 1 selected!");
+    rb1.selected && alert("Radio button 1 selected!");
 }
-view.add(rb1);
+view.add(rb1, ...);
 --------------------------------------------------
 
 [[buttongroup]]
@@ -903,7 +814,7 @@ representation. After adding to the form, the button group component
 will be added to the Other components tree node on the inspector panel.
 
 The group of buttons enables the simultaneous selection of only one of
-widgets belonging to the `ToggleButton`, `RadioButton`, and
+widgets of `ToggleButton`, `RadioButton`, and
 `RadioMenuItem` types, for which the same button group is assigned. When
 you select one of the widgets in the group, the other widgets will be
 reset.
@@ -916,7 +827,7 @@ Use ButtonGroup constructor in your program:
 
 [source,Javascript]
 ------------------------------------ 
-var buttonGroup = new ButtonGroup();
+var buttonGroup = new P.ButtonGroup();
 ------------------------------------
 
 To specify a `ButtonGroup` for a exclusive buttons, use component's
@@ -932,7 +843,7 @@ the add method:
 
 [source,Javascript]
 ------------------ 
-buttonGroup.add();
+buttonGroup.add(component);
 ------------------
 
 where component is a button widget to add.
@@ -941,8 +852,8 @@ After creating, add button widgets to the group:
 
 [source,Javascript]
 -------------------------------------- 
-var rbA = new RadioButton("A", true);
-var rbB = new RadioButton("B", false);
+var rbA = new P.RadioButton("A", true);
+var rbB = new P.RadioButton("B", false);
 rbA.buttonGroup = buttonGroup;
 rbB.buttonGroup = buttonGroup;
 --------------------------------------
@@ -968,8 +879,8 @@ The specific component events are listed in the following table:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ActionEvent` |Text input event: pressing the
-Enter key
+|`onActionPerformed` |`ActionEvent` |User interaction event firing when user changes the text
+|`onValueChange` |`ValueChangeEvent` |Text field value change event
 |=======================================================================
 
 To create a component of this type by program means, use the TextField
@@ -977,22 +888,18 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 -------------------------- 
-var tf2 = new TextField();
+var tf1 = new P.TextField(text);
 --------------------------
 
-where `
-
------------------------------------
-    ` is the field text (optional).
------------------------------------
+where `text` is the field text (optional).
 
 After creating, if necessary, set the properties and event handlers and
 add the component to the container:
 
 [source,Javascript]
 ------------------------------------ 
-tf.emptyText = "Enter your name...";
-view.add(rb1);
+tf1.emptyText = "Enter your name...";
+view.add(tf1, ...);
 ------------------------------------
 
 [[slider]]
@@ -1011,9 +918,6 @@ The properties of this component are listed in the following table:
 
 |`minimum` |Minimum value
 
-|`orientation` |Horizontal or vertical orientation of the component:
-`HORIZONTAL`, `VERTICAL`
-
 |`value` |Value
 |=======================================================================
 
@@ -1022,8 +926,8 @@ The specific component events are listed in the following table:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ComponentEvent` |Slider movement termination
-event
+|`onActionPerformed` |`ComponentEvent` |Slider movement termination event
+|`onValueChange` |`ValueChangeEvent` |Slider value change event
 |=======================================================================
 
 To create a component of this type by program means, use the Slider
@@ -1031,17 +935,11 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ---------------------------- 
-var sl = new Slider(, , , );
+var sl = new P.Slider(min, max, value);
 ----------------------------
 
-where `
-
-------------------------------------------------------------------
-    ` is the slider orientation, an object of the Orientation type
-------------------------------------------------------------------
-
-(optional), min is a minimum value (optional), max is a maximum value
-(optional), value is the current value (optional).
+where `min` is a minimum value (optional), `max` is a maximum value
+(optional), `value` is the current value (optional).
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
@@ -1049,14 +947,14 @@ handlers and add the component to the container:
 [source,Javascript]
 ---------------------------------------------
 
-var sl1 = new Slider(Orientation.HORIZONTAL);
+var sl1 = new P.Slider();
 sl1.minimum = 0;
 sl1.maximum = 100;
 sl1.value = 50;
 s1l.onActionPerformed = function(evt) {
   Logger.info("Slider moved.");
 }
-view.add(sl1);
+view.add(sl1, ...);
 ---------------------------------------------
 
 [[progressbar]]
@@ -1093,26 +991,20 @@ which can be called with a different number of parameters:
 
 [source,Javascript]
 ----------------------------- 
-var pb = new ProgressBar(, );
+var pb = new P.ProgressBar(min, max);
 -----------------------------
 
-where `
-
---------------------------------------
-    ` is a minimum value (optional), `
-      
-    ` is a maximum value (optional).
---------------------------------------
+where `min` is a minimum value (optional), `max` is a maximum value (optional).
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
 [source,Javascript]
 ---------------------------- 
-var pb1 = new ProgressBar();
+var pb1 = new P.ProgressBar();
 pb1.minimum = 0;
 pb1.maximum = 100;
-view.add(pb1);
+view.add(pb1, ...);
 ----------------------------
 
 [[formattedfield]]
@@ -1122,11 +1014,11 @@ FormattedField
 `FormattedField` is a component, which allows you to edit value of some
 specific type as the text. So, a user sees just text and a program sees
 a value of specific type e.g. date, number, boolean, string and etc.
-Specify the set of characters, which will be considered acceptable to
-enter in this field. Provide the value's format and the widget's value.
-The value is converted into the required format before displaying.
+Specify the valur type which will be managed by this field.
+Provide the value's format according to value type and the widget's value.
+The value is converted into the text of the required format before displaying.
 
-For example, you can configure the widget to enter some date some
+You can configure the widget to enter some date in some
 predefined formats, and also set the custom format to enter strings.
 
 The `FormattedField` properties is identical to the `TextField` widget
@@ -1135,16 +1027,16 @@ properties, but it includes the following specific properties:
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
-|`format` |Format string, check Java`java.util.Formatter` documentation.
+|`valueType` |Type of value, managed by this field.
+|`format` |Format string, specific for each value type.
 |=======================================================================
 
 The formatted field is intended to display and enter values of a
 particular type. The format of displaying and editing can vary only
 within a given type. Therefore, when you programmatically create this
-widget, you should specify a value determining the type, within which
-this widget will work, before defining the format. After determining the
-value type, the format can be changed if the new format will be suitable
-for displaying and editing the values of this type.
+widget, you should specify a value type before defining the format.
+After determining the value type, the format can be changed if the
+new format will be suitable for displaying and editing the values of this type.
 
 Use the format setting dialog to specify the format string in the visual
 editor. Click the button in the format property field. Select a category
@@ -1157,8 +1049,8 @@ The specific component events are listed in the following table:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ComponentEvent` |Value input event: pressing the
-Enter key.
+|`onActionPerformed` |`ComponentEvent` |User interaction event: pressing the Enter key.
+|`onValueChange` |`ValueChangeEvent` |Formatted field value change event: value property assignment from script, focus loose or pressing the Enter key
 |=======================================================================
 
 To create a component of this type by program means, use the
@@ -1167,7 +1059,7 @@ of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var ff = new FormattedField();
+var ff = new P.FormattedField();
 ------------------------------
 
 After creating, if necessary, set the properties and component event
@@ -1175,16 +1067,17 @@ handlers and add the component to the container:
 
 [source,Javascript]
 ---------------------------------- 
-var ff = new FormattedField();
-ff.value = new Date();
+var ff = new P.FormattedField();
+ff.valueType = Date;
 ff.format = "dd.MM.yyyy HH:mm:ss";
+ff.value = new Date();
 ----------------------------------
 
 [[passwordfield]]
 PasswordField
 ~~~~~~~~~~~~~
 
-`PasswordField` is a simple input component, which allows you to edit
+`PasswordField` is a simple input widget, which allows you to edit
 single line of text. It displays placeholders instead of actual
 characters.
 
@@ -1196,21 +1089,17 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ----------------------------- 
-var pf = new PasswordField();
+var pf = new P.PasswordField(text);
 -----------------------------
 
-where `
-
--------------------------
-    ` is text (optional).
--------------------------
+where `text` is text (optional).
 
 After creating, if necessary, set the properties and component event
 handlers and add the component to the container:
 
 [source,Javascript]
 ----------------------------- 
-var pf = new PasswordField();
+var pf = new P.PasswordField();
 view.add(pf, ...);
 -----------------------------
 
@@ -1218,7 +1107,7 @@ view.add(pf, ...);
 TextArea
 ~~~~~~~~
 
-`TextArea` is the text component for editing and displaying multistring
+`TextArea` is the text component for editing and displaying multiline
 text.
 
 The properties and events of `TextArea` are identical to the `TextField`
@@ -1229,19 +1118,15 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var textArea = new TextArea();
+var textArea = new P.TextArea(text);
 ------------------------------
 
-where `
-
--------------------------
-    ` is text (optional).
--------------------------
+where `text` is text (optional).
 
 [source,Javascript]
 ------------------------------ 
-var textArea = new TextArea();
-view.add(textArea);
+var textArea = new P.TextArea();
+view.add(textArea, ...);
 ------------------------------
 
 [[htmlarea]]
@@ -1261,49 +1146,46 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var textArea = new HtmlArea();
+var textArea = new P.HtmlArea(text);
 ------------------------------
 
-where `
-
--------------------------
-    ` is text (optional).
--------------------------
+where `text` is text (optional).
 
 [source,Javascript]
 ------------------------------------- 
-var htmlArea = new HtmlArea();
+var htmlArea = new P.HtmlArea();
 htmlArea.text = "<p>Sample text</p>";
-view.add(htmlArea);
+view.add(htmlArea, ...);
 -------------------------------------
 
 [[model-widgets]]
 Model widgets
 -------------
 
-Model widgets are components, which can interact with the data model and
-respond to the model's datasets events.
+Model widgets are components, which can be binded with JavaScript objects.
 
-You can bind a model widgets to any data model entity dataset (including
-"parameters" entity). This dataset will change in response to the user
+You can bind a model widgets to any JavaScript object. This object will change in response to the user
 actions on the widgets and its changes will lead to automatic update of
 data displayed on all bound widgets.
 
-Configure specific properties for binding to data model, using
+Configure specific properties for binding to JavaScript object, using
 properties in the Model binding category.
 
-Scalar model widgets represents a single dataset object and its specific
-field. This data object is the object at the cursor position. Other more
-complex model widgets as `ModelGrid` and `ModelMap` can represent
-multiply objects in dataset and control the cursor in this dataset.
+Scalar model widgets represent a single JavaScript object and its specific
+field. `field` here means some data accessible by some property path begining with
+bound object. Property path is a string like a `cursor.customer.name`.
+Only dot separated property paths are supported.
+Other more complex model widget - `ModelGrid` can represent a JavaScript array.
 
 Scalar model widgets have the following common properties:
 
 [cols="<,<",options="header",]
 |=============================================
 |Property |Description
-|`field` |Bound model entity field.
+|`data`  |Bound JavaScript object.
+|`field` |Bound property path within a `data` object.
 |`value` |The current value for the component.
+|`nullable` |Nullable flag indicating, that clear button will be shonw to the right of the widget.
 |=============================================
 
 Scalar model widgets common events are listed in the following table:
@@ -1319,12 +1201,11 @@ handler is defined.
 
 |`onRender` |`RenderEvent` |Occurs when preparing the widget for
 displaying (both when it is used independently or as a `ModelGrid`
-widget cell). This event is cancelable: return `true` in its handler
-function to apply rendering and `false` otherwise.
+widget cell).
 |=======================================================================
 
 Any model widget can be presented as an independent component and as a
-`ModelGrid` widget cell. There is an "abstract" cell in each model
+`ModelGrid` cell's widget. There is an "abstract" cell in each model
 widget. It is available in the `onRender` event handlers.
 
 `RenderEvent` object specific propetries are listed in the following
@@ -1333,16 +1214,17 @@ table:
 [cols="<,<",options="header",]
 |=========================================
 |Property |Description
-|`id` |The primary key of the data object.
+|`object` |The data object being rendered.
 |`cell` |The "abstract" cell.
+|`column` |The grid's column node.
 |=========================================
 
 For such a `cell`, the following properties are defined:
 
 * `display` is the displayed text.
-* `style` is the `Style` of displaying.
+* `data` is the value of the cell.
 
-Model widgets also have the same basic properties and event as standard
+Model widgets also have the same basic properties and events as standard
 widgets. It is not recommended to specify handlers of low-level events
 (keyboard, mouse movement events, etc.) for model widgets.
 
@@ -1355,7 +1237,7 @@ The following example illustrates how to use `onSelect` event:
  * the cell's editor's value.
  *
  */
-function buttonOnSelect(aEditor) {
+form.button.onSelect = function(aEditor) {
   var selector = new PetSelector();
   selector.showModal(function(){
     aEditor.value = selector.pet;
@@ -1371,17 +1253,16 @@ function buttonOnSelect(aEditor) {
 /**
  * Renders a cell with complex data
  */
-function entityOnRender(evt) {
+form.cbCategory.onRender = function(evt) {
     var txt = '';
     categories.find(categories.schema.CAT_ID, evt.id)
         .forEach(function(aDoc) {
-           if(txt.length > 0) {
-            txt += ' ';
-           }
-          txt += aCat.NAME ? aDoc.NAME : '';
-          });
+             if(txt.length > 0) {
+                 txt += ' ';
+             }
+             txt += aCat.NAME ? aDoc.NAME : '';
+        });
     evt.cell.display = txt;
-    return true;
 }
 -----------------------------------------------------
 
@@ -1398,22 +1279,21 @@ Data types conversion rules are as follows:
 
 * Widget's value is displayed as `true` when actual data is the
 following values: Boolean type: `true`, Number type: any number other
-than `0` or `null`, String type: any string other than empty and `null`.
+than `0`, String type: any string other than empty.
 * Widget's `true` value is converted to various types as follows:
 Boolean: `true`, Number type: `1`, String type: `'true'`.
 * Widget's `false` value is converted to various types as follows:
 Boolean type: `false`, Number type: 0, String type: an empty string.
 
-To configure the widget model binding specifiy the field property for
-the component, select a parameter or a data model entity's field in the
-data model field selection form.
+To configure the widget binding specifiy the data and field properties for
+the component.
 
 To create a component of this type by program means, use the
 ModelCheckBox constructor:
 
 [source,Javascript]
 ------------------------------------- 
-var modelCheck = new ModelCheckBox();
+var modelCheck = new P.ModelCheckBox();
 -------------------------------------
 
 After creating, if necessary, set the properties and component event
@@ -1422,8 +1302,9 @@ handlers and add the component to the container:
 [source,Javascript]
 -----------------------------------------------
 
-modelCheck.field = model.entityA.schema.fieldA;
-view.add(modelCheck);
+modelCheck.data = model.entityA.cursor;
+modelCheck.field = 'fieldA';
+view.add(modelCheck, ...);
 -----------------------------------------------
 
 [[modelcombo]]
@@ -1432,7 +1313,7 @@ ModelCombo
 
 `ModelCombo` is a scalar model widget representing a combo box that is
 bound to some data model field. This widget uses other two fields of an
-entity to generate visual representation and syncronise it to the value.
+entity to generate visual representation and synchronize it to the value.
 As other model widgets, it holds and edits model's value and displays
 some other looked up value. It also allows you to select a value from a
 list. List items are also looked up while displaying.
