@@ -1134,6 +1134,7 @@ HtmlArea
 ~~~~~~~~
 
 `HtmlArea` is a component for editing and displaying HTML documents.
+It is a WYSIWYG html editor.
 
 When showing a form in web-browser, the editor area is displayed as HTML
 WYSIWYG editor.
@@ -1311,40 +1312,30 @@ view.add(modelCheck, ...);
 ModelCombo
 ~~~~~~~~~~
 
-`ModelCombo` is a scalar model widget representing a combo box that is
-bound to some data model field. This widget uses other two fields of an
-entity to generate visual representation and synchronize it to the value.
-As other model widgets, it holds and edits model's value and displays
-some other looked up value. It also allows you to select a value from a
-list. List items are also looked up while displaying.
+`ModelCombo` is a scalar model widget representing a lookup box that is
+bound to some data object and its property path. It holds and edits one
+value and displays some other looked up value. It allows you to select a
+value from a list or form a selection form. List items are also looked up
+while displaying.
 
 `ModelCombo` widget has the following specific properties:
 
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
-|`valueField` |Value field of the component.
+|`displayField` |Property path inside value or list items to be used to obtain data to be displayed.
 
-|`displayField` |Display field of the component.
+|`displayList` |Object to be used as lookup list.
 
-|`list` |`true` to allow selection from drop-down list and `false`
-otherwise.
+|`list` |`true` to allow selection from drop-down list and `false` otherwise.
 |=======================================================================
 
-To configure the widget model binding:
+To configure the widget's model binding:
 
-* Specify the field property for the component. Select a parameter or a
-data model entity field.
-* Specify the value field, i.e. the field, the values from which will be
-compared with the values of the list items, to do this, use the
-valueField property. Select a data model parameter or some entity field.
-The entity for this field must be the same as for displayField property,
-but different from the one specified for the `field` property.
-* Set the display field, i.e. a field, the values from which will be
-shown to the user. Use thedisplayField property. Select a data model
-parameter or a data model entity field. The entity for this field must
-be the same as for displayField property, but different from the one
-specified for the `field` property.
+* Specify the data property for the component.
+* Specify the field property for the component.
+* Specify the displayList property.
+* Specify the displayField property.
 * To allow selection of value from the list, enable the list property
 checkbox.
 * To allow a customized selection of the widget's value, specify
@@ -1355,7 +1346,7 @@ constructor:
 
 [source,Javascript]
 ---------------------------------- 
-var modelCombo = new ModelCombo();
+var modelCombo = new P.ModelCombo();
 ----------------------------------
 
 After creating, if necessary, set the properties and component event
@@ -1365,21 +1356,22 @@ handlers and add the component to the container:
 ----------------------------------------------------
 
 //Specify value field as a model parameter:
-modelCombo.field = model.params.schema.paramA;
+modelCombo.data = model.pets;
+modelCombo.field = 'cursor.owner';
 
 //Lookup fields:
-modelCombo.valueField = model.entityB.schema.id;
-modelCombo.displayField = model.entityB.schema.name;
+modelCombo.displayList = model.owners;
+modelCombo.displayField = 'ownerName';
 
-view.add(modelCombo);
+view.add(modelCombo, ...);
 ----------------------------------------------------
 
 [[modeldate]]
 ModelDate
 ~~~~~~~~~
 
-`ModelDate` is a scalar model widget representing a date and bound to
-some date or timestamp field in the model.
+`ModelDate` is a scalar model widget representing a timestamp and bound to
+some date or timestamp in some object.
 
 `ModelDate` widget has the following specific properties:
 
@@ -1387,25 +1379,24 @@ some date or timestamp field in the model.
 |=================================================================
 |Property |Description
 |`editable` |`true` if the date is editable and `false` otherwise.
-|`expanded` |`true` to show calndar panel and `false` otherwise.
+|`datePicker` |`true` if the date part is editable by popup window of date picker and `false` otherwise.
+|`timePicker` |`true` if the time part is editable by popup window of time picker and `false` otherwise.
 |=================================================================
 
 To configure the widget model binding:
 
-* Specify the field property. Select a parameter or a data model entity
-field in the form for selecting a data model entity field.
-* Configure the date and time format by selecting from the drop-down
-list.
-* Enable the expanded flag to display the calendar in an expanded form.
-To ensure that the widget is displayed correctly, set its dimensions
-according to its full-scale view.
+* Specify the data property for the component.
+* Specify the field property for the component.
+* Specify the date and time format. E.g. 
+* Enable the datePicker flag to display the calendar button on the right side of the widget.
+* Enable the timePicker flag to display the clock button on the right side of the widget.
 
 To create a component of this type by program means, use the ModelDate
 constructor:
 
 [source,Javascript]
 -------------------------------- 
-var modelDate = new ModelDate();
+var modelDate = new P.ModelDate();
 --------------------------------
 
 After creating, if necessary, set the properties and component event
@@ -1414,9 +1405,13 @@ handlers and add the component to the container:
 [source,Javascript]
 -------------------------------------------------
 
-modelDate.field = model.entityA.schema.dateField;
+modelDate.data = model.pets;
+modelDate.field = 'cursor.dateOfBirth';
+modelDate.format = 'dd.MM.yyyy';
+modelDate.datePicker = true;
+modelDate.timePicker = false;
 modelDate.editable = true;
-view.add(modelDate);
+view.add(modelDate, ...);
 -------------------------------------------------
 
 [[modelgrid]]
@@ -1424,145 +1419,127 @@ ModelGrid
 ~~~~~~~~~
 
 `ModelGrid` model widget is a powerful widget to display and enter data,
-which is presented in a tabular form and as a tree. `ModelGrid` widget
-is the most powerful UI component.
+which is presented in a tabular form and as a tree.
 
 ___________________________________________________________________________________________________________________
 *Note*
 
-At the current version of the platfom you can create and setup an
+At the current version of the platform you can create and setup an
 instance of `ModelGrid` only using visual editor.
 ___________________________________________________________________________________________________________________
 
-`ModelGrid` component has the following features:
+`ModelGrid` widget has the following features:
 
-* Entity's data representation as a columns and rows.
+* Array's data presentation as a cell view.
 * Data cells editing, inserting new and deleting rows.
-* Fixed non-scrollable rows and/or columns.
-* Service column with the cursor pointer.
-* Entity's data scrolling and cursor positioning.
-* Expandable dynamic columns.
-* Tree view of hierarchical data.
+* Frozen non-scrollable rows and/or columns.
+* Service columns with the cursor pointer, checkboxes and radiobuttons.
+* Multiple service column at a time.
+* Governing of data object cursor property while scrolling and user selection actions.
+* Tree view of rows with multiple columns as well.
 
 `ModelGrid` widget has the following specific properties:
 
 [cols="<,<,<,<",options="header",]
 |=======================================================================
-|Property |Layout |JS |Description
-|`border` |• |[multiblock cell omitted] |The component's border.
+|Property |Description
+|`frozenColumns` |The number of the non-scrollable grid columns.
 
-|`fixedColumns` |• |• |The number of the fixed grid columns.
+|`frozenRows` |The number of the non-scrollable grid rows.
 
-|`fixedRows` |• |• |The number of the fixed grid rows.
+|`gridColor` |The `Color` of the grid.
 
-|`gridColor` |• |• |The `Color` of the grid.
+|`oddRowsColor` |The `Color` of the grid's odd rows.
 
-|`oddRowsColor` |• |• |The `Color` of the grid's odd rows.
+|`rowsHeight` |The height of the grid's rows.
 
-|`rowsHeaderType` |• |• |The service column's type.
+|`showHorizontalLines` |`true` to show horizontal lines and `false` otherwise.
 
-|`rowsHeight` |• |• |The height of the grid's rows.
+|`showVerticalLines` |`true` to show vertical lines and `false` otherwise.
 
-|`showHorizontalLines` |• |• |`true` to show horizontal lines and
-`false` otherwise.
+|`showOddRowsInOtherColor` |`true` to show odd rows in the different color and `false` otherwise.
 
-|`showVerticalLines` |• |• |`true` to show vertical lines and `false`
-otherwise.
+|`deletable` |`true` to enable rows delete operation for the grid and `false` otherwise.
 
-|`showOddRowsInOtherColor` |• |• |`true` to show odd rows in the
-different color and `false` otherwise.
+|`editable` |`true` to enable cells edit operation for the grid and `false` otherwise.
 
-|`deletable` |• |• |`true` to enable rows delete operation for the grid
-and `false` otherwise.
+|`insertable` |`true` to enable rows insert operation for the grid and `false` otherwise.
 
-|`editable` |• |• |`true` to enable cells edit operation for the grid
-and `false` otherwise.
+|`data` |The bounded object/array for the grid rows.
 
-|`insertable` |• |• |`true` to enable rows insert operation for the grid
-and `false` otherwise.
+|`field` |Property path within data object to object/array for the grid rows.
+It might be omitted if data property points to actual grid's rows' array.
 
-|`entity` |• |[multiblock cell omitted] |The bounded model entity for
-the grid.
+|`childrenField` |See tree option.
 
-|`param2GetChildren` |• |[multiblock cell omitted] |See tree option.
+|`parentField` |See tree option.
 
-|`paramSourceField` |• |[multiblock cell omitted] |See tree option.
+|`selected` |All selected in grid elements of `data` array as an array.
 
-|`unaryLinkField` |• |[multiblock cell omitted] |See tree option.
-
-|`cells` |[multiblock cell omitted] |• |All grid cells as an array.
-
-|`selectedCells` |[multiblock cell omitted] |• |All selected grid cells
-as an array.
-
-|`columns` |[multiblock cell omitted] |• |Grid columns as an array.
+|`onRender` |Event handler, which will be called for each data
+grid cell, if a similar handler was not defined for theirs columns.
 |=======================================================================
 
 To configure `ModelGrid` properties:
 
-* To select the model entity for the component use the entity property
-under the Model binding propetries group. To delete the binding, clear
-the entity field.
-* Use the fixedColumns and fixedRows properties in the Apperance
+* Use the frozenColumns and frozenRows properties in the Apperance
 properties group to freeze the required number of columns on the left
 and/or rows on the top of the grid.
-* Configure the rowsHeaderType property to define appearance of the rows
-header. It has the following options: None — the service column is not
-displayed, Usual — the service column is displayed with the cursor icon,
-Check box — a check box control, which allows you to select multiple
-rows, Radio button — to show a radio button control, which allows you to
-select only one row of the grid.
+* Use service columns from designer's palette. There are service columns 
+of the following types:
+** Ordinary service column is displayed with the cursor icon.
+** Service column with check boxes allows you to select multiple
+rows
+** Service column with radio buttons allows you to select only one row of the grid.
 * Use the `onRender` event handler, which will be called for each data
-grid cell, if a similar handler was not defined for their columns.
+grid cell, if a similar handler was not defined for theirs columns.
+* If you whant to make a hierarchical view of rows, then you need to configure
+parentField and childrenField properties. They will be used to discover children rows of
+a particular row and to determine what is the parent row of the row.
 
 `ModelGridColumn` has the following properties:
 
 [cols="<,<,<,<",options="header",]
 |=======================================================================
-|Property |Layout |JS |Description
-|`enabled` |• |[multiblock cell omitted] |`true` if the column is
-enabled and `false` otherwise.
+|Property |Description
+|`title` |The column's title string.
 
-|`fixed` |• |[multiblock cell omitted] |`true` if the column is fixed
-and `false` otherwise.
+|`visible` |`true` the column is visible and `false` otherwise.
 
-|`readonly` |• |• |`true` the column is in a read-only mode and `false`
-otherwise.
-
-|`selectOnly` |• |[multiblock cell omitted] |`true` the column is in a
-select-only mode and `false` otherwise.
-
-|`title` |• |• |The column's title string.
-
-|`expandable` |• |[multiblock cell omitted] |See expandable option.
-
-|`visible` |• |• |`true` the column is visible and `false` otherwise.
-
-|`width` |• |• |The column's width in pixels.
-
-|`background` |• |[multiblock cell omitted] |The header style background
+|`background` |The header style background
 color.
 
-|`font` |• |[multiblock cell omitted] |The header style font.
+|`foreground` |The header style foreground
+color.
 
-|`field` |• |[multiblock cell omitted] |Model entity's field bound to
-this column.
+|`font` |The header font.
 
-|`columnsEntity` |• |[multiblock cell omitted] |See expandable option.
+|`maxWidth` |The maximum width of the column.
 
-|`columnsDisplayField` |• |[multiblock cell omitted] |See expandable
-option.
+|`minWidth` |The minimum width of the column.
 
-|`cellsEntity` |• |[multiblock cell omitted] |See expandable option.
+|`preferredWidth` |The preferred width of the column.
 
-|`cellsValueField` |• |[multiblock cell omitted] |See expandable option.
+|`width`|Readonly property, calculated by the grid according to columns widths automatic distribution algorithm.
 
-|`cellsColumnKeyField` |• |[multiblock cell omitted] |See expandable
-option.
+|`movable` |Flag indicating thst column can be moved by user.
 
-|`rowsKeyField` |• |[multiblock cell omitted] |See expandable option.
+|`resizable` |`true` if the column can be resized by user and `false`
+otherwise.
 
-|`substitute` |• |[multiblock cell omitted] |See expandable option.
+|`field` |Property path of rendered and edited value of the cell. Property path is accounted against data object of grid's row.
+
+|`sortable` |`true` if the grid's rows can be sorted by the column cells vales and `false` otherwise.
+
+|`sortField` |Property path within data object of grid's row to be used as sorting keys source while sorting by the column.
+
+|`readonly` |`true` if the column's cells is in a read-only mode and `false`
+otherwise.
+
+|`onRender` |Event handler, which will be called for each data
+grid cell within the column.
+
+|`onSelect` |Value selection handler, which will be called while user clicks on select button on the right side of edited cell.
 |=======================================================================
 
 `ModelGrid` has ability to change it's cells' display style and to
@@ -1579,22 +1556,19 @@ as children of `ModelGrid` component node and allows you to edit them.
 To add, remove and configure grid columns:
 
 * To fill all `ModelGrid` columns corresponding to the fields of the
-linked data model entity, select Fill columns — in this case, link to
-the entity fields will be performed automatically.
+linked data model entity, select Fill columns. In this case, columns'
+binding will be performed automatically.
 * To manually add a column to `ModelGrid` drag it from the components
-palette or add it using Add from palette Model-aware controls Model grid
-columncontext menu item in form inspector.
+palette or add it using Add from palette context menu in form inspector.
 * To add a column as a child to another column use parent column's node
-Add from palette Model-aware controls Model grid column context menu
-item in form inspector.
+Add from palette of from context menu in form inspector.
 * Move the selected columns up and down using the Move up, Move down or
 Change Order context menu items or by draggining it by mouse.
 
-In standard mode a column represents entity's field data. To configure
-the column in standard mode:
+To configure bind a column to data:
 
-* Specify the bound entity's field, to which the column should be
-linked. To do this, use the field property and select a field from the
+* Specify the field property, to which the column should be
+bound. To do this, use the field property and select a field from the
 bound entity.
 * Define a widget, which will be used for displaying in the column
 cells. Select its type from the view context menu of the column's node
@@ -1603,49 +1577,7 @@ linked entity field. Set the properties of the corresponding widget (see
 the corresponding sections for the description of the model widget
 setting procedure).
 
-In expanded mode, a column can contain an arbitrary number of child
-columns. Their combination can be changed dynamically at runtime.
-
-image:images/expandableTables.png[Expandable columns data tables]
-
-image:images/expandableResult.png[Expandable column result grid]
-
-The combination of dynamic children columns is determined by a special
-column entity in the data model. Values for the child column cells are
-determined by another cell entity, the objects of which also contain
-references to objects in the main entity (grid's rows source) and to the
-column entity objects.
-
-image:images/gridFilpColumnsDatasource.png[Expandable column entities]
-
-Use the following `ModelGridColumn` propeties to configure an expandable
-column:
-
-[cols="<,<",options="header",]
-|=======================================================================
-|Property |Description
-|`expandable` |`true` if the column is in a expanded mode and `false`
-otherwise.
-
-|`substitute` |`true` to hide the parent column and `false` otherwise.
-
-|`columnsEntity` |Columns entity representing data to form columns.
-
-|`columnsDisplayField` |The field in Columns entity for dynamic columns
-titles.
-
-|`cellsEntity` |Cells entity.
-
-|`cellValueField` |The value field in Cells entity.
-
-|`cellColumnKeyField` |The field in Cells entity refering to the primary
-key in Columns entity.
-
-|`cellRowKeyField` |The field in Cells entity refering to the primary
-key in Main entity.
-|=======================================================================
-
-The widget can be configured to display a tree structure in the first
+ModelGrid widget can be configured to display a tree structure in the first
 column on the left (next to the service column). Other columns in this
 grid are displayed as usual.
 
@@ -1654,167 +1586,19 @@ some other field, thus forming a hierarchical data structure.
 
 image:images/gridTree.png[Hierarchical data dataset]
 
-A tree structure in the grid can function in two modes:
-
-* The simple mode, in which all tree levels are loaded by a single
-query.
-* The lazy mode, in which each level is loaded as the nodes are
-expanded.
-
-_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-*Note*
-
-The simple tree operation mode is acceptable only for small sets of
-data, since in this mode all tree elements are requested simultaneously
-and it can lead to the performance problems and slow user interface. For
-large data sets, use the lazy tree operation mode.
-_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-
-To configure a tree in the simple mode:
-
-* Specify a value for the `unaryLinkField` property. For this property
-select the link source field, which is responsible for hierarchical
-relationships, in the example figure above it is the `ParentID` field.
-To remove the selection, clear the property.
-
-_____________________________________________________________________________________________
-*Important*
-
-The link source field should be in the same data set as configured as
-the grid's rows source.
-_____________________________________________________________________________________________
-
-To use a lazy tree grid, create an entity based on a query, which
-returns child elements by the parent identifier passed as a parameter,
-for example:
-
-[source,Sql]
----------------------------------------------- 
-/**
- * @name LazyTree
- */
-SELECT * FROM tree_table t
-WHERE t.PARENT_ID = :parentId
-OR (:parentId IS NULL AND t.PARENT_ID IS NULL)
-----------------------------------------------
-
-To configure lazy tree for `ModelGrid`:
-
-* Specify `unaryLinkField` property. For this property select the link
-source field, which is responsible for hierarchical relationships, in
-the example figure above it is the `ParentID` field.
-* Set `param2GetChildren` property. Select the entity's parameter that
-is responsible for fetching child records. In the code snippet above
-this corresponds to `:parentId` parameter.
-* Set `paramSourceField` property. Select the field that will be used as
-a source for the parameter to get child records. The field's value will
-provided to the parameter specified by `param2GetChildren` property. In
-the example above this property should be set to `ID` primary key field.
-
-[[modelimage]]
-ModelImage
-~~~~~~~~~~
-
-`ModelImage` is a scalar model widget to display an image. The state of
-this component is linked to a field of the data model, which contains
-binary data of the image in one of the following formats: GIF, JPEG,
-PNG. This field usually corresponds to the BLOB type in the database.
-
-______________________________________________________________________________________________
-*Note*
-
-In the current Platypus Platform version, this component is supported
-only in the J2SE client.
-______________________________________________________________________________________________
-
-`ModelImage` widget has the following specific properties:
-
-[cols="<,<",options="header",]
-|=======================================================================
-|Property |Description
-|`editable` |`true` if the image is editable and `false` otherwise.
-
-|`plain` |`true` if image is displayed with real dimensions and not
-scaled. If true, the image is not fitted by its size and can't be scaled
-with the mouse wheel and `false` otherwise.
-|=======================================================================
-
-To configure the widget:
-
-* Set the entity property for the component, using the field property on
-the properties panel; select the data model parameter or data model
-entity property in the dialog.
-* Set the `plain` property to prevent image scaling.
-
-To upload an image or other binary file into the database, open the file
-selection dialog in the component selection event handler. In the
-handler, assign a file byte array to the `value` property of the
-ModelImage control. Then the contents of the file be added to the
-control and the corresponding entity field will be changed. If you later
-request saving of the `model.save()` model, the file contents will by
-saved by the model in usual way.
-
-[source,Javascript]
----------------------------------------- 
-modelImage.onSelect = function(aEditor){
-    selectFile(functon (file) {
-      aEditor.value = readFile(file);
-    });
-}
-----------------------------------------
-
-To create a component of this type by program means, use the ModelImage
-constructor:
-
-[source,Javascript]
----------------------------------- 
-var modelImage = new ModelImage();
-----------------------------------
-
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
-
-[source,Javascript]
------------------------------------------------
-
-modelImage.field = model.entityA.schema.images;
-view.add(modelImage);
------------------------------------------------
-
 [[modelformattedfield]]
 ModelFormattedField
 ~~~~~~~~~~~~~~~~~~~
 
-`ModelFormattedField` is a scalar model widget, the state of which is
-linked to a field of the data model string or number type. The widget
-can be used to display and enter text. You can apply specified
-formatting to the displayed value and impose restrictions on entered
-data.
+`ModelFormattedField` is the same widget as `FormattedField` widget with ability of binding.
+<<formattedfield,See `FormattedField` widget>>
 
-`ModelFormattedField` widget has the following specific properties:
-
-[cols="<,<",options="header",]
-|=======================================================================
-|Property |Description
-|`format` |Format string, check Java`java.util.Formatter` documentation.
-|=======================================================================
-
-To configure the widget:
-
-* Set the entity property for the component, using the field property on
-the properties panel; select the data model parameter or data model
-entity property in the dialog.
-* If necessary, set handlers for selection and data changing events.
-* Configure the format of displaying by setting a value for the format
-property; see the section dedicated to the FormattedField widget for
-information on using this property.
-
-To create a component of this type by program means, use the
+To create a widget of this type by program means, use the
 ModelFormattedField constructor:
 
 [source,Javascript]
 ------------------------------------ 
-var mff = new ModelFormattedField();
+var mff = new P.ModelFormattedField();
 ------------------------------------
 
 After creating, if necessary, set the properties and component event
@@ -1823,7 +1607,8 @@ handlers and add the component to a container:
 [source,Javascript]
 -------------------------------------------
 
-mff.field = model.entityA.schema.dateField;
+mff.data = model.entityA;
+mff.field = 'cursor.timeOfDeath';
 mff.format = "dd.MM.yyyy HH:mm:ss";
 view.add(mff);
 -------------------------------------------
@@ -1869,89 +1654,13 @@ mta.field = model.entityB.schema.textField;
 view.add(mta);
 -------------------------------------------
 
-[[modelmap]]
-ModelMap
-~~~~~~~~
-
-`ModelMap` widget is used to display a map and objects on it. This
-widget displays a map by loading bitmap tiles from the network using a
-given URL. An arbitrary number of layers are imposed upon the map to
-display objects.
-
-The map component allows you to position the map, change its scale, turn
-layers on and off, select objects, etc.
-
-___________________________________________________________________________________________________
-*Note*
-
-In the current Platypus Platform version, this widget is supported only
-in the J2SE desktop client.
-___________________________________________________________________________________________________
-
-Coordinates and shapes of the displayed objects should be presented
-using the "Geometry" data type. The layer entity should contain one
-column of the "Geometry" type and an arbitrary number of columns
-containing additional attributes.
-
-Each layer should have an assigned entity, which contains information
-about objects. One entity can be linked with one or more layers. If the
-entity is linked with several layers, a field with information about
-entity instance belonging to the layer should be defined. In this case,
-each layer should have its own identifier for this field. A layer
-identifier must be a positive integer.
-
-`ModelMap` widget has the following specific properties:
-
-[cols="<,<",options="header",]
-|===================================
-|Property |Description
-|`backingUrl` |URL for tiles source.
-|===================================
-
-To configure the map:
-
-* Specify the map title by filling out the Title field.
-* Link the data model parameter to the map scale: to do this, click the
-select button next to the Zoom factor parameter field, on the form for
-selecting a data model field choose the data model parameter; to remove
-the parameter link, click the clear button.
-* Provide a description of the coordinate system used by the map in the
-well known text format (WKT). To do this, fill out the Geographic CRS
-WKT field. This text should also contain projected `CRS` definition.
-* Specify the map event handler by filling out the Map event listener
-field — an event handler will be created.
-
-The backingURL and Geographic CRS WKT values are specific for map tiles
-providers, such as Open Street Map:
-
-* An example of value for
-backingURL:`http://%s.tile.openstreetmap.org/%d/%d/%d.png`
-* An example of value for Geographic CRS WKT:
-`PROJCS["WGS 84 / World Mercator",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.01745329251994328,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],UNIT["metre",1,AUTHORITY["EPSG","9001"]],PROJECTION["Mercator_1SP"],PARAMETER["central_meridian",0],PARAMETER["scale_factor",1],PARAMETER["false_easting",0],PARAMETER["false_northing",0],AUTHORITY["EPSG","3395"],AXIS["X",EAST],AXIS["Y",SOUTH]]`
-
-To create a component of this type by program means, use the ModelMap
-constructor:
-
-[source,Javascript]
------------------------------- 
-var modelMap = new ModelMap();
-------------------------------
-
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
-
-[source,Javascript]
-------------------- 
-view.add(modelMap);
--------------------
-
 [[modelspin]]
 ModelSpin
 ~~~~~~~~~
 
 `ModelSpin` is a scalar model widget, the state of which is linked to a
-field of a data model entity of number type. One can input numbers
-either from the keyboard or using buttons to increase/decrease values.
+value of number type. One can input numbers either from the keyboard or
+using buttons to increase/decrease values.
 
 `ModelSpin` widget has the following specific properties:
 
@@ -1976,7 +1685,7 @@ constructor:
 
 [source,Javascript]
 -------------------------------- 
-var modelSpin = new ModelSpin();
+var modelSpin = new P.ModelSpin();
 --------------------------------
 
 After creating, if necessary, set the properties and component event
@@ -1985,8 +1694,9 @@ handlers and add the component to the container:
 [source,Javascript]
 ----------------------------------------------
 
-modelSpin.field = model.entityC.schema.fieldC;
-view.add(modelSpin);
+modelSpin.data = model.entityC;
+modelSpin.field = 'cursor.count';
+view.add(modelSpin, ...);
 ----------------------------------------------
 
 [[containers]]
