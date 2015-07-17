@@ -1703,12 +1703,11 @@ view.add(modelSpin, ...);
 Containers
 ----------
 
-Containers are components, which can contain other components e.g.
-widgets or other containers and control their child components size and
+Containers are widgets, which can contain other widgets e.g.
+widgets or other containers and control their child widgets size and
 location.
 
-Containers are represented as panel component with specific layout in
-the visual editor.
+In the visual editor Containers are represented as panel component with specific layout.
 
 The layout of a panel can be changed using the editor. At runtime, panel
 with particular layout will be replaced by the corresponding container.
@@ -1721,17 +1720,17 @@ The common methods for all containers:
 [cols="<,<",options="header",]
 |==============================================================
 |Method |Description
-|`remove(сomponent)` |Removes a child component
-|`child(index)` |Returns a child component by its numeric index
+|`remove(widget)` |Removes a child widget
+|`child(index)` |Returns a child widget by its numeric index
 |`clear()` |Removes all child components
 |==============================================================
 
-The common property all containers:
+The common property of all containers:
 
 [cols="<,<",options="header",]
 |===================================================
 |Property |Description
-|`сount` |The number of child components (read-only)
+|`count` |The number of child components (read-only)
 |===================================================
 
 [[anchorspane]]
@@ -1751,7 +1750,7 @@ defining Left, Top, Right, Bottom anchors and Width and Height settings
 of the component. You can specify two of the three properties by the
 horizontal and vertical axis.
 
-Аt the same time can be set two anchors or one anchor and one dimension
+At the same time can be set two anchors or one anchor and one dimension
 values. The set properties are fixed and maintained when changing
 dimensions of the container. If the property is not defined, it is
 stretched along with the dimensions of the container.
@@ -1760,7 +1759,7 @@ Use AnchorsPane constructor in form's JavaScript code:
 
 [source,Javascript]
 ----------------------------- 
-var pane = new AnchorsPane();
+var pane = new P.AnchorsPane();
 -----------------------------
 
 To add child components to the container, use the add method and pass a
@@ -1769,18 +1768,18 @@ method.
 
 [source,Javascript]
 ------------- 
-pane.add(, );
+pane.add(widget, anchors);
 -------------
 
-where component is a component to add, anchors is an object of the
+where widget is a component to add, anchors is an object of the
 Anchors type.
 
 [source,Javascript]
 --------------------------------------------------------
 
-var pane = new AnchorsPane();
-var comp = new Button("Sample");
-pane.add(comp, new Anchors(12, null, 14, 22, null, 24));
+var pane = new P.AnchorsPane();
+var comp = new P.Button("Sample");
+pane.add(comp, new P.Anchors(12, null, 14, 22, null, 24));
 --------------------------------------------------------
 
 In the above example a button with the specified Left, Right, Top, and
@@ -1794,17 +1793,16 @@ the corresponding anchor as parameters:
 
 [source,Javascript]
 ------------------------------- 
-var anchors = new Anchors(, , ,
-            , , );
+var anchors = new Anchors(left, width, right, top, height, bottom);
 -------------------------------
 
 where left is a left anchor, width is width, right is a right anchor,
 top is a top anchor, height is height, bottom is a bottom anchor.
 
-Each anchor can be specified in pixels; to do this, define an anchor
-using a number or string with the " `px`" symbols added, for example:
-`100`, "`100px`". To specify an anchor in percents, define an anchor
-using a string with the "`%`" symbol added, for example: "`30%`".
+Each anchor can be specified in pixels. To do this, define an anchor
+using a number or string with the " `px`" symbols added. For example:
+`100`, "`100px`" mean the same anchor. To specify an anchor in percents,
+define an anchor using a string with the "`%`" symbol added, for example: "`30%`".
 
 According to the rules of anchor layout, you can define two anchor
 values per coordinate.
@@ -1814,10 +1812,10 @@ corresponding parameter, for example:
 
 [source,Javascript]
 ----------------------------------------- 
-var anchors = new Anchors(100, 200, null,
+var anchors = new P.Anchors(100, 200, null,
             100, 100, null);
-var panel = new AnchorsPane();
-panel.add(new Label("Test"), anchors);
+var panel = new P.AnchorsPane();
+panel.add(new P.Label("Test"), anchors);
 -----------------------------------------
 
 There's also alternative syntax for adding a child component: pass the
@@ -1827,8 +1825,8 @@ with the same execution results:
 
 [source,Javascript]
 -------------------------------- 
-var pane = new AnchorsPane();
-var comp = new Button("Sample");
+var pane = new P.AnchorsPane();
+var comp = new P.Button("Sample");
 pane.add(comp, 
   {
     left : 12,
@@ -1861,7 +1859,7 @@ Use BorderPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 -------------------------------------- 
-var pane = new BorderPane(hgap, vgap);
+var pane = new P.BorderPane(hgap, vgap);
 --------------------------------------
 
 where `hgap` is the horizontal gap (optional) and `vgap` is the vertical
@@ -1871,10 +1869,10 @@ To add child components to the container, use add instance method:
 
 [source,Javascript]
 --------------- 
-pane.add(, , );
+pane.add(widget, place, size);
 ---------------
 
-where component is a component to add, place is an instance of a
+where widget is a component to add, place is an instance of a
 `HorizontalPosition` or `VerticalPosition` constants, determining the
 region (optional) and size is the size of the component by the provided
 place direction (optional).
@@ -1885,67 +1883,12 @@ add to this container two child components:
 [source,Javascript]
 ------------------------------------------------
 
-var pane = new BorderPane();
-var topComp = new Button("Top");
-pane.add(topComp, VerticalPosition.TOP);
-var bottomComp = new Button("Bottom");
-pane.add(bottomComp, VerticalalPosition.BOTTOM);
+var pane = new P.BorderPane();
+var topComp = new P.Button("Top");
+pane.add(topComp, P.VerticalPosition.TOP);
+var bottomComp = new P.Button("Bottom");
+pane.add(bottomComp, P.VerticalalPosition.BOTTOM);
 ------------------------------------------------
-
-[[asolutepane]]
-AsolutePane
-~~~~~~~~~~~
-
-`AbsolutePane` is a lightweight container with the absolute positioning,
-e.g. without layout rules.
-
-The absolute layout positons child components using its explicit
-position and dimensions.
-
-It is generally not recommended to use this layout, because when
-changing the dimensions of the container, the position of its components
-is not changed or you'll have to recalculate positions and sizes by your
-program. However, in some cases, using this layout makes sense, for
-example, when creating a simple animation.
-
-Set X, Y, width and height parameters for each component in the
-container. To do this, select a component and set values for the X, Y,
-Width and Height fields on the properties panel in the Layout properties
-group. The Preferred value allows you to set the automatic calculation
-of width and height of the components according to their content.
-
-Use AbsolutePane constructor to create this container in JavaScript
-code:
-
-[source,Javascript]
------------------------------- 
-var pane = new AbsolutePane();
-------------------------------
-
-To add child components to the container, use add instance method:
-
-[source,Javascript]
-------------- 
-pane.add(, );
--------------
-
-where component is a component to add and pos is an JavaScript object
-with the `left`, `width`, `top`, `height` properties.
-
-The following example shows how to create an `AbosolutePane` container
-and add to this container to the components tree:
-
-[source,Javascript]
--------------------------------- 
-var pane = new AboslutePane();
-var comp = new Button("Sample");
-pane.add(comp, {
-    left : 100,
-    right : 150,
-    width : 32,
-    height : 32
-});
---------------------------------
 
 [[gridpane]]
 GridPane
@@ -1957,7 +1900,7 @@ intended for static UI designs.
 `GridPane` lays components out by the grid, all columns must have the
 same width and all rows must have the same height.
 
-image:images/gridLayout.png[Grid Layout — arranging by a grid]
+image:images/gridLayout.png[Grid Layout arranging widgets by a grid]
 
 To set the number of columns and rows and the vertical and horizontal
 interval between cells, select the GridLayout node in the component tree
@@ -1973,11 +1916,11 @@ Use GridPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 -------------------------------- 
-var pane = new GridPane(, , , );
+var pane = new GridPane(rows, cols, hgap, vgap);
 --------------------------------
 
 Where rows is the number of grid rows, cols is the number of grid
-columns, hgap is the horizontal gap (optional) and vgap vgap the
+columns, hgap is the horizontal gap (optional) and vgap is the
 vertical gap (optional).
 
 To add child components to the container, use add instance method, which
@@ -1985,33 +1928,33 @@ adds a component to the next avaliable position:
 
 [source,Javascript]
 ----------- 
-pane.add();
+pane.add(widget, row, column);
 -----------
 
-where component is a component to add.
+where widget is a component to add, row is the vertical position, the widget to added to and column is the horizontal position.
 
 Use `child` method to get an child component at the specified row and
 column, if the target position is empty the method will return `null`:
 
 [source,Javascript]
 -------------------------- 
-var comp = pane.child(, );
+var comp = pane.child(row, column);
 --------------------------
 
 where row is the row of the component and column is the column of the
 grid position.
 
-The following example shows how to create an `GridPane` container:
+The following example shows how to create an `GridPane` container by program means:
 
 [source,Javascript]
 ------------------------------ 
-var pane = new GridPane(3, 1);
-var comp1 = new Button("1");
-var comp2 = new Button("2");
-var comp3 = new Button("3");
-pane.add(comp1);
-pane.add(comp2);
-pane.add(comp3);
+var pane = new P.GridPane(3, 1);
+var comp1 = new P.Button("1");
+var comp2 = new P.Button("2");
+var comp3 = new P.Button("3");
+pane.add(comp1, 0, 0);
+pane.add(comp2, 1, 0);
+pane.add(comp3, 2, 0);
 ------------------------------
 
 [[flowpane]]
@@ -2025,13 +1968,13 @@ components are calculated according to their content (component
 preferences). If the component doesn't fit into a row, it is transferred
 to the next line.
 
-image:images/flowLayout.png[Flow Layout — arranging into a line]
+image:images/flowLayout.png[Flow Layout arranging into a line]
 
 Use FlowPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 ---------------------------- 
-var pane = new FlowPane(, );
+var pane = new P.FlowPane(hgap, vgap);
 ----------------------------
 
 Where hgap is the horizontal gap (optional) and vgap vgap the vertical
@@ -2041,18 +1984,18 @@ To add child components to the container, use add instance method:
 
 [source,Javascript]
 ----------- 
-pane.add();
+pane.add(widget);
 -----------
 
-where component is a component to add.
+where widget is a component to add.
 
 The following example shows how to create an `FlowPane` container and
 add this container to its parent container:
 
 [source,Javascript]
 -------------------------------- 
-var pane = new FlowPane();
-var comp = new Button("Sample");
+var pane = new P.FlowPane();
+var comp = new P.Button("Sample");
 pane.add(comp);
 --------------------------------
 
@@ -2063,25 +2006,21 @@ CardPane
 `CardPane` is a lightweight container with the card layout.
 
 Card layout allows you to arrange components as a stack of cards, one
-above the other; only the top component is visible. This layout manager
-is usually used to create a step-by-step wizard.
+above the other. Only the top component is visible. This layout manager
+is usually used to create a step-by-step wizards.
 
 Each component has an assigned card name, which can be set on the
 component properties panel in the Card Name field of the Layout
 properties group. This name can be used later to select a visible
 component.
 
-To select a visible component, use show(cardName) method, where `
-
------------------------
-    ` is the card name.
------------------------
+To select a visible component, use show(cardName) method, where cardName is the card name.
 
 Use CardPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 ---------------------------- 
-var pane = new CardPane(, );
+var pane = new P.CardPane(hgap, vgap);
 ----------------------------
 
 Where hgap is the horizontal gap (optional) and vgap vgap the vertical
@@ -2091,23 +2030,23 @@ To add child components to the container, use add instance method:
 
 [source,Javascript]
 ------------- 
-pane.add(, );
+pane.add(widget, cardName);
 -------------
 
-where component is a component to add and cardName is the name of the
+where widget is a component to add and cardName is the name of the
 card.
 
 The following example shows how to create an `FlowPane` container and
-add this container to the components tree:
+add this container to the widgets tree:
 
 [source,Javascript]
 ----------------------------------------- 
-var pane = new CardPane();
-var compA = new Button("SampleA");
+var pane = new P.CardPane();
+var compA = new P.Button("SampleA");
 pane.add(comp, "A");
-var compB = new Button("SampleB");
+var compB = new P.Button("SampleB");
 pane.add(comp, "B");
-var compC = new Button("SampleC");
+var compC = new P.Button("SampleC");
 pane.add(comp, "C");
 
 pane.show("B");//Shows the SampleB button
@@ -2117,7 +2056,7 @@ pane.show("B");//Shows the SampleB button
 BoxPane
 ~~~~~~~
 
-`BoxPane` is a lightweight container with the box layout.
+`BoxPane` is a lightweight container with the vertical or horizontal box layout.
 
 The box layout arranges components in the order, in which they were
 added to the container, one after the other, back to back.
@@ -2135,38 +2074,49 @@ Use BoxPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 ------------------------- 
-var pane = new BoxPane();
+var pane = new P.BoxPane(orientation, hgap, vgap);
 -------------------------
 
-Where orientation is a value of `Orientation.HORIZONTAL` or
-`Orientation.VERTICAL` constants (optional). By default
-`Orientation.HORIZONTAL` orientation is specified.
+Where orientation is a value of `P.Orientation.HORIZONTAL` or
+`P.Orientation.VERTICAL` constants (optional). By default
+`P.Orientation.HORIZONTAL` orientation is specified.
+If orientation is specified as P.Orientation.HORIZONTAL hgap is horizontal
+gap between child widgets and it is ignored otherwise.
+If orientation is specified as P.Orientation.VERTICAL vgap is vertical
+gap between child widgets and it is ignored otherwise.
 
 To add child components to the container, use add instance method:
 
 [source,Javascript]
 ----------- 
-pane.add();
+pane.add(widget);
 -----------
 
-where component is a component to add.
+where widget is a widget to add.
 
-The following example shows how to create an `BoxPane` instance and add
-a component to this container:
+The following example shows how to create a `BoxPane` instance and add
+a widget to this container:
 
 [source,Javascript]
 ---------------------------------------------
 
-var pane = new BoxPane(Orientation.VERTICAL);
-var comp = new Button("Sample");
+var pane = new P.BoxPane(P.Orientation.VERTICAL, 0, 20);// vertical box with 20 pixels vertical gap
+var comp = new P.Button("Sample");
 pane.add(comp);
 ---------------------------------------------
+
+NOTE: Take into accout, that changing of orientation in box pane will rearrange child widgets,
+but theirs widths and heights will remain unchanged if it will be allowed by thne container. E.g.
+if you've got a horizontal box with defferent widths of child widgets and then you will change
+orientation to P.Orientation.VERTICAL, then all child widgets heights will remain equal to height
+if the cintainer and widths will be changed to fit container's width. Of course you may reassign
+heights of child widgets is such case and layout will become pretty again.
 
 [[tabbedpane]]
 TabbedPane
 ~~~~~~~~~~
 
-`TabbedPane` component allows the user to switch between a group of
+`TabbedPane` container allows the user to switch between a group of
 components by clicking tabs with titles and icons.
 
 Component's specific properties:
@@ -2175,7 +2125,7 @@ Component's specific properties:
 |===========================================
 |Property |Description
 |`selectedComponent` |Active tab's component
-|`selectedComponentIndex` |Active tab index
+|`selectedIndex` |Active tab index
 |===========================================
 
 Component's specific events:
@@ -2183,36 +2133,36 @@ Component's specific events:
 [cols="<,<,<",options="header",]
 |=======================================================
 |Event |Event type |Description
-|`onStateChanged` |`ComponentEvent` |Tab switching event
+|`onItemSelected` |`ComponentEvent` |Tab switching event
 |=======================================================
 
-To create a component of this type by program means, use the TabbedPane
+To create a widget of this type by program means, use the TabbedPane
 constructor:
 
 [source,Javascript]
 ---------------------------- 
-var pane = new TabbedPane();
+var pane = new P.TabbedPane();
 ----------------------------
 
-To add child components to the container, use the add method and pass a
-child component as well as a tab title and an optional icon setting as
+To add child widgets to the container, use the add method and pass a
+child widget as well as a tab title and an optional icon as
 parameters to this method:
 
 [source,Javascript]
 --------------- 
-pane.add(, , );
+pane.add(widget, text, icon);
 ---------------
 
-where component is a component to add, text is the tab's label text,
+where widget is a component to add, text is the tab's label text,
 icon is the tab's label icon (optional).
 
 An example of code using the `TabbedPane` container:
 
 [source,Javascript]
 ----------------------------- 
-var pane = new TabbedPane();
-var tab1 = new AnchorsPane();
-var tab2 = new AnchorsPane();
+var pane = new P.TabbedPane();
+var tab1 = new P.AnchorsPane();
+var tab2 = new P.AnchorsPane();
 pane.add(tab1, "Tab 1");
 pane.add(tab2, "Tab 2");
 -----------------------------
@@ -2222,12 +2172,13 @@ SplitPane
 ~~~~~~~~~
 
 `SplitPane` container is used to display two (and only two) splitted
-components; the user can change their size by moving the separator.
+components. The user can change their size by moving the separator.
 
 Split pane setup in form editor:
 
-* Drag-and-drop a container of the type from the palette, exactly two
-components to be added.
+* Drag-and-drop a container of the type from the palette.
+* Drag one widget to be displayed as the first widget of SplitPane.
+* Drag another widget to be displayed as the second widget of SplitPane.
 
 The specific properties of the `SplitPane`:
 
@@ -2247,12 +2198,12 @@ The specific properties of the `SplitPane`:
 |`secondComponent` |The second component of the container.
 |=======================================================================
 
-To create a component of this type by program means, use the SplitPane
+To create a widgets of this type by program means, use the SplitPane
 constructor with an optional parameter for specifying orientation:
 
 [source,Javascript]
 --------------------------- 
-var pane = new SplitPane();
+var pane = new P.SplitPane(orientation);
 ---------------------------
 
 where orientation is an object of the Orientation type, which defines
@@ -2264,17 +2215,18 @@ As an alternative to the `firstComponent` and
 
 [source,Javascript]
 ----------- 
-pane.add();
+pane.add(firstWidget);
+pane.add(secondWidget);
 -----------
 
-where component is the first and then the second component to add.
+where firstWidget and secondWidget are the first and then the second widget to add.
 
 [source,Javascript]
 -----------------------------------------------
 
-var pane = new SplitPane(Orientation.VERTICAL);
-var comp1 = new AnchorsPane();
-var comp2 = new AnchorsPane();
+var pane = new P.SplitPane(P.Orientation.VERTICAL);
+var comp1 = new P.AnchorsPane();
+var comp2 = new P.AnchorsPane();
 pane.firstComponent = comp1;
 pane.secondComponent = comp2;
 -----------------------------------------------
@@ -2287,40 +2239,41 @@ ScrollPane
 Usually another container is added to this one, using `ScrollPane` as a
 wrapper.
 
-Specific properties of the container:
+The specific properties of the `ScrollPane`:
 
 [cols="<,<",options="header",]
-|============================
+|=======================================================================
 |Property |Description
-|`view` |A wrapped component.
-|============================
+|`view`|Single child widget - content of the ScrollPane.
 
-To create a component of this type by program means, use the ScrollPane
+|`horizontalScrollBarPolicy` |Horizontal scroll bar policy of the container.
+P.ScrollBarPolicy.AUTO or P.ScrollBarPolicy.NEVER or P.ScrollBarPolicy.ALLWAYS
+can be assigned to this property to specify scroll bars appearance.
+
+|`verticalScrollBarPolicy` |Vertical scroll bar policy of the container.
+P.ScrollBarPolicy.AUTO or P.ScrollBarPolicy.NEVER or P.ScrollBarPolicy.ALLWAYS
+can be assigned to this property to specify scroll bars appearance.
+|=======================================================================
+
+To create a widget of this type by program means, use the ScrollPane
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------ 
-var pane = ScrollPane();
+var pane = P.ScrollPane(view);
 ------------------------
 
-where component is a component, which is added inside the scroll panel
+where view is a widget, which is added inside the scroll panel
 (optional).
 
-You also can use the view property, for example:
-
-[source,Javascript]
-------------- 
-pane.view = ;
--------------
-
-Alternatively you can add one child component to the container using the
+You can add one child component to the container using the
 add method, for example:
 
 [source,Javascript]
 ------------------------------- 
-var wrapper = new ScrollPane();
-var pane = new AnchorsPane();
-wrapper.add(pane);
+var scroll = new P.ScrollPane();
+var view = new P.AnchorsPane();
+scroll.add(view);
 -------------------------------
 
 [[toolbar]]
@@ -2334,42 +2287,41 @@ Toolbars are intended to display a set of buttons (usually without
 labels, but with tooltips and small, clearly visible icons) which
 trigger the most frequently used application actions.
 
-Components in the toolbar are stacked one-to-one according to the
-applied orientation.
+Widgets in the toolbar are placed in horizontal box one-by-one.
 
 To create a component of this type by program means, use the ToolBar
 constructor:
 
 [source,Javascript]
 ---------------------------- 
-var toolbar = new ToolBar();
+var toolbar = new P.ToolBar();
 ----------------------------
 
-where floatable is `true` when the tool bar can be moved and `false`
-otherwise (optional). By default set to `false`.
-
 To add child components to the container, use the add method and pass a
-child component as well as a tab title and an optional icon setting as
-parameters to this method:
+child widget:
 
 [source,Javascript]
 ----------- 
-pane.add();
+pane.add(widget);
 -----------
 
-where component is the component to add.
+where widget is the component to add.
 
 For example:
 
 [source,Javascript]
 ----------------------------- 
-var toolbar = new ToolBar();
-var b1 = new Button();
-b1.icon = Icon.load("1.png");
+var toolbar = new P.ToolBar();
+var b1 = new P.Button();
 pane.add(b1);
-var b2 = new Button();
-b2.icon = Icon.load("2.png");
+P.Icon.load("1.png", function(aLoaded){
+    b1.icon = aLoaded;
+});
+var b2 = new P.Button();
 pane.add(b2);
+P.Icon.load("2.png", function(aLoaded){
+    b2.icon = aLoaded;
+});
 -----------------------------
 
 [[desktoppane]]
@@ -2378,16 +2330,16 @@ DesktopPane
 
 `DesktopPane` is used to create a multi-document interface.
 
-Forms can be displayed inside this container. Add forms to the container
-in your program. After adding, these forms can be moved, closed,
-minimized or expanded to the full container size.
+Forms can be displayed inside this container. Such forms are named as `frames`
+Add forms to the container in your program. After adding, these forms can be moved,
+closed, minimized or expanded (maximized) to the full container's size.
 
-To create a component of this type by program means, use the DesktopPane
+To create a widget of this type by program means, use the DesktopPane
 constructor:
 
 [source,Javascript]
 ----------------------------- 
-var pane = new DesktopPane();
+var pane = new P.DesktopPane();
 -----------------------------
 
 The list of specific methods of the component:
@@ -2420,9 +2372,19 @@ Example:
 
 [source,Javascript]
 -------------------------------------- 
-var desktop = new DesktopPane();
-var myForm = new InnerForm();
-myForm.showInternalFrame(desktopPane);
+function InnerForm(){
+    var form = P.loadForm(this.constructor.name);
+    this.onDesktop = function(aDesktop){
+        form.showInternalFrame(aDesktop);
+    };
+}
+--------------------------------------
+
+[source,Javascript]
+-------------------------------------- 
+var desktop = new P.DesktopPane();
+var formModule = new InnerForm();
+formModule.onDesktop(desktop);
 --------------------------------------
 
 [[menus]]
@@ -2436,12 +2398,12 @@ several options.
 MenuBar
 ~~~~~~~
 
-`MenuBar` component is a form's main menu bar, into which individual
+`MenuBar` widget is a form's main menu bar, into which individual
 menus can be added. This compontent is a kind of a container and
 inherits it common properties and methods.
 
-After adding this component from the palette, the menu bar contains some
-default menus, this menus can be changed or deleted.
+After adding this widget from the palette, the menu bar contains some
+default menus, this menus can be changed, edited or deleted.
 
 To create a component of this type by in your code, use the MenuBar
 constructor:
@@ -2449,15 +2411,15 @@ constructor:
 [source,Javascript]
 -------------------------------------------------
 
-var menuBar = new MenuBar();
-view.add(menuBar);// add it to the root container
+var menuBar = new P.MenuBar();
+view.add(menuBar, ...);// add it to the root container
 -------------------------------------------------
 
 The list of specific methods of the component:
 
 [cols="<,<",options="header",]
 |=======================================================================
-|Property |Description
+|Method |Description
 |`add()` |Adds a new menu to the menu bar, where menu is a `Menu` to
 add.
 |=======================================================================
@@ -2476,14 +2438,16 @@ pallete in the visual editor.
 Add the submenu into a `Menu` by selecting Add From Palette in the
 context menu.
 
-To create a component of this type by in your code, use the Menu
+To create a component of this type by your code, use the Menu
 constructor:
 
 [source,Javascript]
 ---------------------- 
-var menu = new Menu();
+var menu = new P.Menu(text);
 menuBar.add(menu);
 ----------------------
+
+Where text is menu's label, displayed in parent menu it this menu is used as a sub menu.
 
 The list of specific properties of the component:
 
@@ -2499,7 +2463,7 @@ The list of specific methods of the component:
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
-|`add()` |Adds an item to the menu, where comp is the `MenuItem` or
+|`add(widget)` |Adds an item to the menu, where widget is the `MenuItem` or
 `MenuSeparator` component to add.
 |=======================================================================
 
@@ -2516,10 +2480,10 @@ palette in visual editor. After adding, this component will have no
 visual representation in the form's layout, it will be avaliable under
 the Other components node in the inspector component tree.
 
-Add items to the pop-up menu the same way as to the standard menu.
+Add items to the popup menu the same way as to the standard menu.
 
 To assign a popup menu for a component in the visual editor, define a
-component's `PopupMenu` property and select the required popup menu from
+widget's `componentPopupMenu` property and select the required popup menu from
 the list.
 
 To create a component of this type by in your code, use the PopupMenu
@@ -2527,8 +2491,8 @@ constructor:
 
 [source,Javascript]
 --------------------------------- 
-var popup = new PopupMenu();
-var label = new Label("Sample");
+var popup = new P.PopupMenu();
+var label = new P.Label("Sample");
 label.componentPopupMenu = popup;
 ---------------------------------
 
@@ -2536,8 +2500,8 @@ The list of specific methods of the component:
 
 [cols="<,<",options="header",]
 |=======================================================================
-|Property |Description
-|`add()` |Adds an item to the menu, where comp is the `MenuItem` or
+|Method |Description
+|`add(item)` |Adds an item to the menu, where comp is the `MenuItem` or
 `MenuSeparator` component to add.
 |=======================================================================
 
@@ -2552,10 +2516,10 @@ constructor:
 
 [source,Javascript]
 ---------------------------------- 
-var menuItem = new MenuItem(, , );
+var menuItem = new P.MenuItem(text, icon, actionPerformed);
 ----------------------------------
 
-where text is the text of the component (optional), icon is the icon of
+where text is the text of the menu item (optional), icon is the icon of
 the component (optional), actionPerformed the function for the action
 performed handler (optional).
 
@@ -2573,7 +2537,7 @@ An example of code using `MenuItem` component:
 
 [source,Javascript]
 ---------------------------------------- 
-var item = new MenuItem("Sample");
+var item = new P.MenuItem("Sample");
 item.onActionPerformed = function(evt) {
    alert("Sample selected.")
 }
@@ -2592,7 +2556,7 @@ CheckMenuItem constructor:
 [source,Javascript]
 --------------------------------------------
 
-var checkMenuItem = new CheckMenuItem(, , );
+var checkMenuItem = new CheckMenuItem(text, selected, actionPerformed);
 --------------------------------------------
 
 where text is the text of the component (optional), selected is `true`
@@ -2626,10 +2590,10 @@ RadioMenuItem constructor:
 [source,Javascript]
 --------------------------------------------
 
-var radioMenuItem = new RadioMenuItem(, , );
+var radioMenuItem = new P.RadioMenuItem(text, selected, actionPerformed);
 --------------------------------------------
 
-where text is the text of the component (optional), selected is `true`
+where text is the text of the widget (optional), selected is `true`
 when the check box is selected and `false` otherwise (optional),
 actionPerformed the function for the action performed handler
 (optional).
@@ -2653,7 +2617,7 @@ elements which are not present in the menu.
 MenuSeparator
 ~~~~~~~~~~~~~
 
-`MenuSeparator` is a separator of menu items. Use this component to
+`MenuSeparator` is a separator of menu items. Use this widget to
 visually split the groups of menu items.
 
 To create a component of this type by in your program, use the
@@ -2661,7 +2625,7 @@ MenuSeparator constructor:
 
 [source,Javascript]
 ------------------------------------ 
-var separator = new MenuSeparator();
+var separator = new P.MenuSeparator();
 ------------------------------------
 
 The list of specific properties of the component:
@@ -2676,66 +2640,34 @@ The list of specific properties of the component:
 UI utilities API
 ----------------
 
-[[style]]
-Style
-~~~~~
-
-`Style` object, which can inherit the property values from the parent
-style.
-
-`Style` properites list:
-
-[cols="<,<",options="header",]
-|==============================================================
-|Property |Description
-|`align` |Alignment: `TOP`, `RIGHT`, `BOTTOM`, `LEFT`, `CENTER`
-|`background` |Background color
-|`folderIcon` |Folder node icon
-|`font` |Font
-|`foreground` |Color
-|`icon` |Icon
-|`leafIcon` |Leaf node icon
-|`openFolderIcon` |Open folder node icon
-|`parent` |Parent style object
-|==============================================================
-
-To create a style object by program means, use a constructor, which can
-accept the parent style object as a parameter:
-
-[source,Javascript]
-------------------------- 
-var style1 = new Style();
-
-var style2 = new Style();
--------------------------
-
 [[icon]]
 Icon
 ~~~~
 
-`Icon` is a bitmap picture.
+`Icon` is a small picture.
 
 To create an icon object, use the factory load method of the Icon
 object:
 
 [source,Javascript]
 ----------------------- 
-var icon = Icon.load();
+var icon = Icon.load(path);
 -----------------------
 
 where path is the name of the icon file, relative path of an application
-or URL.
+or http URL.
 
-The icon file name will be used for accessing the built-in collection of
+The icon file name will be used for accessing the application project's collection of
 icons.
 
 An example of using an icon to create a button:
 
 [source,Javascript]
 ----------------------------------- 
-var carIcon = Icon.load("car.png");
-var b = new Button("Car", carIcon);
-view.add(b);
+P.Icon.load("car.png", funtion(aCarIcon){
+    var b = new P.Button("Car", aCarIcon);
+    view.add(b, ...);
+});
 -----------------------------------
 
 [[fontstyle]]
@@ -2758,7 +2690,7 @@ Example of usage:
 
 [source,Javascript]
 --------------------------------------- 
-var italicFontStyle = FontStyle.ITALIC;
+var italicFontStyle = P.FontStyle.ITALIC;
 ---------------------------------------
 
 [[font]]
@@ -2773,7 +2705,7 @@ Object properties:
 |=================================
 |Property |Description
 |`family` |Name of the font family
-|`style` |Style
+|`style` |Style, See <<fontstyle, FontStyle>>
 |`size` |Size
 |=================================
 
@@ -2781,18 +2713,18 @@ To create a font object, use the Font constructor:
 
 [source,Javascript]
 ------------------------- 
-var font = new Font(, , )
+var font = new Font(family, style, size)
 -------------------------
 
-where family is a string of the font family name; fontStyle is a font
-style of the FontStyle type, size is a font size.
+where family is a string of the font family name; style is a font
+style of the <<fontstyle, FontStyle>> type, size is a font size in points.
 
 Example:
 
 [source,Javascript]
 ---------------------------------------------------
 
-var font = new Font("Verdana", FontStyle.BOLD, 14);
+button.font = new P.Font("Verdana", P.FontStyle.BOLD, 14);
 ---------------------------------------------------
 
 [[color]]
@@ -2826,21 +2758,20 @@ passing it three RGB integers as parameters:
 
 [source,Javascript]
 ---------------------------- 
-var color = new Color(, , );
+var color = new PColor(red, green, blue, alpha);
 ----------------------------
 
-where R, G, B are red, green and blue constituents in the form of
-integers.
+where R, G, B are red, green, blue and alpha are integer constituents of the color.
 
 Example of usage:
 
 [source,Javascript]
 -------------------------------------------
 
-button.foreground = Color.BLUE;
+button.foreground = P.Color.BLUE;
 
-var IVORY_COLOR = new Color(255, 255, 240);
-panel.background = IVORY_COLOR;
+var ivory = new P.Color(255, 255, 240);
+panel.background = ivory;
 -------------------------------------------
 
 [[horizontalposition]]
@@ -2864,7 +2795,7 @@ Example of usage:
 [source,Javascript]
 ---------------------------------------------------
 
-var horizontalPosition = HorizontalPosition.CENTER;
+var horizontalPosition = P.HorizontalPosition.CENTER;
 ---------------------------------------------------
 
 [[verticalposition]]
@@ -2888,7 +2819,7 @@ Example of usage:
 [source,Javascript]
 -----------------------------------------------
 
-var verticalPosition = VerticalPosition.CENTER;
+var verticalPosition = P.VerticalPosition.CENTER;
 -----------------------------------------------
 
 [[orientation]]
@@ -2910,7 +2841,30 @@ Example of usage:
 
 [source,Javascript]
 ----------------------------------------- 
-var orientation = Orientation.HORIZONTAL;
+var orientation = P.Orientation.HORIZONTAL;
+-----------------------------------------
+
+[[scrollbarpolicy]]
+ScrollBarPolicy
+~~~~~~~~~~~
+
+`ScrollBarPolicy` is the scroll bar policy constants object.
+
+This object contains constants, which determine the scroll bar policy:
+
+[cols="<,<",options="header",]
+|==========================
+|Property |Description
+|`AUTO` |Scroll bar appears automatically, when content of scroll pane becomes greater than scroll pane.
+|`NEVER` |Scroll bar is never shown.
+|`ALLWAYS` |Scroll bar is allways shown.
+|==========================
+
+Example of usage:
+
+[source,Javascript]
+----------------------------------------- 
+scrooll.scrollBarPolicy = P.ScrollBarPolicy.NEVER;
 -----------------------------------------
 
 [[dialogs-api]]
@@ -2922,37 +2876,23 @@ Use this global functions to display custom dialogs:
 [width="98%",cols="<17%,<83%",options="header",]
 |=======================================================================
 |Function |Description
-|`alert(, )` |Displays an info message, where
+|`alert(message)` |Displays an info message, where `message` is the message text.
+Platypus J2SE client accepts extra parameter, - `title` and uses it as title of the message window.
 
-|[multiblock cell omitted] |`message` is the message text,
+|`prompt(message, default)` |Displays a prompt window, returns the response string,
+where `message` is the message text, `default` is the default text.
 
-|[multiblock cell omitted] |`title` is the message window.
+|`confirm(message)` |Displays a dialog with confirmation, where `message` is the message text.
 
-|`prompt(, )` |Displays a prompt window, returns the response string,
-where
+|`selectFile(callback, fileFilter)` |Displays a dialog, which allows the user to select a
+file. Calls callback and passes a file object, where `curDir` is the current directory,
+`fileFilter` is a files names filter. It has the following format: `.png,.txt,.xls`.
 
-|[multiblock cell omitted] |`message` is the message text,
+|`selectDirectory(callback, curDir)` |Displays a dialog, which allows the user to select a directory and callback is called
+upon user's selection. `curDir` is the directory the dialog will be opened with.
 
-|[multiblock cell omitted] |`defaultvalue` is the default value.
-
-|`confirm()` |Displays a dialog with confirmation, where
-
-|[multiblock cell omitted] |`message` is the message text.
-
-|`fileDialog(, )` |Displays a dialog, which allows the user to select a
-file; returns a file object, where
-
-|[multiblock cell omitted] |`curDir` is the current directory,
-
-|[multiblock cell omitted] |`save` is a `true` to enable the saving mode
-for the dialog and `false` otherwise.
-
-|`selectFile()` |Displays a file selection dialog, whrere
-
-|[multiblock cell omitted] |`callback` is a function, which will be
-called after the file is selected, with a parameter,
-
-|[multiblock cell omitted] |`file` is the file object.
+|`selectColor(callback, oldColor)` |Displays a color selection dialog and calls callback upon user's selection.
+`oldColor` is the color to be preset in dialog for user's convenience.
 |=======================================================================
 
 Code examples:
@@ -2964,7 +2904,7 @@ alert("Message title", "Message");
 
 var txt = prompt("Enter text here", "Some default text");
 
-if (confirm("Confirm?")) {
+if (confirm("Are you sure?")) {
   // Do something here...
 }
 ---------------------------------------------------------
