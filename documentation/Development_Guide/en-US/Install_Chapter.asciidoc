@@ -2,17 +2,13 @@
 Installation and configuration
 ------------------------------
 
-The application designer software package is included into the
-developer's kit and can be bundled with the Platypus Platform runtime
-installation.
-
-If the developer's kit is supplied as an archive, unpack its contents to
-the folder of your choice on the hard drive.
+The platypus developer's kit all-in-one bundle contains Platypus.js IDE,
+Platypus.js runtime and Apache Tomcat 8 software packages.
 
 _____________________________________________________________________________________________
 *Note*
 
-Platypus Platform runtime installation instructions are provided in the
+Platypus.js runtime installation instructions are provided in the
 Administration Guide.
 _____________________________________________________________________________________________
 
@@ -27,7 +23,7 @@ includes:
 * 2 GB (for 32-bit system) or 3 GB (for 64-bit system) RAM
 * 10 GB of free disk space
 * Operating system with graphical user interface: Windows or Linux
-* Oracle JDK 7
+* Oracle JDK 8.40+
 * Internet access for updates downloading
 
 [[installation-guide]]
@@ -40,17 +36,14 @@ To install the developer's kit, perform the following actions:
 `platypusdesigner-linux.sh` for Linux. The Linux user must have access
 rights to launch the installer.
 2.  Click Next to proceed to the next installation step.
-3.  Read licensing terms and conditions; check the I accept the terms of
-the license agreement option to accept; click Next to proceed to the
+3.  Read licensing terms and conditions, check the I accept the terms of
+the license agreement option to accept and click Next to proceed to the
 next step.
-4.  Select the applications installation directory and options for
-creating shortcuts on the desktop and in the installed programs menu;
-click Next to proceed to the next step.
-5.  Click Install to begin the Platypus Application Designer
-installation process.
-6.  After the installation process is finished, click Finish; check the
-Launch Platypus application designer after the installer closes option
-to launch the designer.
+4.  Select applications to be installed (Platypus application designer, Platypus.js runtime and Apache tomcat).
+4.  Select the applications installation directories and options for
+creating shortcuts on the desktop and in the installed programs menu and click Next to proceed to the next step.
+5.  Click Install to start selected applications installation process.
+6.  After the installation process is finished, click Finish.
 
 __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 *Note*
@@ -63,15 +56,31 @@ parameter can lead to errors which may occur when launching the
 designer.
 __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
+To remove Platypus.js runtime from you computer, perform the
+following actions:
+
+1.  Use the your OS standard mechanism of programs removal, as an
+alternative, use the `uninstall.exe` program for Windows or
+`uninstall.sh` for Linux from the installation directory.
+2.  Confirm the components removal by clicking Finish button.
+
 To remove Platypus Application Designer from you computer, perform the
 following actions:
 
 1.  Use the your OS standard mechanism of programs removal, as an
 alternative, use the `uninstall.exe` program for Windows or
 `uninstall.sh` for Linux from the installation directory.
-2.  Confirm the components removal by clicking Finish button; if
+2.  Confirm the components removal by clicking Finish button. If
 necessary, select the option of removing configuration data from the
 user's directory.
+
+To remove Apache tomcat from you computer if it was installed using platypus developer's kit all-in-one installer, perform the
+following actions:
+
+1.  Use the your OS standard mechanism of programs removal, as an
+alternative, use the `uninstall.exe` program for Windows or
+`uninstall.sh` for Linux from the installation directory.
+2.  Confirm the components removal by clicking Finish button.
 
 [[configuration-tips]]
 Configuration tips
@@ -116,16 +125,16 @@ accessed by the Application Designer classloader.
 Runtime environment setup
 -------------------------
 
-The Platypus Platform runtime is required to start, debug and deploy
+The Platypus.js runtime is required to start, debug and deploy
 it's applications. You must specify the path to the runtime directory
 for the Platypus Application Designer to be able to run and debug your
 applications.
 
-Specify the location of the platform runtime directory in the computer's
+Specify the location of the Platypus.js runtime directory in the computer's
 file system:
 
-* Select Tools Platypus Platform in the main menu.
-* In the selection dialog, specify path to the Platypus Platform
+* Select Tools Platypus Platform in the main menu of a the designer.
+* In the selection dialog, specify path to the Platypus.js
 directory.
 
 Add the J2EE server instance which can be used to launch the Platypus
@@ -139,9 +148,6 @@ administrator's login and password.
 
 _______________________________________________________________________________________________________________________________________________________________________________________________________________________________
 *Note*
-
-The current version of Platypus Application Designer supports launching
-of applications in Apache Tomcat 7+. Download Apache Tomcat from the
-developer's site and unpack it in the directory of your choice on your
-hard drive.
+If Platypus.js runtime and Platypus application designer were installed using
+platypus developer's kit all-in-one installer, Platypus.js location will be specified already.
 _______________________________________________________________________________________________________________________________________________________________________________________________________________________________
