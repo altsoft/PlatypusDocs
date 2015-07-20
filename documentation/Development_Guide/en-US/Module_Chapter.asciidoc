@@ -198,15 +198,12 @@ searched for the following expressions:
 +
 `new ModuleName()`
 +
-`new ServerModule("")`
+`new ServerModule("Implementation")`
 +
-`new Report("")`
-+
-`new ServerReport("")`
-+
-where ModuleName is the name of the module.
+where ModuleName is the name of the module and Implementation is module name
+wich is executed on the server side.
 * Application elements with the specified names are loaded or server
-proxies for server modules/reports are generated.
+proxies for server modules are generated.
 * The process continues recursevly for the loaded modules, except for
 the server proxies.
 
@@ -767,6 +764,31 @@ come to the client over the network.
 Handler of the `onRequeried` entity event will be called in any case,
 regardless of the method of calling the `requery` function.
 
+To append some new elements to existing data array without adding any changes into
+model's changelog, use append method of an entity:
+
+[source,Javascript]
+------------------------------- 
+model.entity1.append([{id:78, name: 'Mike'}, {id:79, name: 'Juke'}]);
+-------------------------------
+
+After a data is appended to entity's data array, model is watching after it and
+accumulates changes made to appended items in its change log.
+This method might be used for example in a view with lazy tree widget.
+
+To query some data and obtain sata array, wich is not watched by the model and not used as a
+replacement of entity's data array, use query method:
+
+[source,Javascript]
+------------------------------- 
+for(var i = 0; i < maxCount; i++){
+    model.entity1.query({param1: i + 43, param2: 'Astralia'}, function(aFetchedData){
+        // Some actions with fetched data
+    }, function(aError){
+        P.Logger.severe('Failed due to an error: ' + aError);
+    });
+}
+-------------------------------
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________
 *Note*
 
@@ -1636,10 +1658,10 @@ Filesystem I/O
 To read and write files, use Java API from the `java.io.*` and other
 dedicated packages.
 
-To read and write strings, use `readString(, )`, and `writeString(, , )`
+To read and write strings, use `readString(path, encoding)`, and `writeString(path, text, encoding)`
 global functions, where `path` is a path to the file, `text` is a
 string, `encoding` is the name of encoding. The `encoding` parameter in
-both functions is optional and by default is set for the UTF-8 encoding.
+both functions is optional and by default is set for the utf-8 encoding.
 
 Example of using functions for reading and writing strings to a file:
 

@@ -10,9 +10,8 @@ The reporting tools allows a developer to generate reports as a
 Microsoft Excel files. You can open a generated report in a spreadsheet
 application, print or save it to disk.
 
-`Report` is a regular JavaScript module with a report template. The
-report constructor is defined in the JavaScript file by first function
-or using the `@module` annotation.
+`ReportTemplate` is an Platypus.js API class representing a report template. 
+It is used in regular Platypus.js modules.
 
 The report application element includes the following:
 
@@ -21,13 +20,13 @@ The report application element includes the following:
 * JavaScript code,
 * a data model.
 
-Reports are based on the jXLS library, which in turn uses the Apache POI
+Reports generator is based on the jXLS library, which in turn uses the Apache POI
 library. Markup and formatting of the report are defined in the template
 file. Binding to data is performed using jXLS library tags placed in
 spreadsheet cells.
 
 In the process of report generation, template tags are linked to model
-entity's dataset as well as to JavaScript objects.
+entity's data arrays as well as to JavaScript objects.
 
 image:images/reportsFlow.png[Data transformations while generating a
 report]
@@ -39,9 +38,9 @@ New report creation
 To create a report, perform the following actions:
 
 * Select a New item in the parent directory context menu, or select the
-parent directory and click New Filе in the main menu, or click New File
+parent directory and click New File in the main menu, or click New File
 on the toolbar, or use a corresponding shortcut.
-* Select a Reporttype in the context menu, or select Choose file type
+* Select a Report type in the context menu, or select Choose file type
 Platypus application elements Report on the wizard first step and click
 Next.
 * Enter the name of a new application element in the Name field and
@@ -72,7 +71,7 @@ the JavaScript code.
 * Implement report `onBeforeRender` event handler in the JavaScript
 editor.
 * Save the application element by clicking Save All on the Platypus
-Application Designer toolbar or by clicking theCtrl S shortcut.
+Application Designer toolbar or by clicking the Ctrl S shortcut.
 
 [[template-tags]]
 Template tags
@@ -81,9 +80,10 @@ Template tags
 Edit the report template in a spreadsheet application.
 
 Place tags for linking to JavaScript objects and model entities'
-datasets in the template cells. To access data, use the following
-syntax: $\{propertyName}, where propertyName is the module instance
-object's property.
+data arrays in the template cells. To access data, use the following
+syntax: $\{propertyName}, where propertyName is the object's property
+of object accessible to report generator. Report generator has access
+to object, that is passed to P.loadTemplate(modeulName, object) as second argument.
 
 Example of writing the name of a documents into cells:
 
@@ -116,19 +116,19 @@ template tags:
 [source,Javascript]
 ------------------------------------ 
 function reportA {
-   
-   this.docs = this.model.documents;
+    var library = {};
+    var template = P.loadTemplate(this.constructor.name, library);
 
-   this.library = {};
-   library.documents = [
-    {name:'foo'}, 
-    {name:'bar'},
-    {name:'baz'}
-   ];
+    library.docs = this.model.documents;
+    library.documents = [
+        {name:'foo'}, 
+        {name:'bar'},
+        {name:'baz'}
+    ];
 }
 ------------------------------------
 
-Add entities, which will be linked to the template, to the report data
+Add entities, which will be linked to the template, to the report module data
 model.
 
 When outputting collections, a new row is added for each collection
@@ -137,23 +137,9 @@ cells of this row.
 
 If you know the size of the collection beforehand, you can use the
 template rows instead of adding new rows for each element. To do this,
-set `true` for the `fixed` special property of the collection.
+add name of the collection to fixed property of a temlate (variable `rt` in the above example).
 
-If necessary, specify dynamic styles for cells. These styles will vary
-depending on the contents of the cell. To do this:
-
-* Define the style, which should be applied dynamically to the
-collection element cell, for the special template cell, define a label
-for this cell, for example, `$[0]customRow`; this cell can be placed on
-a hidden template cell.
-* Set a special cellTemplateLabel property for the collection element by
-inserting a link to the style cell into it, for example
-`cellTemplateLabel='customRow'`.
-
-Use special tags in the template in order to predetermine the
-transformation of data when generating the report.
-
-To display collections, use the `jx:forEach` tag:
+There is another way yo display collections using the `jx:forEach` tag:
 
 [source,Javascript]
 ----------------------------------------------------
@@ -260,13 +246,11 @@ Report API
 ----------
 
 To generate a report, create a report object by passing the required
-report identifier to the constructor name.
+report identifier to P.loadTemplate function.
 
 Use the report object:
 
-* Create an report instance using either `Report` or server report proxy
-by `ServerReport` constuctors. Use `ServerReport` constructor for a
-report generated on the server side.
+* Create an report instance using generateReport() method of ReportTemplate on the server side.
 * Display a report by calling the show method. The report will be
 downloaded and a command to open it will be executed.
 * Send the report to print by calling the print method.
@@ -277,7 +261,7 @@ ________________________________________________________________________________
 *Note*
 
 When executing the report in the HTML5 browser client, calling the
-show(), print(), and save(reportPath) methods lead to the same results —
+show(), print(), and save(reportPath) methods lead to the same results, -
 the report file will be downloaded by your browser.
 _______________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -287,9 +271,8 @@ appliction:
 [source,Javascript]
 -----------------------------------------------------------
 
-var r = new Report('DocumentReport');
-r.params.documentCategory = 'business'; // update the model
-r.show(); // show report
+var r = new DocumentReport();
+r.execute('business'); // generate report
 -----------------------------------------------------------
 
 To execute the report on the server side (from a HTML5 browser or a
@@ -299,40 +282,35 @@ desktop client):
 ----------------------------------------------------------
 
 /*
- * @module
+ * @stateless
  * @public
  */
 function DocumentReport(){
-    var self = this, model = self.model;
+    var self = this
+        , model = P.loadModel(this.constructor.name)
+        , template = P.loadTemplate(this.constructor.name, model);
     // take parameter's value from self property.
-    model.params.documentCategory = self.documentCategory;
+    self.execute = function(aValue, onSuccess, onFailure){
+        model.documents.params.documentCategory = aValue;
+        model.requery(function(){
+            var report = template.generateReport();
+            onSuccess(report);
+        }, onFailure);
+    }
     // ...
 }
 
-var r = new ServerReport('DocumentReport');
+var r = new ServerModule('DocumentReport');
 // provide some property to be taken as a model parameter
 // by the report at the server side
-r.documentCategory = 'business'; 
-// Transfer the report's properties and download a report
-r.show();
+r.execute('business', function(aReport){
+    aReport.show();
+}); 
 ----------------------------------------------------------
 
 Report's JavaScript code prepares data for displaying, calculating new
 data, etc.
 
-* Write code in the report's constructor to perform initialization.
-* Add code in the `onBeforeRender` event hanler function, which will be
-invoked before starting the generation of report, when client calls the
-show, print, or save methods.
+* Write code in the report's module constructor to perform initialization.
 * For server-side reports think about what data should be transferred to
-the server side and provide properties of report proxy before calling
-`show()` method.
-
-The report events:
-
-[cols="<,<,<",options="header",]
-|=======================================================================
-|Event |Handler parameters |Description
-|`onBeforeRender` |`evt` — an event object |Is called before starting
-the generation of the report
-|=======================================================================
+the server side and provide arguments of method, performing generateReport.

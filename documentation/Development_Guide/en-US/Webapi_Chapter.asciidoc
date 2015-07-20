@@ -114,7 +114,7 @@ key-value form.
 
 |`localAddr` |IP address, on which the request was received.
 
-|`localName` |Ð˜ame of the host, on which the request was received.
+|`localName` |Ð?ame of the host, on which the request was received.
 
 |`localPort` |Port, on which the request was received.
 
