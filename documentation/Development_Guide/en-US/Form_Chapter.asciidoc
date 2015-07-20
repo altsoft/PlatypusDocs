@@ -10,25 +10,25 @@ Form
 top-level window with a title and a decorations or can be build-in on a panel
 or on another form.
 
-A form is a regular JavaScript module with visual components. Any form
+A form is a regular JavaScript module with visual widgets. Any form
 can be displayed both in J2SE client as well in HTML5 web-browser.
 
 `Form` by default includes a top-level container, which holds widgets and other
 containers and usually has `view` name.
 
-A widget is a component, which has a visual representation. A container
-is a component, which holds widgets and other containers.
+A widget is a widget, which has a visual representation. A container
+is a widget, which holds widgets and other containers.
 
-Each component, as well as the form itself, has a set of properties,
-which defines the component appearance and behavior, and a set of events
+Each widget, as well as the form itself, has a set of properties,
+which defines the widget appearance and behavior, and a set of events
 (e.g. user actions, for which you can define handlers).
 
-image:images/form.png[Form's components layout]
+image:images/form.png[Form's widgets layout]
 
 In the J2SE client, forms are displayed in separate windows, can be
 minimized or expanded to the full screen, displayed in other forms as
 built-in elements (frames) and as internal windows in the DesktopPane
-component. In the HTML5 browser client, forms are displayed in the same
+widget. In the HTML5 browser client, forms are displayed in the same
 way, but within a browser page.
 
 [[new-form-creation]]
@@ -51,19 +51,19 @@ click Finish to create it, or click Cancel to cancel.
 Visual UI editor
 ----------------
 
-Edit form components layout using the visual form editor. To open the
+Edit form widgets layout using the visual form editor. To open the
 editor double-click the application element in the project tree.
 
 To edit the form:
 
 * Open the Design tab of the module editor.
-* Drag a widget, a container or a menu from the components palette onto
+* Drag a widget, a container or a menu from the widgets palette onto
 the form surface.
-* Arrange the components on the form.
+* Arrange the widgets on the form.
 * Set the general properties of the form and properties of each
-component on the Properties panel, e.g. text, font, foreground and
+widget on the Properties panel, e.g. text, font, foreground and
 background colors.
-* Specify handlers functions of the form and components. To do that
+* Specify handlers functions of the form and widgets. To do that
 write the event handlers code in the JavaScript editor.
 * Configure the form's data model and write code responsible for data
 manipulations.
@@ -79,10 +79,10 @@ ________________________________________________________________________________
 
 Form's structure is presented as a tree in the form inspector panel. Use
 the inspector to select a widget, a container or a menu, to move a
-component from one container to another, and to select the container
+widget from one container to another, and to select the container
 layout.
 
-Drag components up or down in the inspector tree or activate the Move
+Drag widgets up or down in the inspector tree or activate the Move
 Up, Move Down, and Change Order context menu items to set the order
 along the Z axis.
 
@@ -93,16 +93,16 @@ representation of the form, which is identical to its look in runtime.
 The anchors layout is enabled for all form's containers by default. To
 choose some other layout for the specific container, select the layout
 menu item in the Set Layout submenu from the container's context menu in
-the inspector component tree.
+the inspector widget tree.
 
-Add a component from the pallete using the visual editor, anchors are
+Add a widget from the pallete using the visual editor, anchors are
 attached for the nearest container's sides and width and height values
 are automatically set.
 
-Change dimensions of the component and its location by using the mouse
-or arrows keys. When you move a component using arrows keys, the
-position of the component is tied to the grid. Hold down the Ctrl to
-move the component smoothly. Hold down the Shift key to expand the
+Change dimensions of the widget and its location by using the mouse
+or arrows keys. When you move a widget using arrows keys, the
+position of the widget is tied to the grid. Hold down the Ctrl to
+move the widget smoothly. Hold down the Shift key to expand the
 widget.
 
 ____________________________________________________________________________________________________________
@@ -116,7 +116,7 @@ To enable or disable an anchor, use anchors buttons on the form editor
 toolbar.
 
 Specify values for anchors and dimensions explicitly, changing the
-values of the component's properties panel in the Layout properties
+values of the widget's properties panel in the Layout properties
 group: Left, Top, Right, Bottom, Left, Width, and Height.
 
 Anchors properties values are specified as a strings together with the
@@ -126,15 +126,15 @@ percentage, this anchor and dimension will be changed while maintaining
 the defined value when changing dimensions of the container, for example
 : `60px`, `30%`, `40`.
 
-Use the component alignment control buttons on the form editor tool bar
+Use the widget alignment control buttons on the form editor tool bar
 to align widgets in relation to each other. Alignment buttons become
 active when you select multiple widgets. To select multiple widgets,
 click them while holding down the Ctrl key.
 
-Specify a component's the properties and event handlers:
+Specify a widget's the properties and event handlers:
 
-* Click a form area, which is free from other components, or select a
-form node in the component inspector.
+* Click a form area, which is free from other widgets, or select a
+form node in the widget inspector.
 * Change properties of the form on the Properties panel.
 * Write code of the handlers in the JavaScript editor.
 
@@ -340,14 +340,14 @@ Typically the top-level container has the `view` name and form has same property
 form.view.background = P.Color.BLACK;
 -----------------------------------
 
-[[components-events]]
-Components events
+[[widgets-events]]
+Widgets events
 -----------------
 
-NOTE: Component events are not propagated to the its parent in J2SE client.
+NOTE: Widget events are not propagated to the its parent in J2SE client.
 
 The base `ComponentEvent` object contains `source` property that
-contains the event's source component.
+contains the event's source widget.
 
 Use an event handler function as follows:
 
@@ -363,13 +363,13 @@ their own specific properties. The following types of specific events
 are defined: `ContainerEvent`, `KeyboardEvent` and `MouseEvent`.
 
 `ContainerEvent` event object represents an event that is called when
-something happens with the container, e.g. a component added or
+something happens with the container, e.g. a widget added or
 removed, its specific propetries are listed in the following table:
 
 [cols="<,<",options="header",]
 |=============================================================
 |Property |Description
-|`child` |Child component container operation is performed on.
+|`child` |Child widget container operation is performed on.
 |=============================================================
 
 `KeyEvent` event object contains information about a keyboard event,
@@ -428,7 +428,7 @@ otherwise.
 Standard widgets
 ----------------
 
-Standard widgets are simple components intended to organize
+Standard widgets are simple widgets intended to organize
 application's user interface.
 
 To specify visual presentation of the widget, set its properties and
@@ -437,13 +437,13 @@ event handlers in the visual editor or in JavaScript code.
 Standard widgets have a set of common properties and events as well as
 specific properties and events.
 
-The common properties for all components are listed in the following
+The common properties for all widgets are listed in the following
 table:
 
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
-|`visible` |`true` if the component is visible and `false` otherwise
+|`visible` |`true` if the widget is visible and `false` otherwise
 
 |`background` |Background color
 
@@ -454,23 +454,23 @@ table:
 |`foreground` |Color
 
 |`toolTipText` |Text, which is shown when hovering a cursor over the
-component
+widget
 
-|`cursor` |Cursor above the component
+|`cursor` |Cursor above the widget
 
-|`enabled` |`true` if the component is enabled and `false` otherwise
+|`enabled` |`true` if the widget is enabled and `false` otherwise
 
-|`focusable` |`true` if it is allowed for the component to get keyboard
+|`focusable` |`true` if it is allowed for the widget to get keyboard
 focus and `false` otherwise
 
-|`opaque` |`true` if the component's background is opaque and `false`
+|`opaque` |`true` if the widget's background is opaque and `false`
 otherwise
 
-|`error` |Error message of this component. Validation procedure may set
+|`error` |Error message of this widget. Validation procedure may set
 this property and subsequent focus lost event will clear it.
 |=======================================================================
 
-Common events for all components are listed in the following table:
+Common events for all widgets are listed in the following table:
 
 [cols="<,<,<",options="header",]
 |=======================================================================
@@ -479,22 +479,22 @@ Common events for all components are listed in the following table:
 performed
 
 |`onComponentAdded` |`ComponentEvent` |Is called after adding the
-component
+widget
 
 |`onComponentHidden` |`ComponentEvent` |Is called after hiding the
-component
+widget
 
 |`onComponentMoved` |`ComponentEvent` |Is called after moving the
-component
+widget
 
 |`onComponentRemoved` |`ComponentEvent` |Is called after removing the
-component from its container
+widget from its container
 
 |`onComponentResized` |`ComponentEvent` |Is called after changing the
-component size
+widget size
 
 |`onComponentShown` |`ComponentEvent` |Is called after displaying the
-component
+widget
 
 |`onFocusGained` |`FocusEvent` |Is called after getting the keyboard
 focus
@@ -509,12 +509,12 @@ focus
 
 |`onMouseClicked` |`MouseEvent` |Mouse key is pressed and released
 
-|`onMouseDragged` |`MouseEvent` |Component is dragged by the mouse
+|`onMouseDragged` |`MouseEvent` |Widget is dragged by the mouse
 
-|`onMouseEntered` |`MouseEvent` |Mouse cursor has entered the component
+|`onMouseEntered` |`MouseEvent` |Mouse cursor has entered the widget
 rectangle
 
-|`onMouseExited` |`MouseEvent` |Mouse cursor has left the component
+|`onMouseExited` |`MouseEvent` |Mouse cursor has left the widget
 rectangle
 
 |`onMouseMoved` |`MouseEvent` |Mouse cursor has changed its position
@@ -534,7 +534,7 @@ Label
 image. The label does not respond to keyboard input events and can't get
 the keyboard focus.
 
-The specific properties of this component are listed in the following
+The specific properties of this widget are listed in the following
 table:
 
 [cols="<,<",options="header",]
@@ -551,7 +551,7 @@ the icon, one of the following: `HorizontalPosition.RIGHT`,
 `HorizontalPosition.LEFT`, `HorizontalPosition.CENTER`
 
 |`horizontalAlignment` |Horizontal position of the text with the icon
-relative to the component's size, one of the following:
+relative to the widget's size, one of the following:
 `HorizontalPosition.RIGHT`, `HorizontalPosition.LEFT`,
 `HorizontalPosition.CENTER`.
 
@@ -560,12 +560,12 @@ icon, one of the following: `VerticalPosition.TOP`,
 `VerticalPosition.BOTTOM`, `VerticalPosition.CENTER`
 
 |`verticalAlignment` |Vertical position of the text with the icon
-relative to the component's size, one of the following:
+relative to the widget's size, one of the following:
 `VerticalPosition.TOP`, `VerticalPosition.BOTTOM`,
 `VerticalPosition.CENTER`.
 |=======================================================================
 
-To create a component of this type by program means, use the Label
+To create a widget of this type by program means, use the Label
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -576,8 +576,8 @@ var label = new P.Label(text, icon, iconTextGap);
 where text is the text (optional), icon is an icon (optional),
 iconTextGap is a gap between the icon and text (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ---------------------------- 
@@ -597,14 +597,14 @@ Button
 
 `Button` is a simple button, which responds to the click action.
 
-The properties of this component are listed in the following table:
+The properties of this widget are listed in the following table:
 
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
 |`icon` |`Icon` attached to `Button`.
 
-|`text` |Component's text.
+|`text` |Widget's text.
 
 |`iconTextGap` |Gap between the text and the icon, in pixels.
 
@@ -617,7 +617,7 @@ the icon: `VerticalPosition.BOTTOM`, `VerticalPosition.TOP`,
 `VerticalPosition.CENTER`
 |=======================================================================
 
-The specific component events are listed in the following table:
+The specific widget events are listed in the following table:
 
 [cols="<,<,<",options="header",]
 |======================================================
@@ -625,7 +625,7 @@ The specific component events are listed in the following table:
 |`onActionPerformed` |`ActionEvent` |Button click event
 |======================================================
 
-To create a component of this type by program means, use the Button,
+To create a widget of this type by program means, use the Button,
 which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -637,8 +637,8 @@ where text is text (optional), icon is an icon (optional), iconTextGap
 is a gap between the icon and text (optional), actionPerformed is a
 handler of the button clicking event (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ------------------------------------- 
@@ -655,7 +655,7 @@ ToggleButton
 
 `ToggleButton` is a button with two states: selected and not selected.
 
-This component looks like a standard button, but after a click action it
+This widget looks like a standard button, but after a click action it
 and it will stay in a toggled state. You can use this widget, for
 example, when it is necessary to choose from the two options, but flags
 or switches are not suitable.
@@ -670,16 +670,16 @@ The list of `ToggleButton` widget properties is identical to the
 |`selected` |`true` if the button is selected and `false` otherwise
 |==================================================================
 
-The specific component events:
+The specific widget events:
 
 [cols="<,<,<",options="header",]
 |=======================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ActionEvent` |The component user interaction event
+|`onActionPerformed` |`ActionEvent` |The widget user interaction event
 |`onValueChange` |`ValueChangeEvent` |ToggleButton value change event
 |=======================================================
 
-To create a component of this type by program means, use the
+To create a widget of this type by program means, use the
 ToggleButton constructor, which can be called with a different number of
 parameters:
 
@@ -693,8 +693,8 @@ where text is text, icon is an icon (optional), selected is set to `true` if the
 selected and `false` otherwise (optional), iconTextGap is a gap between the icon and text,
 actionPerformed is a handler function of the button clicking event (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ------------------------------------- 
@@ -712,18 +712,18 @@ form.view.add(btn1, ...);
 CheckBox
 ~~~~~~~~
 
-`CheckBox` is a component with two states: selected/not selected.
+`CheckBox` is a widget with two states: selected/not selected.
 
-The specific component events are listed in the following table:
+The specific widget events are listed in the following table:
 
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ActionEvent` |The component user interaction event
+|`onActionPerformed` |`ActionEvent` |The widget user interaction event
 |`onValueChange` |`ValueChangeEvent` |CheckBox value change event
 |=======================================================================
 
-To create a component of this type by program means, use the CheckBox
+To create a widget of this type by program means, use the CheckBox
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -736,8 +736,8 @@ check box is selected and `false` otherwise (optional),
 actionPerformed is a handler function of the check box switching
 event (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 -------------------------------------------------
@@ -754,7 +754,7 @@ form.view.add(cb1, ...);
 RadioButton
 ~~~~~~~~~~~
 
-`RadioButton` is a component with two states: selected/not selected.
+`RadioButton` is a widget with two states: selected/not selected.
 Widgets of this type can be joined into groups. Only one widget of this
 type can be selected in one group.
 
@@ -775,11 +775,11 @@ widget properties.
 [cols="<,<,<",options="header",]
 |======================================================================
 |Event |Handler parameters |Description
-|`onActionPerformed` |`ActionEvent` |The component user interaction event
+|`onActionPerformed` |`ActionEvent` |The widget user interaction event
 |`onValueChange` |`ValueChangeEvent` |Radio button value change event
 |======================================================================
 
-To create a component of this type by program means, use the RadioButton
+To create a widget of this type by program means, use the RadioButton
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -791,8 +791,8 @@ where `text` is text (optional), `selected` is set to `true` when the
 radio button is selected and `false` otherwise (optional),
 `actionPerformed` is the user interaction handler function (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 --------------------------------------------------
@@ -809,9 +809,9 @@ view.add(rb1, ...);
 ButtonGroup
 ~~~~~~~~~~~
 
-`ButtonGroup` is a special kind of a component without its own visual
-representation. After adding to the form, the button group component
-will be added to the Other components tree node on the inspector panel.
+`ButtonGroup` is a special kind of a widget without its own visual
+representation. After adding to the form, the button group widget
+will be added to the Other widgets tree node on the inspector panel.
 
 The group of buttons enables the simultaneous selection of only one of
 widgets of `ToggleButton`, `RadioButton`, and
@@ -819,7 +819,15 @@ widgets of `ToggleButton`, `RadioButton`, and
 you select one of the widgets in the group, the other widgets will be
 reset.
 
-Set the `buttonGroup` property for the supported components types. To do
+Widget's specific events:
+
+[cols="<,<,<",options="header",]
+|=======================================================
+|Event |Event type |Description
+|`onItemSelected` |`ItemEvent` |Item switching event
+|=======================================================
+
+Set the `buttonGroup` property for the supported widgets types. To do
 this, select the appropriate button group from the property field list
 on the properties panel.
 
@@ -830,7 +838,7 @@ Use ButtonGroup constructor in your program:
 var buttonGroup = new P.ButtonGroup();
 ------------------------------------
 
-To specify a `ButtonGroup` for a exclusive buttons, use component's
+To specify a `ButtonGroup` for a exclusive buttons, use widget's
 buttonGroup property:
 
 [source,Javascript]
@@ -843,10 +851,10 @@ the add method:
 
 [source,Javascript]
 ------------------ 
-buttonGroup.add(component);
+buttonGroup.add(widget);
 ------------------
 
-where component is a button widget to add.
+where widget is a button widget to add.
 
 After creating, add button widgets to the group:
 
@@ -862,10 +870,10 @@ rbB.buttonGroup = buttonGroup;
 TextField
 ~~~~~~~~~
 
-`TextField` is a simple component, which allows you to edit single line
+`TextField` is a simple widget, which allows you to edit single line
 of text.
 
-The properties of this component are listed in the following table:
+The properties of this widget are listed in the following table:
 
 [cols="<,<",options="header",]
 |================================================================
@@ -874,7 +882,7 @@ The properties of this component are listed in the following table:
 |`emptyText` |The text displayed when the actual value is absent.
 |================================================================
 
-The specific component events are listed in the following table:
+The specific widget events are listed in the following table:
 
 [cols="<,<,<",options="header",]
 |=======================================================================
@@ -883,7 +891,7 @@ The specific component events are listed in the following table:
 |`onValueChange` |`ValueChangeEvent` |Text field value change event
 |=======================================================================
 
-To create a component of this type by program means, use the TextField
+To create a widget of this type by program means, use the TextField
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -894,7 +902,7 @@ var tf1 = new P.TextField(text);
 where `text` is the field text (optional).
 
 After creating, if necessary, set the properties and event handlers and
-add the component to the container:
+add the widget to the container:
 
 [source,Javascript]
 ------------------------------------ 
@@ -906,10 +914,10 @@ view.add(tf1, ...);
 Slider
 ~~~~~~
 
-`Slider` is a component, which allows you to visually select a value by
+`Slider` is a widget, which allows you to visually select a value by
 moving the slider lever within the specified interval.
 
-The properties of this component are listed in the following table:
+The properties of this widget are listed in the following table:
 
 [cols="<,<",options="header",]
 |=======================================================================
@@ -921,7 +929,7 @@ The properties of this component are listed in the following table:
 |`value` |Value
 |=======================================================================
 
-The specific component events are listed in the following table:
+The specific widget events are listed in the following table:
 
 [cols="<,<,<",options="header",]
 |=======================================================================
@@ -930,7 +938,7 @@ The specific component events are listed in the following table:
 |`onValueChange` |`ValueChangeEvent` |Slider value change event
 |=======================================================================
 
-To create a component of this type by program means, use the Slider
+To create a widget of this type by program means, use the Slider
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -941,8 +949,8 @@ var sl = new P.Slider(min, max, value);
 where `min` is a minimum value (optional), `max` is a maximum value
 (optional), `value` is the current value (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ---------------------------------------------
@@ -961,7 +969,7 @@ view.add(sl1, ...);
 ProgressBar
 ~~~~~~~~~~~
 
-`ProgressBar` is a component, which visually shows the progress of some
+`ProgressBar` is a widget, which visually shows the progress of some
 task.
 
 For example, during the execution of a task the percentage of its
@@ -974,7 +982,7 @@ can't be obtained, use the uncertainty mode, in which the indicator will
 show that the task was started but is not completed yet instead of its
 progress.
 
-The specific properties of this component are listed in the following
+The specific properties of this widget are listed in the following
 table:
 
 [cols="<,<",options="header",]
@@ -986,7 +994,7 @@ table:
 |`text` |Text displayed inside a progress bar
 |============================================
 
-To create a component of this type, use the ProgressBar constructor,
+To create a widget of this type, use the ProgressBar constructor,
 which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -996,8 +1004,8 @@ var pb = new P.ProgressBar(min, max);
 
 where `min` is a minimum value (optional), `max` is a maximum value (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ---------------------------- 
@@ -1011,7 +1019,7 @@ view.add(pb1, ...);
 FormattedField
 ~~~~~~~~~~~~~~
 
-`FormattedField` is a component, which allows you to edit value of some
+`FormattedField` is a widget, which allows you to edit value of some
 specific type as the text. So, a user sees just text and a program sees
 a value of specific type e.g. date, number, boolean, string and etc.
 Specify the valur type which will be managed by this field.
@@ -1044,7 +1052,7 @@ from the following: number, date, time, percentage, currency, and mask.
 Select a predefined format for the selected category or specify the
 custom one in the Format field.
 
-The specific component events are listed in the following table:
+The specific widget events are listed in the following table:
 
 [cols="<,<,<",options="header",]
 |=======================================================================
@@ -1053,7 +1061,7 @@ The specific component events are listed in the following table:
 |`onValueChange` |`ValueChangeEvent` |Formatted field value change event: value property assignment from script, focus loose or pressing the Enter key
 |=======================================================================
 
-To create a component of this type by program means, use the
+To create a widget of this type by program means, use the
 FormattedField constructor, which can be called with a different number
 of parameters:
 
@@ -1062,8 +1070,8 @@ of parameters:
 var ff = new P.FormattedField();
 ------------------------------
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ---------------------------------- 
@@ -1084,7 +1092,7 @@ characters.
 The properties and events of `PasswordField` are identical to the
 `TextField` widget.
 
-To create a component of this type in JavaScript code, use PasswordField
+To create a widget of this type in JavaScript code, use PasswordField
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -1094,8 +1102,8 @@ var pf = new P.PasswordField(text);
 
 where `text` is text (optional).
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ----------------------------- 
@@ -1107,13 +1115,13 @@ view.add(pf, ...);
 TextArea
 ~~~~~~~~
 
-`TextArea` is the text component for editing and displaying multiline
+`TextArea` is the text widget for editing and displaying multiline
 text.
 
 The properties and events of `TextArea` are identical to the `TextField`
 widget.
 
-To create a component of this type in JavaScript code, use TextArea
+To create a widget of this type in JavaScript code, use TextArea
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -1133,7 +1141,7 @@ view.add(textArea, ...);
 HtmlArea
 ~~~~~~~~
 
-`HtmlArea` is a component for editing and displaying HTML documents.
+`HtmlArea` is a widget for editing and displaying HTML documents.
 It is a WYSIWYG html editor.
 
 When showing a form in web-browser, the editor area is displayed as HTML
@@ -1142,7 +1150,7 @@ WYSIWYG editor.
 The properties and events of `HtmlArea` are identical to the `TextField`
 widget.
 
-To create a component of this type in JavaScript code, use HtmlArea
+To create a widget of this type in JavaScript code, use HtmlArea
 constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
@@ -1163,7 +1171,7 @@ view.add(htmlArea, ...);
 Model widgets
 -------------
 
-Model widgets are components, which can be binded with JavaScript objects.
+Model widgets are widgets, which can be binded with JavaScript objects.
 
 You can bind a model widgets to any JavaScript object. This object will change in response to the user
 actions on the widgets and its changes will lead to automatic update of
@@ -1185,7 +1193,7 @@ Scalar model widgets have the following common properties:
 |Property |Description
 |`data`  |Bound JavaScript object.
 |`field` |Bound property path within a `data` object.
-|`value` |The current value for the component.
+|`value` |The current value for the widget.
 |`nullable` |Nullable flag indicating, that clear button will be shonw to the right of the widget.
 |=============================================
 
@@ -1194,10 +1202,10 @@ Scalar model widgets common events are listed in the following table:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Handler parameter |Description
-|`onSelect` |The `aEditor` object is the source component, is passed to
-the event handler as a parameter, specify the value of the component by
+|`onSelect` |The `aEditor` object is the source widget, is passed to
+the event handler as a parameter, specify the value of the widget by
 setting its properties. |Occurs when the select button, located next to
-the component, is clicked. The select button is displayed only if the
+the widget, is clicked. The select button is displayed only if the
 handler is defined.
 
 |`onRender` |`RenderEvent` |Occurs when preparing the widget for
@@ -1205,7 +1213,7 @@ displaying (both when it is used independently or as a `ModelGrid`
 widget cell).
 |=======================================================================
 
-Any model widget can be presented as an independent component and as a
+Any model widget can be presented as an independent widget and as a
 `ModelGrid` cell's widget. There is an "abstract" cell in each model
 widget. It is available in the `onRender` event handlers.
 
@@ -1287,9 +1295,9 @@ Boolean: `true`, Number type: `1`, String type: `'true'`.
 Boolean type: `false`, Number type: 0, String type: an empty string.
 
 To configure the widget binding specifiy the data and field properties for
-the component.
+the widget.
 
-To create a component of this type by program means, use the
+To create a widget of this type by program means, use the
 ModelCheckBox constructor:
 
 [source,Javascript]
@@ -1297,8 +1305,8 @@ ModelCheckBox constructor:
 var modelCheck = new P.ModelCheckBox();
 -------------------------------------
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 -----------------------------------------------
@@ -1332,8 +1340,8 @@ while displaying.
 
 To configure the widget's model binding:
 
-* Specify the data property for the component.
-* Specify the field property for the component.
+* Specify the data property for the widget.
+* Specify the field property for the widget.
 * Specify the displayList property.
 * Specify the displayField property.
 * To allow selection of value from the list, enable the list property
@@ -1341,7 +1349,7 @@ checkbox.
 * To allow a customized selection of the widget's value, specify
 `onSelect` event handler.
 
-To create a component of this type by program means, use the ModelCombo
+To create a widget of this type by program means, use the ModelCombo
 constructor:
 
 [source,Javascript]
@@ -1349,8 +1357,8 @@ constructor:
 var modelCombo = new P.ModelCombo();
 ----------------------------------
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ----------------------------------------------------
@@ -1385,13 +1393,13 @@ some date or timestamp in some object.
 
 To configure the widget model binding:
 
-* Specify the data property for the component.
-* Specify the field property for the component.
+* Specify the data property for the widget.
+* Specify the field property for the widget.
 * Specify the date and time format. E.g. 
 * Enable the datePicker flag to display the calendar button on the right side of the widget.
 * Enable the timePicker flag to display the clock button on the right side of the widget.
 
-To create a component of this type by program means, use the ModelDate
+To create a widget of this type by program means, use the ModelDate
 constructor:
 
 [source,Javascript]
@@ -1399,8 +1407,8 @@ constructor:
 var modelDate = new P.ModelDate();
 --------------------------------
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 -------------------------------------------------
@@ -1420,13 +1428,6 @@ ModelGrid
 
 `ModelGrid` model widget is a powerful widget to display and enter data,
 which is presented in a tabular form and as a tree.
-
-___________________________________________________________________________________________________________________
-*Note*
-
-At the current version of the platform you can create and setup an
-instance of `ModelGrid` only using visual editor.
-___________________________________________________________________________________________________________________
 
 `ModelGrid` widget has the following features:
 
@@ -1468,7 +1469,7 @@ ________________________________________________________________________________
 |`data` |The bounded object/array for the grid rows.
 
 |`field` |Property path within data object to object/array for the grid rows.
-It might be omitted if data property points to actual grid's rows' array.
+It might be omitted if data property points to actual grid's rows array.
 
 |`childrenField` |See tree option.
 
@@ -1476,7 +1477,46 @@ It might be omitted if data property points to actual grid's rows' array.
 
 |`selected` |All selected in grid elements of `data` array as an array.
 
-|`onRender` |Event handler, which will be called for each data
+|=======================================================================
+
+`ModelGrid` widget has the following specific methods:
+
+[cols="<,<,<,<",options="header",]
+|=======================================================================
+|Method |Parameters |Description
+|`select` |(aObject) | Selects the specified grid's data array element.
+
+|`unselect` |(aObject) | Deselects the specified grid's data array element.
+
+|`clearSelection` | Deselects all selected grid's data array elements. E.g. clears the slection.
+
+|`find` | Opens find dialog
+
+|`makeVisible` |(aObject, needToSelect) | Scrolls a ModelGrid's view to show gird's row of the specified element in visible area.
+
+|`unsort` |() | Cancels all sorting in the ModelGrid.
+
+|`redraw` | Redraws in J2SE client and regenerates all inner ModelGrid's markup  in browser client.
+
+|`removeColumnNode` |(aColumn) | Removes the specified column from ModelGrid's header and columns collection.
+
+|`addColumnNode` |(aColumn) | Adds the specified column to ModelGrid's header and columns collection at the end.
+
+|`insertColumnNode |(aIndex, aColumnFacade) | Adds the specified column to ModelGrid's header and columns collection at the specified index.
+|=======================================================================
+
+`ModelGrid` widget has the following specific events:
+
+[cols="<,<,<,<",options="header",]
+|=======================================================================
+|Event |Handler parameter |Description
+|`onItemSelected` |`ItemEvent` |Selection lead of the grid change event.
+
+|`onCollapse` |`ItemEvent` |Event handler, which will be called when user collapses a grid's row.
+
+|`onExpand` |`ItemEvent` |Event handler, which will be called when user expands a grid's row.
+
+|`onRender` |`RenderEvent` |Event handler, which will be called for each data
 grid cell, if a similar handler was not defined for theirs columns.
 |=======================================================================
 
@@ -1551,14 +1591,14 @@ it will be ivoked rather than similar event handler, defined on
 about how to deal with `onRender` and `onSelect` event handlers.
 
 Use the form inspector: the inspector displays the grid's columns node
-as children of `ModelGrid` component node and allows you to edit them.
+as children of `ModelGrid` widget node and allows you to edit them.
 
 To add, remove and configure grid columns:
 
 * To fill all `ModelGrid` columns corresponding to the fields of the
 linked data model entity, select Fill columns. In this case, columns'
 binding will be performed automatically.
-* To manually add a column to `ModelGrid` drag it from the components
+* To manually add a column to `ModelGrid` drag it from the widgets
 palette or add it using Add from palette context menu in form inspector.
 * To add a column as a child to another column use parent column's node
 Add from palette of from context menu in form inspector.
@@ -1586,6 +1626,21 @@ some other field, thus forming a hierarchical data structure.
 
 image:images/gridTree.png[Hierarchical data dataset]
 
+Create and use ModelGrid within your JavaScript progams as follows:
+
+[source,Javascript]
+----------------
+    var g = new P.ModelGrid();
+    g.data = model.allcustomers;
+    var colService = new P.ServiceGridColumn();
+    g.addColumnNode(colService);
+    var colName = new P.ModelGridColumn();
+    colName.field = 'name';
+    colName.title = 'just added name column'
+    g.addColumnNode(colName);
+    form.view.add(g, {left: '300px', top: '10px', right: '9px', bottom: '48px'});
+----------------
+
 [[modelformattedfield]]
 ModelFormattedField
 ~~~~~~~~~~~~~~~~~~~
@@ -1601,8 +1656,8 @@ ModelFormattedField constructor:
 var mff = new P.ModelFormattedField();
 ------------------------------------
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to a container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to a container:
 
 [source,Javascript]
 -------------------------------------------
@@ -1631,12 +1686,12 @@ used to display and enter text.
 
 To configure the widget:
 
-* Set the entity property for the component, using the field property on
+* Set the entity property for the widget, using the field property on
 the properties panel; select the data model parameter or data model
 entity property in the dialog.
 * If necessary, set handlers for selection and data changing events.
 
-To create a component of this type by program means, use the
+To create a widget of this type by program means, use the
 ModelTextArea constructor:
 
 [source,Javascript]
@@ -1644,8 +1699,8 @@ ModelTextArea constructor:
 var mta = new ModelTextArea();
 ------------------------------
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 -------------------------------------------
@@ -1667,7 +1722,7 @@ using buttons to increase/decrease values.
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
-|`editable` |`true` if the component is editable and `false` otherwise.
+|`editable` |`true` if the widget is editable and `false` otherwise.
 
 |`min` |Determines the lower bound of spinner's value. If it's `null`,
 valus is unlimited at lower bound.
@@ -1680,7 +1735,7 @@ unlimited at upper bound.
 |`emptyText` |The text displayed when the actual value is absent.
 |=======================================================================
 
-To create a component of this type by program means, use the ModelSpin
+To create a widget of this type by program means, use the ModelSpin
 constructor:
 
 [source,Javascript]
@@ -1688,8 +1743,8 @@ constructor:
 var modelSpin = new P.ModelSpin();
 --------------------------------
 
-After creating, if necessary, set the properties and component event
-handlers and add the component to the container:
+After creating, if necessary, set the properties and widget event
+handlers and add the widget to the container:
 
 [source,Javascript]
 ----------------------------------------------
@@ -1707,12 +1762,12 @@ Containers are widgets, which can contain other widgets e.g.
 widgets or other containers and control their child widgets size and
 location.
 
-In the visual editor Containers are represented as panel component with specific layout.
+In the visual editor Containers are represented as panel widget with specific layout.
 
 The layout of a panel can be changed using the editor. At runtime, panel
 with particular layout will be replaced by the corresponding container.
 
-Containers have a set of properties and events common for all components
+Containers have a set of properties and events common for all widgets
 as well as their own specific properties and events.
 
 The common methods for all containers:
@@ -1722,7 +1777,7 @@ The common methods for all containers:
 |Method |Description
 |`remove(widget)` |Removes a child widget
 |`child(index)` |Returns a child widget by its numeric index
-|`clear()` |Removes all child components
+|`clear()` |Removes all child widgets
 |==============================================================
 
 The common property of all containers:
@@ -1730,7 +1785,7 @@ The common property of all containers:
 [cols="<,<",options="header",]
 |===================================================
 |Property |Description
-|`count` |The number of child components (read-only)
+|`count` |The number of child widgets (read-only)
 |===================================================
 
 [[anchorspane]]
@@ -1742,12 +1797,12 @@ AnchorsPane
 Anchors layout provides a simple, flexible yet powerful layout
 algorithm, which allows you to build complex user interfaces.
 
-image:images/anchorLayout.png[Anchor layout: anchors and component's
+image:images/anchorLayout.png[Anchor layout: anchors and widget's
 width and height dimensions]
 
 Configure the position and behavior of a widget in the container by
 defining Left, Top, Right, Bottom anchors and Width and Height settings
-of the component. You can specify two of the three properties by the
+of the widget. You can specify two of the three properties by the
 horizontal and vertical axis.
 
 At the same time can be set two anchors or one anchor and one dimension
@@ -1762,8 +1817,8 @@ Use AnchorsPane constructor in form's JavaScript code:
 var pane = new P.AnchorsPane();
 -----------------------------
 
-To add child components to the container, use the add method and pass a
-child component and object of the Anchors type as parameters to this
+To add child widgets to the container, use the add method and pass a
+child widget and object of the Anchors type as parameters to this
 method.
 
 [source,Javascript]
@@ -1771,7 +1826,7 @@ method.
 pane.add(widget, anchors);
 -------------
 
-where widget is a component to add, anchors is an object of the
+where widget is a widget to add, anchors is an object of the
 Anchors type.
 
 [source,Javascript]
@@ -1785,7 +1840,7 @@ pane.add(comp, new P.Anchors(12, null, 14, 22, null, 24));
 In the above example a button with the specified Left, Right, Top, and
 Bottom anchors is added to the anchor pane.
 
-`Anchors` object defines component's binding anchors in a container with
+`Anchors` object defines widget's binding anchors in a container with
 anchors layout.
 
 To create an `Anchors` object, use its constructor by passing values for
@@ -1818,7 +1873,7 @@ var panel = new P.AnchorsPane();
 panel.add(new P.Label("Test"), anchors);
 -----------------------------------------
 
-There's also alternative syntax for adding a child component: pass the
+There's also alternative syntax for adding a child widget: pass the
 JavaScript object with the left, width, right, top, height, bottom
 properties as a second parameter to the add method. An example of code
 with the same execution results:
@@ -1842,16 +1897,16 @@ BorderPane
 
 `BorderPane` is a lightweight container with the border layout.
 
-Border layout is a simple way of arranging components, when a container
-changes the position and dimensions of its components to the fit five
+Border layout is a simple way of arranging widgets, when a container
+changes the position and dimensions of its widgets to the fit five
 regions: northern, southern, western, eastern and center. Each area can
-contain only one component, which is determined by one of the following
+contain only one widget, which is determined by one of the following
 constants: North, South, East, West, Center.
 
 image:images/borderLayout.png[Border layout]
 
 Explicitly set the value of the property, which controls the position of
-the component in the container. To do this, change widget Direction
+the widget in the container. To do this, change widget Direction
 property fields at the Layout property group, by selecting one of the
 values from the drop-down list.
 
@@ -1865,20 +1920,20 @@ var pane = new P.BorderPane(hgap, vgap);
 where `hgap` is the horizontal gap (optional) and `vgap` is the vertical
 gap (optional).
 
-To add child components to the container, use add instance method:
+To add child widgets to the container, use add instance method:
 
 [source,Javascript]
 --------------- 
 pane.add(widget, place, size);
 ---------------
 
-where widget is a component to add, place is an instance of a
+where widget is a widget to add, place is an instance of a
 `HorizontalPosition` or `VerticalPosition` constants, determining the
-region (optional) and size is the size of the component by the provided
+region (optional) and size is the size of the widget by the provided
 place direction (optional).
 
 The following example shows how to create a `BorderPane` container and
-add to this container two child components:
+add to this container two child widgets:
 
 [source,Javascript]
 ------------------------------------------------
@@ -1897,19 +1952,19 @@ GridPane
 `GridPane` is a lightweight container with the grid layout. It is
 intended for static UI designs.
 
-`GridPane` lays components out by the grid, all columns must have the
+`GridPane` lays widgets out by the grid, all columns must have the
 same width and all rows must have the same height.
 
 image:images/gridLayout.png[Grid Layout arranging widgets by a grid]
 
 To set the number of columns and rows and the vertical and horizontal
-interval between cells, select the GridLayout node in the component tree
+interval between cells, select the GridLayout node in the widget tree
 of the inspector and change the corresponding values on the properties
 panel.
 
 If you set a value other than zero for the number of columns and rows,
 column number setting is ignored. Instead of this, the number of columns
-is determined by the number of rows and the total number of components
+is determined by the number of rows and the total number of widgets
 in the container.
 
 Use GridPane constructor to create this container in JavaScript code:
@@ -1923,17 +1978,17 @@ Where rows is the number of grid rows, cols is the number of grid
 columns, hgap is the horizontal gap (optional) and vgap is the
 vertical gap (optional).
 
-To add child components to the container, use add instance method, which
-adds a component to the next avaliable position:
+To add child widgets to the container, use add instance method, which
+adds a widget to the next avaliable position:
 
 [source,Javascript]
 ----------- 
 pane.add(widget, row, column);
 -----------
 
-where widget is a component to add, row is the vertical position, the widget to added to and column is the horizontal position.
+where widget is a widget to add, row is the vertical position, the widget to added to and column is the horizontal position.
 
-Use `child` method to get an child component at the specified row and
+Use `child` method to get an child widget at the specified row and
 column, if the target position is empty the method will return `null`:
 
 [source,Javascript]
@@ -1941,7 +1996,7 @@ column, if the target position is empty the method will return `null`:
 var comp = pane.child(row, column);
 --------------------------
 
-where row is the row of the component and column is the column of the
+where row is the row of the widget and column is the column of the
 grid position.
 
 The following example shows how to create an `GridPane` container by program means:
@@ -1963,9 +2018,9 @@ FlowPane
 
 `FlowPane` is a lightweight container with the flow layout.
 
-Flow layout aligns components into a row/line. Dimensions of the
-components are calculated according to their content (component
-preferences). If the component doesn't fit into a row, it is transferred
+Flow layout aligns widgets into a row/line. Dimensions of the
+widgets are calculated according to their content (widget
+preferences). If the widget doesn't fit into a row, it is transferred
 to the next line.
 
 image:images/flowLayout.png[Flow Layout arranging into a line]
@@ -1980,14 +2035,14 @@ var pane = new P.FlowPane(hgap, vgap);
 Where hgap is the horizontal gap (optional) and vgap vgap the vertical
 gap (optional).
 
-To add child components to the container, use add instance method:
+To add child widgets to the container, use add instance method:
 
 [source,Javascript]
 ----------- 
 pane.add(widget);
 -----------
 
-where widget is a component to add.
+where widget is a widget to add.
 
 The following example shows how to create an `FlowPane` container and
 add this container to its parent container:
@@ -2005,16 +2060,16 @@ CardPane
 
 `CardPane` is a lightweight container with the card layout.
 
-Card layout allows you to arrange components as a stack of cards, one
-above the other. Only the top component is visible. This layout manager
+Card layout allows you to arrange widgets as a stack of cards, one
+above the other. Only the top widget is visible. This layout manager
 is usually used to create a step-by-step wizards.
 
-Each component has an assigned card name, which can be set on the
-component properties panel in the Card Name field of the Layout
+Each widget has an assigned card name, which can be set on the
+widget properties panel in the Card Name field of the Layout
 properties group. This name can be used later to select a visible
-component.
+widget.
 
-To select a visible component, use show(cardName) method, where cardName is the card name.
+To select a visible widget, use show(cardName) method, where cardName is the card name.
 
 Use CardPane constructor to create this container in JavaScript code:
 
@@ -2026,14 +2081,14 @@ var pane = new P.CardPane(hgap, vgap);
 Where hgap is the horizontal gap (optional) and vgap vgap the vertical
 gap (optional).
 
-To add child components to the container, use add instance method:
+To add child widgets to the container, use add instance method:
 
 [source,Javascript]
 ------------- 
 pane.add(widget, cardName);
 -------------
 
-where widget is a component to add and cardName is the name of the
+where widget is a widget to add and cardName is the name of the
 card.
 
 The following example shows how to create an `FlowPane` container and
@@ -2058,17 +2113,17 @@ BoxPane
 
 `BoxPane` is a lightweight container with the vertical or horizontal box layout.
 
-The box layout arranges components in the order, in which they were
+The box layout arranges widgets in the order, in which they were
 added to the container, one after the other, back to back.
 
 Specify an axis, along which the Box layout manager will arrange
-components. For this select the BoxLayout node in the inspector
-component tree and select the Axis property value from the list on the
+widgets. For this select the BoxLayout node in the inspector
+widget tree and select the Axis property value from the list on the
 properties panel:
 
-* HORIZONTAL for components are laid out horizontally from left to
+* HORIZONTAL for widgets are laid out horizontally from left to
 right.
-* VERTICAL for components are laid out vertically from top to bottom.
+* VERTICAL for widgets are laid out vertically from top to bottom.
 
 Use BoxPane constructor to create this container in JavaScript code:
 
@@ -2085,7 +2140,7 @@ gap between child widgets and it is ignored otherwise.
 If orientation is specified as P.Orientation.VERTICAL vgap is vertical
 gap between child widgets and it is ignored otherwise.
 
-To add child components to the container, use add instance method:
+To add child widgets to the container, use add instance method:
 
 [source,Javascript]
 ----------- 
@@ -2117,23 +2172,23 @@ TabbedPane
 ~~~~~~~~~~
 
 `TabbedPane` container allows the user to switch between a group of
-components by clicking tabs with titles and icons.
+widgets by clicking tabs with titles and icons.
 
-Component's specific properties:
+Widget's specific properties:
 
 [cols="<,<",options="header",]
 |===========================================
 |Property |Description
-|`selectedComponent` |Active tab's component
+|`selectedComponent` |Active tab's widget
 |`selectedIndex` |Active tab index
 |===========================================
 
-Component's specific events:
+Widget's specific events:
 
 [cols="<,<,<",options="header",]
 |=======================================================
 |Event |Event type |Description
-|`onItemSelected` |`ComponentEvent` |Tab switching event
+|`onItemSelected` |`ItemEvent` |Tab switching event
 |=======================================================
 
 To create a widget of this type by program means, use the TabbedPane
@@ -2153,7 +2208,7 @@ parameters to this method:
 pane.add(widget, text, icon);
 ---------------
 
-where widget is a component to add, text is the tab's label text,
+where widget is a widget to add, text is the tab's label text,
 icon is the tab's label icon (optional).
 
 An example of code using the `TabbedPane` container:
@@ -2172,7 +2227,7 @@ SplitPane
 ~~~~~~~~~
 
 `SplitPane` container is used to display two (and only two) splitted
-components. The user can change their size by moving the separator.
+widgets. The user can change their size by moving the separator.
 
 Split pane setup in form editor:
 
@@ -2193,9 +2248,9 @@ The specific properties of the `SplitPane`:
 |`oneTouchExpandable` |`true` if the pane is one touch expandable and
 `false` otherwise.
 
-|`firstComponent` |The first component of the container.
+|`firstComponent` |The first widget of the container.
 
-|`secondComponent` |The second component of the container.
+|`secondComponent` |The second widget of the container.
 |=======================================================================
 
 To create a widgets of this type by program means, use the SplitPane
@@ -2266,7 +2321,7 @@ var pane = P.ScrollPane(view);
 where view is a widget, which is added inside the scroll panel
 (optional).
 
-You can add one child component to the container using the
+You can add one child widget to the container using the
 add method, for example:
 
 [source,Javascript]
@@ -2280,7 +2335,7 @@ scroll.add(view);
 ToolBar
 ~~~~~~~
 
-`ToolBar` is a container used to display components, which are
+`ToolBar` is a container used to display widgets, which are
 responsible for the most common user actions.
 
 Toolbars are intended to display a set of buttons (usually without
@@ -2289,7 +2344,7 @@ trigger the most frequently used application actions.
 
 Widgets in the toolbar are placed in horizontal box one-by-one.
 
-To create a component of this type by program means, use the ToolBar
+To create a widget of this type by program means, use the ToolBar
 constructor:
 
 [source,Javascript]
@@ -2297,7 +2352,7 @@ constructor:
 var toolbar = new P.ToolBar();
 ----------------------------
 
-To add child components to the container, use the add method and pass a
+To add child widgets to the container, use the add method and pass a
 child widget:
 
 [source,Javascript]
@@ -2305,7 +2360,7 @@ child widget:
 pane.add(widget);
 -----------
 
-where widget is the component to add.
+where widget is the widget to add.
 
 For example:
 
@@ -2342,7 +2397,7 @@ constructor:
 var pane = new P.DesktopPane();
 -----------------------------
 
-The list of specific methods of the component:
+The list of specific methods of the widget:
 
 [cols="<,<",options="header",]
 |============================================================
@@ -2353,7 +2408,7 @@ The list of specific methods of the component:
 |`closeAll()` |Closes all frames on the pane.
 |============================================================
 
-The specific property of the component:
+The specific property of the widget:
 
 [cols="<,<",options="header",]
 |========================================================
@@ -2391,7 +2446,7 @@ formModule.onDesktop(desktop);
 Menus
 -----
 
-Menus components provide a convinient way to let the user choose one of
+Menus widgets provide a convinient way to let the user choose one of
 several options.
 
 [[menubar]]
@@ -2405,7 +2460,7 @@ inherits it common properties and methods.
 After adding this widget from the palette, the menu bar contains some
 default menus, this menus can be changed, edited or deleted.
 
-To create a component of this type by in your code, use the MenuBar
+To create a widget of this type by in your code, use the MenuBar
 constructor:
 
 [source,Javascript]
@@ -2415,7 +2470,7 @@ var menuBar = new P.MenuBar();
 view.add(menuBar, ...);// add it to the root container
 -------------------------------------------------
 
-The list of specific methods of the component:
+The list of specific methods of the widget:
 
 [cols="<,<",options="header",]
 |=======================================================================
@@ -2429,16 +2484,16 @@ Menu
 ~~~~
 
 `Menu` is an individual menu, it can contain `MenuItem` and
-`MenuSeparator` components. This compontent is a kind of a container and
+`MenuSeparator` widgets. This compontent is a kind of a container and
 inherits it's common properties and methods.
 
-Add new `Menu` components on to the `MenuBar` from the components
+Add new `Menu` widgets on to the `MenuBar` from the widgets
 pallete in the visual editor.
 
 Add the submenu into a `Menu` by selecting Add From Palette in the
 context menu.
 
-To create a component of this type by your code, use the Menu
+To create a widget of this type by your code, use the Menu
 constructor:
 
 [source,Javascript]
@@ -2449,7 +2504,7 @@ menuBar.add(menu);
 
 Where text is menu's label, displayed in parent menu it this menu is used as a sub menu.
 
-The list of specific properties of the component:
+The list of specific properties of the widget:
 
 [cols="<,<",options="header",]
 |===========================================
@@ -2458,13 +2513,13 @@ The list of specific properties of the component:
 |`parent` |The parent container (read-only).
 |===========================================
 
-The list of specific methods of the component:
+The list of specific methods of the widget:
 
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
 |`add(widget)` |Adds an item to the menu, where widget is the `MenuItem` or
-`MenuSeparator` component to add.
+`MenuSeparator` widget to add.
 |=======================================================================
 
 [[popupmenu]]
@@ -2472,21 +2527,21 @@ PopupMenu
 ~~~~~~~~~
 
 `PopupMenu` is an options selection window, which can be assigned to any
-component. This compontent is a kind of a container and inherits it's
+widget. This compontent is a kind of a container and inherits it's
 common properties and methods.
 
-Add the `PopupMenu` component onto the form by dragging it from the
-palette in visual editor. After adding, this component will have no
+Add the `PopupMenu` widget onto the form by dragging it from the
+palette in visual editor. After adding, this widget will have no
 visual representation in the form's layout, it will be avaliable under
-the Other components node in the inspector component tree.
+the Other widgets node in the inspector widget tree.
 
 Add items to the popup menu the same way as to the standard menu.
 
-To assign a popup menu for a component in the visual editor, define a
+To assign a popup menu for a widget in the visual editor, define a
 widget's `componentPopupMenu` property and select the required popup menu from
 the list.
 
-To create a component of this type by in your code, use the PopupMenu
+To create a widget of this type by in your code, use the PopupMenu
 constructor:
 
 [source,Javascript]
@@ -2496,13 +2551,13 @@ var label = new P.Label("Sample");
 label.componentPopupMenu = popup;
 ---------------------------------
 
-The list of specific methods of the component:
+The list of specific methods of the widget:
 
 [cols="<,<",options="header",]
 |=======================================================================
 |Method |Description
 |`add(item)` |Adds an item to the menu, where comp is the `MenuItem` or
-`MenuSeparator` component to add.
+`MenuSeparator` widget to add.
 |=======================================================================
 
 [[menuitem]]
@@ -2511,7 +2566,7 @@ MenuItem
 
 The default `MenuItem` object contains a simple labeled menu item.
 
-To create a component of this type by in your program, use the MenuItem
+To create a widget of this type by in your program, use the MenuItem
 constructor:
 
 [source,Javascript]
@@ -2520,10 +2575,10 @@ var menuItem = new P.MenuItem(text, icon, actionPerformed);
 ----------------------------------
 
 where text is the text of the menu item (optional), icon is the icon of
-the component (optional), actionPerformed the function for the action
+the widget (optional), actionPerformed the function for the action
 performed handler (optional).
 
-The list of specific properties of the component:
+The list of specific properties of the widget:
 
 [cols="<,<",options="header",]
 |===========================================
@@ -2533,7 +2588,7 @@ The list of specific properties of the component:
 |`parent` |The parent container (read-only).
 |===========================================
 
-An example of code using `MenuItem` component:
+An example of code using `MenuItem` widget:
 
 [source,Javascript]
 ---------------------------------------- 
@@ -2550,7 +2605,7 @@ CheckMenuItem
 
 `CheckMenuItem` is a menu item combined with a checkbox.
 
-To create a component of this type by in your program, use the
+To create a widget of this type by in your program, use the
 CheckMenuItem constructor:
 
 [source,Javascript]
@@ -2559,12 +2614,12 @@ CheckMenuItem constructor:
 var checkMenuItem = new CheckMenuItem(text, selected, actionPerformed);
 --------------------------------------------
 
-where text is the text of the component (optional), selected is `true`
+where text is the text of the widget (optional), selected is `true`
 when the check box is selected and `false` otherwise (optional),
 actionPerformed the function for the action performed handler
 (optional).
 
-The list of specific properties of the component:
+The list of specific properties of the widget:
 
 [cols="<,<",options="header",]
 |======================================================================
@@ -2574,7 +2629,7 @@ The list of specific properties of the component:
 |`parent` |The parent container (read-only).
 |======================================================================
 
-A menu item of this type can be added to a `ButtonGroup` component,
+A menu item of this type can be added to a `ButtonGroup` widget,
 which is shared by other check boxes and radio buttons, including
 elements which are not present in the menu.
 
@@ -2584,7 +2639,7 @@ RadioMenuItem
 
 `RadioMenuItem` is a menu item combined with a radio button.
 
-To create a component of this type by in your program, use the
+To create a widget of this type by in your program, use the
 RadioMenuItem constructor:
 
 [source,Javascript]
@@ -2598,18 +2653,18 @@ when the check box is selected and `false` otherwise (optional),
 actionPerformed the function for the action performed handler
 (optional).
 
-The list of specific properties of the component:
+The list of specific properties of the widget:
 
 [cols="<,<",options="header",]
 |======================================================================
 |Property |Description
 |`text` |Menu item text.
 |`selected` |`true` if the menu item is selected and `false` otherwise.
-|`buttonGroup` |The button group this component belongs
+|`buttonGroup` |The button group this widget belongs
 |`parent` |The parent container (read-only).
 |======================================================================
 
-A menu item of this type can be added to a `ButtonGroup` component,
+A menu item of this type can be added to a `ButtonGroup` widget,
 which is shared by other check boxes and radio buttons, including
 elements which are not present in the menu.
 
@@ -2620,7 +2675,7 @@ MenuSeparator
 `MenuSeparator` is a separator of menu items. Use this widget to
 visually split the groups of menu items.
 
-To create a component of this type by in your program, use the
+To create a widget of this type by in your program, use the
 MenuSeparator constructor:
 
 [source,Javascript]
@@ -2628,7 +2683,7 @@ MenuSeparator constructor:
 var separator = new P.MenuSeparator();
 ------------------------------------
 
-The list of specific properties of the component:
+The list of specific properties of the widget:
 
 [cols="<,<",options="header",]
 |===========================================

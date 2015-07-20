@@ -1106,40 +1106,18 @@ Entity data events list is given in the table below:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Event type |Description
-|`onChanged` |`ChangeEvent` |Is called after changing the dataset object
+|`onRequeried` |`EntityEvent` |Is called after re-requesting the entitiy's data
+array.
 
 |`onDeleted` |`DeleteEvent` |Is called after removing an object from the
-dataset
+entitiy's data array.
 
 |`onInserted` |`InsertEvent` |Is called after inserting a new object
-into the entity dataset
+into the entitiy's data array.
 
-|`onFiltered` |`EntityEvent` |Is called after filtering the entity
-dataset
-
-|`onRequeried` |`EntityEvent` |Is called after re-requesting the dataset
-data, including the first request during the module's startup
-
-|`onScrolled` |`CursorChangeEvent` |Is called after changing the cursor
-position in the entity dataset array
-
-|`willChange` |`ChangeEvent` |Is called before changing the rowset
-object
-
-|`willDelete` |`DeleteEvent` |Is called before removing an object from
-the dataset
-
-|`willInsert` |`InsertEvent` |Is called before inserting an object into
-the dataset
-
-|`willScroll` |`CursorChangeEvent` |Is called before moving the cursor
-over the entity dataset
+|`onScrolled` |`ChangeEvent` |Is called after changing the cursor
+in the entity's data array
 |=======================================================================
-
-The events that are invoked before some action are cancelable from the
-handler function by returning the `false` value. That way you can cancel
-the following events: `willChange`, `willDelete`, `willInsert` and
-`willScroll`.
 
 `EntityEvent` is a generic entity object and contains the following
 property:
@@ -1170,7 +1148,7 @@ table:
 [cols="<,<",options="header",]
 |==============================
 |Property |Description
-|`deleted` |The deleted object.
+|`deleted` |The deleted objects.
 |==============================
 
 `InsertEvent` object specific propetries are listed in the following
@@ -1179,34 +1157,8 @@ table:
 [cols="<,<",options="header",]
 |================================
 |Property |Description
-|`inserted` |The inserted object.
+|`inserted` |The inserted objects.
 |================================
-
-`CursorChangeEvent` object specific propetries are listed in the
-following table:
-
-[cols="<,<",options="header",]
-|=============================================================
-|Property |Description
-|`oldIndex` |The cursor position index before position change.
-|`newIndex` |The cursor position index after position change.
-|=============================================================
-
-Example of using an event handler function for validation:
-
-[source,Javascript]
-------------------------------------- 
-//Handles willChange event
-function usersWillChange(evt) {
-  return validateEmail(evt.newValue);
-}
-
-//Simple e-mail validation
-function validateEmail(email) {
-    var re = /\S+@\S+\.\S+/;
-    return re.test(email);
-}
--------------------------------------
 
 [[data-schema]]
 Data schema
@@ -1220,54 +1172,28 @@ To read an entity's schema, use its `schema` property:
 
 [source,Javascript]
 ----------------------------------- 
-var entityMetadata = model..schema;
+var entityMetadata = model.entity1.schema;
 -----------------------------------
 
-where `
-
--------------------------------------------------------
-    ` is an entity, which schema you are interested in.
--------------------------------------------------------
-
-The same data can be obtained using the object-instance of this entity:
-
-[source,Javascript]
-------------------------------------- 
-var item = model.[];// Gets some item
-var entityMetadata = item.schema;
--------------------------------------
-
-where `
-
----------------------------
-    ` is an entity, `
-      
-    ` is an object's index.
----------------------------
+where `entity1` is an entity, which schema you are interested in.
 
 To get access to the an entitiy's property metadata:
 
 [source,Javascript]
 ---------------------------------- 
-var propMetadata = model..schema.;
+var propMetadata = model.entity1.schema.prop1;
 ----------------------------------
 
-where `
-
-------------------------------------------------
-    ` is an entity, `
-      
-    ` is the name of the corresponding property.
-------------------------------------------------
+where `entity1` is an entity, `prop1` is the name of the corresponding property.
 
 Example of code, which checks if the `id` property of the documents
-entity is an object's key.
+entity is an object's key property.
 
 [source,Javascript]
 ------------------------------------------------
 
 if (model.documents.schema.id.pk) {
-  Logger.info('id is key attribute of entity.');
+  P.Logger.info('id is key attribute of decuments entity.');
 }
 ------------------------------------------------
 
@@ -1278,9 +1204,6 @@ The schema composed of the following properties:
 |Property |Type |Description
 |`pk` |Boolean |`true`, if the property is an ID key
 
-|`fk` |Boolean |`true`, if the property is a reference to another entity
-instance
-
 |`name` |String |Property name
 
 |`description` |String |Property description
@@ -1288,13 +1211,6 @@ instance
 |`readonly` |Boolean |`true`, if the property is read-only
 
 |`size` |Number |Size of the property value
-
-|`scale` |Number |Scale
-
-|`precision` |Number |Accuracy
-
-|`signed` |Boolean |`true`, if the property has a Number type and can
-take on negative values
 
 |`nullable` |Boolean |`true`, if the property can take on the `NULL`
 value
@@ -1305,23 +1221,20 @@ in the entity schema object:
 
 [source,Javascript]
 -------------------- 
-model..schema.length
+model.entity.schema.length
 --------------------
+
+NOTE: If some field will have name as `length`, than its name will have a priority
+and it will be impossible to determine length of .schema as in above example.
 
 You can read the property's metadata by index as an array element:
 
 [source,Javascript]
 --------------- 
-model..schema[]
+model.entity1.schema[i]
 ---------------
 
-where `
-
-----------------------------------------------------------------
-    ` is an entity, and `
-      
-    ` is within the range from `0` to `entityMetadata.length-1`.
-----------------------------------------------------------------
+where `entity1` is an entity, and `i` is within the range from `0` to `entityMetadata.length - 1`.
 
 Below you can find an example of output all properties of the documents
 entity into the log:
@@ -1330,65 +1243,29 @@ entity into the log:
 ---------------------------------------------------------
 
 for (var i = 0; i < model.documents.schema.length; i++) {
-  Logger.info(documents.md[i]);
+  P.Logger.info(documents.md[i]);
 }
 ---------------------------------------------------------
 
 To read the entity parameter metadata, use the `schema` property of the
-`params` object of a data model or entity:
-
-[source,Javascript]
------------------------------------------ 
-var paramsMetadata = model.params.schema;
------------------------------------------
+`params` object of an entity:
 
 [source,Javascript]
 ------------------------------------------
 
-var paramsMetadata = model..params.schema;
+var paramsMetadata = model.entity1.params.schema;
 ------------------------------------------
-
-To get access to the metadata of a specific parameter:
-
-[source,Javascript]
------------------------------------- 
-var paramMetadata = paramsMetadata.;
-------------------------------------
-
-where `
-
----------------------------------
-    ` is a name of the parameter.
----------------------------------
-
-Example of code, which checks if the `documentID` parameter of the data
-model was changed:
-
-[source,Javascript]
-----------------------------------------------------
-
-if (model.params.schema.documentID.modified) {
-  Logger.info('Parameter documentID was modified.');
-}
-----------------------------------------------------
 
 You can read metadata composed of the following for the parameter:
 
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Property |Type |Description
-|`mode` |Number |Parameter operation mode
-
-|`defaultValue` |Object |Default parameter value
-
 |`modified` |Boolean |`true`, if the parameter was changed and `false`
 otherwise
 
 |`pk` |Boolean |`true`, if the parameter is a primary key and `false`
 otherwise
-
-|`fk` |Boolean |`true`, if the field is an foreign key referring to
-another entity and `false` otherwise
 
 |`name` |String |Name of the parameter
 
@@ -1399,81 +1276,27 @@ otherwise
 
 |`size` |Number |Size of the property value
 
-|`scale` |Number |Scale
-
-|`precision` |Number |Accuracy
-
-|`signed` |Boolean |`true`, if the parameter has a Number type and can
-take on negative values and `false` otherwise
-
 |`nullable` |Boolean |`true`, if the parameter is not mandatory and
 `false` otherwise
 |=======================================================================
-
-To get the number of model parameters, use the `length` property of the
-model parameter schema object:
-
-[source,Javascript]
--------------------------- 
-model.params.schema.length
---------------------------
-
-or just the `length` property of the model parameters:
-
-[source,Javascript]
-------------------- 
-model.params.length
--------------------
 
 To get the number of the entity parameters:
 
 [source,Javascript]
 --------------------------- 
-model..params.schema.length
+model.entity1.params.schema.length
 ---------------------------
 
-or:
+where `entity1` is an entity.
 
-[source,Javascript]
--------------------- 
-model..params.length
---------------------
-
-where `
-
--------------------
-    ` is an entity.
--------------------
-
-To access parameter metadata by index, call it as an array element:
-
-[source,Javascript]
---------------------- 
-model.params.schema[]
----------------------
-
-where `
-
--------------------------------------------------------------
-    ` is within the range from 0 to `params.schema.length-1`.
--------------------------------------------------------------
-
-Below you can see an example of outputting all model data parameters
-into the log:
-
-[source,Javascript]
-------------------------------------------------------
-
-for (var i = 0; i < model.params.schema.length; i++) {
-  Logger.info(params.md[i]);
-}
-------------------------------------------------------
+NOTE: If some parameter will have name as `length`, than its name will have a priority
+and it will be impossible to determine length of .schema as in above example.
 
 [[dynamic-entities]]
 Dynamic entities
 ~~~~~~~~~~~~~~~~
 
-Use model's loadEntity(queryName)method, where queryName is the name of
+Use model's loadEntity(queryName) method, where queryName is the name of
 the query to dynamically create an entity in the data model. The
 generated entity can be used to read, insert or modify objects:
 
@@ -1481,17 +1304,50 @@ generated entity can be used to read, insert or modify objects:
 ---------------------------------------------------
 
 var docEntity = model.loadEntity("Documents");
-docEntity.requery();
+docEntity.requery(function(){}, function(){});
 
 //Print all documents names
-docEntity.foreach(function(doc) {
-  Logger.info(doc.NAME);
+docEntity.forEach(function(doc) {
+  P.Logger.info(doc.NAME);
 });
 
 //Change first document's name
 docEntity[0] && docEntity[0].NAME = "New document";
-model.save();
+model.save(function(){}, function(){});
 ---------------------------------------------------
+
+Use model's createEntity(sqlText, datasourceName) method, where sqlText is arbitrary sql text
+and is datasourceName the name of datasource accessible in your current environment
+The generated entity can be used to read, insert or modify objects:
+
+[source,Javascript]
+---------------------------------------------------
+
+var docEntity = model.createEntity("select * from tr_documents", "testdb");
+docEntity.requery(function(){}, function(){});
+
+//Print all documents names
+docEntity.forEach(function(doc) {
+  P.Logger.info(doc.NAME);
+});
+
+//Change first document's name
+docEntity[0] && docEntity[0].NAME = "New document";
+model.save(function(){}, function(){});
+---------------------------------------------------
+
+Use executeUpdate entity method to execute the SQL code, which contains
+the `INSERT`, `UPDATE`, `DELETE` or DDL commands:
+
+[source,Javascript]
+----------------------------------------------------------------------------
+
+var e = model.createEntity("DELETE * FROM Document d WHERE d.DOC_TYPE = 1");
+e.executeUpdate(function(){}, function(){});
+----------------------------------------------------------------------------
+
+NOTE: createEntity method may be used only is two-tier environment. E.g. in Java EE
+server, J2SE client or in Platypus TSA server.
 
 [[executing-arbitary-sql]]
 Executing arbitary SQL
@@ -1506,57 +1362,12 @@ arbitrary SQL.
 SQL execution is available on a server or on a desktop client wich has a
 direct connection to a database.
 
-Use the following methods of `model`:
-
-* createEntity to dynamically create a new entity.
-* executeSql to execute SQL without any preprocessing.
-
-Use model.createEntity(sqlQuery, dataSourceName) method, where `
-
---------------------------------------------------------------
-    ` is the query text, dataSourceName is the datasource name
---------------------------------------------------------------
-
-(optional) to dynamically create a new entity, which can be used for
-executing the SQL code. The generated entity can be used to read, insert
-or modify objects:
-
-[source,Javascript]
--------------------------------------------------------------
-
-var docEntity = model.createEntity("SELECT * FROM Document");
-docEntity.requery();
-
-//Print all documents names
-docEntity.foreach(function(doc) {
-  Logger.info(doc.NAME);
-});
-
-//Change first document's name
-docEntity[0] && docEntity[0].NAME = "New document";
-model.save();
--------------------------------------------------------------
-
-Use executeUpdate entity method to execute the SQL code, which contains
-the `INSERT`, `UPDATE`, `DELETE` or DDL commands:
-
-[source,Javascript]
-----------------------------------------------------------------------------
-
-var e = model.createEntity("DELETE * FROM Document d WHERE d.DOC_TYPE = 1");
-e.executeUpdate();
-----------------------------------------------------------------------------
-
-Use executeSql(sqlQuery) model's method to execute the SQL code, which
-contains the `INSERT`, `UPDATE`, `DELETE` commands, where `
-
-------------------------
-    ` is the query text:
-------------------------
+Use executeSql(sqlClause, datasourceName, onSuccess, onFailure) model's method to execute the SQL code, which
+contains the `INSERT`, `UPDATE`, `DELETE` commands, where `sqlClause` is the query text:
 
 [source,Javascript]
 ---------------------------------------- 
-model.executeSql("DROP TABLE Document");
+model.executeSql("DROP TABLE Document", "testdb", function(){}, function(){});
 ----------------------------------------
 
 [[data-source-module]]
