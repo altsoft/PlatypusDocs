@@ -952,6 +952,20 @@ model.documens.push({id: 101, name: 'New document name'});
 model.save(function(){});
 ---------------------------------------------------------
 
+Use `elementClass` entity property to specify JavaScript constructor of entity's data array items.
+
+Example of code that uses `elementClass` property of `documents` entity:
+
+[source,Javascript]
+---------------------------------------------------------
+model.documens.elementClass = Document;// assume, that cinstructor function Document is accessible in global scope
+model.documens.requery(function(){
+    model.documens.forEach(function(aDoc){
+        P.Logger.info('aDoc instanceof Document : ' + (aDoc instanceof Document));
+    });
+}, function(){});
+---------------------------------------------------------
+
 Use `remove` function and pass the object to be deleted or pass an array of objects to be deleted
 as the parameter to avoid unnecessary iterations:
 
