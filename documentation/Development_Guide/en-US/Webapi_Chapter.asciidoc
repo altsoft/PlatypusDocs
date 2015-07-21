@@ -10,24 +10,24 @@ Server modules instance methods can be remotely invoked over network
 using simple GET or POST HTTP requests.
 
 To make the module instance methods available for external requests,
-mark it with the `@public` annotation.
+mark the module with the `@public` annotation.
 
 To invoke a server method, send a request by the URL formed using the
-base URL of the Servlet and the `/api` suffix for accessing HTTP API.
+base URL of the Servlet and the `/application` suffix for accessing HTTP API.
 
 Specify the request type, the module name, the method name and
 parameters of method calling in the URL parameters or in the body of the
 POST request in the application/x-www-form-urlencoded format. The
-request body will contain a value, which was returned in the executed
+response body will contain a value, which was returned in the executed
 method.
 
 If the JavaScript object is returned from an instance method, it will be
 serialized as JSON and string will be sent to a client as a response. If
-the object of the String or XML type is returned, string response will
-be sent to a client. It is also possible to specify the response content
-type explicitly.
+the object of the String, string will be escaped as if it was JSON string and
+text response will be sent to a client. It is also possible to specify the
+response content type explicitly.
 
-Parameters of the server module method inocation request:
+Parameters of the server module method invocation request:
 
 [cols="<,<",options="header",]
 |=======================================================================
@@ -35,28 +35,29 @@ Parameters of the server module method inocation request:
 |`__type` |Request type. To execute the server module method, this
 parameter should be set to `14`.
 
-|`__moduleName` |Module identifier.
+|`__moduleName` |Module constructor name.
 
 |`__methodName` |Name of the called module method.
 
-|`__param` |Method's single parameter. A single value, a string, a
-number or a serialized JavaScript object in the JSON format.
+|`__param` |Method's single parameter. A text value, a string, a
+number or a JavaScript object in the JSON format. Strings are also escaped
+as if it was JSON string.
 
 |`__param[]` |Method's multiply parameters. Several values, value can be
-a string, a `Number` or a serialized JavaScript objects in JSON format.
+a string, a `Number` or a JavaScript objects in JSON format. Strings are also escaped
+as if they were JSON string.
 |=======================================================================
 
 Example of URL for calling a server module method (URL is not encoded):
 
-http://server/platypus/application/api?__type=14&__moduleName=TestModule&__methodName=say&__param[]=Hello%20Platypus&__param[]=1[http://server/platypus/application/api?__type=14&__moduleName=TestModule&__methodName=say&__param[]=Hello
-Platypus&__param[]=1]
+http://server:port/context/application?__type=14&__moduleName=TestModule&__methodName=say&__param[]=Hello%20Platypus
 
 [[http-request-and-response-api]]
 HTTP request and response API
 -----------------------------
 
 To access HTTP request and response in the JavaScript server code, use
-the `http` property, which is available, if the method is called by the
+the `HttpContext` class, which is available, if the method is called by the
 external HTTP request.
 
 [source,Javascript]
@@ -72,12 +73,15 @@ function ModuleConstructor() {
    * @rolesAllowed tester admin
    */
    this.doSomething = function(paramA, paramB) {
-      // Use self.http property
+        var context = new P.HttpContext();
+        var request = context.request;
+        var response = context.response;
+        // application logic...
    }
 }
 ------------------------------------------------
 
-The `http` property contains the following objects:
+The `HttpContext` instance contains the following objects:
 
 [cols="<,<",options="header",]
 |=================================
@@ -159,8 +163,8 @@ In the example below, all request headers are output into the log:
 [source,Javascript]
 ------------------------------------------------------
 
-for (var c in http.response.headers) {
-    Logger.info(c + ' - ' + http.response.headers[c]);
+for (var c in context.request.headers) {
+    P.Logger.info(c + ' - ' + context.request.headers[c]);
 }
 ------------------------------------------------------
 
@@ -217,11 +221,11 @@ In the example below, new cookie will be added to the HTTP response:
 
 [source,Javascript]
 -------------------------- 
-http.response.addCookie({ 
+context.response.addCookie({ 
     name : 'platypus',
     value : 'test',
     maxAge : 60*60
 });
 --------------------------
 
-To delete cookie from your browser, set `0` for its `maxAge` property.
+To eliminate cookie from a browser, set `0` for its `maxAge` property.
