@@ -1,8 +1,8 @@
 [[platforms-installation]]
-Platform's installation
+Platform.js's installation
 -----------------------
 
-If the Platypus Platform runtime is delivered as a ZIP file, unpack its
+If the Platypus.js runtime is delivered as a ZIP file, unpack its
 contents to a location according to your preference on your hard drive.
 
 ____________________________________________________________________________________________________________________
@@ -30,7 +30,7 @@ higher
 mapping service (In a corporate network, Internet access may be arranged
 through a proxy server.)
 * Google Chrome 19, Mozilla Firefox 10, Internet Explorer 9 or newer
-versions of browsers for Platypus client HTML5 operation
+versions of browsers for Platypus HTML5 client operation
 
 The Platypus Platform supports the following database servers:
 
@@ -51,9 +51,8 @@ does not require any additional installation and configuration steps.
 For running applicatons on server side in a J2EE servlet container use a
 J2EE server or container, for example:
 
-* Apache Tomcat 7
-* Glassfish 3.1.2
-* JBoss AS7
+* Apache Tomcat 8.0.24 or higher
+* WildFly 9.0.0 or higher
 
 For information on installing and configuring the servlet container or
 J2EE server, refer to the relevant installation and administration
@@ -63,41 +62,35 @@ manuals, provided by their manufacturers.
 Installation guide
 ------------------
 
-To install the platform components, perform the following actions:
-
-1.  Go to the `install` subdirectory of the Platypus distribution kit.
-2.  Run `install.bat` files for the Windows OS or perform the
-`sh install.sh` command for Linux.
-3.  Select the language of the installation program user interface.
-4.  Select the installation directory.
-5.  Select components to be installed.
-* The platform's core components (required)
-* Java SE desktop client
-* Geospacial and maps components
-* Components required for operation of the standalone application server
-and in J2EE servlet containers and on the application servers
-* Components required for operation with COM/DCOM and OPC servers
-6.  Select settings of shortcuts for running the Platypus client in your
-system environment.
+To install the Platform.js runtime, unpack *.zip
+file you have downloaded to the desired directory.
 
 After installation, the platform's directory will have the following
 structure:
 
 * `platypus/`
+** `api/`
 ** `bin/`
-** `lib/`
 ** `etc/`
-** `run/`
-** `logs/`
+** `ext/`
+** `lib/`
+** `updates/`
+
+You might whant to install Platypus.js runtime as part of All-in-one bundle installer.
+If so, perform the following actions:
+
+1.  Run downloaded installer file.
+2.  Select components (Platypus.js runtime, Platypus Application Designer, Apache Tomcat server) to be installed.
+3.  Select the installation directories.
 
 [[uninstallation-guide]]
 Uninstallation guide
 --------------------
-
-To delete the platform components from your computer, perform the
+If you have unpacked platypus.js from *.zip file manually, delete platypus directory from your hard disk.
+If you have installed platypus.js using All-in-one bundle installer, than perform the
 following actions:
 
-* Select the UninstallPlatypus menu item from the installed programs
+* Select the Platypus.js runtime menu item from the installed programs
 menu. For Windows, use the conventional mechanism for removing programs.
-* Confirm uninstalling of Platypus components. If necessary, enable an
+* Confirm uninstalling of Platypus.js runtime. If necessary, enable an
 option for removing the working directory.

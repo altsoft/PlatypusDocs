@@ -12,10 +12,10 @@ a web-application as a WAR-archive or a folder. Special sevlet provides
 interaction with the clients.
 * Desktop client and HTML5 browser are supported as clients.
 * It is possible to use an external user authentication service, such as
-Microsoft Active Directory service; it allows you to integrate the
-platform target application in existing enterprise user space.
+Microsoft Active Directory service. It allows you to integrate the
+platform target application in existing enterprise users space.
 * Database connecions are configrued as a JNDI resources.
-* Application sever modules methods are avaliable via HTTP protocol.
+* Application sever modules methods are avaliable via HTTP.
 
 ______________________________________________________________________________________________________________________
 *Note*
@@ -28,7 +28,7 @@ ________________________________________________________________________________
 Configuring J2EE server
 -----------------------
 
-To run the plafrom's application in a J2EE servlet container or on the
+To run the plaform's application in a J2EE servlet container or on the
 application server, perform the following actions:
 
 * Create a new directory with a standard structure for a web-application
@@ -36,18 +36,21 @@ in J2EE, including the `WEB-INF/web.xml` deployment descriptor.
 * Create HTML pages, which will contain the Platypus application.
 Configure JavaScript code, necessary for the initial startup code.
 * Copy libraries, necessary for the application functioning, to the
-web-application `WEB-INF/lib` directory from the `bin` sub-directory of
+web-application `WEB-INF/lib` directory from the `bin` and `lib` sub-directories of
+the Platypus.js runtime directory.
+* Copy JavaScript files, necessary for the application functioning, to the
+web-application `WEB-INF/classes` directory from the `api` sub-directory of
 the platform runtime directory.
 * Copy the `pwc` directory of the JavaScript HTML5 client from the `bin`
-sub-directory of the platform runtime directory.
+sub-directory of the platform runtime directory to `web` directory within a project.
 * Configure the JDBC data source as a JNDI resource, specify its name,
-for example `jdbc/main`. Configure the connection pool and JNDI
+for example `test_db`. Configure the connection pool and JNDI
 resource. Copy the JAR file copy of the corresponding database driver to
 the directory available for the class loader.
 * Configure the security domain (Realm) for working with built-in
 storage or external authentication service. For working with built-in
 storage, configure the JDBC security domain for working with `MTD_USERS`
-and `MTD_GROUPS` tables — see Security section.
+and `MTD_GROUPS` tables. See Security section.
 * Configure the parameters of the web-application deployment in the
 `WEB-INF/web.xml` file. If necessary, configure settings in the
 configuration files specific for this application server.
@@ -61,42 +64,46 @@ Configuring the deployment descriptor
 To configure a web-application, edit the XML file of the
 `WEB-INF/web.xml` deployment descriptor.
 
-* Set the initialization parameter and specify `url` as its name and
-path to Platypus application folder as its value; the path may be
-absolute or relative within the web-application; when the
-web-application is packed into a war file, the relative path will work
-if the server unpacks this archive when deploying the application; if
-this option is not specified, the application will be loaded from the
-database. In the following example, an absolute path is specified
-+
---------------------------------------------------------
-...
-<context-param>
-    <param-name>url</param-name>
-    <param-value>file:///home/Platypus/app</param-value>
- </context-param>
-...
---------------------------------------------------------
-* Set the initialization parameter and specify `default-datasource` as
-its name and the name of the JNDI resource of the JDBC data source as
-its value, for example:
+* Set the initialization parameter `default-datasource` with name of the
+JNDI resource of the JDBC data source as its value, for example:
 +
 -----------------------------------------------
 ...
 <context-param>
     <param-name>default-datasource</param-name>
-    <param-value>jdbc/main</param-value>
+    <param-value>test_db</param-value>
  </context-param>
 ...
 -----------------------------------------------
+* Set the initialization parameter `appelement` with name of the
+default application element as its value, for example:
++
+-----------------------------------------------
+...
+<context-param>
+    <param-name>appelement</param-name>
+    <param-value>start.js</param-value>
+ </context-param>
+...
+-----------------------------------------------
++
+This parameter is usefull while working with JavaSE client and Servlet container as a server.
+This parameter is useless while working with browser.
+* Add the default html file to be sent to browser, when browser requests an application url, for example:
++
+-------------------------------------------------------
+...
+  <welcome-file-list>
+    <welcome-file>application-start.html</welcome-file>
+  </welcome-file-list>
+...
+-------------------------------------------------------
 * Add the session event handler:
 +
 -------------------------------------------------------
 ...
-<listener>       
-    <listener-class>
-com.eas.server.httpservlet.PlatypusSessionsSynchronizer
-    </listener-class>
+<listener>
+    <listener-class>com.eas.server.httpservlet.PlatypusSessionsSynchronizer</listener-class>
 </listener>
 ...
 -------------------------------------------------------
@@ -106,13 +113,13 @@ com.eas.server.httpservlet.PlatypusSessionsSynchronizer
 ...
 <resource-ref>
     <description>Main database connection</description>
-    <res-ref-name>jdbc/main</res-ref-name>
+    <res-ref-name>test_db</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
 </resource-ref>
 ...
 -------------------------------------------------------
-* Add Platypus servlet configuration; in the `multipart/location`
+* Add Platypus servlet configuration. In the `multipart/location`
 element specify the path to the folder for storing the downloaded files:
 +
 --------------------------------------------------------
@@ -122,7 +129,6 @@ element specify the path to the folder for storing the downloaded files:
     <servlet-class>
 com.eas.server.httpservlet.PlatypusHttpServlet
     </servlet-class>
-    <load-on-startup>1</load-on-startup>
     <multipart-config>  
       <location>
           /home/user1/pub
@@ -138,7 +144,7 @@ com.eas.server.httpservlet.PlatypusHttpServlet
 </servlet-mapping>
 ...
 --------------------------------------------------------
-* Configure the access and security constraints; for information on the
+* Configure the access and security constraints. For information on the
 security domain configuration, see the "Security" section.
 
 After completing configuring, deploy the web-application as a folder or

@@ -1,1 +1,18 @@
 
+Administration Guide on Platypus.js
+===============================
+:leveloffset: 1
+
+include::Author_Group.asciidoc[]
+include::Book_Info.asciidoc[]
+include::Preface.asciidoc[]
+include::Installation_Chapter.asciidoc[]
+include::Deployment_Chapter.asciidoc[]
+include::J2ee_Chapter.asciidoc[]
+include::Security_Chapter.asciidoc[]
+include::Client_Chapter.asciidoc[]
+include::Server_Chapter.asciidoc[]
+include::Loglevel_Appendix.asciidoc[]
+include::Tomcat_Appendix.asciidoc[]
+include::Revision_History.asciidoc[]
+

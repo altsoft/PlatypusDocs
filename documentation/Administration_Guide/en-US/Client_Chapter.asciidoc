@@ -2,37 +2,24 @@
 Desktop client
 --------------
 
-The desktop client is a Java SE desktop application to provide user
+The JavaSE client is a Java SE swing application to provide user
 interface and/or execute the application logic on the end user's
-computer. The desktop client loads required application elements from
-the application server, from the database or directly from a disk,
+computer. The JavaSE client loads required application elements from
+the application server, or directly from a disk,
 according to its configuration.
 
-The desktop client supports automatic updates via network.
+The JavaSE client supports automatic updates via network.
 
 [[running-desktop-client]]
 Running desktop client
 ----------------------
 
-Startup scripts and Platypus client loader are located in the `/run`
-folder:
+Startup command for Platypus client typically is as follows:
+java -D.level=INFO -Dhandlers=java.util.logging.ConsoleHandler -Djava.util.logging.ConsoleHandler.level=INFO -Djava.util.logging.ConsoleHandler.formatter=com.eas.util.logging.PlatypusFormatter -Djava.util.logging.config.class=com.eas.util.logging.LoggersConfig -cp "C:\Program Files\PlatypusJs\bin\Application.jar;C:\Program Files\PlatypusJs\api;C:\Program Files\PlatypusJs\ext/*;C:\Program Files\PlatypusJs\ext" com.eas.client.application.PlatypusClientApplication -url http://localhost:8080/proba
 
-* `platypus.exe` — to run the client in Windows without creating the
-command prompt window with preliminary running the client update; this
-command ensures the correct functioning with UAC (User Account Control).
-* `platypus.js` — a script to run the client in Windows without checking
-for updates.
-* `platypus.sh` — to run the client in Linux.
-* `startupdate.sh` — to run the client in Linux with preliminary running
-the client update.
-
-If the desktop client is started successfully, it displays a dialog box
+If command-line argument `url` is missing, dialog box
 for entering the user name and password and selecting a preconfigured
-connection to the server.
-
-You can create and use several preconfigured connections to the database
-or to an app server. Your distribution kit can include a default
-preconfigured connection.
+connection to the server is displayed.
 
 If the no-server configuration is used, enter the username and password
 of the database connection, and the username and password.
@@ -43,9 +30,6 @@ password.
 Use the Remember database password and Remember password check boxes, if
 it is necessary to remember the database password and/or Platypus
 applications password.
-
-Use the >>> and <<< buttons to display and hide the preconfigured
-connections panel.
 
 Select a preconfigured connection from the list to connect to the server
 and run the client.
@@ -91,8 +75,8 @@ connection selection dialog, click Cancel.
 Command line options
 --------------------
 
-To configure starting of the desktop client, edit the contents of the
-launch script files.
+To configure starting of the desktop client, edit the contents of 
+launch shell files.
 
 The deskop client is a Java SE Swing application. To customize it,
 specify the startup JVM options and the applications parameters.
@@ -100,7 +84,7 @@ specify the startup JVM options and the applications parameters.
 The command for running the Platypus client is as follows:
 
 -------------------------------------------------------------------------------
-java  -cp Application.jar;com.eas.client.application.PlatypusClientApplication 
+java JVM_OPTIONS -cp Application.jar;EXT_CLASSPATH com.eas.client.application.PlatypusClientApplication OPTIONS
 -------------------------------------------------------------------------------
 
 where JVM_OPTIONS is Java Virtual Machine options, EXT_CLASSPATH are
@@ -123,7 +107,7 @@ refer to Java documentation.
 |`-url URL` |URL to the applicaion. Can be one of the follow: `file://`
 to specify to a directory or `jndi://` to specify to a datasource.
 
-|`-appElement APP_ELEMENT` |Module or form element's name to run.
+|`-appElement APP_ELEMENT` |Used only in two-tier configuration. Module or form element's name to run.
 
 |`-user USER_NAME` |Username for logging to the application.
 
@@ -156,8 +140,27 @@ To specify the look and feel (L&F) in command line use the -D flag to
 set the swing.defaultlaf property, for example:
 -Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
 
-The example of desktop client running command:
+The example of J2SE client running command in two-tier configuration:
+---------------
+java -D.level=INFO -Dhandlers=java.util.logging.ConsoleHandler -Djava.util.logging.ConsoleHandler.level=INFO -Djava.util.logging.ConsoleHandler.formatter=com.eas.util.logging.PlatypusFormatter -Djava.util.logging.config.class=com.eas.util.logging.LoggersConfig -cp "C:\Program Files\PlatypusJs\bin\Application.jar;C:\Program Files\PlatypusJs\api;C:\Program Files\PlatypusJs\ext/*;C:\Program Files\PlatypusJs\ext" com.eas.client.application.PlatypusClientApplication -appelement start.js -datasource test_db -dburl jdbc:h2:tcp://localhost/~/test_db -dbuser sa -dbpassword sa -dbschema PUBLIC -datasource eas -dburl jdbc:oracle:thin:@asvr:1521:adb -dbuser eas -dbpassword eas -dbschema EAS -datasource easHR -dburl jdbc:oracle:thin:@asvr:1521:adb -dbuser hr -dbpassword hr -dbschema HR -default-datasource test_db -url file:/C:/Users/mg/Documents/NetBeansProjects/probah2/
+---------------
 
+The example of J2SE client running command in three-tier configuration with web server:
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-java -Dswing.defaultlaf=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel -cp Application.jar com.eas.client.application.PlatypusClientApplication -appElement mainForm -url file://~/testApp -default-datasource ds -datasource ds dburl jdbc:h2:tcp://localhost:9092/testDb -dbuser sa -dbpassword sa
+java -D.level=INFO -Dhandlers=java.util.logging.ConsoleHandler -Djava.util.logging.ConsoleHandler.level=INFO -Djava.util.logging.ConsoleHandler.formatter=com.eas.util.logging.PlatypusFormatter -Djava.util.logging.config.class=com.eas.util.logging.LoggersConfig -cp "C:\Program Files\PlatypusJs\bin\Application.jar;C:\Program Files\PlatypusJs\api;C:\Program Files\PlatypusJs\ext/*;C:\Program Files\PlatypusJs\ext" com.eas.client.application.PlatypusClientApplication -url http://localhost:8080/proba
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The example of J2SE client running command in three-tier configuration with Platypus TSA server:
+---------------
+java -D.level=INFO -Dhandlers=java.util.logging.ConsoleHandler -Djava.util.logging.ConsoleHandler.level=INFO -Djava.util.logging.ConsoleHandler.formatter=com.eas.util.logging.PlatypusFormatter -Djava.util.logging.config.class=com.eas.util.logging.LoggersConfig -cp "C:\Program Files\PlatypusJs\bin\Application.jar;C:\Program Files\PlatypusJs\api;C:\Program Files\PlatypusJs\ext/*;C:\Program Files\PlatypusJs\ext" com.eas.client.application.PlatypusClientApplication -url platypus://localhost:8500
+---------------
+
+The -Djava.util.logging.config.class=com.eas.util.logging.LoggersConfig argument acts as follows:
+Java system property `java.util.logging.config.class` assigned the following value: com.eas.util.logging.LoggersConfig.
+This allows to specify loggers configuration directly in command line instead of editing of logging.properties file.
+The following arguments:
+* -D.level=INFO
+* -Dhandlers=java.util.logging.ConsoleHandler
+* -Djava.util.logging.ConsoleHandler.level=INFO
+* -Djava.util.logging.ConsoleHandler.formatter=com.eas.util.logging.PlatypusFormatter
+are the same properties as in logging.properties file.
