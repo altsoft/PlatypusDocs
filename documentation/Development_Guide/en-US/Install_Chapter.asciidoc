@@ -1,6 +1,5 @@
+= Installation and configuration
 [[installation-and-configuration]]
-Installation and configuration
-------------------------------
 
 The platypus developer's kit all-in-one bundle contains Platypus.js IDE,
 Platypus.js runtime and Apache Tomcat 8 software packages.
@@ -12,9 +11,8 @@ Platypus.js runtime installation instructions are provided in the
 Administration Guide.
 _____________________________________________________________________________________________
 
+== System requirements
 [[system-requirements]]
-System requirements
--------------------
 
 System requirements for installing the developer's kit on a computer
 includes:
@@ -26,9 +24,8 @@ includes:
 * Oracle JDK 8.40+
 * Internet access for updates downloading
 
+== Installation guide
 [[installation-guide]]
-Installation guide
-------------------
 
 To install the developer's kit, perform the following actions:
 
@@ -40,12 +37,12 @@ rights to launch the installer.
 the license agreement option to accept and click Next to proceed to the
 next step.
 4.  Select applications to be installed (Platypus application designer, Platypus.js runtime and Apache tomcat).
-4.  Select the applications installation directories and options for
+5.  Select the applications installation directories and options for
 creating shortcuts on the desktop and in the installed programs menu and click Next to proceed to the next step.
-5.  Click Install to start selected applications installation process.
-6.  After the installation process is finished, click Finish.
+6.  Click Install to start selected applications installation process.
+7.  After the installation process is finished, click Finish.
 
-__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+------
 *Note*
 
 Specify the path to the JDK in the `jdkhome` parameter in the Platypus
@@ -54,7 +51,7 @@ Application Designer configuration file at
 location is other than default. Incorrect value of the `jdkhome`
 parameter can lead to errors which may occur when launching the
 designer.
-__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+------
 
 To remove Platypus.js runtime from you computer, perform the
 following actions:
@@ -82,9 +79,8 @@ alternative, use the `uninstall.exe` program for Windows or
 `uninstall.sh` for Linux from the installation directory.
 2.  Confirm the components removal by clicking Finish button.
 
+== Configuration tips
 [[configuration-tips]]
-Configuration tips
-------------------
 
 Platypus Application Designer supports localization of menus, messages
 texts, etc. Currently, the following languages are supported:
@@ -121,9 +117,8 @@ also necessary to include the style library into the path which can be
 accessed by the Application Designer classloader.
 * Restart the application designer.
 
+== Runtime environment setup
 [[runtime-environment-setup]]
-Runtime environment setup
--------------------------
 
 The Platypus.js runtime is required to start, debug and deploy
 it's applications. You must specify the path to the runtime directory
@@ -145,9 +140,9 @@ server... item.
 * In the J2EE server adding wizard, select the server type, server name,
 and specify its preferences: path to the server directory,
 administrator's login and password.
-
-_______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________
 *Note*
 If Platypus.js runtime and Platypus application designer were installed using
 platypus developer's kit all-in-one installer, Platypus.js location will be specified already.
-_______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________
+    

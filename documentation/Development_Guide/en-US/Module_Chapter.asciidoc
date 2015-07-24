@@ -1,6 +1,5 @@
+= JavaScript module
 [[javascript-module]]
-JavaScript module
------------------
 
 Module is a JavaScript file containing the constructor function and some specific resources.
 Modules contain data model responsible for data access and <ModuleName>.model file contains
@@ -9,9 +8,8 @@ its data model definition.
 Modules can be executed both under JVM in a client and server on Oracle Nashorn
 javasceript engine or in a browser.
 
+== New module creation
 [[new-module-creation]]
-New module creation
--------------------
 
 To create a new module, perform the following actions:
 
@@ -24,9 +22,8 @@ Next.
 * Enter the name of a new application element in the Name field and
 click Finish to create it, or click Cancel to cancel.
 
+== JavaScript code editor
 [[javascript-code-editor]]
-JavaScript code editor
-----------------------
 
 You can edit the module code in the JavaScript code editor. To open the
 application element editor, double-click an application element in the
@@ -45,12 +42,12 @@ function while holding down the Ctrl key.
 * Save the application element by clicking Save All on the Platypus
 Application Designer toolbar or by using the Ctrl S keyboard shortcut.
 
-___________________________________________________________________________________________
+-------------------------------------------------------------------------------------------
 *Note*
 
 Use the editor's context menu Format menu item to format the JavaScript
 code automatically.
-___________________________________________________________________________________________
+-------------------------------------------------------------------------------------------
 
 If necessary, configure the code editor parameters; to do this:
 
@@ -60,9 +57,8 @@ If necessary, configure the code editor parameters; to do this:
 To configure auto completion modes, go to the Code Completion tab and
 enable or disable corresponding options.
 
+== Module constructor
 [[module-constructor]]
-Module constructor
-------------------
 
 Using modules allows you to manage the complexity according to the
 object-oriented programming principles.
@@ -183,9 +179,8 @@ moduleInstance.getResult(10, function(aResult){
 });
 ------------------------------------------
 
+== Dependencies resolving
 [[dependencies-resolving]]
-Dependencies resolving
-----------------------
 
 When executing the code on a application server or on a client, all application elements,
 on which initial application element depends, are loaded during the process of automatic dependencies
@@ -323,9 +318,8 @@ dependencies resolution. So, SampleModule1 and SampleModule2 will be
 loaded only when calling the `P.require`, rather than before starting the
 application.
 
-[[security]]
-Security
---------
+== Security
+[[module_security]]
 
 The executable module code is a resource, access to which can be
 restricted on the basis of the roles. When a user, who has no rights to
@@ -384,9 +378,8 @@ Use `P.logout(onLoggedOut, onError)` function, where `onLoggedOut` is a function
 after the session is terminated and onError is a function, which will be called if an error occur.
 Open forms will be closed and the user will see the login and password entering form.
 
+== Resources loading
 [[resources-loading]]
-Resources loading
------------------
 
 The platfrom runtime enables loading of resources in the form of binary
 data and text. Resources may be loaded using their applicaion paths or
@@ -439,9 +432,8 @@ To get the absolute path to the application directory, use the
 P.Logger.info(Resource.applicationPath);
 --------------------------------------
 
+== Data model
 [[data-model]]
-Data model
-----------
 
 Data model is a module's persistence manager. It provides access to the
 data obtained from a relational database or any other data source. Data
@@ -500,13 +492,13 @@ element of entities' data arrays. This is done via new properties, wich are crea
 while data fetching. The link of this type is visually shown as a dashed
 line on the data model diagram.
 
-___________________________________________________________________________________________________________________________________________________________________________________________________
+------------------------------------
 *Note*
 
 To get inter-instance connections work, primary and foreign keys are
 required. Such keys may come from database structure definitions or from
 schema definitions in a JavaScript datasource module.
-___________________________________________________________________________________________________________________________________________________________________________________________________
+------------------------------------
 
 image:images/dataModelLinks.png[Query and filtration types links]
 
@@ -573,9 +565,8 @@ where `onSuccess` is the handler function for refresh data on success
 event (optional), `onFailure` is the handler function for refresh data
 on failure event (optional).
 
+=== Data model editor
 [[data-model-editor]]
-Data model editor
-~~~~~~~~~~~~~~~~~
 
 Data model is configured using the visual editor.
 
@@ -611,13 +602,13 @@ place.
 * Save the application element by clicking Save All on the main toolbar
 or by using the Ctrl Shift S keyboard shortcut.
 
-_____________________________________________________________________________________________________________________________________________________________________________________
+---------------------
 *Note*
 
 Drag an existing query or a module from the application elements tree on
 the project panel to the visual editor diagram of the data model to
 include it into the editable data model.
-_____________________________________________________________________________________________________________________________________________________________________________________
+---------------------
 
 An entity object and its data is available to module's JavaScript
 code. When you add a new entity, its name will be specified by default,
@@ -633,12 +624,12 @@ field. Entity name is case-sensitive and must meet the requirements for
 the JavaScript identifiers.
 * Save the application element by clicking Save All on the main toolbar
 or by using the Ctrl Shift S keyboard shortcut.
-______________________________________________________________________________________________________________________________________________
+----------
 *Note*
 
 If the Properties panel is not displayed, enable this panel. To do this,
 select Window Properties in the Platypus Application Designer main menu.
-_________________________________________________________________________________________________________________________________________________
+----------
 
 To delete an entity from the data model, perform the following actions:
 
@@ -655,13 +646,13 @@ an arrow between parameters or field/parameter of theese two entities.
 * Save the application element by clicking Save All on the main toolbar
 or by using the Ctrl Shift S keyboard shortcut.
 
-_______________________________________________________________________________________________________________________________________________
+----------
 *Note*
 
 Query link type in the visual editor is highlighted by purple. Reference
 link is highlighted by black with dashed style. The link target field is shown by an
 arrow.
-_______________________________________________________________________________________________________________________________________________
+----------
 
 To delete a link, perform the following actions:
 
@@ -695,9 +686,8 @@ option to perform the case-sensitive search.
 * Click Next and Previous to go to the next or previous search result.
 * Click Close to close the search dialog.
 
+=== Entities
 [[entities]]
-Entities
-~~~~~~~~
 
 Data model entities are available as the data model object's properties:
 `model.entity1`, where `entity1` is the script presentation of an entity.
@@ -789,14 +779,15 @@ for(var i = 0; i < maxCount; i++){
     });
 }
 -------------------------------
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+-------------------------------
 *Note*
 
 Update of entity data does not cancel the data changes made in the
 entity dataset earlier, so after saving the model these changes will be
 applied to the database. Data changes are reset only after saving the
 entire model or explicit call to `revert` method.
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+-------------------------------
 
 To access to the entity's data, refer to the entity data arrayt as a regular
 JavaScript array:
@@ -854,9 +845,8 @@ referees is a name of collection property name configured earlier in datamodel d
 Change for a foregn key link scalar and collection properties if
 required via reference link properties dialog in datamodel designer.
 
+=== Cursor API
 [[cursor-api]]
-Cursor API
-~~~~~~~~~~
 
 To get access to the entity's "current" data array element use
 the `model.entity1.cursor` property, for example:
@@ -873,9 +863,8 @@ The cursor points to some object, or it can be null.
 After loading data array the cursor point on the first
 entity's data array element.
 
+=== Saving data
 [[saving-data]]
-Saving data
-~~~~~~~~~~~
 
 Data model provides automatic tracking of data changes. Data
 changes can be saved only as a part of entire model.
@@ -910,9 +899,9 @@ data array, `56` is an expression for the new value.
 To save changes the data model changes, use its save method:
 
 [source,Javascript]
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------
 model.save(onSuccess, onFailure);
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------
 where onSuccess is the handler function for an event of successfull saving of data (optional)
 and onFailure is the handler function for a save data on failure event (optional).
 
@@ -1040,9 +1029,8 @@ method call, no data changes are avaliable for `save()` method, but the
 model still attempts to commit. Calling `save()` on unchanged model
 nevertheless leads to a commit even transaction will be empty.
 
+=== Find API
 [[find-api]]
-Find API
-~~~~~~~~~~
 
 Find operations can be performed after the data model loads its
 entities' data.
@@ -1094,7 +1082,7 @@ var items = model.entity1.find({
 where `entity1` is an entity, `prop1` and `prop2` are an entity properties`
 and `propValue1` and `propValue2` are search keys values
 
-___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+-------------------------------
 *Note*
 
 findByKey and find functions search for objects using prepared hash
@@ -1103,7 +1091,7 @@ Therefore, it is recommended to logically separate the code for
 searching and changing data, as after any change of data prepared hashes
 are marked as obsolete, and are rebuilded when you attempt to perform
 the search next time.
-___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+-------------------------------
 
 This code snippet illustrates search documents by their names and by the
 set flag:
@@ -1123,15 +1111,13 @@ foundDocuments.forEach(function(aFoundDocument){
 });
 --------------------------------------------
 
+=== Sort API
 [[sort-api]]
-Sort API
-~~~~~~~~
 
 To sort entities' data arrays use standard JavaScript array `sort` function.
 
+=== Entity events
 [[entity-events]]
-Entity events
-~~~~~~~~~~~~~
 
 To implement some logic to react to the data events specify entity
 events handlers functions. To create these handler functions assign
@@ -1196,9 +1182,8 @@ table:
 |`inserted` |The inserted objects.
 |================================
 
+=== Data schema
 [[data-schema]]
-Data schema
-~~~~~~~~~~~
 
 JavaScript code has access to an entity's fields metadata. It is
 possible to read types, names, descriptions of entity properties and
@@ -1328,9 +1313,8 @@ where `entity1` is an entity.
 NOTE: If some parameter will have name as `length`, than its name will have a priority
 and it will be impossible to determine length of .schema as in above example.
 
+=== Dynamic entities
 [[dynamic-entities]]
-Dynamic entities
-~~~~~~~~~~~~~~~~
 
 Use model's loadEntity(queryName) method, where queryName is the name of
 the query to dynamically create an entity in the data model. The
@@ -1385,9 +1369,8 @@ e.executeUpdate(function(){}, function(){});
 NOTE: createEntity method may be used only is two-tier environment. E.g. in Java EE
 server, J2SE client or in Platypus TSA server.
 
+=== Executing arbitary SQL
 [[executing-arbitary-sql]]
-Executing arbitary SQL
-~~~~~~~~~~~~~~~~~~~~~~
 
 In addition to using entities based on a query, data model allows to
 execute arbitrary SQL code. Using entities based on a query instance
@@ -1406,9 +1389,8 @@ contains the `INSERT`, `UPDATE`, `DELETE` commands, where `sqlClause` is the que
 model.executeSql("DROP TABLE Document", "testdb", function(){}, function(){});
 ----------------------------------------
 
+== Data source module
 [[data-source-module]]
-Data source module
-------------------
 
 A module can be used as a data source in other modules' data models just
 like a query.
@@ -1491,16 +1473,14 @@ function DataSourceModule(){
     };
 --------------------------------------------------
 
+== Server modules
 [[server-modules]]
-Server modules
---------------
 
 This section provides information how to use special features of
 JavaScript modules running on an application server.
 
+=== Statefull and stateless session modules
 [[statefull-and-stateless-session-modules]]
-Statefull and stateless session modules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A module being created on server is stateful by default. Such module
 exists in the context of the current user session.
@@ -1509,17 +1489,15 @@ Mark a module with `@stateless` annotation if you want to make the
 module stateless. A new instance of stateless module is created every
 time the module is called via a RPC or via LPC.
 
+=== Resident module
 [[resident-module]]
-Resident module
-~~~~~~~~~~~~~~~
 
 Use `@resident` annotation to make a server module resident. A resident
 modules are loaded and instantiated during server startup. Resident
 modules reside in the system session. They are can't be stateless.
 
+=== Data validators
 [[data-validators]]
-Data validators
-~~~~~~~~~~~~~~~
 
 Use annotation `@validator data_source_name,  ...`, where data_source_name is a data source
 name to enable server side validation. Implement validation logic in the
@@ -1551,14 +1529,12 @@ function ValidatorA(){
 }
 -----------------------------------------------------------
 
-[[tips-and-tricks]]
-Tips and tricks
-~~~~~~~~~~~~~~~
+//=== Tips and tricks
+//[[tips-and-tricks]]
 
 
+== Scripting Java
 [[scripting-java]]
-Scripting Java
---------------
 
 Calling Java classes from JavaScript code is possible for applications,
 which are executed in the Platypus J2SE or on the application server
@@ -1567,9 +1543,8 @@ in any configuration.
 To access the Java packages and classes, use the Java global object as described
 in articles about integrating Nashorn and Java.
 
+== Local procedure calls
 [[lpc]]
-Local procedure calls
---------------
 
 Use local procedure calls (LPC) in JavaScript for tasks, which have to be executed in parallel manner.
 The LPC mechanism might is available only in application server (both Platypus TSA server or J2EE server).
@@ -1642,9 +1617,8 @@ pass some arguments to them and obtain results of such calls. To avoid concurren
 Platypus.js runtime uses http://www.w3.org/TR/html5/infrastructure.html#safe-passing-of-structured-data[structured copy algorithm] while
 passing arguments and while retrieving results.
 
+== Logging
 [[logging]]
-Logging
--------
 
 The logging subsystem is built on the base of the Java Logging
 infrastructure.
@@ -1665,9 +1639,8 @@ P.Logger.severe("severe error");
 Check the Administration Guide and Java documentation for information
 about configuring logging subsystem.
 
+== Filesystem I/O
 [[filesystem-io]]
-Filesystem I/O
---------------
 
 To read and write files, use Java API from the `java.io.*` and other
 dedicated packages.

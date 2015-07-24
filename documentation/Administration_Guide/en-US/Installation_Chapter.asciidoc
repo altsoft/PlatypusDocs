@@ -1,6 +1,6 @@
 [[platforms-installation]]
 Platform's installation
------------------------
+=======================
 
 If the Platypus Platform runtime is delivered as a ZIP file, unpack its
 contents to a location according to your preference on your hard drive.

@@ -1,6 +1,5 @@
+= SQL query
 [[sql-query]]
-SQL query
----------
 
 Query is an application element which defines the SQL expression to be
 executed in database. A query's SQL text is preprocessed before

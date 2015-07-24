@@ -1,2 +1,2 @@
-publican build --formats pdf,html --langs ru-RU --config publican_ru.cfg
-publican build --formats pdf,html --langs en-US --config publican_en.cfg
+asciidoc -b html5 -a icons -a toc2 -a toclevels=3 --theme altsoft Development_Guide.asciidoc
+a2x -fpdf --fop --verbose -dbook -v Development_Guide.asciidoc

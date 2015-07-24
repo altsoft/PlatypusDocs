@@ -1,10 +1,8 @@
+= User interface guide
 [[user-interface-guide]]
-User interface guide
---------------------
 
+== Form
 [[form]]
-Form
-----
 
 `Form` is a user interface building block wich can be represented as a
 top-level window with a title and a decorations or can be build-in on a panel
@@ -47,9 +45,8 @@ wizard first step and click Next.
 * Enter the name for the new application element in the Name field and
 click Finish to create it, or click Cancel to cancel.
 
+== Visual UI editor
 [[visual-ui-editor]]
-Visual UI editor
-----------------
 
 Edit form widgets layout using the visual form editor. To open the
 editor double-click the application element in the project tree.
@@ -138,9 +135,8 @@ form node in the widget inspector.
 * Change properties of the form on the Properties panel.
 * Write code of the handlers in the JavaScript editor.
 
+== Form API
 [[form-api]]
-Form API
---------
 
 Create a module instance in client JavaScript as follows:
 
@@ -340,9 +336,8 @@ Typically the top-level container has the `view` name and form has same property
 form.view.background = P.Color.BLACK;
 -----------------------------------
 
+== Widgets events
 [[widgets-events]]
-Widgets events
------------------
 
 NOTE: Widget events are not propagated to the its parent in J2SE client.
 
@@ -424,9 +419,8 @@ otherwise.
 otherwise.
 |=======================================================================
 
+== Standard widgets
 [[standard-widgets]]
-Standard widgets
-----------------
 
 Standard widgets are simple widgets intended to organize
 application's user interface.
@@ -526,9 +520,8 @@ rectangle
 |`onMouseWheelMoved` |`MouseWheelEvent` |Mouse wheel is rotated
 |=======================================================================
 
+=== Label
 [[label]]
-Label
-~~~~~
 
 `Label` is a widget with a short piece of text, image or text with an
 image. The label does not respond to keyboard input events and can't get
@@ -591,9 +584,8 @@ If `opaque` property is set to true, than background of the widget
 is filled and it is not filled otherwise. So you may use the `opaque`
 property as a switcher of label's background.
 
+=== Button
 [[button]]
-Button
-~~~~~~
 
 `Button` is a simple button, which responds to the click action.
 
@@ -649,9 +641,8 @@ btn5.onActionPerformed = function() {
 form.view.add(btn1, ...);
 -------------------------------------
 
+=== ToggleButton
 [[togglebutton]]
-ToggleButton
-~~~~~~~~~~~~
 
 `ToggleButton` is a button with two states: selected and not selected.
 
@@ -708,9 +699,8 @@ btn1.onActionPerformed = function(evt) {
 form.view.add(btn1, ...);
 -------------------------------------
 
+=== CheckBox
 [[checkbox]]
-CheckBox
-~~~~~~~~
 
 `CheckBox` is a widget with two states: selected/not selected.
 
@@ -750,9 +740,8 @@ cb1.onValueChange = function(evt) {
 form.view.add(cb1, ...);
 -------------------------------------------------
 
+=== RadioButton
 [[radiobutton]]
-RadioButton
-~~~~~~~~~~~
 
 `RadioButton` is a widget with two states: selected/not selected.
 Widgets of this type can be joined into groups. Only one widget of this
@@ -805,9 +794,8 @@ rb1.onActionPerformed = function(evt) {
 view.add(rb1, ...);
 --------------------------------------------------
 
+=== ButtonGroup
 [[buttongroup]]
-ButtonGroup
-~~~~~~~~~~~
 
 `ButtonGroup` is a special kind of a widget without its own visual
 representation. After adding to the form, the button group widget
@@ -866,9 +854,8 @@ rbA.buttonGroup = buttonGroup;
 rbB.buttonGroup = buttonGroup;
 --------------------------------------
 
+=== TextField
 [[textfield]]
-TextField
-~~~~~~~~~
 
 `TextField` is a simple widget, which allows you to edit single line
 of text.
@@ -910,9 +897,8 @@ tf1.emptyText = "Enter your name...";
 view.add(tf1, ...);
 ------------------------------------
 
+=== Slider
 [[slider]]
-Slider
-~~~~~~
 
 `Slider` is a widget, which allows you to visually select a value by
 moving the slider lever within the specified interval.
@@ -965,9 +951,8 @@ s1l.onActionPerformed = function(evt) {
 view.add(sl1, ...);
 ---------------------------------------------
 
+=== ProgressBar
 [[progressbar]]
-ProgressBar
-~~~~~~~~~~~
 
 `ProgressBar` is a widget, which visually shows the progress of some
 task.
@@ -1015,9 +1000,8 @@ pb1.maximum = 100;
 view.add(pb1, ...);
 ----------------------------
 
+=== FormattedField
 [[formattedfield]]
-FormattedField
-~~~~~~~~~~~~~~
 
 `FormattedField` is a widget, which allows you to edit value of some
 specific type as the text. So, a user sees just text and a program sees
@@ -1081,9 +1065,8 @@ ff.format = "dd.MM.yyyy HH:mm:ss";
 ff.value = new Date();
 ----------------------------------
 
+=== PasswordField
 [[passwordfield]]
-PasswordField
-~~~~~~~~~~~~~
 
 `PasswordField` is a simple input widget, which allows you to edit
 single line of text. It displays placeholders instead of actual
@@ -1111,9 +1094,9 @@ var pf = new P.PasswordField();
 view.add(pf, ...);
 -----------------------------
 
+=== TextArea
 [[textarea]]
-TextArea
-~~~~~~~~
+    
 
 `TextArea` is the text widget for editing and displaying multiline
 text.
@@ -1137,9 +1120,8 @@ var textArea = new P.TextArea();
 view.add(textArea, ...);
 ------------------------------
 
+=== HtmlArea
 [[htmlarea]]
-HtmlArea
-~~~~~~~~
 
 `HtmlArea` is a widget for editing and displaying HTML documents.
 It is a WYSIWYG html editor.
@@ -1167,9 +1149,8 @@ htmlArea.text = "<p>Sample text</p>";
 view.add(htmlArea, ...);
 -------------------------------------
 
+== Model widgets
 [[model-widgets]]
-Model widgets
--------------
 
 Model widgets are widgets, which can be binded with JavaScript objects.
 
@@ -1275,9 +1256,8 @@ form.cbCategory.onRender = function(evt) {
 }
 -----------------------------------------------------
 
+=== ModelCheck
 [[modelcheck]]
-ModelCheck
-~~~~~~~~~~
 
 `ModelCheck` is a scalar model widget representing a check box, the
 state of which is linked to an entity's field of a Boolean, Number, or
@@ -1316,9 +1296,8 @@ modelCheck.field = 'fieldA';
 view.add(modelCheck, ...);
 -----------------------------------------------
 
+=== ModelCombo
 [[modelcombo]]
-ModelCombo
-~~~~~~~~~~
 
 `ModelCombo` is a scalar model widget representing a lookup box that is
 bound to some data object and its property path. It holds and edits one
@@ -1374,9 +1353,8 @@ modelCombo.displayField = 'ownerName';
 view.add(modelCombo, ...);
 ----------------------------------------------------
 
+=== ModelDate
 [[modeldate]]
-ModelDate
-~~~~~~~~~
 
 `ModelDate` is a scalar model widget representing a timestamp and bound to
 some date or timestamp in some object.
@@ -1422,9 +1400,8 @@ modelDate.editable = true;
 view.add(modelDate, ...);
 -------------------------------------------------
 
+=== ModelGrid
 [[modelgrid]]
-ModelGrid
-~~~~~~~~~
 
 `ModelGrid` model widget is a powerful widget to display and enter data,
 which is presented in a tabular form and as a tree.
@@ -1641,9 +1618,8 @@ Create and use ModelGrid within your JavaScript progams as follows:
     form.view.add(g, {left: '300px', top: '10px', right: '9px', bottom: '48px'});
 ----------------
 
+=== ModelFormattedField
 [[modelformattedfield]]
-ModelFormattedField
-~~~~~~~~~~~~~~~~~~~
 
 `ModelFormattedField` is the same widget as `FormattedField` widget with ability of binding.
 <<formattedfield,See `FormattedField` widget>>
@@ -1668,9 +1644,8 @@ mff.format = "dd.MM.yyyy HH:mm:ss";
 view.add(mff);
 -------------------------------------------
 
+=== ModelTextArea
 [[modeltextarea]]
-ModelTextArea
-~~~~~~~~~~~~~
 
 `ModelTextArea` is a scalar model widget, the state of which is linked
 to a field of the data model of string or number type. The widget can be
@@ -1709,9 +1684,8 @@ mta.field = model.entityB.schema.textField;
 view.add(mta);
 -------------------------------------------
 
+=== ModelSpin
 [[modelspin]]
-ModelSpin
-~~~~~~~~~
 
 `ModelSpin` is a scalar model widget, the state of which is linked to a
 value of number type. One can input numbers either from the keyboard or
@@ -1754,9 +1728,8 @@ modelSpin.field = 'cursor.count';
 view.add(modelSpin, ...);
 ----------------------------------------------
 
+== Containers
 [[containers]]
-Containers
-----------
 
 Containers are widgets, which can contain other widgets e.g.
 widgets or other containers and control their child widgets size and
@@ -1788,9 +1761,8 @@ The common property of all containers:
 |`count` |The number of child widgets (read-only)
 |===================================================
 
+=== AnchorsPane
 [[anchorspane]]
-AnchorsPane
-~~~~~~~~~~~
 
 `AnchorsPane` is a lightweight container with the anchors layout.
 
@@ -1891,9 +1863,8 @@ pane.add(comp,
 });
 --------------------------------
 
+=== BorderPane
 [[borderpane]]
-BorderPane
-~~~~~~~~~~
 
 `BorderPane` is a lightweight container with the border layout.
 
@@ -1945,9 +1916,8 @@ var bottomComp = new P.Button("Bottom");
 pane.add(bottomComp, P.VerticalalPosition.BOTTOM);
 ------------------------------------------------
 
+=== GridPane
 [[gridpane]]
-GridPane
-~~~~~~~~
 
 `GridPane` is a lightweight container with the grid layout. It is
 intended for static UI designs.
@@ -2012,9 +1982,8 @@ pane.add(comp2, 1, 0);
 pane.add(comp3, 2, 0);
 ------------------------------
 
+=== FlowPane
 [[flowpane]]
-FlowPane
-~~~~~~~~
 
 `FlowPane` is a lightweight container with the flow layout.
 
@@ -2054,9 +2023,8 @@ var comp = new P.Button("Sample");
 pane.add(comp);
 --------------------------------
 
+=== CardPane
 [[cardpane]]
-CardPane
-~~~~~~~~
 
 `CardPane` is a lightweight container with the card layout.
 
@@ -2107,9 +2075,8 @@ pane.add(comp, "C");
 pane.show("B");//Shows the SampleB button
 -----------------------------------------
 
+=== BoxPane
 [[boxpane]]
-BoxPane
-~~~~~~~
 
 `BoxPane` is a lightweight container with the vertical or horizontal box layout.
 
@@ -2167,9 +2134,8 @@ orientation to P.Orientation.VERTICAL, then all child widgets heights will remai
 if the cintainer and widths will be changed to fit container's width. Of course you may reassign
 heights of child widgets is such case and layout will become pretty again.
 
+=== TabbedPane
 [[tabbedpane]]
-TabbedPane
-~~~~~~~~~~
 
 `TabbedPane` container allows the user to switch between a group of
 widgets by clicking tabs with titles and icons.
@@ -2222,9 +2188,8 @@ pane.add(tab1, "Tab 1");
 pane.add(tab2, "Tab 2");
 -----------------------------
 
+=== SplitPane
 [[splitpane]]
-SplitPane
-~~~~~~~~~
 
 `SplitPane` container is used to display two (and only two) splitted
 widgets. The user can change their size by moving the separator.
@@ -2286,9 +2251,8 @@ pane.firstComponent = comp1;
 pane.secondComponent = comp2;
 -----------------------------------------------
 
+=== ScrollPane
 [[scrollpane]]
-ScrollPane
-~~~~~~~~~~
 
 `ScrollPane` is a container, which supports scrolling of its content.
 Usually another container is added to this one, using `ScrollPane` as a
@@ -2331,9 +2295,8 @@ var view = new P.AnchorsPane();
 scroll.add(view);
 -------------------------------
 
+=== ToolBar
 [[toolbar]]
-ToolBar
-~~~~~~~
 
 `ToolBar` is a container used to display widgets, which are
 responsible for the most common user actions.
@@ -2379,9 +2342,8 @@ P.Icon.load("2.png", function(aLoaded){
 });
 -----------------------------
 
+=== DesktopPane
 [[desktoppane]]
-DesktopPane
-~~~~~~~~~~~
 
 `DesktopPane` is used to create a multi-document interface.
 
@@ -2442,16 +2404,14 @@ var formModule = new InnerForm();
 formModule.onDesktop(desktop);
 --------------------------------------
 
+== Menus
 [[menus]]
-Menus
------
 
 Menus widgets provide a convinient way to let the user choose one of
 several options.
 
+=== MenuBar
 [[menubar]]
-MenuBar
-~~~~~~~
 
 `MenuBar` widget is a form's main menu bar, into which individual
 menus can be added. This compontent is a kind of a container and
@@ -2479,9 +2439,8 @@ The list of specific methods of the widget:
 add.
 |=======================================================================
 
+=== Menu
 [[menu]]
-Menu
-~~~~
 
 `Menu` is an individual menu, it can contain `MenuItem` and
 `MenuSeparator` widgets. This compontent is a kind of a container and
@@ -2522,9 +2481,8 @@ The list of specific methods of the widget:
 `MenuSeparator` widget to add.
 |=======================================================================
 
+=== PopupMenu
 [[popupmenu]]
-PopupMenu
-~~~~~~~~~
 
 `PopupMenu` is an options selection window, which can be assigned to any
 widget. This compontent is a kind of a container and inherits it's
@@ -2560,9 +2518,8 @@ The list of specific methods of the widget:
 `MenuSeparator` widget to add.
 |=======================================================================
 
+=== MenuItem
 [[menuitem]]
-MenuItem
-~~~~~~~~
 
 The default `MenuItem` object contains a simple labeled menu item.
 
@@ -2599,9 +2556,8 @@ item.onActionPerformed = function(evt) {
 menu.add(item);
 ----------------------------------------
 
+=== CheckMenuItem
 [[checkmenuitem]]
-CheckMenuItem
-~~~~~~~~~~~~~
 
 `CheckMenuItem` is a menu item combined with a checkbox.
 
@@ -2633,9 +2589,8 @@ A menu item of this type can be added to a `ButtonGroup` widget,
 which is shared by other check boxes and radio buttons, including
 elements which are not present in the menu.
 
+=== RadioMenuItem
 [[radiomenuitem]]
-RadioMenuItem
-~~~~~~~~~~~~~
 
 `RadioMenuItem` is a menu item combined with a radio button.
 
@@ -2668,9 +2623,8 @@ A menu item of this type can be added to a `ButtonGroup` widget,
 which is shared by other check boxes and radio buttons, including
 elements which are not present in the menu.
 
+=== MenuSeparator
 [[menuseparator]]
-MenuSeparator
-~~~~~~~~~~~~~
 
 `MenuSeparator` is a separator of menu items. Use this widget to
 visually split the groups of menu items.
@@ -2691,13 +2645,11 @@ The list of specific properties of the widget:
 |`parent` |The parent container (read-only).
 |===========================================
 
+== UI utilities API
 [[ui-utilities-api]]
-UI utilities API
-----------------
 
+=== Icon
 [[icon]]
-Icon
-~~~~
 
 `Icon` is a small picture.
 
@@ -2725,9 +2677,8 @@ P.Icon.load("car.png", funtion(aCarIcon){
 });
 -----------------------------------
 
+=== FontStyle
 [[fontstyle]]
-FontStyle
-~~~~~~~~~
 
 `FontStyle` object contains constants, which can be used to set font
 styles.
@@ -2748,9 +2699,8 @@ Example of usage:
 var italicFontStyle = P.FontStyle.ITALIC;
 ---------------------------------------
 
+=== Font
 [[font]]
-Font
-~~~~
 
 `Font` object.
 
@@ -2782,9 +2732,8 @@ Example:
 button.font = new P.Font("Verdana", P.FontStyle.BOLD, 14);
 ---------------------------------------------------
 
+=== Color
 [[color]]
-Color
-~~~~~
 
 `Color` represents color an the object.
 
@@ -2829,9 +2778,8 @@ var ivory = new P.Color(255, 255, 240);
 panel.background = ivory;
 -------------------------------------------
 
+=== HorizontalPosition
 [[horizontalposition]]
-HorizontalPosition
-~~~~~~~~~~~~~~~~~~
 
 `HorizontalPosition` is the horizontal position constants object.
 
@@ -2853,9 +2801,8 @@ Example of usage:
 var horizontalPosition = P.HorizontalPosition.CENTER;
 ---------------------------------------------------
 
+=== VerticalPosition
 [[verticalposition]]
-VerticalPosition
-~~~~~~~~~~~~~~~~
 
 `VerticalPosition` is the vertical position constants object.
 
@@ -2877,9 +2824,8 @@ Example of usage:
 var verticalPosition = P.VerticalPosition.CENTER;
 -----------------------------------------------
 
+=== Orientation
 [[orientation]]
-Orientation
-~~~~~~~~~~~
 
 `Orientation` is the orientation constants object.
 
@@ -2899,9 +2845,8 @@ Example of usage:
 var orientation = P.Orientation.HORIZONTAL;
 -----------------------------------------
 
+=== ScrollBarPolicy
 [[scrollbarpolicy]]
-ScrollBarPolicy
-~~~~~~~~~~~
 
 `ScrollBarPolicy` is the scroll bar policy constants object.
 
@@ -2922,9 +2867,8 @@ Example of usage:
 scrooll.scrollBarPolicy = P.ScrollBarPolicy.NEVER;
 -----------------------------------------
 
+== Dialogs API
 [[dialogs-api]]
-Dialogs API
------------
 
 Use this global functions to display custom dialogs:
 

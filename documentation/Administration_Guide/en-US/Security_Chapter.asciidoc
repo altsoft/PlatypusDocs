@@ -1,6 +1,6 @@
 [[application-management]]
 Application management
-----------------------
+======================
 
 [[application-structure-and-system-tables]]
 Application structure and system tables
@@ -64,7 +64,7 @@ database migrations.
 |`-dbschema DB_SCHEMA` |Database scheme
 |====================================================
 
-[[application-database-deployment-and-import]]
+[[application-database-deployment-and-import-security]]
 Application database deployment and import
 ------------------------------------------
 
@@ -105,7 +105,7 @@ Example of the command for importing an application from the database:
 java -jar PlatypusDeploy.jar -import -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[[database-migrations]]
+[[database-migrations-security]]
 Database migrations
 -------------------
 

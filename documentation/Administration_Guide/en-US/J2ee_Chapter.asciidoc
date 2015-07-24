@@ -1,6 +1,6 @@
 [[java-ee-server]]
 Java EE server
---------------
+==============
 
 The plaftorm's server components can run in a J2EE server or a servlet
 container.
@@ -235,7 +235,7 @@ located in the `app` directory, except `public` sub-directory:
 ...
 --------------------------------------------------------
 
-[[j2ee-glassfish-3-configuration]]
+[[j2ee-glassfish-3-configuration-j2ee]]
 J2EE Glassfish 3 configuration
 ------------------------------
 
@@ -346,7 +346,7 @@ groups:
 </glassfish-web-app>
 ------------------------------------------------
 
-[[apache-tomcat-7-configuration]]
+[[apache-tomcat-7-configuration-j2ee]]
 Apache Tomcat 7 configuration
 -----------------------------
 

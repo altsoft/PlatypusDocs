@@ -1,6 +1,6 @@
 [[desktop-client]]
 Desktop client
---------------
+==============
 
 The desktop client is a Java SE desktop application to provide user
 interface and/or execute the application logic on the end user's
@@ -87,7 +87,7 @@ confirmation dialog.
 To run the client using the selected connection, click OK. To close the
 connection selection dialog, click Cancel.
 
-[[command-line-options]]
+[[command-line-options_client]]
 Command line options
 --------------------
 
