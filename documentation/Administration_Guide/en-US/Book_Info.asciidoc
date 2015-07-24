@@ -1,4 +1,4 @@
-Platypus.js 0.3.0 Administration Guide: Administration manual
+Platypus.js 5.3 Administration Guide: Administration manual
 =============================================================
 
 

@@ -2,21 +2,15 @@
 Platypus Application Server
 ===========================
 
-The main purpose of use of the Platypus Application Server is to provide
+The main purpose of use of the Platypus Application TSA Server is to provide
 support for various binary communication protocols.
 
 [[running-server]]
 Running server
 --------------
 
-To start the server application, you run the startup script for the
-server, located in the `/run` folder:
-
-* `server.bat` is the script file to start the server in Windows.
-* `server.sh` is the script file to start the server in Linux.
-
-For running the server in production environment, it is recommended to
-configure it as an operating system service.
+To start the server application, you run the startup shell script for the
+server, which contains java command and its command line arguments.
 
 [[command-line-options]]
 Command line options
@@ -25,12 +19,12 @@ Command line options
 The command for running the server is as follows:
 
 ------------------------------------------------
-java  -cp Server.jar; com.eas.server.ServerMain 
+java JVM_OPTIONS -cp EXT_CLASSPATH com.eas.server.ServerMain OPTIONS
 ------------------------------------------------
 
 where JVM_OPTIONS is Java Virtual Machine options, EXT_CLASSPATH are
 paths to be added to the Java class loader search path, OPTIONS are
-server application running parameters.
+server running parameters.
 
 .Command line options
 [cols="<,<",options="header",]
@@ -46,14 +40,6 @@ to specify to a directory or `jndi://` to specify to a datasource.
 
 |`-protocols` PORT:PROTOCOL,PORT:PROTOCOL |Network protocols for
 listening ports.
-
-|`-tasks` MODULES_NAME |The list of server modules (separated by comma
-without spaces) for processing incoming data and background tasks. The
-received(data)function should be defined for the incoming data
-processing module. The incoming data processing modules can have the
-`@stateless` annotation, or be without it. Background tasks modules
-should not have the `@stateless` annotation. When starting server,
-modules with this annotation will be skipped.
 
 |`-default-datasource DEFAULT_DS` |Name of the application's default
 datasource.
@@ -78,5 +64,5 @@ jointly. One of the datasource can be specified as a default using the
 The example of the application server running command:
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-java -cp Server.jar com.eas.server.ServerMain -iface 0.0.0.0:8500 -protocols 8500:platypus -url jndi://ds -default-datasource ds -datasource ds dburl jdbc:h2:tcp://localhost:9092/testServer -dbuser sa -dbpassword sa
+java -D.level=INFO -Dhandlers=java.util.logging.ConsoleHandler -Djava.util.logging.ConsoleHandler.level=INFO -Djava.util.logging.ConsoleHandler.formatter=com.eas.util.logging.PlatypusFormatter -Djava.util.logging.config.class=com.eas.util.logging.LoggersConfig -cp ""C:\Program Files\PlatypusJs\bin\Server.jar;C:\Program Files\PlatypusJs\api;C:\Program Files\PlatypusJs\ext/*;C:\Program Files\PlatypusJs\ext"" com.eas.server.ServerMain -datasource test_db -dburl jdbc:h2:tcp://localhost/~/test_db -dbuser sa -dbpassword sa -dbschema PUBLIC -datasource eas -dburl jdbc:oracle:thin:@asvr:1521:adb -dbuser eas -dbpassword eas -dbschema EAS -datasource easHR -dburl jdbc:oracle:thin:@asvr:1521:adb -dbuser hr -dbpassword hr -dbschema HR -default-datasource test_db -appelement start.js -url file:/C:/Users/mg/Documents/NetBeansProjects/probah2/ -iface 0.0.0.0:8500 -protocols 8500:platypus
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

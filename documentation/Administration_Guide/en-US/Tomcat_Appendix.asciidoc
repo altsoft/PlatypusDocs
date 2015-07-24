@@ -1,11 +1,11 @@
-[[apache-tomcat-7-configuration]]
-Apache Tomcat 7 configuration
+[[apache-tomcat-8-configuration]]
+Apache Tomcat 8 configuration
 -----------------------------
 
 _________________________________________________________________________________________________
 *Note*
 
-For more detailed information on Apache Tomcat 7 setup, refer to the
+For more detailed information on Apache Tomcat 8 setup, refer to the
 corresponding documentation.
 _________________________________________________________________________________________________
 
@@ -22,7 +22,7 @@ source resource:
 ...
 <Resource name="jdbc/main" auth="Container" type="javax.sql.DataSource"
        maxActive="100" maxIdle="30" maxWait="10000"
-       username="sa" password="te$tPwd" driverClassName="org.h2.Driver"    
+       username="sa" password="te$tPwd" driverClassName="org.h2.Driver"
        url="jdbc:h2:tcp://localhost/~/h2db/test;schema=test"/>
 ...
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ repository of user information:
 --------------------------------------------------------------------------
 ...
 <Realm  className="org.apache.catalina.realm.DataSourceRealm"
-   dataSourceName="jdbc/TestDB"
+   dataSourceName="test_db"
    userTable="MTD_USERS" userNameCol="USR_NAME"   userCredCol="USR_PASSWD"
    userRoleTable="MTD_GROUPS" roleNameCol="GROUP_NAME" digest="MD5"/>
 ...

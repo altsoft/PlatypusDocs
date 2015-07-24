@@ -1,4 +1,5 @@
-= Platypus administration guide 
+Administration Guide on Platypus.js
+===============================
 :doctype: book
 //:toc: 3
 :ascii-ids:

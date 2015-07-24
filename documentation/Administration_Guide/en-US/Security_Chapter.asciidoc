@@ -1,179 +1,6 @@
 [[application-management]]
 Application management
 ======================
-
-[[application-structure-and-system-tables]]
-Application structure and system tables
----------------------------------------
-
-If an application is delivered as an archive file, unpack its contents
-to a your hard disk drive.
-
-After unpacking, the directory will have the following structure:
-
-* `projectDirectory/`
-** `app/`
-** `project.properties`
-** `private.properties`
-
-The project directory corresponds to the application project, which is
-ready for deployment and execution, as well as for modification in the
-IDE.
-
-The `app` directory contains application elements directories and files.
-
-The `project.properties` and `private.properties` are project's
-configuration files used by the IDE.
-
-It is possible to deploy the application to the database `MTD_ENTITIES`
-table and run it from there.
-
-System tables includes the following:
-
-* `MTD_ENTITIES` — this table stores an executable application in the
-form of a tree.
-* `MTD_USERS` и `MTD_GROUPS` — tables of users and their groups when
-working with built-in users' space. For additional information, see the
-"Security" section.
-* `MTD_VERSION` — this table stores information about the current
-version of the application data repository.
-
-After deployment in the database each application element is represented
-as a single entry in the `MTD_ENTITIES` table.
-
-Use the following command for application database mangement utility:
-
------------------------------
-java -jar PlatypusDeploy.jar 
------------------------------
-
-where OPTIONS is a deployment or migration command and a set of its
-parameters.
-
-For the description of commands related to the import deployment
-operation and migrations, see sections dedicated to deployment and
-database migrations.
-
-.Database management common command line options
-[cols="<,<",]
-|====================================================
-|Parameter |Description
-|`-url DB_URL` |Database connection JDBC URL
-|`-dbuser DB_USER` |Username
-|`-dbpassword DB_PASSWORD` |Password
-|`-dbschema DB_SCHEMA` |Database scheme
-|====================================================
-
-[[application-database-deployment-and-import-security]]
-Application database deployment and import
-------------------------------------------
-
-Database deployment is the process allows you to application to the
-database table `MTD_ENTITIES`.
-
-To deploy or undeploy an application to/from a database use the database
-management utility command line with the one of the following options:
-
-.Application deployment and import commands
-[cols="<,<",]
-|=======================================================================
-|Parameter |Description
-
-|`-initapp` |Checks and initializes application storage table in the
-database, if it is not initialized.
-
-|`-ap APP_PATH` |The path to the folder containing the application's
-project.
-
-|`-deploy` |Deploys application to the specified database.
-
-|`-undeploy` |Removes application from the specified database.
-
-|`-import` |Imports application from the database to the specified
-directory.
-|=======================================================================
-
-Example of the command for deploying an application to the database:
-
---------------------------------------------------------------------------------------------------------------------------------------------------------
-java -jar PlatypusDeploy.jar -deploy -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema
---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Example of the command for importing an application from the database:
-
---------------------------------------------------------------------------------------------------------------------------------------------------------
-java -jar PlatypusDeploy.jar -import -ap ~/apps/testApp -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema
---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[[database-migrations-security]]
-Database migrations
--------------------
-
-Application database schema and initial data can be stored in as a
-consecutive migrations. Database migrations can be applied consistently
-to ensure the correct state of the application's database(s) schema and
-its initial data.
-
-Each migration of the database schema or data is represented as a
-migration file with a name corresponding to the migration version,
-starting from 1. The next file name for each new migration is created by
-incrementing the current application version number stored in the
-`MTD_VERSION` table.
-
-The `MTD_VERSION` table contains the following mandatory field:
-
-[cols="<,<",options="header",]
-|=========================================================
-|Field |Description
-|`VERSION_VALUE` |The application's current version number
-|=========================================================
-
-The types of migration files are the following:
-
-* Database metadata snapshot with the `.xdm` extension.
-* A bundle of SQL commands for adding and/or changing service data with
-the `.batch`.
-
-To create a migration files and apply them to a database use the command
-line with the the following options:
-
-.Commands for creating and applying database migrations
-[cols="<,<",]
-|=======================================================================
-|Parameter |Description
-
-|`-initversioning` |Checks and inits the version storage table in the
-database, if it is not initialized.
-
-|`-migrations` |The path to the directory containing the migrations
-
-|`-snapshot` |Creates a new migration — a database metadata snapshot;
-the database version corresponds to this migration.
-
-|`-batch` |Creates a new empty batch migration; the version of the
-database corresponds to this migration.
-
-|`-clean` |Cleans the migration directory by removing migrations which
-are not applied.
-
-|`-getver` |Returns the current version of the database.
-
-|`-setver` |Sets the current database version in VERSION as a
-nonnegative integer.
-|=======================================================================
-
-When applying migrations to the database, only the latest snapshot and
-the snapshots which were created immediately before the `.batch`
-migration, other snapshot migration are ignored and can be removed using
-the `-clean` command.
-
-The following example illustrates how to apply migrations to the
-database:
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-java -jar PlatypusDeploy.jar -url jdbc:oracle:thin:@serverHost:1521:adb -dbuser user1 -dbpassword secret -dbschema testschema -apply -migrations ~/apps/testMigrations
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 [[security]]
 Security
 --------
@@ -193,7 +20,7 @@ and groups.
 * External storages of authentication data, for example, a LDAP server
 (Active Directory, OpenLDAP, etc.).
 
-The security domain is used to ​​define a set of groups or global roles
+The security domain is used to define a set of groups or global roles
 for the user, which can be associated with roles at the application
 level.
 
@@ -208,7 +35,6 @@ The `MTD_USERS` table contains the following mandatory fields:
 |Field |Description
 |`USR_NAME` |Username
 |`USR_PASSWD` |Hash sum of the user password using the MD5 algorithm
-|`USR_FORM` |Default form application element name
 |===================================================================
 
 In addition, the `MTD_USERS` table can include optional fields
