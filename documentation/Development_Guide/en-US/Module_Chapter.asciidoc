@@ -5,8 +5,8 @@ Module is a JavaScript file containing the constructor function and some specifi
 Modules contain data model responsible for data access and <ModuleName>.model file contains
 its data model definition.
 
-Modules can be executed both under JVM in a client and server on Oracle Nashorn
-javasceript engine or in a browser.
+Modules can be executed both under JVM (in a JavaSE client and server) on Oracle Nashorn
+JavaScript engine or in a HTML5 compatible browser.
 
 == New module creation
 [[new-module-creation]]
@@ -60,11 +60,11 @@ enable or disable corresponding options.
 == Module constructor
 [[module-constructor]]
 
-Using modules allows you to manage the complexity according to the
+Using modules allows you to manage the complexity of your application according to the
 object-oriented programming principles.
 
 Module is an equivalent of a class in other programming languages, such
-as in Java or C++.
+as in Java or in C++.
 
 Every module contains a constructor function. This function is used for
 module's instanses creation.
@@ -155,7 +155,7 @@ var moduleName = getPrincipalStartView();// Some impersonate technique
 var moduleInstance = new global[moduleName]();
 ----------------------------------
 +
-where `moduleName` is the module constructor name string, for example, `"WebModule"`;
+where `moduleName` is the module constructor name, for example, `"WebModule"`;
 * Create a proxy/stub for the server module, to use RPC on client or Local procudure call (LPC) on apllication server:
 +
 [source,Javascript]
@@ -163,7 +163,7 @@ where `moduleName` is the module constructor name string, for example, `"WebModu
 var moduleStub = new P.ServerModule("Processor");
 ----------------------------------------
 +
-where `Processor` is the module constructor name string. The server module
+where `Processor` is the module constructor name. The server module
 should be marked with the `@public` annotation to enable access via the network.
 Server modules, with is used only within application server don't need the `@public` annotation
 to be used with LPC.
@@ -182,21 +182,22 @@ moduleInstance.getResult(10, function(aResult){
 == Dependencies resolving
 [[dependencies-resolving]]
 
-When executing the code on a application server or on a client, all application elements,
+When executing the code on an application server or on a client, all application elements,
 on which initial application element depends, are loaded during the process of automatic dependencies
 resolution.
 
-Automatic dependencies resolving works as follows:
+Automatic dependencies resolution works as follows:
 
 * The source code is analyzed and expressions of the following types are
 searched for the following expressions:
 +
 `new ModuleName()`
 +
-`new ServerModule("Implementation")`
+`new P.ServerModule("Implementation")`
 +
 where ModuleName is the name of the module and Implementation is module name
 wich is executed on the server side.
+
 * Application elements with the specified names are loaded or server
 proxies for server modules are generated.
 * The process continues recursevly for the loaded modules, except for
@@ -207,7 +208,7 @@ automatically, for example, if you want to determine the called module
 in a dynamic manner, you can use the manual dependencies resolving with
 `P.require` function.
 
-Use `P.require([param], callback)` global function, where param is the module
+Use `P.require([param], callback)` function, where param is the module
 constructor name, or the relative path to the JavaScript file in the
 application, or an array of these elements, callback is a function,
 which will be called when all the specified modules are downloaded and
@@ -242,7 +243,7 @@ P.require(["Module1",
  "localLib.js"], function() {
   
   //Platypus module
-  var m1 = new Module("Module1");
+  var m1 = new Module1();
   m1.bar();
   
   // Constructor LibObject is defined in localLib.js
@@ -1547,12 +1548,12 @@ in articles about integrating Nashorn and Java.
 [[lpc]]
 
 Use local procedure calls (LPC) in JavaScript for tasks, which have to be executed in parallel manner.
-The LPC mechanism might is available only in application server (both Platypus TSA server or J2EE server).
+The LPC mechanism is available only in application server (both Platypus TSA server or J2EE server).
 
 To run a JavaScript code in parallel, create server module containing some logic processing one task.
 Than use it multiple times in other module through LPC. 
 
-Imagine, that we have task to compute tangent 100 time for different angles. Let's create worker module,
+Imagine, that we have to compute tangent several times for different angles. Let's create a worker module,
 which will be executed multiple times in parallel:
 
 [source,Javascript]
@@ -1585,7 +1586,10 @@ function Processor(){
         var w = new P.ServerModule('Worker');
         var calced = 0;
         aAngles.forEach(function(aAngle){
-            w.calc(aAngle, function(aTan){// Call to LPC stub. Actual calc function will be called by Platypus.js runtime probably in several concurrent threads.
+            w.calc(aAngle, function(aTan){// Call to LPC stub. Actual calc
+                                          // function will be called by 
+                                          // Platypus.js runtime probably in
+                                          // several concurrent threads.
                 results.push(aTan);
                 if(results.length === aAngles.length){
                     aOnSuccess(results);
@@ -1598,19 +1602,23 @@ function Processor(){
 
 Unlike HTML5 Workers, LPC mechanism in Platypus.js uses standard container's thread pool
 and so, maximum number of concurrent threads is less or equal to container's thread pool
-maxThreads configuration parameter. Platypus.js supports asynchronous IO model and so maxThreads parameter
-should be configured as number of processors/core of the computer + 1. 
+maxThreads configuration parameter.
+
+Platypus.js supports asynchronous IO model and so maxThreads parameter should be configured
+as number of processors/cores of the computer + 1.
 
 There are three levels of parallelism in Platypus.js server environment:
+
 * Resident modules level.
 * Session modules level.
 * Stateless modules level.
+
 Each level of parallelism considers its own script spaces (script context and global object) magaging policy.
 Resident modules level owns a single script space and all calls to arbitrary resident modules are
 added to the same queue. Session statefull modules level considers the following: Each user's session has its own
 script space and all calls to arbitrary session statefull modules are
 added to the session's queue. Stateless modules level considers the following: Each instance of stateless module
-creates its own script space and a call to the module and all calls to its callbacks are added toits own queue.
+creates its own script space and a call to the module and all calls to its callbacks are added to its own queue.
 
 LPC allows to make calls one module from one level to another module from another level of parallelism and
 pass some arguments to them and obtain results of such calls. To avoid concurrency in using JavaScript engine
@@ -1646,7 +1654,7 @@ To read and write files, use Java API from the `java.io.*` and other
 dedicated packages.
 
 To read and write strings, use `readString(path, encoding)`, and `writeString(path, text, encoding)`
-global functions, where `path` is a path to the file, `text` is a
+functions, where `path` is a path to the file, `text` is a
 string, `encoding` is the name of encoding. The `encoding` parameter in
 both functions is optional and by default is set for the utf-8 encoding.
 
@@ -1659,3 +1667,43 @@ Example of using functions for reading and writing strings to a file:
 var str = P.readString('/home/user1/Documents/doc1.txt');
 P.writeString('/home/user1/Documents/doc2.txt', str);
 -------------------------------------------------------
+
+== Miscellaneous
+[[miscellaneous-api]]
+
+There are some useful functions for executing JavaScript code in unusual manner.
+Some JavaScript call might be enqueued for later execution via
+the `P.invokeLater(callback)` function.
+
+Example of using `P.invokeLater(callback)` function to avoid unnecessary work on a couple of the similar events:
+
+[source,JavaScript]
+-----------
+var processed = false;
+for(var i = 0; i < similarEvents.length; i++){
+    P.invokeLater(function(){
+        if(!processed){
+            // Some processing logic
+            processed = true;
+            P.Logger.info('All event have been processed');
+        }
+    });
+}
+-----------
+
+Also, some JavaScript code execution might be delayed for a particular timeout via
+the `P.invokeDelayed(timeout, callback)` function.
+
+Example of using `P.invokeDelayed(timeout, callback)` function to implement a periodic task:
+
+[source,JavaScript]
+-----------
+function doWork(){
+    //...
+    // Some work
+    //...
+    // Rescheduling the task...
+    P.invokeDelayed(100, doWork);
+}
+doWork();// First time execution of the periodic task
+-----------
