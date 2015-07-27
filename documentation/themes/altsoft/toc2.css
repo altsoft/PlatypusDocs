@@ -15,17 +15,20 @@
     margin: 0;
     overflow: auto;
     border-right: 3px solid #f8f8f8;
-    background-color: white;
+    background-color: green;
   }
 
   #toc .toclevel1 {
     margin-top: 0.5em;
+		background-color: green;
   }
 
   #toc .toclevel2 {
     margin-top: 0.25em;
+    margin-left: 100px;
     display: list-item;
     color: #aaaaaa;
+		background-color: red;
   }
 
   #toctitle {

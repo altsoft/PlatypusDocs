@@ -1,6 +1,6 @@
 [[platforms-installation]]
 Platform.js's installation
------------------------
+==========================
 
 If the Platypus.js runtime is delivered as a ZIP file, unpack its
 contents to a location according to your preference on your hard drive.

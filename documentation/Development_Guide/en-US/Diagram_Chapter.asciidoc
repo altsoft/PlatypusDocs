@@ -1,6 +1,5 @@
+= Database diagram
 [[database-diagram]]
-Database diagram
-----------------
 
 Database diagram is an application element responsible for
 representation of the database structure. For example, the diagram can
@@ -16,9 +15,8 @@ The structure of the relational database is determined by the tables and
 links between them. Links between two tables are implemented through the
 foreign keys.
 
+== New diagram creation
 [[new-diagram-creation]]
-New diagram creation
---------------------
 
 To create a new database diagram, perform the following actions:
 
@@ -43,9 +41,8 @@ After creating the database structure diagram, fill it with the database
 tables. To do that, define the tables, theirs fields and theirs
 descriptions. After that define foreign key links between the tables.
 
-[[diagram-visual-editor]]
-Diagram visual editor
----------------------
+== Diagram visual editor
+[diagram-visual-editor]
 
 Diagram is a representation of some tables in the database, as well as
 the links between them. In general, one includes a part of the database
@@ -239,3 +236,4 @@ search for whole words and the Match case to perform a case-sensitive
 search.
 * Click Next and Previous buttons to go to the next found entity.
 * Click Close to close the search dialog.
+

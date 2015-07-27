@@ -1,6 +1,6 @@
 [[platypus-application-server]]
 Platypus Application Server
----------------------------
+===========================
 
 The main purpose of use of the Platypus Application TSA Server is to provide
 support for various binary communication protocols.

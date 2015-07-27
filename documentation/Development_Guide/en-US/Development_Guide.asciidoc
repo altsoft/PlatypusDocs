@@ -1,19 +1,34 @@
-
-Combined Title
-===============================
+= Platypus development guide 
+:doctype: book
+//:toc: 3
+:ascii-ids:
 :leveloffset: 1
 
+//include::Preface.asciidoc[]
+//include::Book_Info.asciidoc[]
 
-include::Author_Group.asciidoc[]
-include::Book_Info.asciidoc[]
+include::Intro_Chapter.asciidoc[]
+include::Install_Chapter.asciidoc[]
 include::Designer_Chapter.asciidoc[]
 include::Diagram_Chapter.asciidoc[]
-include::Form_Chapter.asciidoc[]
-include::Install_Chapter.asciidoc[]
-include::Intro_Chapter.asciidoc[]
-include::Module_Chapter.asciidoc[]
-include::Preface.asciidoc[]
 include::Query_Chapter.asciidoc[]
+include::Module_Chapter.asciidoc[]
+include::Form_Chapter.asciidoc[]
 include::Report_Chapter.asciidoc[]
-include::Revision_History.asciidoc[]
 include::Webapi_Chapter.asciidoc[]
+//include::Revision_History.asciidoc[]
+include::Author_Group.asciidoc[]
+
+//= Introduction
+//[[introduction]]
+//
+//== About the platform
+//[[about-the-platform]]
+//    temp
+//
+//= Introduction
+//[[introduction1]]
+//
+//== About the platform
+//[[about-the-platform1]]
+//    temp

@@ -1,13 +1,11 @@
 [[application-project]]
-Application project
--------------------
+= Application project
 
 In the course of development and further during the application life
 cycle, the application is represented by the application project.
 
+== New project creation
 [[new-project-creation]]
-New project creation
---------------------
 
 To create a project, perform the following actions:
 
@@ -28,9 +26,8 @@ project will be created, in the Project Location field.
 
 New project will be added to the Projects panel.
 
+== Opening an existing project
 [[opening-an-existing-project]]
-Opening an existing project
----------------------------
 
 To open an existing project, perform the following actions:
 
@@ -41,9 +38,8 @@ the project folder, and click the Open Project button.
 
 Opened project will be added to the Projects panel.
 
+== Project properties
 [[project-properties]]
-Project properties
-------------------
 
 To change the project properties, select the Properties item in the
 project root node context menu.
@@ -89,9 +85,8 @@ Specify the applicaton's default datasource:
 
 * Select the database connecton from the list.
 
+== Project structure
 [[project-structure]]
-Project structure
------------------
 
 A Platypus Platform project has the following structure:
 
@@ -151,9 +146,8 @@ tree.
 * Select File Application element info menu item, or use the Ctrl Shift
 I shortcut.
 
+== Running and debugging
 [[running-and-debugging]]
-Running and debugging
----------------------
 
 To run an application:
 
@@ -197,9 +191,8 @@ necessary to update the libraries in the `web` and WEB-INF directories. The libr
 will be removed, and at the next application launch these libraries will
 be copied from the platform's runtime directory.
 
+== Database connections
 [[database-connections]]
-Database connections
---------------------
 
 Define an application project's database connections and the default
 connection of the application. The default connection to be used when a
@@ -250,9 +243,8 @@ database item in the context menu of Databases node child node on the Services t
 
 To disconnect, select the Disconnect from the same child node of Databases node on the Services tab.
 
+== Version control
 [[version-control]]
-Version control
----------------
 
 During application development and further during the application life
 cycle, it is recommended to use a version control system to manage the
@@ -275,3 +267,5 @@ ________________________________________________________________________________
 Refer to the documentation of the relevant version control system for
 details about this system usage.
 ______________________________________________________________________________________________________
+
+     

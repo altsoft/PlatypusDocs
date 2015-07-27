@@ -1,10 +1,9 @@
-[[report]]
-Report
-------
 
+= Report
+[[report]]
+
+== Introduction to reports
 [[introduction-to-reports]]
-Introduction to reports
------------------------
 
 The reporting tools allows a developer to generate reports as a
 Microsoft Excel files. You can open a generated report in a spreadsheet
@@ -31,9 +30,8 @@ entity's data arrays as well as to JavaScript objects.
 image:images/reportsFlow.png[Data transformations while generating a
 report]
 
+== New report creation
 [[new-report-creation]]
-New report creation
--------------------
 
 To create a report, perform the following actions:
 
@@ -46,9 +44,8 @@ Next.
 * Enter the name of a new application element in the Name field and
 click Finish to create it, or click Cancel to cancel.
 
+== Reports editor
 [[reports-editor]]
-Reports editor
---------------
 
 To open reports editor, double-click the application element in the
 project tree.
@@ -73,9 +70,8 @@ editor.
 * Save the application element by clicking Save All on the Platypus
 Application Designer toolbar or by clicking the Ctrl S shortcut.
 
+== Template tags
 [[template-tags]]
-Template tags
--------------
 
 Edit the report template in a spreadsheet application.
 
@@ -241,9 +237,8 @@ The `jx:outline` tag has an optional detail attribute, which determines
 the state of the row group. By default, it is set to `false`, which
 means that the row group will be hidden.
 
+== Report API
 [[report-api]]
-Report API
-----------
 
 To generate a report, create a report object by passing the required
 report identifier to P.loadTemplate function.
@@ -257,13 +252,13 @@ downloaded and a command to open it will be executed.
 * Save the report file to disk by calling the save method; pass the path
 of the file, to which the report should be saved, as a parameters.
 
-_______________________________________________________________________________________________________________________________________________________________________________________________
+-------------------------------
 *Note*
 
 When executing the report in the HTML5 browser client, calling the
 show(), print(), and save(reportPath) methods lead to the same results, -
 the report file will be downloaded by your browser.
-_______________________________________________________________________________________________________________________________________________________________________________________________
+-------------------------------
 
 In the example below, the report is generated on client side by desktop
 appliction:
@@ -314,3 +309,4 @@ data, etc.
 * Write code in the report's module constructor to perform initialization.
 * For server-side reports think about what data should be transferred to
 the server side and provide arguments of method, performing generateReport.
+    

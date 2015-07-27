@@ -1,6 +1,6 @@
 [[java-ee-server]]
 Java EE server
---------------
+==============
 
 The plaftorm's server components can run in a J2EE server or a servlet
 container.
@@ -241,7 +241,7 @@ located in the `app` directory, except `public` sub-directory:
 ...
 --------------------------------------------------------
 
-[[j2ee-glassfish-3-configuration]]
+[[j2ee-glassfish-3-configuration-j2ee]]
 J2EE Glassfish 3 configuration
 ------------------------------
 
@@ -352,7 +352,7 @@ groups:
 </glassfish-web-app>
 ------------------------------------------------
 
-[[apache-tomcat-8-configuration]]
+[[apache-tomcat-8-configuration-j2ee]]
 Apache Tomcat 8 configuration
 -----------------------------
 
@@ -369,7 +369,7 @@ source resource:
 ...
 <Resource name="jdbc/main" auth="Container" type="javax.sql.DataSource"
        maxActive="100" maxIdle="30" maxWait="10000"
-       username="sa" password="te$tPwd" driverClassName="org.h2.Driver"     url="jdbc:h2:tcp://localhost/~/h2db/test;schema=test"/>
+       username="sa" password="te$tPwd" driverClassName="org.h2.Driver" url="jdbc:h2:tcp://localhost/~/h2db/test;schema=test"/>
 ...
 -----------------------------------------------------------------------------------------------------------------------------------
 +

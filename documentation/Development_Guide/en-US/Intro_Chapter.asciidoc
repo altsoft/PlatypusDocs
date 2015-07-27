@@ -1,10 +1,8 @@
+= Introduction
 [[introduction]]
-Introduction
-------------
 
+== About the platform
 [[about-the-platform]]
-About the platform
-------------------
 
 The Platypus Platform is a JavaScript client and server applications
 platform for rapid development of enterprise-level information systems.
@@ -42,9 +40,8 @@ visual configuration and without or just a little coding.
 * Built-in security support, including users authentication and
 authorization, constraints of access to application resources.
 
+== Application structure
 [[application-structure]]
-Application structure
----------------------
 
 Application has a tree structure which contains directories and files.
 Some files or file groups, called application elements, have a special
@@ -64,9 +61,8 @@ During development process, the application tree is stored on disk in
 the project's directory `src` subfolder. For production operation
 application can be deployed into the database `MTD_ENTITIES` table.
 
+== Runtime configurations
 [[runtime-configurations]]
-Runtime configurations
-----------------------
 
 In general, the platform works on three-tier archeticture including
 presentation, logic and data storage tiers. The presentation and the
@@ -112,9 +108,8 @@ configuration the presentation tier operates in the client, either at
 Java SE desktop client or HTML5 browser and the logic tier runs on
 application server.
 
+== Development steps
 [[development-steps]]
-Development steps
------------------
 
 To develop an application iteratively perform the following steps:
 
@@ -136,3 +131,4 @@ the user interface.
 Specify the report's data model. Create the report template using the
 visual editor. Write JavaScript code if some non-standard data
 processing required.
+    

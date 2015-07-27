@@ -1,4 +1,1 @@
-Platypus.js 5.3 Development Guide: Application development manual
-===================================================================
-
-
+== Platypus.js 5.3 Development Guide: Application development manual

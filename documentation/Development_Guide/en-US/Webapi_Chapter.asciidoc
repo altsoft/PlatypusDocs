@@ -1,10 +1,9 @@
-[[http]]
-HTTP
-----
 
+= HTTP
+[[http]]
+
+== HTTP interface
 [[http-interface]]
-HTTP interface
---------------
 
 Server modules instance methods can be remotely invoked over network
 using simple GET or POST HTTP requests.
@@ -50,11 +49,10 @@ as if they were JSON string.
 
 Example of URL for calling a server module method (URL is not encoded):
 
-http://server:port/context/application?__type=14&__moduleName=TestModule&__methodName=say&__param[]=Hello%20Platypus
+http://server:port/context/application?\__type=14&\__moduleName=TestModule&\__methodName=say&__param[]=Hello%20Platypus
 
+== HTTP request and response API
 [[http-request-and-response-api]]
-HTTP request and response API
------------------------------
 
 To access HTTP request and response in the JavaScript server code, use
 the `HttpContext` class, which is available, if the method is called by the
@@ -118,7 +116,7 @@ key-value form.
 
 |`localAddr` |IP address, on which the request was received.
 
-|`localName` |Ð?ame of the host, on which the request was received.
+|`localName` |Name of the host, on which the request was received.
 
 |`localPort` |Port, on which the request was received.
 

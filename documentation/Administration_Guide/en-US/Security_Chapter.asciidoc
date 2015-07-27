@@ -1,7 +1,6 @@
 [[application-management]]
 Application management
-----------------------
-
+======================
 [[security]]
 Security
 --------
