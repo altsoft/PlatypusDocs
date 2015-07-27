@@ -1,5 +1,5 @@
 [[desktop-client]]
-Desktop client
+Java SE client
 ==============
 
 The JavaSE client is a Java SE swing application to provide user
@@ -11,7 +11,7 @@ according to its configuration.
 The JavaSE client supports automatic updates via network.
 
 [[running-desktop-client]]
-Running desktop client
+Running Java SE client
 ----------------------
 
 Startup command for Platypus client typically is as follows:

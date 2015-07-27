@@ -24,7 +24,7 @@ higher
 * 1 gigabyte (GB) (for 32-bit system) or 2 GB (for 64-bit system) RAM
 * 5 gigabytes (GB) of free hard disk space
 * Windows, Linux, Mac OS X or other operating system like Unix
-* Oracle JRE 7 or OpenJDK 7
+* JDK 8+
 * Graphical user interface for client operation
 * Internet access for downloading updates and working with external
 mapping service (In a corporate network, Internet access may be arranged

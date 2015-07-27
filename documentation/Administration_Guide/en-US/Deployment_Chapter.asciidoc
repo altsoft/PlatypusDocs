@@ -9,7 +9,7 @@ of a directory.
 
 Platypus applications are provided by the following ways:
 
-* On CD or DVD drive.
+* On Flash, CD or DVD drive.
 * Over the Internet as a zip archive file or as war archive Java EE Web application.
 
 If the Platypus application is delivered as a zip file, unpack its
