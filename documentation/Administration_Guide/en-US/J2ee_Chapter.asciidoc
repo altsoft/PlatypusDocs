@@ -352,8 +352,8 @@ groups:
 </glassfish-web-app>
 ------------------------------------------------
 
-[[apache-tomcat-7-configuration]]
-Apache Tomcat 7 configuration
+[[apache-tomcat-8-configuration]]
+Apache Tomcat 8 configuration
 -----------------------------
 
 Data source setup:
