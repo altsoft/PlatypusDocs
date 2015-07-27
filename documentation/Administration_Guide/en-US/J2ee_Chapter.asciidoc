@@ -241,6 +241,7 @@ located in the `app` directory, except `public` sub-directory:
 ...
 --------------------------------------------------------
 
+////
 [[j2ee-glassfish-3-configuration-j2ee]]
 J2EE Glassfish 3 configuration
 ------------------------------
@@ -351,7 +352,7 @@ groups:
 ..
 </glassfish-web-app>
 ------------------------------------------------
-
+////
 [[apache-tomcat-8-configuration-j2ee]]
 Apache Tomcat 8 configuration
 -----------------------------
