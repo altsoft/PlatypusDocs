@@ -575,7 +575,7 @@ handlers and add the widget to the container:
 [source,Javascript]
 ---------------------------- 
 label.text = "Message text";
-view.add(label, ...);
+form.view.add(label, ...);
 ----------------------------
 
 [NOTE]
@@ -622,7 +622,7 @@ which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var btn5 = new Button(text, icon, iconTextGap, actionPerformed);
+var btn5 = new P.Button(text, icon, iconTextGap, actionPerformed);
 ------------------------------
 
 where text is text (optional), icon is an icon (optional), iconTextGap
@@ -946,7 +946,7 @@ sl1.minimum = 0;
 sl1.maximum = 100;
 sl1.value = 50;
 s1l.onActionPerformed = function(evt) {
-  Logger.info("Slider moved.");
+  P.Logger.info("Slider moved.");
 }
 view.add(sl1, ...);
 ---------------------------------------------
