@@ -1750,6 +1750,7 @@ The common methods for all containers:
 |Method |Description
 |`remove(widget)` |Removes a child widget
 |`child(index)` |Returns a child widget by its numeric index
+|`children()` |Returns a array of a child widgets
 |`clear()` |Removes all child widgets
 |==============================================================
 

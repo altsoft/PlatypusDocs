@@ -197,6 +197,7 @@ searched for the following expressions:
 +
 where ModuleName is the name of the module and Implementation is module name
 wich is executed on the server side.
+    
 * Application elements with the specified names are loaded or server
 proxies for server modules are generated.
 * The process continues recursevly for the loaded modules, except for
@@ -1602,6 +1603,7 @@ maxThreads configuration parameter. Platypus.js supports asynchronous IO model a
 should be configured as number of processors/core of the computer + 1. 
 
 There are three levels of parallelism in Platypus.js server environment:
+
 * Resident modules level.
 * Session modules level.
 * Stateless modules level.
