@@ -196,7 +196,7 @@ be shown on this form. Save this form but for this moment leave it
 blank.
 
 Now lets edit the `OwnersView` form.
-`OwnersView` form will contain (Fig. <<ownersView, owners view>>):
+`OwnersView` form will contain (Fig. <<OwnersView, owners view>>):
 
 * On the top of the form: the panel with the Add and Delete buttons as
 well as the search text field and the Search button.
@@ -204,7 +204,7 @@ well as the search text field and the Search button.
 
 //image:images/ownersList.png[Owners list form layout]
 
-[[OwneresView]]
+[[OwnersView]]
 .Owners view 
 image::images/ui/ownersView.png[Owners view] 
 
@@ -247,7 +247,7 @@ network from a remote data model running on a client and save the query.
 Drag-and-drop it to the `OwnersView` data model. You may also go to the new entity's
 properties and provide its name, for example `owners`.
 
-[[connection_name]]
+[[connection_name_owners]]
 .Connection name
 image::images/query/ownersQuery.png[OwnersView form data model]
 
