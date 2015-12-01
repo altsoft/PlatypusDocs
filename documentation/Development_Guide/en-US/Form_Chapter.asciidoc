@@ -71,7 +71,7 @@ ________________________________________________________________________________
 *Note*
 
 A form should contain JavaScript code, responsible for user interface.
-Business logic should be implemented in server modules.
+Business logic in most cases should be implemented in server modules.
 ______________________________________________________________________________________________________________________________
 
 Form's structure is presented as a tree in the form inspector panel. Use
@@ -138,11 +138,13 @@ form node in the widget inspector.
 == Form API
 [[form-api]]
 
-Create a module instance in client JavaScript as follows:
+Create a form instance in client JavaScript as follows:
 
 [source,Javascript]
 -------------------------- 
-var form = P.loadForm('MainView');
+define('forms', function(Forms){
+    var form = Forms.loadForm(ModuleName);
+});
 --------------------------
 
 To make a form visible use the `show` method:
@@ -162,13 +164,25 @@ get the shown form by its key.
 
 [source,Javascript]
 ---------------------------------------- 
-var formA = P.loadForm('FormA'); 
-var formB = P.loadForm('FormB');
-formA.formKey = 'A1';
-formB.formKey = 'B1';
-formA.show();
-formB.show();
-Form.getShownForm('A1').visible = false;
+/**
+ * 
+ * @module FormB
+ */
+define(['forms', 'forms/form'], function(Forms){});
+
+/**
+ * 
+ * @module FormA
+ */
+define(['forms', 'forms/form'], function(Forms){
+    var formA = Forms.loadForm(ModuleName);
+    var formB = Forms.loadForm('FormB');
+    formA.formKey = 'A1';
+    formB.formKey = 'B1';
+    formA.show();
+    formB.show();
+    Form.getShownForm('A1').visible = false;
+});
 ----------------------------------------
 
 Get the array of the application's shown forms registry using `Form`
@@ -333,7 +347,7 @@ Typically the top-level container has the `view` name and form has same property
 [source,Javascript]
 ----------------------------------- 
 //Sets the veiw's background
-form.view.background = P.Color.BLACK;
+form.view.background = Color.BLACK;
 -----------------------------------
 
 == Widgets events
@@ -563,7 +577,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ---------------------------- 
-var label = new P.Label(text, icon, iconTextGap);
+var label = new Label(text, icon, iconTextGap);
 ----------------------------
 
 where text is the text (optional), icon is an icon (optional),
@@ -622,7 +636,7 @@ which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var btn5 = new P.Button(text, icon, iconTextGap, actionPerformed);
+var btn5 = new Button(text, icon, iconTextGap, actionPerformed);
 ------------------------------
 
 where text is text (optional), icon is an icon (optional), iconTextGap
@@ -677,7 +691,7 @@ parameters:
 [source,Javascript]
 ---------------------------------------------
 
-var btn1 = new P.ToggleButton(text, icon, selected, iconTextGap, actionPerformed);
+var btn1 = new ToggleButton(text, icon, selected, iconTextGap, actionPerformed);
 ---------------------------------------------
 
 where text is text, icon is an icon (optional), selected is set to `true` if the button is
@@ -718,7 +732,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ---------------------------- 
-var cb = new P.CheckBox(text, selected, actionPerformed);
+var cb = new CheckBox(text, selected, actionPerformed);
 ----------------------------
 
 where text is text (optional), selected is set to `true`, when the
@@ -773,7 +787,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 -------------------------------- 
-var rb1 = new P.RadioButton(text, selected, actionPerformed);
+var rb1 = new RadioButton(text, selected, actionPerformed);
 --------------------------------
 
 where `text` is text (optional), `selected` is set to `true` when the
@@ -848,8 +862,8 @@ After creating, add button widgets to the group:
 
 [source,Javascript]
 -------------------------------------- 
-var rbA = new P.RadioButton("A", true);
-var rbB = new P.RadioButton("B", false);
+var rbA = new RadioButton("A", true);
+var rbB = new RadioButton("B", false);
 rbA.buttonGroup = buttonGroup;
 rbB.buttonGroup = buttonGroup;
 --------------------------------------
@@ -883,7 +897,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 -------------------------- 
-var tf1 = new P.TextField(text);
+var tf1 = new TextField(text);
 --------------------------
 
 where `text` is the field text (optional).
@@ -929,7 +943,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ---------------------------- 
-var sl = new P.Slider(min, max, value);
+var sl = new Slider(min, max, value);
 ----------------------------
 
 where `min` is a minimum value (optional), `max` is a maximum value
@@ -941,7 +955,7 @@ handlers and add the widget to the container:
 [source,Javascript]
 ---------------------------------------------
 
-var sl1 = new P.Slider();
+var sl1 = new Slider();
 sl1.minimum = 0;
 sl1.maximum = 100;
 sl1.value = 50;
@@ -984,7 +998,7 @@ which can be called with a different number of parameters:
 
 [source,Javascript]
 ----------------------------- 
-var pb = new P.ProgressBar(min, max);
+var pb = new ProgressBar(min, max);
 -----------------------------
 
 where `min` is a minimum value (optional), `max` is a maximum value (optional).
@@ -994,7 +1008,7 @@ handlers and add the widget to the container:
 
 [source,Javascript]
 ---------------------------- 
-var pb1 = new P.ProgressBar();
+var pb1 = new ProgressBar();
 pb1.minimum = 0;
 pb1.maximum = 100;
 view.add(pb1, ...);
@@ -1051,7 +1065,7 @@ of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var ff = new P.FormattedField();
+var ff = new FormattedField();
 ------------------------------
 
 After creating, if necessary, set the properties and widget event
@@ -1059,7 +1073,7 @@ handlers and add the widget to the container:
 
 [source,Javascript]
 ---------------------------------- 
-var ff = new P.FormattedField();
+var ff = new FormattedField();
 ff.valueType = Date;
 ff.format = "dd.MM.yyyy HH:mm:ss";
 ff.value = new Date();
@@ -1080,7 +1094,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ----------------------------- 
-var pf = new P.PasswordField(text);
+var pf = new PasswordField(text);
 -----------------------------
 
 where `text` is text (optional).
@@ -1090,7 +1104,7 @@ handlers and add the widget to the container:
 
 [source,Javascript]
 ----------------------------- 
-var pf = new P.PasswordField();
+var pf = new PasswordField();
 view.add(pf, ...);
 -----------------------------
 
@@ -1109,14 +1123,14 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var textArea = new P.TextArea(text);
+var textArea = new TextArea(text);
 ------------------------------
 
 where `text` is text (optional).
 
 [source,Javascript]
 ------------------------------ 
-var textArea = new P.TextArea();
+var textArea = new TextArea();
 view.add(textArea, ...);
 ------------------------------
 
@@ -1137,14 +1151,14 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------------ 
-var textArea = new P.HtmlArea(text);
+var textArea = new HtmlArea(text);
 ------------------------------
 
 where `text` is text (optional).
 
 [source,Javascript]
 ------------------------------------- 
-var htmlArea = new P.HtmlArea();
+var htmlArea = new HtmlArea();
 htmlArea.text = "<p>Sample text</p>";
 view.add(htmlArea, ...);
 -------------------------------------
@@ -1256,10 +1270,10 @@ form.cbCategory.onRender = function(evt) {
 }
 -----------------------------------------------------
 
-=== ModelCheck
+=== ModelCheckBox
 [[modelcheck]]
 
-`ModelCheck` is a scalar model widget representing a check box, the
+`ModelCheckBox` is a scalar model widget representing a check box, the
 state of which is linked to an entity's field of a Boolean, Number, or
 String type.
 
@@ -1282,7 +1296,7 @@ ModelCheckBox constructor:
 
 [source,Javascript]
 ------------------------------------- 
-var modelCheck = new P.ModelCheckBox();
+var modelCheck = new ModelCheckBox();
 -------------------------------------
 
 After creating, if necessary, set the properties and widget event
@@ -1333,7 +1347,7 @@ constructor:
 
 [source,Javascript]
 ---------------------------------- 
-var modelCombo = new P.ModelCombo();
+var modelCombo = new ModelCombo();
 ----------------------------------
 
 After creating, if necessary, set the properties and widget event
@@ -1382,7 +1396,7 @@ constructor:
 
 [source,Javascript]
 -------------------------------- 
-var modelDate = new P.ModelDate();
+var modelDate = new ModelDate();
 --------------------------------
 
 After creating, if necessary, set the properties and widget event
@@ -1607,11 +1621,11 @@ Create and use ModelGrid within your JavaScript progams as follows:
 
 [source,Javascript]
 ----------------
-    var g = new P.ModelGrid();
+    var g = new ModelGrid();
     g.data = model.allcustomers;
-    var colService = new P.ServiceGridColumn();
+    var colService = new ServiceGridColumn();
     g.addColumnNode(colService);
-    var colName = new P.ModelGridColumn();
+    var colName = new ModelGridColumn();
     colName.field = 'name';
     colName.title = 'just added name column'
     g.addColumnNode(colName);
@@ -1629,7 +1643,7 @@ ModelFormattedField constructor:
 
 [source,Javascript]
 ------------------------------------ 
-var mff = new P.ModelFormattedField();
+var mff = new ModelFormattedField();
 ------------------------------------
 
 After creating, if necessary, set the properties and widget event
@@ -1714,7 +1728,7 @@ constructor:
 
 [source,Javascript]
 -------------------------------- 
-var modelSpin = new P.ModelSpin();
+var modelSpin = new ModelSpin();
 --------------------------------
 
 After creating, if necessary, set the properties and widget event
@@ -1787,7 +1801,7 @@ Use AnchorsPane constructor in form's JavaScript code:
 
 [source,Javascript]
 ----------------------------- 
-var pane = new P.AnchorsPane();
+var pane = new AnchorsPane();
 -----------------------------
 
 To add child widgets to the container, use the add method and pass a
@@ -1805,27 +1819,16 @@ Anchors type.
 [source,Javascript]
 --------------------------------------------------------
 
-var pane = new P.AnchorsPane();
-var comp = new P.Button("Sample");
-pane.add(comp, new P.Anchors(12, null, 14, 22, null, 24));
+var pane = new AnchorsPane();
+var comp = new Button("Sample");
+pane.add(comp, {left: 12, right: 14, top: 22, bottom: 24));
 --------------------------------------------------------
 
 In the above example a button with the specified Left, Right, Top, and
 Bottom anchors is added to the anchor pane.
 
-`Anchors` object defines widget's binding anchors in a container with
+The object in second argument defines widget's binding anchors in a container with
 anchors layout.
-
-To create an `Anchors` object, use its constructor by passing values for
-the corresponding anchor as parameters:
-
-[source,Javascript]
-------------------------------- 
-var anchors = new Anchors(left, width, right, top, height, bottom);
--------------------------------
-
-where left is a left anchor, width is width, right is a right anchor,
-top is a top anchor, height is height, bottom is a bottom anchor.
 
 Each anchor can be specified in pixels. To do this, define an anchor
 using a number or string with the " `px`" symbols added. For example:
@@ -1840,29 +1843,9 @@ corresponding parameter, for example:
 
 [source,Javascript]
 ----------------------------------------- 
-var anchors = new P.Anchors(100, 200, null,
-            100, 100, null);
-var panel = new P.AnchorsPane();
-panel.add(new P.Label("Test"), anchors);
+var panel = new AnchorsPane();
+panel.add(new Label("Test"), {left: 100, width: 200, top: 100, height: 100});
 -----------------------------------------
-
-There's also alternative syntax for adding a child widget: pass the
-JavaScript object with the left, width, right, top, height, bottom
-properties as a second parameter to the add method. An example of code
-with the same execution results:
-
-[source,Javascript]
--------------------------------- 
-var pane = new P.AnchorsPane();
-var comp = new P.Button("Sample");
-pane.add(comp, 
-  {
-    left : 12,
-    right : 14,
-    top : 22,
-    bottom : 24
-});
---------------------------------
 
 === BorderPane
 [[borderpane]]
@@ -1886,7 +1869,7 @@ Use BorderPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 -------------------------------------- 
-var pane = new P.BorderPane(hgap, vgap);
+var pane = new BorderPane(hgap, vgap);
 --------------------------------------
 
 where `hgap` is the horizontal gap (optional) and `vgap` is the vertical
@@ -1909,12 +1892,13 @@ add to this container two child widgets:
 
 [source,Javascript]
 ------------------------------------------------
-
-var pane = new P.BorderPane();
-var topComp = new P.Button("Top");
-pane.add(topComp, P.VerticalPosition.TOP);
-var bottomComp = new P.Button("Bottom");
-pane.add(bottomComp, P.VerticalalPosition.BOTTOM);
+require('ui', function(Ui){
+    var pane = new BorderPane();
+    var topComp = new Button("Top");
+    pane.add(topComp, Ui.VerticalPosition.TOP);
+    var bottomComp = new Button("Bottom");
+    pane.add(bottomComp, Ui.VerticalalPosition.BOTTOM);
+});
 ------------------------------------------------
 
 === GridPane
@@ -1974,13 +1958,15 @@ The following example shows how to create an `GridPane` container by program mea
 
 [source,Javascript]
 ------------------------------ 
-var pane = new P.GridPane(3, 1);
-var comp1 = new P.Button("1");
-var comp2 = new P.Button("2");
-var comp3 = new P.Button("3");
-pane.add(comp1, 0, 0);
-pane.add(comp2, 1, 0);
-pane.add(comp3, 2, 0);
+require(['forms/button', 'forms/grid-pane'], function(Button, GridPane){
+    var pane = new GridPane(3, 1);
+    var comp1 = new Button("1");
+    var comp2 = new Button("2");
+    var comp3 = new Button("3");
+    pane.add(comp1, 0, 0);
+    pane.add(comp2, 1, 0);
+    pane.add(comp3, 2, 0);
+});
 ------------------------------
 
 === FlowPane
@@ -1999,7 +1985,7 @@ Use FlowPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 ---------------------------- 
-var pane = new P.FlowPane(hgap, vgap);
+var pane = new FlowPane(hgap, vgap);
 ----------------------------
 
 Where hgap is the horizontal gap (optional) and vgap vgap the vertical
@@ -2019,9 +2005,11 @@ add this container to its parent container:
 
 [source,Javascript]
 -------------------------------- 
-var pane = new P.FlowPane();
-var comp = new P.Button("Sample");
-pane.add(comp);
+require(['forms/button', 'forms/flow-pane'], function(Button, FlowPane){
+    var pane = new FlowPane();
+    var comp = new Button("Sample");
+    pane.add(comp);
+});
 --------------------------------
 
 === CardPane
@@ -2044,7 +2032,7 @@ Use CardPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 ---------------------------- 
-var pane = new P.CardPane(hgap, vgap);
+var pane = new CardPane(hgap, vgap);
 ----------------------------
 
 Where hgap is the horizontal gap (optional) and vgap vgap the vertical
@@ -2065,15 +2053,17 @@ add this container to the widgets tree:
 
 [source,Javascript]
 ----------------------------------------- 
-var pane = new P.CardPane();
-var compA = new P.Button("SampleA");
-pane.add(comp, "A");
-var compB = new P.Button("SampleB");
-pane.add(comp, "B");
-var compC = new P.Button("SampleC");
-pane.add(comp, "C");
+require(['forms/button', 'forms/card-pane'], function(Button, CardPane){
+    var pane = new CardPane();
+    var compA = new Button("SampleA");
+    pane.add(comp, "A");
+    var compB = new Button("SampleB");
+    pane.add(comp, "B");
+    var compC = new Button("SampleC");
+    pane.add(comp, "C");
 
-pane.show("B");//Shows the SampleB button
+    pane.show("B");//Shows the SampleB button
+});
 -----------------------------------------
 
 === BoxPane
@@ -2097,7 +2087,7 @@ Use BoxPane constructor to create this container in JavaScript code:
 
 [source,Javascript]
 ------------------------- 
-var pane = new P.BoxPane(orientation, hgap, vgap);
+var pane = new BoxPane(orientation, hgap, vgap);
 -------------------------
 
 Where orientation is a value of `P.Orientation.HORIZONTAL` or
@@ -2122,16 +2112,17 @@ a widget to this container:
 
 [source,Javascript]
 ---------------------------------------------
-
-var pane = new P.BoxPane(P.Orientation.VERTICAL, 0, 20);// vertical box with 20 pixels vertical gap
-var comp = new P.Button("Sample");
-pane.add(comp);
+require(['forms/button', 'forms/box-pane', 'ui'], function(Button, BoxPane, Ui){
+    var pane = new BoxPane(Ui.Orientation.VERTICAL, 0, 20);// vertical box with 20 pixels vertical gap
+    var comp = new Button("Sample");
+    pane.add(comp);
+});
 ---------------------------------------------
 
 NOTE: Take into accout, that changing of orientation in box pane will rearrange child widgets,
 but theirs widths and heights will remain unchanged if it will be allowed by thne container. E.g.
 if you've got a horizontal box with defferent widths of child widgets and then you will change
-orientation to P.Orientation.VERTICAL, then all child widgets heights will remain equal to height
+orientation to Ui.Orientation.VERTICAL, then all child widgets heights will remain equal to height
 if the cintainer and widths will be changed to fit container's width. Of course you may reassign
 heights of child widgets is such case and layout will become pretty again.
 
@@ -2163,7 +2154,7 @@ constructor:
 
 [source,Javascript]
 ---------------------------- 
-var pane = new P.TabbedPane();
+var pane = new TabbedPane();
 ----------------------------
 
 To add child widgets to the container, use the add method and pass a
@@ -2182,11 +2173,13 @@ An example of code using the `TabbedPane` container:
 
 [source,Javascript]
 ----------------------------- 
-var pane = new P.TabbedPane();
-var tab1 = new P.AnchorsPane();
-var tab2 = new P.AnchorsPane();
-pane.add(tab1, "Tab 1");
-pane.add(tab2, "Tab 2");
+require(['forms/anchors-pane', 'forms/tabbed-pane'], function(AnchorsPane, TabbedPane){
+    var pane = new TabbedPane();
+    var tab1 = new AnchorsPane();
+    var tab2 = new AnchorsPane();
+    pane.add(tab1, "Tab 1");
+    pane.add(tab2, "Tab 2");
+});
 -----------------------------
 
 === SplitPane
@@ -2206,8 +2199,8 @@ The specific properties of the `SplitPane`:
 [cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
-|`orientation` |The separator's orientation: `Orientation.VERTICAL` or
-`Orientation.HORIZONTAL`
+|`orientation` |The separator's orientation: `Ui.Orientation.VERTICAL` or
+`Ui.Orientation.HORIZONTAL`
 
 |`dividerLocation` |The split pane divider's location in pixels
 
@@ -2224,7 +2217,7 @@ constructor with an optional parameter for specifying orientation:
 
 [source,Javascript]
 --------------------------- 
-var pane = new P.SplitPane(orientation);
+var pane = new SplitPane(orientation);
 ---------------------------
 
 where orientation is an object of the Orientation type, which defines
@@ -2244,12 +2237,13 @@ where firstWidget and secondWidget are the first and then the second widget to a
 
 [source,Javascript]
 -----------------------------------------------
-
-var pane = new P.SplitPane(P.Orientation.VERTICAL);
-var comp1 = new P.AnchorsPane();
-var comp2 = new P.AnchorsPane();
-pane.firstComponent = comp1;
-pane.secondComponent = comp2;
+require(['forms/anchors-pane', 'forms/split-pane', 'ui'], function(AnchorsPane, SplitPane, Ui){
+    var pane = new SplitPane(Ui.Orientation.VERTICAL);
+    var comp1 = new AnchorsPane();
+    var comp2 = new AnchorsPane();
+    pane.firstComponent = comp1;
+    pane.secondComponent = comp2;
+});
 -----------------------------------------------
 
 === ScrollPane
@@ -2280,7 +2274,7 @@ constructor, which can be called with a different number of parameters:
 
 [source,Javascript]
 ------------------------ 
-var pane = P.ScrollPane(view);
+var pane = ScrollPane(view);
 ------------------------
 
 where view is a widget, which is added inside the scroll panel
@@ -2291,9 +2285,11 @@ add method, for example:
 
 [source,Javascript]
 ------------------------------- 
-var scroll = new P.ScrollPane();
-var view = new P.AnchorsPane();
-scroll.add(view);
+require(['forms/anchors-pane', 'forms/scroll-pane'], function(AnchorsPane, ScrollPane){
+    var scroll = new ScrollPane();
+    var view = new AnchorsPane();
+    scroll.add(view);
+});
 -------------------------------
 
 === ToolBar
@@ -2313,7 +2309,7 @@ constructor:
 
 [source,Javascript]
 ---------------------------- 
-var toolbar = new P.ToolBar();
+var toolbar = new ToolBar();
 ----------------------------
 
 To add child widgets to the container, use the add method and pass a
@@ -2330,16 +2326,18 @@ For example:
 
 [source,Javascript]
 ----------------------------- 
-var toolbar = new P.ToolBar();
-var b1 = new P.Button();
-pane.add(b1);
-P.Icon.load("1.png", function(aLoaded){
-    b1.icon = aLoaded;
-});
-var b2 = new P.Button();
-pane.add(b2);
-P.Icon.load("2.png", function(aLoaded){
-    b2.icon = aLoaded;
+require(['forms/tool-bar', 'forms/button', 'ui'], function(ToolBar, Button, Ui){
+    var toolbar = new ToolBar();
+    var b1 = new Button();
+    pane.add(b1);
+    Ui.Icon.load("1.png", function(aLoaded){
+        b1.icon = aLoaded;
+    });
+    var b2 = new Button();
+    pane.add(b2);
+    Ui.Icon.load("2.png", function(aLoaded){
+        b2.icon = aLoaded;
+    });
 });
 -----------------------------
 
@@ -2357,7 +2355,7 @@ constructor:
 
 [source,Javascript]
 ----------------------------- 
-var pane = new P.DesktopPane();
+var pane = new DesktopPane();
 -----------------------------
 
 The list of specific methods of the widget:
@@ -2390,19 +2388,26 @@ Example:
 
 [source,Javascript]
 -------------------------------------- 
-function InnerForm(){
-    var form = P.loadForm(this.constructor.name);
-    this.onDesktop = function(aDesktop){
-        form.showInternalFrame(aDesktop);
-    };
-}
+/**
+ * @module InnerForm
+ */
+define('forms', function(Forms, ModuleName){
+    return function (){
+        var form = Forms.loadForm(ModuleName);
+        this.onDesktop = function(aDesktop){
+            form.showInternalFrame(aDesktop);
+        };
+    }
+});
 --------------------------------------
 
 [source,Javascript]
 -------------------------------------- 
-var desktop = new P.DesktopPane();
-var formModule = new InnerForm();
-formModule.onDesktop(desktop);
+require(['forms/desktop-pane', 'InnerForm'], function(DesktopPane, InnerForm){
+    var desktop = new DesktopPane();
+    var formModule = new InnerForm();
+    formModule.onDesktop(desktop);
+});
 --------------------------------------
 
 == Menus
@@ -2427,7 +2432,7 @@ constructor:
 [source,Javascript]
 -------------------------------------------------
 
-var menuBar = new P.MenuBar();
+var menuBar = new MenuBar();
 view.add(menuBar, ...);// add it to the root container
 -------------------------------------------------
 
@@ -2458,7 +2463,7 @@ constructor:
 
 [source,Javascript]
 ---------------------- 
-var menu = new P.Menu(text);
+var menu = new Menu(text);
 menuBar.add(menu);
 ----------------------
 
@@ -2505,8 +2510,8 @@ constructor:
 
 [source,Javascript]
 --------------------------------- 
-var popup = new P.PopupMenu();
-var label = new P.Label("Sample");
+var popup = new PopupMenu();
+var label = new Label("Sample");
 label.componentPopupMenu = popup;
 ---------------------------------
 
@@ -2529,7 +2534,7 @@ constructor:
 
 [source,Javascript]
 ---------------------------------- 
-var menuItem = new P.MenuItem(text, icon, actionPerformed);
+var menuItem = new MenuItem(text, icon, actionPerformed);
 ----------------------------------
 
 where text is the text of the menu item (optional), icon is the icon of
@@ -2550,7 +2555,7 @@ An example of code using `MenuItem` widget:
 
 [source,Javascript]
 ---------------------------------------- 
-var item = new P.MenuItem("Sample");
+var item = new MenuItem("Sample");
 item.onActionPerformed = function(evt) {
    alert("Sample selected.")
 }
@@ -2601,7 +2606,7 @@ RadioMenuItem constructor:
 [source,Javascript]
 --------------------------------------------
 
-var radioMenuItem = new P.RadioMenuItem(text, selected, actionPerformed);
+var radioMenuItem = new RadioMenuItem(text, selected, actionPerformed);
 --------------------------------------------
 
 where text is the text of the widget (optional), selected is `true`
@@ -2635,7 +2640,7 @@ MenuSeparator constructor:
 
 [source,Javascript]
 ------------------------------------ 
-var separator = new P.MenuSeparator();
+var separator = new MenuSeparator();
 ------------------------------------
 
 The list of specific properties of the widget:
@@ -2659,7 +2664,7 @@ object:
 
 [source,Javascript]
 ----------------------- 
-var icon = Icon.load(path);
+var icon = Ui.Icon.load(path);
 -----------------------
 
 where path is the name of the icon file, relative path of an application
@@ -2672,9 +2677,11 @@ An example of using an icon to create a button:
 
 [source,Javascript]
 ----------------------------------- 
-P.Icon.load("car.png", funtion(aCarIcon){
-    var b = new P.Button("Car", aCarIcon);
-    view.add(b, ...);
+require(['ui', 'forms/button'], function(Ui, Button){
+    Ui.Icon.load("car.png", funtion(aCarIcon){
+        var b = new Button("Car", aCarIcon);
+        view.add(b, ...);
+    });
 });
 -----------------------------------
 
@@ -2697,7 +2704,7 @@ Example of usage:
 
 [source,Javascript]
 --------------------------------------- 
-var italicFontStyle = P.FontStyle.ITALIC;
+var italicFontStyle = Ui.FontStyle.ITALIC;
 ---------------------------------------
 
 === Font
@@ -2719,7 +2726,7 @@ To create a font object, use the Font constructor:
 
 [source,Javascript]
 ------------------------- 
-var font = new Font(family, style, size)
+var font = new Ui.Font(family, style, size)
 -------------------------
 
 where family is a string of the font family name; style is a font
@@ -2730,7 +2737,7 @@ Example:
 [source,Javascript]
 ---------------------------------------------------
 
-button.font = new P.Font("Verdana", P.FontStyle.BOLD, 14);
+button.font = new Ui.Font("Verdana", P.FontStyle.BOLD, 14);
 ---------------------------------------------------
 
 === Color
@@ -2763,7 +2770,7 @@ passing it three RGB integers as parameters:
 
 [source,Javascript]
 ---------------------------- 
-var color = new PColor(red, green, blue, alpha);
+var color = new Ui.PColor(red, green, blue, alpha);
 ----------------------------
 
 where R, G, B are red, green, blue and alpha are integer constituents of the color.
@@ -2773,9 +2780,9 @@ Example of usage:
 [source,Javascript]
 -------------------------------------------
 
-button.foreground = P.Color.BLUE;
+button.foreground = Ui.P.Color.BLUE;
 
-var ivory = new P.Color(255, 255, 240);
+var ivory = new Ui.Color(255, 255, 240);
 panel.background = ivory;
 -------------------------------------------
 
@@ -2799,7 +2806,7 @@ Example of usage:
 [source,Javascript]
 ---------------------------------------------------
 
-var horizontalPosition = P.HorizontalPosition.CENTER;
+var horizontalPosition = Ui.HorizontalPosition.CENTER;
 ---------------------------------------------------
 
 === VerticalPosition
@@ -2822,7 +2829,7 @@ Example of usage:
 [source,Javascript]
 -----------------------------------------------
 
-var verticalPosition = P.VerticalPosition.CENTER;
+var verticalPosition = Ui.VerticalPosition.CENTER;
 -----------------------------------------------
 
 === Orientation
@@ -2843,7 +2850,7 @@ Example of usage:
 
 [source,Javascript]
 ----------------------------------------- 
-var orientation = P.Orientation.HORIZONTAL;
+var orientation = Ui.Orientation.HORIZONTAL;
 -----------------------------------------
 
 === ScrollBarPolicy
@@ -2865,7 +2872,7 @@ Example of usage:
 
 [source,Javascript]
 ----------------------------------------- 
-scrooll.scrollBarPolicy = P.ScrollBarPolicy.NEVER;
+scrooll.scrollBarPolicy = Ui.ScrollBarPolicy.NEVER;
 -----------------------------------------
 
 == Dialogs API

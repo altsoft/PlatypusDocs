@@ -5,7 +5,7 @@
 == Introduction to reports
 [[introduction-to-reports]]
 
-The reporting tools allows a developer to generate reports as a
+The reporting tools allow a developer to generate reports as a
 Microsoft Excel files. You can open a generated report in a spreadsheet
 application, print or save it to disk.
 
@@ -111,17 +111,22 @@ template tags:
 
 [source,Javascript]
 ------------------------------------ 
-function reportA {
-    var library = {};
-    var template = P.loadTemplate(this.constructor.name, library);
+define(['template'], function (loadTemplate, ModuleName) {
+    function ReportConstructor() {
+        var self = this;
+        
+        var library = {};
+        var template = loadTemplate(ModuleName, library);
 
-    library.docs = this.model.documents;
-    library.documents = [
-        {name:'foo'}, 
-        {name:'bar'},
-        {name:'baz'}
-    ];
-}
+        library.docs = this.model.documents;
+        library.documents = [
+            {name:'foo'}, 
+            {name:'bar'},
+            {name:'baz'}
+        ];
+    }
+    return ReportConstructor;
+});
 ------------------------------------
 
 Add entities, which will be linked to the template, to the report module data
@@ -133,7 +138,7 @@ cells of this row.
 
 If you know the size of the collection beforehand, you can use the
 template rows instead of adding new rows for each element. To do this,
-add name of the collection to fixed property of a temlate (variable `rt` in the above example).
+add name of the collection to fixed property of a template (variable `rt` in the above example).
 
 There is another way yo display collections using the `jx:forEach` tag:
 
@@ -241,15 +246,15 @@ means that the row group will be hidden.
 [[report-api]]
 
 To generate a report, create a report object by passing the required
-report identifier to P.loadTemplate function.
+report identifier to loadTemplate function.
 
 Use the report object:
 
 * Create an report instance using generateReport() method of ReportTemplate on the server side.
-* Display a report by calling the show method. The report will be
+* Display a report by calling the show() method. The report will be
 downloaded and a command to open it will be executed.
-* Send the report to print by calling the print method.
-* Save the report file to disk by calling the save method; pass the path
+* Send the report to print by calling the print() method.
+* Save the report file to disk by calling the save() method; pass the path
 of the file, to which the report should be saved, as a parameters.
 
 -------------------------------
@@ -267,7 +272,7 @@ appliction:
 -----------------------------------------------------------
 
 var r = new DocumentReport();
-r.execute('business'); // generate report
+r.execute('execute'); // generate report
 -----------------------------------------------------------
 
 To execute the report on the server side (from a HTML5 browser or a
@@ -278,35 +283,45 @@ desktop client):
 
 /*
  * @stateless
+ * @module DocumentReport
  * @public
  */
-function DocumentReport(){
-    var self = this
-        , model = P.loadModel(this.constructor.name)
-        , template = P.loadTemplate(this.constructor.name, model);
-    // take parameter's value from self property.
-    self.execute = function(aValue, onSuccess, onFailure){
-        model.documents.params.documentCategory = aValue;
-        model.requery(function(){
-            var report = template.generateReport();
-            onSuccess(report);
-        }, onFailure);
+define(['orm', 'template'], function (Orm, loadTemplate, ModuleName) {
+    function ReportConstructor(){
+        var self = this
+                , model = Orm.loadModel(ModuleName)
+                , template = loadTemplate(ModuleName, model);
+        self.execute = function(aValue, onSuccess, onFailure){
+            model.documents.params.documentCategory = aValue;
+            model.requery(function(){
+                var report = template.generateReport();
+                onSuccess(report);
+            }, onFailure);
+        };
+        // ...
     }
-    // ...
-}
+    return ReportConstructor;
+});
 
-var r = new ServerModule('DocumentReport');
-// provide some property to be taken as a model parameter
-// by the report at the server side
-r.execute('business', function(aReport){
-    aReport.show();
-}); 
+require('rpc', function(Rpc){
+    var r = new Rpc.Proxy('DocumentReport');
+    r.execute('execute', function(aReport){
+        aReport.show();
+    }); 
+}
 ----------------------------------------------------------
 
-Report's JavaScript code prepares data for displaying, calculating new
+Report's JavaScript code prepares data for displaying, calculates new
 data, etc.
 
 * Write code in the report's module constructor to perform initialization.
 * For server-side reports think about what data should be transferred to
 the server side and provide arguments of method, performing generateReport.
+
+There is a problem with dates in Excel documents. Excel is unable to convert UTC dates
+to localized strings automatically. So you should give dates already in local time zones.
+To fix this issue, use "timezoneOffset" property of ReportTemplate. This property is suited for
+use with JavaScript dates. To use this property in a right way, call (new Date()).getTimezoneOffset() in browser
+and thransfer it to the server code and in server code use it as value of "timezoneOffset" property of ReportTemplate.
+Thus you will get localized dates in generated document.
     

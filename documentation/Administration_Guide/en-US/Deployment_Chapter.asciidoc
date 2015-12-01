@@ -17,7 +17,7 @@ contents to a location according to your preference on your hard drive.
 
 After unpacking, the directory will have the following structure:
 
-* `appDirectory/`
+* `projectDirectory/`
 ** `META-INF`/
 ** `WEB-INF`/
 ** `app/`
@@ -29,7 +29,7 @@ After unpacking, the directory will have the following structure:
 ** `private.properties`
 ** `project.properties`
 
-The Platypus application directory corresponds to the application
+The Platypus project directory corresponds to the application
 project, which is ready for deployment and execution, as well as for
 modification in Platypus Application Designer.
 
@@ -51,7 +51,7 @@ Built in realm
 When using Platypus.js TSA Server it is possible to use built-in users space, which is represented as two database tables:
 `MTD_USERS` and `MTD_GROUPS`. `MTD_USERS` is table of users and `MTD_GROUPS` is table of groups/roles.
 For additional information, see the "Security" chapter. To initialize theese tables in a database Deploy tool might be used.
-When using Java EE or Servlet container, it is recommended to use standard Jdbc, File or LDAP RelaMs supplied by container.
+When using Java EE or Servlet container, it is recommended to use standard Jdbc, File or LDAP RealMs supplied by container.
 
 The command for initializing the in database users space is as follows:
 

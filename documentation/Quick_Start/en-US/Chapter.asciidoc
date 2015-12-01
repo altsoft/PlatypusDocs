@@ -13,11 +13,11 @@ more details about Platypus.js.
 Platypus.js installation
 ------------------------
 
-Java Runtime and JDK 8 update 40 or higher are required for Platypus.js applications
+Java Runtime and JDK 8 update 66 or higher are required for Platypus.js applications
 development.
 
 Install the Platypus.js IDE, the Platypus.js runtime components and
-Apache Tomcat 8 to enable running a web client:
+Apache Tomcat 8.0.24+ to enable running a web client:
 
 * http://platypus-platform.org/download.html[Download] the Platypus.js installer bundle from the project's website
 for your operating system.

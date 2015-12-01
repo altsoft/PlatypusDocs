@@ -186,10 +186,10 @@ server specific configuration file `META-INF/context.xml`, and JavaScript file r
 the application launching on the HTML page) are modified, but the
 libraries are not copied again.
 
-Select the Clean directories `web`, `WEB-INF` and Run menu item in the project context menu, if it is
+Select the "Clean directories `web`, `WEB-INF` and Run" menu item in the project context menu, if it is
 necessary to update the libraries in the `web` and WEB-INF directories. The libraries
-will be removed, and at the next application launch these libraries will
-be copied from the platform's runtime directory.
+will be removed they will be copied again from the platform's runtime directory.
+After that, application will be launched as usual.
 
 == Database connections
 [[database-connections]]

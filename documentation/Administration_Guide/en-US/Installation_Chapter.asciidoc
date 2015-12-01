@@ -24,7 +24,7 @@ higher
 * 1 gigabyte (GB) (for 32-bit system) or 2 GB (for 64-bit system) RAM
 * 5 gigabytes (GB) of free hard disk space
 * Windows, Linux, Mac OS X or other operating system like Unix
-* JDK 8+
+* JDK 8u66+
 * Graphical user interface for client operation
 * Internet access for downloading updates and working with external
 mapping service (In a corporate network, Internet access may be arranged
@@ -32,7 +32,9 @@ through a proxy server.)
 * Google Chrome 19, Mozilla Firefox 10, Internet Explorer 9 or newer
 versions of browsers for Platypus HTML5 client operation
 
-The Platypus Platform supports the following database servers:
+The Platypus.js runtime supports all Jdbc compitible databases.
+
+The Platypus Application database structure designer supports the following database servers:
 
 * Oracle Database 10g and higher
 * IBM DB2 9 and higher
@@ -53,6 +55,7 @@ J2EE server or container, for example:
 
 * Apache Tomcat 8.0.24 or higher
 * WildFly 9.0.0 or higher
+* Any J2EE compliant server, probably with some specific settings
 
 For information on installing and configuring the servlet container or
 J2EE server, refer to the relevant installation and administration

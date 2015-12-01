@@ -55,7 +55,7 @@ Platypus protocol and in this case it can be omitted.
 +
 For working on the 3-tier confirguration over the HTTP protocol, use URL
 of the `http://` format, for example,
-`http://localhost/myapp/application`.
+`http://localhost/myapp/`.
 * Scheme is the default database scheme, for example, `myschema` (not
 used in case of the 3-tier configuration).
 * Database user is the default database username, for example, `user1`

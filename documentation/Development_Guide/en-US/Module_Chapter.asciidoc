@@ -1,7 +1,8 @@
 = JavaScript module
 [[javascript-module]]
 
-Module is a JavaScript file containing the constructor function and some specific resources.
+Module is a JavaScript file containing the constructor function for global module and
+define() call for AMD modules and some specific resources.
 Modules contain data model responsible for data access and <ModuleName>.model file contains
 its data model definition.
 
@@ -36,7 +37,7 @@ To edit the JavaScript code:
 * Use the code completion for field names and functions of objects and
 modules.
 * Use automatic transition to declarations of variables, functions, and
-to the functions of other modules; to do this, click a module ID or
+to the functions of other modules; to do this, click a module name or
 function while holding down the Ctrl key.
 * Use context menus and shortcuts to use built-in editor functions.
 * Save the application element by clicking Save All on the Platypus
@@ -66,7 +67,66 @@ object-oriented programming principles.
 Module is an equivalent of a class in other programming languages, such
 as in Java or in C++.
 
-Every module contains a constructor function. This function is used for
+Modules can be either global modules and https://en.wikipedia.org/wiki/Asynchronous_module_definition[AMD] modules.
+
+Every AMD module contains strictly one call to a global function define.
+Define function should be used as follows:
+
+[source,Javascript]
+------------------------------- 
+/**
+ * Module description goes here
+ *
+ * @module ModuleA
+ * @rolesAllowed admin
+ *
+ */
+define(['logger', 'other-super-module'], function(Logger, OtherModule){
+    function ModuleConstructor(p) {
+      ...
+    }
+
+    function otherFunction() {
+      ...
+    }
+    return ModuleConstructor;
+});
+-------------------------------
+Define function call can have a header, which is represented as a
+comment in the JsDoc format and is located at the top of the module define call.
+The @module annotation allows to assign a short name to the defined module.
+If this annotation is absent, module name will be formed as relative path from
+'app' directory in application project and without .js filename extension.
+Such modules names have no the leading slash. So if you have a module without 
+@module annotation in file 'app/folder/module.js', the module name will be 'folder/module'
+
+The define function of the module is called only once per script global object (script space).
+So it is easy to implement such pattern as singleton and JavaScript class pattern.
+
+The first argument of define function may be omitted if the module has no dependencies.
+Also, the first argument may be an empty array or a single sitring literal/variable.
+
+Dependencies of a module may be referenced if first argument of define function as relative module names.
+So, if you have a module in file 'app/folder/module.js' and it depends on module located in file
+'app/utility.js', than define call in module 'folder/module' may look like:
+
+[source,Javascript]
+------------------------------- 
+define(['../utility', 'other-super-module'], function(Utility, OtherModule){
+    function ModuleConstructor(p) {
+      ...
+    }
+
+    function otherFunction() {
+      ...
+    }
+    return ModuleConstructor;
+});
+------------------------------- 
+
+Relative module names may formed using filesystem reserved directories names ('../', '../../', './').
+
+Every global module contains a constructor function. This function is used for
 module's instanses creation.
 
 Constructor function can have a header, which is represented as a
@@ -156,11 +216,11 @@ var moduleInstance = new global[moduleName]();
 ----------------------------------
 +
 where `moduleName` is the module constructor name, for example, `"WebModule"`;
-* Create a proxy/stub for the server module, to use RPC on client or Local procudure call (LPC) on apllication server:
+* Create a proxy/stub for the server module, to use RPC on client or Local procudure call (LPC) on an apllication server:
 +
 [source,Javascript]
 ---------------------------------------- 
-var moduleStub = new P.ServerModule("Processor");
+var moduleProxy = new Rpc.Proxy("Processor");
 ----------------------------------------
 +
 where `Processor` is the module constructor name. The server module
@@ -183,17 +243,19 @@ moduleInstance.getResult(10, function(aResult){
 [[dependencies-resolving]]
 
 When executing the code on an application server or on a client, all application elements,
-on which initial application element depends, are loaded during the process of automatic dependencies
+on which initial application element depends, are loaded during the process of dependencies
 resolution.
 
-Automatic dependencies resolution works as follows:
+Dependencies resolution for AMD modules is base on AMD specification.
+
+Dependencies resolution for global modules in Platypus.js is automatic and works as follows:
 
 * The source code is analyzed and expressions of the following types are
 searched for the following expressions:
 +
 `new ModuleName()`
 +
-`new P.ServerModule("Implementation")`
+`new Rpc.Proxy("Implementation")`
 +
 where ModuleName is the name of the module and Implementation is module name
 wich is executed on the server side.
@@ -206,13 +268,13 @@ the server proxies.
 If it is not necessary or not possible to resolve the dependency
 automatically, for example, if you want to determine the called module
 in a dynamic manner, you can use the manual dependencies resolving with
-`P.require` function.
+global `require` function.
 
-Use `P.require([param], callback)` function, where param is the module
-constructor name, or the relative path to the JavaScript file in the
-application, or an array of these elements, callback is a function,
+Use `require([param], callback)` function, where param is the module
+name (short name or relative module name, inlcluding '../', './' names parts),
+or an array of these elements, callback is a function,
 which will be called when all the specified modules are downloaded and
-executed. Both synchronous and asynchronous modes of P.require function calls are supported.
+executed. Both synchronous and asynchronous modes of `require` function calls are supported.
 If callback is omitted, than synchronous version of function is used.
 
 NOTE: Don't use manual dependencies resolving against a server modules. It
@@ -223,70 +285,55 @@ Example of using manual dependencies resolving is as follows:
 [source,Javascript]
 ------------------------------------------------
 
-var moduleName1 = "Module1",
-    moduleName2 = "Module2";
-P.require([moduleName1, moduleName2], function() {
-  var m1 = new Module(moduleName1);
+require(['Module1', 'Module2'], function(Module1, Module2) {
+  var m1 = new Module1();
   m1.bar();
-  var m2 = new Module(moduleName2);
+  var m2 = new Module2();
   m2.foo();
 });
 ------------------------------------------------
 
-The following example shows how to use the `P.require` function for
-loading the module by its constructor name as well as the plain
-JavaScript file by specifing its path:
+The following example shows how to use the `require` function for
+loading the module by its module name.
 
-[source,Javascript]
-----------------------------------------------------
-P.require(["Module1",
- "localLib.js"], function() {
-  
-  //Platypus module
-  var m1 = new Module1();
-  m1.bar();
-  
-  // Constructor LibObject is defined in localLib.js
-  var o1 = new LibObject();
-});
-----------------------------------------------------
+Relative modules names are counted off as relative path from the `app` directory of the Platypus
+application project.
 
-Relative paths are counted off from the `app` directory of the Platypus
-application project. If the JavaScript file path matches the Platypus module
-identifier name, the Platypus module will be preferred.
+NOTE: If the relative module name is equals to @module annotation value, only the annotated module
+will be taken into accout while dependency resolution process.
 
-The `P.require` function also has a synchronous variant, which can be used
+The `require` function also has a synchronous version, which can be used
 in the server code. In this case, if you don't need to maintain
 compatibility with the client's code, the second parameter is optional:
 
 [source,Javascript]
 -------------------------------------- 
-P.require("localLib.js");
+require("localLib.js");
 // LibObject is defined in localLib.js
 var obj = new LibObject();
 --------------------------------------
 
-The `P.require` function supports relative paths for both synchronous and synchronous variants:
+The `require` function supports relative modules names for both synchronous and asynchronous variants:
 [source,Javascript]
 -------------------------------------- 
-P.require("./sublibs/sublib-a.js");
+require("./sublibs/sublib-a.js");
 // SubLibObjectA is defined in sublib-a.js
 var obja = new SubLibObjectA();
-P.require("./sublibs/sublib-b.js", function(){
+require("./sublibs/sublib-b.js", function(SubLibObjectB){
     // SubLibObjectB is defined in sublib-b.js
     var objb = new SubLibObjectB();
 });
 --------------------------------------
 
 You should pay attention to the combination of automatic and manual
-dependencies resolution. For example, in the following snippet it is not
-necessary to call the `P.require` function:
+dependencies resolution for global modules.
+For example, in the following snippet it is not necessary to call the `require` function:
 
 [source,Javascript]
 ------------------------------------------------
 var moduleName1 = "SampleModule1",
     moduleName2 = "SampleModule2";
-P.require([moduleName1, moduleName2], function() {
+require([moduleName1, moduleName2], function(SampleModule1, SampleModule2) {
   var m1 = new SampleModule1();
   m1.bar();
   var m2 = new SampleModule2();
@@ -295,28 +342,26 @@ P.require([moduleName1, moduleName2], function() {
 ------------------------------------------------
 
 This code leads to the automatic dependencies resolution regarding to
-the SampleModule1 и SampleModule2, as calls of their constructors are
-present in the code in explicit form.
+the SampleModule1 and SampleModule2, as calls of their constructors are
+global functions and automatic dependencies resolution will be performed.
 
-On the other hand, creating modules in the `var m = new SampleModule1()`
-form is natural and it is preferred in most cases.
-In order to avoid automatic resolving of dependencies, explicitly specify module constructor names in the form of
-string literals the `P.require` function parameter:
+In order to avoid automatic resolving of dependencies, even if required modules are global,
+explicitly specify module names in the form of string literals in the `require` function parameter:
 
 [source,Javascript]
 --------------------------------------------------------
-P.require(["SampleModule1", "SampleModule2"], function() {
-  var m1 = new SampleModule1();
-  m1.bar();
-  var m2 = new SampleModule2();
-  m2.foo();
+require(["SampleModule1", "SampleModule2"], function(SampleModule1, SampleModule2) {
+    var m1 = new SampleModule1();
+    m1.bar();
+    var m2 = new SampleModule2();
+    m2.foo();
 });
 --------------------------------------------------------
 
-This method of calling the `P.require` function excludes these explicitly
+This method of calling the `require` function excludes these explicitly
 specified constructor names in the first parameter from the automatic
 dependencies resolution. So, SampleModule1 and SampleModule2 will be
-loaded only when calling the `P.require`, rather than before starting the
+loaded only when calling the `require`, rather than before starting the
 application.
 
 == Security
@@ -327,8 +372,9 @@ restricted on the basis of the roles. When a user, who has no rights to
 execute some code, tries to call it, a security exception is thrown.
 
 In order to restrict access to the entire module code, add the
-`@rolesAllowed`... annotation to the module header. Specify roles,
-allowed to access the module code execution, in the `@rolesAllowed`
+`@rolesAllowed`... annotation to the module header
+(Either in define call JsDoc section or constructor's JsDoc section).
+Specify roles, allowed to access the module code execution, in the `@rolesAllowed`
 annotation, dividing them by spaces. If the annotation is omitted,
 access to the module is granted to all users.
 
@@ -342,40 +388,42 @@ with the `role2` role from the following example will have access to the
 [source,Javascript]
 ---------------------------- 
 /**
- * @constructor
+ * @module ModuleC
  * @rolesAllowed role1 role2
- *
  */
-function ModuleC {
+define(function(){
+    function ModuleConstructor {
+       var self = this;
 
-   var self = this;
-
-   /**
-    * @rolesAllowed role2
-    */
-   this.f2 = function() {
-      //...
-   }
-}
+       /**
+        * @rolesAllowed role2
+        */
+       this.f2 = function() {
+          //...
+       }
+    }
+    return ModuleConstructor;
+});
 ----------------------------
 
-Use `principal` property to get access to the information about the
-current user in the executable code. The `principal` property is
-read-only. The object of information about the user contains the `name`
+Use `security` module to get access to the information about the
+current user in the executable code. The module has `principal` property.
+The `principal` property is read-only.
+The object of information about the user contains the `name`
 property, i.e. the name of the current user, and the `hasRole()`method,
 which allows you to check if this user has any role:
 
 [source,Javascript]
 ----------------------------------------------------
 
-P.Logger.info('Current user: ' + P.principal.name);
+Logger.info('Current user: ' + Security.principal.name);
 
-if (P.principal.hasRole('Manager')) {
+if (Security.principal.hasRole('Manager')) {
   // Some operations allowed only to managers ...
 }
 ----------------------------------------------------
 
-Use `P.logout(onLoggedOut, onError)` function, where `onLoggedOut` is a function, which will be called
+Use `Security.principal.logout(onLoggedOut, onError)` function, where `onLoggedOut` is a function, which will be called
 after the session is terminated and onError is a function, which will be called if an error occur.
 Open forms will be closed and the user will see the login and password entering form.
 
@@ -385,7 +433,7 @@ Open forms will be closed and the user will see the login and password entering 
 The platfrom runtime enables loading of resources in the form of binary
 data and text. Resources may be loaded using their applicaion paths or
 URLs. Applicaion paths are counted off from the `app` root directory of
-the application project. Use the Resource object methods for resource loading.
+the application project. Use the `resource` module for resource loading.
 
 To download a resource, use the `Resource.load(path, callback)` method, where
 `path` is a application path or URL, `callback(obj)` is a function, which
@@ -396,20 +444,23 @@ and string in the case of text data:
 
 [source,Javascript]
 ---------------------------------------------
-
-//Loads binary resource
-P.Resource.load("res/pict.bin", function(obj) {
-  ...
-})
+require('resource', function(Resource){
+    //Loads binary resource
+    Resource.load("res/pict.bin", function(obj) {
+        ...
+    });
+});
 ---------------------------------------------
 
 [source,Javascript]
 ---------------------------------------------
 
-//Loads text resource
-P.Resource.load("res/list.txt", function(obj) {
-  ...
-})
+require('resource', function(Resource){
+    //Loads text resource
+    Resource.load("res/list.txt", function(obj) {
+      ...
+    });
+});
 ---------------------------------------------
 
 You can use a synchronous version of this method with a single parameter
@@ -420,7 +471,8 @@ the downloaded resource:
 [source,Javascript]
 ---------------------------------------- 
 //Loads binary resource synchronously
-var obj = P.Resource.load("res/pict.bin");
+var Resource = require('resource');
+var obj = Resource.load("res/pict.bin");
 ...
 ----------------------------------------
 
@@ -430,7 +482,7 @@ To get the absolute path to the application directory, use the
 [source,Javascript]
 -------------------------------------- 
 //Reads the application's path
-P.Logger.info(Resource.applicationPath);
+Logger.info(Resource.applicationPath);
 --------------------------------------
 
 == Data model
@@ -456,6 +508,7 @@ data array.
 
 Entities are created using a module implements special datasouce
 interface methods or a query application element.
+
 NOTE: Table entity is a special query entity, which selects all data from
 the table. It is created automatically by runtime. A table entity can be
 used only in two-tier configurations with direct connection to a database.
@@ -518,28 +571,45 @@ following restrictions:
 
 * Links must not create circular references.
 * Linked fields and parameters of the source and the target entities must
-match by thiers type: the types of connected fields and parameters must
+match by thiers type. The types of connected fields and parameters must
 allow the mutual conversion of values. For example, it is possible to
 connect field if there's a number specified for the connection on the
 source, and a string specified the connection on the target, it is quite
 possible, since there is a possibility of an unambiguous conversion of a
 number to a string, but not vice versa.
 
-Added, deleted and changed datasets of these entities objects are saved
+Added, deleted and changed objects of these entities objects are saved
 to the database or sent to the application server for subsequent saving
 when calling the save function of the data model object.
 
-The data model object is represented in the module constructor by the
-result of call to `P.loadModel(name)` function, where name is name of already loaded module.
+The data model object is represented in the module by the
+result of call to `Orm.loadModel(name)` function, where name is name of already loaded module.
 
 Create a variable for the data model object and assign result of P.loadModel() to it. 
 In the following code snippets we will use such variable:
 
 [source,Javascript]
 -------------------------- 
-function ModuleD() {
-   var model = P.loadModel(this.constructor.name);
-   //...
+/**
+ *
+ * @module ModuleD
+ */
+define('orm', function(Orm, ModuleName){
+    return function () {
+       var model = Orm.loadModel(ModuleName);
+       //...
+    }
+});
+--------------------------
+
+or as a global module:
+
+[source,Javascript]
+-------------------------- 
+function ModuleD(Orm) {
+    var self = this;
+    var model = Orm.loadModel(this.constructor.name);
+    //...
 }
 --------------------------
 
@@ -755,6 +825,22 @@ come to the client over the network.
 Handler of the `onRequeried` entity event will be called in any case,
 regardless of the method of calling the `requery` function.
 
+To query new entity data, but leave entity's parameters, data array and related
+entities as is, use the `query` function:
+
+[source,Javascript]
+------------------------------- 
+model.entity1.query({param1: true, param2: 'some value'}, function(aNewData){
+    //...
+}, onFailure);
+-------------------------------
+
+where `entity1` is an entity object, first argument is parameters values,
+represented as JavaScript object, second argument of `query` function is the handler function for
+success event (optional) and `onFailure` is the handler function failure event (optional).
+Callback functions are called when the database request is executed and its results
+come to the client over the network.
+
 To append some new elements to existing data array without adding any changes into
 model's changelog, use append method of an entity:
 
@@ -776,7 +862,7 @@ for(var i = 0; i < maxCount; i++){
     model.entity1.query({param1: i + 43, param2: 'Astralia'}, function(aFetchedData){
         // Some actions with fetched data
     }, function(aError){
-        P.Logger.severe('Failed due to an error: ' + aError);
+        Logger.severe('Failed due to an error: ' + aError);
     });
 }
 -------------------------------
@@ -790,7 +876,7 @@ applied to the database. Data changes are reset only after saving the
 entire model or explicit call to `revert` method.
 -------------------------------
 
-To access to the entity's data, refer to the entity data arrayt as a regular
+To access to the entity's data, refer to the entity data array as a regular
 JavaScript array:
 
 [source,Javascript]
@@ -811,18 +897,18 @@ var documents = model.documents;
 
 // Logs all documents names
 for (var i = 0; i < documents.length; i++) {
-  P.Logger.info(documents[i].name);
+    Logger.info(documents[i].name);
 }
 --------------------------------------------
 
-If an reference link is established between two entities, you can get
+If a reference link is established between two entities, you can get
 access to the data of the connected entity by using data instance
 property having the name configured earlier in propertoes of a link ion the datamodel designer.
 This properties are generated during data fetch by Platypus.js ORM.
 
 [source,Javascript]
 -------------------------- 
-var propValue = model.entity1[i].referencedObject.someData
+var propValue = model.entity1[i].referencedObject.someData;
 --------------------------
 
 where `entity1` is the name of an entity, which contains the external key
@@ -836,7 +922,7 @@ the property contains an array of the connected entity objects:
 [source,Javascript]
 -------------------------- 
 var referees = model.referencedEntity[i].referees;
-P.Logger.info("referees.length: " + referees.length);
+Logger.info("referees.length: " + referees.length);
 --------------------------
 
 where `referencedEntity` is an entity, which contains the external key reference,
@@ -951,7 +1037,7 @@ Example of code that uses `elementClass` property of `documents` entity:
 model.documens.elementClass = Document;// assume, that cinstructor function Document is accessible in global scope
 model.documens.requery(function(){
     model.documens.forEach(function(aDoc){
-        P.Logger.info('aDoc instanceof Document : ' + (aDoc instanceof Document));
+        Logger.info('aDoc instanceof Document : ' + (aDoc instanceof Document));
     });
 }, function(){});
 ---------------------------------------------------------
@@ -1018,7 +1104,7 @@ not saved to the database. To handle this exception, use failure callback:
 ---------------------------------------- 
   model.save(function(){}, function(){
       model.revert();
-      P.Logger.severe('Data are not saved, due to an error: ' + e);
+      Logger.severe('Data are not saved, due to an error: ' + e);
   });
 ----------------------------------------
 
@@ -1060,7 +1146,7 @@ displaying its name in the log:
 var documentId = 101;
 var document = model.documents.findByKey(documentId);
 if (document) {
-  P.Logger.info('Document name is ' + document.name);
+    Logger.info('Document name is ' + document.name);
 }
 ----------------------------------------------------
 
@@ -1073,10 +1159,10 @@ values and values to search for.
 [source,Javascript]
 ------------------------ 
 var items = model.entity1.find({
-  prop1: propValue1,
-  prop2: propValue2//,
-  //...
-  //propN: propValueN
+    prop1: propValue1,
+    prop2: propValue2//,
+    //...
+    //propN: propValueN
 });
 ------------------------
 
@@ -1104,11 +1190,11 @@ var documentName = 'Document 1';
 var isChecked = true;
 var documents = model.documents;
 var foundDocuments = documents.find({
-  name: documentName,
-  checked: isChecked
+    name: documentName,
+    checked: isChecked
 });
 foundDocuments.forEach(function(aFoundDocument){
-  P.Logger.info(foundDocument.desc);
+    Logger.info(foundDocument.desc);
 });
 --------------------------------------------
 
@@ -1215,7 +1301,7 @@ entity is an object's key property.
 ------------------------------------------------
 
 if (model.documents.schema.id.pk) {
-  P.Logger.info('id is key attribute of decuments entity.');
+    Logger.info('id is key attribute of decuments entity.');
 }
 ------------------------------------------------
 
@@ -1265,7 +1351,7 @@ entity into the log:
 ---------------------------------------------------------
 
 for (var i = 0; i < model.documents.schema.length; i++) {
-  P.Logger.info(documents.md[i]);
+    Logger.info(documents.md[i]);
 }
 ---------------------------------------------------------
 
@@ -1329,7 +1415,7 @@ docEntity.requery(function(){}, function(){});
 
 //Print all documents names
 docEntity.forEach(function(doc) {
-  P.Logger.info(doc.NAME);
+    Logger.info(doc.NAME);
 });
 
 //Change first document's name
@@ -1349,7 +1435,7 @@ docEntity.requery(function(){}, function(){});
 
 //Print all documents names
 docEntity.forEach(function(doc) {
-  P.Logger.info(doc.NAME);
+    Logger.info(doc.NAME);
 });
 
 //Change first document's name
@@ -1459,7 +1545,7 @@ function DataSourceModule(){
     };
 
     this.apply = function(aLog, aOnSuccess, aOnFailure) {
-        P.Logger.info("Log length: " + aLog.length);
+        Logger.info("Log length: " + aLog.length);
         for (var i = 0; i < aLog.length; i++) {
             var change = aLog[i];
             // some work on applying a change
@@ -1577,52 +1663,60 @@ Now let's create session statefull module, serving user's request and performing
 ----------------------------------------------------------
 /**
  * @constructor
+ * @module Processor
  * @public
  */
-function Processor(){
-    var self = this;
-    this.process = function(aAngles, aOnSuccess){
-        var results = [];
-        var w = new P.ServerModule('Worker');
-        var calced = 0;
-        aAngles.forEach(function(aAngle){
-            w.calc(aAngle, function(aTan){// Call to LPC stub. Actual calc
-                                          // function will be called by 
-                                          // Platypus.js runtime probably in
-                                          // several concurrent threads.
-                results.push(aTan);
-                if(results.length === aAngles.length){
-                    aOnSuccess(results);
-                }
+define('rpc', function(Lpc){
+    return function (){
+        var self = this;
+        this.process = function(aAngles, aOnSuccess){
+            var results = [];
+            var w = new Lpc.Proxy('Worker');
+            var calced = 0;
+            aAngles.forEach(function(aAngle){
+                w.calc(aAngle, function(aTan){// Call to LPC stub. Actual calc
+                                              // function will be called by 
+                                              // Platypus.js runtime probably in
+                                              // several concurrent threads.
+                    results.push(aTan);
+                    if(results.length === aAngles.length){
+                        aOnSuccess(results);
+                    }
+                });
             });
-        });
-    }
-}
+        }
+    };
+});
 ----------------------------------------------------------
 
 Unlike HTML5 Workers, LPC mechanism in Platypus.js uses standard container's thread pool
 and so, maximum number of concurrent threads is less or equal to container's thread pool
 maxThreads configuration parameter.
 
-Platypus.js supports asynchronous IO model and so maxThreads parameter should be configured
+NOTE: Platypus.js supports asynchronous IO model and so maxThreads parameter should be configured
 as number of processors/cores of the computer + 1.
 
-There are three levels of parallelism in Platypus.js server environment:
+There are three levels of parall execution in Platypus.js server environment:
 
 * Resident modules level.
 * Session modules level.
 * Stateless modules level.
 
-Each level of parallelism considers its own script spaces (script context and global object) magaging policy.
-Resident modules level owns a single script space and all calls to arbitrary resident modules are
-added to the same queue. Session statefull modules level considers the following: Each user's session has its own
+Each level of parall execution considers its own script spaces (script context and global object) magaging policy.
+All resident modules own a single script space and all calls to arbitrary resident modules are
+added to the same queue.
+
+Session statefull modules level considers the following: Each user's session has its own
 script space and all calls to arbitrary session statefull modules are
-added to the session's queue. Stateless modules level considers the following: Each instance of stateless module
+added to the session's queue.
+
+Stateless modules level considers the following: Each instance of stateless module
 creates its own script space and a call to the module and all calls to its callbacks are added to its own queue.
 
-LPC allows to make calls one module from one level to another module from another level of parallelism and
-pass some arguments to them and obtain results of such calls. To avoid concurrency in using JavaScript engine
-Platypus.js runtime uses http://www.w3.org/TR/html5/infrastructure.html#safe-passing-of-structured-data[structured copy algorithm] while
+LPC allows one module from one level to make calls to another module from another level of parall execution and
+pass some arguments to them and obtain results of such calls. To avoid concurrency in using JavaScript engine,
+Platypus.js runtime uses asynchronous IO and callbacks mechanism. Also, it uses
+http://www.w3.org/TR/html5/infrastructure.html#safe-passing-of-structured-data[structured copy algorithm] while
 passing arguments and while retrieving results.
 
 == Logging
@@ -1631,7 +1725,7 @@ passing arguments and while retrieving results.
 The logging subsystem is built on the base of the Java Logging
 infrastructure.
 
-To write into the log, use the `Logger` object, which is a shell for the
+To write into the log, use the `logger` module, which is a facade for the
 java.util.logging.Logger class. The `Logger` object is also available in
 the HTML5 web browser client.
 
@@ -1639,12 +1733,14 @@ Example of using the `Logger` object:
 
 [source,Javascript]
 ------------------------------- 
-P.Logger.info("info text");
-P.Logger.warning("warning text");
-P.Logger.severe("severe error");
+require('logger', function(Logger){
+    Logger.info("info text");
+    Logger.warning("warning text");
+    Logger.severe("severe error");
+});
 -------------------------------
 
-Check the Administration Guide and Java documentation for information
+Check the Administration Guide and Java SE documentation for information
 about configuring logging subsystem.
 
 == Filesystem I/O
@@ -1653,8 +1749,8 @@ about configuring logging subsystem.
 To read and write files, use Java API from the `java.io.*` and other
 dedicated packages.
 
-To read and write strings, use `readString(path, encoding)`, and `writeString(path, text, encoding)`
-functions, where `path` is a path to the file, `text` is a
+To read and write strings, use `read(path, encoding)`, and `write(path, text, encoding)`
+functions from module `files`, where `path` is a path to the file, `text` is a
 string, `encoding` is the name of encoding. The `encoding` parameter in
 both functions is optional and by default is set for the utf-8 encoding.
 
@@ -1662,10 +1758,11 @@ Example of using functions for reading and writing strings to a file:
 
 [source,Javascript]
 -------------------------------------------------------
-
-//Read from one text file and write to another
-var str = P.readString('/home/user1/Documents/doc1.txt');
-P.writeString('/home/user1/Documents/doc2.txt', str);
+require('files', function(File){
+    //Read from one text file and write to another
+    var str = File.read('/home/user1/Documents/doc1.txt');
+    File.write('/home/user1/Documents/doc2.txt', str);
+});
 -------------------------------------------------------
 
 == Miscellaneous
@@ -1673,37 +1770,41 @@ P.writeString('/home/user1/Documents/doc2.txt', str);
 
 There are some useful functions for executing JavaScript code in unusual manner.
 Some JavaScript call might be enqueued for later execution via
-the `P.invokeLater(callback)` function.
+the `invoke` module and its `later(callback)` function.
 
-Example of using `P.invokeLater(callback)` function to avoid unnecessary work on a couple of the similar events:
+Example of using `later(callback)` function to avoid unnecessary work on a couple of the similar events:
 
 [source,JavaScript]
 -----------
-var processed = false;
-for(var i = 0; i < similarEvents.length; i++){
-    P.invokeLater(function(){
-        if(!processed){
-            // Some processing logic
-            processed = true;
-            P.Logger.info('All event have been processed');
-        }
-    });
-}
+require(['invoke', 'logger'], function(Invoke, Logger){
+    var processed = false;
+    for(var i = 0; i < similarEvents.length; i++){
+        Invoke.later(function(){
+            if(!processed){
+                // Some processing logic
+                processed = true;
+                Logger.info('All events have been processed');
+            }
+        });
+    }
+});
 -----------
 
 Also, some JavaScript code execution might be delayed for a particular timeout via
-the `P.invokeDelayed(timeout, callback)` function.
+the `delayed(timeout, callback)` function of the same module.
 
-Example of using `P.invokeDelayed(timeout, callback)` function to implement a periodic task:
+Example of using `delayed(timeout, callback)` function to implement a periodic task:
 
 [source,JavaScript]
 -----------
-function doWork(){
-    //...
-    // Some work
-    //...
-    // Rescheduling the task...
-    P.invokeDelayed(100, doWork);
-}
-doWork();// First time execution of the periodic task
+require(['invoke'], function(Invoke){
+    function doWork(){
+        //...
+        // Some work
+        //...
+        // Rescheduling the task...
+        Invoke.delayed(100, doWork);
+    }
+    doWork();// First time execution of the periodic task
+});
 -----------

@@ -1,4 +1,3 @@
-
 = HTTP
 [[http]]
 
@@ -14,7 +13,7 @@ mark the module with the `@public` annotation.
 To invoke a server method, send a request by the URL formed using the
 base URL of the Servlet and the `/application` suffix for accessing HTTP API.
 
-Specify the request type, the module name, the method name and
+Specify the request type (optional for RPC requests), the module name, the method name and
 parameters of method calling in the URL parameters or in the body of the
 POST request in the application/x-www-form-urlencoded format. The
 response body will contain a value, which was returned in the executed
@@ -31,9 +30,6 @@ Parameters of the server module method invocation request:
 [cols="<,<",options="header",]
 |=======================================================================
 |Parameter |Description
-|`__type` |Request type. To execute the server module method, this
-parameter should be set to `14`.
-
 |`__moduleName` |Module constructor name.
 
 |`__methodName` |Name of the called module method.
@@ -49,7 +45,7 @@ as if they were JSON string.
 
 Example of URL for calling a server module method (URL is not encoded):
 
-http://server:port/context/application?\__type=14&\__moduleName=TestModule&\__methodName=say&__param[]=Hello%20Platypus
+http://server:port/context/application?\__moduleName=TestModule&\__methodName=say&__param[]=Hello%20Platypus
 
 == HTTP request and response API
 [[http-request-and-response-api]]
@@ -64,19 +60,22 @@ external HTTP request.
 /**
  * @public
  */
-function ModuleConstructor() {
-   var self = this;
-   
-  /**
-   * @rolesAllowed tester admin
-   */
-   this.doSomething = function(paramA, paramB) {
-        var context = new P.HttpContext();
-        var request = context.request;
-        var response = context.response;
-        // application logic...
-   }
-}
+define('http-context', function(HttpContext){
+    function ModuleConstructor() {
+       var self = this;
+
+      /**
+       * @rolesAllowed tester admin
+       */
+       this.doSomething = function(paramA, paramB) {
+            var context = new HttpContext();
+            var request = context.request;
+            var response = context.response;
+            // application logic...
+       }
+    }
+    return ModuleConstructor;
+});
 ------------------------------------------------
 
 The `HttpContext` instance contains the following objects:
@@ -162,7 +161,7 @@ In the example below, all request headers are output into the log:
 ------------------------------------------------------
 
 for (var c in context.request.headers) {
-    P.Logger.info(c + ' - ' + context.request.headers[c]);
+    Logger.info(c + ' - ' + context.request.headers[c]);
 }
 ------------------------------------------------------
 

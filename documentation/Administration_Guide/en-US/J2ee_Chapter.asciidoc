@@ -202,13 +202,6 @@ When an application works in the J2EE container, you should use built-in
 web-server tools in addition to Platypus platform security constraints:
 
 * Restrict access to application files over HTTP.
-* Restrict access to application files for Platypus resources loader,
-which works over URL of the following type:
-+
-application/resource/
-+
-where resourcePath is the path to the resource in the Platypus
-application.
 
 Configure access constraints in the `WEB-INF/web.xml` descriptor file.
 
@@ -223,7 +216,6 @@ located in the `app` directory, except `public` sub-directory:
       <!-- whitelist -->
       <web-resource-name />
       <url-pattern>/app/public/*</url-pattern>
-      <url-pattern>/application/resource/public/*
       </url-pattern>
    </web-resource-collection>
    <!-- No auth constraint here for whitelist -->
@@ -234,7 +226,6 @@ located in the `app` directory, except `public` sub-directory:
       <!-- everything other is restricted -->
       <web-resource-name />
       <url-pattern>/app/*</url-pattern>
-      <url-pattern>/application/resource/*</url-pattern>
   </web-resource-collection>
   <auth-constraint />
 </security-constraint>
@@ -272,7 +263,7 @@ external authentication service:
 
 To configure the Glassfish server:
 
-* Add the security domain for Glassfish — to do this, change the server
+* Add the security domain for Glassfish. To do this, change the server
 configuration (Configurations -> Server-config -> Security -> Realms
 ->New).
 +
