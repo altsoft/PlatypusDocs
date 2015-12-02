@@ -1,4 +1,4 @@
-= JavaScript module
+= JavaScript modules
 [[javascript-module]]
 
 Module is a JavaScript file containing the constructor function for global module and
@@ -58,19 +58,22 @@ If necessary, configure the code editor parameters; to do this:
 To configure auto completion modes, go to the Code Completion tab and
 enable or disable corresponding options.
 
-== Module constructor
-[[module-constructor]]
+== Modules systems
+[[modules-systems]]
 
 Using modules allows you to manage the complexity of your application according to the
 object-oriented programming principles.
 
-Module is an equivalent of a class in other programming languages, such
+Module is an analog of a class in other programming languages, such
 as in Java or in C++.
 
-Modules can be either global modules and https://en.wikipedia.org/wiki/Asynchronous_module_definition[AMD] modules.
+Modules in Platypus.js can be either https://en.wikipedia.org/wiki/Asynchronous_module_definition[AMD] modules and global modules.
 
-Every AMD module contains strictly one call to a global function define.
-Define function should be used as follows:
+=== AMD Modules
+[[modules-amd]]
+
+Every AMD module contains strictly one call to a global function `define`.
+The `define` function should be used as follows:
 
 [source,Javascript]
 ------------------------------- 
@@ -93,20 +96,20 @@ define(['logger', 'other-super-module'], function(Logger, OtherModule){
 });
 -------------------------------
 Define function call can have a header, which is represented as a
-comment in the JsDoc format and is located at the top of the module define call.
+comment in the JsDoc format and is located at the top of the module `define` call.
+
 The @module annotation allows to assign a short name to the defined module.
 If this annotation is absent, module name will be formed as relative path from
-'app' directory in application project and without .js filename extension.
-Such modules names have no the leading slash. So if you have a module without 
-@module annotation in file 'app/folder/module.js', the module name will be 'folder/module'
+'app' directory in application project and without .js filename extension without leading slash.
+So if you have a module without  @module annotation in file 'app/folder/module.js', the module name will be 'folder/module'.
 
-The define function of the module is called only once per script global object (script space).
-So it is easy to implement such pattern as singleton and JavaScript class pattern.
+The `define` function of the module is called only once per script global object (script space).
+So it is easy to implement such patterns as singleton and JavaScript class pattern.
 
 The first argument of define function may be omitted if the module has no dependencies.
 Also, the first argument may be an empty array or a single sitring literal/variable.
 
-Dependencies of a module may be referenced if first argument of define function as relative module names.
+Relative module names may be formed using filesystem reserved directories names ('../', '../../', './').
 So, if you have a module in file 'app/folder/module.js' and it depends on module located in file
 'app/utility.js', than define call in module 'folder/module' may look like:
 
@@ -124,10 +127,28 @@ define(['../utility', 'other-super-module'], function(Utility, OtherModule){
 });
 ------------------------------- 
 
-Relative module names may formed using filesystem reserved directories names ('../', '../../', './').
+Typically, `define`'s callback is returns module definition as JavaScript "class" constructor. 
+Tis constructor will be used by depending code to create module's "class" instances.
+On the other hand, `define`'s callback is free to return plaim JavaScript object and depending code will
+recieve exactly this object regardless of how many times it is required.
 
-Every global module contains a constructor function. This function is used for
-module's instanses creation.
+Create an instance of AMD module with the help of the `new` keyword,
+using a module constructor, for example:
++
+[source,Javascript]
+---------------------------- 
+require('ModuleA', function(ModuleA){
+    var moduleInstance = new ModuleA();
+});
+----------------------------
++
+where `ModuleA` is a module "class"'s constructor.
+
+=== Global modules
+[[modules-global]]
+
+Global module is a JavaScrpit file without `define` call.
+In general, such modules provide module constructor global function.
 
 Constructor function can have a header, which is represented as a
 comment in the JsDoc format and is located at the top of the module constructor
@@ -161,40 +182,7 @@ In addition to the `@constructor` annotation, a header may contain the module
 description, annotations for defining security constraints and other
 JsDoc annotations.
 
-Specify module instance methods:
-
-[source,Javascript]
-----------------------------------------------------------
-
-function ModuleA() {
-   
-   this.somePublicMethod = fucntion(p) { //instance method
-      ...
-   }
-}
-----------------------------------------------------------
-
-Module instance methods are available for the client code.
-
-Add module scope methods and fields:
-
-[source,Javascript]
-----------------------------------------------------------
-
-function ModuleB() {
-   var a, b, c;//private `fields`
-
-   this.somePublicMethod = function(p) { //instance method
-      ...
-   }
-
-   function somePrivateMethod() { //scope function
-      ...
-   }
-}
-----------------------------------------------------------
-
-Create or get a module instance by the following ways:
+Create global module's "class" instance by the following ways:
 
 * Create an instance of the module with the help of the `new` keyword,
 using a module constructor, for example:
@@ -216,28 +204,41 @@ var moduleInstance = new global[moduleName]();
 ----------------------------------
 +
 where `moduleName` is the module constructor name, for example, `"WebModule"`;
-* Create a proxy/stub for the server module, to use RPC on client or Local procudure call (LPC) on an apllication server:
-+
-[source,Javascript]
----------------------------------------- 
-var moduleProxy = new Rpc.Proxy("Processor");
-----------------------------------------
-+
-where `Processor` is the module constructor name. The server module
-should be marked with the `@public` annotation to enable access via the network.
-Server modules, with is used only within application server don't need the `@public` annotation
-to be used with LPC.
 
-To call the module's instance method, use the following structure, for
-example:
+=== Modules instance functions and properties
+[[modules-members]]
+
+Specify module instance methods:
 
 [source,Javascript]
-------------------------------------------
+----------------------------------------------------------
 
-moduleInstance.getResult(10, function(aResult){
-    var result = aResult;
-});
-------------------------------------------
+function ModuleA() {
+   
+   this.somePublicMethod = fucntion(p) { //instance method
+      ...
+   }
+
+}
+----------------------------------------------------------
+
+Add module scope methods and fields:
+
+[source,Javascript]
+----------------------------------------------------------
+
+function ModuleB() {
+   var a, b, c;//private `fields`
+
+   this.somePublicMethod = function(p) { //instance method
+      ...
+   }
+
+   function somePrivateMethod() { //scope function
+      ...
+   }
+}
+----------------------------------------------------------
 
 == Dependencies resolving
 [[dependencies-resolving]]
@@ -1310,7 +1311,7 @@ The schema composed of the following properties:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Property |Type |Description
-|`pk` |Boolean |`true`, if the property is an ID key
+|`pk` |Boolean |`true`, if the property is a key
 
 |`name` |String |Property name
 
@@ -1630,6 +1631,33 @@ in any configuration.
 To access the Java packages and classes, use the Java global object as described
 in articles about integrating Nashorn and Java.
 
+== Remote procedure calls
+[[modules-rpc]]
+
+To use a server module on client (browser or J2SE platypus client) via remote procedure call mechanism,
+create a proxyb for the server module as follows:
+
+[source,Javascript]
+---------------------------------------- 
+var moduleProxy = new Rpc.Proxy("Processor");
+----------------------------------------
+
+where `Processor` is either short or relative server module name. The server module
+should be marked with the `@public` annotation to enable access via the network.
+Server modules, with is used only within application server don't need the `@public` annotation
+to be used with LPC.
+
+To call the module's instance method, use the following structure, for
+example:
+
+[source,Javascript]
+------------------------------------------
+
+moduleInstance.getResult(10, function(aResult){
+    var result = aResult;
+});
+------------------------------------------
+
 == Local procedure calls
 [[lpc]]
 
@@ -1664,7 +1692,6 @@ Now let's create session statefull module, serving user's request and performing
 /**
  * @constructor
  * @module Processor
- * @public
  */
 define('rpc', function(Lpc){
     return function (){
