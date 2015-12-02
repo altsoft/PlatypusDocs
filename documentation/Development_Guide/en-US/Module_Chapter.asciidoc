@@ -58,8 +58,8 @@ If necessary, configure the code editor parameters; to do this:
 To configure auto completion modes, go to the Code Completion tab and
 enable or disable corresponding options.
 
-== Modules systems
-[[modules-systems]]
+== Module system
+[[module-system]]
 
 Using modules allows you to manage the complexity of your application according to the
 object-oriented programming principles.
@@ -100,7 +100,7 @@ comment in the JsDoc format and is located at the top of the module `define` cal
 
 The @module annotation allows to assign a short name to the defined module.
 If this annotation is absent, module name will be formed as relative path from
-'app' directory in application project and without .js filename extension without leading slash.
+'app' directory in application project and without .js filename extension and without leading slash.
 So if you have a module without  @module annotation in file 'app/folder/module.js', the module name will be 'folder/module'.
 
 The `define` function of the module is called only once per script global object (script space).
@@ -109,7 +109,7 @@ So it is easy to implement such patterns as singleton and JavaScript class patte
 The first argument of define function may be omitted if the module has no dependencies.
 Also, the first argument may be an empty array or a single sitring literal/variable.
 
-Relative module names may be formed using filesystem reserved directories names ('../', '../../', './').
+Module names in dependencies list may be formed using filesystem reserved directories names ('../', '../../', './').
 So, if you have a module in file 'app/folder/module.js' and it depends on module located in file
 'app/utility.js', than define call in module 'folder/module' may look like:
 
@@ -127,21 +127,21 @@ define(['../utility', 'other-super-module'], function(Utility, OtherModule){
 });
 ------------------------------- 
 
-Typically, `define`'s callback is returns module definition as JavaScript "class" constructor. 
-Tis constructor will be used by depending code to create module's "class" instances.
-On the other hand, `define`'s callback is free to return plaim JavaScript object and depending code will
-recieve exactly this object regardless of how many times it is required.
+Typically, `define`'s callback returns module definition as JavaScript "class" constructor. 
+This constructor will be used by depending code to create module's "class" instances.
+On the other hand, `define`'s callback is free to return plain JavaScript object and depending code will
+recieve exactly this object regardless of how many times the module is required.
 
 Create an instance of AMD module with the help of the `new` keyword,
 using a module constructor, for example:
-+
+
 [source,Javascript]
 ---------------------------- 
 require('ModuleA', function(ModuleA){
     var moduleInstance = new ModuleA();
 });
 ----------------------------
-+
+
 where `ModuleA` is a module "class"'s constructor.
 
 === Global modules
@@ -174,8 +174,8 @@ function otherFunction() {
 }
 -------------------------------
 
-If a JavaScript file contains exactly one top-level fucntion, this
-fuction is considered as a module constructor, otherwise the module
+If a JavaScript file contains exactly one top-level function, this
+function is considered as a module constructor, otherwise the module
 constructor must be marked with the `@constructor` annotation.
 
 In addition to the `@constructor` annotation, a header may contain the module
@@ -193,6 +193,7 @@ var moduleInstance = new ModuleA();
 ----------------------------
 +
 where `ModuleA` is a module constructor.
+
 * Create an instance of the module with the help of the `new` keyword
 using global object and its properties, for example:
 +
@@ -240,14 +241,17 @@ function ModuleB() {
 }
 ----------------------------------------------------------
 
-== Dependencies resolving
-[[dependencies-resolving]]
+== Dependencies of AMD modules resolving
+[[dependencies-resolving-amd]]
+
+Dependencies resolution for AMD modules is based on AMD specification.
+
+== Dependencies of global modules resolving
+[[dependencies-resolving-global]]
 
 When executing the code on an application server or on a client, all application elements,
 on which initial application element depends, are loaded during the process of dependencies
 resolution.
-
-Dependencies resolution for AMD modules is base on AMD specification.
 
 Dependencies resolution for global modules in Platypus.js is automatic and works as follows:
 
@@ -258,7 +262,7 @@ searched for the following expressions:
 +
 `new Rpc.Proxy("Implementation")`
 +
-where ModuleName is the name of the module and Implementation is module name
+where `ModuleName` is the name of the module and `Implementation` is module name
 wich is executed on the server side.
 
 * Application elements with the specified names are loaded or server
@@ -271,9 +275,9 @@ automatically, for example, if you want to determine the called module
 in a dynamic manner, you can use the manual dependencies resolving with
 global `require` function.
 
-Use `require([param], callback)` function, where param is the module
+Use `require([param], callback)` function, where `param` is the module
 name (short name or relative module name, inlcluding '../', './' names parts),
-or an array of these elements, callback is a function,
+or an array of such elements, `callback` is a function,
 which will be called when all the specified modules are downloaded and
 executed. Both synchronous and asynchronous modes of `require` function calls are supported.
 If callback is omitted, than synchronous version of function is used.
@@ -326,6 +330,11 @@ require("./sublibs/sublib-b.js", function(SubLibObjectB){
 });
 --------------------------------------
 
+NOTE: The `require` global function acts with AMD and global modules in the same way and
+passes resolved modules to its callback function or returns them if callback is omitted.
+So, you can make a global module, but in depending code you may not use the corresponding global
+variables. In this case global dependencies resolution mechanism will not be used.
+
 You should pay attention to the combination of automatic and manual
 dependencies resolution for global modules.
 For example, in the following snippet it is not necessary to call the `require` function:
@@ -360,26 +369,27 @@ require(["SampleModule1", "SampleModule2"], function(SampleModule1, SampleModule
 --------------------------------------------------------
 
 This method of calling the `require` function excludes these explicitly
-specified constructor names in the first parameter from the automatic
-dependencies resolution. So, SampleModule1 and SampleModule2 will be
-loaded only when calling the `require`, rather than before starting the
-application.
+specified modules names in the first parameter from the automatic
+dependencies resolution. So, `SampleModule1` and `SampleModule2` will be
+loaded only when calling the `require` function, rather than before starting the
+application even if required modules are global modules.
 
 == Security
 [[module_security]]
 
 The executable module code is a resource, access to which can be
-restricted on the basis of the roles. When a user, who has no rights to
-execute some code, tries to call it, a security exception is thrown.
+restricted on the basis of the roles. When a user with no rights to
+execute some code tries to call it, a security exception is thrown.
 
 In order to restrict access to the entire module code, add the
 `@rolesAllowed`... annotation to the module header
-(Either in define call JsDoc section or constructor's JsDoc section).
+(either in define call JsDoc section or global constructor's JsDoc section).
 Specify roles, allowed to access the module code execution, in the `@rolesAllowed`
-annotation, dividing them by spaces. If the annotation is omitted,
-access to the module is granted to all users.
+annotation, dividing them by spaces.
 
-You can restrict access to the module code on the level of an individual
+If the annotation is omitted, access to the module is granted to all users.
+
+You can restrict access to the module code on the level of an particular
 function. To do this, add the `@rolesAllowed` annotation to the
 function's JsDoc. The restrictions on the function level have a higher
 priority than the module level restrictions. For example, only a user
@@ -410,7 +420,7 @@ define(function(){
 Use `security` module to get access to the information about the
 current user in the executable code. The module has `principal` property.
 The `principal` property is read-only.
-The object of information about the user contains the `name`
+This is object of information about the user and contains the `name`
 property, i.e. the name of the current user, and the `hasRole()`method,
 which allows you to check if this user has any role:
 
@@ -477,7 +487,7 @@ var obj = Resource.load("res/pict.bin");
 ...
 ----------------------------------------
 
-To get the absolute path to the application directory, use the
+To get the absolute path to the `app` project directory, use the
 `Resource.applicationPath` read-only property:
 
 [source,Javascript]
