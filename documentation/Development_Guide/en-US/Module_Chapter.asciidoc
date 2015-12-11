@@ -98,7 +98,7 @@ define(['logger', 'other-super-module'], function(Logger, OtherModule){
 Define function call can have a header, which is represented as a
 comment in the JsDoc format and is located at the top of the module `define` call.
 
-The @module annotation allows to assign a short name to the defined module.
+The `@module` annotation allows to assign a short name to the defined module.
 If this annotation is absent, module name will be formed as relative path from
 'app' directory in application project and without .js filename extension and without leading slash.
 So if you have a module without  @module annotation in file 'app/folder/module.js', the module name will be 'folder/module'.
@@ -1685,14 +1685,15 @@ which will be executed multiple times in parallel:
 /**
  * @constructor
  * @stateless
+ * @module Worker
  */
-function Worker(){
+define(function Worker(){
     var self = this;
 
     this.calc = function (aAngle) {
       return Math.tan(aAngle);// one of parallel operations here
     }
-}
+});
 ----------------------------
 
 Now let's create session statefull module, serving user's request and performing all calculations:
