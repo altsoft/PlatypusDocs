@@ -183,12 +183,18 @@ automatically.
 
 |`headers` |Response headers in key-value form.
 
-|`addHeader(name, value)` |Adds a new header with the specified name and
+|`addCookie(cookie)` |Adds new cookies to the response.
+|=======================================================================
+
+The `response.headers` object contains the following properties and methods:
+
+[cols="<,<",options="header",]
+|=======================================================================
+|Property/method |Description
+|`add(name, value)` |Adds a new header with the specified name and
 value to the response.
 
-|`setHeader(name, value)` |Defines a new value for the response header.
-
-|`addCookie(cookie)` |Adds new cookies to the response.
+|`set(name, value)` |Defines/Redefines a value for the response header.
 |=======================================================================
 
 The `cookie` object contains the following properties:
