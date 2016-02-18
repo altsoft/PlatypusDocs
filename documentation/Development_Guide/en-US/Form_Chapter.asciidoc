@@ -164,17 +164,9 @@ get the shown form by its key.
 
 [source,Javascript]
 ---------------------------------------- 
-/**
- * 
- * @module FormB
- */
-define(['forms', 'forms/form'], function(Forms){});
+define('FormB', ['forms', 'forms/form'], function(Forms){});
 
-/**
- * 
- * @module FormA
- */
-define(['forms', 'forms/form'], function(Forms){
+define('FormA', ['forms', 'forms/form'], function(Forms){
     var formA = Forms.loadForm(ModuleName);
     var formB = Forms.loadForm('FormB');
     formA.formKey = 'A1';
@@ -2388,10 +2380,7 @@ Example:
 
 [source,Javascript]
 -------------------------------------- 
-/**
- * @module InnerForm
- */
-define('forms', function(Forms, ModuleName){
+define('InnerForm', 'forms', function(Forms, ModuleName){
     return function (){
         var form = Forms.loadForm(ModuleName);
         this.onDesktop = function(aDesktop){

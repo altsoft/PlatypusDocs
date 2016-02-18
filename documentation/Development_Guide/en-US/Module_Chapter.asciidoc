@@ -80,11 +80,9 @@ The `define` function should be used as follows:
 /**
  * Module description goes here
  *
- * @module ModuleA
  * @rolesAllowed admin
- *
  */
-define(['logger', 'other-super-module'], function(Logger, OtherModule){
+define('ModuleA', ['logger', 'other-super-module'], function(Logger, OtherModule){
     function ModuleConstructor(p) {
       ...
     }
@@ -98,10 +96,10 @@ define(['logger', 'other-super-module'], function(Logger, OtherModule){
 Define function call can have a header, which is represented as a
 comment in the JsDoc format and is located at the top of the module `define` call.
 
-The `@module` annotation allows to assign a short name to the defined module.
+The first argument in three argument version of define function allows to assign a short name to the defined module.
 If this annotation is absent, module name will be formed as relative path from
 'app' directory in application project and without .js filename extension and without leading slash.
-So if you have a module without  @module annotation in file 'app/folder/module.js', the module name will be 'folder/module'.
+So if you use two argument version of define in file 'app/folder/module.js', the module name will be 'folder/module'.
 
 The `define` function of the module is called only once per script global object (script space).
 So it is easy to implement such patterns as singleton and JavaScript class pattern.
@@ -304,16 +302,13 @@ loading the module by its module name.
 Relative modules names are counted off as relative path from the `app` directory of the Platypus
 application project.
 
-NOTE: If the relative module name is equals to @module annotation value, only the annotated module
-will be taken into accout while dependency resolution process.
-
 The `require` function also has a synchronous version, which can be used
 in the server code. In this case, if you don't need to maintain
 compatibility with the client's code, the second parameter is optional:
 
 [source,Javascript]
 -------------------------------------- 
-require("localLib.js");
+require("localLib");
 // LibObject is defined in localLib.js
 var obj = new LibObject();
 --------------------------------------
@@ -321,10 +316,10 @@ var obj = new LibObject();
 The `require` function supports relative modules names for both synchronous and asynchronous variants:
 [source,Javascript]
 -------------------------------------- 
-require("./sublibs/sublib-a.js");
+require("./sublibs/sublib-a");
 // SubLibObjectA is defined in sublib-a.js
 var obja = new SubLibObjectA();
-require("./sublibs/sublib-b.js", function(SubLibObjectB){
+require("./sublibs/sublib-b", function(SubLibObjectB){
     // SubLibObjectB is defined in sublib-b.js
     var objb = new SubLibObjectB();
 });
@@ -399,7 +394,6 @@ with the `role2` role from the following example will have access to the
 [source,Javascript]
 ---------------------------- 
 /**
- * @module ModuleC
  * @rolesAllowed role1 role2
  */
 define(function(){
@@ -601,11 +595,7 @@ In the following code snippets we will use such variable:
 
 [source,Javascript]
 -------------------------- 
-/**
- *
- * @module ModuleD
- */
-define('orm', function(Orm, ModuleName){
+define('ModuleD', 'orm', function(Orm, ModuleName){
     return function () {
        var model = Orm.loadModel(ModuleName);
        //...
@@ -1685,9 +1675,8 @@ which will be executed multiple times in parallel:
 /**
  * @constructor
  * @stateless
- * @module Worker
  */
-define(function Worker(){
+define('Worker', [], function Worker(){
     var self = this;
 
     this.calc = function (aAngle) {
@@ -1700,11 +1689,7 @@ Now let's create session statefull module, serving user's request and performing
 
 [source,Javascript]
 ----------------------------------------------------------
-/**
- * @constructor
- * @module Processor
- */
-define('rpc', function(Lpc){
+define('Processor', 'rpc', function(Lpc){
     return function (){
         var self = this;
         this.process = function(aAngles, aOnSuccess){

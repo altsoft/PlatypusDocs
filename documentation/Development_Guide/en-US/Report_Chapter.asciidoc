@@ -283,10 +283,9 @@ desktop client):
 
 /*
  * @stateless
- * @module DocumentReport
  * @public
  */
-define(['orm', 'template'], function (Orm, loadTemplate, ModuleName) {
+define('DocumentReport', ['orm', 'template'], function (Orm, loadTemplate, ModuleName) {
     function ReportConstructor(){
         var self = this
                 , model = Orm.loadModel(ModuleName)
