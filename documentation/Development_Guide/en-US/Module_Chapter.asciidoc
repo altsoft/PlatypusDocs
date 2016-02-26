@@ -1745,7 +1745,7 @@ passing arguments and while retrieving results.
 == WebSocket in platypus.js applications
 [[websocket]]
 
-Platypus.js applications can handle WebSocket messages. Regular server modules can be used as WebSocket endpoint.
+Platypus.js applications can handle WebSocket messages. Regular server modules can be used as WebSocket endpoints.
 Websocket endpoint server modules are subject of security checks as well as other server modules.
 Note, that each WebSocket client uses its own network session and so, session server modules are created in context
 of each WebSocket client object. So, if you want to account multiple WebSocket clients, then you need a resident module
@@ -1851,7 +1851,72 @@ define(['logger'], function(Logger){
 -------------------------------------------------------------------------------------------
 *Note*
 
-Unfortunately, only one word WebSocket modules names are allowed.
+Unfortunately, only one word WebSocket modules names are allowed. E.g. WebSocket endpoint module name 'SampleEndpoint' is allowed,
+but 'Websocket/SampleEndpoint' is not.
+-------------------------------------------------------------------------------------------
+
+== REST services in platypus.js applications
+[[restservices]]
+
+Platypus.js applications can handle REST requests via HTTP. Regular server modules can be used as REST endpoints.
+REST endpoint server modules are subject of security checks as well as other server modules. To handle a HTTP request by Platypus.js application module,
+just add one of the following annotations: @get /path-paratmeter, @post /path-paratmeter, @put /path-paratmeter, @delete /path-paratmeter
+to one of server module function properties, according to wich HTTP method is under consideration.
+
+Example REST service may be implemented with Platypus.js as follows:
+
+[source,Javascript]
+-------------------------------
+/**
+ * @public 
+ */
+define('PetsSource', ['logger'], function (Logger, ModuleName) {
+
+    var pets = [
+        {name: 'Pick', from: new Date(), to: null, paid: true},
+        {name: 'Tom', from: new Date(), to: null, paid: true},
+        {name: 'Vaska', from: new Date(), to: null, paid: true},
+        {name: 'Pushok', from: new Date(), to: null, paid: true},
+        {name: 'Snezhok', from: new Date(), to: null, paid: true},
+        {name: 'Murka', from: new Date(), to: null, paid: true},
+        {name: 'Zorka', from: new Date(), to: null, paid: true}
+    ];
+
+    function RestAcceptor() {
+        var self = this;
+
+        /**
+         * @get /pets
+         */
+        this.pets = function () {
+            return pets;
+        };
+        
+        /**
+         * @delete /pets
+         */
+        this.remove = function (aPetName) {
+            for (var i = 0; i < pets.length; i++) {
+                if (pets[i].name === aPetName) {
+                    return pets.splice(i, 1);
+                }
+            }
+            return pets;
+        };
+    }
+    return RestAcceptor;
+});
+-------------------------------
+
+In this example /pets URI part is used, but actual HTTP request can have an URI that is much longer, for example /pets/Tom and so on.
+The tail of te request's URI is passed as a first argument to handler function.
+And only after this argument, onSuccess and onFailure calback are passed to handler function.
+
+-------------------------------------------------------------------------------------------
+*Note*
+
+Note, that each HTTP request must be hanled by Platypus.js servlet at lower level to reach JavaScript modules of Platypus.js application.
+So, requests' urls have to be prefixed with '/context-path/application/' to be processed by Platypus.js application modules.
 -------------------------------------------------------------------------------------------
 
 == Logging
