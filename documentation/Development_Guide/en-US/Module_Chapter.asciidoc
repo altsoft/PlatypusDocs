@@ -1716,7 +1716,7 @@ Unlike HTML5 Workers, LPC mechanism in Platypus.js uses standard container's thr
 and so, maximum number of concurrent threads is less or equal to container's thread pool
 maxThreads configuration parameter.
 
-NOTE: Platypus.js supports asynchronous IO model and so maxThreads parameter should be configured
+NOTE: Platypus.js supports asynchronous IO model and so maxThreads parameter in most cases should be configured
 as number of processors/cores of the computer + 1.
 
 There are three levels of parall execution in Platypus.js server environment:
@@ -1741,6 +1741,118 @@ pass some arguments to them and obtain results of such calls. To avoid concurren
 Platypus.js runtime uses asynchronous IO and callbacks mechanism. Also, it uses
 http://www.w3.org/TR/html5/infrastructure.html#safe-passing-of-structured-data[structured copy algorithm] while
 passing arguments and while retrieving results.
+
+== WebSocket in platypus.js applications
+[[websocket]]
+
+Platypus.js applications can handle WebSocket messages. Regular server modules can be used as WebSocket endpoint.
+Websocket endpoint server modules are subject of security checks as well as other server modules.
+Note, that each WebSocket client uses its own network session and so, session server modules are created in context
+of each WebSocket client object. So, if you want to account multiple WebSocket clients, then you need a resident module
+to hold accounting data structure.
+
+Example of WebSocket messages handling with cross sessions client endpoints is shown in the the following examples.
+
+This example shows resident module, that holds information on currently connected WebSocket clients.
+
+[source,Javascript]
+-------------------------------
+/**
+ * Assume this server module has file driven module name - WebSocket/ChatAccounter
+ * @resident
+ */
+define(function(){
+    var sessions = {};
+    function mc(){
+        this.add = function(aSessionId, aOnMessage){
+            sessions[aSessionId] = aOnMessage;
+        };
+        this.remove = function(aSessionId){
+            delete sessions[aSessionId];
+        };
+        this.broadcast = function(aData){
+            for(var s in sessions){
+                sessions[s](aData);
+            }
+        };
+    }
+    return mc;
+});
+-------------------------------
+
+The server WebSocket endpoint may be implemented as:
+
+[source,Javascript]
+-------------------------------
+/**
+ * @public
+ * @stateless
+ */
+define('ChatEndpoint', ['rpc'], function (Lpc) {
+    function mc() {
+        var accounter = new Lpc.Proxy('WebSocket/ChatAccounter');
+
+        this.onopen = function (session) {
+            // The second parameter actually is onSuccess callback of Platypus.js Lpc mechanism.
+            accounter.add(session.id, function(aData){
+                session.send(aData);
+            });
+        };
+        this.onclose = function (evt) {
+            // evt.id - Session id
+            // evt.wasClean - True if session was closed without an error
+            // evt.code - Session close code
+            // evt.reason - Description of session close reason
+            accounter.remove(evt.id);
+        };
+        this.onmessage = function (evt) {
+            // evt.id - Session id
+            // evt.data - Text data recieved from other (client) endpoint
+            accounter.broadcast(evt.data);
+        };
+        this.onerror = function (evt) {
+            // evt.id - Session id
+            // evt.message - Error message from container's exception
+        };
+    }
+    return mc;
+});
+-------------------------------
+
+The following example shows browser client for 'ChatEndpoint' WebSocket server module.
+
+[source,Javascript]
+-------------------------------
+define(['logger'], function(Logger){
+    function mc(){
+        var wsProtocol = "ws:";
+        if (window.location.protocol == 'https:')
+            wsProtocol = "wss:";
+
+        var webSocket = new WebSocket(wsProtocol + "//" + window.location.host + window.location.pathname.substr(0, window.location.pathname.lastIndexOf("/")) + "/ChatEndpoint");
+        
+        webSocket.onopen = function () {
+            Logger.info("onOpen");
+        };
+        webSocket.onerror = function () {
+            Logger.info("onError");
+        };
+        webSocket.onmessage = function (evt) {
+            Logger.info("onMessage");
+        };
+        webSocket.onclose = function () {
+            Logger.info("onClose");
+        };
+    }
+    return mc;
+});
+-------------------------------
+
+-------------------------------------------------------------------------------------------
+*Note*
+
+Unfortunately, only one word WebSocket modules names are allowed.
+-------------------------------------------------------------------------------------------
 
 == Logging
 [[logging]]
