@@ -1635,13 +1635,13 @@ maxThreads configuration parameter.
 NOTE: Platypus.js supports asynchronous IO model and so maxThreads parameter in most cases should be configured
 as number of processors/cores of the computer + 1.
 
-There are three levels of parall execution in Platypus.js server environment:
+There are three levels of parallel execution in Platypus.js server environment:
 
 * Resident modules level.
 * Session modules level.
 * Stateless modules level.
 
-Each level of parall execution considers its own script spaces (script context and global object) magaging policy.
+Each level of parallel execution considers its own script spaces (script context and global object) magaging policy.
 All resident modules own a single script space and all calls to arbitrary resident modules are
 added to the same queue.
 
@@ -1652,7 +1652,7 @@ added to the session's queue.
 Stateless modules level considers the following: Each instance of stateless module
 creates its own script space and a call to the module and all calls to its callbacks are added to its own queue.
 
-LPC allows one module from one level to make calls to another module from another level of parall execution and
+LPC allows one module from one level to make calls to another module from another level of parallel execution and
 pass some arguments to them and obtain results of such calls. To avoid concurrency in using JavaScript engine,
 Platypus.js runtime uses asynchronous IO and callbacks mechanism. Also, it uses
 http://www.w3.org/TR/html5/infrastructure.html#safe-passing-of-structured-data[structured copy algorithm] while
