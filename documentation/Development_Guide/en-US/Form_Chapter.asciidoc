@@ -1424,7 +1424,7 @@ which is presented in a tabular form and as a tree.
 
 `ModelGrid` widget has the following specific properties:
 
-[cols="<,<,<,<",options="header",]
+[cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
 |`frozenColumns` |The number of the non-scrollable grid columns.
@@ -1464,7 +1464,7 @@ It might be omitted if data property points to actual grid's rows array.
 
 `ModelGrid` widget has the following specific methods:
 
-[cols="<,<,<,<",options="header",]
+[cols="<,<,<",options="header",]
 |=======================================================================
 |Method |Parameters |Description
 |`select` |(aObject) | Selects the specified grid's data array element.
@@ -1490,7 +1490,7 @@ It might be omitted if data property points to actual grid's rows array.
 
 `ModelGrid` widget has the following specific events:
 
-[cols="<,<,<,<",options="header",]
+[cols="<,<,<",options="header",]
 |=======================================================================
 |Event |Handler parameter |Description
 |`onItemSelected` |`ItemEvent` |Selection lead of the grid change event.
@@ -1522,7 +1522,7 @@ a particular row and to determine what is the parent row of the row.
 
 `ModelGridColumn` has the following properties:
 
-[cols="<,<,<,<",options="header",]
+[cols="<,<",options="header",]
 |=======================================================================
 |Property |Description
 |`title` |The column's title string.
