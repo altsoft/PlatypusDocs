@@ -555,8 +555,7 @@ line on the data model diagram.
 *Note*
 
 To get inter-instance connections work, primary and foreign keys are
-required. Such keys may come from database structure definitions or from
-schema definitions in a JavaScript datasource module.
+required. Such keys may come from database structure definitions.
 ------------------------------------
 
 image:images/dataModelLinks.png[Query and filtration types links]
