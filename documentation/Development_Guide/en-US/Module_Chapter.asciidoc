@@ -2,7 +2,7 @@
 [[javascript-module]]
 
 Module is a JavaScript file containing the constructor function for global module and
-define() call for AMD modules and some specific resources.
+`define()` call for AMD modules and some specific resources.
 Modules contain data model responsible for data access and <ModuleName>.model file contains
 its data model definition.
 
@@ -1218,14 +1218,17 @@ Entity data events list is given in the table below:
 |`onRequeried` |`EntityEvent` |Is called after re-requesting the entitiy's data
 array.
 
-|`onDeleted` |`DeleteEvent` |Is called after removing an object from the
+|`onDelete` |`DeleteEvent` |Is called after removing an object from the
 entitiy's data array.
 
-|`onInserted` |`InsertEvent` |Is called after inserting a new object
+|`onInsert` |`InsertEvent` |Is called after inserting a new object
 into the entitiy's data array.
 
-|`onScrolled` |`ChangeEvent` |Is called after changing the cursor
+|`onScroll` |`ChangeEvent` |Is called after changing the cursor property
 in the entity's data array
+
+|`onChange` |`ChangeEvent` |Is called after changing the element of
+the entity's data array
 |=======================================================================
 
 `EntityEvent` is a generic entity object and contains the following
@@ -1246,6 +1249,7 @@ table:
 [cols="<,<",options="header",]
 |======================================
 |Property |Description
+|`source` |Changed object.
 |`propertyName` |Changed property name.
 |`oldValue` |The value before change.
 |`newValue` |The value after change.
@@ -1257,7 +1261,8 @@ table:
 [cols="<,<",options="header",]
 |==============================
 |Property |Description
-|`deleted` |The deleted objects.
+|`source` |The data array, the deletion takes place in.
+|`items` |The deleted objects.
 |==============================
 
 `InsertEvent` object specific propetries are listed in the following
@@ -1266,7 +1271,8 @@ table:
 [cols="<,<",options="header",]
 |================================
 |Property |Description
-|`inserted` |The inserted objects.
+|`source` |The data array, the insertion takes place in.
+|`items` |The inserted objects.
 |================================
 
 === Data schema
@@ -1411,7 +1417,11 @@ generated entity can be used to read, insert or modify objects:
 ---------------------------------------------------
 
 var docEntity = model.loadEntity("Documents");
-docEntity.requery(function(){}, function(){});
+docEntity.requery(function(){
+    // ...
+}, function(){
+    // ...
+});
 
 //Print all documents names
 docEntity.forEach(function(doc) {
@@ -1420,7 +1430,11 @@ docEntity.forEach(function(doc) {
 
 //Change first document's name
 docEntity[0] && docEntity[0].NAME = "New document";
-model.save(function(){}, function(){});
+model.save(function(){
+    // ...
+}, function(){
+    // ...
+});
 ---------------------------------------------------
 
 Use model's createEntity(sqlText, datasourceName) method, where sqlText is arbitrary sql text
@@ -1431,7 +1445,11 @@ The generated entity can be used to read, insert or modify objects:
 ---------------------------------------------------
 
 var docEntity = model.createEntity("select * from tr_documents", "testdb");
-docEntity.requery(function(){}, function(){});
+docEntity.requery(function(){
+    // ...
+}, function(){
+    // ...
+});
 
 //Print all documents names
 docEntity.forEach(function(doc) {
@@ -1440,21 +1458,74 @@ docEntity.forEach(function(doc) {
 
 //Change first document's name
 docEntity[0] && docEntity[0].NAME = "New document";
-model.save(function(){}, function(){});
+model.save(function(){
+    // ...
+}, function(anError){
+    // ...
+});
 ---------------------------------------------------
 
-Use executeUpdate entity method to execute the SQL code, which contains
-the `INSERT`, `UPDATE`, `DELETE` or DDL commands:
+Use `update()` entity method to execute the SQL code, which contains
+the `Insert`, `Update`, `Delete` or Ddl commands:
 
 [source,Javascript]
 ----------------------------------------------------------------------------
 
-var e = model.createEntity("DELETE * FROM Document d WHERE d.DOC_TYPE = 1");
-e.executeUpdate(function(){}, function(){});
+// model.deleteAt entity is Dml based entity with the following Sql:
+// "Delete From Document d Where d.docType = :docType"
+model.deleteAt.update({docType: 50}, function(){
+    // ...
+}, function(anError){
+    // ...
+});
+----------------------------------------------------------------------------
+The `update()` entity method takes first argument as parameters object for dml query's parameters.
+
+NOTE: This method goes in its own transaction.
+
+Use `enqueueUpdate()` entity method to prepare Sql code execution, which contains
+the `Insert`, `Update`, `Delete` or Ddl commands:
+
+[source,Javascript]
 ----------------------------------------------------------------------------
 
-NOTE: createEntity method may be used only is two-tier environment. E.g. in Java EE
+// model.deleteAt entity is Dml based entity with the following Sql:
+// "Delete From Document d Where d.docType = :docType"
+model.deleteAt.enqueueUpdate({docType: 50});
+model.save(function(){
+    // ...
+}, function(anError){
+    // ...
+});
+----------------------------------------------------------------------------
+The `enqueueUpdate(params)` entity method takes first argument as parameters object for dml query's parameters.
+The `params` argument is optional. So if it is absent, current values of entity's parameters will be taken instead.
+This method prepares a record about executed command in client's change log wich will be applied while next commit operation.
+Note, that every `model.save(...)` call commits accumulated changes and consumes client's change log.
+
+Legacy `executeUpdate()` entity method executes a Sql code, which contains
+the `Insert`, `Update`, `Delete` or Ddl commands:
+
+[source,Javascript]
+----------------------------------------------------------------------------
+
+var e = model.createEntity("DELETE * FROM Document d WHERE d.DOC_TYPE = :docType");
+e.params.docType = 50;
+e.executeUpdate(function(){
+    // ...
+}, function(){
+    // ...
+});
+----------------------------------------------------------------------------
+
+The `executeUpdate()` entity method takes entity's parameters as dml query's parameters.
+
+NOTE: This method goes in its own transaction.
+
+NOTE: createEntity method may be used only in two-tier environment. E.g. in Java EE
 server, J2SE client or in Platypus TSA server.
+
+NOTE: This method is deprecated, and so, use `update` method instead.
 
 === Executing arbitary SQL
 [[executing-arbitary-sql]]

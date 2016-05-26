@@ -1501,6 +1501,9 @@ It might be omitted if data property points to actual grid's rows array.
 
 |`onRender` |`RenderEvent` |Event handler, which will be called for each data
 grid cell, if a similar handler was not defined for theirs columns.
+
+|`onAfterRender` |`Event` |Event handler, which will be called when cells' rendering is complete.
+It is called in asynchronous manner.
 |=======================================================================
 
 To configure `ModelGrid` properties:
