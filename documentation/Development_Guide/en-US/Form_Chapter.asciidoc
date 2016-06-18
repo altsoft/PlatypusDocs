@@ -1475,17 +1475,21 @@ It might be omitted if data property points to actual grid's rows array.
 
 |`find` |() | Opens find dialog
 
-|`makeVisible` |(aObject, needToSelect) | Scrolls a ModelGrid's view to show gird's row of the specified element in visible area.
+|`makeVisible` |(aObject, ifSelect) | Scrolls a ModelGrid's view to show gird's row of the specified element in visible area.
 
 |`unsort` |() | Cancels all sorting in the ModelGrid.
 
-|`redraw` |() | Redraws in J2SE client and regenerates all inner ModelGrid's markup  in browser client.
+|`redraw` |() | Redraws in J2SE client and regenerates all inner ModelGrid's markup in browser client.
 
 |`removeColumnNode` |(aColumn) | Removes the specified column from ModelGrid's header and columns collection.
 
 |`addColumnNode` |(aColumn) | Adds the specified column to ModelGrid's header and columns collection at the end.
 
 |`insertColumnNode |(aIndex, aColumnFacade) | Adds the specified column to ModelGrid's header and columns collection at the specified index.
+
+|`added` |(aAddedElements) | Notifies the grid about additions of elements to `data` array. `aAddedElements` is the array of added elements.
+|`removed` |(aRemovedElements) | Notifies the grid about removes from `data` array. `aRemovedElements` is the array of removed elements.
+|`changed` |(aChangedElements) | Notifies the grid about changes of certain elements in `data` array. `aChangedElements` is the array of changed elements.
 |=======================================================================
 
 `ModelGrid` widget has the following specific events:
