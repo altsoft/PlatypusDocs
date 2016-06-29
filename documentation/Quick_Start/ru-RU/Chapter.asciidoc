@@ -109,7 +109,7 @@ image:images/serverType.png[Выбор типа сервера Java EE]
 .Добавление папки сервера Apache Tomcat
 image:images/apacheCreation.png[Добавление папки сервера Apache Tomcat]
 
-Точная регулировка Tomcat в качестве порта сервера показана на рис. <<tomcat_properties, Свойства Tomcat>>.
+Точная настройка параметров Tomcat, такие, например, как порт сервера, показана на рис. <<tomcat_properties, Свойства Tomcat>>.
 
 [[tomcat_properties]]
 .Свойства Tomcat
