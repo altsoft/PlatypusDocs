@@ -255,7 +255,7 @@ ORM (object-relational mapping - объектно-реляционное отображение) в любой базе
 
 [[connection_name_owners]]
 .Имя соединения
-image::images/query/ownersQuery.png[Имя соединения]
+image:images/query/ownersQuery.png[Имя соединения]
 
 Далее, необходимо связать виджет `ModelGrid`(сетка данных) с сущностью 'owners' как
 это показано на рис. <<bindGrid, Связывание модели данных с сеткой>>. Выберем параметр 
@@ -266,11 +266,11 @@ image::images/query/ownersQuery.png[Имя соединения]
 
 [[bindGrid]]
 .Связывание модели данных с сеткой
-image::images/settings/bindModel.png[Связывание модели данных с сеткой]
+image:images/settings/bindModel.png[Связывание модели данных с сеткой]
 
 [[inspector]]
 .Оформление сетки столбцов
-image::images/settings/inspector.png[Оформление сетки столбцов]
+image:images/settings/inspector.png[Оформление сетки столбцов]
 
 Виджет `ModelGrid` (сетка данных) позволяет вставлять и удалять строки, а также редактировать 
 свои ячейки. Изменения будут внесены в сущность ограниченной модели данных. Таким образом, 
