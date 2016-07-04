@@ -50,7 +50,7 @@ Database structure is shown on following diagram (Fig.<<appDomain,model diagram>
 
 [[appDomain]]
 .Pet Hotel knowledge domain model diagram
-image::images/appDomain.png[Pet Hotel knowledge domain model diagram]
+image::images/appDomain.png["Pet Hotel knowledge domain model diagram",width=600,link="/images/appDomain.png"]
 
 [[the-sample-project-creation-and-setup]]
 The sample project creation and setup
@@ -64,7 +64,7 @@ Platform menu item in the global menu.
 After first launch of Platypus designer you will get window as it shown on Fig. <<start_screen,start screen>>.
 [[start_screen]]
 .Platypus designer interface
-image::images/firstScreen.png["First screen",width=150,link="#"]
+image::images/firstScreen.png["First screen",width=600,link="/images/firstScreen.png"]
 
 To create Platypus project you should select menu item 'File -> New Project' (Fig. <<project_creation, project creation>>).
 
