@@ -67,7 +67,7 @@ Cоздание и настройка проекта
 
 [[start_screen]]
 .Интерфейс Platypus
-image:images/firstScreen.png[Интерфейс Platypus]
+image:images/firstScreen.png["Интерфейс Platypus",width=600,link="/images/firstScreen.png"]
 
 Чтобы создать проект в Platypus, необходимо выбрать Файл > Создать проект (рис. <<project_creation,Создание проекта>>).
 
