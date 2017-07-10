@@ -1454,9 +1454,9 @@ which is presented in a tabular form and as a tree.
 |`field` |Property path within data object to object/array for the grid rows.
 It might be omitted if data property points to actual grid's rows array.
 
-|`childrenField` |See tree option.
+|`childrenField` |Determines wich property of data array's element consists element's children collection.
 
-|`parentField` |See tree option.
+|`parentField` |Determines wich property of data array's element consists scalar reference to parent element.
 
 |`selected` |All selected in grid elements of `data` array as an array.
 
@@ -1488,7 +1488,9 @@ It might be omitted if data property points to actual grid's rows array.
 |`insertColumnNode |(aIndex, aColumnFacade) | Adds the specified column to ModelGrid's header and columns collection at the specified index.
 
 |`added` |(aAddedElements) | Notifies the grid about additions of elements to `data` array. `aAddedElements` is the array of added elements.
+
 |`removed` |(aRemovedElements) | Notifies the grid about removes from `data` array. `aRemovedElements` is the array of removed elements.
+
 |`changed` |(aChangedElements) | Notifies the grid about changes of certain elements in `data` array. `aChangedElements` is the array of changed elements.
 |=======================================================================
 
@@ -1609,7 +1611,12 @@ setting procedure).
 
 ModelGrid widget can be configured to display a tree structure in the first
 column on the left (next to the service column). Other columns in this
-grid are displayed as usual.
+grid are displayed as usual. To configure ModelGrid to be a tree-grid, you
+shoud use `childrenField` and `parentField` properties, wich will contain
+children elements collection and reference to a parent element respectively.
+Note, children collection and parent should be elements themsevs, not reference ids.
+To get this to work you may use dereferencind feature of P{latypus.js data model,
+define properties on elements of data aray through `Object.definePorperty` and so on.
 
 To show a tree we need an entity, which contains a field referring to
 some other field, thus forming a hierarchical data structure.
