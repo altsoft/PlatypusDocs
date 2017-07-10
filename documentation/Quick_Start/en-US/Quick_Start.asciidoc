@@ -1,4 +1,4 @@
-Quick start guide
+Platypus.js Quick Start Guide
 =================
 
 include::Chapter.asciidoc[]

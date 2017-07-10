@@ -1,4 +1,4 @@
-= Platypus development guide 
+= Platypus.js Development Guide 
 :doctype: book
 //:toc: 3
 :ascii-ids:
